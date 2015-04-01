@@ -7,6 +7,7 @@
 #include <fullscore/note.h>
 #include <fullscore/globals.h>
 #include <fullscore/measure_grid.h>
+#include <fullscore/music_engraver.h>
 
 
 
@@ -28,6 +29,8 @@ public:
 	placement2d camera;
 	Motion motion;
 
+	MusicEngraver music_engraver;
+
 	Project(Display *display)
 		: Screen(display)
 		, measure_grid(20, 6)
@@ -40,6 +43,7 @@ public:
 		, type_cursor_pos(0) // << YOU WERE HERE :)
 		, camera(display->width()/2, display->height()/2, display->width(), display->height())
 		, motion()
+		, music_engraver()
 	{
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
@@ -53,12 +57,14 @@ public:
 		for (int y=0; y<NUM_Y_MEASURES; y++)
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
-				measure_grid.get_measure(x,y).draw(x*MEASURE_WIDTH, y*STAFF_HEIGHT, text_font);
+				Measure *measure = &measure_grid.get_measure(x,y);
+				measure->draw(x*MEASURE_WIDTH, y*STAFF_HEIGHT, text_font);
+				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
 			}
 
 		al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 			measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::avajowhite, 2.0);
-
+		
 		camera.restore_transform();
 	}
 	Measure *get_focused_measure()
@@ -66,7 +72,7 @@ public:
 		if (measure_cursor_x < 0 || measure_cursor_x >= NUM_X_MEASURES) return NULL;
 		if (measure_cursor_y < 0 || measure_cursor_y >= NUM_Y_MEASURES) return NULL;
 
-		return &measure_grid.get_measure(measure_cursor_x,measure_cursor_y);
+		return &measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 	}
 	Note *get_focused_note()
 	{
