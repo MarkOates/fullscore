@@ -25,6 +25,9 @@ public:
 	FontBin fonts;
 	ALLEGRO_FONT *text_font;
 
+	placement2d camera;
+	Motion motion;
+
 	Project(Display *display)
 		: Screen(display)
 		, measure_grid(20, 6)
@@ -35,6 +38,8 @@ public:
 		, fonts("data/fonts")
 		, text_font(fonts["DroidSans.ttf 20"])
 		, type_cursor_pos(0) // << YOU WERE HERE :)
+		, camera(display->width()/2, display->height()/2, display->width(), display->height())
+		, motion()
 	{
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
@@ -42,6 +47,9 @@ public:
 	}
 	void primary_timer_func() override
 	{
+		motion.update(af::time_now);
+		camera.start_transform();
+
 		for (int y=0; y<NUM_Y_MEASURES; y++)
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
@@ -50,6 +58,8 @@ public:
 
 		al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 			measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::avajowhite, 2.0);
+
+		camera.restore_transform();
 	}
 	Measure *get_focused_measure()
 	{
@@ -82,10 +92,13 @@ public:
 	}
 	void mouse_axes_func() override
 	{
-		measure_cursor_x = af::current_event->mouse.x / MEASURE_WIDTH;
-		measure_cursor_y = af::current_event->mouse.y / STAFF_HEIGHT;
 		cursor_x = af::current_event->mouse.x;
 		cursor_y = af::current_event->mouse.y;
+
+		camera.transform_coordinates(&cursor_x, &cursor_y);
+
+		measure_cursor_x = cursor_x / MEASURE_WIDTH;
+		measure_cursor_y = cursor_y / STAFF_HEIGHT;
 	}
 	void key_down_func() override
 	{
@@ -137,6 +150,49 @@ public:
 						focused_measure->notes.erase(focused_measure->notes.begin() + i);
 						i--;
 					}
+			}
+			break;
+
+		// some basic camera controls
+
+		case ALLEGRO_KEY_UP:
+			{
+				motion.cmove(&camera.position.y, 200, 0.4);
+			}
+			break;
+		case ALLEGRO_KEY_DOWN:
+			{
+				motion.cmove(&camera.position.y, -200, 0.4);
+			}
+			break;
+		case ALLEGRO_KEY_RIGHT:
+			{
+				motion.cmove(&camera.position.x, 200, 0.4);
+			}
+			break;
+		case ALLEGRO_KEY_LEFT:
+			{
+				motion.cmove(&camera.position.x, -200, 0.4);
+			}
+			break;
+		case ALLEGRO_KEY_EQUALS:
+			{
+				if (af::key_shift)
+				{
+					motion.cmove_to(&camera.scale.x, 1, 0.3);
+					motion.cmove_to(&camera.scale.y, 1, 0.3);
+				}
+				else
+				{
+					motion.cmove(&camera.scale.x, 0.1, 0.4);
+					motion.cmove(&camera.scale.y, 0.1, 0.4);
+				}
+			}
+			break;
+		case ALLEGRO_KEY_MINUS:
+			{
+				motion.cmove(&camera.scale.x, -0.1, 0.4);
+				motion.cmove(&camera.scale.y, -0.1, 0.4);
 			}
 			break;
 		default:
