@@ -3,71 +3,17 @@
 
 
 
-
-
-
-
-#define NUM_X_MEASURES 20
-#define NUM_Y_MEASURES 6
-#define STAFF_HEIGHT 80
-#define MEASURE_WIDTH 280
-
-
-
-
-class Note
-{
-public:
-	int scale_degree;
-	int duration;
-	bool attacked, released;
-	float start_time, end_time;
-	Note(int _scale_degree=0, int _duration=4)
-		: scale_degree(_scale_degree)
-		, duration(_duration)
- 	{}
-	float get_width()
-	{
-		return (MEASURE_WIDTH/4.0f) * 4 / duration;
-	}
-};
-
-
-
-
-
-class Measure
-{
-public:
-	std::vector<Note *> notes;
-	void draw(float x, float y, ALLEGRO_FONT *font)
-	{
-		if (notes.empty()) return;
-
-		float x_cursor = 0;
-		for (unsigned i=0; i<notes.size(); i++)
-		{
-			float width = notes[i]->get_width();
-
-			al_draw_rectangle(x+x_cursor, y, x+x_cursor+width, y+STAFF_HEIGHT, color::pink, 2);
-			// scale degree
-			al_draw_text(font, color::white, x+x_cursor, y, 0, tostring(notes[i]->scale_degree).c_str());
-			// duration
-			al_draw_text(font, color::white, x+x_cursor, y+20, 0, tostring(notes[i]->duration).c_str());
-
-			x_cursor += width;
-		}
-	}
-};
-
-
+#include <fullscore/measure.h>
+#include <fullscore/note.h>
+#include <fullscore/globals.h>
 
 
 
 class Project : public Screen
 {
 public:
-	Measure measures[NUM_X_MEASURES][NUM_Y_MEASURES];
+	//Measure measures[NUM_X_MEASURES][NUM_Y_MEASURES];
+	Measure measures[20][6];
 	//int measure_w;
 	//int measure_h;
 
