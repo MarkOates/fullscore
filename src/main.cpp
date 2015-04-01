@@ -54,6 +54,16 @@ public:
 		motion.update(af::time_now);
 		camera.start_transform();
 
+		// draw a background for the score
+		al_draw_filled_rectangle(-30, -30, MEASURE_WIDTH * 20 + 30, STAFF_HEIGHT * 6 + 30, color::color(color::blanchedalmond, 0.2));
+		
+		// draw barlines
+		for (int x=0; x<NUM_X_MEASURES; x++)
+		{
+			Measure *measure = &measure_grid.get_measure(x, 0);
+			al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * 6, color::brown, 1.0);
+		}
+
 		for (int y=0; y<NUM_Y_MEASURES; y++)
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
@@ -173,12 +183,12 @@ public:
 			break;
 		case ALLEGRO_KEY_RIGHT:
 			{
-				motion.cmove(&camera.position.x, 200, 0.4);
+				motion.cmove(&camera.position.x, -200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_LEFT:
 			{
-				motion.cmove(&camera.position.x, -200, 0.4);
+				motion.cmove(&camera.position.x, 200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_EQUALS:
