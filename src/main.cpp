@@ -6,16 +6,14 @@
 #include <fullscore/measure.h>
 #include <fullscore/note.h>
 #include <fullscore/globals.h>
+#include <fullscore/measure_grid.h>
 
 
 
 class Project : public Screen
 {
 public:
-	//Measure measures[NUM_X_MEASURES][NUM_Y_MEASURES];
-	Measure measures[20][6];
-	//int measure_w;
-	//int measure_h;
+	MeasureGrid measure_grid;
 
 	int measure_cursor_x;
 	int measure_cursor_y;
@@ -29,8 +27,7 @@ public:
 
 	Project(Display *display)
 		: Screen(display)
-		//, measure_w(280)
-		//, measure_h(STAFF_HEIGHT)
+		, measure_grid(20, 6)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
 		, cursor_x(0)
@@ -39,16 +36,16 @@ public:
 		, text_font(fonts["DroidSans.ttf 20"])
 		, type_cursor_pos(0) // << YOU WERE HERE :)
 	{
-		measures[3][2].notes.push_back(new Note());
-		measures[3][2].notes.push_back(new Note());
-		measures[1][3].notes.push_back(new Note());
+		measure_grid.get_measure(3,2).notes.push_back(new Note());
+		measure_grid.get_measure(3,2).notes.push_back(new Note());
+		measure_grid.get_measure(1,3).notes.push_back(new Note());
 	}
 	void primary_timer_func() override
 	{
 		for (int y=0; y<NUM_Y_MEASURES; y++)
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
-				measures[x][y].draw(x*MEASURE_WIDTH, y*STAFF_HEIGHT, text_font);
+				measure_grid.get_measure(x,y).draw(x*MEASURE_WIDTH, y*STAFF_HEIGHT, text_font);
 			}
 
 		al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
@@ -59,7 +56,7 @@ public:
 		if (measure_cursor_x < 0 || measure_cursor_x >= NUM_X_MEASURES) return NULL;
 		if (measure_cursor_y < 0 || measure_cursor_y >= NUM_Y_MEASURES) return NULL;
 
-		return &measures[measure_cursor_x][measure_cursor_y];
+		return &measure_grid.get_measure(measure_cursor_x,measure_cursor_y);
 	}
 	Note *get_focused_note()
 	{
