@@ -43,3 +43,14 @@ Measure &MeasureGrid::get_measure(int x_measure, int y_staff)
 
 
 
+int MeasureGrid::get_num_measures()
+{
+	if (voices.empty()) return 0;
+	return voices[0].measures.size();
+}
+
+
+int MeasureGrid::get_num_staves()
+{
+	return voices.size();
+}

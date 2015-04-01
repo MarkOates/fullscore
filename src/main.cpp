@@ -41,7 +41,7 @@ public:
 		, fonts("data/fonts")
 		, text_font(fonts["DroidSans.ttf 20"])
 		, type_cursor_pos(0) // << YOU WERE HERE :)
-		, camera(display->width()/2, display->height()/2, display->width(), display->height())
+		, camera(display->width()/2+200, display->height()/2+200, display->width(), display->height())
 		, motion()
 		, music_engraver()
 	{
@@ -72,8 +72,10 @@ public:
 				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
 			}
 
-		al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
-			measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::avajowhite, 2.0);
+		// draw a box over the focused measure
+		if (get_focused_measure())
+			al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
+				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::aliceblue, 2.0);
 		
 		camera.restore_transform();
 	}
@@ -115,6 +117,12 @@ public:
 
 		measure_cursor_x = cursor_x / MEASURE_WIDTH;
 		measure_cursor_y = cursor_y / STAFF_HEIGHT;
+
+		// do a bounds check on the board & hovered measure
+		if (measure_cursor_x < 0 || measure_cursor_y < 0
+			|| measure_cursor_x >= this->measure_grid.get_num_measures()
+			|| measure_cursor_y >= this->measure_grid.get_num_staves())
+			measure_cursor_x = measure_cursor_y = -1;
 	}
 	void key_down_func() override
 	{

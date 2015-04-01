@@ -25,6 +25,9 @@ private:
 public:
 	MeasureGrid(int num_x_measures, int num_y_staves);
 	Measure &get_measure(int x_measure, int y_staff);
+
+	int get_num_staves();
+	int get_num_measures();
 };
 
 
