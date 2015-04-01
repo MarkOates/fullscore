@@ -150,6 +150,13 @@ public:
 				focused_note->duration = limit<int>(1, 64, focused_note->duration);
 			}
 			break;
+		case ALLEGRO_KEY_R:
+			{
+				Note *focused_note = get_focused_note();
+				if (!focused_note) break;
+				focused_note->is_rest = !focused_note->is_rest;
+			}
+			break;
 		case ALLEGRO_KEY_E:
 				// erase the focused note
 			{

@@ -12,6 +12,7 @@ class Note
 public:
 	int scale_degree;
 	int duration;
+	bool is_rest;
 	bool attacked, released;
 	float start_time, end_time;
 
