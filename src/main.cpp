@@ -11,7 +11,7 @@
 
 
 
-class Project : public Screen
+class Project : public FGUIScreen
 {
 public:
 	MeasureGrid measure_grid;
@@ -27,12 +27,14 @@ public:
 	ALLEGRO_FONT *text_font;
 
 	placement2d camera;
-	Motion motion;
 
 	MusicEngraver music_engraver;
 
+	FGUIWindow *help_window;
+	bool showing_help_menu;
+
 	Project(Display *display)
-		: Screen(display)
+		: FGUIScreen(display)
 		, measure_grid(20, 6)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
@@ -42,16 +44,34 @@ public:
 		, text_font(fonts["DroidSans.ttf 20"])
 		, type_cursor_pos(0) // << YOU WERE HERE :)
 		, camera(display->width()/2+200, display->height()/2+200, display->width(), display->height())
-		, motion()
 		, music_engraver()
+		, help_window(NULL)
+		, showing_help_menu(true)
 	{
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(1,3).notes.push_back(new Note());
+		initialize_help_window();
+	}
+	void initialize_help_window()
+	{
+		float x = 100;
+		float y = 100;
+
+		help_window = new FGUIWindow(this, display->center(), display->middle(), 550, 600);
+
+		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
+		FGUITextBox *help_paragraph = new FGUITextBox(help_window, text_font, php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
+
+		help_paragraph->set_text_color(color::white);
+
+		help_title->place.align = vec2d(0, 0);
+		help_paragraph->place.align = vec2d(0, 0);
 	}
 	void primary_timer_func() override
 	{
-		motion.update(af::time_now);
+		FGUIScreen::primary_timer_func();
+
 		camera.start_transform();
 
 		// draw a background for the score
@@ -224,6 +244,26 @@ public:
 			{
 				motion.cmove(&camera.scale.x, -0.1, 0.4);
 				motion.cmove(&camera.scale.y, -0.1, 0.4);
+			}
+			break;
+		case ALLEGRO_KEY_F1:
+			{
+				if (showing_help_menu)
+				{
+					// hide the help menu
+					motion.cmove_to(&help_window->place.position.x, -600, 0.4);
+					motion.cmove_to(&help_window->place.position.y, -100, 0.4);
+					motion.cmove_to(&help_window->place.rotation, -0.1, 0.4);
+					showing_help_menu = false;
+				}
+				else
+				{
+					// show the help menu
+					motion.cmove_to(&help_window->place.position.x, display->center(), 0.4);
+					motion.cmove_to(&help_window->place.position.y, display->middle(), 0.4);
+					motion.cmove_to(&help_window->place.rotation, 0, 0.4);
+					showing_help_menu = true;
+				}
 			}
 			break;
 		default:
