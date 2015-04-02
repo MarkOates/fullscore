@@ -10,10 +10,28 @@
 
 
 
+
+class Playhead
+{
+public:
+	float position; // in seconds
+	bool playing;
+	double tempo; // in BPM
+
+	Playhead()
+		: position(0)
+		, playing(false)
+		, tempo(120)
+	{}
+};
+
+
+
 class GUIScoreEditor : public FGUIParent
 {
 public:
 	MeasureGrid measure_grid;
+	Playhead playhead;
 
 	int measure_cursor_x;
 	int measure_cursor_y;
@@ -37,6 +55,7 @@ public:
 		: FGUIParent(parent,
 			new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 		, measure_grid(20, 6)
+		, playhead()
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
 		, cursor_x(0)
@@ -63,7 +82,9 @@ public:
 		camera.start_transform();
 
 		// draw a background for the score
-		al_draw_filled_rectangle(-30, -30, MEASURE_WIDTH * 20 + 30, STAFF_HEIGHT * 6 + 30, color::color(color::blanchedalmond, 0.2));
+		al_draw_filled_rectangle(-30, -30,
+			MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
+			color::color(color::blanchedalmond, 0.2));
 		
 		// draw barlines
 		for (int x=0; x<measure_grid.get_num_measures(); x++)
@@ -111,7 +132,21 @@ public:
 				}
 			}
 
+		// draw the playhead
+		float playhead_x = playhead.position * (MEASURE_WIDTH / 4);
+		al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::black, 3);
+
 		camera.restore_transform();
+	}
+	void on_timer() override
+	{
+		FGUIParent::on_timer();
+
+		if (playhead.playing)
+		{
+			float CURRENT_TIMER_BPM = 60.0f;
+			playhead.position += (playhead.tempo / 60.0f / CURRENT_TIMER_BPM);
+		}
 	}
 	Measure *get_hovered_measure()
 	{
@@ -309,7 +344,7 @@ public:
 	}
 	void create_help_window()
 	{
-		help_window = new FGUIWindow(this, -600, -100, 550, 600);
+		help_window = new FGUIWindow(this, -600, -100, 550, 700);
 
 		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
 		FGUITextBox *help_paragraph = new FGUITextBox(help_window, fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
@@ -349,6 +384,19 @@ public:
 			{
 				// toggle showing the debug data on the editor
 				score_editor->showing_debug_data = !score_editor->showing_debug_data;
+			}
+			break;
+		case ALLEGRO_KEY_SPACE:
+			{
+				// toggle playback
+				score_editor->playhead.playing = !score_editor->playhead.playing;
+			}
+			break;
+		case ALLEGRO_KEY_OPENBRACE:
+			{
+				// toggle playback
+				score_editor->playhead.playing = false;
+				motion.cmove_to(&score_editor->playhead.position, 0, 0.3);
 			}
 			break;
 		}

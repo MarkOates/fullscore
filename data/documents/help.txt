@@ -5,6 +5,8 @@ Click on a measure to add notes.  Use the keyboard to modify a note that you are
 
 F1 - toggle help
 F2 - toggle debug overlay
+SPACE - start playback
+[  - rewind playback
 
 == Editing Controls (while on a selection) ==
 
