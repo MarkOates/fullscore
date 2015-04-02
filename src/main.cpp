@@ -52,6 +52,9 @@ public:
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(1,3).notes.push_back(new Note());
 		initialize_help_window();
+
+		FGUIScreen::draw_focused_outline = true;
+		FGUIScreen::clear_to_background_color = false;
 	}
 	void initialize_help_window()
 	{
@@ -70,8 +73,6 @@ public:
 	}
 	void primary_timer_func() override
 	{
-		FGUIScreen::primary_timer_func();
-
 		camera.start_transform();
 
 		// draw a background for the score
@@ -98,6 +99,8 @@ public:
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::aliceblue, 2.0);
 		
 		camera.restore_transform();
+
+		FGUIScreen::primary_timer_func();
 	}
 	Measure *get_focused_measure()
 	{
@@ -123,6 +126,8 @@ public:
 	}
 	void mouse_down_func() override
 	{
+		FGUIScreen::mouse_down_func();
+
 		Measure *focused_measure = get_focused_measure();
 		if (!focused_measure) return;
 
@@ -130,6 +135,8 @@ public:
 	}
 	void mouse_axes_func() override
 	{
+		FGUIScreen::mouse_axes_func();
+
 		cursor_x = af::current_event->mouse.x;
 		cursor_y = af::current_event->mouse.y;
 
@@ -146,6 +153,8 @@ public:
 	}
 	void key_down_func() override
 	{
+		FGUIScreen::key_down_func();
+
 		switch(af::current_event->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_W:
