@@ -289,27 +289,27 @@ class Project : public FGUIScreen
 public:
 	GUIScoreEditor *score_editor;
 	FGUIWindow *help_window;
+	FGUINotificationBubble *notification_bubble;
 	bool showing_help_menu;
 
 	Project(Display *display)
 		: FGUIScreen(display)
 		, score_editor(NULL)
 		, help_window(NULL)
-		, showing_help_menu(true)
+		, notification_bubble(NULL)
+		, showing_help_menu(false)
 	{
 		FGUIScreen::draw_focused_outline = true;
 		FGUIScreen::clear_to_background_color = false;
 
 		score_editor = new GUIScoreEditor(this, display);
+		notification_bubble = new FGUINotificationBubble(this, "Press F1 for help", display->width()-30, display->height()-30);
 
 		create_help_window();
 	}
 	void create_help_window()
 	{
-		float x = 100;
-		float y = 100;
-
-		help_window = new FGUIWindow(this, display->center(), display->middle(), 550, 600);
+		help_window = new FGUIWindow(this, -600, -100, 550, 600);
 
 		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
 		FGUITextBox *help_paragraph = new FGUITextBox(help_window, fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
