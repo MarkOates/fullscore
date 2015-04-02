@@ -163,7 +163,7 @@ public:
 		measure_cursor_y = cursor_y / STAFF_HEIGHT;
 
 		// do a bounds check on the board & hovered measure
-		if (measure_cursor_x < 0 || measure_cursor_y < 0
+		if (cursor_x < 0 || cursor_y < 0
 			|| measure_cursor_x >= this->measure_grid.get_num_measures()
 			|| measure_cursor_y >= this->measure_grid.get_num_staves())
 			measure_cursor_x = measure_cursor_y = -1;
