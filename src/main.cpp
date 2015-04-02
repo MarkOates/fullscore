@@ -42,6 +42,9 @@ public:
 		, camera(200, 200, 1, 1)
 		, music_engraver()
 	{
+		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
+		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
+
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(1,3).notes.push_back(new Note());
