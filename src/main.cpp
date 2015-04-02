@@ -108,10 +108,13 @@ public:
 	{
 		if (!FGUIParent::focused) return;
 
-		Measure *focused_measure = get_hovered_measure();
-		if (!focused_measure) return;
+		// append a note into the focused measure
 
-		focused_measure->notes.push_back(new Note());
+		if (af::current_event->mouse.button == 1)
+		{
+			Measure *focused_measure = get_hovered_measure();
+			if (focused_measure) focused_measure->notes.push_back(new Note());
+		}
 	}
 	void on_mouse_move(float x, float y, float dx, float dy) override
 	{
