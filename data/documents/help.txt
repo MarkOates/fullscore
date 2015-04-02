@@ -1,19 +1,18 @@
 Click on a measure to add notes.  Use the keyboard to modify a note that you are currently focused on (by hovering with the mouse).
 
 
-Program Controls
+== Program Controls ==
 
 F1 - toggle help
+F2 - toggle debug overlay
 
-
-Editing Controls (while on a selection)
+== Editing Controls (while on a selection) ==
 
 WASD keys - transpose up/down OR double/half the note duration.
 E - erase the current note
 R - toggle a rest
 
-
-Camera Controls
+== Camera Controls ==
 
 UP, DOWN, LEFT, RIGHT - move the camera
 PLUS, MINUS - zoom in and out

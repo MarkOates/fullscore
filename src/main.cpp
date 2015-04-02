@@ -28,6 +28,8 @@ public:
 
 	MusicEngraver music_engraver;
 
+	bool showing_debug_data;
+
 	GUIScoreEditor(FGUIParent *parent, Display *display)
 		// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
 		: FGUIParent(parent,
@@ -41,6 +43,7 @@ public:
 		, text_font(fonts["DroidSans.ttf 20"])
 		, camera(200, 200, 1, 1)
 		, music_engraver()
+		, showing_debug_data(false)
 	{
 		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
 		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
@@ -91,10 +94,14 @@ public:
 
 					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
 						3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
-					// scale degree
-					al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
-					// duration
-					al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, tostring(note->duration).c_str());
+
+					if (showing_debug_data)
+					{
+						// scale degree
+						al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
+						// duration
+						al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, tostring(note->duration).c_str());
+					}
 
 					x_cursor += width;
 				}
@@ -332,6 +339,12 @@ public:
 					motion.cmove_to(&help_window->place.rotation, 0, 0.4);
 					showing_help_menu = true;
 				}
+			}
+			break;
+		case ALLEGRO_KEY_F2:
+			{
+				// toggle showing the debug data on the editor
+				score_editor->showing_debug_data = !score_editor->showing_debug_data;
 			}
 			break;
 		}
