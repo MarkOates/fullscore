@@ -11,7 +11,7 @@
 
 
 
-class Project : public FGUIScreen
+class GUIScoreEditor : public FGUIParent
 {
 public:
 	MeasureGrid measure_grid;
@@ -21,8 +21,6 @@ public:
 	float cursor_x;
 	float cursor_y;
 
-	int type_cursor_pos;
-
 	FontBin fonts;
 	ALLEGRO_FONT *text_font;
 
@@ -30,11 +28,10 @@ public:
 
 	MusicEngraver music_engraver;
 
-	FGUIWindow *help_window;
-	bool showing_help_menu;
-
-	Project(Display *display)
-		: FGUIScreen(display)
+	GUIScoreEditor(FGUIParent *parent, Display *display)
+		// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
+		: FGUIParent(parent,
+			new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 		, measure_grid(20, 6)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
@@ -42,36 +39,16 @@ public:
 		, cursor_y(0)
 		, fonts("data/fonts")
 		, text_font(fonts["DroidSans.ttf 20"])
-		, type_cursor_pos(0) // << YOU WERE HERE :)
-		, camera(display->width()/2+200, display->height()/2+200, display->width(), display->height())
+		, camera(200, 200, 1, 1)
 		, music_engraver()
-		, help_window(NULL)
-		, showing_help_menu(true)
 	{
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(3,2).notes.push_back(new Note());
 		measure_grid.get_measure(1,3).notes.push_back(new Note());
-		initialize_help_window();
 
-		FGUIScreen::draw_focused_outline = true;
-		FGUIScreen::clear_to_background_color = false;
+		camera.align = vec2d(0, 0);
 	}
-	void initialize_help_window()
-	{
-		float x = 100;
-		float y = 100;
-
-		help_window = new FGUIWindow(this, display->center(), display->middle(), 550, 600);
-
-		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
-		FGUITextBox *help_paragraph = new FGUITextBox(help_window, text_font, php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
-
-		help_paragraph->set_text_color(color::white);
-
-		help_title->place.align = vec2d(0, 0);
-		help_paragraph->place.align = vec2d(0, 0);
-	}
-	void primary_timer_func() override
+	void on_draw() override
 	{
 		camera.start_transform();
 
@@ -99,11 +76,11 @@ public:
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::aliceblue, 2.0);
 		
 		camera.restore_transform();
-
-		FGUIScreen::primary_timer_func();
 	}
 	Measure *get_focused_measure()
 	{
+		if (!FGUIParent::focused) return NULL;
+
 		if (measure_cursor_x < 0 || measure_cursor_x >= NUM_X_MEASURES) return NULL;
 		if (measure_cursor_y < 0 || measure_cursor_y >= NUM_Y_MEASURES) return NULL;
 
@@ -124,22 +101,23 @@ public:
 		}
 		return NULL;
 	}
-	void mouse_down_func() override
+	void on_click() override
 	{
-		FGUIScreen::mouse_down_func();
+		if (!FGUIParent::focused) return;
 
 		Measure *focused_measure = get_focused_measure();
 		if (!focused_measure) return;
 
 		focused_measure->notes.push_back(new Note());
 	}
-	void mouse_axes_func() override
+	void on_mouse_move(float x, float y, float dx, float dy) override
 	{
-		FGUIScreen::mouse_axes_func();
+		if (!FGUIParent::focused) return;
 
-		cursor_x = af::current_event->mouse.x;
-		cursor_y = af::current_event->mouse.y;
+		cursor_x = x;
+		cursor_y = y;
 
+		place.transform_coordinates(&cursor_x, &cursor_y);
 		camera.transform_coordinates(&cursor_x, &cursor_y);
 
 		measure_cursor_x = cursor_x / MEASURE_WIDTH;
@@ -151,9 +129,11 @@ public:
 			|| measure_cursor_y >= this->measure_grid.get_num_staves())
 			measure_cursor_x = measure_cursor_y = -1;
 	}
-	void key_down_func() override
+	void on_key_down() override
 	{
-		FGUIScreen::key_down_func();
+		if (!FGUIParent::focused) return;
+
+		Motion &motion = *gimmie_motion();
 
 		switch(af::current_event->keyboard.keycode)
 		{
@@ -255,6 +235,57 @@ public:
 				motion.cmove(&camera.scale.y, -0.1, 0.4);
 			}
 			break;
+		default:
+			break;
+		}
+	}
+};
+
+
+
+
+
+class Project : public FGUIScreen
+{
+public:
+	GUIScoreEditor *score_editor;
+	FGUIWindow *help_window;
+	bool showing_help_menu;
+
+	Project(Display *display)
+		: FGUIScreen(display)
+		, score_editor(NULL)
+		, help_window(NULL)
+		, showing_help_menu(true)
+	{
+		FGUIScreen::draw_focused_outline = true;
+		FGUIScreen::clear_to_background_color = false;
+
+		score_editor = new GUIScoreEditor(this, display);
+
+		create_help_window();
+	}
+	void create_help_window()
+	{
+		float x = 100;
+		float y = 100;
+
+		help_window = new FGUIWindow(this, display->center(), display->middle(), 550, 600);
+
+		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
+		FGUITextBox *help_paragraph = new FGUITextBox(help_window, fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
+
+		help_paragraph->set_text_color(color::white);
+
+		help_title->place.align = vec2d(0, 0);
+		help_paragraph->place.align = vec2d(0, 0);
+	}
+	void key_down_func() override
+	{
+		FGUIScreen::key_down_func();
+
+		switch(af::current_event->keyboard.keycode)
+		{
 		case ALLEGRO_KEY_F1:
 			{
 				if (showing_help_menu)
@@ -274,8 +305,6 @@ public:
 					showing_help_menu = true;
 				}
 			}
-			break;
-		default:
 			break;
 		}
 	}
