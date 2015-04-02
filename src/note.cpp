@@ -3,7 +3,6 @@
 
 
 #include <fullscore/note.h>
-#include <fullscore/globals.h>
 
 
 

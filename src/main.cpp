@@ -5,7 +5,6 @@
 
 #include <fullscore/measure.h>
 #include <fullscore/note.h>
-#include <fullscore/globals.h>
 #include <fullscore/measure_grid.h>
 #include <fullscore/music_engraver.h>
 
@@ -30,6 +29,9 @@ public:
 
 	bool showing_debug_data;
 
+	float STAFF_HEIGHT;
+	float MEASURE_WIDTH;
+
 	GUIScoreEditor(FGUIParent *parent, Display *display)
 		// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
 		: FGUIParent(parent,
@@ -44,6 +46,8 @@ public:
 		, camera(200, 200, 1, 1)
 		, music_engraver()
 		, showing_debug_data(false)
+		, STAFF_HEIGHT(80)
+		, MEASURE_WIDTH(280)
 	{
 		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
 		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
@@ -62,7 +66,7 @@ public:
 		al_draw_filled_rectangle(-30, -30, MEASURE_WIDTH * 20 + 30, STAFF_HEIGHT * 6 + 30, color::color(color::blanchedalmond, 0.2));
 		
 		// draw barlines
-		for (int x=0; x<NUM_X_MEASURES; x++)
+		for (int x=0; x<measure_grid.get_num_measures(); x++)
 		{
 			Measure *measure = &measure_grid.get_measure(x, 0);
 			al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * 6, color::brown, 1.0);
@@ -77,8 +81,8 @@ public:
 		// draw the notes and measures
 		Note *hovered_note = get_hovered_note();
 
-		for (int y=0; y<NUM_Y_MEASURES; y++)
-			for (int x=0; x<NUM_X_MEASURES; x++)
+		for (int y=0; y<measure_grid.get_num_staves(); y++)
+			for (int x=0; x<measure_grid.get_num_measures(); x++)
 			{
 				Measure *measure = &measure_grid.get_measure(x,y);
 				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, MEASURE_WIDTH);
@@ -113,8 +117,8 @@ public:
 	{
 		if (!FGUIParent::focused) return NULL;
 
-		if (measure_cursor_x < 0 || measure_cursor_x >= NUM_X_MEASURES) return NULL;
-		if (measure_cursor_y < 0 || measure_cursor_y >= NUM_Y_MEASURES) return NULL;
+		if (measure_cursor_x < 0 || measure_cursor_x >= measure_grid.get_num_measures()) return NULL;
+		if (measure_cursor_y < 0 || measure_cursor_y >= measure_grid.get_num_staves()) return NULL;
 
 		return &measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 	}
