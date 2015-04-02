@@ -69,7 +69,25 @@ public:
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
 				Measure *measure = &measure_grid.get_measure(x,y);
-				measure->draw(x*MEASURE_WIDTH, y*STAFF_HEIGHT, text_font);
+
+				// draw the notes
+				float x_cursor = 0;
+				for (unsigned i=0; i<measure->notes.size(); i++)
+				{
+					int xx = x * MEASURE_WIDTH;
+					int yy = y * STAFF_HEIGHT;
+					Note *note = measure->notes[i];
+					float width = note->get_width();
+
+					al_draw_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT, color::pink, 2);
+					// scale degree
+					al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
+					// duration
+					al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, tostring(note->duration).c_str());
+
+					x_cursor += width;
+				}
+
 				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
 			}
 

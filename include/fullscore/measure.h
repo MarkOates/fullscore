@@ -15,7 +15,6 @@ class Measure
 {
 public:
 	std::vector<Note *> notes;
-	void draw(float x, float y, ALLEGRO_FONT *font);
 };
 
 
