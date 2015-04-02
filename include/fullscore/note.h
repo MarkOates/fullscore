@@ -17,7 +17,7 @@ public:
 	float start_time, end_time;
 
 	Note(int _scale_degree=0, int _duration=4);
-	float get_width();
+	float get_duration_width();
 };
 
 

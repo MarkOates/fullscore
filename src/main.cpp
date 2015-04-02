@@ -78,7 +78,7 @@ public:
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
 				Measure *measure = &measure_grid.get_measure(x,y);
-				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
+				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, MEASURE_WIDTH);
 
 				// draw the notes
 				float x_cursor = 0;
@@ -87,7 +87,7 @@ public:
 					int xx = x * MEASURE_WIDTH;
 					int yy = y * STAFF_HEIGHT;
 					Note *note = measure->notes[i];
-					float width = note->get_width();
+					float width = note->get_duration_width() * MEASURE_WIDTH;
 
 					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
 						3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
@@ -121,7 +121,7 @@ public:
 		float width_traversed = 0;
 		for (unsigned i=0; i<focused_measure->notes.size(); i++)
 		{
-			width_traversed += focused_measure->notes[i]->get_width();
+			width_traversed += focused_measure->notes[i]->get_duration_width() * MEASURE_WIDTH;
 			if (local_cursor_x < width_traversed) return focused_measure->notes[i];
 		}
 		return NULL;

@@ -15,9 +15,9 @@ Note::Note(int _scale_degree, int _duration)
 
 
 
-float Note::get_width()
+float Note::get_duration_width()
 {
-	return (MEASURE_WIDTH/4.0f) * 4 / duration;
+	return 1.0f / duration;
 }
 
 
