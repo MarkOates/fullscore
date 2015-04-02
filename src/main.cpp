@@ -65,10 +65,20 @@ public:
 			al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * 6, color::brown, 1.0);
 		}
 
+		// draw a box under the focused measure
+		if (get_hovered_measure())
+			al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
+				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+				4, 4, color::color(color::aliceblue, 0.2));
+		
+		// draw the notes and measures
+		Note *hovered_note = get_hovered_note();
+
 		for (int y=0; y<NUM_Y_MEASURES; y++)
 			for (int x=0; x<NUM_X_MEASURES; x++)
 			{
 				Measure *measure = &measure_grid.get_measure(x,y);
+				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
 
 				// draw the notes
 				float x_cursor = 0;
@@ -79,7 +89,8 @@ public:
 					Note *note = measure->notes[i];
 					float width = note->get_width();
 
-					al_draw_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT, color::pink, 2);
+					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
+						3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
 					// scale degree
 					al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
 					// duration
@@ -87,15 +98,8 @@ public:
 
 					x_cursor += width;
 				}
-
-				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2);
 			}
 
-		// draw a box over the focused measure
-		if (get_hovered_measure())
-			al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
-				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::aliceblue, 2.0);
-		
 		camera.restore_transform();
 	}
 	Measure *get_hovered_measure()
