@@ -71,13 +71,13 @@ public:
 			}
 
 		// draw a box over the focused measure
-		if (get_focused_measure())
+		if (get_hovered_measure())
 			al_draw_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT, color::aliceblue, 2.0);
 		
 		camera.restore_transform();
 	}
-	Measure *get_focused_measure()
+	Measure *get_hovered_measure()
 	{
 		if (!FGUIParent::focused) return NULL;
 
@@ -86,9 +86,9 @@ public:
 
 		return &measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 	}
-	Note *get_focused_note()
+	Note *get_hovered_note()
 	{
-		Measure *focused_measure = get_focused_measure();
+		Measure *focused_measure = get_hovered_measure();
 		if (!focused_measure) return NULL;
 
 		float local_cursor_x = cursor_x - measure_cursor_x * MEASURE_WIDTH;
@@ -105,7 +105,7 @@ public:
 	{
 		if (!FGUIParent::focused) return;
 
-		Measure *focused_measure = get_focused_measure();
+		Measure *focused_measure = get_hovered_measure();
 		if (!focused_measure) return;
 
 		focused_measure->notes.push_back(new Note());
@@ -139,21 +139,21 @@ public:
 		{
 		case ALLEGRO_KEY_W:
 			{
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				focused_note->scale_degree++;
 			}
 			break;
 		case ALLEGRO_KEY_S:
 			{
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				focused_note->scale_degree--;
 			}
 			break;
 		case ALLEGRO_KEY_A:
 			{
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				focused_note->duration *= 2;
 				focused_note->duration = limit<int>(1, 64, focused_note->duration);
@@ -161,7 +161,7 @@ public:
 			break;
 		case ALLEGRO_KEY_D:
 			{
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				focused_note->duration /= 2;
 				focused_note->duration = limit<int>(1, 64, focused_note->duration);
@@ -169,7 +169,7 @@ public:
 			break;
 		case ALLEGRO_KEY_R:
 			{
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				focused_note->is_rest = !focused_note->is_rest;
 			}
@@ -177,10 +177,10 @@ public:
 		case ALLEGRO_KEY_E:
 				// erase the focused note
 			{
-				Measure *focused_measure = get_focused_measure();
+				Measure *focused_measure = get_hovered_measure();
 				if (!focused_measure) break;
 
-				Note *focused_note = get_focused_note();
+				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 				
 				for (unsigned i=0; i<focused_measure->notes.size(); i++)
