@@ -11,18 +11,101 @@
 
 
 
-class Playhead
+class PlaybackControl
 {
 public:
 	float position; // in seconds
 	bool playing;
-	double tempo; // in BPM
+	float tempo_duration;
+	double tempo_bpm;
+	MeasureGrid *measure_grid;
 
-	Playhead()
+	PlaybackControl(MeasureGrid *measure_grid)
 		: position(0)
 		, playing(false)
-		, tempo(120)
+		, tempo_bpm(120)
+		, tempo_duration(4) // quarter note
+		, measure_grid(measure_grid)
 	{}
+
+	void reset()
+	{
+		position = 0;
+		playing = false;
+		if (!measure_grid) return;
+
+		// reset all the notes
+		//     it would be nice if it could look something more like this:
+		//     ("SELECT * FROM NOTES WHERE score_id=current").each( { |note| note.on=false; note.off=false; } );
+		// but alas...
+		for (int x=0; x<measure_grid->get_num_measures(); x++)
+			for (int y=0; y<measure_grid->get_num_staves(); y++)
+			{
+				Measure *measure = &measure_grid->get_measure(x, y);
+				for (unsigned n=0; n<measure->notes.size(); n++)
+				{
+					Note *note = measure->notes[n];
+					note->attacked = false;
+					note->released = false;
+				}
+			}
+	}
+
+	void update(double time_now)
+	{
+		if (!playing) return;
+
+		float CURRENT_TIMER_BPM = 60.0f;
+		position += (tempo_bpm / 60.0f / CURRENT_TIMER_BPM / tempo_duration);
+
+		// cycle through the notes, if they're past the attack points, then attack or release them
+		for (int x=0; x<measure_grid->get_num_measures(); x++)
+			for (int y=0; y<measure_grid->get_num_staves(); y++)
+			{
+				Measure *measure = &measure_grid->get_measure(x, y);
+				for (unsigned n=0; n<measure->notes.size(); n++)
+				{
+					Note &note = *measure->notes[n];
+					if (note.released) continue;
+
+					if (!note.attacked && position >= note.start_time)
+					{
+						// attack the note
+						note.attacked = true;
+					}
+
+					if (note.attacked && position >= note.end_time)
+					{
+						// release the note
+						note.released = true;
+					}
+				}
+			}
+	}
+
+	void refresh_note_start_and_end_times()
+	{
+		// cycle through the notes
+		for (int x=0; x<measure_grid->get_num_measures(); x++)
+			for (int y=0; y<measure_grid->get_num_staves(); y++)
+			{
+				Measure *measure = &measure_grid->get_measure(x, y);
+				float x_cursor = 0;
+				for (unsigned n=0; n<measure->notes.size(); n++)
+				{
+					Note &note = *measure->notes[n];
+					note.start_time = x_cursor + x;
+					note.end_time = note.start_time + note.get_duration_width();
+					x_cursor += note.get_duration_width();
+				}
+			}
+	}
+
+	void toggle_playback()
+	{
+		refresh_note_start_and_end_times();
+		playing = !playing;
+	}
 };
 
 
@@ -31,7 +114,7 @@ class GUIScoreEditor : public FGUIParent
 {
 public:
 	MeasureGrid measure_grid;
-	Playhead playhead;
+	PlaybackControl playback_control;
 
 	int measure_cursor_x;
 	int measure_cursor_y;
@@ -55,7 +138,7 @@ public:
 		: FGUIParent(parent,
 			new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 		, measure_grid(20, 6)
-		, playhead()
+		, playback_control(&measure_grid)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
 		, cursor_x(0)
@@ -126,6 +209,9 @@ public:
 						al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
 						// duration
 						al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, tostring(note->duration).c_str());
+						// start and end times
+						al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note->start_time).c_str());
+						al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note->end_time).c_str());
 					}
 
 					x_cursor += width;
@@ -133,8 +219,9 @@ public:
 			}
 
 		// draw the playhead
-		float playhead_x = playhead.position * (MEASURE_WIDTH / 4);
+		float playhead_x = playback_control.position * MEASURE_WIDTH;
 		al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::black, 3);
+		al_draw_text(text_font, color::white, playhead_x, -58, 0, tostring(playback_control.position).c_str());
 
 		camera.restore_transform();
 	}
@@ -142,11 +229,7 @@ public:
 	{
 		FGUIParent::on_timer();
 
-		if (playhead.playing)
-		{
-			float CURRENT_TIMER_BPM = 60.0f;
-			playhead.position += (playhead.tempo / 60.0f / CURRENT_TIMER_BPM);
-		}
+		playback_control.update(af::time_now);
 	}
 	Measure *get_hovered_measure()
 	{
@@ -389,14 +472,13 @@ public:
 		case ALLEGRO_KEY_SPACE:
 			{
 				// toggle playback
-				score_editor->playhead.playing = !score_editor->playhead.playing;
+				score_editor->playback_control.toggle_playback();
 			}
 			break;
 		case ALLEGRO_KEY_OPENBRACE:
 			{
 				// toggle playback
-				score_editor->playhead.playing = false;
-				motion.cmove_to(&score_editor->playhead.position, 0, 0.3);
+				score_editor->playback_control.reset();
 			}
 			break;
 		}

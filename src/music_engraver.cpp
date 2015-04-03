@@ -27,6 +27,9 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 {
 	std::string result;
 
+	if (note.released) result += "{ color=gray }";
+	else if (note.attacked) result += "{ color=yellow }";
+
 	int num_octaves = abs(note.scale_degree) / 8;
 	int local_degree = abs(note.scale_degree) % 8;
 	if (note.scale_degree < 0) local_degree = 8 - local_degree;
