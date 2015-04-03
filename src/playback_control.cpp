@@ -35,7 +35,7 @@ void PlaybackControl::reset()
 	for (int x=0; x<measure_grid->get_num_measures(); x++)
 		for (int y=0; y<measure_grid->get_num_staves(); y++)
 		{
-			Measure *measure = &measure_grid->get_measure(x, y);
+			Measure *measure = measure_grid->get_measure(x, y);
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
 				Note *note = measure->notes[n];
@@ -59,7 +59,7 @@ void PlaybackControl::update(double time_now)
 	for (int x=0; x<measure_grid->get_num_measures(); x++)
 		for (int y=0; y<measure_grid->get_num_staves(); y++)
 		{
-			Measure *measure = &measure_grid->get_measure(x, y);
+			Measure *measure = measure_grid->get_measure(x, y);
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
 				Note &note = *measure->notes[n];
@@ -91,7 +91,7 @@ void PlaybackControl::refresh_note_start_and_end_times()
 	for (int x=0; x<measure_grid->get_num_measures(); x++)
 		for (int y=0; y<measure_grid->get_num_staves(); y++)
 		{
-			Measure *measure = &measure_grid->get_measure(x, y);
+			Measure *measure = measure_grid->get_measure(x, y);
 			float x_cursor = 0;
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{

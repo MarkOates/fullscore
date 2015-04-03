@@ -36,9 +36,13 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 
 
-Measure &MeasureGrid::get_measure(int x_measure, int y_staff)
+Measure *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
-	return voices[y_staff][x_measure];
+	// bounds check
+	if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return NULL;
+	if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return NULL;
+
+	return &voices[y_staff][x_measure];
 }
 
 

@@ -37,7 +37,7 @@ public:
 		// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
 		: FGUIParent(parent,
 			new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
-		, measure_grid(20, 6)
+		, measure_grid(20, 3)
 		, playback_control(&measure_grid, playback_device)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
@@ -52,9 +52,9 @@ public:
 		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
 		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
 
-		measure_grid.get_measure(3,2).notes.push_back(new Note());
-		measure_grid.get_measure(3,2).notes.push_back(new Note());
-		measure_grid.get_measure(1,3).notes.push_back(new Note());
+		measure_grid.get_measure(3,2)->notes.push_back(new Note());
+		measure_grid.get_measure(3,2)->notes.push_back(new Note());
+		measure_grid.get_measure(1,3)->notes.push_back(new Note());
 
 		camera.align = vec2d(0, 0);
 	}
@@ -70,8 +70,8 @@ public:
 		// draw barlines
 		for (int x=0; x<measure_grid.get_num_measures(); x++)
 		{
-			Measure *measure = &measure_grid.get_measure(x, 0);
-			al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * 6, color::brown, 1.0);
+			Measure *measure = measure_grid.get_measure(x, 0);
+			al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::brown, 1.0);
 		}
 
 		// draw a box under the focused measure
@@ -86,7 +86,7 @@ public:
 		for (int y=0; y<measure_grid.get_num_staves(); y++)
 			for (int x=0; x<measure_grid.get_num_measures(); x++)
 			{
-				Measure *measure = &measure_grid.get_measure(x,y);
+				Measure *measure = measure_grid.get_measure(x,y);
 				music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, MEASURE_WIDTH);
 
 				// draw the notes
@@ -137,7 +137,7 @@ public:
 		if (measure_cursor_x < 0 || measure_cursor_x >= measure_grid.get_num_measures()) return NULL;
 		if (measure_cursor_y < 0 || measure_cursor_y >= measure_grid.get_num_staves()) return NULL;
 
-		return &measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+		return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 	}
 	Note *get_hovered_note()
 	{
