@@ -52,7 +52,7 @@ public:
 		, music_engraver()
 		, showing_debug_data(false)
 		, STAFF_HEIGHT(80)
-		, MEASURE_WIDTH(280)
+		, MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
 	{
 		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
 		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
