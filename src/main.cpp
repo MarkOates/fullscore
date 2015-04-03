@@ -11,6 +11,8 @@
 
 
 
+#include <fullscore/playback_device_interface.h>
+
 class PlaybackControl
 {
 public:
@@ -19,13 +21,15 @@ public:
 	float tempo_duration;
 	double tempo_bpm;
 	MeasureGrid *measure_grid;
+	PlaybackDeviceInterface *playback_device;
 
-	PlaybackControl(MeasureGrid *measure_grid)
+	PlaybackControl(MeasureGrid *measure_grid, PlaybackDeviceInterface *playback_device)
 		: position(0)
 		, playing(false)
 		, tempo_bpm(120)
 		, tempo_duration(4) // quarter note
 		, measure_grid(measure_grid)
+		, playback_device(playback_device)
 	{}
 
 	void reset()
@@ -72,12 +76,14 @@ public:
 					{
 						// attack the note
 						note.attacked = true;
+						if (playback_device) playback_device->note_on(y, note.scale_degree + 60, 127);
 					}
 
 					if (note.attacked && position >= note.end_time)
 					{
 						// release the note
 						note.released = true;
+						if (playback_device) playback_device->note_off(y, note.scale_degree + 60);
 					}
 				}
 			}
@@ -133,12 +139,12 @@ public:
 	float STAFF_HEIGHT;
 	float MEASURE_WIDTH;
 
-	GUIScoreEditor(FGUIParent *parent, Display *display)
+	GUIScoreEditor(FGUIParent *parent, Display *display, PlaybackDeviceInterface *playback_device)
 		// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
 		: FGUIParent(parent,
 			new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 		, measure_grid(20, 6)
-		, playback_control(&measure_grid)
+		, playback_control(&measure_grid, playback_device)
 		, measure_cursor_x(-1)
 		, measure_cursor_y(-1)
 		, cursor_x(0)
@@ -400,7 +406,7 @@ public:
 
 
 
-
+#include <fullscore/playback_device_win_midi.h>
 
 class Project : public FGUIScreen
 {
@@ -420,7 +426,7 @@ public:
 		FGUIScreen::draw_focused_outline = true;
 		FGUIScreen::clear_to_background_color = false;
 
-		score_editor = new GUIScoreEditor(this, display);
+		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
 		notification_bubble = new FGUINotificationBubble(this, "Press F1 for help", display->width()-30, display->height()-30);
 
 		create_help_window();
