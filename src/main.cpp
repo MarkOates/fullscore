@@ -24,9 +24,6 @@ public:
 	float cursor_x;
 	float cursor_y;
 
-	FontBin fonts;
-	ALLEGRO_FONT *text_font;
-
 	placement2d camera;
 
 	MusicEngraver music_engraver;
@@ -46,8 +43,6 @@ public:
 		, measure_cursor_y(-1)
 		, cursor_x(0)
 		, cursor_y(0)
-		, fonts("data/fonts")
-		, text_font(fonts["DroidSans.ttf 20"])
 		, camera(200, 200, 1, 1)
 		, music_engraver()
 		, showing_debug_data(false)
@@ -108,6 +103,7 @@ public:
 
 					if (showing_debug_data)
 					{
+						ALLEGRO_FONT *text_font = af::fonts["DroidSans.ttf 20"];
 						// scale degree
 						al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
 						// duration
@@ -124,7 +120,7 @@ public:
 		// draw the playhead
 		float playhead_x = playback_control.position * MEASURE_WIDTH;
 		al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::black, 3);
-		al_draw_text(text_font, color::white, playhead_x, -58, 0, tostring(playback_control.position).c_str());
+		al_draw_text(af::fonts["DroidSans.ttf 20"], color::white, playhead_x, -58, 0, tostring(playback_control.position).c_str());
 
 		camera.restore_transform();
 	}
@@ -332,8 +328,8 @@ public:
 	{
 		help_window = new FGUIWindow(this, -600, -100, 550, 700);
 
-		FGUIText *help_title = new FGUIText(help_window, 25, 25, fonts["DroidSans.ttf 34"], "Controls");
-		FGUITextBox *help_paragraph = new FGUITextBox(help_window, fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
+		FGUIText *help_title = new FGUIText(help_window, 25, 25, af::fonts["DroidSans.ttf 34"], "Controls");
+		FGUITextBox *help_paragraph = new FGUITextBox(help_window, af::fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
 
 		help_paragraph->set_text_color(color::white);
 
