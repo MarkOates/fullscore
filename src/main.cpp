@@ -54,7 +54,7 @@ public:
 
 		measure_grid.get_measure(3,2)->notes.push_back(new Note());
 		measure_grid.get_measure(3,2)->notes.push_back(new Note());
-		measure_grid.get_measure(1,3)->notes.push_back(new Note());
+		measure_grid.get_measure(1,2)->notes.push_back(new Note());
 
 		camera.align = vec2d(0, 0);
 	}
