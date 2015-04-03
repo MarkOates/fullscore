@@ -3,6 +3,7 @@
 
 
 // to use this playback device, you'll need to link to -winmm.lib
+// (or in case of Dev C++ the -libwinmm.a)
 
 // THIS FILE NEEDS CLEANING
 
