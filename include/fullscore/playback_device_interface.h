@@ -14,7 +14,7 @@ public:
 	PlaybackDeviceInterface();
 	~PlaybackDeviceInterface();
 
-	virtual void note_on(int channel, int pitch, int velocity) = 0;
+	virtual void note_on(int channel, int pitch, int velocity) = 0; // pitch == 0 is "Middle C"
 	virtual void note_off(int channel, int pitch) = 0;
 	virtual void patch_change(int channel, int patch_num) = 0;
 	virtual void all_notes_off() = 0;

@@ -501,7 +501,7 @@ PlaybackDeviceWinMIDI::~PlaybackDeviceWinMIDI() {}
 void PlaybackDeviceWinMIDI::note_on(int channel, int pitch, int velocity)
 {
 	//note_on((unsigned char)channel, (unsigned char)pitch);
-	midi_note_on((unsigned char)channel, (unsigned char)pitch, (unsigned char)velocity);
+	midi_note_on((unsigned char)channel, (unsigned char)pitch + 60, (unsigned char)velocity);
 }
 
 
@@ -509,7 +509,7 @@ void PlaybackDeviceWinMIDI::note_on(int channel, int pitch, int velocity)
 void PlaybackDeviceWinMIDI::note_off(int channel, int pitch)
 {
 	// todo
-	midi_note_off((unsigned char)channel, (unsigned char)pitch);
+	midi_note_off((unsigned char)channel + 60, (unsigned char)pitch);
 }
 
 
