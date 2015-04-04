@@ -52,9 +52,22 @@ public:
 		attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
 		attr.set("id", "GUIScoreEditor" + tostring(widget_count));
 
-		measure_grid.get_measure(3,2)->notes.push_back(new Note());
-		measure_grid.get_measure(3,2)->notes.push_back(new Note());
-		measure_grid.get_measure(1,2)->notes.push_back(new Note());
+		// twinkle twinkle, little star
+		measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
+		measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
+		measure_grid.get_measure(0,0)->notes.push_back(new Note(4));
+		measure_grid.get_measure(0,0)->notes.push_back(new Note(4));
+		measure_grid.get_measure(1,0)->notes.push_back(new Note(5));
+		measure_grid.get_measure(1,0)->notes.push_back(new Note(5));
+		measure_grid.get_measure(1,0)->notes.push_back(new Note(4, 2));
+
+		measure_grid.get_measure(2,1)->notes.push_back(new Note(0));
+		measure_grid.get_measure(2,1)->notes.push_back(new Note(0));
+		measure_grid.get_measure(2,1)->notes.push_back(new Note(-1));
+		measure_grid.get_measure(2,1)->notes.push_back(new Note(-1));
+		measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
+		measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
+		measure_grid.get_measure(3,1)->notes.push_back(new Note(-3, 2));
 
 		camera.align = vec2d(0, 0);
 	}
