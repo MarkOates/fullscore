@@ -203,8 +203,6 @@ public:
 	{
 		if (!FGUIParent::focused) return;
 
-		Motion &motion = *gimmie_motion();
-
 		switch(af::current_event->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_W:
@@ -267,42 +265,42 @@ public:
 
 		case ALLEGRO_KEY_UP:
 			{
-				motion.cmove(&camera.position.y, 200, 0.4);
+				af::motion.cmove(&camera.position.y, 200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_DOWN:
 			{
-				motion.cmove(&camera.position.y, -200, 0.4);
+				af::motion.cmove(&camera.position.y, -200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_RIGHT:
 			{
-				motion.cmove(&camera.position.x, -200, 0.4);
+				af::motion.cmove(&camera.position.x, -200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_LEFT:
 			{
-				motion.cmove(&camera.position.x, 200, 0.4);
+				af::motion.cmove(&camera.position.x, 200, 0.4);
 			}
 			break;
 		case ALLEGRO_KEY_EQUALS:
 			{
 				if (af::key_shift)
 				{
-					motion.cmove_to(&camera.scale.x, 1, 0.3);
-					motion.cmove_to(&camera.scale.y, 1, 0.3);
+					af::motion.cmove_to(&camera.scale.x, 1, 0.3);
+					af::motion.cmove_to(&camera.scale.y, 1, 0.3);
 				}
 				else
 				{
-					motion.cmove(&camera.scale.x, 0.1, 0.4);
-					motion.cmove(&camera.scale.y, 0.1, 0.4);
+					af::motion.cmove(&camera.scale.x, 0.1, 0.4);
+					af::motion.cmove(&camera.scale.y, 0.1, 0.4);
 				}
 			}
 			break;
 		case ALLEGRO_KEY_MINUS:
 			{
-				motion.cmove(&camera.scale.x, -0.1, 0.4);
-				motion.cmove(&camera.scale.y, -0.1, 0.4);
+				af::motion.cmove(&camera.scale.x, -0.1, 0.4);
+				af::motion.cmove(&camera.scale.y, -0.1, 0.4);
 			}
 			break;
 		default:
@@ -361,17 +359,17 @@ public:
 				if (showing_help_menu)
 				{
 					// hide the help menu
-					motion.cmove_to(&help_window->place.position.x, -600, 0.4);
-					motion.cmove_to(&help_window->place.position.y, -100, 0.4);
-					motion.cmove_to(&help_window->place.rotation, -0.1, 0.4);
+					af::motion.cmove_to(&help_window->place.position.x, -600, 0.4);
+					af::motion.cmove_to(&help_window->place.position.y, -100, 0.4);
+					af::motion.cmove_to(&help_window->place.rotation, -0.1, 0.4);
 					showing_help_menu = false;
 				}
 				else
 				{
 					// show the help menu
-					motion.cmove_to(&help_window->place.position.x, display->center(), 0.4);
-					motion.cmove_to(&help_window->place.position.y, display->middle(), 0.4);
-					motion.cmove_to(&help_window->place.rotation, 0, 0.4);
+					af::motion.cmove_to(&help_window->place.position.x, display->center(), 0.4);
+					af::motion.cmove_to(&help_window->place.position.y, display->middle(), 0.4);
+					af::motion.cmove_to(&help_window->place.rotation, 0, 0.4);
 					showing_help_menu = true;
 				}
 			}
