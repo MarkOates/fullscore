@@ -92,7 +92,7 @@ public:
 			al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
 				4, 4, color::color(color::aliceblue, 0.2));
-		
+
 		// draw the notes and measures
 		Note *hovered_note = get_hovered_note();
 
@@ -120,7 +120,7 @@ public:
 						// scale degree
 						al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
 						// duration
-						al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, tostring(note->duration).c_str());
+						al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note->duration) + "(" + tostring(note->dots) + ")").c_str());
 						// start and end times
 						al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note->start_time).c_str());
 						al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note->end_time).c_str());
@@ -266,6 +266,22 @@ public:
 						focused_measure->notes.erase(focused_measure->notes.begin() + i);
 						i--;
 					}
+			}
+			break;
+		case ALLEGRO_KEY_FULLSTOP:
+				// add a dot
+			{
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+				focused_note->dots = std::min(2, focused_note->dots+1);
+			}
+			break;
+		case ALLEGRO_KEY_COMMA:
+				// remove a dot
+			{
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+				focused_note->dots = std::max(0, focused_note->dots-1);
 			}
 			break;
 

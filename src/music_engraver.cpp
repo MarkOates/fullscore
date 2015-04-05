@@ -36,10 +36,16 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 	char octave_char = (note.scale_degree < 0) ? ',' : '\'';
 	int octave_offset = (note.scale_degree < 0) ? 1 : 0;
 
+	// write the duration
 	result += music_notation.duration_denominator_to_char(note.duration);
+
+	// write the pitch (or rest)
 	std::string accidental = (note.accidental == -1) ? "-" : (note.accidental == 1) ? "+" : "";
 	if (note.is_rest) result += "r" + tostring(local_degree);
 	else result += std::string((num_octaves+octave_offset), octave_char) + accidental + tostring(local_degree);
+
+	// write the dots
+	if (note.dots != 0) result += std::string(note.dots, '.');
 
 	return result;
 }
