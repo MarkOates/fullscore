@@ -106,14 +106,14 @@ void PlaybackControl::update(double time_now)
 				{
 					// attack the note
 					note.attacked = true;
-					if (playback_device) playback_device->note_on(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, 0), 127);
+					if (playback_device) playback_device->note_on(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, note.accidental), 127);
 				}
 
 				if (note.attacked && position >= note.end_time)
 				{
 					// release the note
 					note.released = true;
-					if (playback_device) playback_device->note_off(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, 0));
+					if (playback_device) playback_device->note_off(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, note.accidental));
 				}
 			}
 		}

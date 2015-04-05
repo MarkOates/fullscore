@@ -37,8 +37,9 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 	int octave_offset = (note.scale_degree < 0) ? 1 : 0;
 
 	result += music_notation.duration_denominator_to_char(note.duration);
+	std::string accidental = (note.accidental == -1) ? "-" : (note.accidental == 1) ? "+" : "";
 	if (note.is_rest) result += "r" + tostring(local_degree);
-	else result += std::string((num_octaves+octave_offset), octave_char) + tostring(local_degree);
+	else result += std::string((num_octaves+octave_offset), octave_char) + accidental + tostring(local_degree);
 
 	return result;
 }

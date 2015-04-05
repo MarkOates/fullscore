@@ -11,6 +11,7 @@ class Note
 {
 public:
 	int scale_degree;
+	int accidental;
 	int duration;
 	int dots;
 	bool is_rest;

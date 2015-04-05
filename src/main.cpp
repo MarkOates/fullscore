@@ -209,14 +209,22 @@ public:
 			{
 				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
-				focused_note->scale_degree++;
+
+				if (af::key_shift) focused_note->scale_degree += 7;
+				else if (af::key_alt) ; // nothing;
+				else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
+				else focused_note->scale_degree++;
 			}
 			break;
 		case ALLEGRO_KEY_S:
 			{
 				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
-				focused_note->scale_degree--;
+
+				if (af::key_shift) focused_note->scale_degree -= 7;
+				else if (af::key_alt) ; // nothing;
+				else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
+				else focused_note->scale_degree--;
 			}
 			break;
 		case ALLEGRO_KEY_A:
