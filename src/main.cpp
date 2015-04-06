@@ -12,10 +12,70 @@
 
 
 
+class GUIPlaybackControls : public FGUIWindow
+{
+public:
+	FGUIScaledText *time;
+	FGUIScaledText *title;
+	FGUIButton *play_button;
+	FGUIButton *rewind_button;
+	FGUIDraggableRegion *draggable_region;
+
+	GUIPlaybackControls(FGUIParent *parent, float x, float y)
+		: FGUIWindow(parent, x, y, 500, 90)
+		, title(NULL)
+		, time(NULL)
+		, play_button(NULL)
+		, draggable_region(NULL)
+	{
+		title = new FGUIScaledText(this, 10, 10, "DroidSans.ttf 18", "Playback Controls");
+		title->place.align = vec2d(0, 0);
+		title->set_font_color(color::color(color::white, 0.3));
+
+		draggable_region = new FGUIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
+		draggable_region->place.align = vec2d(0, 0);
+
+		play_button = new FGUIButton(this, ">", af::fonts["DroidSans.ttf 20"], place.size.x-20-50, place.size.y-10-20, 100, 40);
+		play_button->attr.set("on_click_send_message", "toggle_playback");
+		play_button->place.align = vec2d(0.5, 0.5);
+
+		rewind_button = new FGUIButton(this, "|<<", af::fonts["DroidSans.ttf 20"], place.size.x-130-25, place.size.y-10-20, 50, 40);
+		rewind_button->attr.set("on_click_send_message", "reset_playback");
+		rewind_button->place.align = vec2d(0.5, 0.5);
+
+		time = new FGUIScaledText(this, 20, place.size.y-10, "minisystem.ttf 36", "4:33.263");
+		time->place.align = vec2d(0, 1.0);
+		time->set_font_color(color::aliceblue);
+	}
+	void set_time(double time_in_sec)
+	{
+		int min = (int)floor(time_in_sec / 60.0);
+		int seconds = (int)floor(time_in_sec) - min;
+		int msec = (time_in_sec - floor(time_in_sec)) * 1000;
+		std::stringstream time_str;
+		time_str << std::setfill('0');
+		time_str << std::setw(2) << min << ":";
+		time_str << std::setw(2) << seconds << ".";
+		time_str << std::setw(3) << msec;
+		time->set_text(time_str.str());
+	}
+	void receive_message(std::string message) override
+	{
+		// right now... the message is just being passed up to the next widget
+		// there is certainly a better way to do this (*cough* signals and slots)
+		parent->receive_message(message);
+	}
+};
+
+
+
+
+
 class Project : public FGUIScreen
 {
 public:
 	GUIScoreEditor *score_editor;
+	GUIPlaybackControls *gui_playback_controls;
 	FGUIWindow *help_window;
 	FGUINotificationBubble *notification_bubble;
 	bool showing_help_menu;
@@ -23,6 +83,7 @@ public:
 	Project(Display *display)
 		: FGUIScreen(display)
 		, score_editor(NULL)
+		, gui_playback_controls(NULL)
 		, help_window(NULL)
 		, notification_bubble(NULL)
 		, showing_help_menu(false)
@@ -32,6 +93,7 @@ public:
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
 		notification_bubble = new FGUINotificationBubble(this, "Press F1 for help", display->width()-30, display->height()-30);
+		gui_playback_controls = new GUIPlaybackControls(this, display->center(), 70);
 
 		create_help_window();
 	}
@@ -46,6 +108,11 @@ public:
 
 		help_title->place.align = vec2d(0, 0);
 		help_paragraph->place.align = vec2d(0, 0);
+	}
+	void primary_timer_func() override
+	{
+		FGUIScreen::primary_timer_func();
+		gui_playback_controls->set_time(score_editor->playback_control.position);
 	}
 	void key_down_func() override
 	{
@@ -92,6 +159,12 @@ public:
 			}
 			break;
 		}
+	}
+	void receive_message(std::string message) override
+	{
+		std::cout << "message: " << message << std::endl;
+		if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
+		if (message == "reset_playback") score_editor->playback_control.reset();
 	}
 };
 
