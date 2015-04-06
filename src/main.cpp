@@ -35,12 +35,14 @@ public:
 		draggable_region = new FGUIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
 		draggable_region->place.align = vec2d(0, 0);
 
-		play_button = new FGUIButton(this, ">", af::fonts["DroidSans.ttf 20"], place.size.x-20-50, place.size.y-10-20, 100, 40);
+		play_button = new FGUIButton(this, "", af::fonts["DroidSans.ttf 20"], place.size.x-20-50, place.size.y-10-20, 100, 40);
 		play_button->attr.set("on_click_send_message", "toggle_playback");
+		play_button->set_icon(af::bitmaps["play_icon.png"]);
 		play_button->place.align = vec2d(0.5, 0.5);
 
-		rewind_button = new FGUIButton(this, "|<<", af::fonts["DroidSans.ttf 20"], place.size.x-130-25, place.size.y-10-20, 50, 40);
+		rewind_button = new FGUIButton(this, "", af::fonts["DroidSans.ttf 20"], place.size.x-130-25, place.size.y-10-20, 50, 40);
 		rewind_button->attr.set("on_click_send_message", "reset_playback");
+		rewind_button->set_icon(af::bitmaps["rewind_icon.png"]);
 		rewind_button->place.align = vec2d(0.5, 0.5);
 
 		time = new FGUIScaledText(this, 20, place.size.y-10, "minisystem.ttf 36", "4:33.263");
