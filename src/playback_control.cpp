@@ -147,5 +147,6 @@ void PlaybackControl::toggle_playback()
 {
 	refresh_note_start_and_end_times();
 	playing = !playing;
+	if (!playing) playback_device->all_notes_off();
 }
 
