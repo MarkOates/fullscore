@@ -28,6 +28,9 @@ public:
 
 	int get_num_staves();
 	int get_num_measures();
+
+	bool save(std::string filename);
+	bool load(std::string filename);
 };
 
 

@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+#include <allegro_flare/useful.h>
+#include <allegro_flare/data_attr.h>
+
 #include <fullscore/measure_grid.h>
 
 
@@ -57,4 +60,39 @@ int MeasureGrid::get_num_measures()
 int MeasureGrid::get_num_staves()
 {
 	return voices.size();
+}
+
+
+
+
+
+bool MeasureGrid::save(std::string filename)
+{
+	DataAttr state;
+
+	state.set("grid_height", tostring(get_num_staves()));
+	state.set("grid_width", tostring(get_num_measures()));
+
+	for (int y=0; y<get_num_staves(); y++)
+		for (int x=0; x<get_num_measures(); x++)
+		{
+			Measure *measure = get_measure(x, y);
+			if (!measure || measure->notes.empty()) continue;
+			std::string val = "";
+			for (int n=0; n<(int)measure->notes.size(); n++)
+				val = tostring(measure->get_note_at(n));
+			state.set(tostring(x) + " " + tostring(y), val);
+		}
+
+	state.save(filename);
+}
+
+
+
+
+bool MeasureGrid::load(std::string filename)
+{
+	// todo
+	DataAttr state;
+	state.load(filename);
 }
