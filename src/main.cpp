@@ -4,6 +4,8 @@
 
 
 
+#include <allegro_flare/screens/simple_notification_screen.h>
+
 #include <fullscore/gui_score_editor.h>
 
 
@@ -76,26 +78,28 @@ public:
 class Project : public FGUIScreen
 {
 public:
+	SimpleNotificationScreen *simple_notification_screen;
+
 	GUIScoreEditor *score_editor;
 	GUIPlaybackControls *gui_playback_controls;
 	FGUIWindow *help_window;
-	FGUINotificationBubble *notification_bubble;
 	bool showing_help_menu;
 
 	Project(Display *display)
 		: FGUIScreen(display)
+		, simple_notification_screen(new SimpleNotificationScreen(display, af::fonts["DroidSans.ttf 20"]))
 		, score_editor(NULL)
 		, gui_playback_controls(NULL)
 		, help_window(NULL)
-		, notification_bubble(NULL)
 		, showing_help_menu(false)
 	{
 		FGUIScreen::draw_focused_outline = true;
 		FGUIScreen::clear_to_background_color = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
-		notification_bubble = new FGUINotificationBubble(this, "Press F1 for help", display->width()-30, display->height()-30);
 		gui_playback_controls = new GUIPlaybackControls(this, display->center(), 70);
+
+		simple_notification_screen->spawn_notification("Press F1 for help");
 
 		create_help_window();
 	}
@@ -158,6 +162,18 @@ public:
 			{
 				// toggle playback
 				score_editor->playback_control.reset();
+			}
+			break;
+		case ALLEGRO_KEY_1:
+			{
+				score_editor->measure_grid.save("score_filename.fs");
+				simple_notification_screen->spawn_notification("score saved as \"score_filename.fs\"");
+			}
+			break;
+		case ALLEGRO_KEY_2:
+			{
+				score_editor->measure_grid.load("score_filename.fs");
+				simple_notification_screen->spawn_notification("score loaded from \"score_filename.fs\"");
 			}
 			break;
 		}
