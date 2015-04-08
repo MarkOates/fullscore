@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include <allegro_flare/useful.h>
-#include <allegro_flare/data_attr.h>
 
 #include <fullscore/measure_grid.h>
 
@@ -66,6 +65,12 @@ int MeasureGrid::get_num_staves()
 
 
 
+
+#include <allegro_flare/data_attr.h>
+#include <fullscore/note.h>
+#include <allegro_flare/useful_php.h>
+
+
 bool MeasureGrid::save(std::string filename)
 {
 	DataAttr state;
@@ -79,12 +84,17 @@ bool MeasureGrid::save(std::string filename)
 			Measure *measure = get_measure(x, y);
 			if (!measure || measure->notes.empty()) continue;
 			std::string val = "";
+			std::vector<std::string> notes_strs;
 			for (int n=0; n<(int)measure->notes.size(); n++)
-				val = tostring(measure->get_note_at(n));
-			state.set(tostring(x) + " " + tostring(y), val);
+			{
+				Note *note = measure->get_note_at(n);
+				notes_strs.push_back("q");
+			}
+			val = php::implode(";", notes_strs);
+			state.set(tostring(x) + "," + tostring(y), val);
 		}
 
-	state.save(filename);
+	return state.save(filename);
 }
 
 
@@ -92,7 +102,39 @@ bool MeasureGrid::save(std::string filename)
 
 bool MeasureGrid::load(std::string filename)
 {
-	// todo
 	DataAttr state;
-	state.load(filename);
+	if (!state.load(filename)) return false;
+
+	// clear out the contents of the current measure-grid
+	this->voices.clear(); // TODO: fix this: mkay, this will create dangling pointers of Note* in the measures
+
+	// the the size of the board, and resize the current measure-grid
+	int grid_height = atoi(state.get("grid_height").c_str());
+	int grid_width = atoi(state.get("grid_width").c_str());
+
+	voices.resize(grid_height, Staff(grid_width));
+
+	// for now, remove those two elements.  The rest of the data in `state` is measure data
+	state.remove("grid_height");
+	state.remove("grid_width");
+
+	// get the 
+	std::map<std::string, std::string> data = state.get_copy();
+	for (std::map<std::string, std::string>::iterator it = data.begin(); it!=data.end(); it++)
+	{
+		// get the measure x, and y (in the format "x,y")
+		std::vector<std::string> parts = php::explode(",", it->first);
+		if (parts.size() != 2) continue;
+		Measure *measure = this->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
+
+		// get the notes
+		std::vector<std::string> notes = php::explode(";", it->second);
+		for (unsigned i=0; i<notes.size(); i++)
+		{
+			Note *new_note = new Note();
+			measure->notes.push_back(new_note);
+		}
+	}
+
+	return true;
 }

@@ -167,13 +167,13 @@ public:
 		case ALLEGRO_KEY_1:
 			{
 				score_editor->measure_grid.save("score_filename.fs");
-				simple_notification_screen->spawn_notification("score saved as \"score_filename.fs\"");
+				simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
 			}
 			break;
 		case ALLEGRO_KEY_2:
 			{
 				score_editor->measure_grid.load("score_filename.fs");
-				simple_notification_screen->spawn_notification("score loaded from \"score_filename.fs\"");
+				simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
 			}
 			break;
 		}
