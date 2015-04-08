@@ -14,6 +14,59 @@
 
 
 
+
+class GUIMixer : public FGUIWindow
+{
+public:
+	class Channel
+	{
+	public:
+		int channel_num;
+		int patch;
+	};
+
+private:
+
+	std::vector<Channel> channels;
+public:
+	GUIMixer(FGUIParent *parent, float x_, float y_, int num_channels=8)
+		: FGUIWindow(parent, x_, y_, 300, 380)
+		, channels()
+	{
+		// create 16 channels
+		channels.resize(num_channels);
+
+		// create a title and draggable region
+		FGUIText *text = new FGUIText(this, place.size.x/2, 26, af::fonts["DroidSans.ttf 18"], "Mixer & Channel Settings");
+		text->place.align.x = 0.5;
+		new FGUIDraggableRegion(this, place.size.x/2, place.size.y/2, place.size.x, place.size.y);
+
+		// create the input boxes
+		float x = 150;
+		float y = 100;
+		float spacing_y = 30;
+		for (unsigned c=0; c<channels.size(); c++)
+		{
+			FGUIText *text = new FGUIText(this, x-10, y, af::fonts["DroidSans.ttf 16"], "Channel " + tostring(c+1));
+			text->place.align = vec2d(1, 1);
+
+			FGUITextInput *text_input = new FGUITextInput(this, af::fonts["DroidSans.ttf 16"], "0", x, y, 50, 30);
+			text_input->place.align = vec2d(0, 1);
+
+			y += spacing_y;
+		}
+	}
+	Channel *get_channel(int channel_num)
+	{
+		if (channels.empty() || channel_num < 0 || channel_num >= channels.size()) return NULL;
+		return &channels[channel_num];
+	}
+};
+
+
+
+
+
 class GUIPlaybackControls : public FGUIWindow
 {
 public:
@@ -82,6 +135,7 @@ public:
 
 	GUIScoreEditor *score_editor;
 	GUIPlaybackControls *gui_playback_controls;
+	GUIMixer *gui_mixer;
 	FGUIWindow *help_window;
 	bool showing_help_menu;
 
@@ -90,6 +144,7 @@ public:
 		, simple_notification_screen(new SimpleNotificationScreen(display, af::fonts["DroidSans.ttf 20"]))
 		, score_editor(NULL)
 		, gui_playback_controls(NULL)
+		, gui_mixer(NULL)
 		, help_window(NULL)
 		, showing_help_menu(false)
 	{
@@ -97,6 +152,7 @@ public:
 		FGUIScreen::clear_to_background_color = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
+		gui_mixer = new GUIMixer(this, 1350, 500);
 		gui_playback_controls = new GUIPlaybackControls(this, display->center(), 70);
 
 		simple_notification_screen->spawn_notification("Press F1 for help");
