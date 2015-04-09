@@ -1,7 +1,7 @@
 
 
 
-
+#include <sstream>
 #include <fullscore/note.h>
 
 
@@ -36,3 +36,28 @@ float Note::get_duration_width()
 
 
 
+
+
+std::string Note::get_string(int format_version)
+{
+	std::stringstream ss;
+	if (format_version == 0)
+	{
+		ss << scale_degree << " " << accidental << " " << duration << " " << is_rest;
+	}
+	return ss.str();
+}
+
+
+
+
+bool Note::set_from_string(std::string str, int format_version)
+{
+	if (format_version == 0)
+	{
+		std::stringstream ss;
+		ss << str;
+		ss >> scale_degree >> accidental >> duration >> is_rest;
+		return true;
+	}
+}
