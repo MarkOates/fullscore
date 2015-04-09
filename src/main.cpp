@@ -52,6 +52,7 @@ public:
 
 			FGUITextInput *text_input = new FGUITextInput(this, af::fonts["DroidSans.ttf 16"], "0", x, y, 50, 30);
 			text_input->place.align = vec2d(0, 1);
+			text_input->attr.set("select_all_on_focus", "true");
 
 			y += spacing_y;
 		}
