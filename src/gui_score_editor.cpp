@@ -182,7 +182,13 @@ void GUIScoreEditor::on_click()
 	if (af::current_event->mouse.button == 1)
 	{
 		Measure *focused_measure = get_hovered_measure();
-		if (focused_measure) focused_measure->notes.push_back(new Note());
+		if (!focused_measure) return;
+
+		Note *focused_note = get_hovered_note();
+		if (focused_note)
+			focused_measure->insert(focused_measure->get_note_position(focused_note), new Note());
+		else
+			focused_measure->push(new Note());
 	}
 }
 

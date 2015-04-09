@@ -20,6 +20,22 @@ Note *Measure::get_note_at(int index)
 }
 
 
+bool Measure::insert(int at_index, Note *note)
+{
+	if (at_index < 0) at_index = 0;
+	if (at_index >= notes.size()) at_index = notes.size()-1;
+	notes.insert(notes.begin() + at_index, note);
+	return true;
+}
+
+
+bool Measure::push(Note *note)
+{
+	notes.push_back(note);
+	return true;
+}
+
+
 void Measure::retrograde()
 {
 	std::vector<Note *> result;

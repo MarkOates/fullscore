@@ -21,6 +21,7 @@ public:
 
 	// todo:
 	bool insert(int index, Note *note);
+	bool push(Note *note);
 	int remove(int index);
 
 	void retrograde();
