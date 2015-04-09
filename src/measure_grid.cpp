@@ -92,15 +92,10 @@ bool MeasureGrid::save(std::string filename)
 				Note *note = measure->get_note_at(n);
 
 				// build the note into a string
-				std::stringstream note_as_str;
-				note_as_str << note->scale_degree << " ";
-				note_as_str << note->accidental << " ";
-				note_as_str << note->duration << " ";
-				note_as_str << note->dots << " ";
-				note_as_str << note->is_rest;
+				std::string note_as_str = note->get_as_string(0);
 
 				// put it in the stack
-				notes_strs.push_back(note_as_str.str());
+				notes_strs.push_back(note_as_str);
 			}
 
 			// collapse the note-string
@@ -153,19 +148,14 @@ bool MeasureGrid::load(std::string filename)
 
 		// get the notes
 		std::vector<std::string> notes = php::explode(";", it->second);
+
 		for (unsigned i=0; i<notes.size(); i++)
 		{
 			// create a new note
 			Note *new_note = new Note();
 
-			// build the note from a note-string (five integers seperated by " ")
-			std::vector<std::string> note_data = php::explode(" ", notes[i]);
-			if (note_data.size() != 5) continue;
-			new_note->scale_degree = atoi(note_data[0].c_str());
-			new_note->accidental = atoi(note_data[1].c_str());
-			new_note->duration = atoi(note_data[2].c_str());
-			new_note->dots = atoi(note_data[3].c_str());
-			new_note->is_rest = atoi(note_data[4].c_str());
+			// set the note from the string
+			new_note->set_from_string(notes[i]);
 
 			// put the note into the measure
 			measure->notes.push_back(new_note);

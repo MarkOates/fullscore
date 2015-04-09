@@ -73,11 +73,12 @@ void GUIScoreEditor::on_draw()
 		al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::white, 0.2), 1.0);
 	}
 
-	// draw a box under the focused measure
-	if (get_hovered_measure())
-		al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
-			measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
-			4, 4, color::color(color::aliceblue, 0.2));
+	// draw a box under the focused measure (if the alt key is pressed)
+	if (af::key_alt)
+		if (get_hovered_measure())
+			al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
+				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+				4, 4, color::color(color::aliceblue, 0.2));
 
 	// draw the notes and measures
 	Note *hovered_note = get_hovered_note();
@@ -97,8 +98,10 @@ void GUIScoreEditor::on_draw()
 				Note *note = measure->notes[i];
 				float width = note->get_duration_width() * MEASURE_WIDTH;
 
-				al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
-					3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
+				// draw a hilight box under the focused note
+				if (!af::key_alt && (note == hovered_note))
+					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
+							3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
 
 				if (showing_debug_data)
 				{
@@ -216,25 +219,53 @@ void GUIScoreEditor::on_key_down()
 	switch(af::current_event->keyboard.keycode)
 	{
 	case ALLEGRO_KEY_W:
+			// transpose up
 		{
-			Note *focused_note = get_hovered_note();
-			if (!focused_note) break;
+			if (af::key_alt)
+			{
+				// transpose the whole measure
+				Measure *focused_measure = get_hovered_measure();
+				if (!focused_measure) break;
 
-			if (af::key_shift) focused_note->scale_degree += 7;
-			else if (af::key_alt) ; // nothing;
-			else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
-			else focused_note->scale_degree++;
+				if (af::key_shift) focused_measure->transpose(7);
+				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				else focused_measure->transpose(1);
+			}
+			else
+			{
+				// transpose the focused note
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+
+				if (af::key_shift) focused_note->scale_degree += 7;
+				else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
+				else focused_note->scale_degree++;
+			}
 		}
 		break;
 	case ALLEGRO_KEY_S:
+			// transpose down
 		{
-			Note *focused_note = get_hovered_note();
-			if (!focused_note) break;
+			if (af::key_alt)
+			{
+				// transposes the whole measure
+				Measure *focused_measure = get_hovered_measure();
+				if (!focused_measure) break;
 
-			if (af::key_shift) focused_note->scale_degree -= 7;
-			else if (af::key_alt) ; // nothing;
-			else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
-			else focused_note->scale_degree--;
+				if (af::key_shift) focused_measure->transpose(-7);
+				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				else focused_measure->transpose(-1);
+			}
+			else
+			{
+				// transposes a single note
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+
+				if (af::key_shift) focused_note->scale_degree -= 7;
+				else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
+				else focused_note->scale_degree--;
+			}
 		}
 		break;
 	case ALLEGRO_KEY_A:
@@ -276,6 +307,24 @@ void GUIScoreEditor::on_key_down()
 					focused_measure->notes.erase(focused_measure->notes.begin() + i);
 					i--;
 				}
+		}
+		break;
+	case ALLEGRO_KEY_I:
+			// invert the measure
+		{
+			Measure *focused_measure = get_hovered_measure();
+			if (!focused_measure) break;
+
+			focused_measure->invert(0);
+		}
+		break;
+	case ALLEGRO_KEY_P:
+			// retrograde the measure
+		{
+			Measure *focused_measure = get_hovered_measure();
+			if (!focused_measure) break;
+
+			focused_measure->retrograde();
 		}
 		break;
 	case ALLEGRO_KEY_FULLSTOP:
