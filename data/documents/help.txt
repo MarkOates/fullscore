@@ -6,11 +6,13 @@ Click on a measure to add notes.  Use the keyboard to modify a note that you are
 F1 - toggle help
 F2 - toggle debug overlay
 SPACE - start playback
-[  - rewind playback
+Q - rewind playback
+F7/F8 - save/load
 
 == Editing Controls (while on a selection) ==
 
 WASD keys - transpose up/down OR double/half the note duration.
+ALT - set focus to whole measures
 E - erase the current note
 R - toggle a rest
 

@@ -215,19 +215,19 @@ public:
 				score_editor->playback_control.toggle_playback();
 			}
 			break;
-		case ALLEGRO_KEY_OPENBRACE:
+		case ALLEGRO_KEY_Q:
 			{
 				// toggle playback
 				score_editor->playback_control.reset();
 			}
 			break;
-		case ALLEGRO_KEY_1:
+		case ALLEGRO_KEY_F7:
 			{
 				score_editor->measure_grid.save("score_filename.fs");
 				simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
 			}
 			break;
-		case ALLEGRO_KEY_2:
+		case ALLEGRO_KEY_F8:
 			{
 				score_editor->measure_grid.load("score_filename.fs");
 				simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
