@@ -23,7 +23,7 @@ public:
 	Note(int _scale_degree=0, int _duration=4, int _dots=0);
 	float get_duration_width();
 
-	std::string get_string(int format=0);
+	std::string get_as_string(int format=0);
 	bool set_from_string(std::string str, int format_version=0);
 };
 

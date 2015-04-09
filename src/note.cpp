@@ -37,8 +37,7 @@ float Note::get_duration_width()
 
 
 
-
-std::string Note::get_string(int format_version)
+std::string Note::get_as_string(int format_version)
 {
 	std::stringstream ss;
 	if (format_version == 0)
