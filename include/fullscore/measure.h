@@ -29,6 +29,8 @@ public:
 	void invert(int axis);
 	void double_duration();
 	void half_duration();
+
+	void transpose(int transposition);
 };
 
 

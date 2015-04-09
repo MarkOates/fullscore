@@ -23,7 +23,7 @@ Note *Measure::get_note_at(int index)
 void Measure::retrograde()
 {
 	std::vector<Note *> result;
-	for (unsigned i=notes.size()-1; i>=0; i--)
+	for (int i=(int)notes.size()-1; i>=0; i--)
 		result.push_back(notes[i]);
 	notes = result;
 }
@@ -68,4 +68,10 @@ void Measure::half_duration()
 }
 
 
+
+void Measure::transpose(int transposition)
+{
+	for (unsigned i=0; i<notes.size(); i++)
+		notes[i]->scale_degree += transposition;
+}
 

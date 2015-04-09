@@ -216,25 +216,55 @@ void GUIScoreEditor::on_key_down()
 	switch(af::current_event->keyboard.keycode)
 	{
 	case ALLEGRO_KEY_W:
+			// transpose up
 		{
-			Note *focused_note = get_hovered_note();
-			if (!focused_note) break;
+			if (af::key_alt)
+			{
+				// transpose the whole measure
+				Measure *focused_measure = get_hovered_measure();
+				if (!focused_measure) break;
 
-			if (af::key_shift) focused_note->scale_degree += 7;
-			else if (af::key_alt) ; // nothing;
-			else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
-			else focused_note->scale_degree++;
+				if (af::key_shift) focused_measure->transpose(7);
+				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				else focused_measure->transpose(1);
+			}
+			else
+			{
+				// transpose the focused note
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+
+				if (af::key_shift) focused_note->scale_degree += 7;
+				else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
+				else focused_note->scale_degree++;
+			}
 		}
 		break;
 	case ALLEGRO_KEY_S:
+			// transpose down
 		{
-			Note *focused_note = get_hovered_note();
-			if (!focused_note) break;
+			Measure *focused_measure = get_hovered_measure();
 
-			if (af::key_shift) focused_note->scale_degree -= 7;
-			else if (af::key_alt) ; // nothing;
-			else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
-			else focused_note->scale_degree--;
+			if (af::key_alt)
+			{
+				// transposes the whole measure
+				Measure *focused_measure = get_hovered_measure();
+				if (!focused_measure) break;
+
+				if (af::key_shift) focused_measure->transpose(-7);
+				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				else focused_measure->transpose(-1);
+			}
+			else
+			{
+				// transposes a single note
+				Note *focused_note = get_hovered_note();
+				if (!focused_note) break;
+
+				if (af::key_shift) focused_note->scale_degree -= 7;
+				else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
+				else focused_note->scale_degree--;
+			}
 		}
 		break;
 	case ALLEGRO_KEY_A:
@@ -276,6 +306,24 @@ void GUIScoreEditor::on_key_down()
 					focused_measure->notes.erase(focused_measure->notes.begin() + i);
 					i--;
 				}
+		}
+		break;
+	case ALLEGRO_KEY_I:
+			// invert the measure
+		{
+			Measure *focused_measure = get_hovered_measure();
+			if (!focused_measure) break;
+
+			focused_measure->invert(0);
+		}
+		break;
+	case ALLEGRO_KEY_P:
+			// retrograde the measure
+		{
+			Measure *focused_measure = get_hovered_measure();
+			if (!focused_measure) break;
+
+			focused_measure->retrograde();
 		}
 		break;
 	case ALLEGRO_KEY_FULLSTOP:
