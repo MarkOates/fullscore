@@ -21,7 +21,7 @@ public:
 	MeasureGrid measure_grid;
 	PlaybackControl playback_control;
 
-	int measure_cursor_x;
+	int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
 	int measure_cursor_y;
 	float cursor_x;
 	float cursor_y;
@@ -40,6 +40,8 @@ public:
 	void on_timer() override;
 	Measure *get_hovered_measure();
 	Note *get_hovered_note();
+	int get_hovered_measure_index();
+	int get_hovered_staff_index();
 	void on_click() override;
 	void on_mouse_move(float x, float y, float dx, float dy) override;
 	void on_key_down() override;
@@ -49,3 +51,4 @@ public:
 
 
 #endif
+
