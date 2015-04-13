@@ -15,7 +15,7 @@
 
 
 
-class GUIMixer : public FGUIWindow
+class GUIMixer : public FGUIFramedWindow 
 {
 public:
 	class Channel
@@ -30,16 +30,13 @@ private:
 	std::vector<Channel> channels;
 public:
 	GUIMixer(FGUIParent *parent, float x_, float y_, int num_channels=8)
-		: FGUIWindow(parent, x_, y_, 300, 380)
+		: FGUIFramedWindow(parent, x_, y_, 300, 376)
 		, channels()
 	{
+		this->set_title("Mixer & Channel Settings");
+
 		// create 16 channels
 		channels.resize(num_channels);
-
-		// create a title and draggable region
-		FGUIText *text = new FGUIText(this, place.size.x/2, 26, af::fonts["DroidSans.ttf 18"], "Mixer & Channel Settings");
-		text->place.align.x = 0.5;
-		new FGUIDraggableRegion(this, place.size.x/2, place.size.y/2, place.size.x, place.size.y);
 
 		// create the input boxes
 		float x = 150;
@@ -68,25 +65,21 @@ public:
 
 
 
-class GUIPlaybackControls : public FGUIWindow
+class GUIPlaybackControls : public FGUIFramedWindow
 {
 public:
 	FGUIScaledText *time;
-	FGUIScaledText *title;
 	FGUIButton *play_button;
 	FGUIButton *rewind_button;
 	FGUIDraggableRegion *draggable_region;
 
 	GUIPlaybackControls(FGUIParent *parent, float x, float y)
-		: FGUIWindow(parent, x, y, 500, 90)
-		, title(NULL)
+		: FGUIFramedWindow(parent, x, y, 500, 66)
 		, time(NULL)
 		, play_button(NULL)
 		, draggable_region(NULL)
 	{
-		title = new FGUIScaledText(this, 10, 10, "DroidSans.ttf 18", "Playback Controls");
-		title->place.align = vec2d(0, 0);
-		title->set_font_color(color::color(color::white, 0.3));
+		this->set_title("Playback Controls");
 
 		draggable_region = new FGUIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
 		draggable_region->place.align = vec2d(0, 0);
@@ -149,7 +142,7 @@ public:
 		, help_window(NULL)
 		, showing_help_menu(false)
 	{
-		FGUIScreen::draw_focused_outline = true;
+		FGUIScreen::draw_focused_outline = false;
 		FGUIScreen::clear_to_background_color = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
