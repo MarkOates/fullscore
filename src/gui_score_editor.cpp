@@ -19,7 +19,7 @@ GUIScoreEditor::GUIScoreEditor(FGUIParent *parent, Display *display, PlaybackDev
 	// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
 	: FGUIParent(parent,
 		new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
-	, measure_grid(20, 3)
+	, measure_grid(8, 3)
 	, playback_control(&measure_grid, playback_device)
 	, measure_cursor_x(-1)
 	, measure_cursor_y(-1)
@@ -408,6 +408,16 @@ void GUIScoreEditor::on_key_down()
 		{
 			af::motion.cmove(&camera.scale.x, -0.1, 0.4);
 			af::motion.cmove(&camera.scale.y, -0.1, 0.4);
+		}
+		break;
+	case ALLEGRO_KEY_N:
+		{
+			measure_grid.push_staff();
+		}
+		break;
+	case ALLEGRO_KEY_M:
+		{
+			measure_grid.push_measure();
 		}
 		break;
 	default:
