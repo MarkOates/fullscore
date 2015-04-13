@@ -164,3 +164,40 @@ bool MeasureGrid::load(std::string filename)
 
 	return true;
 }
+
+
+
+void MeasureGrid::insert_staff(int index)
+{
+	if (index < 0) index = 0;
+
+	if (index >= voices.size())
+	{
+		push_staff();
+	}
+	else 
+	{
+		int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
+		voices.insert(voices.begin() + index, Staff(num_measures)); 
+	}
+}
+
+
+
+bool MeasureGrid::delete_staff(int index)
+{
+	if (index < 0 || index >= (int)voices.size()) return false;
+	voices.erase(voices.begin() + index);
+	return true;
+}
+
+
+
+void MeasureGrid::push_staff()
+{
+	int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
+	voices.push_back(Staff(num_measures));
+}
+
+
+

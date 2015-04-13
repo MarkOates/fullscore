@@ -31,6 +31,10 @@ public:
 
 	bool save(std::string filename);
 	bool load(std::string filename);
+
+	void insert_staff(int index);
+	bool delete_staff(int index);
+	void push_staff();
 };
 
 
