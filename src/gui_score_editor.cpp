@@ -420,6 +420,26 @@ void GUIScoreEditor::on_key_down()
 			measure_grid.push_measure();
 		}
 		break;
+	case ALLEGRO_KEY_J: // insert a measure
+		{
+			measure_grid.insert_measure(get_hovered_measure_index());
+		}
+		break;
+	case ALLEGRO_KEY_U: // delete a measure
+		{
+			measure_grid.delete_measure(get_hovered_measure_index());
+		}
+		break;
+	case ALLEGRO_KEY_H: // insert a staff
+		{
+			measure_grid.insert_staff(get_hovered_staff_index());  
+		}
+		break;
+	case ALLEGRO_KEY_Y: // delete a staff
+		{
+			measure_grid.delete_staff(get_hovered_staff_index());  
+		}
+		break;
 	default:
 		break;
 	}
