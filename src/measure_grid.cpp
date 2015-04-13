@@ -171,7 +171,7 @@ void MeasureGrid::insert_staff(int index)
 {
 	if (index < 0) index = 0;
 
-	if (index >= voices.size())
+	if (index >= (int)voices.size())
 	{
 		push_staff();
 	}
@@ -197,6 +197,48 @@ void MeasureGrid::push_staff()
 {
 	int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
 	voices.push_back(Staff(num_measures));
+}
+
+
+
+void MeasureGrid::insert_measure(int index)
+{
+	int num_measures = get_num_measures();
+	if (index < 0) index = 0;
+	
+	if (index >= num_measures)
+	{
+		push_measure();
+	}
+	else
+	{
+		for (unsigned i=0; i<voices.size(); i++)
+		{
+			// WARNING: this assumes all staves have the same
+			// number of measures (they should)
+			voices[i].measures.insert(voices[i].measures.begin() + index, Measure());
+		}
+	}
+}
+
+
+
+bool MeasureGrid::delete_measure(int index)
+{
+	int num_measures = get_num_measures();
+	if (index < 0 || index >= num_measures) return false;
+	for (unsigned i=0; i<voices.size(); i++)
+		voices.erase(voices.begin() + index);
+}
+
+
+
+void MeasureGrid::push_measure()
+{
+	for (unsigned i=0; i<voices.size(); i++)
+	{
+		voices[i].measures.push_back(Measure());
+	}
 }
 
 
