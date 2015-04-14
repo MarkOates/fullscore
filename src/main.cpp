@@ -130,7 +130,7 @@ public:
 	GUIScoreEditor *score_editor;
 	GUIPlaybackControls *gui_playback_controls;
 	GUIMixer *gui_mixer;
-	FGUIWindow *help_window;
+	FGUIFramedWindow *help_window;
 	bool showing_help_menu;
 
 	Project(Display *display)
@@ -155,10 +155,11 @@ public:
 	}
 	void create_help_window()
 	{
-		help_window = new FGUIWindow(this, -600, -100, 550, 700);
+		help_window = new FGUIFramedWindow(this, -600, -100, 550, 700);
+		help_window->set_title("Help");
 
 		FGUIText *help_title = new FGUIText(help_window, 25, 25, af::fonts["DroidSans.ttf 34"], "Controls");
-		FGUITextBox *help_paragraph = new FGUITextBox(help_window, af::fonts["DroidSans.ttf 20"], php::file_get_contents("data/documents/help.txt"), 25, 25+50, 500, 500);
+		FGUITextBox *help_paragraph = new FGUITextBox(help_window, af::fonts["DroidSans.ttf 18"], php::file_get_contents("data/documents/help.txt"), 25, 25+70, 500, 500);
 
 		help_paragraph->set_text_color(color::white);
 

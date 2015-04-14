@@ -221,7 +221,7 @@ void MeasureGrid::insert_measure(int index)
 	}
 }
 
-
+// I love you burhlayburlee <3
 
 bool MeasureGrid::delete_measure(int index)
 {
@@ -240,6 +240,8 @@ void MeasureGrid::push_measure()
 		voices[i].measures.push_back(Measure());
 	}
 }
+
+
 
 
 
