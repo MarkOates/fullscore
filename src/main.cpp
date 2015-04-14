@@ -23,9 +23,28 @@ public:
 	public:
 		int channel_num;
 		int patch;
+		Channel(int channel_num, int patch)
+			: channel_num(channel_num)
+			, patch(patch)
+		{}
 	};
 
 private:
+
+	class GUIPatchTextInput : public FGUITextInput
+	{
+	public:
+		int channel_num;
+		GUIPatchTextInput(FGUIParent *parent, int channel_num, float x, float y)
+			: FGUITextInput(parent, af::fonts["DroidSans.ttf 16"], "0", x, y, 50, 30)
+			, channel_num(channel_num)
+		{}
+		void on_change() override
+		{
+			GUIMixer *mixer = static_cast<GUIMixer *>(parent);
+			mixer->channels[channel_num].patch = atoi(get_text().c_str());
+		} 
+	};
 
 	std::vector<Channel> channels;
 public:
@@ -35,8 +54,8 @@ public:
 	{
 		this->set_title("Mixer & Channel Settings");
 
-		// create 16 channels
-		channels.resize(num_channels);
+		// create the channels
+		for (unsigned i=0; i<num_channels; i++) channels.push_back(Channel(i, 0));
 
 		// create the input boxes
 		float x = 150;
@@ -47,7 +66,7 @@ public:
 			FGUIText *text = new FGUIText(this, x-10, y, af::fonts["DroidSans.ttf 16"], "Channel " + tostring(c+1));
 			text->place.align = vec2d(1, 1);
 
-			FGUITextInput *text_input = new FGUITextInput(this, af::fonts["DroidSans.ttf 16"], "0", x, y, 50, 30);
+			FGUITextInput *text_input = new GUIPatchTextInput(this, c, x, y);
 			text_input->place.align = vec2d(0, 1);
 			text_input->attr.set("select_all_on_focus", "true");
 
@@ -58,6 +77,11 @@ public:
 	{
 		if (channels.empty() || channel_num < 0 || channel_num >= channels.size()) return NULL;
 		return &channels[channel_num];
+	}
+	int get_patch_num(int channel_num)
+	{
+		if (channels.empty() || channel_num < 0 || channel_num >= channels.size()) return 0;
+		return channels[channel_num].patch;
 	}
 };
 
@@ -151,7 +175,7 @@ public:
 
 		simple_notification_screen->spawn_notification("Press F1 for help");
 
-		create_help_window();
+	//	create_help_window();
 	}
 	void create_help_window()
 	{
@@ -205,6 +229,12 @@ public:
 			break;
 		case ALLEGRO_KEY_SPACE:
 			{
+				// send the patches before play
+				PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
+				for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
+				{
+					device->patch_change(i, gui_mixer->get_patch_num(i));
+				}
 				// toggle playback
 				score_editor->playback_control.toggle_playback();
 			}
