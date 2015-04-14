@@ -246,8 +246,10 @@ typedef union
 
 static bool midi_patch_change(unsigned char channel, unsigned char patch_num)
 {
+
+	std::cout << "midi_patch_change(" << (int)channel << ", " << (int)patch_num << std::endl;
 	midi_message message;
-	message.data[0] = PATCH_CHANGE;  // MIDI command byte
+	message.data[0] = PATCH_CHANGE + channel;  // MIDI command byte
 	message.data[1] = patch_num;    // MIDI first data byte
 	message.data[2] = 0;   // MIDI second data byte
 	message.data[3] = 0;     // Unused parameter
@@ -269,7 +271,7 @@ static bool midi_note_on(unsigned char channel, unsigned char pitch, unsigned ch
 	// max velocity of 127
 {
 	midi_message message;
-	message.data[0] = NOTE_ON;  // MIDI command byte
+	message.data[0] = NOTE_ON + channel;  // MIDI command byte
 	message.data[1] = pitch;    // MIDI first data byte
 	message.data[2] = velocity;   // MIDI second data byte (0-127)
 	message.data[3] = 0;     // Unused parameter
@@ -288,7 +290,7 @@ static bool midi_note_on(unsigned char channel, unsigned char pitch, unsigned ch
 static bool midi_note_off(unsigned char channel, unsigned char pitch)
 {
 	midi_message message;
-	message.data[0] = NOTE_ON;  // MIDI command byte
+	message.data[0] = NOTE_ON + channel;  // MIDI command byte
 	message.data[1] = pitch;    // MIDI first data byte
 	message.data[2] = 0;   // MIDI second data byte
 	message.data[3] = 0;     // Unused parameter
