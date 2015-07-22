@@ -7,7 +7,7 @@
 #include <allegro_flare/placement2d.h>
 #include <allegro_flare/display.h>
 
-#include <flare_gui/widget_parent.h>
+#include <flare_gui/widget.h>
 
 #include <fullscore/measure_grid.h>
 #include <fullscore/playback_control.h>
@@ -15,7 +15,7 @@
 
 
 
-class GUIScoreEditor : public FGUIParent
+class GUIScoreEditor : public FGUIWidget
 {
 public:
 	MeasureGrid measure_grid;
@@ -35,7 +35,7 @@ public:
 	float STAFF_HEIGHT;
 	float MEASURE_WIDTH;
 
-	GUIScoreEditor(FGUIParent *parent, Display *display, PlaybackDeviceInterface *playback_device);
+	GUIScoreEditor(FGUIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
 	void on_draw() override;
 	void on_timer() override;
 	Measure *get_hovered_measure();

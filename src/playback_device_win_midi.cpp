@@ -135,8 +135,8 @@ static bool midi_initialized = false;
 
 
 
-static std::vector<MIDI_IN_DEVICE *> midi_in_device;
-static std::vector<MIDI_OUT_DEVICE *> midi_out_device;
+std::vector<MIDI_IN_DEVICE *> midi_in_device;
+std::vector<MIDI_OUT_DEVICE *> midi_out_device;
 
 
 
@@ -145,7 +145,7 @@ static HMIDIOUT current_midi_out_device_handler; //<- eventually this will be a 
 										  // simultaniously.
 
 
-static void init_midi()
+void init_midi()
 {
 	if (midi_initialized) return;
 
@@ -206,7 +206,7 @@ static void init_midi()
 
 
 
-static void uninstall_midi()
+void uninstall_midi()
 {
 	if (!midi_initialized) return;
 
@@ -219,7 +219,7 @@ static void uninstall_midi()
 
 
 
-static bool open_midi_device(MIDI_OUT_DEVICE *dev)
+bool open_midi_device(MIDI_OUT_DEVICE *dev)
 {
 	if (!midi_initialized) return false;
 	if (!dev) return false;
@@ -244,7 +244,7 @@ typedef union
 
 
 
-static bool midi_patch_change(unsigned char channel, unsigned char patch_num)
+bool midi_patch_change(unsigned char channel, unsigned char patch_num)
 {
 
 	std::cout << "midi_patch_change(" << (int)channel << ", " << (int)patch_num << std::endl;
@@ -267,7 +267,7 @@ static bool midi_patch_change(unsigned char channel, unsigned char patch_num)
 
 
 
-static bool midi_note_on(unsigned char channel, unsigned char pitch, unsigned char velocity)
+bool midi_note_on(unsigned char channel, unsigned char pitch, unsigned char velocity)
 	// max velocity of 127
 {
 	midi_message message;
@@ -287,7 +287,7 @@ static bool midi_note_on(unsigned char channel, unsigned char pitch, unsigned ch
 
 
 
-static bool midi_note_off(unsigned char channel, unsigned char pitch)
+bool midi_note_off(unsigned char channel, unsigned char pitch)
 {
 	midi_message message;
 	message.data[0] = NOTE_ON + channel;  // MIDI command byte
@@ -307,7 +307,7 @@ static bool midi_note_off(unsigned char channel, unsigned char pitch)
 
 
 
-static void midi_all_notes_off()
+void midi_all_notes_off()
 {
 	midiOutReset(current_midi_out_device_handler);
 }
@@ -348,7 +348,7 @@ static std::string __get_midiOutPrepareHeader_error_message(UINT err)
 	return ss.str();
 }
 
-static bool midi_sysex_send_message(char device_id, char command_format, char command, char data)
+bool midi_sysex_send_message(char device_id, char command_format, char command, char data)
 {
 	if (device_id == 0xF7
 	 || command_format == 0xF7

@@ -7,7 +7,7 @@
 
 #include <allegro_flare/allegro_flare.h>
 
-#include <flare_gui/collision_box.h>
+#include <flare_gui/surface_areas/box.h>
 
 
 
@@ -15,10 +15,10 @@
 
 
 
-GUIScoreEditor::GUIScoreEditor(FGUIParent *parent, Display *display, PlaybackDeviceInterface *playback_device)
+GUIScoreEditor::GUIScoreEditor(FGUIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
 	// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-	: FGUIParent(parent,
-		new FGUICollisionBox(display->center(), display->middle(), display->width()-20, display->height()-20))
+	: FGUIWidget(parent,
+		new FGUISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 	, measure_grid(8, 3)
 	, playback_control(&measure_grid, playback_device)
 	, measure_cursor_x(-1)
@@ -32,7 +32,7 @@ GUIScoreEditor::GUIScoreEditor(FGUIParent *parent, Display *display, PlaybackDev
 	, MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
 {
 	attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
-	attr.set("id", "GUIScoreEditor" + tostring(widget_count));
+	attr.set("id", "GUIScoreEditor" + tostring(FGUIWidget::get_num_created_widgets()));
 
 	// twinkle twinkle, little star
 	measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
@@ -133,7 +133,7 @@ void GUIScoreEditor::on_draw()
 
 void GUIScoreEditor::on_timer()
 {
-	FGUIParent::on_timer();
+	FGUIWidget::on_timer();
 
 	playback_control.update(af::time_now);
 }
@@ -143,7 +143,7 @@ void GUIScoreEditor::on_timer()
 
 Measure *GUIScoreEditor::get_hovered_measure()
 {
-	if (!FGUIParent::focused) return NULL;
+	if (!FGUIWidget::focused) return NULL;
 
 	if (measure_cursor_x < 0 || measure_cursor_x >= measure_grid.get_num_measures()) return NULL;
 	if (measure_cursor_y < 0 || measure_cursor_y >= measure_grid.get_num_staves()) return NULL;
@@ -193,7 +193,7 @@ int GUIScoreEditor::get_hovered_staff_index()
 
 void GUIScoreEditor::on_click()
 {
-	if (!FGUIParent::focused) return;
+	if (!FGUIWidget::focused) return;
 
 	// append a note into the focused measure
 
@@ -215,7 +215,7 @@ void GUIScoreEditor::on_click()
 
 void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 {
-	if (!FGUIParent::focused) return;
+	if (!FGUIWidget::focused) return;
 
 	cursor_x = x;
 	cursor_y = y;
@@ -238,7 +238,7 @@ void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 
 void GUIScoreEditor::on_key_down()
 {
-	if (!FGUIParent::focused) return;
+	if (!FGUIWidget::focused) return;
 
 	switch(af::current_event->keyboard.keycode)
 	{

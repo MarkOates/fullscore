@@ -1,2 +1,13 @@
-/msvc-10.0
+
+/msvc-*
+
 *.swp
+*.swo
+
+allegro.log
+
+*.o
+*.obj
+*.exe
+
+

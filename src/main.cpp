@@ -35,20 +35,20 @@ private:
 	{
 	public:
 		int channel_num;
-		GUIPatchTextInput(FGUIParent *parent, int channel_num, float x, float y)
-			: FGUITextInput(parent, af::fonts["DroidSans.ttf 16"], "0", x, y, 50, 30)
+		GUIPatchTextInput(FGUIWidget *parent, int channel_num, float x, float y)
+			: FGUITextInput(parent, x, y, 50, 30, "0")
 			, channel_num(channel_num)
 		{}
 		void on_change() override
 		{
-			GUIMixer *mixer = static_cast<GUIMixer *>(parent);
+			GUIMixer *mixer = static_cast<GUIMixer *>(FGUIWidget::family.parent);
 			mixer->channels[channel_num].patch = atoi(get_text().c_str());
 		} 
 	};
 
 	std::vector<Channel> channels;
 public:
-	GUIMixer(FGUIParent *parent, float x_, float y_, int num_channels=8)
+	GUIMixer(FGUIWidget *parent, float x_, float y_, int num_channels=8)
 		: FGUIFramedWindow(parent, x_, y_, 300, 376)
 		, channels()
 	{
@@ -63,7 +63,7 @@ public:
 		float spacing_y = 30;
 		for (unsigned c=0; c<channels.size(); c++)
 		{
-			FGUIText *text = new FGUIText(this, x-10, y, af::fonts["DroidSans.ttf 16"], "Channel " + tostring(c+1));
+			FGUIText *text = new FGUIText(this, x-10, y, "Channel " + tostring(c+1));
 			text->place.align = vec2d(1, 1);
 
 			FGUITextInput *text_input = new GUIPatchTextInput(this, c, x, y);
@@ -97,7 +97,7 @@ public:
 	FGUIButton *rewind_button;
 	FGUIDraggableRegion *draggable_region;
 
-	GUIPlaybackControls(FGUIParent *parent, float x, float y)
+	GUIPlaybackControls(FGUIWidget *parent, float x, float y)
 		: FGUIFramedWindow(parent, x, y, 500, 66)
 		, time(NULL)
 		, play_button(NULL)
@@ -108,17 +108,17 @@ public:
 		draggable_region = new FGUIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
 		draggable_region->place.align = vec2d(0, 0);
 
-		play_button = new FGUIButton(this, "", af::fonts["DroidSans.ttf 20"], place.size.x-20-50, place.size.y-10-20, 100, 40);
+		play_button = new FGUIButton(this, place.size.x-20-50, place.size.y-10-20, 100, 40, "");
 		play_button->attr.set("on_click_send_message", "toggle_playback");
 		play_button->set_icon(af::bitmaps["play_icon.png"]);
 		play_button->place.align = vec2d(0.5, 0.5);
 
-		rewind_button = new FGUIButton(this, "", af::fonts["DroidSans.ttf 20"], place.size.x-130-25, place.size.y-10-20, 50, 40);
+		rewind_button = new FGUIButton(this, place.size.x-130-25, place.size.y-10-20, 50, 40, "");
 		rewind_button->attr.set("on_click_send_message", "reset_playback");
 		rewind_button->set_icon(af::bitmaps["rewind_icon.png"]);
 		rewind_button->place.align = vec2d(0.5, 0.5);
 
-		time = new FGUIScaledText(this, 20, place.size.y-10, "minisystem.ttf 36", "4:33.263");
+		time = new FGUIScaledText(this, 20, place.size.y-10, "4:33.263");
 		time->place.align = vec2d(0, 1.0);
 		time->set_font_color(color::aliceblue);
 	}
@@ -134,11 +134,11 @@ public:
 		time_str << std::setw(3) << msec;
 		time->set_text(time_str.str());
 	}
-	void receive_message(std::string message) override
+	void on_message(FGUIWidget *sender, std::string message) override
 	{
 		// right now... the message is just being passed up to the next widget
 		// there is certainly a better way to do this (*cough* signals and slots)
-		parent->receive_message(message);
+		family.parent->on_message(sender, message);
 	}
 };
 
@@ -175,18 +175,22 @@ public:
 
 		simple_notification_screen->spawn_notification("Press F1 for help");
 
-	//	create_help_window();
+		create_help_window();
 	}
 	void create_help_window()
 	{
+		std::cout << "A";
 		help_window = new FGUIFramedWindow(this, -600, -100, 550, 700);
 		help_window->set_title("Help");
 
-		FGUIText *help_title = new FGUIText(help_window, 25, 25, af::fonts["DroidSans.ttf 34"], "Controls");
-		FGUITextBox *help_paragraph = new FGUITextBox(help_window, af::fonts["DroidSans.ttf 18"], php::file_get_contents("data/documents/help.txt"), 25, 25+70, 500, 500);
+		std::cout << "B";
+		FGUIText *help_title = new FGUIText(help_window, 25, 25, "Controls");
+		FGUITextBox *help_paragraph = new FGUITextBox(help_window, 25, 25+70, 500, 500, php::file_get_contents("data/documents/help.txt"));
 
+		std::cout << "C";
 		help_paragraph->set_text_color(color::white);
 
+		std::cout << "D";
 		help_title->place.align = vec2d(0, 0);
 		help_paragraph->place.align = vec2d(0, 0);
 	}
@@ -259,7 +263,7 @@ public:
 			break;
 		}
 	}
-	void receive_message(std::string message) override
+	void on_message(FGUIWidget *sender, std::string message) override
 	{
 		std::cout << "message: " << message << std::endl;
 		if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
