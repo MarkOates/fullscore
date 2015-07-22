@@ -179,18 +179,14 @@ public:
 	}
 	void create_help_window()
 	{
-		std::cout << "A";
 		help_window = new FGUIFramedWindow(this, -600, -100, 550, 700);
 		help_window->set_title("Help");
 
-		std::cout << "B";
 		FGUIText *help_title = new FGUIText(help_window, 25, 25, "Controls");
 		FGUITextBox *help_paragraph = new FGUITextBox(help_window, 25, 25+70, 500, 500, php::file_get_contents("data/documents/help.txt"));
 
-		std::cout << "C";
 		help_paragraph->set_text_color(color::white);
 
-		std::cout << "D";
 		help_title->place.align = vec2d(0, 0);
 		help_paragraph->place.align = vec2d(0, 0);
 	}
