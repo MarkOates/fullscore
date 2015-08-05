@@ -167,7 +167,6 @@ public:
 		, showing_help_menu(false)
 	{
 		FGUIScreen::draw_focused_outline = false;
-		FGUIScreen::clear_to_background_color = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
 		gui_mixer = new GUIMixer(this, 1350, 500);
