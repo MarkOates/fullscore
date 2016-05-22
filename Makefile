@@ -1,19 +1,42 @@
 
+#
+# Makefile for Fullscore
+#
+
+
+BASE_DIR=/Users/markoates/Repos
+ALLEGRO_DIR=$(BASE_DIR)/allegro5
+ALLEGROFLARE_DIR=$(BASE_DIR)/allegro_flare
+ALLEGROFLARE_LIB_NAME=allegro_flare-0.8.8wip
+
+
+
+
+ALLEGRO_LIB_DIR=$(ALLEGRO_DIR)/build/lib
+ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
+ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
+ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
 OBJS=gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface playback_device_win_midi run_script
 
-
 OBJ_FILES=$(OBJS:%=obj/%.o)
-INCLUDE_FLAGS=-IE:/allegro-5.1.11-mingw-edgar/include -IE:/allegro_flare/include -IE:/fullscore/include -IE:/flare_gui/include
-LIBRARY_LINKS=-lflare_gui-0.6.6-mingw-4.8.1 -lallegro_flare-0.8.6-mingw-4.8.1 -lallegro_monolith-debug.dll -lwinmm -LE:/allegro-5.1.11-mingw-edgar/lib -LE:/allegro_flare/lib -LE:/flare_gui/lib
+
+ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
+ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 
 
-bin/fullscore.exe: $(OBJ_FILES) E:/flare_gui/lib/libflare_gui-0.6.6-mingw-4.8.1.a
-	g++ $(OBJ_FILES) -o $@ $(LIBRARY_LINKS)
+
+#
+# Build Targets
+#
+
+
+bin/fullscore.exe: $(OBJ_FILES)
+	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
 
 $(OBJ_FILES): obj/%.o : src/%.cpp
-	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< $(INCLUDE_FLAGS)
+	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 	
 
 
