@@ -20,8 +20,10 @@ ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 OBJS=gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface run_script
 
 ifeq ($(OS), Windows_NT)
+	EXE_EXTENSION=.exe
 	OBJS += playback_device_win_midi
 else
+	EXE_EXTENSION=
 	OBJS += playback_device_generic
 endif
 
@@ -38,7 +40,7 @@ ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 #
 
 
-bin/fullscore.exe: $(OBJ_FILES)
+bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
 	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
 
