@@ -12,6 +12,7 @@
 #include <fullscore/measure_grid.h>
 #include <fullscore/playback_control.h>
 #include <fullscore/music_engraver.h>
+#include <fullscore/cell_instance.h>
 
 
 
@@ -20,6 +21,7 @@ class GUIScoreEditor : public UIWidget
 public:
 	MeasureGrid measure_grid;
 	PlaybackControl playback_control;
+   std::vector<UICellInstance *> cell_instances;
 
 	int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
 	int measure_cursor_y;
