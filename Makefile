@@ -17,7 +17,7 @@ ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
-OBJS=cell gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface run_script
+OBJS=cell cell_instance gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface run_script
 
 ifeq ($(OS), Windows_NT)
 	EXE_EXTENSION=.exe
