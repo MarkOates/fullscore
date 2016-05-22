@@ -17,7 +17,14 @@ ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
-OBJS=gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface playback_device_win_midi run_script
+OBJS=gui_score_editor main measure measure_grid music_engraver note playback_control playback_device_interface run_script
+
+ifeq ($(OS), Windows_NT)
+	OBJS += playback_device_win_midi
+else
+	OBJS += playback_device_generic
+endif
+
 
 OBJ_FILES=$(OBJS:%=obj/%.o)
 

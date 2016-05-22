@@ -8,7 +8,7 @@
 #include <fullscore/gui_score_editor.h>
 
 
-#include <fullscore/playback_device_win_midi.h>
+#include <fullscore/playback_device_generic.h>
 
 
 
@@ -167,7 +167,7 @@ public:
 	{
 		UIScreen::draw_focused_outline = false;
 
-		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
+		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
 		gui_mixer = new GUIMixer(this, 1350, 500);
 		gui_playback_controls = new GUIPlaybackControls(this, display->center(), 70);
 
