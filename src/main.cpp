@@ -275,4 +275,6 @@ int main(int argc, char *argv[])
 	Display *d = Framework::create_display(1600, 800);
 	Project *proj = new Project(d);
 	Framework::run_loop();
+
+   return 0;
 }
