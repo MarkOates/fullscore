@@ -5,7 +5,7 @@
 
 
 
-#include <allegro_flare/music_notation.h>
+#include <allegro_flare/render_music_notation.h>
 #include <fullscore/note.h>
 #include <fullscore/measure.h>
 

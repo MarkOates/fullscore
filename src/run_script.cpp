@@ -15,7 +15,7 @@
 // and "popen" and "pclose" for other systems
 
 static std::string exec(const char* cmd) {
-    FILE* pipe = _popen(cmd, "r");
+    FILE* pipe = popen(cmd, "r");
     if (!pipe) return "ERROR";
     char buffer[128];
     std::string result = "";
@@ -23,7 +23,7 @@ static std::string exec(const char* cmd) {
     	if(fgets(buffer, 128, pipe) != NULL)
     		result += buffer;
     }
-    _pclose(pipe);
+    pclose(pipe);
     return result;
 }
 

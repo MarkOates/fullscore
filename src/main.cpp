@@ -1,5 +1,4 @@
 #include <allegro_flare/allegro_flare.h>
-#include <flare_gui/flare_gui.h>
 
 
 
@@ -15,7 +14,7 @@
 
 
 
-class GUIMixer : public FGUIFramedWindow 
+class GUIMixer : public UIFramedWindow
 {
 public:
 	class Channel
@@ -31,25 +30,25 @@ public:
 
 private:
 
-	class GUIPatchTextInput : public FGUITextInput
+	class GUIPatchTextInput : public UITextInput
 	{
 	public:
 		int channel_num;
-		GUIPatchTextInput(FGUIWidget *parent, int channel_num, float x, float y)
-			: FGUITextInput(parent, x, y, 50, 30, "0")
+		GUIPatchTextInput(UIWidget *parent, int channel_num, float x, float y)
+			: UITextInput(parent, x, y, 50, 30, "0")
 			, channel_num(channel_num)
 		{}
 		void on_change() override
 		{
-			GUIMixer *mixer = static_cast<GUIMixer *>(FGUIWidget::family.parent);
+			GUIMixer *mixer = static_cast<GUIMixer *>(UIWidget::family.parent);
 			mixer->channels[channel_num].patch = atoi(get_text().c_str());
 		} 
 	};
 
 	std::vector<Channel> channels;
 public:
-	GUIMixer(FGUIWidget *parent, float x_, float y_, int num_channels=8)
-		: FGUIFramedWindow(parent, x_, y_, 300, 376)
+	GUIMixer(UIWidget *parent, float x_, float y_, int num_channels=8)
+		: UIFramedWindow(parent, x_, y_, 300, 376)
 		, channels()
 	{
 		this->set_title("Mixer & Channel Settings");
@@ -63,10 +62,10 @@ public:
 		float spacing_y = 30;
 		for (unsigned c=0; c<channels.size(); c++)
 		{
-			FGUIText *text = new FGUIText(this, x-10, y, "Channel " + tostring(c+1));
+			UIText *text = new UIText(this, x-10, y, "Channel " + tostring(c+1));
 			text->place.align = vec2d(1, 1);
 
-			FGUITextInput *text_input = new GUIPatchTextInput(this, c, x, y);
+			UITextInput *text_input = new GUIPatchTextInput(this, c, x, y);
 			text_input->place.align = vec2d(0, 1);
 			text_input->attr.set("select_all_on_focus", "true");
 
@@ -89,36 +88,36 @@ public:
 
 
 
-class GUIPlaybackControls : public FGUIFramedWindow
+class GUIPlaybackControls : public UIFramedWindow
 {
 public:
-	FGUIScaledText *time;
-	FGUIButton *play_button;
-	FGUIButton *rewind_button;
-	FGUIDraggableRegion *draggable_region;
+	UIScaledText *time;
+	UIButton *play_button;
+	UIButton *rewind_button;
+	UIDraggableRegion *draggable_region;
 
-	GUIPlaybackControls(FGUIWidget *parent, float x, float y)
-		: FGUIFramedWindow(parent, x, y, 500, 66)
+	GUIPlaybackControls(UIWidget *parent, float x, float y)
+		: UIFramedWindow(parent, x, y, 500, 66)
 		, time(NULL)
 		, play_button(NULL)
 		, draggable_region(NULL)
 	{
 		this->set_title("Playback Controls");
 
-		draggable_region = new FGUIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
+		draggable_region = new UIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
 		draggable_region->place.align = vec2d(0, 0);
 
-		play_button = new FGUIButton(this, place.size.x-20-50, place.size.y-10-20, 100, 40, "");
+		play_button = new UIButton(this, place.size.x-20-50, place.size.y-10-20, 100, 40, "");
 		play_button->attr.set("on_click_send_message", "toggle_playback");
-		play_button->set_icon(af::bitmaps["play_icon.png"]);
+		play_button->set_icon(Framework::bitmap("play_icon.png"));
 		play_button->place.align = vec2d(0.5, 0.5);
 
-		rewind_button = new FGUIButton(this, place.size.x-130-25, place.size.y-10-20, 50, 40, "");
+		rewind_button = new UIButton(this, place.size.x-130-25, place.size.y-10-20, 50, 40, "");
 		rewind_button->attr.set("on_click_send_message", "reset_playback");
-		rewind_button->set_icon(af::bitmaps["rewind_icon.png"]);
+		rewind_button->set_icon(Framework::bitmap("rewind_icon.png"));
 		rewind_button->place.align = vec2d(0.5, 0.5);
 
-		time = new FGUIScaledText(this, 20, place.size.y-10, "4:33.263");
+		time = new UIScaledText(this, 20, place.size.y-10, "4:33.263");
 		time->place.align = vec2d(0, 1.0);
 		time->set_font_color(color::aliceblue);
 	}
@@ -134,7 +133,7 @@ public:
 		time_str << std::setw(3) << msec;
 		time->set_text(time_str.str());
 	}
-	void on_message(FGUIWidget *sender, std::string message) override
+	void on_message(UIWidget *sender, std::string message) override
 	{
 		// right now... the message is just being passed up to the next widget
 		// there is certainly a better way to do this (*cough* signals and slots)
@@ -146,7 +145,7 @@ public:
 
 
 
-class Project : public FGUIScreen
+class Project : public UIScreen
 {
 public:
 	SimpleNotificationScreen *simple_notification_screen;
@@ -154,19 +153,19 @@ public:
 	GUIScoreEditor *score_editor;
 	GUIPlaybackControls *gui_playback_controls;
 	GUIMixer *gui_mixer;
-	FGUIFramedWindow *help_window;
+	UIFramedWindow *help_window;
 	bool showing_help_menu;
 
 	Project(Display *display)
-		: FGUIScreen(display)
-		, simple_notification_screen(new SimpleNotificationScreen(display, af::fonts["DroidSans.ttf 20"]))
+		: UIScreen(display)
+		, simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
 		, score_editor(NULL)
 		, gui_playback_controls(NULL)
 		, gui_mixer(NULL)
 		, help_window(NULL)
 		, showing_help_menu(false)
 	{
-		FGUIScreen::draw_focused_outline = false;
+		UIScreen::draw_focused_outline = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceWinMIDI());
 		gui_mixer = new GUIMixer(this, 1350, 500);
@@ -178,11 +177,11 @@ public:
 	}
 	void create_help_window()
 	{
-		help_window = new FGUIFramedWindow(this, -600, -100, 550, 700);
+		help_window = new UIFramedWindow(this, -600, -100, 550, 700);
 		help_window->set_title("Help");
 
-		FGUIText *help_title = new FGUIText(help_window, 25, 25, "Controls");
-		FGUITextBox *help_paragraph = new FGUITextBox(help_window, 25, 25+70, 500, 500, php::file_get_contents("data/documents/help.txt"));
+		UIText *help_title = new UIText(help_window, 25, 25, "Controls");
+		UITextBox *help_paragraph = new UITextBox(help_window, 25, 25+70, 500, 500, php::file_get_contents("data/documents/help.txt"));
 
 		help_paragraph->set_text_color(color::white);
 
@@ -191,31 +190,31 @@ public:
 	}
 	void primary_timer_func() override
 	{
-		FGUIScreen::primary_timer_func();
+		UIScreen::primary_timer_func();
 		gui_playback_controls->set_time(score_editor->playback_control.position);
 	}
 	void key_down_func() override
 	{
-		FGUIScreen::key_down_func();
+		UIScreen::key_down_func();
 
-		switch(af::current_event->keyboard.keycode)
+		switch(Framework::current_event->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_F1:
 			{
 				if (showing_help_menu)
 				{
 					// hide the help menu
-					af::motion.cmove_to(&help_window->place.position.x, -600, 0.4);
-					af::motion.cmove_to(&help_window->place.position.y, -100, 0.4);
-					af::motion.cmove_to(&help_window->place.rotation, -0.1, 0.4);
+					Framework::motion().cmove_to(&help_window->place.position.x, -600, 0.4);
+					Framework::motion().cmove_to(&help_window->place.position.y, -100, 0.4);
+					Framework::motion().cmove_to(&help_window->place.rotation, -0.1, 0.4);
 					showing_help_menu = false;
 				}
 				else
 				{
 					// show the help menu
-					af::motion.cmove_to(&help_window->place.position.x, display->center(), 0.4);
-					af::motion.cmove_to(&help_window->place.position.y, display->middle(), 0.4);
-					af::motion.cmove_to(&help_window->place.rotation, 0, 0.4);
+					Framework::motion().cmove_to(&help_window->place.position.x, display->center(), 0.4);
+					Framework::motion().cmove_to(&help_window->place.position.y, display->middle(), 0.4);
+					Framework::motion().cmove_to(&help_window->place.rotation, 0, 0.4);
 					showing_help_menu = true;
 				}
 			}
@@ -258,7 +257,7 @@ public:
 			break;
 		}
 	}
-	void on_message(FGUIWidget *sender, std::string message) override
+	void on_message(UIWidget *sender, std::string message) override
 	{
 		std::cout << "message: " << message << std::endl;
 		if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
@@ -272,8 +271,8 @@ public:
 
 int main(int argc, char *argv[])
 {
-	af::initialize();
-	Display *d = af::create_display(1600, 800);
+	Framework::initialize();
+	Display *d = Framework::create_display(1600, 800);
 	Project *proj = new Project(d);
-	af::run_loop();
+	Framework::run_loop();
 }

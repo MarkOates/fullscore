@@ -7,7 +7,7 @@
 
 #include <allegro_flare/allegro_flare.h>
 
-#include <flare_gui/surface_areas/box.h>
+//#include <allegro_flare/surface_areas/box.h>
 
 
 
@@ -15,10 +15,10 @@
 
 
 
-GUIScoreEditor::GUIScoreEditor(FGUIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
+GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
 	// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-	: FGUIWidget(parent,
-		new FGUISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
+	: UIWidget(parent,
+		new UISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 	, measure_grid(8, 3)
 	, playback_control(&measure_grid, playback_device)
 	, measure_cursor_x(-1)
@@ -31,8 +31,8 @@ GUIScoreEditor::GUIScoreEditor(FGUIWidget *parent, Display *display, PlaybackDev
 	, STAFF_HEIGHT(80)
 	, MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
 {
-	attr.set(FGUI_ATTR__FGUI_WIDGET_TYPE, "GUIScoreEditor");
-	attr.set("id", "GUIScoreEditor" + tostring(FGUIWidget::get_num_created_widgets()));
+	attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
+	attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
 
 	// twinkle twinkle, little star
 	measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
@@ -74,7 +74,7 @@ void GUIScoreEditor::on_draw()
 	}
 
 	// draw a box under the focused measure (if the alt key is pressed)
-	if (af::key_alt)
+	if (Framework::key_alt)
 		if (get_hovered_measure())
 			al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
@@ -99,13 +99,13 @@ void GUIScoreEditor::on_draw()
 				float width = note->get_duration_width() * MEASURE_WIDTH;
 
 				// draw a hilight box under the focused note
-				if (!af::key_alt && (note == hovered_note))
+				if (!Framework::key_alt && (note == hovered_note))
 					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
 							3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
 
 				if (showing_debug_data)
 				{
-					ALLEGRO_FONT *text_font = af::fonts["DroidSans.ttf 20"];
+					ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
 					// scale degree
 					al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
 					// duration
@@ -133,9 +133,9 @@ void GUIScoreEditor::on_draw()
 
 void GUIScoreEditor::on_timer()
 {
-	FGUIWidget::on_timer();
+	UIWidget::on_timer();
 
-	playback_control.update(af::time_now);
+	playback_control.update(Framework::time_now);
 }
 
 
@@ -143,7 +143,7 @@ void GUIScoreEditor::on_timer()
 
 Measure *GUIScoreEditor::get_hovered_measure()
 {
-	if (!FGUIWidget::focused) return NULL;
+	if (!UIWidget::focused) return NULL;
 
 	if (measure_cursor_x < 0 || measure_cursor_x >= measure_grid.get_num_measures()) return NULL;
 	if (measure_cursor_y < 0 || measure_cursor_y >= measure_grid.get_num_staves()) return NULL;
@@ -193,11 +193,11 @@ int GUIScoreEditor::get_hovered_staff_index()
 
 void GUIScoreEditor::on_click()
 {
-	if (!FGUIWidget::focused) return;
+	if (!UIWidget::focused) return;
 
 	// append a note into the focused measure
 
-	if (af::current_event->mouse.button == 1)
+	if (Framework::current_event->mouse.button == 1)
 	{
 		Measure *focused_measure = get_hovered_measure();
 		if (!focused_measure) return;
@@ -215,7 +215,7 @@ void GUIScoreEditor::on_click()
 
 void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 {
-	if (!FGUIWidget::focused) return;
+	if (!UIWidget::focused) return;
 
 	cursor_x = x;
 	cursor_y = y;
@@ -238,21 +238,21 @@ void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 
 void GUIScoreEditor::on_key_down()
 {
-	if (!FGUIWidget::focused) return;
+	if (!UIWidget::focused) return;
 
-	switch(af::current_event->keyboard.keycode)
+	switch(Framework::current_event->keyboard.keycode)
 	{
 	case ALLEGRO_KEY_W:
 			// transpose up
 		{
-			if (af::key_alt)
+			if (Framework::key_alt)
 			{
 				// transpose the whole measure
 				Measure *focused_measure = get_hovered_measure();
 				if (!focused_measure) break;
 
-				if (af::key_shift) focused_measure->transpose(7);
-				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				if (Framework::key_shift) focused_measure->transpose(7);
+				else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
 				else focused_measure->transpose(1);
 			}
 			else
@@ -261,8 +261,8 @@ void GUIScoreEditor::on_key_down()
 				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 
-				if (af::key_shift) focused_note->scale_degree += 7;
-				else if (af::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
+				if (Framework::key_shift) focused_note->scale_degree += 7;
+				else if (Framework::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
 				else focused_note->scale_degree++;
 			}
 		}
@@ -270,14 +270,14 @@ void GUIScoreEditor::on_key_down()
 	case ALLEGRO_KEY_S:
 			// transpose down
 		{
-			if (af::key_alt)
+			if (Framework::key_alt)
 			{
 				// transposes the whole measure
 				Measure *focused_measure = get_hovered_measure();
 				if (!focused_measure) break;
 
-				if (af::key_shift) focused_measure->transpose(-7);
-				else if (af::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+				if (Framework::key_shift) focused_measure->transpose(-7);
+				else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
 				else focused_measure->transpose(-1);
 			}
 			else
@@ -286,8 +286,8 @@ void GUIScoreEditor::on_key_down()
 				Note *focused_note = get_hovered_note();
 				if (!focused_note) break;
 
-				if (af::key_shift) focused_note->scale_degree -= 7;
-				else if (af::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
+				if (Framework::key_shift) focused_note->scale_degree -= 7;
+				else if (Framework::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
 				else focused_note->scale_degree--;
 			}
 		}
@@ -372,42 +372,42 @@ void GUIScoreEditor::on_key_down()
 
 	case ALLEGRO_KEY_UP:
 		{
-			af::motion.cmove(&camera.position.y, 200, 0.4);
+			Framework::motion().cmove(&camera.position.y, 200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_DOWN:
 		{
-			af::motion.cmove(&camera.position.y, -200, 0.4);
+			Framework::motion().cmove(&camera.position.y, -200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_RIGHT:
 		{
-			af::motion.cmove(&camera.position.x, -200, 0.4);
+			Framework::motion().cmove(&camera.position.x, -200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_LEFT:
 		{
-			af::motion.cmove(&camera.position.x, 200, 0.4);
+			Framework::motion().cmove(&camera.position.x, 200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_EQUALS:
 		{
-			if (af::key_shift)
+			if (Framework::key_shift)
 			{
-				af::motion.cmove_to(&camera.scale.x, 1, 0.3);
-				af::motion.cmove_to(&camera.scale.y, 1, 0.3);
+				Framework::motion().cmove_to(&camera.scale.x, 1, 0.3);
+				Framework::motion().cmove_to(&camera.scale.y, 1, 0.3);
 			}
 			else
 			{
-				af::motion.cmove(&camera.scale.x, 0.1, 0.4);
-				af::motion.cmove(&camera.scale.y, 0.1, 0.4);
+				Framework::motion().cmove(&camera.scale.x, 0.1, 0.4);
+				Framework::motion().cmove(&camera.scale.y, 0.1, 0.4);
 			}
 		}
 		break;
 	case ALLEGRO_KEY_MINUS:
 		{
-			af::motion.cmove(&camera.scale.x, -0.1, 0.4);
-			af::motion.cmove(&camera.scale.y, -0.1, 0.4);
+			Framework::motion().cmove(&camera.scale.x, -0.1, 0.4);
+			Framework::motion().cmove(&camera.scale.y, -0.1, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_N:
