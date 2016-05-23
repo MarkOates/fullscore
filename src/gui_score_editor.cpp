@@ -23,7 +23,6 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
 	, measure_cursor_y(-1)
 	, cursor_x(0)
 	, cursor_y(0)
-	, camera(200, 200, 1, 1)
 	, music_engraver()
 	, showing_debug_data(false)
 	, STAFF_HEIGHT(80)
@@ -48,8 +47,6 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
 	measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
 	measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
 	measure_grid.get_measure(3,1)->notes.push_back(new Note(-3, 2));
-
-	camera.align = vec2d(0, 0);
 }
 
 
@@ -57,8 +54,6 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
 
 void GUIScoreEditor::on_draw()
 {
-	camera.start_transform();
-
 	// draw a background for the score
 	al_draw_filled_rectangle(-30, -30,
 		MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
@@ -122,8 +117,6 @@ void GUIScoreEditor::on_draw()
 	al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
 	al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
 	al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
-
-	camera.restore_transform();
 }
 
 
@@ -219,7 +212,6 @@ void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 	cursor_y = y;
 
 	place.transform_coordinates(&cursor_x, &cursor_y);
-	camera.transform_coordinates(&cursor_x, &cursor_y);
 
 	measure_cursor_x = cursor_x / MEASURE_WIDTH;
 	measure_cursor_y = cursor_y / STAFF_HEIGHT;
@@ -366,46 +358,46 @@ void GUIScoreEditor::on_key_down()
 		}
 		break;
 
-	// some basic camera controls
+	// some basic placement controls of this widget
 
 	case ALLEGRO_KEY_UP:
 		{
-			Framework::motion().cmove(&camera.position.y, 200, 0.4);
+			Framework::motion().cmove(&place.position.y, 200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_DOWN:
 		{
-			Framework::motion().cmove(&camera.position.y, -200, 0.4);
+			Framework::motion().cmove(&place.position.y, -200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_RIGHT:
 		{
-			Framework::motion().cmove(&camera.position.x, -200, 0.4);
+			Framework::motion().cmove(&place.position.x, -200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_LEFT:
 		{
-			Framework::motion().cmove(&camera.position.x, 200, 0.4);
+			Framework::motion().cmove(&place.position.x, 200, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_EQUALS:
 		{
 			if (Framework::key_shift)
 			{
-				Framework::motion().cmove_to(&camera.scale.x, 1, 0.3);
-				Framework::motion().cmove_to(&camera.scale.y, 1, 0.3);
+				Framework::motion().cmove_to(&place.scale.x, 1, 0.3);
+				Framework::motion().cmove_to(&place.scale.y, 1, 0.3);
 			}
 			else
 			{
-				Framework::motion().cmove(&camera.scale.x, 0.1, 0.4);
-				Framework::motion().cmove(&camera.scale.y, 0.1, 0.4);
+				Framework::motion().cmove(&place.scale.x, 0.1, 0.4);
+				Framework::motion().cmove(&place.scale.y, 0.1, 0.4);
 			}
 		}
 		break;
 	case ALLEGRO_KEY_MINUS:
 		{
-			Framework::motion().cmove(&camera.scale.x, -0.1, 0.4);
-			Framework::motion().cmove(&camera.scale.y, -0.1, 0.4);
+			Framework::motion().cmove(&place.scale.x, -0.1, 0.4);
+			Framework::motion().cmove(&place.scale.y, -0.1, 0.4);
 		}
 		break;
 	case ALLEGRO_KEY_N:
