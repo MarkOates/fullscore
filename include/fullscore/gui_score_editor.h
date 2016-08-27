@@ -28,8 +28,6 @@ public:
 	float cursor_x;
 	float cursor_y;
 
-	placement2d camera;
-
 	MusicEngraver music_engraver;
 
 	bool showing_debug_data;
