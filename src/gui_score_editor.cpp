@@ -430,23 +430,6 @@ void GUIScoreEditor::on_key_down()
 			measure_grid.delete_staff(get_hovered_staff_index());  
 		}
 		break;
-   case ALLEGRO_KEY_C: // creates a cell instance
-      {
-         cell_instances.push_back(new UICellInstance(this, NULL, cursor_x, cursor_y));
-      }
-      break;
-   case ALLEGRO_KEY_X: // deletes the hovered cell instance
-      {
-         int found_pos = -1;
-         for (int i=0; i<cell_instances.size(); i++)
-            if (cell_instances[i]->is_mouse_over()) found_pos = i;
-         if (found_pos >= 0)
-         {
-            delete cell_instances[found_pos];
-            cell_instances.erase(cell_instances.begin() + found_pos);
-         }
-      }
-      break;
 	default:
 		break;
 	}
