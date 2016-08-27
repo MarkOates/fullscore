@@ -6,7 +6,7 @@
 
 
 UICellInstance::UICellInstance(UIWidget *parent, Cell *cell, float x, float y)
-   : UIWidget(parent, new UISurfaceAreaBox(x, y, 100, 60))
+   : UIWidget(parent, "UICellInstance", new UISurfaceAreaBox(x, y, 100, 60))
 {
 }
 

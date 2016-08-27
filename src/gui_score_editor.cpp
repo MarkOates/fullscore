@@ -15,7 +15,7 @@
 
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
 	// the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-	: UIWidget(parent,
+	: UIWidget(parent, "GUIScoreEditor",
 		new UISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
 	, measure_grid(8, 3)
 	, playback_control(&measure_grid, playback_device)
