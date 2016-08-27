@@ -3,6 +3,9 @@
 
 
 
+#include <cmath>
+#include <iomanip>
+
 #include <allegro_flare/screens/simple_notification_screen.h>
 
 #include <fullscore/gui_score_editor.h>
