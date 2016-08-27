@@ -49,3 +49,10 @@ $(OBJ_FILES): obj/%.o : src/%.cpp
 	
 
 
+#
+# Make Clean
+#
+
+clean:
+	rm ./obj/*.o
+	rm ./bin/fullscore
