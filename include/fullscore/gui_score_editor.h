@@ -47,6 +47,8 @@ public:
 	void on_click() override;
 	void on_mouse_move(float x, float y, float dx, float dy) override;
 	void on_key_down() override;
+   void on_mouse_enter() override;
+   void on_mouse_leave() override;
 };
 
 

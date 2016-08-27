@@ -451,3 +451,23 @@ void GUIScoreEditor::on_key_down()
 		break;
 	}
 }
+
+
+
+
+void GUIScoreEditor::on_mouse_enter()
+{
+   UIWidget::focused = true;
+}
+
+
+
+
+void GUIScoreEditor::on_mouse_leave()
+{
+   UIWidget::focused = false;
+}
+
+
+
+
