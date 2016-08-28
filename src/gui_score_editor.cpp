@@ -361,48 +361,6 @@ void GUIScoreEditor::on_key_down()
 		}
 		break;
 
-	// some basic placement controls of this widget
-
-	case ALLEGRO_KEY_UP:
-		{
-			Framework::motion().cmove(&place.position.y, 200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_DOWN:
-		{
-			Framework::motion().cmove(&place.position.y, -200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_RIGHT:
-		{
-			Framework::motion().cmove(&place.position.x, -200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_LEFT:
-		{
-			Framework::motion().cmove(&place.position.x, 200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_EQUALS:
-		{
-			if (Framework::key_shift)
-			{
-				Framework::motion().cmove_to(&place.scale.x, 1, 0.3);
-				Framework::motion().cmove_to(&place.scale.y, 1, 0.3);
-			}
-			else
-			{
-				Framework::motion().cmove(&place.scale.x, 0.1, 0.4);
-				Framework::motion().cmove(&place.scale.y, 0.1, 0.4);
-			}
-		}
-		break;
-	case ALLEGRO_KEY_MINUS:
-		{
-			Framework::motion().cmove(&place.scale.x, -0.1, 0.4);
-			Framework::motion().cmove(&place.scale.y, -0.1, 0.4);
-		}
-		break;
 	case ALLEGRO_KEY_N:
 		{
          // append a staff

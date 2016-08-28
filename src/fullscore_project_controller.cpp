@@ -118,6 +118,49 @@ void FullscoreProjectController::key_down_func()
          simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
       }
       break;
+
+	// some basic placement controls of this widget
+
+	case ALLEGRO_KEY_UP:
+		{
+			Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
+		}
+		break;
+	case ALLEGRO_KEY_DOWN:
+		{
+			Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
+		}
+		break;
+	case ALLEGRO_KEY_RIGHT:
+		{
+			Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
+		}
+		break;
+	case ALLEGRO_KEY_LEFT:
+		{
+			Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
+		}
+		break;
+	case ALLEGRO_KEY_EQUALS:
+		{
+			if (Framework::key_shift)
+			{
+				Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
+				Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
+			}
+			else
+			{
+				Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
+				Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
+			}
+		}
+		break;
+	case ALLEGRO_KEY_MINUS:
+		{
+			Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
+			Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
+		}
+		break;
    }
 }
 
