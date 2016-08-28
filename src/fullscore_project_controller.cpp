@@ -11,7 +11,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , score_editor(NULL)
-   , gui_controller_bar(NULL)
+   , command_bar(NULL)
    , gui_mixer(NULL)
    , help_window(NULL)
    , showing_help_menu(false)
@@ -20,7 +20,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
 
    score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
    gui_mixer = new UIMixer(this, 1350, 500);
-   gui_controller_bar = new UIControllerBar(this);
+   command_bar = new UICommandBar(this);
 
    simple_notification_screen->spawn_notification("Press F1 for help");
 
@@ -50,7 +50,7 @@ void FullscoreProjectController::create_help_window()
 void FullscoreProjectController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
-   gui_controller_bar->set_time(score_editor->playback_control.position);
+   command_bar->set_time(score_editor->playback_control.position);
 }
 
 

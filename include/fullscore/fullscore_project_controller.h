@@ -6,7 +6,7 @@
 
 #include <allegro_flare/screens/simple_notification_screen.h>
 
-#include <fullscore/controller_bar.h>
+#include <fullscore/command_bar.h>
 #include <fullscore/gui_score_editor.h>
 #include <fullscore/mixer.h>
 #include <fullscore/playback_device_generic.h>
@@ -20,7 +20,7 @@ public:
    SimpleNotificationScreen *simple_notification_screen;
 
    GUIScoreEditor *score_editor;
-   UIControllerBar *gui_controller_bar;
+   UICommandBar *command_bar;
    UIMixer *gui_mixer;
    UIFramedWindow *help_window;
    bool showing_help_menu;

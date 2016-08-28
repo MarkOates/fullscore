@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/controller_bar.h>
+#include <fullscore/command_bar.h>
 
 #include <cmath>
 #include <iomanip>
@@ -10,8 +10,8 @@
 
 
 
-UIControllerBar::UIControllerBar(UIWidget *parent)
-   : UIWidget(parent, "UIControllerBar", new UISurfaceAreaBox(0, parent->place.size.y-66, parent->place.size.x, 66))
+UICommandBar::UICommandBar(UIWidget *parent)
+   : UIWidget(parent, "UICommandBar", new UISurfaceAreaBox(0, parent->place.size.y-66, parent->place.size.x, 66))
    , time(NULL)
    , play_button(NULL)
    , text_input(NULL)
@@ -39,7 +39,7 @@ UIControllerBar::UIControllerBar(UIWidget *parent)
 
 
 
-void UIControllerBar::set_time(double time_in_sec)
+void UICommandBar::set_time(double time_in_sec)
 {
    int min = (int)floor(time_in_sec / 60.0);
    int seconds = (int)floor(time_in_sec) - min;
@@ -55,7 +55,7 @@ void UIControllerBar::set_time(double time_in_sec)
 
 
 
-void UIControllerBar::on_draw()
+void UICommandBar::on_draw()
 {
    UIStyleAssets::draw_outset(0, 0, place.size.x, place.size.y);
 }
@@ -63,7 +63,7 @@ void UIControllerBar::on_draw()
 
 
 
-void UIControllerBar::on_message(UIWidget *sender, std::string message)
+void UICommandBar::on_message(UIWidget *sender, std::string message)
 {
    // right now... the message is just being passed up to the next widget
    // there is certainly a better way to do this (*cough* signals and slots)
@@ -73,7 +73,7 @@ void UIControllerBar::on_message(UIWidget *sender, std::string message)
 
 
 
-void UIControllerBar::on_key_down()
+void UICommandBar::on_key_down()
 {
    switch (Framework::current_event->keyboard.keycode)
    {
