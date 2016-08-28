@@ -93,14 +93,12 @@ void GUIScoreEditor::on_draw()
                al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
                      3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
 
+            // draw some debug info on the note
             if (showing_debug_data)
             {
                ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
-               // scale degree
                al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
-               // duration
                al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note->duration) + "(" + tostring(note->dots) + ")").c_str());
-               // start and end times
                al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note->start_time).c_str());
                al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note->end_time).c_str());
             }
