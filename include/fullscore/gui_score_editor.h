@@ -45,6 +45,9 @@ public:
 	void on_key_down() override;
    void on_mouse_enter() override;
    void on_mouse_leave() override;
+
+   float get_measure_cursor_real_x();
+   float get_measure_cursor_real_y();
 };
 
 

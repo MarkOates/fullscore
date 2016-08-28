@@ -407,3 +407,19 @@ void GUIScoreEditor::on_mouse_leave()
 
 
 
+float GUIScoreEditor::get_measure_cursor_real_x()
+{
+   return measure_cursor_x * MEASURE_WIDTH;
+}
+
+
+
+
+float GUIScoreEditor::get_measure_cursor_real_y()
+{
+   return measure_cursor_y * STAFF_HEIGHT;
+}
+
+
+
+
