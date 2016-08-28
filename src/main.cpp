@@ -81,7 +81,7 @@ public:
 
 	GUIScoreEditor *score_editor;
 	UIControllerBar *gui_controller_bar;
-	GUIMixer *gui_mixer;
+	UIMixer *gui_mixer;
 	UIFramedWindow *help_window;
 	bool showing_help_menu;
 
@@ -97,7 +97,7 @@ public:
 		UIScreen::draw_focused_outline = false;
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
-		gui_mixer = new GUIMixer(this, 1350, 500);
+		gui_mixer = new UIMixer(this, 1350, 500);
 		gui_controller_bar = new UIControllerBar(this);
 
 		simple_notification_screen->spawn_notification("Press F1 for help");

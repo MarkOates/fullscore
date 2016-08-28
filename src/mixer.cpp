@@ -7,7 +7,7 @@
 
 
 
-GUIMixer::Channel::Channel(int channel_num, int patch)
+UIMixer::Channel::Channel(int channel_num, int patch)
    : channel_num(channel_num)
    , patch(patch)
 {}
@@ -20,7 +20,7 @@ GUIMixer::Channel::Channel(int channel_num, int patch)
 
 
 
-GUIMixer::GUIPatchTextInput::GUIPatchTextInput(UIWidget *parent, int channel_num, float x, float y)
+UIMixer::GUIPatchTextInput::GUIPatchTextInput(UIWidget *parent, int channel_num, float x, float y)
    : UITextInput(parent, x, y, 50, 30, "0")
    , channel_num(channel_num)
 {}
@@ -28,21 +28,21 @@ GUIMixer::GUIPatchTextInput::GUIPatchTextInput(UIWidget *parent, int channel_num
 
 
 
-void GUIMixer::GUIPatchTextInput::on_change()
+void UIMixer::GUIPatchTextInput::on_change()
 {
-   GUIMixer *mixer = static_cast<GUIMixer *>(UIWidget::family.parent);
+   UIMixer *mixer = static_cast<UIMixer *>(UIWidget::family.parent);
    mixer->channels[channel_num].patch = atoi(get_text().c_str());
 }
 
 
 
 
-// GUIMixer
+// UIMixer
 
 
 
 
-GUIMixer::GUIMixer(UIWidget *parent, float x_, float y_, int num_channels)
+UIMixer::UIMixer(UIWidget *parent, float x_, float y_, int num_channels)
    : UIFramedWindow(parent, x_, y_, 300, 376)
    , channels()
 {
@@ -71,7 +71,7 @@ GUIMixer::GUIMixer(UIWidget *parent, float x_, float y_, int num_channels)
 
 
 
-GUIMixer::Channel *GUIMixer::get_channel(int channel_num)
+UIMixer::Channel *UIMixer::get_channel(int channel_num)
 {
    if (channels.empty() || channel_num < 0 || channel_num >= channels.size()) return NULL;
    return &channels[channel_num];
@@ -80,7 +80,7 @@ GUIMixer::Channel *GUIMixer::get_channel(int channel_num)
 
 
 
-int GUIMixer::get_patch_num(int channel_num)
+int UIMixer::get_patch_num(int channel_num)
 {
    if (channels.empty() || channel_num < 0 || channel_num >= channels.size()) return 0;
    return channels[channel_num].patch;

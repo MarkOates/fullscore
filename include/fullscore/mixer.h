@@ -10,7 +10,7 @@
 
 
 
-class GUIMixer : public UIFramedWindow
+class UIMixer : public UIFramedWindow
 {
 public:
 	class Channel
@@ -33,7 +33,7 @@ private:
 	std::vector<Channel> channels;
 
 public:
-	GUIMixer(UIWidget *parent, float x_, float y_, int num_channels=8);
+	UIMixer(UIWidget *parent, float x_, float y_, int num_channels=8);
 	Channel *get_channel(int channel_num);
 	int get_patch_num(int channel_num);
 };
