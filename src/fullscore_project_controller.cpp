@@ -202,6 +202,15 @@ void FullscoreProjectController::on_message(UIWidget *sender, std::string messag
    if (message == "cursor_right") score_editor->measure_cursor_x += 1;
    if (message == "cursor_up") score_editor->measure_cursor_y -= 1;
    if (message == "cursor_down") score_editor->measure_cursor_y += 1;
+
+   if (message == "insert_measure")
+      score_editor->measure_grid.insert_measure(score_editor->get_hovered_measure_index());
+   if (message == "delete_measure")
+      score_editor->measure_grid.delete_measure(score_editor->get_hovered_measure_index());
+   if (message == "insert_staff")
+      score_editor->measure_grid.insert_staff(score_editor->get_hovered_staff_index());
+   if (message == "delete_staff")
+      score_editor->measure_grid.delete_staff(score_editor->get_hovered_staff_index());
 }
 
 
