@@ -119,7 +119,11 @@ void GUIScoreEditor::on_draw()
 	al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
 
    // draw the measure cursor
-   al_draw_line(measure_cursor_x, measure_cursor_y, measure_cursor_x, measure_cursor_y+STAFF_HEIGHT, color::orange, 3.0);
+   float measure_cursor_real_x = get_measure_cursor_real_x();
+   float measure_cursor_real_y = get_measure_cursor_real_y();
+   al_draw_line(measure_cursor_real_x, measure_cursor_real_y,
+         measure_cursor_real_x, measure_cursor_real_y+STAFF_HEIGHT,
+         color::orange, 3.0);
 }
 
 
