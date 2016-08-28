@@ -27,6 +27,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
 	, showing_debug_data(false)
 	, STAFF_HEIGHT(80)
 	, MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
+   , input_mode(false)
 {
 	attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
 	attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
@@ -67,7 +68,7 @@ void GUIScoreEditor::on_draw()
 	}
 
 	// draw a box under the focused measure (if the alt key is pressed)
-	if (Framework::key_alt)
+	if (is_measure_mode())
 		if (get_hovered_measure())
 			al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
 				measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
@@ -92,7 +93,7 @@ void GUIScoreEditor::on_draw()
 				float width = note->get_duration_width() * MEASURE_WIDTH;
 
 				// draw a hilight box under the focused note
-				if (!Framework::key_alt && (note == hovered_note))
+				if (is_note_mode() && (note == hovered_note))
 					al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
 							3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
 
@@ -242,7 +243,7 @@ void GUIScoreEditor::on_key_down()
 	case ALLEGRO_KEY_W:
 			// transpose up
 		{
-			if (Framework::key_alt)
+			if (is_measure_mode())
 			{
 				// transpose the whole measure
 				Measure *focused_measure = get_hovered_measure();
@@ -267,7 +268,7 @@ void GUIScoreEditor::on_key_down()
 	case ALLEGRO_KEY_S:
 			// transpose down
 		{
-			if (Framework::key_alt)
+			if (is_measure_mode())
 			{
 				// transposes the whole measure
 				Measure *focused_measure = get_hovered_measure();
@@ -423,6 +424,31 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 {
    return measure_cursor_y * STAFF_HEIGHT;
 }
+
+
+
+
+void GUIScoreEditor::toggle_input_mode()
+{
+   input_mode = !input_mode;
+}
+
+
+
+
+bool GUIScoreEditor::is_measure_mode()
+{
+   return input_mode;
+}
+
+
+
+
+bool GUIScoreEditor::is_note_mode()
+{
+   return !input_mode;
+}
+
 
 
 

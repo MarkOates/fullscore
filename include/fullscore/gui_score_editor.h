@@ -25,6 +25,7 @@ public:
 	int measure_cursor_y;
 	float cursor_x;
 	float cursor_y;
+   bool input_mode;
 
 	MusicEngraver music_engraver;
 
@@ -48,6 +49,10 @@ public:
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
+
+   void toggle_input_mode();
+   bool is_measure_mode();
+   bool is_note_mode();
 };
 
 

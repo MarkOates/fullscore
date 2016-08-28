@@ -185,6 +185,9 @@ void FullscoreProjectController::key_down_func()
       case ALLEGRO_KEY_L:
          on_message(this, "cursor_right");
          break;
+      case ALLEGRO_KEY_TAB:
+         score_editor->toggle_input_mode();
+         break;
       }
    }
 }
