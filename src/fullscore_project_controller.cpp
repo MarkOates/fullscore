@@ -161,6 +161,16 @@ void FullscoreProjectController::key_down_func()
 			Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
 		}
 		break;
+   case ALLEGRO_KEY_SEMICOLON:
+      if (command_bar->text_input->is_focused())
+      {
+         command_bar->text_input->set_as_unfocused();
+      }
+      else
+      {
+         command_bar->text_input->set_as_focused();
+      }
+      break;
    }
 }
 
