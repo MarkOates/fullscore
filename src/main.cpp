@@ -91,24 +91,19 @@ public:
 
 
 
-class GUIPlaybackControls : public UIFramedWindow
+class GUIPlaybackControls : public UIWidget
 {
 public:
 	UIScaledText *time;
 	UIButton *play_button;
 	UIButton *rewind_button;
-	UIDraggableRegion *draggable_region;
 
-	GUIPlaybackControls(UIWidget *parent, float x, float y)
-		: UIFramedWindow(parent, x, y, 500, 66)
+	GUIPlaybackControls(UIWidget *parent)
+		: UIWidget(parent, "GUIPlaybackControls", new UISurfaceAreaBox(0, 0, parent->place.size.x, 66))
 		, time(NULL)
 		, play_button(NULL)
-		, draggable_region(NULL)
 	{
-		this->set_title("Playback Controls");
-
-		draggable_region = new UIDraggableRegion(this, 0, 0, place.size.x, place.size.y);
-		draggable_region->place.align = vec2d(0, 0);
+      this->place.align = {0.0, 0.0};
 
 		play_button = new UIButton(this, place.size.x-20-50, place.size.y-10-20, 100, 40, "");
 		play_button->attr.set("on_click_send_message", "toggle_playback");
@@ -136,6 +131,10 @@ public:
 		time_str << std::setw(3) << msec;
 		time->set_text(time_str.str());
 	}
+   void on_draw() override
+   {
+      UIStyleAssets::draw_outset(0, 0, place.size.x, place.size.y);
+   }
 	void on_message(UIWidget *sender, std::string message) override
 	{
 		// right now... the message is just being passed up to the next widget
@@ -172,7 +171,7 @@ public:
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
 		gui_mixer = new GUIMixer(this, 1350, 500);
-		gui_playback_controls = new GUIPlaybackControls(this, display->center(), 70);
+		gui_playback_controls = new GUIPlaybackControls(this);
 
 		simple_notification_screen->spawn_notification("Press F1 for help");
 
