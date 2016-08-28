@@ -15,11 +15,13 @@ public:
 	UIScaledText *time;
 	UIButton *play_button;
 	UIButton *rewind_button;
+   UITextInput *text_input;
 
 	UIControllerBar(UIWidget *parent);
 	void set_time(double time_in_sec);
    void on_draw() override;
 	void on_message(UIWidget *sender, std::string message) override;
+   void on_key_down() override;
 };
 
 

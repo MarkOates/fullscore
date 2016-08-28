@@ -11,9 +11,10 @@
 
 
 UIControllerBar::UIControllerBar(UIWidget *parent)
-   : UIWidget(parent, "UIControllerBar", new UISurfaceAreaBox(0, 0, parent->place.size.x, 66))
+   : UIWidget(parent, "UIControllerBar", new UISurfaceAreaBox(0, parent->place.size.y-66, parent->place.size.x, 66))
    , time(NULL)
    , play_button(NULL)
+   , text_input(NULL)
 {
    this->place.align = {0.0, 0.0};
 
@@ -30,6 +31,9 @@ UIControllerBar::UIControllerBar(UIWidget *parent)
    time = new UIScaledText(this, 20, place.size.y-10, "4:33.263");
    time->place.align = vec2d(0, 1.0);
    time->set_font_color(color::aliceblue);
+
+   text_input = new UITextInput(this, 10, 10, 800, 40);
+   text_input->place.align = {0, 0};
 }
 
 
@@ -64,6 +68,21 @@ void UIControllerBar::on_message(UIWidget *sender, std::string message)
    // right now... the message is just being passed up to the next widget
    // there is certainly a better way to do this (*cough* signals and slots)
    family.parent->on_message(sender, message);
+}
+
+
+
+
+void UIControllerBar::on_key_down()
+{
+   switch (Framework::current_event->keyboard.keycode)
+   {
+   case ALLEGRO_KEY_ENTER:
+      family.parent->on_message(this, text_input->get_text());
+      break;
+   default:
+      break;
+   }
 }
 
 
