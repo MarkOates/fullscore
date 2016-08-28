@@ -405,32 +405,24 @@ void GUIScoreEditor::on_key_down()
 		break;
 	case ALLEGRO_KEY_N:
 		{
+         // append a staff
 			measure_grid.push_staff();
 		}
 		break;
 	case ALLEGRO_KEY_M:
 		{
+         // append a measure
 			measure_grid.push_measure();
-		}
-		break;
-	case ALLEGRO_KEY_J: // insert a measure
-		{
+         /*
+         // insert a measure
 			measure_grid.insert_measure(get_hovered_measure_index());
-		}
-		break;
-	case ALLEGRO_KEY_U: // delete a measure
-		{
+         // delete a measure
 			measure_grid.delete_measure(get_hovered_measure_index());
-		}
-		break;
-	case ALLEGRO_KEY_H: // insert a staff
-		{
+         // insert a staff
 			measure_grid.insert_staff(get_hovered_staff_index());  
-		}
-		break;
-	case ALLEGRO_KEY_Y: // delete a staff
-		{
+         // delete a staff
 			measure_grid.delete_staff(get_hovered_staff_index());  
+         */
 		}
 		break;
 	default:
