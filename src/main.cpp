@@ -91,15 +91,15 @@ public:
 
 
 
-class GUIPlaybackControls : public UIWidget
+class UIControllerBar : public UIWidget
 {
 public:
 	UIScaledText *time;
 	UIButton *play_button;
 	UIButton *rewind_button;
 
-	GUIPlaybackControls(UIWidget *parent)
-		: UIWidget(parent, "GUIPlaybackControls", new UISurfaceAreaBox(0, 0, parent->place.size.x, 66))
+	UIControllerBar(UIWidget *parent)
+		: UIWidget(parent, "UIControllerBar", new UISurfaceAreaBox(0, 0, parent->place.size.x, 66))
 		, time(NULL)
 		, play_button(NULL)
 	{
@@ -153,7 +153,7 @@ public:
 	SimpleNotificationScreen *simple_notification_screen;
 
 	GUIScoreEditor *score_editor;
-	GUIPlaybackControls *gui_playback_controls;
+	UIControllerBar *gui_controller_bar;
 	GUIMixer *gui_mixer;
 	UIFramedWindow *help_window;
 	bool showing_help_menu;
@@ -162,7 +162,7 @@ public:
 		: UIScreen(display)
 		, simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
 		, score_editor(NULL)
-		, gui_playback_controls(NULL)
+		, gui_controller_bar(NULL)
 		, gui_mixer(NULL)
 		, help_window(NULL)
 		, showing_help_menu(false)
@@ -171,7 +171,7 @@ public:
 
 		score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
 		gui_mixer = new GUIMixer(this, 1350, 500);
-		gui_playback_controls = new GUIPlaybackControls(this);
+		gui_controller_bar = new UIControllerBar(this);
 
 		simple_notification_screen->spawn_notification("Press F1 for help");
 
@@ -193,7 +193,7 @@ public:
 	void primary_timer_func() override
 	{
 		UIScreen::primary_timer_func();
-		gui_playback_controls->set_time(score_editor->playback_control.position);
+		gui_controller_bar->set_time(score_editor->playback_control.position);
 	}
 	void key_down_func() override
 	{
