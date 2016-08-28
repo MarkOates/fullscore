@@ -117,6 +117,9 @@ void GUIScoreEditor::on_draw()
 	al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
 	al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
 	al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
+
+   // draw the measure cursor
+   al_draw_line(measure_cursor_x, measure_cursor_y, measure_cursor_x, measure_cursor_y+STAFF_HEIGHT, color::orange, 3.0);
 }
 
 
