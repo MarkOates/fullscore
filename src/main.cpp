@@ -16,7 +16,7 @@
 
 
 
-class Project : public UIScreen
+class FullscoreProjectController : public UIScreen
 {
 public:
 	SimpleNotificationScreen *simple_notification_screen;
@@ -27,7 +27,7 @@ public:
 	UIFramedWindow *help_window;
 	bool showing_help_menu;
 
-	Project(Display *display)
+	FullscoreProjectController(Display *display)
 		: UIScreen(display)
 		, simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
 		, score_editor(NULL)
@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 {
 	Framework::initialize();
 	Display *d = Framework::create_display(1920, 1080);
-	Project *proj = new Project(d);
+	FullscoreProjectController *proj = new FullscoreProjectController(d);
 	Framework::run_loop();
 
    return 0;
