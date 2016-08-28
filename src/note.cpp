@@ -59,4 +59,5 @@ bool Note::set_from_string(std::string str, int format_version)
 		ss >> scale_degree >> accidental >> duration >> dots >> is_rest;
 		return true;
 	}
+   return false;
 }

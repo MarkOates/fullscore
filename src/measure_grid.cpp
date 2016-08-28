@@ -229,6 +229,7 @@ bool MeasureGrid::delete_measure(int index)
 	if (index < 0 || index >= num_measures) return false;
 	for (unsigned i=0; i<voices.size(); i++)
 		voices[i].measures.erase(voices[i].measures.begin() + index);
+   return true;
 }
 
 
