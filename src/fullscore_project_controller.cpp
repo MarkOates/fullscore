@@ -173,6 +173,18 @@ void FullscoreProjectController::key_down_func()
             Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
          }
          break;
+      case ALLEGRO_KEY_H:
+         on_message(this, "cursor_left");
+         break;
+      case ALLEGRO_KEY_J:
+         on_message(this, "cursor_down");
+         break;
+      case ALLEGRO_KEY_K:
+         on_message(this, "cursor_up");
+         break;
+      case ALLEGRO_KEY_L:
+         on_message(this, "cursor_right");
+         break;
       }
    }
 }
@@ -185,6 +197,11 @@ void FullscoreProjectController::on_message(UIWidget *sender, std::string messag
    std::cout << "message: " << message << std::endl;
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
+
+   if (message == "cursor_left") score_editor->measure_cursor_x -= 1;
+   if (message == "cursor_right") score_editor->measure_cursor_x += 1;
+   if (message == "cursor_up") score_editor->measure_cursor_y -= 1;
+   if (message == "cursor_down") score_editor->measure_cursor_y += 1;
 }
 
 
