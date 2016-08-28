@@ -60,117 +60,120 @@ void FullscoreProjectController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   switch(Framework::current_event->keyboard.keycode)
+
+   if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SEMICOLON)
    {
-   case ALLEGRO_KEY_F1:
-      {
-         if (showing_help_menu)
-         {
-            // hide the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, -600, 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, -100, 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, -0.1, 0.4);
-            showing_help_menu = false;
-         }
-         else
-         {
-            // show the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, display->center(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, display->middle(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, 0, 0.4);
-            showing_help_menu = true;
-         }
-      }
-      break;
-   case ALLEGRO_KEY_F2:
-      {
-         // toggle showing the debug data on the editor
-         score_editor->showing_debug_data = !score_editor->showing_debug_data;
-      }
-      break;
-   case ALLEGRO_KEY_SPACE:
-      {
-         // send the patches before play
-         PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
-         for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
-         {
-            device->patch_change(i, gui_mixer->get_patch_num(i));
-         }
-         // toggle playback
-         score_editor->playback_control.toggle_playback();
-      }
-      break;
-   case ALLEGRO_KEY_Q:
-      {
-         // toggle playback
-         score_editor->playback_control.reset();
-      }
-      break;
-   case ALLEGRO_KEY_F7:
-      {
-         score_editor->measure_grid.save("score_filename.fs");
-         simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
-      }
-      break;
-   case ALLEGRO_KEY_F8:
-      {
-         score_editor->measure_grid.load("score_filename.fs");
-         simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
-      }
-      break;
+      // toggle focus of the command bar
 
-	// some basic placement controls of this widget
+      if (command_bar->text_input->is_focused()) command_bar->text_input->set_as_unfocused();
+      else command_bar->text_input->set_as_focused();
+   }
+   else if (!command_bar->text_input->is_focused())
+   {
+      // while the command bar is NOT focused, here are the normal keyboard inputs
 
-	case ALLEGRO_KEY_UP:
-		{
-			Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_DOWN:
-		{
-			Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_RIGHT:
-		{
-			Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_LEFT:
-		{
-			Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
-		}
-		break;
-	case ALLEGRO_KEY_EQUALS:
-		{
-			if (Framework::key_shift)
-			{
-				Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
-				Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
-			}
-			else
-			{
-				Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
-				Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
-			}
-		}
-		break;
-	case ALLEGRO_KEY_MINUS:
-		{
-			Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
-			Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
-		}
-		break;
-   case ALLEGRO_KEY_SEMICOLON:
-      if (command_bar->text_input->is_focused())
+      switch(Framework::current_event->keyboard.keycode)
       {
-         command_bar->text_input->set_as_unfocused();
+      case ALLEGRO_KEY_F1:
+         {
+            if (showing_help_menu)
+            {
+               // hide the help menu
+               Framework::motion().cmove_to(&help_window->place.position.x, -600, 0.4);
+               Framework::motion().cmove_to(&help_window->place.position.y, -100, 0.4);
+               Framework::motion().cmove_to(&help_window->place.rotation, -0.1, 0.4);
+               showing_help_menu = false;
+            }
+            else
+            {
+               // show the help menu
+               Framework::motion().cmove_to(&help_window->place.position.x, display->center(), 0.4);
+               Framework::motion().cmove_to(&help_window->place.position.y, display->middle(), 0.4);
+               Framework::motion().cmove_to(&help_window->place.rotation, 0, 0.4);
+               showing_help_menu = true;
+            }
+         }
+         break;
+      case ALLEGRO_KEY_F2:
+         {
+            // toggle showing the debug data on the editor
+            score_editor->showing_debug_data = !score_editor->showing_debug_data;
+         }
+         break;
+      case ALLEGRO_KEY_SPACE:
+         {
+            // send the patches before play
+            PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
+            for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
+            {
+               device->patch_change(i, gui_mixer->get_patch_num(i));
+            }
+            // toggle playback
+            score_editor->playback_control.toggle_playback();
+         }
+         break;
+      case ALLEGRO_KEY_Q:
+         {
+            // toggle playback
+            score_editor->playback_control.reset();
+         }
+         break;
+      case ALLEGRO_KEY_F7:
+         {
+            score_editor->measure_grid.save("score_filename.fs");
+            simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
+         }
+         break;
+      case ALLEGRO_KEY_F8:
+         {
+            score_editor->measure_grid.load("score_filename.fs");
+            simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
+         }
+         break;
+
+      // some basic placement controls of this widget
+
+      case ALLEGRO_KEY_UP:
+         {
+            Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
+         }
+         break;
+      case ALLEGRO_KEY_DOWN:
+         {
+            Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
+         }
+         break;
+      case ALLEGRO_KEY_RIGHT:
+         {
+            Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
+         }
+         break;
+      case ALLEGRO_KEY_LEFT:
+         {
+            Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
+         }
+         break;
+      case ALLEGRO_KEY_EQUALS:
+         {
+            if (Framework::key_shift)
+            {
+               Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
+               Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
+            }
+            else
+            {
+               Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
+               Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
+            }
+         }
+         break;
+      case ALLEGRO_KEY_MINUS:
+         {
+            Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
+            Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
+         }
+         break;
       }
-      else
-      {
-         command_bar->text_input->set_as_focused();
-      }
-      break;
    }
 }
 
