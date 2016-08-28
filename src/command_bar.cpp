@@ -79,6 +79,7 @@ void UICommandBar::on_key_down()
    {
    case ALLEGRO_KEY_ENTER:
       family.parent->on_message(this, text_input->get_text());
+      text_input->set_text("");
       break;
    default:
       break;
