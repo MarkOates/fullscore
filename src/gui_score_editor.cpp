@@ -60,7 +60,7 @@ void GUIScoreEditor::on_draw()
    for (int x=0; x<measure_grid.get_num_measures(); x++)
    {
       Measure *measure = measure_grid.get_measure(x, 0);
-      al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::white, 0.2), 1.0);
+      al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
    }
 
    // draw a box under the focused measure (if the alt key is pressed)
@@ -118,7 +118,7 @@ void GUIScoreEditor::on_draw()
    float measure_cursor_real_y = get_measure_cursor_real_y();
    al_draw_line(measure_cursor_real_x, measure_cursor_real_y,
          measure_cursor_real_x, measure_cursor_real_y+STAFF_HEIGHT,
-         color::orange, 3.0);
+         color::white, 3.0);
 }
 
 
