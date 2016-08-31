@@ -375,16 +375,6 @@ void GUIScoreEditor::on_key_down()
       {
          // append a measure
          measure_grid.push_measure();
-         /*
-         // insert a measure
-         measure_grid.insert_measure(get_hovered_measure_index());
-         // delete a measure
-         measure_grid.delete_measure(get_hovered_measure_index());
-         // insert a staff
-         measure_grid.insert_staff(get_hovered_staff_index());
-         // delete a staff
-         measure_grid.delete_staff(get_hovered_staff_index());
-         */
       }
       break;
    default:
