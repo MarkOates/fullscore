@@ -23,8 +23,7 @@ public:
 
 	int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
 	int measure_cursor_y;
-	float cursor_x;
-	float cursor_y;
+   int note_cursor_x;
    bool input_mode;
 
 	MusicEngraver music_engraver;

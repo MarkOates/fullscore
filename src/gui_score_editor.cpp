@@ -17,8 +17,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , playback_control(&measure_grid, playback_device)
    , measure_cursor_x(-1)
    , measure_cursor_y(-1)
-   , cursor_x(0)
-   , cursor_y(0)
+   , note_cursor_x(0)
    , music_engraver()
    , showing_debug_data(false)
    , STAFF_HEIGHT(80)
@@ -155,7 +154,7 @@ Note *GUIScoreEditor::get_hovered_note()
    Measure *focused_measure = get_hovered_measure();
    if (!focused_measure) return NULL;
 
-   float local_cursor_x = cursor_x - measure_cursor_x * MEASURE_WIDTH;
+   float local_cursor_x = local_mouse_x - measure_cursor_x * MEASURE_WIDTH;
 
    float width_traversed = 0;
    for (unsigned i=0; i<focused_measure->notes.size(); i++)
@@ -215,16 +214,11 @@ void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
 {
    if (!UIWidget::focused) return;
 
-   cursor_x = x;
-   cursor_y = y;
-
-   place.transform_coordinates(&cursor_x, &cursor_y);
-
-   measure_cursor_x = cursor_x / MEASURE_WIDTH;
-   measure_cursor_y = cursor_y / STAFF_HEIGHT;
+   measure_cursor_x = local_mouse_x / MEASURE_WIDTH;
+   measure_cursor_y = local_mouse_y / STAFF_HEIGHT;
 
    // do a bounds check on the board & hovered measure
-   if (cursor_x < 0 || cursor_y < 0
+   if (local_mouse_x < 0 || local_mouse_y < 0
          || measure_cursor_x >= this->measure_grid.get_num_measures()
          || measure_cursor_y >= this->measure_grid.get_num_staves())
       measure_cursor_x = measure_cursor_y = -1;
