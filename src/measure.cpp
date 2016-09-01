@@ -20,6 +20,14 @@ Note *Measure::get_note_at(int index)
 }
 
 
+float Measure::get_length_to_note(int index)
+{
+   float sum = 0;
+   for (auto &note : notes) sum += note->get_duration_width();
+   return sum;
+}
+
+
 bool Measure::insert(int at_index, Note *note)
 {
 	if (at_index < 0) at_index = 0;
