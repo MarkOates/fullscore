@@ -234,29 +234,28 @@ void GUIScoreEditor::on_key_down()
 {
    if (!UIWidget::focused) return;
 
+   std::vector<Note> *notes = nullptr;
+   Note *note = nullptr;
+   Transform::Base *transform = nullptr;
+
+   // find the note/notes to transform
+   if (is_measure_mode())
+   {
+      Measure *focused_measure = get_hovered_measure();
+      if (focused_measure) notes = &focused_measure->notes;
+   }
+   else
+   {
+      Note *focused_note = get_hovered_note();
+      if (focused_note) note = focused_note;
+   }
+
+   // locate and build the appropriate transform
    switch(Framework::current_event->keyboard.keycode)
    {
    case ALLEGRO_KEY_W:
       // transpose up
       {
-         std::vector<Note> *notes = nullptr;
-         Note *note = nullptr;
-         Transform::Base *transform = nullptr;
-
-         // find the note/notes to transform
-         if (is_measure_mode())
-         {
-            Measure *focused_measure = get_hovered_measure();
-            if (!focused_measure) break;
-            notes = &focused_measure->notes;
-         }
-         else
-         {
-            Note *focused_note = get_hovered_note();
-            if (!focused_note) break;
-            note = focused_note;
-         }
-
          // create the transformation
          Transform::Transpose transpose_transform(0);
 
@@ -267,35 +266,21 @@ void GUIScoreEditor::on_key_down()
 
          // assign the transformation
          transform = &transpose_transform;
-
-         // perform the actual transformation
-         if (note) *note = transform->transform({*note})[0];
-         else if (notes) *notes = transform->transform(*notes);
       }
       break;
    case ALLEGRO_KEY_S:
       // transpose down
       {
-         if (is_measure_mode())
-         {
-            // transposes the whole measure
-            Measure *focused_measure = get_hovered_measure();
-            if (!focused_measure) break;
+         // create the transformation
+         Transform::Transpose transpose_transform(0);
 
-            if (Framework::key_shift) focused_measure->transpose(-7);
-            else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
-            else focused_measure->transpose(-1);
-         }
-         else
-         {
-            // transposes a single note
-            Note *focused_note = get_hovered_note();
-            if (!focused_note) break;
+         // find the amount of the transformation
+         if (Framework::key_shift) transpose_transform.transposition = -7;
+         else if (Framework::key_ctrl); // nothing (this add sharps to the whole measure? .. probably not a feature to have)
+         else transpose_transform.transposition = -1;
 
-            if (Framework::key_shift) focused_note->scale_degree -= 7;
-            else if (Framework::key_ctrl) focused_note->accidental = std::max(-1, focused_note->accidental-1);
-            else focused_note->scale_degree--;
-         }
+         // assign the transformation
+         transform = &transpose_transform;
       }
       break;
    case ALLEGRO_KEY_A:
@@ -388,6 +373,13 @@ void GUIScoreEditor::on_key_down()
       break;
    default:
       break;
+   }
+
+   // perform the actual transformation
+   if (transform)
+   {
+      if (note) *note = transform->transform({*note})[0];
+      else if (notes) *notes = transform->transform(*notes);
    }
 }
 
