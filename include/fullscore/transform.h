@@ -13,9 +13,12 @@ namespace Transform
    class Base
    {
    public:
-      virtual std::vector<Note> transform(std::vector<Note> n);
+      Base();
+      ~Base();
+      virtual std::vector<Note> transform(std::vector<Note> source);
    };
 };
+
 
 
 

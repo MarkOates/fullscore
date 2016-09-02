@@ -18,6 +18,7 @@ ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
 OBJS=command_bar fullscore_project_controller gui_score_editor main measure measure_grid mixer music_engraver note playback_control playback_device_interface run_script transform
+TRANSFORM_OBJS=double_duration_transform
 
 ifeq ($(OS), Windows_NT)
 	EXE_EXTENSION=.exe
@@ -29,6 +30,7 @@ endif
 
 
 OBJ_FILES=$(OBJS:%=obj/%.o)
+TRANSFORM_OBJ_FILES=$(TRANSFORM_OBJS:%=obj/%.o)
 
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
 ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
@@ -40,11 +42,13 @@ ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 #
 
 
-bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
-	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
-
+bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES) $(TRANSFORM_OBJ_FILES)
+	g++ $(OBJ_FILES) $(TRANSFORM_OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
 $(OBJ_FILES): obj/%.o : src/%.cpp
+	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
+
+$(TRANSFORM_OBJ_FILES): obj/%.o : src/transforms/%.cpp
 	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 	
 
