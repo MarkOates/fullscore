@@ -8,6 +8,7 @@
 
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/invert_transform.h>
 #include <fullscore/transforms/transpose_transform.h>
 #include <fullscore/transforms/toggle_rest_transform.h>
 
@@ -323,10 +324,8 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_I:
       // invert the measure
       {
-         Measure *focused_measure = get_hovered_measure();
-         if (!focused_measure) break;
-
-         focused_measure->invert(0);
+         Transform::Invert invert_transform(0);
+         transform = &invert_transform;
       }
       break;
    case ALLEGRO_KEY_P:
