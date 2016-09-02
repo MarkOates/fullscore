@@ -8,7 +8,7 @@
 int Measure::get_note_position(Note *note)
 {
 	for (unsigned i=0; i<notes.size(); i++)
-		if (note == notes[i]) return i;
+		if (note == &notes[i]) return i;
 	return -1;
 }
 
@@ -16,19 +16,19 @@ int Measure::get_note_position(Note *note)
 Note *Measure::get_note_at(int index)
 {
 	if (index < 0 || notes.empty() || index >= notes.size()) return NULL;
-	return notes[index];
+	return &notes[index];
 }
 
 
 float Measure::get_length_to_note(int index)
 {
    float sum = 0;
-   for (auto &note : notes) sum += note->get_duration_width();
+   for (auto &note : notes) sum += note.get_duration_width();
    return sum;
 }
 
 
-bool Measure::insert(int at_index, Note *note)
+bool Measure::insert(int at_index, Note note)
 {
 	if (at_index < 0) at_index = 0;
 	if (at_index >= notes.size()) at_index = notes.size()-1;
@@ -37,7 +37,7 @@ bool Measure::insert(int at_index, Note *note)
 }
 
 
-bool Measure::push(Note *note)
+bool Measure::push(Note note)
 {
 	notes.push_back(note);
 	return true;
@@ -46,7 +46,7 @@ bool Measure::push(Note *note)
 
 void Measure::retrograde()
 {
-	std::vector<Note *> result;
+	std::vector<Note> result;
 	for (int i=(int)notes.size()-1; i>=0; i--)
 		result.push_back(notes[i]);
 	notes = result;
@@ -72,7 +72,7 @@ void Measure::prepend(const Measure &other_measure)
 void Measure::invert(int axis)
 {
 	for (unsigned i=0; i<notes.size(); i++)
-		notes[i]->scale_degree = (notes[i]->scale_degree - axis) * -1 + axis;
+		notes[i].scale_degree = (notes[i].scale_degree - axis) * -1 + axis;
 }
 
 
@@ -80,7 +80,7 @@ void Measure::double_duration()
 {
 	// warning, there need to be limits in this function
 	for (unsigned i=0; i<notes.size(); i++)
-		notes[i]->duration /= 2;
+		notes[i].duration /= 2;
 }
 
 
@@ -88,7 +88,7 @@ void Measure::half_duration()
 {
 	// warning, there need to be limits in this function
 	for (unsigned i=0; i<notes.size(); i++)
-		notes[i]->duration *= 2;
+		notes[i].duration *= 2;
 }
 
 
@@ -96,6 +96,6 @@ void Measure::half_duration()
 void Measure::transpose(int transposition)
 {
 	for (unsigned i=0; i<notes.size(); i++)
-		notes[i]->scale_degree += transposition;
+		notes[i].scale_degree += transposition;
 }
 

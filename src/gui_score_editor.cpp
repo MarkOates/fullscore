@@ -28,21 +28,21 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
 
    // twinkle twinkle, little star
-   measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(new Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(new Note(4));
-   measure_grid.get_measure(0,0)->notes.push_back(new Note(4));
-   measure_grid.get_measure(1,0)->notes.push_back(new Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(new Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(new Note(4, 2));
+   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
+   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
+   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
+   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
+   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
+   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
+   measure_grid.get_measure(1,0)->notes.push_back(Note(4, 2));
 
-   measure_grid.get_measure(2,1)->notes.push_back(new Note(0));
-   measure_grid.get_measure(2,1)->notes.push_back(new Note(0));
-   measure_grid.get_measure(2,1)->notes.push_back(new Note(-1));
-   measure_grid.get_measure(2,1)->notes.push_back(new Note(-1));
-   measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
-   measure_grid.get_measure(3,1)->notes.push_back(new Note(-2));
-   measure_grid.get_measure(3,1)->notes.push_back(new Note(-3, 2));
+   measure_grid.get_measure(2,1)->notes.push_back(Note(0));
+   measure_grid.get_measure(2,1)->notes.push_back(Note(0));
+   measure_grid.get_measure(2,1)->notes.push_back(Note(-1));
+   measure_grid.get_measure(2,1)->notes.push_back(Note(-1));
+   measure_grid.get_measure(3,1)->notes.push_back(Note(-2));
+   measure_grid.get_measure(3,1)->notes.push_back(Note(-2));
+   measure_grid.get_measure(3,1)->notes.push_back(Note(-3, 2));
 }
 
 
@@ -84,22 +84,22 @@ void GUIScoreEditor::on_draw()
          {
             int xx = x * MEASURE_WIDTH;
             int yy = y * STAFF_HEIGHT;
-            Note *note = measure->notes[i];
-            float width = note->get_duration_width() * MEASURE_WIDTH;
+            Note &note = measure->notes[i];
+            float width = note.get_duration_width() * MEASURE_WIDTH;
 
             // draw a hilight box under the focused note
-            if (is_note_mode() && (note == hovered_note))
+            if (is_note_mode() && (&note == hovered_note))
                al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
-                     3, 3, color::color(color::pink, (note==hovered_note) ? 0.4 : 0.2));
+                     3, 3, color::color(color::pink, (&note==hovered_note) ? 0.4 : 0.2));
 
             // draw some debug info on the note
             if (showing_debug_data)
             {
                ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
-               al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note->scale_degree).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note->duration) + "(" + tostring(note->dots) + ")").c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note->start_time).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note->end_time).c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note.scale_degree).c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note.start_time).c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note.end_time).c_str());
             }
 
             x_cursor += width;
@@ -159,8 +159,8 @@ Note *GUIScoreEditor::get_hovered_note()
    float width_traversed = 0;
    for (unsigned i=0; i<focused_measure->notes.size(); i++)
    {
-      width_traversed += focused_measure->notes[i]->get_duration_width() * MEASURE_WIDTH;
-      if (local_cursor_x < width_traversed) return focused_measure->notes[i];
+      width_traversed += focused_measure->notes[i].get_duration_width() * MEASURE_WIDTH;
+      if (local_cursor_x < width_traversed) return &focused_measure->notes[i];
    }
    return NULL;
 }
@@ -201,9 +201,9 @@ void GUIScoreEditor::on_click()
 
       Note *focused_note = get_hovered_note();
       if (focused_note)
-         focused_measure->insert(focused_measure->get_note_position(focused_note), new Note());
+         focused_measure->insert(focused_measure->get_note_position(focused_note), Note());
       else
-         focused_measure->push(new Note());
+         focused_measure->push(Note());
    }
 }
 
@@ -316,7 +316,7 @@ void GUIScoreEditor::on_key_down()
          if (!focused_note) break;
 
          for (unsigned i=0; i<focused_measure->notes.size(); i++)
-            if (focused_measure->notes[i]==focused_note)
+            if (&focused_measure->notes[i]==focused_note)
             {
                delete focused_note;
                focused_measure->notes.erase(focused_measure->notes.begin() + i);

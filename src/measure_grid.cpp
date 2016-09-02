@@ -152,10 +152,10 @@ bool MeasureGrid::load(std::string filename)
 		for (unsigned i=0; i<notes.size(); i++)
 		{
 			// create a new note
-			Note *new_note = new Note();
+			Note new_note = Note();
 
 			// set the note from the string
-			new_note->set_from_string(notes[i]);
+			new_note.set_from_string(notes[i]);
 
 			// put the note into the measure
 			measure->notes.push_back(new_note);

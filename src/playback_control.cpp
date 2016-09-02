@@ -75,9 +75,9 @@ void PlaybackControl::reset()
 			Measure *measure = measure_grid->get_measure(x, y);
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
-				Note *note = measure->notes[n];
-				note->attacked = false;
-				note->released = false;
+				Note &note = measure->notes[n];
+				note.attacked = false;
+				note.released = false;
 			}
 		}
 }
@@ -99,7 +99,7 @@ void PlaybackControl::update(double time_now)
 			Measure *measure = measure_grid->get_measure(x, y);
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
-				Note &note = *measure->notes[n];
+				Note &note = measure->notes[n];
 				if (note.released) continue;
 
 				if (!note.attacked && position >= note.start_time)
@@ -134,7 +134,7 @@ void PlaybackControl::refresh_note_start_and_end_times()
 			float x_cursor = 0;
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
-				Note &note = *measure->notes[n];
+				Note &note = measure->notes[n];
 				note.start_time = x_cursor + x;
 				note.end_time = note.start_time + note.get_duration_width();
 				x_cursor += note.get_duration_width();

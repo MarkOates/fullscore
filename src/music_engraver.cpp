@@ -57,8 +57,8 @@ void MusicEngraver::draw(Measure *measure, float x, float y, const float whole_n
 	int cursor_x = 0;
 	for (unsigned i=0; i<measure->notes.size(); i++)
 	{
-		music_notation.draw(x + cursor_x, y, translate_note_to_str(*measure->notes[i]));
-		cursor_x += measure->notes[i]->get_duration_width() * whole_note_width;
+		music_notation.draw(x + cursor_x, y, translate_note_to_str(measure->notes[i]));
+		cursor_x += measure->notes[i].get_duration_width() * whole_note_width;
 	}
 }
 
