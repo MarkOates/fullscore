@@ -14,6 +14,8 @@ namespace Transform
    class DoubleDuration : public Base
    {
    public:
+      int maximum_duration;
+
       DoubleDuration();
       ~DoubleDuration();
       virtual std::vector<Note> transform(std::vector<Note> n) override;
