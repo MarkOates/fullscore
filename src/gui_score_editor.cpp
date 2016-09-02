@@ -8,6 +8,7 @@
 
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/transpose_transform.h>
 
 
 
@@ -238,26 +239,38 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_W:
       // transpose up
       {
+         std::vector<Note> *notes = nullptr;
+         Note *note = nullptr;
+         Transform::Base *transform = nullptr;
+
+         // find the note/notes to transform
          if (is_measure_mode())
          {
-            // transpose the whole measure
             Measure *focused_measure = get_hovered_measure();
             if (!focused_measure) break;
-
-            if (Framework::key_shift) focused_measure->transpose(7);
-            else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
-            else focused_measure->transpose(1);
+            notes = &focused_measure->notes;
          }
          else
          {
-            // transpose the focused note
             Note *focused_note = get_hovered_note();
             if (!focused_note) break;
-
-            if (Framework::key_shift) focused_note->scale_degree += 7;
-            else if (Framework::key_ctrl) focused_note->accidental = std::min(1, focused_note->accidental+1);
-            else focused_note->scale_degree++;
+            note = focused_note;
          }
+
+         // create the transformation
+         Transform::Transpose transpose_transform(0);
+
+         // find the amount of the transformation
+         if (Framework::key_shift) transpose_transform.transposition = 7;
+         else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+         else transpose_transform.transposition = 1;
+
+         // assign the transformation
+         transform = &transpose_transform;
+
+         // perform the actual transformation
+         if (note) *note = transform->transform({*note})[0];
+         else if (notes) *notes = transform->transform(*notes);
       }
       break;
    case ALLEGRO_KEY_S:
