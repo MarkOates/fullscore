@@ -18,7 +18,7 @@ ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
 OBJS=command_bar fullscore_project_controller gui_score_editor main measure measure_grid mixer music_engraver note playback_control playback_device_interface run_script transform_base
-TRANSFORM_OBJS=double_duration_transform half_duration_transform transpose_transform
+TRANSFORM_OBJS=double_duration_transform half_duration_transform toggle_rest_transform transpose_transform
 
 ifeq ($(OS), Windows_NT)
 	EXE_EXTENSION=.exe
