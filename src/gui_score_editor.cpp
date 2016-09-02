@@ -6,6 +6,7 @@
 
 #include <allegro_flare/allegro_flare.h>
 
+#include <fullscore/transforms/double_duration_transform.h>
 
 
 
@@ -295,8 +296,8 @@ void GUIScoreEditor::on_key_down()
       {
          Note *focused_note = get_hovered_note();
          if (!focused_note) break;
-         focused_note->duration /= 2;
-         focused_note->duration = limit<int>(1, 64, focused_note->duration);
+         Transform::DoubleDuration transform;
+         *focused_note = transform.transform({*focused_note})[0];
       }
       break;
    case ALLEGRO_KEY_R:
