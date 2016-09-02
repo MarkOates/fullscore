@@ -7,7 +7,7 @@
 
 
 
-std::vector<Note> Transform::transform(std::vector<Note> source)
+std::vector<Note> Transform::Base::transform(std::vector<Note> source)
 {
    std::vector<Note> notes;
    return notes;

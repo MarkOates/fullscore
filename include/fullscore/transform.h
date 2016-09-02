@@ -8,13 +8,14 @@
 
 
 
-
-class Transform
+namespace Transform
 {
-public:
-   virtual std::vector<Note> transform(std::vector<Note> n);
+   class Base
+   {
+   public:
+      virtual std::vector<Note> transform(std::vector<Note> n);
+   };
 };
-
 
 
 
