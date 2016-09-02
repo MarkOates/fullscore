@@ -285,18 +285,14 @@ void GUIScoreEditor::on_key_down()
       break;
    case ALLEGRO_KEY_A:
       {
-         Note *focused_note = get_hovered_note();
-         if (!focused_note) break;
-         Transform::HalfDuration transform;
-         *focused_note = transform.transform({*focused_note})[0];
+         Transform::HalfDuration half_duration_transform;
+         transform = &half_duration_transform;
       }
       break;
    case ALLEGRO_KEY_D:
       {
-         Note *focused_note = get_hovered_note();
-         if (!focused_note) break;
-         Transform::DoubleDuration transform;
-         *focused_note = transform.transform({*focused_note})[0];
+         Transform::DoubleDuration double_duration_transform;
+         transform = &double_duration_transform;
       }
       break;
    case ALLEGRO_KEY_R:
