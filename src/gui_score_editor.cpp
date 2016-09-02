@@ -9,6 +9,7 @@
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
 #include <fullscore/transforms/transpose_transform.h>
+#include <fullscore/transforms/toggle_rest_transform.h>
 
 
 
@@ -297,9 +298,8 @@ void GUIScoreEditor::on_key_down()
       break;
    case ALLEGRO_KEY_R:
       {
-         Note *focused_note = get_hovered_note();
-         if (!focused_note) break;
-         focused_note->is_rest = !focused_note->is_rest;
+         Transform::ToggleRest toggle_rest_transform;
+         transform = &toggle_rest_transform;
       }
       break;
    case ALLEGRO_KEY_E:
