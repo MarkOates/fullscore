@@ -148,9 +148,6 @@ Measure *GUIScoreEditor::get_hovered_measure()
 {
    if (!UIWidget::focused) return NULL;
 
-   if (measure_cursor_x < 0 || measure_cursor_x >= measure_grid.get_num_measures()) return NULL;
-   if (measure_cursor_y < 0 || measure_cursor_y >= measure_grid.get_num_staves()) return NULL;
-
    return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
 
