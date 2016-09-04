@@ -14,6 +14,8 @@
 #include <fullscore/transforms/toggle_rest_transform.h>
 
 
+const bool TEMPORARILY_DISABLE = false;
+
 
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
@@ -200,16 +202,17 @@ void GUIScoreEditor::on_click()
 
    // append a note into the focused measure
 
-   if (Framework::current_event->mouse.button == 1)
+   if (TEMPORARILY_DISABLE)
    {
-      Measure *focused_measure = get_hovered_measure();
-      if (!focused_measure) return;
+      if (Framework::current_event->mouse.button == 1)
+      {
+         Measure *focused_measure = get_hovered_measure();
+         if (!focused_measure) return;
 
-      Note *focused_note = get_hovered_note();
-      if (focused_note)
-         focused_measure->insert(focused_measure->get_note_position(focused_note), Note());
-      else
-         focused_measure->push(Note());
+         Note *focused_note = get_hovered_note();
+         if (focused_note) focused_measure->insert(focused_measure->get_note_position(focused_note), Note());
+         else focused_measure->push(Note());
+      }
    }
 }
 
