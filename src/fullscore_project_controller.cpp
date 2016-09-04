@@ -201,8 +201,24 @@ void FullscoreProjectController::on_message(UIWidget *sender, std::string messag
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
 
-   if (message == "cursor_left") score_editor->move_measure_cursor_x(-1);
-   if (message == "cursor_right") score_editor->move_measure_cursor_x(1);
+   if (message == "cursor_left")
+   {
+      if (score_editor->is_measure_mode())
+      {
+         score_editor->move_measure_cursor_x(-1);
+         score_editor->note_cursor_x = 0;
+      }
+      else if (score_editor->is_note_mode()) score_editor->move_note_cursor_x(-1);
+   }
+   if (message == "cursor_right")
+   {
+      if (score_editor->is_measure_mode())
+      {
+         score_editor->move_measure_cursor_x(1);
+         score_editor->note_cursor_x = 0;
+      }
+      else if (score_editor->is_note_mode()) score_editor->move_note_cursor_x(1);
+   }
    if (message == "cursor_up") score_editor->move_measure_cursor_y(-1);
    if (message == "cursor_down") score_editor->move_measure_cursor_y(1);
 
