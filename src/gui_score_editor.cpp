@@ -70,7 +70,7 @@ void GUIScoreEditor::on_draw()
       al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
    }
 
-   // draw a box under the focused measure (if the alt key is pressed)
+   // draw a box under the focused measure
    if (is_measure_mode())
       if (get_hovered_measure())
          al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
