@@ -412,6 +412,44 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 
 
 
+int GUIScoreEditor::move_measure_cursor_x(int delta)
+{
+   int num_measures = measure_grid.get_num_measures();
+   measure_cursor_x = limit<int>(0, num_measures-1, measure_cursor_x + delta);
+   return measure_cursor_x;
+}
+
+
+
+
+int GUIScoreEditor::move_measure_cursor_y(int delta)
+{
+   int num_staves = measure_grid.get_num_staves();
+   measure_cursor_y = limit<int>(0, num_staves-1, measure_cursor_y + delta);
+   return measure_cursor_y;
+}
+
+
+
+
+int GUIScoreEditor::move_note_cursor_x(int delta)
+{
+   Measure *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+   if (!current_measure)
+   {
+      note_cursor_x = 0;
+   }
+   else
+   {
+      int num_notes = current_measure->notes.size();
+      note_cursor_x = limit<int>(0, num_notes-1, note_cursor_x + delta);
+   }
+   return note_cursor_x;
+}
+
+
+
+
 void GUIScoreEditor::toggle_input_mode()
 {
    input_mode = !input_mode;

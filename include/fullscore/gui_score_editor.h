@@ -46,6 +46,10 @@ public:
    void on_mouse_enter() override;
    void on_mouse_leave() override;
 
+   int move_measure_cursor_x(int delta);
+   int move_measure_cursor_y(int delta);
+   int move_note_cursor_x(int delta);
+
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
 
