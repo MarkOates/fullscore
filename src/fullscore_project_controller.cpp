@@ -201,10 +201,10 @@ void FullscoreProjectController::on_message(UIWidget *sender, std::string messag
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
 
-   if (message == "cursor_left") score_editor->measure_cursor_x -= 1;
-   if (message == "cursor_right") score_editor->measure_cursor_x += 1;
-   if (message == "cursor_up") score_editor->measure_cursor_y -= 1;
-   if (message == "cursor_down") score_editor->measure_cursor_y += 1;
+   if (message == "cursor_left") score_editor->move_measure_cursor_x(-1);
+   if (message == "cursor_right") score_editor->move_measure_cursor_x(1);
+   if (message == "cursor_up") score_editor->move_measure_cursor_y(-1);
+   if (message == "cursor_down") score_editor->move_measure_cursor_y(1);
 
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->get_hovered_measure_index());
