@@ -23,7 +23,10 @@ Note *Measure::get_note_at(int index)
 float Measure::get_length_to_note(int index)
 {
    float sum = 0;
-   for (auto &note : notes) sum += note.get_duration_width();
+   if (index < 0 || index >= notes.size()) return 0;
+
+   for (int i=0; i<index; i++)
+      sum += notes[i].get_duration_width();
    return sum;
 }
 
