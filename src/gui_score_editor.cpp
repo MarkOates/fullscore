@@ -7,6 +7,7 @@
 #include <allegro_flare/allegro_flare.h>
 
 #include <fullscore/transforms/double_duration_transform.h>
+#include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
 #include <fullscore/transforms/invert_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
@@ -256,19 +257,8 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_E:
       // erase the focused note
       {
-         Measure *focused_measure = get_measure_at_cursor();
-         if (!focused_measure) break;
-
-         Note *focused_note = get_note_at_cursor();
-         if (!focused_note) break;
-
-         for (unsigned i=0; i<focused_measure->notes.size(); i++)
-            if (&focused_measure->notes[i]==focused_note)
-            {
-               delete focused_note;
-               focused_measure->notes.erase(focused_measure->notes.begin() + i);
-               i--;
-            }
+         Transform::EraseNote erase_note_transform(note_cursor_x);
+         transform = &erase_note_transform;
       }
       break;
    case ALLEGRO_KEY_I:
