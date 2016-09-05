@@ -159,15 +159,7 @@ Note *GUIScoreEditor::get_hovered_note()
    Measure *focused_measure = get_hovered_measure();
    if (!focused_measure) return NULL;
 
-   float local_cursor_x = local_mouse_x - measure_cursor_x * MEASURE_WIDTH;
-
-   float width_traversed = 0;
-   for (unsigned i=0; i<focused_measure->notes.size(); i++)
-   {
-      width_traversed += focused_measure->notes[i].get_duration_width() * MEASURE_WIDTH;
-      if (local_cursor_x < width_traversed) return &focused_measure->notes[i];
-   }
-   return NULL;
+   return focused_measure->get_note_at(note_cursor_x);
 }
 
 
@@ -188,46 +180,6 @@ int GUIScoreEditor::get_hovered_staff_index()
 {
    // (see comment in get_hovered_measure_index())
    return measure_cursor_y;
-}
-
-
-
-
-void GUIScoreEditor::on_click()
-{
-   if (!UIWidget::focused) return;
-
-   // append a note into the focused measure
-
-   if (TEMPORARILY_DISABLE)
-   {
-      if (Framework::current_event->mouse.button == 1)
-      {
-         Measure *focused_measure = get_hovered_measure();
-         if (!focused_measure) return;
-
-         Note *focused_note = get_hovered_note();
-         if (focused_note) focused_measure->insert(focused_measure->get_note_position(focused_note), Note());
-         else focused_measure->push(Note());
-      }
-   }
-}
-
-
-
-
-void GUIScoreEditor::on_mouse_move(float x, float y, float dx, float dy)
-{
-   if (!UIWidget::focused) return;
-
-   measure_cursor_x = local_mouse_x / MEASURE_WIDTH;
-   measure_cursor_y = local_mouse_y / STAFF_HEIGHT;
-
-   // do a bounds check on the board & hovered measure
-   if (local_mouse_x < 0 || local_mouse_y < 0
-         || measure_cursor_x >= this->measure_grid.get_num_measures()
-         || measure_cursor_y >= this->measure_grid.get_num_staves())
-      measure_cursor_x = measure_cursor_y = -1;
 }
 
 
@@ -375,22 +327,6 @@ void GUIScoreEditor::on_key_down()
       if (note) *note = transform->transform({*note})[0];
       else if (notes) *notes = transform->transform(*notes);
    }
-}
-
-
-
-
-void GUIScoreEditor::on_mouse_enter()
-{
-   UIWidget::focused = true;
-}
-
-
-
-
-void GUIScoreEditor::on_mouse_leave()
-{
-   UIWidget::focused = false;
 }
 
 

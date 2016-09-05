@@ -40,11 +40,7 @@ public:
 	Note *get_hovered_note();
 	int get_hovered_measure_index();
 	int get_hovered_staff_index();
-	void on_click() override;
-	void on_mouse_move(float x, float y, float dx, float dy) override;
 	void on_key_down() override;
-   void on_mouse_enter() override;
-   void on_mouse_leave() override;
 
    int move_measure_cursor_x(int delta);
    int move_measure_cursor_y(int delta);
