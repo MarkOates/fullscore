@@ -165,26 +165,6 @@ Note *GUIScoreEditor::get_hovered_note()
 
 
 
-int GUIScoreEditor::get_hovered_measure_index()
-{
-   // this function relies on the fact that measure_cursor_x is bounds checked
-   // is correctly used.  I think relying on measure_cursor_x to be these things
-   // is actually a good design idea.
-   return measure_cursor_x; // will be -1 if out of bounds
-}
-
-
-
-
-int GUIScoreEditor::get_hovered_staff_index()
-{
-   // (see comment in get_hovered_measure_index())
-   return measure_cursor_y;
-}
-
-
-
-
 void GUIScoreEditor::on_key_down()
 {
    if (!UIWidget::focused) return;

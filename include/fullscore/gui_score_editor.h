@@ -38,8 +38,6 @@ public:
 	void on_timer() override;
 	Measure *get_hovered_measure();
 	Note *get_hovered_note();
-	int get_hovered_measure_index();
-	int get_hovered_staff_index();
 	void on_key_down() override;
 
    int move_measure_cursor_x(int delta);
