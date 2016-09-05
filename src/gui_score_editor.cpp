@@ -95,7 +95,7 @@ void GUIScoreEditor::on_draw()
          }
       }
 
-   // draw a box under the focused measure
+   // draw a hilight box under the focused measure
    Measure *measure = get_measure_at_cursor();
    Note *note = get_note_at_cursor();
 
