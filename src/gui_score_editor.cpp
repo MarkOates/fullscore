@@ -72,13 +72,13 @@ void GUIScoreEditor::on_draw()
 
    // draw a box under the focused measure
    if (is_measure_mode())
-      if (get_hovered_measure())
+      if (get_measure_at_cursor())
          al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
             measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::aliceblue, 0.2));
 
    // draw the notes and measures
-   Note *hovered_note = get_hovered_note();
+   Note *hovered_note = get_note_at_cursor();
 
    for (int y=0; y<measure_grid.get_num_staves(); y++)
       for (int x=0; x<measure_grid.get_num_measures(); x++)
@@ -144,19 +144,17 @@ void GUIScoreEditor::on_timer()
 
 
 
-Measure *GUIScoreEditor::get_hovered_measure()
+Measure *GUIScoreEditor::get_measure_at_cursor()
 {
-   if (!UIWidget::focused) return NULL;
-
    return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
 
 
 
 
-Note *GUIScoreEditor::get_hovered_note()
+Note *GUIScoreEditor::get_note_at_cursor()
 {
-   Measure *focused_measure = get_hovered_measure();
+   Measure *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
 
    return focused_measure->get_note_at(note_cursor_x);
@@ -176,12 +174,12 @@ void GUIScoreEditor::on_key_down()
    // find the note/notes to transform
    if (is_measure_mode())
    {
-      Measure *focused_measure = get_hovered_measure();
+      Measure *focused_measure = get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
    }
    else
    {
-      Note *focused_note = get_hovered_note();
+      Note *focused_note = get_note_at_cursor();
       if (focused_note) note = focused_note;
    }
 
@@ -239,10 +237,10 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_E:
       // erase the focused note
       {
-         Measure *focused_measure = get_hovered_measure();
+         Measure *focused_measure = get_measure_at_cursor();
          if (!focused_measure) break;
 
-         Note *focused_note = get_hovered_note();
+         Note *focused_note = get_note_at_cursor();
          if (!focused_note) break;
 
          for (unsigned i=0; i<focused_measure->notes.size(); i++)
@@ -271,7 +269,7 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_FULLSTOP:
       // add a dot
       {
-         Note *focused_note = get_hovered_note();
+         Note *focused_note = get_note_at_cursor();
          if (!focused_note) break;
          focused_note->dots = std::min(2, focused_note->dots+1);
       }
@@ -279,7 +277,7 @@ void GUIScoreEditor::on_key_down()
    case ALLEGRO_KEY_COMMA:
       // remove a dot
       {
-         Note *focused_note = get_hovered_note();
+         Note *focused_note = get_note_at_cursor();
          if (!focused_note) break;
          focused_note->dots = std::max(0, focused_note->dots-1);
       }

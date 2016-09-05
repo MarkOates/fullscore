@@ -36,8 +36,8 @@ public:
 	GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
 	void on_draw() override;
 	void on_timer() override;
-	Measure *get_hovered_measure();
-	Note *get_hovered_note();
+	Measure *get_measure_at_cursor();
+	Note *get_note_at_cursor();
 	void on_key_down() override;
 
    int move_measure_cursor_x(int delta);
