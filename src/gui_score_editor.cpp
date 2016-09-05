@@ -70,13 +70,6 @@ void GUIScoreEditor::on_draw()
       al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
    }
 
-   // draw a box under the focused measure
-   if (is_measure_mode())
-      if (get_measure_at_cursor())
-         al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT, 
-            measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
-            4, 4, color::color(color::aliceblue, 0.2));
-
    // draw the notes and measures
    Note *hovered_note = get_note_at_cursor();
 
@@ -114,11 +107,12 @@ void GUIScoreEditor::on_draw()
          }
       }
 
-   // draw the playhead
-   float playhead_x = playback_control.position * MEASURE_WIDTH;
-   al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
-   al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
-   al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
+   // draw a box under the focused measure
+   if (is_measure_mode())
+      if (get_measure_at_cursor())
+         al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
+            measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+            4, 4, color::color(color::aliceblue, 0.2));
 
    // draw the measure cursor
    if (measure_cursor_x >= 0 && measure_cursor_y >= 0)
@@ -129,6 +123,12 @@ void GUIScoreEditor::on_draw()
             measure_cursor_real_x, measure_cursor_real_y+STAFF_HEIGHT,
             color::white, 3.0);
    }
+
+   // draw the playhead
+   float playhead_x = playback_control.position * MEASURE_WIDTH;
+   al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
+   al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
+   al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
 }
 
 
