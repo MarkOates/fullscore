@@ -88,11 +88,6 @@ void GUIScoreEditor::on_draw()
             Note &note = measure->notes[i];
             float width = note.get_duration_width() * MEASURE_WIDTH;
 
-            // draw a hilight box under the focused note
-            if (is_note_mode() && (&note == hovered_note))
-               al_draw_filled_rounded_rectangle(xx+x_cursor, yy, xx+x_cursor+width, yy+STAFF_HEIGHT,
-                     3, 3, color::color(color::pink, (&note==hovered_note) ? 0.4 : 0.2));
-
             // draw some debug info on the note
             if (showing_debug_data)
             {
@@ -108,11 +103,35 @@ void GUIScoreEditor::on_draw()
       }
 
    // draw a box under the focused measure
-   if (is_measure_mode())
-      if (get_measure_at_cursor())
-         al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-            measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
-            4, 4, color::color(color::aliceblue, 0.2));
+   Measure *measure = get_measure_at_cursor();
+   Note *note = get_note_at_cursor();
+
+   if (get_measure_at_cursor())
+      al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
+         measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         4, 4, color::color(color::aliceblue, 0.2));
+
+   // draw a hilight box under the focused note
+   if (is_note_mode())
+   {
+      if (measure && note)
+      {
+         float measure_cursor_real_x = get_measure_cursor_real_x();
+         float measure_cursor_real_y = get_measure_cursor_real_y();
+         float note_real_offset_x = measure->get_length_to_note(note_cursor_x) * MEASURE_WIDTH;
+         float note_width = note->get_duration_width() * MEASURE_WIDTH;
+
+         al_draw_filled_rounded_rectangle(
+               measure_cursor_real_x + note_real_offset_x,
+               measure_cursor_real_y,
+               measure_cursor_real_x + note_real_offset_x + note_width,
+               measure_cursor_real_y + STAFF_HEIGHT,
+               6,
+               6,
+               color::color(color::pink, 0.4)
+            );
+      }
+   }
 
    // draw the measure cursor
    if (measure_cursor_x >= 0 && measure_cursor_y >= 0)
