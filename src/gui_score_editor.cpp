@@ -100,30 +100,50 @@ void GUIScoreEditor::on_draw()
    Note *note = get_note_at_cursor();
 
    if (get_measure_at_cursor())
+   {
+      // fill
       al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
          measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.2));
 
-   // draw a hilight box under the focused note
-   if (is_note_mode())
-   {
-      if (measure && note)
-      {
-         float measure_cursor_real_x = get_measure_cursor_real_x();
-         float measure_cursor_real_y = get_measure_cursor_real_y();
-         float note_real_offset_x = measure->get_length_to_note(note_cursor_x) * MEASURE_WIDTH;
-         float note_width = note->get_duration_width() * MEASURE_WIDTH;
+      // outline
+      if (is_measure_mode())
+         al_draw_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
+            measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+            4, 4, color::color(color::aliceblue, 0.7), 2.0);
+   }
 
-         al_draw_filled_rounded_rectangle(
+   // draw a hilight box under the focused note
+   if (measure && note)
+   {
+      float measure_cursor_real_x = get_measure_cursor_real_x();
+      float measure_cursor_real_y = get_measure_cursor_real_y();
+      float note_real_offset_x = measure->get_length_to_note(note_cursor_x) * MEASURE_WIDTH;
+      float note_width = note->get_duration_width() * MEASURE_WIDTH;
+
+      // fill
+      al_draw_filled_rounded_rectangle(
+            measure_cursor_real_x + note_real_offset_x,
+            measure_cursor_real_y,
+            measure_cursor_real_x + note_real_offset_x + note_width,
+            measure_cursor_real_y + STAFF_HEIGHT,
+            6,
+            6,
+            color::color(color::pink, 0.4)
+         );
+
+      // outline
+      if (is_note_mode())
+         al_draw_rounded_rectangle(
                measure_cursor_real_x + note_real_offset_x,
                measure_cursor_real_y,
                measure_cursor_real_x + note_real_offset_x + note_width,
                measure_cursor_real_y + STAFF_HEIGHT,
                6,
                6,
-               color::color(color::pink, 0.4)
+               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
+               2.0
             );
-      }
    }
 
    // draw the measure cursor
