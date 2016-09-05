@@ -38,7 +38,6 @@ public:
 	void on_timer() override;
 	Measure *get_measure_at_cursor();
 	Note *get_note_at_cursor();
-	void on_key_down() override;
 
    int move_measure_cursor_x(int delta);
    int move_measure_cursor_y(int delta);

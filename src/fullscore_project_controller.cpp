@@ -4,6 +4,15 @@
 
 #include <fullscore/fullscore_project_controller.h>
 
+#include <fullscore/transforms/double_duration_transform.h>
+#include <fullscore/transforms/erase_note_transform.h>
+#include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/invert_transform.h>
+#include <fullscore/transforms/retrograde_transform.h>
+#include <fullscore/transforms/transpose_transform.h>
+#include <fullscore/transforms/toggle_rest_transform.h>
+
+
 
 
 
@@ -70,7 +79,142 @@ void FullscoreProjectController::key_down_func()
    }
    else if (!command_bar->text_input->is_focused())
    {
+      //
+      // SCORE EDITING COMMANDS
+      //
+
+      std::vector<Note> *notes = nullptr;
+      Note *note = nullptr;
+      Transform::Base *transform = nullptr;
+
+      // find the note/notes to transform
+      if (score_editor->is_measure_mode())
+      {
+         Measure *focused_measure = score_editor->get_measure_at_cursor();
+         if (focused_measure) notes = &focused_measure->notes;
+      }
+      else
+      {
+         Note *focused_note = score_editor->get_note_at_cursor();
+         if (focused_note) note = focused_note;
+      }
+
+      // locate and build the appropriate transform
+      switch(Framework::current_event->keyboard.keycode)
+      {
+      case ALLEGRO_KEY_W:
+         // transpose up
+         {
+            // create the transformation
+            Transform::Transpose transpose_transform(0);
+
+            // find the amount of the transformation
+            if (Framework::key_shift) transpose_transform.transposition = 7;
+            else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
+            else transpose_transform.transposition = 1;
+
+            // assign the transformation
+            transform = &transpose_transform;
+         }
+         break;
+      case ALLEGRO_KEY_S:
+         // transpose down
+         {
+            // create the transformation
+            Transform::Transpose transpose_transform(0);
+
+            // find the amount of the transformation
+            if (Framework::key_shift) transpose_transform.transposition = -7;
+            else if (Framework::key_ctrl); // nothing (this add sharps to the whole measure? .. probably not a feature to have)
+            else transpose_transform.transposition = -1;
+
+            // assign the transformation
+            transform = &transpose_transform;
+         }
+         break;
+      case ALLEGRO_KEY_A:
+         {
+            Transform::HalfDuration half_duration_transform;
+            transform = &half_duration_transform;
+         }
+         break;
+      case ALLEGRO_KEY_D:
+         {
+            Transform::DoubleDuration double_duration_transform;
+            transform = &double_duration_transform;
+         }
+         break;
+      case ALLEGRO_KEY_R:
+         {
+            Transform::ToggleRest toggle_rest_transform;
+            transform = &toggle_rest_transform;
+         }
+         break;
+      case ALLEGRO_KEY_E:
+         // erase the focused note
+         {
+            Transform::EraseNote erase_note_transform(score_editor->note_cursor_x);
+            transform = &erase_note_transform;
+         }
+         break;
+      case ALLEGRO_KEY_I:
+         // invert the measure
+         {
+            Transform::Invert invert_transform(0);
+            transform = &invert_transform;
+         }
+         break;
+      case ALLEGRO_KEY_P:
+         // retrograde the measure
+         {
+            Transform::Retrograde retrograde_transform;
+            transform = &retrograde_transform;
+         }
+         break;
+      case ALLEGRO_KEY_FULLSTOP:
+         // add a dot
+         {
+            Note *focused_note = score_editor->get_note_at_cursor();
+            if (!focused_note) break;
+            focused_note->dots = std::min(2, focused_note->dots+1);
+         }
+         break;
+      case ALLEGRO_KEY_COMMA:
+         // remove a dot
+         {
+            Note *focused_note = score_editor->get_note_at_cursor();
+            if (!focused_note) break;
+            focused_note->dots = std::max(0, focused_note->dots-1);
+         }
+         break;
+
+      case ALLEGRO_KEY_N:
+         {
+            // append a staff
+            score_editor->measure_grid.push_staff();
+         }
+         break;
+      case ALLEGRO_KEY_M:
+         {
+            // append a measure
+            score_editor->measure_grid.push_measure();
+         }
+         break;
+      default:
+         break;
+      }
+
+      // perform the actual transformation
+      if (transform)
+      {
+         if (note) *note = transform->transform({*note})[0];
+         else if (notes) *notes = transform->transform(*notes);
+      }
       // while the command bar is NOT focused, here are the normal keyboard inputs
+
+      //
+      // NON-SCORE EDITING COMMANDS
+      //
 
       switch(Framework::current_event->keyboard.keycode)
       {
