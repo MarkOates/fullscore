@@ -47,19 +47,3 @@ bool Measure::push(Note note)
 }
 
 
-void Measure::append(const Measure &other_measure)
-{
-	for (unsigned i=0; i<other_measure.notes.size(); i++)
-		notes.push_back(other_measure.notes[i]);
-}
-
-
-void Measure::prepend(const Measure &other_measure)
-{
-	Measure result_measure;
-	result_measure.append(other_measure);
-	result_measure.append(*this);
-	notes = result_measure.notes;
-}
-
-

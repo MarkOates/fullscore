@@ -24,9 +24,6 @@ public:
 	bool insert(int index, Note note);
 	bool push(Note note);
 	int remove(int index);
-
-	void append(const Measure &other_measure);
-	void prepend(const Measure &other_measure);
 };
 
 
