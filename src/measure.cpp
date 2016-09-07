@@ -63,10 +63,3 @@ void Measure::prepend(const Measure &other_measure)
 }
 
 
-
-void Measure::transpose(int transposition)
-{
-	for (unsigned i=0; i<notes.size(); i++)
-		notes[i].scale_degree += transposition;
-}
-
