@@ -27,7 +27,6 @@ public:
 
 	void append(const Measure &other_measure);
 	void prepend(const Measure &other_measure);
-	void invert(int axis);
 	void double_duration();
 	void half_duration();
 

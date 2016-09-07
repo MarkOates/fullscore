@@ -63,13 +63,6 @@ void Measure::prepend(const Measure &other_measure)
 }
 
 
-void Measure::invert(int axis)
-{
-	for (unsigned i=0; i<notes.size(); i++)
-		notes[i].scale_degree = (notes[i].scale_degree - axis) * -1 + axis;
-}
-
-
 void Measure::double_duration()
 {
 	// warning, there need to be limits in this function
