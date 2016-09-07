@@ -87,8 +87,8 @@ void GUIScoreEditor::on_draw()
                ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
                al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note.scale_degree).c_str());
                al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note.start_time).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note.end_time).c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note.playback_info.start_time).c_str());
+               al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note.playback_info.end_time).c_str());
             }
 
             x_cursor += width;

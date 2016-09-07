@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <fullscore/note.h>
+#include <fullscore/note_playback_info.h>
 
 
 class Note
@@ -17,12 +18,13 @@ public:
 	int duration;
 	int dots;
 	int is_rest;
-	bool attacked, released;
-	float start_time, end_time;
+
+   NotePlaybackInfo playback_info;
 
 	Note(int _scale_degree=0, int _duration=4, int _dots=0);
-	float get_duration_width();
+	~Note();
 
+	float get_duration_width();
 	std::string get_as_string(int format=0);
 	bool set_from_string(std::string str, int format_version=0);
 };
