@@ -27,9 +27,6 @@ public:
 
 	void append(const Measure &other_measure);
 	void prepend(const Measure &other_measure);
-	void double_duration();
-	void half_duration();
-
 	void transpose(int transposition);
 };
 

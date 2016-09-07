@@ -63,22 +63,6 @@ void Measure::prepend(const Measure &other_measure)
 }
 
 
-void Measure::double_duration()
-{
-	// warning, there need to be limits in this function
-	for (unsigned i=0; i<notes.size(); i++)
-		notes[i].duration /= 2;
-}
-
-
-void Measure::half_duration()
-{
-	// warning, there need to be limits in this function
-	for (unsigned i=0; i<notes.size(); i++)
-		notes[i].duration *= 2;
-}
-
-
 
 void Measure::transpose(int transposition)
 {
