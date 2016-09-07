@@ -47,15 +47,6 @@ bool Measure::push(Note note)
 }
 
 
-void Measure::retrograde()
-{
-	std::vector<Note> result;
-	for (int i=(int)notes.size()-1; i>=0; i--)
-		result.push_back(notes[i]);
-	notes = result;
-}
-
-
 void Measure::append(const Measure &other_measure)
 {
 	for (unsigned i=0; i<other_measure.notes.size(); i++)

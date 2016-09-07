@@ -25,7 +25,6 @@ public:
 	bool push(Note note);
 	int remove(int index);
 
-	void retrograde();
 	void append(const Measure &other_measure);
 	void prepend(const Measure &other_measure);
 	void invert(int axis);
