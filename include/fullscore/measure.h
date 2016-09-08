@@ -15,9 +15,7 @@ class Measure
 {
 public:
 	std::vector<Note> notes;
-
    Note *operator[](int index);
-   float get_length_to_note(int index);
 };
 
 

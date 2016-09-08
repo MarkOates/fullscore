@@ -118,7 +118,7 @@ void GUIScoreEditor::on_draw()
    {
       float measure_cursor_real_x = get_measure_cursor_real_x();
       float measure_cursor_real_y = get_measure_cursor_real_y();
-      float note_real_offset_x = measure->get_length_to_note(note_cursor_x) * MEASURE_WIDTH;
+      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * MEASURE_WIDTH;
       float note_width = note->get_duration_width() * MEASURE_WIDTH;
 
       // fill
@@ -206,6 +206,19 @@ float GUIScoreEditor::get_measure_cursor_real_x()
 float GUIScoreEditor::get_measure_cursor_real_y()
 {
    return measure_cursor_y * STAFF_HEIGHT;
+}
+
+
+
+
+float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_index)
+{
+   float sum = 0;
+   if (note_index < 0 || note_index >= measure.notes.size()) return 0;
+
+   for (int i=0; i<note_index; i++)
+      sum += measure.notes[i].get_duration_width();
+   return sum;
 }
 
 

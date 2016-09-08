@@ -45,6 +45,7 @@ public:
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
+   float get_measure_length_to_note(Measure &measure, int note_index);
 
    void toggle_input_mode();
    bool is_measure_mode();
