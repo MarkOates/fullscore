@@ -101,15 +101,16 @@ void GUIScoreEditor::on_draw()
 
    if (get_measure_at_cursor())
    {
+      float measure_width = get_measure_width(*measure) * MEASURE_WIDTH;
       // fill
       al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-         measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         measure_cursor_x*MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.2));
 
       // outline
       if (is_measure_mode())
          al_draw_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-            measure_cursor_x*MEASURE_WIDTH+MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+            measure_cursor_x*MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
    }
 
