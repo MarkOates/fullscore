@@ -89,7 +89,7 @@ bool MeasureGrid::save(std::string filename)
 			for (int n=0; n<(int)measure->notes.size(); n++)
 			{
 				// grab the note
-				Note *note = measure->get_note_at(n);
+				Note *note = measure->operator[](n);
 
 				// build the note into a string
 				std::string note_as_str = note->get_as_string(0);
