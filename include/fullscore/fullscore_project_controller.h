@@ -23,6 +23,7 @@ public:
    UICommandBar *command_bar;
    UIMixer *gui_mixer;
    UIFramedWindow *help_window;
+   Measure yank_measure_buffer;
    bool showing_help_menu;
 
    FullscoreProjectController(Display *display);

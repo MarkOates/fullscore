@@ -24,6 +24,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
    , command_bar(NULL)
    , gui_mixer(NULL)
    , help_window(NULL)
+   , yank_measure_buffer()
    , showing_help_menu(false)
 {
    UIScreen::draw_focused_outline = false;
@@ -165,7 +166,7 @@ void FullscoreProjectController::key_down_func()
             transform = &invert_transform;
          }
          break;
-      case ALLEGRO_KEY_P:
+      case ALLEGRO_KEY_G:
          // retrograde the measure
          {
             Transform::Retrograde retrograde_transform;
@@ -206,6 +207,13 @@ void FullscoreProjectController::key_down_func()
             // append a staff
             score_editor->measure_grid.push_staff();
          }
+         break;
+      case ALLEGRO_KEY_Y:
+         if (notes) yank_measure_buffer.notes = *notes;
+         std::cout << "AAAA" << std::endl;
+         break;
+      case ALLEGRO_KEY_P:
+         *notes = yank_measure_buffer.notes;
          break;
       default:
          break;
