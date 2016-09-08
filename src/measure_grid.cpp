@@ -11,14 +11,14 @@
 
 
 
-MeasureGrid::Staff::Staff(int num_measures) : measures()
+MeasureGrid::Row::Row(int num_measures) : measures()
 {
 	measures.resize(num_measures, Measure());
 }
 
 
 
-Measure &MeasureGrid::Staff::operator[](unsigned int index)
+Measure &MeasureGrid::Row::operator[](unsigned int index)
 {
 	if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
 	return measures[index];
@@ -33,7 +33,7 @@ Measure &MeasureGrid::Staff::operator[](unsigned int index)
 
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 {
-	voices.resize(num_y_staves, Staff(num_x_measures));
+	voices.resize(num_y_staves, Row(num_x_measures));
 }
 
 
@@ -130,7 +130,7 @@ bool MeasureGrid::load(std::string filename)
 	// the the size of the board, and resize the current measure-grid
 	int grid_height = atoi(state.get("grid_height").c_str());
 	int grid_width = atoi(state.get("grid_width").c_str());
-	voices.resize(grid_height, Staff(grid_width));
+	voices.resize(grid_height, Row(grid_width));
 
 	// for now, remove those two elements.  The rest of the data in `state` is measure data
 	state.remove("grid_height");
@@ -178,7 +178,7 @@ void MeasureGrid::insert_staff(int index)
 	else 
 	{
 		int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-		voices.insert(voices.begin() + index, Staff(num_measures)); 
+		voices.insert(voices.begin() + index, Row(num_measures)); 
 	}
 }
 
@@ -196,7 +196,7 @@ bool MeasureGrid::delete_staff(int index)
 void MeasureGrid::push_staff()
 {
 	int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-	voices.push_back(Staff(num_measures));
+	voices.push_back(Row(num_measures));
 }
 
 

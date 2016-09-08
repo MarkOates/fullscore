@@ -12,15 +12,15 @@
 class MeasureGrid
 {
 private:
-	class Staff
+	class Row
 	{
 	public:
 		std::vector<Measure> measures;
-		Staff(int num_measures);
+		Row(int num_measures);
 		Measure &operator[](unsigned int index);
 	};
 
-	std::vector<Staff> voices;
+	std::vector<Row> voices;
 
 public:
 	MeasureGrid(int num_x_measures, int num_y_staves);
