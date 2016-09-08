@@ -224,6 +224,16 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
 
 
 
+float GUIScoreEditor::get_measure_width(Measure &m)
+{
+   float sum = 0;
+   for (auto &note : m.notes) sum += note.get_duration_width();
+   return sum;
+}
+
+
+
+
 int GUIScoreEditor::move_measure_cursor_x(int delta)
 {
    int num_measures = measure_grid.get_num_measures();
