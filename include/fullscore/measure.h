@@ -21,7 +21,6 @@ public:
    float get_length_to_note(int index);
 
 	bool insert(int index, Note note);
-	bool push(Note note);
 	int remove(int index);
 };
 

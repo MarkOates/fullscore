@@ -40,10 +40,3 @@ bool Measure::insert(int at_index, Note note)
 }
 
 
-bool Measure::push(Note note)
-{
-	notes.push_back(note);
-	return true;
-}
-
-
