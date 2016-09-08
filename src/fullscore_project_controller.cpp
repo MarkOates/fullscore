@@ -7,6 +7,7 @@
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/insert_note_transform.h>
 #include <fullscore/transforms/invert_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
 #include <fullscore/transforms/transpose_transform.h>
@@ -190,14 +191,20 @@ void FullscoreProjectController::key_down_func()
 
       case ALLEGRO_KEY_N:
          {
-            // append a staff
-            score_editor->measure_grid.push_staff();
+            Transform::InsertNote insert_note_transform(score_editor->note_cursor_x, Note());
+            transform = &insert_note_transform;
          }
          break;
       case ALLEGRO_KEY_M:
          {
             // append a measure
             score_editor->measure_grid.push_measure();
+         }
+         break;
+      case ALLEGRO_KEY_T:
+         {
+            // append a staff
+            score_editor->measure_grid.push_staff();
          }
          break;
       default:
