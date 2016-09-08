@@ -3,6 +3,7 @@
 
 #include <fullscore/measure.h>
 #include <fullscore/note.h>
+#include <allegro_flare/useful.h>
 
 
 int Measure::get_note_position(Note *note)
@@ -33,8 +34,7 @@ float Measure::get_length_to_note(int index)
 
 bool Measure::insert(int at_index, Note note)
 {
-	if (at_index < 0) at_index = 0;
-	if (at_index >= notes.size()) at_index = notes.size()-1;
+   at_index = limit<int>(0, notes.size()-1, at_index);
 	notes.insert(notes.begin() + at_index, note);
 	return true;
 }
