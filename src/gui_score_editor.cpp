@@ -37,13 +37,13 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    measure_grid.get_measure(1,0)->notes.push_back(Note(5));
    measure_grid.get_measure(1,0)->notes.push_back(Note(4, 2));
 
-   measure_grid.get_measure(2,1)->notes.push_back(Note(0));
-   measure_grid.get_measure(2,1)->notes.push_back(Note(0));
-   measure_grid.get_measure(2,1)->notes.push_back(Note(-1));
-   measure_grid.get_measure(2,1)->notes.push_back(Note(-1));
-   measure_grid.get_measure(3,1)->notes.push_back(Note(-2));
-   measure_grid.get_measure(3,1)->notes.push_back(Note(-2));
-   measure_grid.get_measure(3,1)->notes.push_back(Note(-3, 2));
+   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
+   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
+   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
+   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
+   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
+   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
+   measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
 }
 
 
