@@ -31,7 +31,7 @@ public:
 	bool showing_debug_data;
 
 	float STAFF_HEIGHT;
-	float MEASURE_WIDTH;
+	float FULL_MEASURE_WIDTH;
 
 	GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
 	void on_draw() override;

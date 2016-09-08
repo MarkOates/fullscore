@@ -22,7 +22,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , music_engraver()
    , showing_debug_data(false)
    , STAFF_HEIGHT(80)
-   , MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
+   , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
    , input_mode(false)
 {
    attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
@@ -53,14 +53,14 @@ void GUIScoreEditor::on_draw()
 {
    // draw a background for the score
    al_draw_filled_rectangle(-30, -30,
-      MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
+      FULL_MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
       color::color(color::blanchedalmond, 0.2));
 
    // draw barlines
    for (int x=0; x<measure_grid.get_num_measures(); x++)
    {
       Measure *measure = measure_grid.get_measure(x, 0);
-      al_draw_line(x * MEASURE_WIDTH, 0, x * MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
+      al_draw_line(x * FULL_MEASURE_WIDTH, 0, x * FULL_MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
    }
 
    // draw the notes and measures
@@ -70,16 +70,16 @@ void GUIScoreEditor::on_draw()
       for (int x=0; x<measure_grid.get_num_measures(); x++)
       {
          Measure *measure = measure_grid.get_measure(x,y);
-         music_engraver.draw(measure, x*MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, MEASURE_WIDTH);
+         music_engraver.draw(measure, x*FULL_MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, FULL_MEASURE_WIDTH);
 
          // draw the notes
          float x_cursor = 0;
          for (unsigned i=0; i<measure->notes.size(); i++)
          {
-            int xx = x * MEASURE_WIDTH;
+            int xx = x * FULL_MEASURE_WIDTH;
             int yy = y * STAFF_HEIGHT;
             Note &note = measure->notes[i];
-            float width = note.get_duration_width() * MEASURE_WIDTH;
+            float width = note.get_duration_width() * FULL_MEASURE_WIDTH;
 
             // draw some debug info on the note
             if (showing_debug_data)
@@ -101,16 +101,16 @@ void GUIScoreEditor::on_draw()
 
    if (get_measure_at_cursor())
    {
-      float measure_width = get_measure_width(*measure) * MEASURE_WIDTH;
+      float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
       // fill
-      al_draw_filled_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-         measure_cursor_x*MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+      al_draw_filled_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
+         measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.2));
 
       // outline
       if (is_measure_mode())
-         al_draw_rounded_rectangle(measure_cursor_x*MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-            measure_cursor_x*MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         al_draw_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
+            measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
    }
 
@@ -119,8 +119,8 @@ void GUIScoreEditor::on_draw()
    {
       float measure_cursor_real_x = get_measure_cursor_real_x();
       float measure_cursor_real_y = get_measure_cursor_real_y();
-      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * MEASURE_WIDTH;
-      float note_width = note->get_duration_width() * MEASURE_WIDTH;
+      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
+      float note_width = note->get_duration_width() * FULL_MEASURE_WIDTH;
 
       // fill
       al_draw_filled_rounded_rectangle(
@@ -158,7 +158,7 @@ void GUIScoreEditor::on_draw()
    }
 
    // draw the playhead
-   float playhead_x = playback_control.position * MEASURE_WIDTH;
+   float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
    al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
    al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
    al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
@@ -198,7 +198,7 @@ Note *GUIScoreEditor::get_note_at_cursor()
 
 float GUIScoreEditor::get_measure_cursor_real_x()
 {
-   return measure_cursor_x * MEASURE_WIDTH;
+   return measure_cursor_x * FULL_MEASURE_WIDTH;
 }
 
 
