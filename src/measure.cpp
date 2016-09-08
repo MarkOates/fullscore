@@ -32,11 +32,3 @@ float Measure::get_length_to_note(int index)
 }
 
 
-bool Measure::insert(int at_index, Note note)
-{
-   at_index = limit<int>(0, notes.size()-1, at_index);
-	notes.insert(notes.begin() + at_index, note);
-	return true;
-}
-
-

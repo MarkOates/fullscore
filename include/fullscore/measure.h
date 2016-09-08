@@ -19,8 +19,6 @@ public:
 	int get_note_position(Note *note); // returns -1 if not found
 	Note *get_note_at(int index); // returns NULL if not found
    float get_length_to_note(int index);
-
-	bool insert(int index, Note note);
 };
 
 
