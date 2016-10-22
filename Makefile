@@ -17,7 +17,8 @@ ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
-OBJS=command_bar converters/note_string_converter fullscore_project_controller gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script transform_base
+OBJS=command_bar fullscore_project_controller gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script transform_base
+OBJS+=converters/note_string_converter
 OBJS+=models/measure models/measure_grid models/note models/note_playback_info
 OBJS+=transforms/double_duration_transform transforms/erase_note_transform transforms/half_duration_transform transforms/retrograde_transform transforms/insert_note_transform transforms/invert_transform transforms/toggle_rest_transform transforms/transpose_transform
 
