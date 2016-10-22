@@ -6,8 +6,8 @@
 
 #include <string>
 #include <vector>
-#include <fullscore/note.h>
-#include <fullscore/note_playback_info.h>
+#include <fullscore/models/note.h>
+#include <fullscore/models/note_playback_info.h>
 
 
 class Note

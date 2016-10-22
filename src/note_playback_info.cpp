@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/note_playback_info.h>
+#include <fullscore/models/note_playback_info.h>
 
 
 

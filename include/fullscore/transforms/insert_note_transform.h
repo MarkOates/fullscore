@@ -6,7 +6,7 @@
 
 #include <fullscore/transform_base.h>
 
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 
 
 

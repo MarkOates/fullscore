@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include <fullscore/measure.h>
+#include <fullscore/models/measure.h>
 
 
 

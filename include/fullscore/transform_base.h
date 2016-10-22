@@ -4,7 +4,7 @@
 
 
 
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 
 
 

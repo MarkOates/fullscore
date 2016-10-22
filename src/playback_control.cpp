@@ -3,7 +3,7 @@
 
 #include <fullscore/playback_control.h>
 
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 
 
 

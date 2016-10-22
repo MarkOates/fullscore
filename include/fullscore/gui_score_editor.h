@@ -9,7 +9,7 @@
 
 #include <allegro_flare/gui/widget.h>
 
-#include <fullscore/measure_grid.h>
+#include <fullscore/models/measure_grid.h>
 #include <fullscore/playback_control.h>
 #include <fullscore/music_engraver.h>
 

@@ -4,7 +4,7 @@
 
 #include <allegro_flare/useful.h>
 
-#include <fullscore/measure_grid.h>
+#include <fullscore/models/measure_grid.h>
 
 
 
@@ -67,7 +67,7 @@ int MeasureGrid::get_num_staves()
 
 
 #include <allegro_flare/data_attr.h>
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 #include <allegro_flare/useful_php.h>
 
 
