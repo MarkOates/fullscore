@@ -4,21 +4,23 @@
 
 #include <allegro_flare/useful.h>
 
-#include <fullscore/measure_grid.h>
+#include <fullscore/models/measure_grid.h>
+
+#include <fullscore/converters/note_string_converter.h>
 
 
 
 
 
 
-MeasureGrid::Staff::Staff(int num_measures) : measures()
+MeasureGrid::Row::Row(int num_measures) : measures()
 {
 	measures.resize(num_measures, Measure());
 }
 
 
 
-Measure &MeasureGrid::Staff::operator[](unsigned int index)
+Measure &MeasureGrid::Row::operator[](unsigned int index)
 {
 	if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
 	return measures[index];
@@ -33,7 +35,7 @@ Measure &MeasureGrid::Staff::operator[](unsigned int index)
 
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 {
-	voices.resize(num_y_staves, Staff(num_x_measures));
+	voices.resize(num_y_staves, Row(num_x_measures));
 }
 
 
@@ -67,7 +69,7 @@ int MeasureGrid::get_num_staves()
 
 
 #include <allegro_flare/data_attr.h>
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 #include <allegro_flare/useful_php.h>
 
 
@@ -89,10 +91,11 @@ bool MeasureGrid::save(std::string filename)
 			for (int n=0; n<(int)measure->notes.size(); n++)
 			{
 				// grab the note
-				Note *note = measure->get_note_at(n);
+				Note *note = measure->operator[](n);
 
 				// build the note into a string
-				std::string note_as_str = note->get_as_string(0);
+				NoteStringConverter note_string_converter(note);
+				std::string note_as_str = note_string_converter.write();
 
 				// put it in the stack
 				notes_strs.push_back(note_as_str);
@@ -130,7 +133,7 @@ bool MeasureGrid::load(std::string filename)
 	// the the size of the board, and resize the current measure-grid
 	int grid_height = atoi(state.get("grid_height").c_str());
 	int grid_width = atoi(state.get("grid_width").c_str());
-	voices.resize(grid_height, Staff(grid_width));
+	voices.resize(grid_height, Row(grid_width));
 
 	// for now, remove those two elements.  The rest of the data in `state` is measure data
 	state.remove("grid_height");
@@ -155,7 +158,11 @@ bool MeasureGrid::load(std::string filename)
 			Note new_note = Note();
 
 			// set the note from the string
-			new_note.set_from_string(notes[i]);
+			NoteStringConverter note_string_reader(&new_note);
+			if (!note_string_reader.read(notes[i]))
+			{
+				std::cout << "[Error:] A note could not successfully be created from the parsed data" << std::endl;
+			}
 
 			// put the note into the measure
 			measure->notes.push_back(new_note);
@@ -178,7 +185,7 @@ void MeasureGrid::insert_staff(int index)
 	else 
 	{
 		int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-		voices.insert(voices.begin() + index, Staff(num_measures)); 
+		voices.insert(voices.begin() + index, Row(num_measures)); 
 	}
 }
 
@@ -196,7 +203,7 @@ bool MeasureGrid::delete_staff(int index)
 void MeasureGrid::push_staff()
 {
 	int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-	voices.push_back(Staff(num_measures));
+	voices.push_back(Row(num_measures));
 }
 
 

@@ -6,8 +6,8 @@
 
 
 #include <allegro_flare/render_music_notation.h>
-#include <fullscore/note.h>
-#include <fullscore/measure.h>
+#include <fullscore/models/note.h>
+#include <fullscore/models/measure.h>
 
 
 class MusicEngraver

@@ -7,6 +7,7 @@
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/insert_note_transform.h>
 #include <fullscore/transforms/invert_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
 #include <fullscore/transforms/transpose_transform.h>
@@ -23,6 +24,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
    , command_bar(NULL)
    , gui_mixer(NULL)
    , help_window(NULL)
+   , yank_measure_buffer()
    , showing_help_menu(false)
 {
    UIScreen::draw_focused_outline = false;
@@ -164,7 +166,7 @@ void FullscoreProjectController::key_down_func()
             transform = &invert_transform;
          }
          break;
-      case ALLEGRO_KEY_P:
+      case ALLEGRO_KEY_G:
          // retrograde the measure
          {
             Transform::Retrograde retrograde_transform;
@@ -190,8 +192,8 @@ void FullscoreProjectController::key_down_func()
 
       case ALLEGRO_KEY_N:
          {
-            // append a staff
-            score_editor->measure_grid.push_staff();
+            Transform::InsertNote insert_note_transform(score_editor->note_cursor_x, Note());
+            transform = &insert_note_transform;
          }
          break;
       case ALLEGRO_KEY_M:
@@ -199,6 +201,19 @@ void FullscoreProjectController::key_down_func()
             // append a measure
             score_editor->measure_grid.push_measure();
          }
+         break;
+      case ALLEGRO_KEY_T:
+         {
+            // append a staff
+            score_editor->measure_grid.push_staff();
+         }
+         break;
+      case ALLEGRO_KEY_Y:
+         if (notes) yank_measure_buffer.notes = *notes;
+         std::cout << "AAAA" << std::endl;
+         break;
+      case ALLEGRO_KEY_P:
+         *notes = yank_measure_buffer.notes;
          break;
       default:
          break;

@@ -2,12 +2,16 @@
 
 
 
+#include <fullscore/models/note_playback_info.h>
+
+
+
 
 
 #include <allegro_flare/useful.h>
 #include <allegro_flare/drawing_interfaces/drawing_interface_allegro5.h>
 
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 #include <fullscore/music_engraver.h>
 
 
@@ -27,8 +31,8 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 {
 	std::string result;
 
-	if (note.released) result += "{ color=gray }";
-	else if (note.attacked) result += "{ color=greenyellow }";
+	if (note.playback_info.released) result += "{ color=gray }";
+	else if (note.playback_info.attacked) result += "{ color=greenyellow }";
 
 	int num_octaves = abs(note.scale_degree) / 8;
 	int local_degree = abs(note.scale_degree) % 8;

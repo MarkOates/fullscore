@@ -9,7 +9,7 @@
 
 #include <allegro_flare/gui/widget.h>
 
-#include <fullscore/measure_grid.h>
+#include <fullscore/models/measure_grid.h>
 #include <fullscore/playback_control.h>
 #include <fullscore/music_engraver.h>
 
@@ -31,7 +31,7 @@ public:
 	bool showing_debug_data;
 
 	float STAFF_HEIGHT;
-	float MEASURE_WIDTH;
+	float FULL_MEASURE_WIDTH;
 
 	GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
 	void on_draw() override;
@@ -45,6 +45,8 @@ public:
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
+   float get_measure_length_to_note(Measure &measure, int note_index);
+   float get_measure_width(Measure &m);
 
    void toggle_input_mode();
    bool is_measure_mode();

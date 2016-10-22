@@ -17,8 +17,10 @@ ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
-OBJS=command_bar fullscore_project_controller gui_score_editor main measure measure_grid mixer music_engraver note playback_control playback_device_interface run_script transform_base
-TRANSFORM_OBJS=double_duration_transform erase_note_transform half_duration_transform retrograde_transform invert_transform toggle_rest_transform transpose_transform
+OBJS=command_bar fullscore_project_controller gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
+OBJS+=converters/note_string_converter
+OBJS+=models/measure models/measure_grid models/note models/note_playback_info
+OBJS+=transforms/double_duration_transform transforms/erase_note_transform transforms/half_duration_transform transforms/retrograde_transform transforms/insert_note_transform transforms/invert_transform transforms/toggle_rest_transform transforms/transform_base transforms/transpose_transform
 
 ifeq ($(OS), Windows_NT)
 	EXE_EXTENSION=.exe
@@ -30,7 +32,6 @@ endif
 
 
 OBJ_FILES=$(OBJS:%=obj/%.o)
-TRANSFORM_OBJ_FILES=$(TRANSFORM_OBJS:%=obj/%.o)
 
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
 ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
@@ -42,14 +43,11 @@ ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 #
 
 
-bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES) $(TRANSFORM_OBJ_FILES)
-	g++ $(OBJ_FILES) $(TRANSFORM_OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
+bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
+	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
 $(OBJ_FILES): obj/%.o : src/%.cpp
-	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
-
-$(TRANSFORM_OBJ_FILES): obj/%.o : src/transforms/%.cpp
-	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
+	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 	
 
 
@@ -59,4 +57,5 @@ $(TRANSFORM_OBJ_FILES): obj/%.o : src/transforms/%.cpp
 
 clean:
 	rm ./obj/*.o
+	rm ./obj/*/*.o
 	rm ./bin/fullscore

@@ -3,7 +3,7 @@
 
 #include <fullscore/playback_control.h>
 
-#include <fullscore/note.h>
+#include <fullscore/models/note.h>
 
 
 
@@ -76,8 +76,8 @@ void PlaybackControl::reset()
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
 				Note &note = measure->notes[n];
-				note.attacked = false;
-				note.released = false;
+				note.playback_info.attacked = false;
+				note.playback_info.released = false;
 			}
 		}
 }
@@ -100,20 +100,20 @@ void PlaybackControl::update(double time_now)
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
 				Note &note = measure->notes[n];
-				if (note.released) continue;
+				if (note.playback_info.released) continue;
 
-				if (!note.attacked && position >= note.start_time)
+				if (!note.playback_info.attacked && position >= note.playback_info.start_time)
 				{
 					// attack the note
-					note.attacked = true;
+					note.playback_info.attacked = true;
 					if (playback_device && !note.is_rest)
 						playback_device->note_on(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, note.accidental), 127);
 				}
 
-				if (note.attacked && position >= note.end_time)
+				if (note.playback_info.attacked && position >= note.playback_info.end_time)
 				{
 					// release the note
-					note.released = true;
+					note.playback_info.released = true;
 					if (playback_device && !note.is_rest)
 						playback_device->note_off(y, PitchTransform::diatonic_in_c_alto_clef(note.scale_degree, note.accidental));
 				}
@@ -135,8 +135,8 @@ void PlaybackControl::refresh_note_start_and_end_times()
 			for (unsigned n=0; n<measure->notes.size(); n++)
 			{
 				Note &note = measure->notes[n];
-				note.start_time = x_cursor + x;
-				note.end_time = note.start_time + note.get_duration_width();
+				note.playback_info.start_time = x_cursor + x;
+				note.playback_info.end_time = note.playback_info.start_time + note.get_duration_width();
 				x_cursor += note.get_duration_width();
 			}
 		}

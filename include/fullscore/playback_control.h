@@ -6,7 +6,7 @@
 
 
 #include <fullscore/playback_device_interface.h>
-#include <fullscore/measure_grid.h>
+#include <fullscore/models/measure_grid.h>
 
 
 class PlaybackControl
