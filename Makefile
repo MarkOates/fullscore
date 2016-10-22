@@ -46,7 +46,7 @@ bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES) $(TRANSFORM_OBJ_FILES)
 	g++ $(OBJ_FILES) $(TRANSFORM_OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
 $(OBJ_FILES): obj/%.o : src/%.cpp
-	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
+	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 
 $(TRANSFORM_OBJ_FILES): obj/%.o : src/transforms/%.cpp
 	g++ -std=gnu++11 -c -o obj/$(notdir $@) $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
