@@ -6,6 +6,8 @@
 
 #include <fullscore/models/measure_grid.h>
 
+#include <fullscore/converters/note_string_converter.h>
+
 
 
 
@@ -92,7 +94,8 @@ bool MeasureGrid::save(std::string filename)
 				Note *note = measure->operator[](n);
 
 				// build the note into a string
-				std::string note_as_str = note->get_as_string(0);
+				NoteStringConverter note_string_converter(note);
+				std::string note_as_str = note_string_converter.write();
 
 				// put it in the stack
 				notes_strs.push_back(note_as_str);
@@ -155,7 +158,11 @@ bool MeasureGrid::load(std::string filename)
 			Note new_note = Note();
 
 			// set the note from the string
-			new_note.set_from_string(notes[i]);
+			NoteStringConverter note_string_reader(&new_note);
+			if (!note_string_reader.read(notes[i]))
+			{
+				std::cout << "[Error:] A note could not successfully be created from the parsed data" << std::endl;
+			}
 
 			// put the note into the measure
 			measure->notes.push_back(new_note);
