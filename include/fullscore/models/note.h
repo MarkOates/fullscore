@@ -4,8 +4,6 @@
 
 
 
-#include <string>
-#include <vector>
 #include <fullscore/models/note.h>
 #include <fullscore/models/note_playback_info.h>
 

@@ -1,7 +1,6 @@
 
 
 
-#include <sstream>
 #include <fullscore/models/note.h>
 
 
