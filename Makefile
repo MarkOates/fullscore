@@ -59,4 +59,5 @@ $(TRANSFORM_OBJ_FILES): obj/%.o : src/transforms/%.cpp
 
 clean:
 	rm ./obj/*.o
+	rm ./obj/*/*.o
 	rm ./bin/fullscore
