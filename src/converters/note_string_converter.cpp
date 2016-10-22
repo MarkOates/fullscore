@@ -4,6 +4,8 @@
 
 #include <fullscore/converters/note_string_converter.h>
 
+#include <sstream>
+
 
 
 
@@ -14,9 +16,15 @@ NoteStringConverter::NoteStringConverter(Note *note)
 
 
 
-bool NoteStringConverter::read(std::string)
+bool NoteStringConverter::read(std::string str)
 {
-   // unimplemented
+   if (format_version == 0)
+   {
+      std::stringstream ss;
+      ss << str;
+      ss >> scale_degree >> accidental >> duration >> dots >> is_rest;
+      return true;
+   }
    return false;
 }
 
@@ -25,8 +33,12 @@ bool NoteStringConverter::read(std::string)
 
 std::string NoteStringConverter::write()
 {
-   // unimplemented
-   return "";
+   std::stringstream ss;
+   if (format_version == 0)
+   {
+      ss << scale_degree << " " << accidental << " " << duration << " " << dots << " " << is_rest;
+   }
+   return ss.str();
 }
 
 

@@ -25,8 +25,6 @@ public:
 	~Note();
 
 	float get_duration_width();
-	std::string get_as_string(int format=0);
-	bool set_from_string(std::string str, int format_version=0);
 };
 
 
