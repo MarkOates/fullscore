@@ -18,6 +18,8 @@ NoteStringConverter::NoteStringConverter(Note *note)
 
 bool NoteStringConverter::read(std::string str)
 {
+   if (!note) return false;
+
    if (format_version == 0)
    {
       std::stringstream ss;
@@ -33,6 +35,8 @@ bool NoteStringConverter::read(std::string str)
 
 std::string NoteStringConverter::write()
 {
+   if (!note) return "";
+
    std::stringstream ss;
    if (format_version == 0)
    {
