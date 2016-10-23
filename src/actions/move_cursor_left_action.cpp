@@ -27,7 +27,15 @@ Action::MoveCursorLeft::~MoveCursorLeft()
 
 bool Action::MoveCursorLeft::execute()
 {
-   // unimplemented
+   if (!score_editor) return false;
+
+   if (score_editor->is_measure_mode())
+   {
+      score_editor->move_measure_cursor_x(-1);
+      score_editor->note_cursor_x = 0;
+   }
+   else if (score_editor->is_note_mode()) score_editor->move_note_cursor_x(-1);
+
    return false;
 }
 
