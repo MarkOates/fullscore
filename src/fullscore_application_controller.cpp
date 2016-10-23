@@ -4,6 +4,7 @@
 
 #include <fullscore/fullscore_application_controller.h>
 
+#include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
@@ -341,7 +342,10 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_J:
-         on_message(this, "cursor_down");
+         {
+            Action::MoveCursorDown move_cursor_down_action(score_editor);
+            move_cursor_down_action.execute();
+         }
          break;
       case ALLEGRO_KEY_K:
          {
@@ -370,8 +374,6 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
    std::cout << "message: " << message << std::endl;
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
-
-   if (message == "cursor_down") score_editor->move_measure_cursor_y(1);
 
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
