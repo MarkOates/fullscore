@@ -272,7 +272,7 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_Q:
          {
-            // toggle playback
+            // reset playback
             score_editor->playback_control.reset();
          }
          break;
