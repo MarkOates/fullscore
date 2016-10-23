@@ -4,6 +4,7 @@
 
 #include <fullscore/fullscore_application_controller.h>
 
+#include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
@@ -74,10 +75,8 @@ void FullscoreApplicationController::key_down_func()
 
    if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SEMICOLON)
    {
-      // toggle focus of the command bar
-
-      if (command_bar->text_input->is_focused()) command_bar->text_input->set_as_unfocused();
-      else command_bar->text_input->set_as_focused();
+      Action::ToggleCommandBar toggle_command_bar_action(command_bar);
+      toggle_command_bar_action.execute();
    }
    else if (!command_bar->text_input->is_focused())
    {
