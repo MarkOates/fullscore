@@ -8,6 +8,7 @@
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/transforms/double_duration_transform.h>
@@ -272,8 +273,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_Q:
          {
-            // reset playback
-            score_editor->playback_control.reset();
+            Action::ResetPlayback reset_playback_action(score_editor);
+            reset_playback_action.execute();
          }
          break;
       case ALLEGRO_KEY_F7:
@@ -368,7 +369,6 @@ void FullscoreApplicationController::key_down_func()
 void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
-   if (message == "reset_playback") score_editor->playback_control.reset();
 
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
