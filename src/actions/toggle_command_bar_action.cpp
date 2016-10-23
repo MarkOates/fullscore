@@ -10,7 +10,7 @@
 
 
 Action::ToggleCommandBar::ToggleCommandBar(UICommandBar *command_bar)
-   : Base()
+   : Base("toggle_command_bar")
    , command_bar(command_bar)
 {
 }

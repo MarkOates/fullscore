@@ -10,7 +10,7 @@
 
 
 Action::MoveCursorLeft::MoveCursorLeft(GUIScoreEditor *score_editor)
-   : Base()
+   : Base("move_cursor_left")
    , score_editor(score_editor)
 {
 }
