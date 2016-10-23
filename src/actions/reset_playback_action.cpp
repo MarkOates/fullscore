@@ -29,7 +29,8 @@ bool Action::ResetPlayback::execute()
 {
    if (!score_editor) return false;
 
-   // unimplemented
+   score_editor->playback_control.reset();
+
    return false;
 }
 
