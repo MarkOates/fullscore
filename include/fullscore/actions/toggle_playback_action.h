@@ -10,6 +10,7 @@
 
 
 class GUIScoreEditor;
+class UIMixer;
 
 namespace Action
 {
@@ -17,9 +18,10 @@ namespace Action
    {
    private:
       GUIScoreEditor *score_editor;
+      UIMixer *ui_mixer;
 
    public:
-      TogglePlayback(GUIScoreEditor *score_editor);
+      TogglePlayback(GUIScoreEditor *score_editor, UIMixer *ui_mixer);
       ~TogglePlayback();
       bool execute() override;
    };
