@@ -29,8 +29,7 @@ Action::TogglePlayback::~TogglePlayback()
 
 bool Action::TogglePlayback::execute()
 {
-   if (!score_editor) return false;
-
+   if (!score_editor || !ui_mixer) return false;
    // unimplemented
    return true;
 }
