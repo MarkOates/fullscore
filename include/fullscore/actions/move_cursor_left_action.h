@@ -8,13 +8,17 @@
 
 
 
+class GUIScoreEditor;
 
 namespace Action
 {
    class MoveCursorLeft : public Base
    {
+   private:
+      GUIScoreEditor *score_editor;
+
    public:
-      MoveCursorLeft();
+      MoveCursorLeft(GUIScoreEditor *score_editor);
       ~MoveCursorLeft();
       bool execute() override;
    };
