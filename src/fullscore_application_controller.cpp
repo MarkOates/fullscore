@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/fullscore_project_controller.h>
+#include <fullscore/fullscore_application_controller.h>
 
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
