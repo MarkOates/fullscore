@@ -1,5 +1,5 @@
-#ifndef __FULLSCORE_FULLSCORE_PROJECT_CONTROLLER
-#define __FULLSCORE_FULLSCORE_PROJECT_CONTROLLER
+#ifndef __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
+#define __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
 
 
 
@@ -14,7 +14,7 @@
 
 
 
-class FullscoreProjectController : public UIScreen
+class FullscoreApplicationController : public UIScreen
 {
 public:
    SimpleNotificationScreen *simple_notification_screen;
@@ -26,7 +26,7 @@ public:
    Measure yank_measure_buffer;
    bool showing_help_menu;
 
-   FullscoreProjectController(Display *display);
+   FullscoreApplicationController(Display *display);
    void create_help_window();
    void primary_timer_func() override;
    void key_down_func() override;

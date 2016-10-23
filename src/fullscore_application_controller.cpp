@@ -2,8 +2,13 @@
 
 
 
-#include <fullscore/fullscore_project_controller.h>
+#include <fullscore/fullscore_application_controller.h>
 
+#include <fullscore/actions/move_cursor_down_action.h>
+#include <fullscore/actions/move_cursor_left_action.h>
+#include <fullscore/actions/move_cursor_right_action.h>
+#include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
@@ -17,7 +22,7 @@
 
 
 
-FullscoreProjectController::FullscoreProjectController(Display *display)
+FullscoreApplicationController::FullscoreApplicationController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , score_editor(NULL)
@@ -41,7 +46,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
 
 
 
-void FullscoreProjectController::create_help_window()
+void FullscoreApplicationController::create_help_window()
 {
    help_window = new UIFramedWindow(this, -600, -100, 550, 700);
    help_window->set_title("Help");
@@ -58,7 +63,7 @@ void FullscoreProjectController::create_help_window()
 
 
 
-void FullscoreProjectController::primary_timer_func()
+void FullscoreApplicationController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
    command_bar->set_time(score_editor->playback_control.position);
@@ -67,17 +72,15 @@ void FullscoreProjectController::primary_timer_func()
 
 
 
-void FullscoreProjectController::key_down_func()
+void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
 
    if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SEMICOLON)
    {
-      // toggle focus of the command bar
-
-      if (command_bar->text_input->is_focused()) command_bar->text_input->set_as_unfocused();
-      else command_bar->text_input->set_as_focused();
+      Action::ToggleCommandBar toggle_command_bar_action(command_bar);
+      toggle_command_bar_action.execute();
    }
    else if (!command_bar->text_input->is_focused())
    {
@@ -333,16 +336,28 @@ void FullscoreProjectController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_H:
-         on_message(this, "cursor_left");
+         {
+            Action::MoveCursorLeft move_cursor_left_action(score_editor);
+            move_cursor_left_action.execute();
+         }
          break;
       case ALLEGRO_KEY_J:
-         on_message(this, "cursor_down");
+         {
+            Action::MoveCursorDown move_cursor_down_action(score_editor);
+            move_cursor_down_action.execute();
+         }
          break;
       case ALLEGRO_KEY_K:
-         on_message(this, "cursor_up");
+         {
+            Action::MoveCursorUp move_cursor_up_action(score_editor);
+            move_cursor_up_action.execute();
+         }
          break;
       case ALLEGRO_KEY_L:
-         on_message(this, "cursor_right");
+         {
+            Action::MoveCursorRight move_cursor_right_action(score_editor);
+            move_cursor_right_action.execute();
+         }
          break;
       case ALLEGRO_KEY_TAB:
          score_editor->toggle_input_mode();
@@ -354,32 +369,11 @@ void FullscoreProjectController::key_down_func()
 
 
 
-void FullscoreProjectController::on_message(UIWidget *sender, std::string message)
+void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
-
-   if (message == "cursor_left")
-   {
-      if (score_editor->is_measure_mode())
-      {
-         score_editor->move_measure_cursor_x(-1);
-         score_editor->note_cursor_x = 0;
-      }
-      else if (score_editor->is_note_mode()) score_editor->move_note_cursor_x(-1);
-   }
-   if (message == "cursor_right")
-   {
-      if (score_editor->is_measure_mode())
-      {
-         score_editor->move_measure_cursor_x(1);
-         score_editor->note_cursor_x = 0;
-      }
-      else if (score_editor->is_note_mode()) score_editor->move_note_cursor_x(1);
-   }
-   if (message == "cursor_up") score_editor->move_measure_cursor_y(-1);
-   if (message == "cursor_down") score_editor->move_measure_cursor_y(1);
 
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
