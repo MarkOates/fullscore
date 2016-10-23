@@ -8,6 +8,8 @@
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/reset_playback_action.h>
+#include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
@@ -213,10 +215,11 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_Y:
          if (notes) yank_measure_buffer.notes = *notes;
-         std::cout << "AAAA" << std::endl;
+         std::cout << "yank measure to clipboard" << std::endl;
          break;
       case ALLEGRO_KEY_P:
          *notes = yank_measure_buffer.notes;
+         std::cout << "paste measure" << std::endl;
          break;
       default:
          break;
@@ -264,20 +267,14 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_SPACE:
          {
-            // send the patches before play
-            PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
-            for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
-            {
-               device->patch_change(i, gui_mixer->get_patch_num(i));
-            }
-            // toggle playback
-            score_editor->playback_control.toggle_playback();
+            Action::TogglePlayback toggle_playback_action(score_editor, gui_mixer);
+            toggle_playback_action.execute();
          }
          break;
       case ALLEGRO_KEY_Q:
          {
-            // toggle playback
-            score_editor->playback_control.reset();
+            Action::ResetPlayback reset_playback_action(score_editor);
+            reset_playback_action.execute();
          }
          break;
       case ALLEGRO_KEY_F7:
@@ -372,8 +369,6 @@ void FullscoreApplicationController::key_down_func()
 void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
-   if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
-   if (message == "reset_playback") score_editor->playback_control.reset();
 
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
