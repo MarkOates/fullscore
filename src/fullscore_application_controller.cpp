@@ -8,6 +8,7 @@
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
@@ -264,14 +265,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_SPACE:
          {
-            // send the patches before play
-            PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
-            for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
-            {
-               device->patch_change(i, gui_mixer->get_patch_num(i));
-            }
-            // toggle playback
-            score_editor->playback_control.toggle_playback();
+            Action::TogglePlayback toggle_playback_action(score_editor, gui_mixer);
+            toggle_playback_action.execute();
          }
          break;
       case ALLEGRO_KEY_Q:
