@@ -29,7 +29,9 @@ bool Action::MoveCursorUp::execute()
 {
    if (!score_editor) return false;
 
-   return false;
+   score_editor->move_measure_cursor_y(-1);
+
+   return true;
 }
 
 
