@@ -367,7 +367,6 @@ void FullscoreApplicationController::key_down_func()
 void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
-   if (message == "toggle_playback") score_editor->playback_control.toggle_playback();
    if (message == "reset_playback") score_editor->playback_control.reset();
 
    if (message == "insert_measure")
