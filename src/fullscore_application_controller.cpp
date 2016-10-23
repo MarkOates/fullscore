@@ -341,10 +341,7 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_J:
-         {
-            Action::MoveCursorRight move_cursor_right_action(score_editor);
-            move_cursor_right_action.execute();
-         }
+         on_message(this, "cursor_down");
          break;
       case ALLEGRO_KEY_K:
          {
@@ -353,7 +350,10 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_L:
-         on_message(this, "cursor_right");
+         {
+            Action::MoveCursorRight move_cursor_right_action(score_editor);
+            move_cursor_right_action.execute();
+         }
          break;
       case ALLEGRO_KEY_TAB:
          score_editor->toggle_input_mode();
