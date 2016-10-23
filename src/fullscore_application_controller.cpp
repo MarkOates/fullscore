@@ -17,7 +17,7 @@
 
 
 
-FullscoreProjectController::FullscoreProjectController(Display *display)
+FullscoreApplicationController::FullscoreApplicationController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , score_editor(NULL)
@@ -41,7 +41,7 @@ FullscoreProjectController::FullscoreProjectController(Display *display)
 
 
 
-void FullscoreProjectController::create_help_window()
+void FullscoreApplicationController::create_help_window()
 {
    help_window = new UIFramedWindow(this, -600, -100, 550, 700);
    help_window->set_title("Help");
@@ -58,7 +58,7 @@ void FullscoreProjectController::create_help_window()
 
 
 
-void FullscoreProjectController::primary_timer_func()
+void FullscoreApplicationController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
    command_bar->set_time(score_editor->playback_control.position);
@@ -67,7 +67,7 @@ void FullscoreProjectController::primary_timer_func()
 
 
 
-void FullscoreProjectController::key_down_func()
+void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
@@ -354,7 +354,7 @@ void FullscoreProjectController::key_down_func()
 
 
 
-void FullscoreProjectController::on_message(UIWidget *sender, std::string message)
+void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
    if (message == "toggle_playback") score_editor->playback_control.toggle_playback();

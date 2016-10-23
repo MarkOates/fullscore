@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
    Framework::initialize();
    Display *d = Framework::create_display(1920, 1080);
-   FullscoreProjectController *proj = new FullscoreProjectController(d);
+   FullscoreApplicationController *proj = new FullscoreApplicationController(d);
    Framework::run_loop();
 
    return 0;
