@@ -214,10 +214,11 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_Y:
          if (notes) yank_measure_buffer.notes = *notes;
-         std::cout << "AAAA" << std::endl;
+         std::cout << "yank measure to clipboard" << std::endl;
          break;
       case ALLEGRO_KEY_P:
          *notes = yank_measure_buffer.notes;
+         std::cout << "paste measure" << std::endl;
          break;
       default:
          break;
