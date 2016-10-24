@@ -35,9 +35,6 @@ public:
 	int get_num_staves();
 	int get_num_measures();
 
-	bool save(std::string filename);
-	bool load(std::string filename);
-
 	void insert_staff(int index);
 	bool delete_staff(int index);
 	void append_staff();
