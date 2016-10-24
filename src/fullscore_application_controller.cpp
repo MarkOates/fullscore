@@ -112,14 +112,12 @@ void FullscoreApplicationController::key_down_func()
       switch(Framework::current_event->keyboard.keycode)
       {
       case ALLEGRO_KEY_W:
-         // transpose up
          {
             Transform::Transpose transpose_transform(Framework::key_shift ? 7 : 1);
             transform = &transpose_transform;
          }
          break;
       case ALLEGRO_KEY_S:
-         // transpose down
          {
             Transform::Transpose transpose_transform(Framework::key_shift ? -7 : -1);
             transform = &transpose_transform;
@@ -144,35 +142,30 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_E:
-         // erase the focused note
          {
             Transform::EraseNote erase_note_transform(score_editor->note_cursor_x);
             transform = &erase_note_transform;
          }
          break;
       case ALLEGRO_KEY_I:
-         // invert the measure
          {
             Transform::Invert invert_transform(0);
             transform = &invert_transform;
          }
          break;
       case ALLEGRO_KEY_G:
-         // retrograde the measure
          {
             Transform::Retrograde retrograde_transform;
             transform = &retrograde_transform;
          }
          break;
       case ALLEGRO_KEY_FULLSTOP:
-         // add a dot
          {
             Transform::AddDot add_dot_transform;
             transform = &add_dot_transform;
          }
          break;
       case ALLEGRO_KEY_COMMA:
-         // remove a dot
          {
             Transform::RemoveDot remove_dot_transform;
             transform = &remove_dot_transform;
