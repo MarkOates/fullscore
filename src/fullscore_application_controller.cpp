@@ -114,15 +114,7 @@ void FullscoreApplicationController::key_down_func()
       case ALLEGRO_KEY_W:
          // transpose up
          {
-            // create the transformation
-            Transform::Transpose transpose_transform(0);
-
-            // find the amount of the transformation
-            if (Framework::key_shift) transpose_transform.transposition = 7;
-            else if (Framework::key_ctrl); // nothing (this add flats to the whole measure? .. probably not a feature to have)
-            else transpose_transform.transposition = 1;
-
-            // assign the transformation
+            Transform::Transpose transpose_transform(Framework::key_shift ? 7 : 1);
             transform = &transpose_transform;
          }
          break;
