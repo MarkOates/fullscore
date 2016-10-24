@@ -184,7 +184,7 @@ void MeasureGrid::insert_staff(int index)
 
 	if (index >= (int)voices.size())
 	{
-		push_staff();
+		append_staff();
 	}
 	else 
 	{
@@ -204,7 +204,7 @@ bool MeasureGrid::delete_staff(int index)
 
 
 
-void MeasureGrid::push_staff()
+void MeasureGrid::append_staff()
 {
 	int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
 	voices.push_back(Row(num_measures));
@@ -219,7 +219,7 @@ void MeasureGrid::insert_measure(int index)
 	
 	if (index >= num_measures)
 	{
-		push_measure();
+		append_measure();
 	}
 	else
 	{
@@ -256,7 +256,7 @@ bool MeasureGrid::delete_measure(int index)
 
 
 
-void MeasureGrid::push_measure()
+void MeasureGrid::append_measure()
 {
    // append time signature
    time_signatures.push_back(TimeSignature(4, DURATION_QUARTER, 0));

@@ -344,9 +344,9 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
    if (message == "delete_staff")
       score_editor->measure_grid.delete_staff(score_editor->measure_cursor_y);
    if (message == "append_measure")
-      score_editor->measure_grid.push_measure();
+      score_editor->measure_grid.append_measure();
    if (message == "append_staff")
-      score_editor->measure_grid.push_staff();
+      score_editor->measure_grid.append_staff();
 }
 
 

@@ -38,11 +38,11 @@ public:
 
 	void insert_staff(int index);
 	bool delete_staff(int index);
-	void push_staff();
+	void append_staff();
 
 	void insert_measure(int index);
 	bool delete_measure(int index);
-	void push_measure();
+	void append_measure();
 };
 
 
