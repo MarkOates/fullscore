@@ -11,6 +11,7 @@
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
+#include <fullscore/transforms/add_dot_transform.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/half_duration_transform.h>
@@ -181,9 +182,8 @@ void FullscoreApplicationController::key_down_func()
       case ALLEGRO_KEY_FULLSTOP:
          // add a dot
          {
-            Note *focused_note = score_editor->get_note_at_cursor();
-            if (!focused_note) break;
-            focused_note->dots = std::min(2, focused_note->dots+1);
+            Transform::AddDot add_dot_transform;
+            transform = &add_dot_transform;
          }
          break;
       case ALLEGRO_KEY_COMMA:
