@@ -17,6 +17,7 @@
 #include <fullscore/transforms/half_duration_transform.h>
 #include <fullscore/transforms/insert_note_transform.h>
 #include <fullscore/transforms/invert_transform.h>
+#include <fullscore/transforms/remove_dot_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
 #include <fullscore/transforms/transpose_transform.h>
 #include <fullscore/transforms/toggle_rest_transform.h>
@@ -189,9 +190,8 @@ void FullscoreApplicationController::key_down_func()
       case ALLEGRO_KEY_COMMA:
          // remove a dot
          {
-            Note *focused_note = score_editor->get_note_at_cursor();
-            if (!focused_note) break;
-            focused_note->dots = std::max(0, focused_note->dots-1);
+            Transform::RemoveDot remove_dot_transform;
+            transform = &remove_dot_transform;
          }
          break;
 
