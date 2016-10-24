@@ -1,15 +1,12 @@
 
 
-#include <iostream>
 
-#include <allegro_flare/useful.h>
 
 #include <fullscore/models/measure_grid.h>
+
+#include <iostream>
 #include <fullscore/constants.h>
-
-#include <fullscore/converters/note_string_converter.h>
-
-
+#include <fullscore/models/note.h>
 
 
 
