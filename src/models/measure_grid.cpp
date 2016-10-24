@@ -223,6 +223,10 @@ void MeasureGrid::insert_measure(int index)
 	}
 	else
 	{
+      // insert a time signature
+      time_signatures.insert(time_signatures.begin() + index, TimeSignature(4, DURATION_QUARTER, 0));
+
+      // insert a measure into each row
 		for (unsigned i=0; i<voices.size(); i++)
 		{
 			// WARNING: this assumes all staves have the same
@@ -237,9 +241,16 @@ void MeasureGrid::insert_measure(int index)
 bool MeasureGrid::delete_measure(int index)
 {
 	int num_measures = get_num_measures();
+
 	if (index < 0 || index >= num_measures) return false;
+
+   // remove the time signature
+   time_signatures.erase(time_signatures.begin() + index);
+
+   // remove the measure from each row
 	for (unsigned i=0; i<voices.size(); i++)
 		voices[i].measures.erase(voices[i].measures.begin() + index);
+
    return true;
 }
 
@@ -247,6 +258,10 @@ bool MeasureGrid::delete_measure(int index)
 
 void MeasureGrid::push_measure()
 {
+   // append time signature
+   time_signatures.push_back(TimeSignature(4, DURATION_QUARTER, 0));
+
+   // append measure to each row
 	for (unsigned i=0; i<voices.size(); i++)
 	{
 		voices[i].measures.push_back(Measure());
