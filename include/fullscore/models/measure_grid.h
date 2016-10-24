@@ -6,6 +6,8 @@
 #include <vector>
 
 #include <fullscore/models/measure.h>
+#include <fullscore/models/time_signature.h>
+
 
 
 
@@ -21,6 +23,8 @@ private:
 	};
 
 	std::vector<Row> voices;
+	std::vector<TimeSignature> time_signatures;
+
 
 public:
 	MeasureGrid(int num_x_measures, int num_y_staves);

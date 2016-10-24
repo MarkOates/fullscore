@@ -34,6 +34,8 @@ Measure &MeasureGrid::Row::operator[](unsigned int index)
 
 
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
+   : voices()
+   , time_signatures()
 {
 	voices.resize(num_y_staves, Row(num_x_measures));
 }
