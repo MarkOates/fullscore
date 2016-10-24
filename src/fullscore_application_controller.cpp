@@ -178,18 +178,6 @@ void FullscoreApplicationController::key_down_func()
             transform = &insert_note_transform;
          }
          break;
-      case ALLEGRO_KEY_M:
-         {
-            // append a measure
-            score_editor->measure_grid.push_measure();
-         }
-         break;
-      case ALLEGRO_KEY_T:
-         {
-            // append a staff
-            score_editor->measure_grid.push_staff();
-         }
-         break;
       case ALLEGRO_KEY_Y:
          if (notes) yank_measure_buffer.notes = *notes;
          std::cout << "yank measure to clipboard" << std::endl;
@@ -355,6 +343,10 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
       score_editor->measure_grid.insert_staff(score_editor->measure_cursor_y);
    if (message == "delete_staff")
       score_editor->measure_grid.delete_staff(score_editor->measure_cursor_y);
+   if (message == "append_measure")
+      score_editor->measure_grid.push_measure();
+   if (message == "append_staff")
+      score_editor->measure_grid.push_staff();
 }
 
 
