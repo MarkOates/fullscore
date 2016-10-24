@@ -11,6 +11,7 @@
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
+#include <fullscore/converters/measure_grid_file_converter.h>
 #include <fullscore/transforms/add_dot_transform.h>
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
@@ -244,13 +245,15 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_F7:
          {
-            score_editor->measure_grid.save("score_filename.fs");
+            MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
+            measure_grid_file_converter.save();
             simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
          }
          break;
       case ALLEGRO_KEY_F8:
          {
-            score_editor->measure_grid.load("score_filename.fs");
+            MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
+            measure_grid_file_converter.load();
             simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
          }
          break;
