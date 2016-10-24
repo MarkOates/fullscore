@@ -168,8 +168,11 @@ void MeasureGrid::append_measure()
 
 bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 {
-   // unimplemented
-   return false;
+   if (index < 0) return false;
+   if (index >= get_num_measures()) return false;
+
+   time_signatures[index] = time_signature;
+   return true;
 }
 
 
@@ -177,8 +180,10 @@ bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 
 TimeSignature MeasureGrid::get_time_signature(int index)
 {
-   // unimplemented
-   return TimeSignature(0, 0, 0);
+   if (index < 0) return TimeSignature(0, 0, 0);
+   if (index >= get_num_measures()) return TimeSignature(0, 0, 0);
+
+   return time_signatures[index];
 }
 
 
