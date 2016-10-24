@@ -19,6 +19,7 @@ public:
 
    bool set_numerator(int numerator);
    bool set_denominator(int denominator_duration, int denominator_dots=0);
+   float get_width();
 };
 
 

@@ -72,3 +72,20 @@ bool TimeSignature::set_denominator(int denominator_duration, int denominator_do
 
 
 
+float TimeSignature::get_width()
+{
+   float width = 1.0f / denominator_duration;
+   float dots_percentage = 0.0f;
+   float previous_ammount = 1.0f;
+   for (int i=0; i<denominator_dots; i++)
+   {
+      previous_ammount *= 0.5f;
+      dots_percentage += previous_ammount;
+   }
+
+   return width + width * dots_percentage;
+}
+
+
+
+
