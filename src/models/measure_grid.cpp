@@ -5,6 +5,7 @@
 #include <allegro_flare/useful.h>
 
 #include <fullscore/models/measure_grid.h>
+#include <fullscore/constants.h>
 
 #include <fullscore/converters/note_string_converter.h>
 
@@ -38,6 +39,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    , time_signatures()
 {
 	voices.resize(num_y_staves, Row(num_x_measures));
+	time_signatures.resize(num_x_measures, TimeSignature(4, DURATION_QUARTER, 0));
 }
 
 
