@@ -41,6 +41,9 @@ public:
    void insert_measure(int index);
    bool delete_measure(int index);
    void append_measure();
+
+   bool set_time_signature(int index, TimeSignature time_signature);
+   TimeSignature get_time_signature(int index);
 };
 
 

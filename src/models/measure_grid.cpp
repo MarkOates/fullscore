@@ -166,3 +166,21 @@ void MeasureGrid::append_measure()
 
 
 
+bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
+{
+   // unimplemented
+   return false;
+}
+
+
+
+
+TimeSignature MeasureGrid::get_time_signature(int index)
+{
+   // unimplemented
+   return TimeSignature(0, 0, 0);
+}
+
+
+
+
