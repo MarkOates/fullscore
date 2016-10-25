@@ -6,6 +6,10 @@
 
 #include <allegro_flare/allegro_flare.h>
 
+#include <fullscore/components/time_signature_render_component.h>
+
+
+
 
 const bool TEMPORARILY_DISABLE = false;
 
@@ -60,7 +64,12 @@ void GUIScoreEditor::on_draw()
    for (int x=0; x<measure_grid.get_num_measures(); x++)
    {
       Measure *measure = measure_grid.get_measure(x, 0);
-      al_draw_line(x * FULL_MEASURE_WIDTH, 0, x * FULL_MEASURE_WIDTH, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
+      TimeSignature time_signature = measure_grid.get_time_signature(x);
+      TimeSignatureRenderComponent time_signature_render_component(&time_signature);
+      float x_pos = x * FULL_MEASURE_WIDTH;
+
+      al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
+      time_signature_render_component.render(x_pos, -50);
    }
 
    // draw the notes and measures
