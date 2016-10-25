@@ -7,6 +7,8 @@
 class TimeSignature
 {
 private:
+   friend class TimeSignatureRenderComponent;
+
    int numerator;
    int denominator_duration;
    int denominator_dots;
