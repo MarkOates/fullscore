@@ -12,6 +12,7 @@
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
+#include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
 #include <fullscore/transforms/add_dot_transform.h>
 #include <fullscore/transforms/double_duration_transform.h>
@@ -181,9 +182,11 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_Y:
-         if (notes) yank_measure_buffer.notes = *notes;
-         std::cout << "yank measure to clipboard" << std::endl;
-         break;
+         {
+            Measure *focused_measure = score_editor->get_measure_at_cursor();
+            Action::YankMeasureToBufferAction yank_measure_to_buffer_action(&yank_measure_buffer, focused_measure);
+            yank_measure_to_buffer_action.execute();
+         }
       case ALLEGRO_KEY_P:
          *notes = yank_measure_buffer.notes;
          std::cout << "paste measure" << std::endl;
