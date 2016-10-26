@@ -65,6 +65,7 @@ void GUIScoreEditor::on_draw()
       color::color(color::blanchedalmond, 0.2));
 
    // draw barlines
+   TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
    for (int x=0; x<measure_grid.get_num_measures(); x++)
    {
       Measure *measure = measure_grid.get_measure(x, 0);
@@ -73,7 +74,10 @@ void GUIScoreEditor::on_draw()
       float x_pos = x * FULL_MEASURE_WIDTH;
 
       al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
-      time_signature_render_component.render(x_pos, -50);
+      if (time_signature != previous_time_signature)
+         time_signature_render_component.render(x_pos, -50);
+
+      previous_time_signature = time_signature;
    }
 
    // draw the notes and measures
