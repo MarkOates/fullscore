@@ -89,3 +89,13 @@ float TimeSignature::get_width()
 
 
 
+bool TimeSignature::operator==(TimeSignature &other)
+{
+   return (numerator == other.numerator)
+      && (denominator_duration == other.denominator_duration)
+      && (denominator_dots == other.denominator_dots);
+}
+
+
+
+
