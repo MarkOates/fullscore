@@ -185,7 +185,7 @@ void FullscoreApplicationController::key_down_func()
       case ALLEGRO_KEY_Y:
          {
             Measure *focused_measure = score_editor->get_measure_at_cursor();
-            Action::YankMeasureToBufferAction yank_measure_to_buffer_action(&yank_measure_buffer, focused_measure);
+            Action::YankMeasureToBuffer yank_measure_to_buffer_action(&yank_measure_buffer, focused_measure);
             yank_measure_to_buffer_action.execute();
          }
       case ALLEGRO_KEY_P:

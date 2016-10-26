@@ -12,15 +12,15 @@ class Measure;
 
 namespace Action
 {
-   class YankMeasureToBufferAction : public Base
+   class YankMeasureToBuffer : public Base
    {
    private:
       Measure *yank_measure_buffer;
       Measure *source_measure;
 
    public:
-      YankMeasureToBufferAction(Measure *yank_measure_buffer, Measure *source_measure);
-      ~YankMeasureToBufferAction();
+      YankMeasureToBuffer(Measure *yank_measure_buffer, Measure *source_measure);
+      ~YankMeasureToBuffer();
 
       bool execute();
    };

@@ -10,7 +10,7 @@
 
 
 
-Action::YankMeasureToBufferAction::YankMeasureToBufferAction(Measure *yank_measure_buffer, Measure *source_measure)
+Action::YankMeasureToBuffer::YankMeasureToBuffer(Measure *yank_measure_buffer, Measure *source_measure)
    : Base("yank_measure_to_buffer")
    , yank_measure_buffer(yank_measure_buffer)
    , source_measure(source_measure)
@@ -20,14 +20,14 @@ Action::YankMeasureToBufferAction::YankMeasureToBufferAction(Measure *yank_measu
 
 
 
-Action::YankMeasureToBufferAction::~YankMeasureToBufferAction()
+Action::YankMeasureToBuffer::~YankMeasureToBuffer()
 {
 }
 
 
 
 
-bool Action::YankMeasureToBufferAction::execute()
+bool Action::YankMeasureToBuffer::execute()
 {
    if (!yank_measure_buffer || !source_measure) return false;
    yank_measure_buffer->notes = source_measure->notes;
