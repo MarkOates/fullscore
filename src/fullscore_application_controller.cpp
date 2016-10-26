@@ -8,6 +8,7 @@
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
@@ -188,9 +189,11 @@ void FullscoreApplicationController::key_down_func()
             yank_measure_to_buffer_action.execute();
          }
       case ALLEGRO_KEY_P:
-         *notes = yank_measure_buffer.notes;
-         std::cout << "paste measure" << std::endl;
-         break;
+         {
+            Measure *destination_measure = score_editor->get_measure_at_cursor();
+            Action::PasteMeasureFromBuffer paste_measure_from_buffer_action(destination_measure, &yank_measure_buffer);
+            paste_measure_from_buffer_action.execute();
+         }
       default:
          break;
       }
