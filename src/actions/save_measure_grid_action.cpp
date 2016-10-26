@@ -28,8 +28,8 @@ SaveMeasureGridAction::~SaveMeasureGridAction()
 
 bool SaveMeasureGridAction::execute()
 {
-   // unimplemented
-   return false;
+   MeasureGridFileConverter measure_grid_file_converter(measure_grid, filename);
+   return measure_grid_file_converter.save();
 }
 
 
