@@ -9,6 +9,7 @@
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
 #include <fullscore/actions/reset_playback_action.h>
+#include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
@@ -245,9 +246,9 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_F7:
          {
-            MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
-            measure_grid_file_converter.save();
-            simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
+            SaveMeasureGridAction save_measure_grid_action(&score_editor->measure_grid, "score_filename.fs");
+            if (save_measure_grid_action.execute())
+               simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
          }
          break;
       case ALLEGRO_KEY_F8:
