@@ -24,6 +24,7 @@ public:
    float get_width();
 
    bool operator==(TimeSignature &other);
+   bool operator!=(TimeSignature &other);
 };
 
 

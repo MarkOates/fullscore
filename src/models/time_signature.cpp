@@ -99,3 +99,11 @@ bool TimeSignature::operator==(TimeSignature &other)
 
 
 
+bool TimeSignature::operator!=(TimeSignature &other)
+{
+   return !(*this == other);
+}
+
+
+
+
