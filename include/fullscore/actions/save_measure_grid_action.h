@@ -11,17 +11,20 @@
 
 class MeasureGrid;
 
-class SaveMeasureGridAction : public Action::Base
+namespace Action
 {
-private:
-   MeasureGrid *measure_grid;
-   std::string filename;
+   class SaveMeasureGridAction : public Base
+   {
+   private:
+      MeasureGrid *measure_grid;
+      std::string filename;
 
-public:
-   SaveMeasureGridAction(MeasureGrid *measure_grid, std::string filename);
-   ~SaveMeasureGridAction();
+   public:
+      SaveMeasureGridAction(MeasureGrid *measure_grid, std::string filename);
+      ~SaveMeasureGridAction();
 
-   bool execute();
+      bool execute();
+   };
 };
 
 
