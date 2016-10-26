@@ -48,6 +48,10 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
    measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
    measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
+
+   // test time signatures
+   measure_grid.set_time_signature(2, TimeSignature(3, 4));
+   measure_grid.set_time_signature(5, TimeSignature(5, 8));
 }
 
 
