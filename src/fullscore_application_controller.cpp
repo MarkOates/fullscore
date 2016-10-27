@@ -161,7 +161,6 @@ void FullscoreApplicationController::key_down_func()
             transform = &remove_dot_transform;
          }
          break;
-
       case ALLEGRO_KEY_N:
          {
             Transform::InsertNote insert_note_transform(score_editor->note_cursor_x, Note());
