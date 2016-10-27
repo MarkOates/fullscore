@@ -43,7 +43,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    score_editor = new GUIScoreEditor(this, display, new PlaybackDeviceGeneric());
-   gui_mixer = new UIMixer(this, 1350, 500);
+   gui_mixer = new UIMixer(this, 1600, 1200);
    command_bar = new UICommandBar(this);
 
    simple_notification_screen->spawn_notification("Press F1 for help");
