@@ -20,7 +20,7 @@ Action::Template::~Template()
 
 
 
-bool Template::execute()
+bool Action::Template::execute()
 {
    // unimplemented
    return false;
