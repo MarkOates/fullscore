@@ -96,21 +96,7 @@ void FullscoreApplicationController::key_down_func()
       // SCORE EDITING COMMANDS
       //
 
-      std::vector<Note> *notes = nullptr;
-      Note *note = nullptr;
       Transform::Base *transform = nullptr;
-
-      // find the note/notes to transform
-      if (score_editor->is_measure_mode())
-      {
-         Measure *focused_measure = score_editor->get_measure_at_cursor();
-         if (focused_measure) notes = &focused_measure->notes;
-      }
-      else
-      {
-         Note *focused_note = score_editor->get_note_at_cursor();
-         if (focused_note) note = focused_note;
-      }
 
       // locate and build the appropriate transform
       switch(Framework::current_event->keyboard.keycode)
@@ -196,6 +182,20 @@ void FullscoreApplicationController::key_down_func()
          }
       default:
          break;
+      }
+
+      std::vector<Note> *notes = nullptr;
+      Note *note = nullptr;
+      // find the note/notes to transform
+      if (score_editor->is_measure_mode())
+      {
+         Measure *focused_measure = score_editor->get_measure_at_cursor();
+         if (focused_measure) notes = &focused_measure->notes;
+      }
+      else
+      {
+         Note *focused_note = score_editor->get_note_at_cursor();
+         if (focused_note) note = focused_note;
       }
 
       // perform the actual transformation
