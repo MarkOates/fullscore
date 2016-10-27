@@ -31,8 +31,7 @@ bool Action::AddDotTransform::execute()
    Transform::AddDot add_dot_transform;
    *notes = add_dot_transform.transform(*notes);
 
-   // unimplemented
-   return false;
+   return true;
 }
 
 
