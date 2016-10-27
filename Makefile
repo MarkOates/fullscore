@@ -51,7 +51,16 @@ bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
 
 $(OBJ_FILES): obj/%.o : src/%.cpp
 	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
-	
+
+
+
+#
+# Tools
+#
+
+
+tools: src/tools/generate.cpp
+	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) src/tools/generate.cpp
 
 
 #
