@@ -4,6 +4,7 @@
 
 #include <fullscore/fullscore_application_controller.h>
 
+#include <fullscore/actions/transforms/add_dot_transform_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -102,6 +103,13 @@ void FullscoreApplicationController::key_down_func()
 
       Transform::Base *transform = nullptr;
 
+      std::vector<Note> *notes = nullptr;
+      if (score_editor->is_measure_mode())
+      {
+         Measure *focused_measure = score_editor->get_measure_at_cursor();
+         if (focused_measure) notes = &focused_measure->notes;
+      }
+
       // locate and build the appropriate transform
       switch(Framework::current_event->keyboard.keycode)
       {
@@ -155,8 +163,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_FULLSTOP:
          {
-            Transform::AddDot add_dot_transform;
-            transform = &add_dot_transform;
+            Action::AddDotTransform add_dot_transform_action(notes);
+            add_dot_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_COMMA:
