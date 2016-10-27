@@ -49,6 +49,9 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    simple_notification_screen->spawn_notification("Press F1 for help");
 
    create_help_window();
+
+   Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
+   Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
 }
 
 
