@@ -351,12 +351,14 @@ void FullscoreApplicationController::key_down_func()
             Action::YankMeasureToBuffer yank_measure_to_buffer_action(&yank_measure_buffer, focused_measure);
             yank_measure_to_buffer_action.execute();
          }
+         break;
       case ALLEGRO_KEY_P:
          {
             Measure *destination_measure = score_editor->get_measure_at_cursor();
             Action::PasteMeasureFromBuffer paste_measure_from_buffer_action(destination_measure, &yank_measure_buffer);
             paste_measure_from_buffer_action.execute();
          }
+         break;
       case ALLEGRO_KEY_TAB:
          score_editor->toggle_input_mode();
          break;
