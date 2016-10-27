@@ -253,9 +253,6 @@ void FullscoreApplicationController::key_down_func()
             simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
          }
          break;
-
-      // some basic placement controls of this widget
-
       case ALLEGRO_KEY_UP:
          {
             Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
