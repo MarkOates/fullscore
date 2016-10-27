@@ -104,10 +104,22 @@ void FullscoreApplicationController::key_down_func()
       Transform::Base *transform = nullptr;
 
       std::vector<Note> *notes = nullptr;
+      Note *single_note = nullptr;
+      std::vector<Note> single_note_as_array;
+
       if (score_editor->is_measure_mode())
       {
          Measure *focused_measure = score_editor->get_measure_at_cursor();
          if (focused_measure) notes = &focused_measure->notes;
+      }
+      else
+      {
+         single_note = score_editor->get_note_at_cursor();
+         if (single_note)
+         {
+            single_note_as_array.push_back(*single_note);
+            notes = &single_note_as_array;
+         }
       }
 
       // locate and build the appropriate transform
@@ -181,6 +193,11 @@ void FullscoreApplicationController::key_down_func()
          break;
       default:
          break;
+      }
+
+      if (single_note && !single_note_as_array.empty())
+      {
+         *single_note = single_note_as_array.at(0);
       }
 
       if (transform)
