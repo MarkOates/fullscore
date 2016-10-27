@@ -91,6 +91,7 @@ void FullscoreApplicationController::key_down_func()
       toggle_command_bar_action.execute();
    }
    else if (!command_bar->text_input->is_focused())
+   // while the command bar is NOT focused, here are the normal keyboard inputs
    {
       //
       // SCORE EDITING COMMANDS
@@ -191,7 +192,6 @@ void FullscoreApplicationController::key_down_func()
          if (note) *note = transform->transform({*note})[0];
          else if (notes) *notes = transform->transform(*notes);
       }
-      // while the command bar is NOT focused, here are the normal keyboard inputs
 
       //
       // NON-SCORE EDITING COMMANDS
