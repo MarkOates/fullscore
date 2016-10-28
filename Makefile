@@ -60,7 +60,8 @@ $(OBJ_FILES): obj/%.o : src/%.cpp
 
 
 tools: src/tools/generate.cpp
-	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) src/tools/generate.cpp
+	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) src/tools/generate.cpp -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS)
+
 
 
 #
