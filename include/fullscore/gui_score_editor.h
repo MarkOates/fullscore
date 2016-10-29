@@ -62,8 +62,8 @@ public:
    float get_measure_width(Measure &m);
 
    void toggle_edit_mode_target();
-   bool is_measure_mode();
-   bool is_note_mode();
+   bool is_measure_target_mode();
+   bool is_note_target_mode();
 };
 
 

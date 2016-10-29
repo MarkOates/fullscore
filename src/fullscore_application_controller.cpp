@@ -93,7 +93,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    Note *single_note = nullptr;
    std::vector<Note> single_note_as_array;
 
-   if (score_editor->is_measure_mode())
+   if (score_editor->is_measure_target_mode())
    {
       Measure *focused_measure = score_editor->get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
