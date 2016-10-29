@@ -28,8 +28,10 @@ bool Action::Transform::Retrograde::execute()
 {
    if (!notes) return false;
 
-   // unimplemented
-   return false;
+   ::Transform::Retrograde retrograde_transform;
+   *notes = retrograde_transform.transform(*notes);
+
+   return true;
 }
 
 
