@@ -188,22 +188,6 @@ void FullscoreApplicationController::key_down_func()
             insert_note_transform_action.execute();
          }
          break;
-      default:
-         break;
-      }
-
-      if (single_note && !single_note_as_array.empty())
-      {
-         *single_note = single_note_as_array.at(0);
-      }
-
-
-      //
-      // NON-SCORE EDITING COMMANDS
-      //
-
-      switch(Framework::current_event->keyboard.keycode)
-      {
       case ALLEGRO_KEY_F1:
          {
             if (showing_help_menu)
@@ -339,6 +323,11 @@ void FullscoreApplicationController::key_down_func()
       case ALLEGRO_KEY_TAB:
          score_editor->toggle_input_mode();
          break;
+      }
+
+      if (single_note && !single_note_as_array.empty())
+      {
+         *single_note = single_note_as_array.at(0);
       }
    }
 }
