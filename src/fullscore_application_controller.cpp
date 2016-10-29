@@ -8,6 +8,7 @@
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
 #include <fullscore/actions/transforms/erase_note_action.h>
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
+#include <fullscore/actions/transforms/insert_note_action.h>
 #include <fullscore/actions/transforms/invert_action.h>
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
@@ -186,8 +187,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_N:
          {
-            Transform::InsertNote insert_note_transform(score_editor->note_cursor_x, Note());
-            transform = &insert_note_transform;
+            Action::InsertNoteTransform insert_note_transform_action(notes, score_editor->note_cursor_x, Note());
+            insert_note_transform_action.execute();
          }
          break;
       default:
