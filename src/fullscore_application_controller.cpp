@@ -8,6 +8,7 @@
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
+#include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_transform_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
@@ -24,7 +25,6 @@
 #include <fullscore/transforms/insert_note_transform.h>
 #include <fullscore/transforms/invert_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
-#include <fullscore/transforms/toggle_rest_transform.h>
 
 
 
@@ -150,8 +150,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_R:
          {
-            Transform::ToggleRest toggle_rest_transform;
-            transform = &toggle_rest_transform;
+            Action::ToggleRest toggle_rest_action(notes);
+            toggle_rest_action.execute();
          }
          break;
       case ALLEGRO_KEY_E:
