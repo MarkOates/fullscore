@@ -27,10 +27,12 @@ Action::InsertNoteTransform::~InsertNoteTransform()
 
 bool Action::InsertNoteTransform::execute()
 {
-   if (!notes) return false;
+   if (!notes || notes->empty() || at_index < 0 || at_index >= notes->size()) return false;
 
-   // unimplemented
-   return false;
+   ::Transform::InsertNote insert_note_transform(at_index, note);
+   *notes = insert_note_transform.transform(*notes);
+
+   return true;
 }
 
 
