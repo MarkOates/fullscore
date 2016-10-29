@@ -83,6 +83,13 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
+void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_keycode)
+{
+}
+
+
+
+
 void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
