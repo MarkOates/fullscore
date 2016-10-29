@@ -29,8 +29,10 @@ bool Action::TransposeTransform::execute()
 {
    if (!notes) return false;
 
-   // unimplemented
-   return false;
+   Transform::Transpose transpose_transform(transposition);
+   *notes = transpose_transform.transform(*notes);
+
+   return true;
 }
 
 
