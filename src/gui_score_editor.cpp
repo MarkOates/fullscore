@@ -28,6 +28,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , STAFF_HEIGHT(80)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
    , edit_mode_target(MEASURE_TARGET)
+   , mode(NORMAL_MODE)
 {
    attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
    attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
