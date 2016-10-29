@@ -321,7 +321,7 @@ void FullscoreApplicationController::key_down_func()
          }
          break;
       case ALLEGRO_KEY_TAB:
-         score_editor->toggle_input_mode();
+         score_editor->toggle_edit_mode_target();
          break;
       }
 

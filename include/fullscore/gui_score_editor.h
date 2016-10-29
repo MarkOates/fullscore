@@ -17,13 +17,19 @@
 class GUIScoreEditor : public UIWidget
 {
 public:
+   enum edit_mode_target_t
+   {
+      NOTE_TARGET=0,
+      MEASURE_TARGET
+   };
+
    MeasureGrid measure_grid;
    PlaybackControl playback_control;
 
    int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
    int measure_cursor_y;
    int note_cursor_x;
-   bool input_mode;
+   edit_mode_target_t edit_mode_target;
 
    MusicEngraver music_engraver;
 
@@ -47,7 +53,7 @@ public:
    float get_measure_length_to_note(Measure &measure, int note_index);
    float get_measure_width(Measure &m);
 
-   void toggle_input_mode();
+   void toggle_edit_mode_target();
    bool is_measure_mode();
    bool is_note_mode();
 };

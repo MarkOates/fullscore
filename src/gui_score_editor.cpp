@@ -27,7 +27,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , showing_debug_data(false)
    , STAFF_HEIGHT(80)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
-   , input_mode(false)
+   , edit_mode_target(MEASURE_TARGET)
 {
    attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
    attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
@@ -290,9 +290,10 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
 
 
 
-void GUIScoreEditor::toggle_input_mode()
+void GUIScoreEditor::toggle_edit_mode_target()
 {
-   input_mode = !input_mode;
+   if (edit_mode_target == NOTE_TARGET) edit_mode_target = MEASURE_TARGET;
+   else if (edit_mode_target == MEASURE_TARGET) edit_mode_target = NOTE_TARGET;
 }
 
 
@@ -300,7 +301,7 @@ void GUIScoreEditor::toggle_input_mode()
 
 bool GUIScoreEditor::is_measure_mode()
 {
-   return input_mode;
+   return edit_mode_target == MEASURE_TARGET;
 }
 
 
@@ -308,7 +309,7 @@ bool GUIScoreEditor::is_measure_mode()
 
 bool GUIScoreEditor::is_note_mode()
 {
-   return !input_mode;
+   return edit_mode_target == NOTE_TARGET;
 }
 
 
