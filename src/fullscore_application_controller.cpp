@@ -5,6 +5,7 @@
 #include <fullscore/fullscore_application_controller.h>
 
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
+#include <fullscore/actions/transforms/double_duration_transform_action.h>
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
 #include <fullscore/actions/transforms/transpose_transform_action.h>
@@ -19,7 +20,6 @@
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
-#include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/transforms/erase_note_transform.h>
 #include <fullscore/transforms/insert_note_transform.h>
 #include <fullscore/transforms/invert_transform.h>
@@ -144,8 +144,8 @@ void FullscoreApplicationController::key_down_func()
          break;
       case ALLEGRO_KEY_D:
          {
-            Transform::DoubleDuration double_duration_transform;
-            transform = &double_duration_transform;
+            Action::DoubleDurationTransform double_duration_transform_action(notes);
+            double_duration_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_R:
