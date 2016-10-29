@@ -4,6 +4,16 @@
 
 #include <fullscore/fullscore_application_controller.h>
 
+#include <fullscore/actions/transforms/add_dot_transform_action.h>
+#include <fullscore/actions/transforms/double_duration_transform_action.h>
+#include <fullscore/actions/transforms/erase_note_action.h>
+#include <fullscore/actions/transforms/half_duration_transform_action.h>
+#include <fullscore/actions/transforms/insert_note_action.h>
+#include <fullscore/actions/transforms/invert_action.h>
+#include <fullscore/actions/transforms/remove_dot_transform_action.h>
+#include <fullscore/actions/transforms/retrograde_action.h>
+#include <fullscore/actions/transforms/toggle_rest_action.h>
+#include <fullscore/actions/transforms/transpose_transform_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -15,16 +25,6 @@
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
-#include <fullscore/transforms/add_dot_transform.h>
-#include <fullscore/transforms/double_duration_transform.h>
-#include <fullscore/transforms/erase_note_transform.h>
-#include <fullscore/transforms/half_duration_transform.h>
-#include <fullscore/transforms/insert_note_transform.h>
-#include <fullscore/transforms/invert_transform.h>
-#include <fullscore/transforms/remove_dot_transform.h>
-#include <fullscore/transforms/retrograde_transform.h>
-#include <fullscore/transforms/transpose_transform.h>
-#include <fullscore/transforms/toggle_rest_transform.h>
 
 
 
@@ -100,108 +100,94 @@ void FullscoreApplicationController::key_down_func()
       // SCORE EDITING COMMANDS
       //
 
-      Transform::Base *transform = nullptr;
+      std::vector<Note> *notes = nullptr;
+      Note *single_note = nullptr;
+      std::vector<Note> single_note_as_array;
+
+      if (score_editor->is_measure_mode())
+      {
+         Measure *focused_measure = score_editor->get_measure_at_cursor();
+         if (focused_measure) notes = &focused_measure->notes;
+      }
+      else
+      {
+         single_note = score_editor->get_note_at_cursor();
+         if (single_note)
+         {
+            single_note_as_array.push_back(*single_note);
+            notes = &single_note_as_array;
+         }
+      }
 
       // locate and build the appropriate transform
       switch(Framework::current_event->keyboard.keycode)
       {
       case ALLEGRO_KEY_W:
          {
-            Transform::Transpose transpose_transform(Framework::key_shift ? 7 : 1);
-            transform = &transpose_transform;
+            Action::TransposeTransform transpose_transform_action(notes, Framework::key_shift ? 7 : 1);
+            transpose_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_S:
          {
-            Transform::Transpose transpose_transform(Framework::key_shift ? -7 : -1);
-            transform = &transpose_transform;
+            Action::TransposeTransform transpose_transform_action(notes, Framework::key_shift ? -7 : -1);
+            transpose_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_A:
          {
-            Transform::HalfDuration half_duration_transform;
-            transform = &half_duration_transform;
+            Action::HalfDurationTransform half_duration_transform_action(notes);
+            half_duration_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_D:
          {
-            Transform::DoubleDuration double_duration_transform;
-            transform = &double_duration_transform;
+            Action::DoubleDurationTransform double_duration_transform_action(notes);
+            double_duration_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_R:
          {
-            Transform::ToggleRest toggle_rest_transform;
-            transform = &toggle_rest_transform;
+            Action::ToggleRest toggle_rest_action(notes);
+            toggle_rest_action.execute();
          }
          break;
       case ALLEGRO_KEY_E:
          {
-            Transform::EraseNote erase_note_transform(score_editor->note_cursor_x);
-            transform = &erase_note_transform;
+            Action::EraseNote erase_note_action(notes, score_editor->note_cursor_x);
+            erase_note_action.execute();
          }
          break;
       case ALLEGRO_KEY_I:
          {
-            Transform::Invert invert_transform(0);
-            transform = &invert_transform;
+            Action::Transform::Invert invert_action(0);
+            invert_action.execute();
          }
          break;
       case ALLEGRO_KEY_G:
          {
-            Transform::Retrograde retrograde_transform;
-            transform = &retrograde_transform;
+            Action::Transform::Retrograde retrograde_action(notes);
+            retrograde_action.execute();
          }
          break;
       case ALLEGRO_KEY_FULLSTOP:
          {
-            Transform::AddDot add_dot_transform;
-            transform = &add_dot_transform;
+            Action::AddDotTransform add_dot_transform_action(notes);
+            add_dot_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_COMMA:
          {
-            Transform::RemoveDot remove_dot_transform;
-            transform = &remove_dot_transform;
+            Action::RemoveDotTransform remove_dot_transform_action(notes);
+            remove_dot_transform_action.execute();
          }
          break;
       case ALLEGRO_KEY_N:
          {
-            Transform::InsertNote insert_note_transform(score_editor->note_cursor_x, Note());
-            transform = &insert_note_transform;
+            Action::InsertNoteTransform insert_note_transform_action(notes, score_editor->note_cursor_x, Note());
+            insert_note_transform_action.execute();
          }
          break;
-      default:
-         break;
-      }
-
-      if (transform)
-      {
-         std::vector<Note> *notes = nullptr;
-         Note *note = nullptr;
-         // find the note/notes to transform
-         if (score_editor->is_measure_mode())
-         {
-            Measure *focused_measure = score_editor->get_measure_at_cursor();
-            if (focused_measure) notes = &focused_measure->notes;
-         }
-         else
-         {
-            Note *focused_note = score_editor->get_note_at_cursor();
-            if (focused_note) note = focused_note;
-         }
-
-         // perform the actual transformation
-         if (note) *note = transform->transform({*note})[0];
-         else if (notes) *notes = transform->transform(*notes);
-      }
-
-      //
-      // NON-SCORE EDITING COMMANDS
-      //
-
-      switch(Framework::current_event->keyboard.keycode)
-      {
       case ALLEGRO_KEY_F1:
          {
             if (showing_help_menu)
@@ -326,15 +312,22 @@ void FullscoreApplicationController::key_down_func()
             Action::YankMeasureToBuffer yank_measure_to_buffer_action(&yank_measure_buffer, focused_measure);
             yank_measure_to_buffer_action.execute();
          }
+         break;
       case ALLEGRO_KEY_P:
          {
             Measure *destination_measure = score_editor->get_measure_at_cursor();
             Action::PasteMeasureFromBuffer paste_measure_from_buffer_action(destination_measure, &yank_measure_buffer);
             paste_measure_from_buffer_action.execute();
          }
-      case ALLEGRO_KEY_TAB:
-         score_editor->toggle_input_mode();
          break;
+      case ALLEGRO_KEY_TAB:
+         score_editor->toggle_edit_mode_target();
+         break;
+      }
+
+      if (single_note && !single_note_as_array.empty())
+      {
+         *single_note = single_note_as_array.at(0);
       }
    }
 }
