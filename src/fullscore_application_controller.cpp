@@ -109,7 +109,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    }
 
    // locate and build the appropriate transform
-   switch(Framework::current_event->keyboard.keycode)
+   switch(al_keycode)
    {
    case ALLEGRO_KEY_W:
       {
@@ -336,6 +336,7 @@ void FullscoreApplicationController::key_down_func()
    else if (!command_bar->text_input->is_focused())
    // while the command bar is NOT focused, here are the normal keyboard inputs
    {
+      execute_normal_mode_action_for_key(Framework::current_event->keyboard.keycode);
    }
 }
 
