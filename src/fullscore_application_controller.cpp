@@ -25,7 +25,6 @@
 #include <fullscore/actions/toggle_command_bar_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
-#include <fullscore/transforms/insert_note_transform.h>
 
 
 
@@ -100,8 +99,6 @@ void FullscoreApplicationController::key_down_func()
       //
       // SCORE EDITING COMMANDS
       //
-
-      Transform::Base *transform = nullptr;
 
       std::vector<Note> *notes = nullptr;
       Note *single_note = nullptr;
@@ -200,26 +197,6 @@ void FullscoreApplicationController::key_down_func()
          *single_note = single_note_as_array.at(0);
       }
 
-      if (transform)
-      {
-         std::vector<Note> *notes = nullptr;
-         Note *note = nullptr;
-         // find the note/notes to transform
-         if (score_editor->is_measure_mode())
-         {
-            Measure *focused_measure = score_editor->get_measure_at_cursor();
-            if (focused_measure) notes = &focused_measure->notes;
-         }
-         else
-         {
-            Note *focused_note = score_editor->get_note_at_cursor();
-            if (focused_note) note = focused_note;
-         }
-
-         // perform the actual transformation
-         if (note) *note = transform->transform({*note})[0];
-         else if (notes) *notes = transform->transform(*notes);
-      }
 
       //
       // NON-SCORE EDITING COMMANDS
