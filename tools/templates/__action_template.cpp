@@ -2,25 +2,25 @@
 
 
 
-#include <fullscore/action/__template.h>
+#include <fullscore/action/SNAKECASE_ACTION_NAME_action.h>
 
 
 
 
-Action::Template::Template()
-   : Base("name_of_action")
+Action::CLASS_NAME::CLASS_NAME()
+   : Base("SNAKECASE_ACTION_NAME")
 {}
 
 
 
 
-Action::Template::~Template()
+Action::CLASS_NAME::~CLASS_NAME()
 {}
 
 
 
 
-bool Action::Template::execute()
+bool Action::CLASS_NAME::execute()
 {
    // unimplemented
    return false;

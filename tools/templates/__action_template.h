@@ -10,11 +10,11 @@
 
 namespace Action
 {
-   class Template : public Base
+   class CLASS_NAME : public Base
    {
    public:
-      Template();
-      ~Template();
+      CLASS_NAME();
+      ~CLASS_NAME();
 
       bool execute() override;
    };
