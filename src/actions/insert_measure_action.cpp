@@ -7,8 +7,10 @@
 
 
 
-Action::InsertMeasure::InsertMeasure()
+Action::InsertMeasure::InsertMeasure(MeasureGrid *measure_grid, int at_index)
    : Base("insert_measure")
+   , measure_grid(measure_grid)
+   , at_index(at_index)
 {}
 
 

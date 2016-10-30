@@ -8,12 +8,18 @@
 
 
 
+class MeasureGrid;
+
 namespace Action
 {
    class InsertMeasure : public Base
    {
+   private:
+      MeasureGrid *measure_grid;
+      int at_index;
+
    public:
-      InsertMeasure();
+      InsertMeasure(MeasureGrid *measure_grid, int at_index);
       ~InsertMeasure();
 
       bool execute() override;
