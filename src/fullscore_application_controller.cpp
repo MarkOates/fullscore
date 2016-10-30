@@ -185,6 +185,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F1:
       {
+      // ######## //
+      // ######## //
          if (showing_help_menu)
          {
             // hide the help menu
@@ -205,6 +207,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F2:
       {
+      // ######## //
+      // ######## //
          // toggle showing the debug data on the editor
          score_editor->showing_debug_data = !score_editor->showing_debug_data;
       }
@@ -232,6 +236,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F8:
       {
+      // ######## //
+      // ######## //
          MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
          measure_grid_file_converter.load();
          simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
@@ -239,21 +245,29 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_UP:
       {
+      // ######## //
+      // ######## //
          Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
       }
       break;
    case ALLEGRO_KEY_DOWN:
       {
+      // ######## //
+      // ######## //
          Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
       }
       break;
    case ALLEGRO_KEY_RIGHT:
       {
+      // ######## //
+      // ######## //
          Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
       }
       break;
    case ALLEGRO_KEY_LEFT:
       {
+      // ######## //
+      // ######## //
          Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
       }
       break;
@@ -261,11 +275,15 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       {
          if (Framework::key_shift)
          {
+      // ######## //
+      // ######## //
             Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
             Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
          }
          else
          {
+      // ######## //
+      // ######## //
             Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
             Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
          }
@@ -273,6 +291,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_MINUS:
       {
+      // ######## //
+      // ######## //
          Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
          Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
       }
@@ -316,6 +336,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       }
       break;
    case ALLEGRO_KEY_TAB:
+      // ######## //
+      // ######## //
       score_editor->toggle_edit_mode_target();
       break;
    }
@@ -382,16 +404,28 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 {
    std::cout << "message: " << message << std::endl;
 
+   // ######## //
+   // ######## //
    if (message == "insert_measure")
       score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
+   // ######## //
+   // ######## //
    if (message == "delete_measure")
       score_editor->measure_grid.delete_measure(score_editor->measure_cursor_x);
+   // ######## //
+   // ######## //
    if (message == "insert_staff")
       score_editor->measure_grid.insert_staff(score_editor->measure_cursor_y);
+   // ######## //
+   // ######## //
    if (message == "delete_staff")
       score_editor->measure_grid.delete_staff(score_editor->measure_cursor_y);
+   // ######## //
+   // ######## //
    if (message == "append_measure")
       score_editor->measure_grid.append_measure();
+   // ######## //
+   // ######## //
    if (message == "append_staff")
       score_editor->measure_grid.append_staff();
 }
