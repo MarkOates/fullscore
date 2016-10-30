@@ -8,12 +8,17 @@
 
 
 
+class MeasureGrid;
+
 namespace Action
 {
    class CLASS_NAME : public Base
    {
+   private:
+      MeasureGrid *measure_grid;
+
    public:
-      CLASS_NAME();
+      CLASS_NAME(MeasureGrid *measure_grid);
       ~CLASS_NAME();
 
       bool execute() override;
