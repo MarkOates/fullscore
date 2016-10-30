@@ -22,7 +22,7 @@
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
-#include <fullscore/actions/toggle_command_bar_action.h>
+#include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
 

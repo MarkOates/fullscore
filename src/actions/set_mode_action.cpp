@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/toggle_command_bar_action.h>
+#include <fullscore/actions/set_mode_action.h>
 
 #include <fullscore/command_bar.h>
 
