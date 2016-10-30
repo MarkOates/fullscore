@@ -18,7 +18,7 @@ ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
 OBJS=command_bar fullscore_application_controller gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
-OBJS+=actions/action_base actions/move_cursor_down_action actions/move_cursor_left_action actions/move_cursor_right_action actions/paste_measure_from_buffer_action actions/move_cursor_up_action actions/reset_playback_action actions/save_measure_grid_action actions/toggle_command_bar_action actions/toggle_playback_action actions/yank_measure_to_buffer_action
+OBJS+=actions/action_base actions/move_cursor_down_action actions/move_cursor_left_action actions/move_cursor_right_action actions/paste_measure_from_buffer_action actions/move_cursor_up_action actions/reset_playback_action actions/save_measure_grid_action actions/set_mode_action actions/toggle_playback_action actions/yank_measure_to_buffer_action
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard src/actions/transforms/*.cpp))))
 OBJS+=components/time_signature_render_component
 OBJS+=converters/measure_grid_file_converter converters/note_string_converter

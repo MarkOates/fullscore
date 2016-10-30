@@ -23,6 +23,13 @@ public:
       MEASURE_TARGET
    };
 
+   enum mode_t
+   {
+      NORMAL_MODE=0, // navigation, manipulation, etc
+      INSERT_MODE,   // inserting new content
+      COMMAND_MODE   // editing on the command windows
+   };
+
    MeasureGrid measure_grid;
    PlaybackControl playback_control;
 
@@ -30,6 +37,7 @@ public:
    int measure_cursor_y;
    int note_cursor_x;
    edit_mode_target_t edit_mode_target;
+   mode_t mode;
 
    MusicEngraver music_engraver;
 
@@ -54,8 +62,8 @@ public:
    float get_measure_width(Measure &m);
 
    void toggle_edit_mode_target();
-   bool is_measure_mode();
-   bool is_note_mode();
+   bool is_measure_target_mode();
+   bool is_note_target_mode();
 };
 
 

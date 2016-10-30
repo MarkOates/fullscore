@@ -31,6 +31,10 @@ public:
    void primary_timer_func() override;
    void key_down_func() override;
    void on_message(UIWidget *sender, std::string message) override;
+
+   void execute_normal_mode_action_for_key(int al_keycode);
+   void execute_command_mode_action_for_key(int al_keycode);
+   void execute_edit_mode_action_for_key(int al_keycode);
 };
 
 

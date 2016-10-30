@@ -28,6 +28,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , STAFF_HEIGHT(80)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
    , edit_mode_target(MEASURE_TARGET)
+   , mode(NORMAL_MODE)
 {
    attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
    attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
@@ -125,7 +126,7 @@ void GUIScoreEditor::on_draw()
          4, 4, color::color(color::aliceblue, 0.2));
 
       // outline
-      if (is_measure_mode())
+      if (is_measure_target_mode())
          al_draw_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
             measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
@@ -151,7 +152,7 @@ void GUIScoreEditor::on_draw()
          );
 
       // outline
-      if (is_note_mode())
+      if (is_note_target_mode())
          al_draw_rounded_rectangle(
                measure_cursor_real_x + note_real_offset_x,
                measure_cursor_real_y,
@@ -299,7 +300,7 @@ void GUIScoreEditor::toggle_edit_mode_target()
 
 
 
-bool GUIScoreEditor::is_measure_mode()
+bool GUIScoreEditor::is_measure_target_mode()
 {
    return edit_mode_target == MEASURE_TARGET;
 }
@@ -307,7 +308,7 @@ bool GUIScoreEditor::is_measure_mode()
 
 
 
-bool GUIScoreEditor::is_note_mode()
+bool GUIScoreEditor::is_note_target_mode()
 {
    return edit_mode_target == NOTE_TARGET;
 }
