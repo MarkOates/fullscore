@@ -29,8 +29,9 @@ bool Action::DeleteMeasure::execute()
    if (!measure_grid) return false;
    if (at_index < 0 || at_index >= measure_grid->get_num_measures()) return false;
 
-   // unimplemented
-   return false;
+   measure_grid->delete_measure(at_index);
+
+   return true;
 }
 
 
