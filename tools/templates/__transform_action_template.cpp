@@ -2,29 +2,29 @@
 
 
 
-#include <fullscore/actions/transforms/ACTION_NAME.h>
+#include <fullscore/actions/transforms/SNAKECASE_ACTION_NAME_transform_action.h>
 
-#include <fullscore/transforms/TRANSFORM_NAME.h>
+#include <fullscore/transforms/SNAKECASE_ACTION_NAME_transform.h>
 #include <fullscore/models/note.h>
 
 
 
 
-Action::TEMPLATE::TEMPLATE(std::vector<Note> *notes)
-   : Base("TEMPLATE")
+Action::CLASS_NAME::CLASS_NAME(std::vector<Note> *notes)
+   : Base("SNAKECASE_ACTION_NAME")
    , notes(notes)
 {}
 
 
 
 
-Action::TEMPLATE::~TEMPLATE()
+Action::CLASS_NAME::~CLASS_NAME()
 {}
 
 
 
 
-bool Action::TEMPLATE::execute()
+bool Action::CLASS_NAME::execute()
 {
    if (!notes) return false;
 

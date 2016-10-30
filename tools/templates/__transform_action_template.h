@@ -13,14 +13,14 @@ class Note;
 
 namespace Action
 {
-   class TEMPLATE : public Base
+   class CLASS_NAME : public Base
    {
    private:
       std::vector<Note> *notes;
 
    public:
-      TEMPLATE(std::vector<Note> *notes);
-      ~TEMPLATE();
+      CLASS_NAME(std::vector<Note> *notes);
+      ~CLASS_NAME();
 
       bool execute() override;
    };
