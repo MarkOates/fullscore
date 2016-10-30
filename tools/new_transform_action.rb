@@ -53,6 +53,7 @@ puts "generated #{header_filename}"
 
 
 # write `git commit -m "Create source files for CLASS_NAME action"`
+`git commit -m "Create source files for #{class_name.camel_case} action"`
 
 
 
