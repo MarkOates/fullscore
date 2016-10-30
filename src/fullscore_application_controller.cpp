@@ -14,6 +14,7 @@
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_transform_action.h>
+#include <fullscore/actions/insert_measure_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -404,10 +405,11 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 {
    std::cout << "message: " << message << std::endl;
 
-   // ######## //
-   // ######## //
    if (message == "insert_measure")
-      score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
+   {
+      Action::InsertMeasure insert_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
+      insert_measure_action.execute();
+   }
    // ######## //
    // ######## //
    if (message == "delete_measure")
