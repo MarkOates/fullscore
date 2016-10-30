@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/action/SNAKECASE_ACTION_NAME_action.h>
+#include <fullscore/actions/SNAKECASE_ACTION_NAME_action.h>
 
 
 
