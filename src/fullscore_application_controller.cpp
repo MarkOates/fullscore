@@ -329,6 +329,24 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
 
 
 
+void FullscoreApplicationController::execute_command_mode_action_for_key(int al_keycode)
+{
+   switch(al_keycode)
+   {
+   case ALLEGRO_KEY_SEMICOLON:
+      {
+         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+         set_mode_action.execute();
+      }
+      break;
+   default:
+      break;
+   }
+}
+
+
+
+
 void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
@@ -343,11 +361,7 @@ void FullscoreApplicationController::key_down_func()
    case GUIScoreEditor::INSERT_MODE:
       break;
    case GUIScoreEditor::COMMAND_MODE:
-      if (key == ALLEGRO_KEY_SEMICOLON)
-      {
-         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
-         set_mode_action.execute();
-      }
+      execute_command_mode_action_for_key(key);
       break;
    }
 }
