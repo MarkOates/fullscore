@@ -347,6 +347,14 @@ void FullscoreApplicationController::execute_command_mode_action_for_key(int al_
 
 
 
+void FullscoreApplicationController::execute_edit_mode_action_for_key(int al_keycode)
+{
+   // no implementation
+}
+
+
+
+
 void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
@@ -359,6 +367,7 @@ void FullscoreApplicationController::key_down_func()
       execute_normal_mode_action_for_key(key);
       break;
    case GUIScoreEditor::INSERT_MODE:
+      execute_edit_mode_action_for_key(key);
       break;
    case GUIScoreEditor::COMMAND_MODE:
       execute_command_mode_action_for_key(key);

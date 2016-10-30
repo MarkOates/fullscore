@@ -34,6 +34,7 @@ public:
 
    void execute_normal_mode_action_for_key(int al_keycode);
    void execute_command_mode_action_for_key(int al_keycode);
+   void execute_edit_mode_action_for_key(int al_keycode);
 };
 
 
