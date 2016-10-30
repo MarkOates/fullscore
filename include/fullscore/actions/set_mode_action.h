@@ -6,6 +6,9 @@
 
 #include <fullscore/actions/action_base.h>
 
+#include <fullscore/gui_score_editor.h>
+
+
 
 
 class UICommandBar;
@@ -15,10 +18,12 @@ namespace Action
    class SetMode : public Base
    {
    private:
+      GUIScoreEditor *score_editor;
       UICommandBar *command_bar;
+      GUIScoreEditor::mode_t mode;
 
    public:
-      SetMode(UICommandBar *command_bar);
+      SetMode(GUIScoreEditor *score_editor, UICommandBar *command_bar, GUIScoreEditor::mode_t mode);
       ~SetMode();
       bool execute() override;
    };

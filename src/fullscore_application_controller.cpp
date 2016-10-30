@@ -113,7 +113,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    {
    case ALLEGRO_KEY_SEMICOLON:
       {
-         Action::SetMode set_mode_action(command_bar);
+         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
          set_mode_action.execute();
       }
       break;
@@ -333,16 +333,22 @@ void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
+   int key = Framework::current_event->keyboard.keycode;
 
-   if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SEMICOLON)
+   switch(score_editor->mode)
    {
-      Action::SetMode set_mode_action(command_bar);
-      set_mode_action.execute();
-   }
-   else if (!command_bar->text_input->is_focused())
-   // while the command bar is NOT focused, here are the normal keyboard inputs
-   {
-      execute_normal_mode_action_for_key(Framework::current_event->keyboard.keycode);
+   case GUIScoreEditor::NORMAL_MODE:
+      execute_normal_mode_action_for_key(key);
+      break;
+   case GUIScoreEditor::INSERT_MODE:
+      break;
+   case GUIScoreEditor::COMMAND_MODE:
+      if (key == ALLEGRO_KEY_SEMICOLON)
+      {
+         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+         set_mode_action.execute();
+      }
+      break;
    }
 }
 
