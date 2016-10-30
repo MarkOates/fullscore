@@ -9,8 +9,8 @@
 
 
 
-Action::ToggleCommandBar::ToggleCommandBar(UICommandBar *command_bar)
-   : Base("toggle_command_bar")
+Action::SetMode::SetMode(UICommandBar *command_bar)
+   : Base("set_mode")
    , command_bar(command_bar)
 {
 }
@@ -18,14 +18,14 @@ Action::ToggleCommandBar::ToggleCommandBar(UICommandBar *command_bar)
 
 
 
-Action::ToggleCommandBar::~ToggleCommandBar()
+Action::SetMode::~SetMode()
 {
 }
 
 
 
 
-bool Action::ToggleCommandBar::execute()
+bool Action::SetMode::execute()
 {
    if (!command_bar) return false;
 

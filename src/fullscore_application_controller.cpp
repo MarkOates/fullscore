@@ -111,6 +111,12 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    // locate and build the appropriate transform
    switch(al_keycode)
    {
+   case ALLEGRO_KEY_SEMICOLON:
+      {
+         Action::SetMode set_mode_action(command_bar);
+         set_mode_action.execute();
+      }
+      break;
    case ALLEGRO_KEY_W:
       {
          Action::TransposeTransform transpose_transform_action(notes, Framework::key_shift ? 7 : 1);
@@ -330,8 +336,8 @@ void FullscoreApplicationController::key_down_func()
 
    if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SEMICOLON)
    {
-      Action::ToggleCommandBar toggle_command_bar_action(command_bar);
-      toggle_command_bar_action.execute();
+      Action::SetMode set_mode_action(command_bar);
+      set_mode_action.execute();
    }
    else if (!command_bar->text_input->is_focused())
    // while the command bar is NOT focused, here are the normal keyboard inputs

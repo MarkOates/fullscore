@@ -1,5 +1,5 @@
-#ifndef __FULLSCORE_TOGGLE_COMMAND_BAR_ACTION_HEADER
-#define __FULLSCORE_TOGGLE_COMMAND_BAR_ACTION_HEADER
+#ifndef __FULLSCORE_SET_MODE_ACTION_HEADER
+#define __FULLSCORE_SET_MODE_ACTION_HEADER
 
 
 
@@ -12,14 +12,14 @@ class UICommandBar;
 
 namespace Action
 {
-   class ToggleCommandBar : public Base
+   class SetMode : public Base
    {
    private:
       UICommandBar *command_bar;
 
    public:
-      ToggleCommandBar(UICommandBar *command_bar);
-      ~ToggleCommandBar();
+      SetMode(UICommandBar *command_bar);
+      ~SetMode();
       bool execute() override;
    };
 }
