@@ -4,6 +4,8 @@
 
 #include <fullscore/actions/insert_measure_action.h>
 
+#include <fullscore/models/measure_grid.h>
+
 
 
 
@@ -24,8 +26,12 @@ Action::InsertMeasure::~InsertMeasure()
 
 bool Action::InsertMeasure::execute()
 {
-   // unimplemented
-   return false;
+   if (!measure_grid) return false;
+   if (at_index < 0 || at_index >= measure_grid->get_num_measures()) return false;
+
+   measure_grid->insert_measure(at_index);
+
+   return true;
 }
 
 
