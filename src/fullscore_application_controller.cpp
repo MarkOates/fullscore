@@ -15,7 +15,9 @@
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_transform_action.h>
 #include <fullscore/actions/delete_measure_action.h>
+#include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
+#include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -416,14 +418,16 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
       Action::DeleteMeasure delete_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
       delete_measure_action.execute();
    }
-   // ######## //
-   // ######## //
    if (message == "insert_staff")
-      score_editor->measure_grid.insert_staff(score_editor->measure_cursor_y);
-   // ######## //
-   // ######## //
+   {
+      Action::InsertStaff insert_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      insert_staff_action.execute();
+   }
    if (message == "delete_staff")
-      score_editor->measure_grid.delete_staff(score_editor->measure_cursor_y);
+   {
+      Action::DeleteStaff delete_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      delete_staff_action.execute();
+   }
    // ######## //
    // ######## //
    if (message == "append_measure")
