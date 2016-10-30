@@ -43,6 +43,11 @@ IO.write(source_filename, source_code)
 IO.write(header_filename, header_code)
 
 
+# output filenames generated
+puts "generated #{source_filename}"
+puts "generated #{header_filename}"
+
+
 # write `git commit -m "Create source files for CLASS_NAME action"`
 
 
