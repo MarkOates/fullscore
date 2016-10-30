@@ -27,7 +27,8 @@ bool Action::AppendMeasure::execute()
 {
    if (!measure_grid) return false;
 
-   // unimplemented
+   measure_grid->append_measure();
+
    return false;
 }
 

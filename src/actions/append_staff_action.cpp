@@ -27,7 +27,8 @@ bool Action::AppendStaff::execute()
 {
    if (!measure_grid) return false;
 
-   // unimplemented
+   measure_grid->append_staff();
+
    return false;
 }
 
