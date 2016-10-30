@@ -18,6 +18,11 @@ end
 
 
 
+# get a arg for the class name
+class_name = ARGV[0]
+abort 'Please provide valid arguments' if class_name.nil?
+
+
 # open the file
 source_template_file = File.open('tools/templates/__transform_action_template.cpp', 'r')
 header_template_file = File.open('tools/templates/__transform_action_template.h', 'r')
@@ -29,7 +34,6 @@ header_code = header_template_file.read
 
 
 # overwrite the template tokens
-class_name = 'ThisIsClassName'
 source_code.gsub!(/CLASS_NAME/, class_name.camel_case)
 source_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name.underscore)
 header_code.gsub!(/CLASS_NAME/, class_name.camel_case)
