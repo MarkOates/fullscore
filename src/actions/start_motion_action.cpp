@@ -4,11 +4,17 @@
 
 #include <fullscore/actions/start_motion_action.h>
 
+#include <allegro_flare/motion.h>
 
 
 
-Action::StartMotion::StartMotion()
+
+Action::StartMotion::StartMotion(Motion *motion, float *value, float destination, float duration)
    : Base("start_motion")
+   , motion(motion)
+   , value(value)
+   , destination(destination)
+   , duration(duration)
 {}
 
 
@@ -22,6 +28,8 @@ Action::StartMotion::~StartMotion()
 
 bool Action::StartMotion::execute()
 {
+   if (!motion || !value) return false;
+
    // unimplemented
    return false;
 }
