@@ -31,6 +31,7 @@
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
+#include <fullscore/actions/toggle_help_window_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_mode_action.h>
@@ -196,24 +197,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F1:
       {
-      // ######## //
-      // ######## //
-         if (showing_help_menu)
-         {
-            // hide the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, -600, 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, -100, 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, -0.1, 0.4);
-            showing_help_menu = false;
-         }
-         else
-         {
-            // show the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, display->center(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, display->middle(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, 0, 0.4);
-            showing_help_menu = true;
-         }
+         Action::ToggleHelpWindow toggle_help_window_action(&Framework::motion(), this);
+         toggle_help_window_action.execute();
       }
       break;
    case ALLEGRO_KEY_F2:
