@@ -27,6 +27,7 @@
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
+#include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
@@ -251,30 +252,30 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_UP:
       {
-      // ######## //
-      // ######## //
-         Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_DOWN:
       {
-      // ######## //
-      // ######## //
-         Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_RIGHT:
       {
-      // ######## //
-      // ######## //
-         Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_LEFT:
       {
-      // ######## //
-      // ######## //
-         Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_EQUALS:
