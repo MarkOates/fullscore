@@ -30,8 +30,9 @@ bool Action::StartMotion::execute()
 {
    if (!motion || !value) return false;
 
-   // unimplemented
-   return false;
+   motion->cmove(value, destination-*value, duration);
+
+   return true;
 }
 
 
