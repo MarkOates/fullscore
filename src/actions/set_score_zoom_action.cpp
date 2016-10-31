@@ -30,8 +30,8 @@ bool Action::SetScoreZoom::execute()
 {
    if (!score_editor || !motion) return false;
 
-   motion->cmove(&score_editor->place.scale.x, destination, duration);
-   motion->cmove(&score_editor->place.scale.y, destination, duration);
+   motion->cmove_to(&score_editor->place.scale.x, destination, duration);
+   motion->cmove_to(&score_editor->place.scale.y, destination, duration);
 
    return true;
 }

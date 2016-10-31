@@ -27,6 +27,7 @@
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
+#include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/set_mode_action.h>
@@ -282,26 +283,20 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       {
          if (Framework::key_shift)
          {
-      // ######## //
-      // ######## //
-            Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
-            Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
+            Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), 1, 0.3);
+            set_score_zoom_action.execute();
          }
          else
          {
-      // ######## //
-      // ######## //
-            Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
-            Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
+            Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
+            set_score_zoom_action.execute();
          }
       }
       break;
    case ALLEGRO_KEY_MINUS:
       {
-      // ######## //
-      // ######## //
-         Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
-         Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
+         Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
+         set_score_zoom_action.execute();
       }
       break;
    case ALLEGRO_KEY_H:
