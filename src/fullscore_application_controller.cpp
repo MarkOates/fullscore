@@ -31,6 +31,7 @@
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
+#include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/converters/measure_grid_file_converter.h>
@@ -216,10 +217,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F2:
       {
-      // ######## //
-      // ######## //
-         // toggle showing the debug data on the editor
-         score_editor->showing_debug_data = !score_editor->showing_debug_data;
+         Action::ToggleShowDebugData toggle_show_debug_data_action(score_editor);
+         toggle_show_debug_data_action.execute();
       }
       break;
    case ALLEGRO_KEY_SPACE:

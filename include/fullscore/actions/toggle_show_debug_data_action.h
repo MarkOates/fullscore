@@ -8,12 +8,17 @@
 
 
 
+class GUIScoreEditor;
+
 namespace Action
 {
    class ToggleShowDebugData : public Base
    {
+   private:
+      GUIScoreEditor *gui_score_editor;
+
    public:
-      ToggleShowDebugData();
+      ToggleShowDebugData(GUIScoreEditor *gui_score_editor);
       ~ToggleShowDebugData();
 
       bool execute() override;
