@@ -36,7 +36,6 @@
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
-#include <fullscore/converters/measure_grid_file_converter.h>
 
 
 
