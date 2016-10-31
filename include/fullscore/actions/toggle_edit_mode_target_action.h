@@ -8,12 +8,17 @@
 
 
 
+class GUIScoreEditor;
+
 namespace Action
 {
    class ToggleEditModeTarget : public Base
    {
+   private:
+      GUIScoreEditor *gui_score_editor;
+
    public:
-      ToggleEditModeTarget();
+      ToggleEditModeTarget(GUIScoreEditor *gui_score_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;
