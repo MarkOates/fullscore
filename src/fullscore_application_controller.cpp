@@ -236,10 +236,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    case ALLEGRO_KEY_F7:
       {
          Action::SaveMeasureGrid save_measure_grid_action(&score_editor->measure_grid, "score_filename.fs");
-         if (save_measure_grid_action.execute())
-            simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
-         else
-            simple_notification_screen->spawn_notification("ERROR: there was a problem saving \"score_filename.fs\"");
+         save_measure_grid_action.execute();
       }
       break;
    case ALLEGRO_KEY_F8:
