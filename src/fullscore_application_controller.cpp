@@ -29,6 +29,7 @@
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
+#include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
@@ -338,9 +339,10 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       }
       break;
    case ALLEGRO_KEY_TAB:
-      // ######## //
-      // ######## //
-      score_editor->toggle_edit_mode_target();
+      {
+         Action::ToggleEditModeTarget toggle_edit_mode_target_action(score_editor);
+         toggle_edit_mode_target_action.execute();
+      }
       break;
    }
 
