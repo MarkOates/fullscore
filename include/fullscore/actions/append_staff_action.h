@@ -3,24 +3,23 @@
 
 
 
-#include <vector>
 #include <fullscore/actions/action_base.h>
 
 
 
 
-class Note;
+class MeasureGrid;
 
 namespace Action
 {
-   class TEMPLATE : public Base
+   class AppendStaff : public Base
    {
    private:
-      std::vector<Note> *notes;
+      MeasureGrid *measure_grid;
 
    public:
-      TEMPLATE(std::vector<Note> *notes);
-      ~TEMPLATE();
+      AppendStaff(MeasureGrid *measure_grid);
+      ~AppendStaff();
 
       bool execute() override;
    };

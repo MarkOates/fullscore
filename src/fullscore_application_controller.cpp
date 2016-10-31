@@ -14,6 +14,13 @@
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_transform_action.h>
+#include <fullscore/actions/append_measure_action.h>
+#include <fullscore/actions/append_staff_action.h>
+#include <fullscore/actions/delete_measure_action.h>
+#include <fullscore/actions/delete_staff_action.h>
+#include <fullscore/actions/insert_measure_action.h>
+#include <fullscore/actions/insert_staff_action.h>
+#include <fullscore/actions/load_measure_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -21,10 +28,14 @@
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
+#include <fullscore/actions/set_score_zoom_action.h>
+#include <fullscore/actions/start_motion_action.h>
+#include <fullscore/actions/toggle_edit_mode_target_action.h>
+#include <fullscore/actions/toggle_help_window_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
+#include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
-#include <fullscore/converters/measure_grid_file_converter.h>
 
 
 
@@ -185,28 +196,14 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F1:
       {
-         if (showing_help_menu)
-         {
-            // hide the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, -600, 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, -100, 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, -0.1, 0.4);
-            showing_help_menu = false;
-         }
-         else
-         {
-            // show the help menu
-            Framework::motion().cmove_to(&help_window->place.position.x, display->center(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.position.y, display->middle(), 0.4);
-            Framework::motion().cmove_to(&help_window->place.rotation, 0, 0.4);
-            showing_help_menu = true;
-         }
+         Action::ToggleHelpWindow toggle_help_window_action(&Framework::motion(), this);
+         toggle_help_window_action.execute();
       }
       break;
    case ALLEGRO_KEY_F2:
       {
-         // toggle showing the debug data on the editor
-         score_editor->showing_debug_data = !score_editor->showing_debug_data;
+         Action::ToggleShowDebugData toggle_show_debug_data_action(score_editor);
+         toggle_show_debug_data_action.execute();
       }
       break;
    case ALLEGRO_KEY_SPACE:
@@ -224,57 +221,61 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    case ALLEGRO_KEY_F7:
       {
          Action::SaveMeasureGrid save_measure_grid_action(&score_editor->measure_grid, "score_filename.fs");
-         if (save_measure_grid_action.execute())
-            simple_notification_screen->spawn_notification("saved score as \"score_filename.fs\"");
-         else
-            simple_notification_screen->spawn_notification("ERROR: there was a problem saving \"score_filename.fs\"");
+         save_measure_grid_action.execute();
       }
       break;
    case ALLEGRO_KEY_F8:
       {
-         MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
-         measure_grid_file_converter.load();
-         simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
+         Action::LoadMeasureGrid load_measure_grid_action(&score_editor->measure_grid, "score_filename.fs");
+         load_measure_grid_action.execute();
       }
       break;
    case ALLEGRO_KEY_UP:
       {
-         Framework::motion().cmove(&score_editor->place.position.y, 200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_DOWN:
       {
-         Framework::motion().cmove(&score_editor->place.position.y, -200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_RIGHT:
       {
-         Framework::motion().cmove(&score_editor->place.position.x, -200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_LEFT:
       {
-         Framework::motion().cmove(&score_editor->place.position.x, 200, 0.4);
+         Action::StartMotion start_motion_action(&Framework::motion(),
+            &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
+         start_motion_action.execute();
       }
       break;
    case ALLEGRO_KEY_EQUALS:
       {
          if (Framework::key_shift)
          {
-            Framework::motion().cmove_to(&score_editor->place.scale.x, 1, 0.3);
-            Framework::motion().cmove_to(&score_editor->place.scale.y, 1, 0.3);
+            Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), 1, 0.3);
+            set_score_zoom_action.execute();
          }
          else
          {
-            Framework::motion().cmove(&score_editor->place.scale.x, 0.1, 0.4);
-            Framework::motion().cmove(&score_editor->place.scale.y, 0.1, 0.4);
+            Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
+            set_score_zoom_action.execute();
          }
       }
       break;
    case ALLEGRO_KEY_MINUS:
       {
-         Framework::motion().cmove(&score_editor->place.scale.x, -0.1, 0.4);
-         Framework::motion().cmove(&score_editor->place.scale.y, -0.1, 0.4);
+         Action::SetScoreZoom set_score_zoom_action(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
+         set_score_zoom_action.execute();
       }
       break;
    case ALLEGRO_KEY_H:
@@ -316,7 +317,10 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       }
       break;
    case ALLEGRO_KEY_TAB:
-      score_editor->toggle_edit_mode_target();
+      {
+         Action::ToggleEditModeTarget toggle_edit_mode_target_action(score_editor);
+         toggle_edit_mode_target_action.execute();
+      }
       break;
    }
 
@@ -383,17 +387,35 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
    std::cout << "message: " << message << std::endl;
 
    if (message == "insert_measure")
-      score_editor->measure_grid.insert_measure(score_editor->measure_cursor_x);
+   {
+      Action::InsertMeasure insert_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
+      insert_measure_action.execute();
+   }
    if (message == "delete_measure")
-      score_editor->measure_grid.delete_measure(score_editor->measure_cursor_x);
+   {
+      Action::DeleteMeasure delete_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
+      delete_measure_action.execute();
+   }
    if (message == "insert_staff")
-      score_editor->measure_grid.insert_staff(score_editor->measure_cursor_y);
+   {
+      Action::InsertStaff insert_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      insert_staff_action.execute();
+   }
    if (message == "delete_staff")
-      score_editor->measure_grid.delete_staff(score_editor->measure_cursor_y);
+   {
+      Action::DeleteStaff delete_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      delete_staff_action.execute();
+   }
    if (message == "append_measure")
-      score_editor->measure_grid.append_measure();
+   {
+      Action::AppendMeasure append_measure_action(&score_editor->measure_grid);
+      append_measure_action.execute();
+   }
    if (message == "append_staff")
-      score_editor->measure_grid.append_staff();
+   {
+      Action::AppendStaff append_staff_action(&score_editor->measure_grid);
+      append_staff_action.execute();
+   }
 }
 
 
