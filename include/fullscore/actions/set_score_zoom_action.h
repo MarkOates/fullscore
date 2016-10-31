@@ -8,12 +8,21 @@
 
 
 
+class GUIScoreEditor;
+class Motion;
+
 namespace Action
 {
    class SetScoreZoom : public Base
    {
+   private:
+      GUIScoreEditor *score_editor;
+      Motion *motion;
+      float destination;
+      float duration;
+
    public:
-      SetScoreZoom();
+      SetScoreZoom(GUIScoreEditor *score_editor, Motion *motion, float destination, float duration);
       ~SetScoreZoom();
 
       bool execute() override;
