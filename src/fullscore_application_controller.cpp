@@ -20,6 +20,7 @@
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
 #include <fullscore/actions/insert_staff_action.h>
+#include <fullscore/actions/load_measure_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
@@ -241,11 +242,8 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_F8:
       {
-      // ######## //
-      // ######## //
-         MeasureGridFileConverter measure_grid_file_converter(&score_editor->measure_grid, "score_filename.fs");
-         measure_grid_file_converter.load();
-         simple_notification_screen->spawn_notification("loaded score from \"score_filename.fs\"");
+         Action::LoadMeasureGrid load_measure_grid_action(&score_editor->measure_grid, "score_filename.fs");
+         load_measure_grid_action.execute();
       }
       break;
    case ALLEGRO_KEY_UP:
