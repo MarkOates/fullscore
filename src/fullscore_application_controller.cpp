@@ -43,7 +43,6 @@
 
 
 
-
 FullscoreApplicationController::FullscoreApplicationController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
