@@ -96,6 +96,41 @@ void FullscoreApplicationController::primary_timer_func()
 
 std::string FullscoreApplicationController::find_action_identifier_by_keycode(int al_keycode)
 {
+   switch(al_keycode)
+   {
+   case ALLEGRO_KEY_W: break;
+   case ALLEGRO_KEY_S: break;
+   case ALLEGRO_KEY_A: break;
+   case ALLEGRO_KEY_D: break;
+   case ALLEGRO_KEY_R: break;
+   case ALLEGRO_KEY_I: break;
+   case ALLEGRO_KEY_FULLSTOP: break;
+   case ALLEGRO_KEY_COMMA: break;
+   case ALLEGRO_KEY_SEMICOLON: break;
+   case ALLEGRO_KEY_E: break;
+   case ALLEGRO_KEY_G: break;
+   case ALLEGRO_KEY_N: break;
+   case ALLEGRO_KEY_F1: break;
+   case ALLEGRO_KEY_F2: break;
+   case ALLEGRO_KEY_SPACE: break;
+   case ALLEGRO_KEY_Q: break;
+   case ALLEGRO_KEY_F7: break;
+   case ALLEGRO_KEY_F8: break;
+   case ALLEGRO_KEY_UP: break;
+   case ALLEGRO_KEY_DOWN: break;
+   case ALLEGRO_KEY_RIGHT: break;
+   case ALLEGRO_KEY_LEFT: break;
+   case ALLEGRO_KEY_EQUALS: break;
+   case ALLEGRO_KEY_MINUS: break;
+   case ALLEGRO_KEY_H: break;
+   case ALLEGRO_KEY_J: break;
+   case ALLEGRO_KEY_K: break;
+   case ALLEGRO_KEY_L: break;
+   case ALLEGRO_KEY_Y: break;
+   case ALLEGRO_KEY_P: break;
+   case ALLEGRO_KEY_TAB: break;
+   }
+
    return "";
 }
 
