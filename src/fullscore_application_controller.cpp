@@ -147,7 +147,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::EraseNote(notes, score_editor->note_cursor_x);
       break;
    case ALLEGRO_KEY_I:
-      action = new Action::Transform::Invert(0);
+      action = new Action::Transform::Invert(notes, 0);
       break;
    case ALLEGRO_KEY_G:
       action = new Action::Transform::Retrograde(notes);
