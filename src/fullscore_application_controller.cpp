@@ -141,6 +141,28 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
 
 
 
+std::string FullscoreApplicationController::find_action_identifier_by_command_mode_keycode(int al_keycode, bool shift, bool alt)
+{
+   switch(al_keycode)
+   {
+   case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
+   }
+
+   return "";
+}
+
+
+
+
+std::string FullscoreApplicationController::find_action_identifier_by_edit_mode_keycode(int al_keycode, bool shift, bool alt)
+{
+   // no implementation
+   return "";
+}
+
+
+
+
 void FullscoreApplicationController::execute_command_mode_action_for_key(int al_keycode)
 {
    switch(al_keycode)
