@@ -97,7 +97,7 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier_by_normal_mode_keycode(int al_keycode, bool shift, bool alt)
+std::string FullscoreApplicationController::find_action_identifier(int al_keycode, bool shift, bool alt)
 {
    if (score_editor->mode == GUIScoreEditor::NORMAL_MODE)
       switch(al_keycode)
@@ -289,7 +289,7 @@ void FullscoreApplicationController::key_down_func()
    {
    case GUIScoreEditor::NORMAL_MODE:
       {
-         std::string identifier = find_action_identifier_by_normal_mode_keycode(key, Framework::key_shift, Framework::key_alt);
+         std::string identifier = find_action_identifier(key, Framework::key_shift, Framework::key_alt);
 
          Action::Base *action = create_action(identifier);
 
