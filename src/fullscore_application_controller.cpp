@@ -319,8 +319,14 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
          if (action)
          {
-            std::string success_message = "Calling ";
-            success_message += message + " using " + action->get_action_name();
+            std::string success_message = action->get_action_name();
+
+            if (success_message != action_identifier)
+            {
+               success_message = "Calling non-atomic action: ";
+               success_message += message + " using " + action->get_action_name();
+            }
+
             simple_notification_screen->spawn_notification(success_message);
             action->execute();
             delete action;
