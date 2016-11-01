@@ -218,7 +218,15 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
    }
    else if (action_name == "toggle_rest")
-      action = new Action::ToggleRest(single_note);
+   {
+      if (score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
+      else
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes) action_queue->add_action(new Action::ToggleRest(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
