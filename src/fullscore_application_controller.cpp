@@ -220,6 +220,36 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(score_editor);
+   if (message == "insert_measure")
+   {
+      Action::InsertMeasure insert_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
+      insert_measure_action.execute();
+   }
+   if (message == "delete_measure")
+   {
+      Action::DeleteMeasure delete_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
+      delete_measure_action.execute();
+   }
+   if (message == "insert_staff")
+   {
+      Action::InsertStaff insert_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      insert_staff_action.execute();
+   }
+   if (message == "delete_staff")
+   {
+      Action::DeleteStaff delete_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
+      delete_staff_action.execute();
+   }
+   if (message == "append_measure")
+   {
+      Action::AppendMeasure append_measure_action(&score_editor->measure_grid);
+      append_measure_action.execute();
+   }
+   if (message == "append_staff")
+   {
+      Action::AppendStaff append_staff_action(&score_editor->measure_grid);
+      append_staff_action.execute();
+   }
 
 
    return action;
@@ -290,37 +320,6 @@ void FullscoreApplicationController::key_down_func()
 void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
-
-   if (message == "insert_measure")
-   {
-      Action::InsertMeasure insert_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
-      insert_measure_action.execute();
-   }
-   if (message == "delete_measure")
-   {
-      Action::DeleteMeasure delete_measure_action(&score_editor->measure_grid, score_editor->measure_cursor_x);
-      delete_measure_action.execute();
-   }
-   if (message == "insert_staff")
-   {
-      Action::InsertStaff insert_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
-      insert_staff_action.execute();
-   }
-   if (message == "delete_staff")
-   {
-      Action::DeleteStaff delete_staff_action(&score_editor->measure_grid, score_editor->measure_cursor_y);
-      delete_staff_action.execute();
-   }
-   if (message == "append_measure")
-   {
-      Action::AppendMeasure append_measure_action(&score_editor->measure_grid);
-      append_measure_action.execute();
-   }
-   if (message == "append_staff")
-   {
-      Action::AppendStaff append_staff_action(&score_editor->measure_grid);
-      append_staff_action.execute();
-   }
 }
 
 
