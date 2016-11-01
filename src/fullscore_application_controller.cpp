@@ -36,6 +36,7 @@
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_command_mode_action.h>
+#include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
@@ -178,6 +179,8 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::RemoveDotTransform(single_note);
    else if (action_name == "set_command_mode")
       action = new Action::SetCommandMode(score_editor, command_bar);
+   else if (action_name == "set_normal_mode")
+      action = new Action::SetNormalMode(score_editor, command_bar);
    else if (action_name == "erase_note")
       action = new Action::EraseNote(notes, score_editor->note_cursor_x);
    else if (action_name == "retrograde")
@@ -247,7 +250,7 @@ void FullscoreApplicationController::execute_command_mode_action_for_key(int al_
    {
    case ALLEGRO_KEY_SEMICOLON:
       {
-         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+         Action::SetNormalMode set_mode_action(score_editor, command_bar);
          set_mode_action.execute();
       }
       break;
@@ -318,7 +321,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
             action->execute();
             delete action;
 
-            Action::SetMode return_to_normal_mode(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+            Action::SetNormalMode return_to_normal_mode(score_editor, command_bar);
             return_to_normal_mode.execute();
          }
          else
