@@ -199,10 +199,24 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "half_duration")
    {
-      action = new Action::HalfDurationTransform(single_note);
+      if (score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
+      else
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes) action_queue->add_action(new Action::HalfDurationTransform(&note));
+         return action_queue;
+      }
    }
    else if (action_name == "double_duration")
-      action = new Action::DoubleDurationTransform(single_note);
+   {
+      if (score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
+      else
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes) action_queue->add_action(new Action::DoubleDurationTransform(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "toggle_rest")
       action = new Action::ToggleRest(single_note);
    else if (action_name == "invert")
