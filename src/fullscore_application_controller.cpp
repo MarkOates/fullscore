@@ -285,47 +285,14 @@ void FullscoreApplicationController::key_down_func()
 
    int key = Framework::current_event->keyboard.keycode;
 
-   switch(score_editor->mode)
+   std::string identifier = find_action_identifier(score_editor->mode, key, Framework::key_shift, Framework::key_alt);
+
+   Action::Base *action = create_action(identifier);
+
+   if (action)
    {
-   case GUIScoreEditor::NORMAL_MODE:
-      {
-         std::string identifier = find_action_identifier(GUIScoreEditor::NORMAL_MODE, key, Framework::key_shift, Framework::key_alt);
-
-         Action::Base *action = create_action(identifier);
-
-         if (action)
-         {
-            action->execute();
-            delete action;
-         }
-      }
-      break;
-   case GUIScoreEditor::INSERT_MODE:
-      {
-         std::string identifier = find_action_identifier_by_edit_mode_keycode(key, Framework::key_shift, Framework::key_alt);
-
-         Action::Base *action = create_action(identifier);
-
-         if (action)
-         {
-            action->execute();
-            delete action;
-         }
-      }
-      break;
-   case GUIScoreEditor::COMMAND_MODE:
-      {
-         std::string identifier = find_action_identifier_by_command_mode_keycode(key, Framework::key_shift, Framework::key_alt);
-
-         Action::Base *action = create_action(identifier);
-
-         if (action)
-         {
-            action->execute();
-            delete action;
-         }
-      }
-      break;
+      action->execute();
+      delete action;
    }
 }
 
