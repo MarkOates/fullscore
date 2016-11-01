@@ -16,11 +16,11 @@ namespace Action
    class TransposeTransform : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
       int transposition;
 
    public:
-      TransposeTransform(std::vector<Note> *notes, int transposition);
+      TransposeTransform(Note *note, int transposition);
       ~TransposeTransform();
 
       bool execute() override;
