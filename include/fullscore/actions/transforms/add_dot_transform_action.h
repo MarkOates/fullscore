@@ -16,10 +16,10 @@ namespace Action
    class AddDotTransform : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
 
    public:
-      AddDotTransform(std::vector<Note> *notes);
+      AddDotTransform(Note *note);
       ~AddDotTransform();
 
       bool execute() override;
