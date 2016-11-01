@@ -97,9 +97,9 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier(int al_keycode, bool shift, bool alt)
+std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool alt)
 {
-   if (score_editor->mode == GUIScoreEditor::NORMAL_MODE)
+   if (mode == GUIScoreEditor::NORMAL_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_W: return "transpose_up"; break;
@@ -135,13 +135,13 @@ std::string FullscoreApplicationController::find_action_identifier(int al_keycod
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       }
 
-   if (score_editor->mode == GUIScoreEditor::COMMAND_MODE)
+   if (mode == GUIScoreEditor::COMMAND_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
 
-   if (score_editor->mode == GUIScoreEditor::INSERT_MODE)
+   if (mode == GUIScoreEditor::INSERT_MODE)
       // no implementation
       ;
 
@@ -289,7 +289,7 @@ void FullscoreApplicationController::key_down_func()
    {
    case GUIScoreEditor::NORMAL_MODE:
       {
-         std::string identifier = find_action_identifier(key, Framework::key_shift, Framework::key_alt);
+         std::string identifier = find_action_identifier(GUIScoreEditor::NORMAL_MODE, key, Framework::key_shift, Framework::key_alt);
 
          Action::Base *action = create_action(identifier);
 
