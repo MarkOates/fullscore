@@ -7,6 +7,7 @@
 #include <allegro_flare/screens/simple_notification_screen.h>
 
 #include <fullscore/actions/action_base.h>
+#include <fullscore/action_queue.h>
 #include <fullscore/command_bar.h>
 #include <fullscore/gui_score_editor.h>
 #include <fullscore/mixer.h>
@@ -20,6 +21,7 @@ class FullscoreApplicationController : public UIScreen
 public:
    SimpleNotificationScreen *simple_notification_screen;
 
+   ActionQueue action_queue;
    GUIScoreEditor *score_editor;
    UICommandBar *command_bar;
    UIMixer *gui_mixer;
