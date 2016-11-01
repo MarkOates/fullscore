@@ -10,9 +10,9 @@
 
 
 
-Action::AddDotTransform::AddDotTransform(std::vector<Note> *notes)
+Action::AddDotTransform::AddDotTransform(Note *note)
    : Base("add_dot_transform")
-   , notes(notes)
+   , note(note)
 {}
 
 
@@ -26,10 +26,15 @@ Action::AddDotTransform::~AddDotTransform()
 
 bool Action::AddDotTransform::execute()
 {
-   if (!notes) return false;
+   if (!note) return false;
+
+   std::vector<Note> single_note_as_array;
+   single_note_as_array.push_back(*note);
 
    Transform::AddDot add_dot_transform;
-   *notes = add_dot_transform.transform(*notes);
+   single_note_as_array = add_dot_transform.transform(single_note_as_array);
+
+   *note = single_note_as_array.at(0);
 
    return true;
 }

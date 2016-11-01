@@ -16,10 +16,10 @@ namespace Action
    class ToggleRest : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
 
    public:
-      ToggleRest(std::vector<Note> *notes);
+      ToggleRest(Note *note);
       ~ToggleRest();
 
       bool execute() override;

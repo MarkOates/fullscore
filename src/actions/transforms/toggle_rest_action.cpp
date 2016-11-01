@@ -10,9 +10,9 @@
 
 
 
-Action::ToggleRest::ToggleRest(std::vector<Note> *notes)
+Action::ToggleRest::ToggleRest(Note *note)
    : Base("toggle_rest")
-   , notes(notes)
+   , note(note)
 {}
 
 
@@ -26,10 +26,16 @@ Action::ToggleRest::~ToggleRest()
 
 bool Action::ToggleRest::execute()
 {
-   if (!notes) return false;
+   if (!note) return false;
+
+   std::vector<Note> single_note_as_array;
+   single_note_as_array.push_back(*note);
 
    Transform::ToggleRest toggle_rest_transform;
-   *notes = toggle_rest_transform.transform(*notes);
+   single_note_as_array = toggle_rest_transform.transform(single_note_as_array);
+
+   *note = single_note_as_array.at(0);
+
    return true;
 }
 

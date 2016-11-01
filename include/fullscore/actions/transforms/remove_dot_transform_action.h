@@ -16,10 +16,10 @@ namespace Action
    class RemoveDotTransform : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
 
    public:
-      RemoveDotTransform(std::vector<Note> *notes);
+      RemoveDotTransform(Note *note);
       ~RemoveDotTransform();
 
       bool execute() override;

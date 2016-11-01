@@ -69,6 +69,7 @@ tools: src/tools/generate.cpp
 #
 
 clean:
-	rm ./obj/*.o
-	rm ./obj/*/*.o
-	rm ./bin/fullscore
+	-rm ./obj/*.o
+	-rm ./obj/*/*.o
+	-rm ./obj/*/*/*.o
+	-rm ./bin/fullscore

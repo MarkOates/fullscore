@@ -16,10 +16,10 @@ namespace Action
    class HalfDurationTransform : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
 
    public:
-      HalfDurationTransform(std::vector<Note> *notes);
+      HalfDurationTransform(Note *note);
       ~HalfDurationTransform();
 
       bool execute() override;

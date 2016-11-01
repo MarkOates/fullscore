@@ -18,7 +18,7 @@ namespace Action
 
    public:
       Base(std::string action_name);
-      ~Base();
+      virtual ~Base();
       virtual bool execute() = 0;
       std::string get_action_name();
    };
