@@ -163,32 +163,6 @@ std::string FullscoreApplicationController::find_action_identifier_by_edit_mode_
 
 
 
-void FullscoreApplicationController::execute_command_mode_action_for_key(int al_keycode)
-{
-   switch(al_keycode)
-   {
-   case ALLEGRO_KEY_SEMICOLON:
-      {
-         Action::SetNormalMode set_mode_action(score_editor, command_bar);
-         set_mode_action.execute();
-      }
-      break;
-   default:
-      break;
-   }
-}
-
-
-
-
-void FullscoreApplicationController::execute_edit_mode_action_for_key(int al_keycode)
-{
-   // no implementation
-}
-
-
-
-
 Action::Base *FullscoreApplicationController::create_action(std::string action_name)
 {
    //
