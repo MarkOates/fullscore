@@ -261,10 +261,12 @@ void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   int key = Framework::current_event->keyboard.keycode;
+   auto mode          = score_editor->mode;
+   auto keycode       = Framework::current_event->keyboard.keycode;
+   auto shift_pressed = Framework::key_shift;
+   auto alt_pressed   = Framework::key_alt;
 
-   std::string identifier = find_action_identifier(score_editor->mode, key, Framework::key_shift, Framework::key_alt);
-
+   std::string identifier = find_action_identifier(mode, keycode, shift_pressed, alt_pressed);
    Action::Base *action = create_action(identifier);
 
    if (action)
