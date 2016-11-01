@@ -35,6 +35,7 @@
 #include <fullscore/actions/toggle_help_window_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
+#include <fullscore/actions/set_command_mode_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
@@ -107,7 +108,7 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
    case ALLEGRO_KEY_I: return "invert"; break;
    case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
    case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
-   case ALLEGRO_KEY_SEMICOLON: return "XXset_mode_command"; break;
+   case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
    case ALLEGRO_KEY_E: return "erase_note"; break;
    case ALLEGRO_KEY_G: return "retrograde"; break;
    case ALLEGRO_KEY_N: return "insert_note"; break;
@@ -175,8 +176,8 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::AddDotTransform(single_note);
    else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
-   else if (action_name == "XXset_mode_command")
-      action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
+   else if (action_name == "set_command_mode")
+      action = new Action::SetCommandMode(score_editor, command_bar);
    else if (action_name == "erase_note")
       action = new Action::EraseNote(notes, score_editor->note_cursor_x);
    else if (action_name == "retrograde")
