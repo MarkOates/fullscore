@@ -174,11 +174,33 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
 
    if (action_name == "transpose_up")
-      action = new Action::TransposeUp(single_note);
+   {
+      if (score_editor->is_note_target_mode()) action = new Action::TransposeUp(single_note);
+      else
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes)
+            for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
+               action_queue->add_action(new Action::TransposeUp(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "transpose_down")
-      action = new Action::TransposeDown(single_note);
+   {
+      if (score_editor->is_note_target_mode()) action = new Action::TransposeDown(single_note);
+      else
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes)
+            for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
+               action_queue->add_action(new Action::TransposeDown(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "half_duration")
+   {
       action = new Action::HalfDurationTransform(single_note);
+   }
    else if (action_name == "double_duration")
       action = new Action::DoubleDurationTransform(single_note);
    else if (action_name == "toggle_rest")
