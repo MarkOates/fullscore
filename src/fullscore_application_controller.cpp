@@ -105,10 +105,11 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    std::vector<Note> single_note_as_array;
+   Measure *focused_measure = nullptr;
 
    if (score_editor->is_measure_target_mode())
    {
-      Measure *focused_measure = score_editor->get_measure_at_cursor();
+      focused_measure = score_editor->get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
    }
    else
@@ -277,14 +278,12 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       break;
    case ALLEGRO_KEY_Y:
       {
-         Measure *focused_measure = score_editor->get_measure_at_cursor();
          action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
       }
       break;
    case ALLEGRO_KEY_P:
       {
-         Measure *destination_measure = score_editor->get_measure_at_cursor();
-         action = new Action::PasteMeasureFromBuffer(destination_measure, &yank_measure_buffer);
+         action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
       }
       break;
    case ALLEGRO_KEY_TAB:
