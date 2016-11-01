@@ -38,8 +38,6 @@ public:
    Action::Base *create_action(std::string action_name);
 
    std::string find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift=false, bool alt=false);
-   std::string find_action_identifier_by_command_mode_keycode(int al_keycode, bool shift=false, bool alt=false);
-   std::string find_action_identifier_by_edit_mode_keycode(int al_keycode, bool shift=false, bool alt=false);
 };
 
 
