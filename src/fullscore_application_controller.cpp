@@ -27,6 +27,7 @@
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
+#include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
@@ -46,7 +47,7 @@
 FullscoreApplicationController::FullscoreApplicationController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
-   , action_queue()
+   , action_queue("master_queue")
    , score_editor(NULL)
    , command_bar(NULL)
    , gui_mixer(NULL)
