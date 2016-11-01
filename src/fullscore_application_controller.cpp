@@ -124,8 +124,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::TransposeTransform(notes, Framework::key_shift ? -7 : -1);
       break;
    case ALLEGRO_KEY_A:
-      // ####### //
-      action = new Action::HalfDurationTransform(notes);
+      action = new Action::HalfDurationTransform(single_note);
       break;
    case ALLEGRO_KEY_D:
       action = new Action::DoubleDurationTransform(single_note);
