@@ -18,11 +18,11 @@ namespace Action
       class Invert : public Base
       {
       private:
-         std::vector<Note> *notes;
+         Note *note;
          int axis;
 
       public:
-         Invert(std::vector<Note> *notes, int axis=0);
+         Invert(Note *note, int axis=0);
          ~Invert();
 
          bool execute() override;

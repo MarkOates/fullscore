@@ -10,9 +10,9 @@
 
 
 
-Action::Transform::Invert::Invert(std::vector<Note> *notes, int axis)
+Action::Transform::Invert::Invert(Note *note, int axis)
    : Base("invert")
-   , notes(notes)
+   , note(note)
    , axis(axis)
 {}
 
@@ -27,10 +27,15 @@ Action::Transform::Invert::~Invert()
 
 bool Action::Transform::Invert::execute()
 {
-   if (!notes) return false;
+   if (!note) return false;
+
+   std::vector<Note> single_note_as_array;
+   single_note_as_array.push_back(*note);
 
    ::Transform::Invert invert_transform(axis);
-   *notes = invert_transform.transform(*notes);
+   single_note_as_array = invert_transform.transform(single_note_as_array);
+
+   *note = single_note_as_array.at(0);
 
    return true;
 }
