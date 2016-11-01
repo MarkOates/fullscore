@@ -13,7 +13,8 @@
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
-#include <fullscore/actions/transforms/transpose_transform_action.h>
+#include <fullscore/actions/transforms/transpose_up_action.h>
+#include <fullscore/actions/transforms/transpose_down_action.h>
 #include <fullscore/actions/append_measure_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/delete_measure_action.h>
@@ -98,8 +99,8 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
 {
    switch(al_keycode)
    {
-   case ALLEGRO_KEY_W: return "XXXtranspose_up"; break;
-   case ALLEGRO_KEY_S: return "XXXtranspose_down"; break;
+   case ALLEGRO_KEY_W: return "transpose_up"; break;
+   case ALLEGRO_KEY_S: return "transpose_down"; break;
    case ALLEGRO_KEY_A: return "half_duration"; break;
    case ALLEGRO_KEY_D: return "double_duration"; break;
    case ALLEGRO_KEY_R: return "toggle_rest"; break;
@@ -158,10 +159,10 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       if (focused_measure) notes = &focused_measure->notes;
    }
 
-   if (action_name == "XXXtranspose_up")
-      action = new Action::TransposeTransform(single_note, Framework::key_shift ? 7 : 1);
-   else if (action_name == "XXXtranspose_down")
-      action = new Action::TransposeTransform(single_note, Framework::key_shift ? -7 : -1);
+   if (action_name == "transpose_up")
+      action = new Action::TransposeUp(single_note);
+   else if (action_name == "transpose_down")
+      action = new Action::TransposeDown(single_note);
    else if (action_name == "half_duration")
       action = new Action::HalfDurationTransform(single_note);
    else if (action_name == "double_duration")
