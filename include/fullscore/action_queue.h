@@ -17,6 +17,7 @@ public:
 
    void add_action(Action::Base *action);
    bool invoke_all();
+   bool clear();
 };
 
 

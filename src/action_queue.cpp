@@ -41,3 +41,13 @@ bool ActionQueue::invoke_all()
 
 
 
+bool ActionQueue::clear()
+{
+   for (auto &action : actions) delete action;
+   actions.clear();
+   return true;
+}
+
+
+
+
