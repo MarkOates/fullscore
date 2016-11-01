@@ -126,170 +126,104 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    switch(al_keycode)
    {
    case ALLEGRO_KEY_SEMICOLON:
-      {
-         action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
-      }
+      action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
       break;
    case ALLEGRO_KEY_W:
-      {
-         action = new Action::TransposeTransform(notes, Framework::key_shift ? 7 : 1);
-      }
+      action = new Action::TransposeTransform(notes, Framework::key_shift ? 7 : 1);
       break;
    case ALLEGRO_KEY_S:
-      {
-         action = new Action::TransposeTransform(notes, Framework::key_shift ? -7 : -1);
-      }
+      action = new Action::TransposeTransform(notes, Framework::key_shift ? -7 : -1);
       break;
    case ALLEGRO_KEY_A:
-      {
-         action = new Action::HalfDurationTransform(notes);
-      }
+      action = new Action::HalfDurationTransform(notes);
       break;
    case ALLEGRO_KEY_D:
-      {
-         action = new Action::DoubleDurationTransform(notes);
-      }
+      action = new Action::DoubleDurationTransform(notes);
       break;
    case ALLEGRO_KEY_R:
-      {
-         action = new Action::ToggleRest(notes);
-      }
+      action = new Action::ToggleRest(notes);
       break;
    case ALLEGRO_KEY_E:
-      {
-         action = new Action::EraseNote(notes, score_editor->note_cursor_x);
-      }
+      action = new Action::EraseNote(notes, score_editor->note_cursor_x);
       break;
    case ALLEGRO_KEY_I:
-      {
-         action = new Action::Transform::Invert(0);
-      }
+      action = new Action::Transform::Invert(0);
       break;
    case ALLEGRO_KEY_G:
-      {
-         action = new Action::Transform::Retrograde(notes);
-      }
+      action = new Action::Transform::Retrograde(notes);
       break;
    case ALLEGRO_KEY_FULLSTOP:
-      {
-         action = new Action::AddDotTransform(notes);
-      }
+      action = new Action::AddDotTransform(notes);
       break;
    case ALLEGRO_KEY_COMMA:
-      {
-         action = new Action::RemoveDotTransform(notes);
-      }
+      action = new Action::RemoveDotTransform(notes);
       break;
    case ALLEGRO_KEY_N:
-      {
-         action = new Action::InsertNoteTransform(notes, score_editor->note_cursor_x, Note());
-      }
+      action = new Action::InsertNoteTransform(notes, score_editor->note_cursor_x, Note());
       break;
    case ALLEGRO_KEY_F1:
-      {
-         action = new Action::ToggleHelpWindow(&Framework::motion(), this);
-      }
+      action = new Action::ToggleHelpWindow(&Framework::motion(), this);
       break;
    case ALLEGRO_KEY_F2:
-      {
-         action = new Action::ToggleShowDebugData(score_editor);
-      }
+      action = new Action::ToggleShowDebugData(score_editor);
       break;
    case ALLEGRO_KEY_SPACE:
-      {
-         action = new Action::TogglePlayback(score_editor, gui_mixer);
-      }
+      action = new Action::TogglePlayback(score_editor, gui_mixer);
       break;
    case ALLEGRO_KEY_Q:
-      {
-         action = new Action::ResetPlayback(score_editor);
-      }
+      action = new Action::ResetPlayback(score_editor);
       break;
    case ALLEGRO_KEY_F7:
-      {
-         action = new Action::SaveMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-      }
+      action = new Action::SaveMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
       break;
    case ALLEGRO_KEY_F8:
-      {
-         action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-      }
+      action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
       break;
    case ALLEGRO_KEY_UP:
-      {
-         action = new Action::StartMotion(&Framework::motion(),
-            &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
-      }
+      action = new Action::StartMotion(&Framework::motion(),
+         &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
       break;
    case ALLEGRO_KEY_DOWN:
-      {
-         action = new Action::StartMotion(&Framework::motion(),
-            &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
-      }
+      action = new Action::StartMotion(&Framework::motion(),
+         &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
       break;
    case ALLEGRO_KEY_RIGHT:
-      {
-         action = new Action::StartMotion(&Framework::motion(),
-            &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
-      }
+      action = new Action::StartMotion(&Framework::motion(),
+         &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
       break;
    case ALLEGRO_KEY_LEFT:
-      {
-         action = new Action::StartMotion(&Framework::motion(),
-            &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
-      }
+      action = new Action::StartMotion(&Framework::motion(),
+         &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
       break;
    case ALLEGRO_KEY_EQUALS:
-      {
-         if (Framework::key_shift)
-         {
-            action = new Action::SetScoreZoom(score_editor, &Framework::motion(), 1, 0.3);
-         }
-         else
-         {
-            action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
-         }
-      }
+      if (Framework::key_shift)
+         action = new Action::SetScoreZoom(score_editor, &Framework::motion(), 1, 0.3);
+      else
+         action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
       break;
    case ALLEGRO_KEY_MINUS:
-      {
-         action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
-      }
+      action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
       break;
    case ALLEGRO_KEY_H:
-      {
-         action = new Action::MoveCursorLeft(score_editor);
-      }
+      action = new Action::MoveCursorLeft(score_editor);
       break;
    case ALLEGRO_KEY_J:
-      {
-         action = new Action::MoveCursorDown(score_editor);
-      }
+      action = new Action::MoveCursorDown(score_editor);
       break;
    case ALLEGRO_KEY_K:
-      {
-         action = new Action::MoveCursorUp(score_editor);
-      }
+      action = new Action::MoveCursorUp(score_editor);
       break;
    case ALLEGRO_KEY_L:
-      {
-         action = new Action::MoveCursorRight(score_editor);
-      }
+      action = new Action::MoveCursorRight(score_editor);
       break;
    case ALLEGRO_KEY_Y:
-      {
-         action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
-      }
+      action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
       break;
    case ALLEGRO_KEY_P:
-      {
-         action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
-      }
+      action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
       break;
    case ALLEGRO_KEY_TAB:
-      {
-         action = new Action::ToggleEditModeTarget(score_editor);
-      }
+      action = new Action::ToggleEditModeTarget(score_editor);
       break;
    }
 
