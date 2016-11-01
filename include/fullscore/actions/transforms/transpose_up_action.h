@@ -13,15 +13,14 @@ class Note;
 
 namespace Action
 {
-   class TransposeTransform : public Base
+   class TransposeUp : public Base
    {
    private:
       Note *note;
-      int transposition;
 
    public:
-      TransposeTransform(Note *note, int transposition);
-      ~TransposeTransform();
+      TransposeUp(Note *note);
+      ~TransposeUp();
 
       bool execute() override;
    };

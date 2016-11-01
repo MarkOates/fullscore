@@ -13,7 +13,8 @@
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
-#include <fullscore/actions/transforms/transpose_transform_action.h>
+#include <fullscore/actions/transforms/transpose_up_action.h>
+#include <fullscore/actions/transforms/transpose_down_action.h>
 #include <fullscore/actions/append_measure_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/delete_measure_action.h>
@@ -34,6 +35,8 @@
 #include <fullscore/actions/toggle_help_window_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
+#include <fullscore/actions/set_command_mode_action.h>
+#include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
@@ -98,15 +101,15 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
 {
    switch(al_keycode)
    {
-   case ALLEGRO_KEY_W: return "XXXtranspose_up"; break;
-   case ALLEGRO_KEY_S: return "XXXtranspose_down"; break;
+   case ALLEGRO_KEY_W: return "transpose_up"; break;
+   case ALLEGRO_KEY_S: return "transpose_down"; break;
    case ALLEGRO_KEY_A: return "half_duration"; break;
    case ALLEGRO_KEY_D: return "double_duration"; break;
    case ALLEGRO_KEY_R: return "toggle_rest"; break;
    case ALLEGRO_KEY_I: return "invert"; break;
    case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
    case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
-   case ALLEGRO_KEY_SEMICOLON: return "XXset_mode_command"; break;
+   case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
    case ALLEGRO_KEY_E: return "erase_note"; break;
    case ALLEGRO_KEY_G: return "retrograde"; break;
    case ALLEGRO_KEY_N: return "insert_note"; break;
@@ -116,12 +119,12 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
    case ALLEGRO_KEY_Q: return "reset_playback"; break;
    case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
    case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
-   case ALLEGRO_KEY_UP: return "XXXmove_camera_up"; break;
-   case ALLEGRO_KEY_DOWN: return "XXXmove_camera_down"; break;
-   case ALLEGRO_KEY_RIGHT: return "XXXmove_camera_right"; break;
-   case ALLEGRO_KEY_LEFT: return "XXXmove_camera_left"; break;
-   case ALLEGRO_KEY_EQUALS: return "XXXcamera_zoom"; break;
-   case ALLEGRO_KEY_MINUS: return "XXXcamera_zoom_out"; break;
+   case ALLEGRO_KEY_UP: return "move_camera_up"; break;
+   case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
+   case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
+   case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
+   case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
+   case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
    case ALLEGRO_KEY_H: return "move_cursor_left"; break;
    case ALLEGRO_KEY_J: return "move_cursor_down"; break;
    case ALLEGRO_KEY_K: return "move_cursor_up"; break;
@@ -158,10 +161,10 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       if (focused_measure) notes = &focused_measure->notes;
    }
 
-   if (action_name == "XXXtranspose_up")
-      action = new Action::TransposeTransform(single_note, Framework::key_shift ? 7 : 1);
-   else if (action_name == "XXXtranspose_down")
-      action = new Action::TransposeTransform(single_note, Framework::key_shift ? -7 : -1);
+   if (action_name == "transpose_up")
+      action = new Action::TransposeUp(single_note);
+   else if (action_name == "transpose_down")
+      action = new Action::TransposeDown(single_note);
    else if (action_name == "half_duration")
       action = new Action::HalfDurationTransform(single_note);
    else if (action_name == "double_duration")
@@ -174,8 +177,10 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::AddDotTransform(single_note);
    else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
-   else if (action_name == "XXset_mode_command")
-      action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
+   else if (action_name == "set_command_mode")
+      action = new Action::SetCommandMode(score_editor, command_bar);
+   else if (action_name == "set_normal_mode")
+      action = new Action::SetNormalMode(score_editor, command_bar);
    else if (action_name == "erase_note")
       action = new Action::EraseNote(notes, score_editor->note_cursor_x);
    else if (action_name == "retrograde")
@@ -194,17 +199,19 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::SaveMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "load_measure_grid")
       action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-   else if (action_name == "XXXmove_camera_up")
+   else if (action_name == "move_camera_up")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
-   else if (action_name == "XXXmove_camera_down")
+   else if (action_name == "move_camera_down")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
-   else if (action_name == "XXXmove_camera_right")
+   else if (action_name == "move_camera_right")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
-   else if (action_name == "XXXmove_camera_left")
+   else if (action_name == "move_camera_left")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
-   else if (action_name == "XXXcamera_zoom")
-      action = new Action::SetScoreZoom(score_editor, &Framework::motion(), Framework::key_shift ? 1 : score_editor->place.scale.x + 0.1, 0.3);
-   else if (action_name == "XXXcamera_zoom_out")
+   else if (action_name == "camera_zoom_in")
+      action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
+   else if (action_name == "camera_zoom_default")
+      action = new Action::SetScoreZoom(score_editor, &Framework::motion(), 1, 0.3);
+   else if (action_name == "camera_zoom_out")
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
    else if (action_name == "move_cursor_left")
       action = new Action::MoveCursorLeft(score_editor);
@@ -245,7 +252,7 @@ void FullscoreApplicationController::execute_command_mode_action_for_key(int al_
    {
    case ALLEGRO_KEY_SEMICOLON:
       {
-         Action::SetMode set_mode_action(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+         Action::SetNormalMode set_mode_action(score_editor, command_bar);
          set_mode_action.execute();
       }
       break;
@@ -312,11 +319,13 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
          if (action)
          {
-            simple_notification_screen->spawn_notification(action->get_action_name());
+            std::string success_message = "Calling ";
+            success_message += message + " using " + action->get_action_name();
+            simple_notification_screen->spawn_notification(success_message);
             action->execute();
             delete action;
 
-            Action::SetMode return_to_normal_mode(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+            Action::SetNormalMode return_to_normal_mode(score_editor, command_bar);
             return_to_normal_mode.execute();
          }
          else
@@ -331,6 +340,9 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
          std::string error_message = "Unrecognized input: ";
          error_message += message;
          simple_notification_screen->spawn_notification(error_message);
+
+         Action::SetNormalMode return_to_normal_mode(score_editor, command_bar);
+         return_to_normal_mode.execute();
       }
    }
 }
