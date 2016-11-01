@@ -302,7 +302,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 {
    std::cout << "message: " << message << std::endl;
 
-   if (sender == command_bar)
+   if (sender == command_bar && message != "on_submit")
    {
       if (!message.empty() && message[0] == ':')
       {
