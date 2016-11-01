@@ -98,37 +98,37 @@ std::string FullscoreApplicationController::find_action_identifier_by_keycode(in
 {
    switch(al_keycode)
    {
-   case ALLEGRO_KEY_W: break;
-   case ALLEGRO_KEY_S: break;
-   case ALLEGRO_KEY_A: break;
-   case ALLEGRO_KEY_D: break;
-   case ALLEGRO_KEY_R: break;
-   case ALLEGRO_KEY_I: break;
-   case ALLEGRO_KEY_FULLSTOP: break;
-   case ALLEGRO_KEY_COMMA: break;
-   case ALLEGRO_KEY_SEMICOLON: break;
-   case ALLEGRO_KEY_E: break;
-   case ALLEGRO_KEY_G: break;
-   case ALLEGRO_KEY_N: break;
-   case ALLEGRO_KEY_F1: break;
-   case ALLEGRO_KEY_F2: break;
-   case ALLEGRO_KEY_SPACE: break;
-   case ALLEGRO_KEY_Q: break;
-   case ALLEGRO_KEY_F7: break;
-   case ALLEGRO_KEY_F8: break;
-   case ALLEGRO_KEY_UP: break;
-   case ALLEGRO_KEY_DOWN: break;
-   case ALLEGRO_KEY_RIGHT: break;
-   case ALLEGRO_KEY_LEFT: break;
-   case ALLEGRO_KEY_EQUALS: break;
-   case ALLEGRO_KEY_MINUS: break;
-   case ALLEGRO_KEY_H: break;
-   case ALLEGRO_KEY_J: break;
-   case ALLEGRO_KEY_K: break;
-   case ALLEGRO_KEY_L: break;
-   case ALLEGRO_KEY_Y: break;
-   case ALLEGRO_KEY_P: break;
-   case ALLEGRO_KEY_TAB: break;
+   case ALLEGRO_KEY_W: return "XXXtranspose_up"; break;
+   case ALLEGRO_KEY_S: return "XXXtranspose_down"; break;
+   case ALLEGRO_KEY_A: return "half_duration"; break;
+   case ALLEGRO_KEY_D: return "double_duration"; break;
+   case ALLEGRO_KEY_R: return "toggle_rest"; break;
+   case ALLEGRO_KEY_I: return "invert"; break;
+   case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
+   case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
+   case ALLEGRO_KEY_SEMICOLON: return "XXset_mode_command"; break;
+   case ALLEGRO_KEY_E: return "erase_note"; break;
+   case ALLEGRO_KEY_G: return "retrograde"; break;
+   case ALLEGRO_KEY_N: return "insert_note"; break;
+   case ALLEGRO_KEY_F1: return "toggle_help_window"; break;
+   case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
+   case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
+   case ALLEGRO_KEY_Q: return "reset_playback"; break;
+   case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
+   case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
+   case ALLEGRO_KEY_UP: return "XXXmove_camera_up"; break;
+   case ALLEGRO_KEY_DOWN: return "XXXmove_camera_down"; break;
+   case ALLEGRO_KEY_RIGHT: return "XXXmove_camera_right"; break;
+   case ALLEGRO_KEY_LEFT: return "XXXmove_camera_left"; break;
+   case ALLEGRO_KEY_EQUALS: return "XXXcamera_zoom"; break;
+   case ALLEGRO_KEY_MINUS: return "XXXcamera_zoom_out"; break;
+   case ALLEGRO_KEY_H: return "move_cursor_left"; break;
+   case ALLEGRO_KEY_J: return "move_cursor_down"; break;
+   case ALLEGRO_KEY_K: return "move_cursor_up"; break;
+   case ALLEGRO_KEY_L: return "move_cursor_right"; break;
+   case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
+   case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
+   case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
    }
 
    return "";
