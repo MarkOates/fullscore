@@ -116,9 +116,6 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    // locate and build the appropriate transform
    switch(al_keycode)
    {
-   case ALLEGRO_KEY_SEMICOLON:
-      action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
-      break;
    case ALLEGRO_KEY_W:
       // ####### //
       action = new Action::TransposeTransform(notes, Framework::key_shift ? 7 : 1);
@@ -139,15 +136,9 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       // ####### //
       action = new Action::ToggleRest(notes);
       break;
-   case ALLEGRO_KEY_E:
-      action = new Action::EraseNote(notes, score_editor->note_cursor_x);
-      break;
    case ALLEGRO_KEY_I:
       // ####### //
       action = new Action::Transform::Invert(notes, 0);
-      break;
-   case ALLEGRO_KEY_G:
-      action = new Action::Transform::Retrograde(notes);
       break;
    case ALLEGRO_KEY_FULLSTOP:
       // ####### //
@@ -156,6 +147,15 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    case ALLEGRO_KEY_COMMA:
       // ####### //
       action = new Action::RemoveDotTransform(notes);
+      break;
+   case ALLEGRO_KEY_SEMICOLON:
+      action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
+      break;
+   case ALLEGRO_KEY_E:
+      action = new Action::EraseNote(notes, score_editor->note_cursor_x);
+      break;
+   case ALLEGRO_KEY_G:
+      action = new Action::Transform::Retrograde(notes);
       break;
    case ALLEGRO_KEY_N:
       action = new Action::InsertNoteTransform(notes, score_editor->note_cursor_x, Note());
