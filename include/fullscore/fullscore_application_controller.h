@@ -36,7 +36,7 @@ public:
    void execute_command_mode_action_for_key(int al_keycode);
    void execute_edit_mode_action_for_key(int al_keycode);
 
-   std::string find_action_identifier_by_keycode(int al_keycode);
+   std::string find_action_identifier_by_keycode(int al_keycode, bool shift=false, bool alt=false);
 };
 
 

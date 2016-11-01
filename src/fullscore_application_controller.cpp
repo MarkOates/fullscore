@@ -94,7 +94,7 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier_by_keycode(int al_keycode)
+std::string FullscoreApplicationController::find_action_identifier_by_keycode(int al_keycode, bool shift, bool alt)
 {
    switch(al_keycode)
    {
