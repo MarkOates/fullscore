@@ -132,8 +132,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::DoubleDurationTransform(notes);
       break;
    case ALLEGRO_KEY_R:
-      // ####### //
-      action = new Action::ToggleRest(notes);
+      action = new Action::ToggleRest(single_note);
       break;
    case ALLEGRO_KEY_I:
       action = new Action::Transform::Invert(single_note, 0);
