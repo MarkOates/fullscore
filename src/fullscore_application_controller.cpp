@@ -214,7 +214,7 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::MoveCursorUp(score_editor);
    else if (action_name == "move_cursor_right")
       action = new Action::MoveCursorRight(score_editor);
-   else if (action_name == "yank_measure_buffer")
+   else if (action_name == "yank_measure_to_buffer")
       action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
    else if (action_name == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
