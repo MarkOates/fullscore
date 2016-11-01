@@ -309,6 +309,12 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
       action->execute();
       delete action;
    }
+   else
+   {
+      std::string error_message = "Unfound action: ";
+      error_message += message;
+      simple_notification_screen->spawn_notification(error_message);
+   }
 }
 
 
