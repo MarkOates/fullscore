@@ -11,7 +11,7 @@
 
 
 Action::TransposeUp::TransposeUp(Note *note)
-   : Base("transpose")
+   : Base("transpose_up")
    , note(note)
 {}
 

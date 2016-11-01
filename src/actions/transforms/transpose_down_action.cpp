@@ -11,7 +11,7 @@
 
 
 Action::TransposeDown::TransposeDown(Note *note)
-   : Base("transpose")
+   : Base("transpose_down")
    , note(note)
 {}
 
