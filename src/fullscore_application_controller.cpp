@@ -103,7 +103,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    Action::Base *action = nullptr;
 
    std::vector<Note> *notes = nullptr;
-   Note *single_note = nullptr;
+   Note *single_note = score_editor->get_note_at_cursor();
    std::vector<Note> single_note_as_array;
    Measure *focused_measure = nullptr;
 
@@ -111,15 +111,6 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    {
       focused_measure = score_editor->get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
-   }
-   else
-   {
-      single_note = score_editor->get_note_at_cursor();
-      if (single_note)
-      {
-         single_note_as_array.push_back(*single_note);
-         notes = &single_note_as_array;
-      }
    }
 
    // locate and build the appropriate transform
@@ -224,11 +215,6 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
    {
       action->execute();
       delete action;
-   }
-
-   if (single_note && !single_note_as_array.empty())
-   {
-      *single_note = single_note_as_array.at(0);
    }
 }
 
