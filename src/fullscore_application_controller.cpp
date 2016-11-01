@@ -301,6 +301,14 @@ void FullscoreApplicationController::key_down_func()
 void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
+
+   Action::Base *action = create_normal_mode_action(message);
+
+   if (action)
+   {
+      action->execute();
+      delete action;
+   }
 }
 
 
