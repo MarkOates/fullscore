@@ -135,6 +135,16 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       }
 
+   if (score_editor->mode == GUIScoreEditor::COMMAND_MODE)
+      switch(al_keycode)
+      {
+      case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
+      }
+
+   if (score_editor->mode == GUIScoreEditor::INSERT_MODE)
+      // no implementation
+      ;
+
    return "";
 }
 
