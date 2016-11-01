@@ -119,10 +119,10 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
    case ALLEGRO_KEY_Q: return "reset_playback"; break;
    case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
    case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
-   case ALLEGRO_KEY_UP: return "XXXmove_camera_up"; break;
-   case ALLEGRO_KEY_DOWN: return "XXXmove_camera_down"; break;
-   case ALLEGRO_KEY_RIGHT: return "XXXmove_camera_right"; break;
-   case ALLEGRO_KEY_LEFT: return "XXXmove_camera_left"; break;
+   case ALLEGRO_KEY_UP: return "move_camera_up"; break;
+   case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
+   case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
+   case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
    case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
    case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
    case ALLEGRO_KEY_H: return "move_cursor_left"; break;
@@ -199,13 +199,13 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
       action = new Action::SaveMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "load_measure_grid")
       action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-   else if (action_name == "XXXmove_camera_up")
+   else if (action_name == "move_camera_up")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
-   else if (action_name == "XXXmove_camera_down")
+   else if (action_name == "move_camera_down")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
-   else if (action_name == "XXXmove_camera_right")
+   else if (action_name == "move_camera_right")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
-   else if (action_name == "XXXmove_camera_left")
+   else if (action_name == "move_camera_left")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
    else if (action_name == "camera_zoom_in")
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
