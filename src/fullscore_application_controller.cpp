@@ -158,102 +158,71 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       if (focused_measure) notes = &focused_measure->notes;
    }
 
-   switch(al_keycode)
-   {
-   case ALLEGRO_KEY_W:
+   std::string action_name = "";
+
+   if (action_name == "XXXtranspose_up")
       action = new Action::TransposeTransform(single_note, Framework::key_shift ? 7 : 1);
-      break;
-   case ALLEGRO_KEY_S:
+   else if (action_name == "XXXtranspose_down")
       action = new Action::TransposeTransform(single_note, Framework::key_shift ? -7 : -1);
-      break;
-   case ALLEGRO_KEY_A:
+   else if (action_name == "half_duration")
       action = new Action::HalfDurationTransform(single_note);
-      break;
-   case ALLEGRO_KEY_D:
+   else if (action_name == "double_duration")
       action = new Action::DoubleDurationTransform(single_note);
-      break;
-   case ALLEGRO_KEY_R:
+   else if (action_name == "toggle_rest")
       action = new Action::ToggleRest(single_note);
-      break;
-   case ALLEGRO_KEY_I:
+   else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
-      break;
-   case ALLEGRO_KEY_FULLSTOP:
+   else if (action_name == "add_dot")
       action = new Action::AddDotTransform(single_note);
-      break;
-   case ALLEGRO_KEY_COMMA:
+   else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
-      break;
-   case ALLEGRO_KEY_SEMICOLON:
+   else if (action_name == "XXset_mode_command")
       action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
-      break;
-   case ALLEGRO_KEY_E:
+   else if (action_name == "erase_note")
       action = new Action::EraseNote(notes, score_editor->note_cursor_x);
-      break;
-   case ALLEGRO_KEY_G:
+   else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
-      break;
-   case ALLEGRO_KEY_N:
+   else if (action_name == "insert_note")
       action = new Action::InsertNoteTransform(notes, score_editor->note_cursor_x, Note());
-      break;
-   case ALLEGRO_KEY_F1:
+   else if (action_name == "toggle_help_window")
       action = new Action::ToggleHelpWindow(&Framework::motion(), this);
-      break;
-   case ALLEGRO_KEY_F2:
+   else if (action_name == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(score_editor);
-      break;
-   case ALLEGRO_KEY_SPACE:
+   else if (action_name == "toggle_playback")
       action = new Action::TogglePlayback(score_editor, gui_mixer);
-      break;
-   case ALLEGRO_KEY_Q:
+   else if (action_name == "reset_playback")
       action = new Action::ResetPlayback(score_editor);
-      break;
-   case ALLEGRO_KEY_F7:
+   else if (action_name == "save_measure_grid")
       action = new Action::SaveMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-      break;
-   case ALLEGRO_KEY_F8:
+   else if (action_name == "load_measure_grid")
       action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
-      break;
-   case ALLEGRO_KEY_UP:
+   else if (action_name == "XXXmove_camera_up")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
-      break;
-   case ALLEGRO_KEY_DOWN:
+   else if (action_name == "XXXmove_camera_down")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
-      break;
-   case ALLEGRO_KEY_RIGHT:
+   else if (action_name == "XXXmove_camera_right")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
-      break;
-   case ALLEGRO_KEY_LEFT:
+   else if (action_name == "XXXmove_camera_left")
       action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
-      break;
-   case ALLEGRO_KEY_EQUALS:
+   else if (action_name == "XXXcamera_zoom")
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), Framework::key_shift ? 1 : score_editor->place.scale.x + 0.1, 0.3);
-      break;
-   case ALLEGRO_KEY_MINUS:
+   else if (action_name == "XXXcamera_zoom_out")
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
-      break;
-   case ALLEGRO_KEY_H:
+   else if (action_name == "move_cursor_left")
       action = new Action::MoveCursorLeft(score_editor);
-      break;
-   case ALLEGRO_KEY_J:
+   else if (action_name == "move_cursor_down")
       action = new Action::MoveCursorDown(score_editor);
-      break;
-   case ALLEGRO_KEY_K:
+   else if (action_name == "move_cursor_up")
       action = new Action::MoveCursorUp(score_editor);
-      break;
-   case ALLEGRO_KEY_L:
+   else if (action_name == "move_cursor_right")
       action = new Action::MoveCursorRight(score_editor);
-      break;
-   case ALLEGRO_KEY_Y:
+   else if (action_name == "yank_measure_buffer")
       action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
-      break;
-   case ALLEGRO_KEY_P:
+   else if (action_name == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
-      break;
-   case ALLEGRO_KEY_TAB:
+   else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(score_editor);
-      break;
-   }
+
 
    if (action)
    {
