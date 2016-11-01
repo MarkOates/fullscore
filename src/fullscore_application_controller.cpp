@@ -221,30 +221,17 @@ Action::Base *FullscoreApplicationController::create_normal_mode_action(std::str
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(score_editor);
    else if (action_name == "insert_measure")
-   {
       action = new Action::InsertMeasure(&score_editor->measure_grid, score_editor->measure_cursor_x);
-   }
    else if (action_name == "delete_measure")
-   {
       action = new Action::DeleteMeasure(&score_editor->measure_grid, score_editor->measure_cursor_x);
-   }
    else if (action_name == "insert_staff")
-   {
       action = new Action::InsertStaff(&score_editor->measure_grid, score_editor->measure_cursor_y);
-   }
    else if (action_name == "delete_staff")
-   {
       action = new Action::DeleteStaff(&score_editor->measure_grid, score_editor->measure_cursor_y);
-   }
    else if (action_name == "append_measure")
-   {
       action = new Action::AppendMeasure(&score_editor->measure_grid);
-   }
    else if (action_name == "append_staff")
-   {
       action = new Action::AppendStaff(&score_editor->measure_grid);
-   }
-
 
    return action;
 }
