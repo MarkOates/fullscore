@@ -16,10 +16,10 @@ namespace Action
    class DoubleDurationTransform : public Base
    {
    private:
-      std::vector<Note> *notes;
+      Note *note;
 
    public:
-      DoubleDurationTransform(std::vector<Note> *notes);
+      DoubleDurationTransform(Note *note);
       ~DoubleDurationTransform();
 
       bool execute() override;
