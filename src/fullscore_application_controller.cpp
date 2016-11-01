@@ -317,10 +317,30 @@ void FullscoreApplicationController::key_down_func()
       }
       break;
    case GUIScoreEditor::INSERT_MODE:
-      execute_edit_mode_action_for_key(key);
+      {
+         std::string identifier = find_action_identifier_by_edit_mode_keycode(key, Framework::key_shift, Framework::key_alt);
+
+         Action::Base *action = create_action(identifier);
+
+         if (action)
+         {
+            action->execute();
+            delete action;
+         }
+      }
       break;
    case GUIScoreEditor::COMMAND_MODE:
-      execute_command_mode_action_for_key(key);
+      {
+         std::string identifier = find_action_identifier_by_command_mode_keycode(key, Framework::key_shift, Framework::key_alt);
+
+         Action::Base *action = create_action(identifier);
+
+         if (action)
+         {
+            action->execute();
+            delete action;
+         }
+      }
       break;
    }
 }
