@@ -175,7 +175,13 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
    if (action_name == "transpose_up")
    {
-      if (score_editor->is_note_target_mode()) action = new Action::TransposeUp(single_note);
+      if (score_editor->is_note_target_mode())
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
+            action_queue->add_action(new Action::TransposeUp(single_note));
+         return action_queue;
+      }
       else
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
@@ -187,7 +193,13 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "transpose_down")
    {
-      if (score_editor->is_note_target_mode()) action = new Action::TransposeDown(single_note);
+      if (score_editor->is_note_target_mode())
+      {
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
+            action_queue->add_action(new Action::TransposeDown(single_note));
+         return action_queue;
+      }
       else
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
