@@ -180,26 +180,19 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
       break;
    case ALLEGRO_KEY_UP:
-      action = new Action::StartMotion(&Framework::motion(),
-         &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
+      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
       break;
    case ALLEGRO_KEY_DOWN:
-      action = new Action::StartMotion(&Framework::motion(),
-         &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
+      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
       break;
    case ALLEGRO_KEY_RIGHT:
-      action = new Action::StartMotion(&Framework::motion(),
-         &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
+      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
       break;
    case ALLEGRO_KEY_LEFT:
-      action = new Action::StartMotion(&Framework::motion(),
-         &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
+      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
       break;
    case ALLEGRO_KEY_EQUALS:
-      if (Framework::key_shift)
-         action = new Action::SetScoreZoom(score_editor, &Framework::motion(), 1, 0.3);
-      else
-         action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
+      action = new Action::SetScoreZoom(score_editor, &Framework::motion(), Framework::key_shift ? 1 : score_editor->place.scale.x + 0.1, 0.3);
       break;
    case ALLEGRO_KEY_MINUS:
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x - 0.1, 0.3);
