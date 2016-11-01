@@ -137,7 +137,7 @@ std::string FullscoreApplicationController::find_action_identifier_by_normal_mod
 
 
 
-void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_keycode)
+Action::Base *FullscoreApplicationController::create_normal_mode_action(std::string action_name)
 {
    //
    // SCORE EDITING COMMANDS
@@ -157,8 +157,6 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       focused_measure = score_editor->get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
    }
-
-   std::string action_name = "";
 
    if (action_name == "XXXtranspose_up")
       action = new Action::TransposeTransform(single_note, Framework::key_shift ? 7 : 1);
@@ -224,11 +222,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::ToggleEditModeTarget(score_editor);
 
 
-   if (action)
-   {
-      action->execute();
-      delete action;
-   }
+   return action;
 }
 
 
@@ -269,7 +263,17 @@ void FullscoreApplicationController::key_down_func()
    switch(score_editor->mode)
    {
    case GUIScoreEditor::NORMAL_MODE:
-      execute_normal_mode_action_for_key(key);
+      {
+         std::string identifier = find_action_identifier_by_normal_mode_keycode(key, Framework::key_shift, Framework::key_alt);
+
+         Action::Base *action = create_normal_mode_action(identifier);
+
+         if (action)
+         {
+            action->execute();
+            delete action;
+         }
+      }
       break;
    case GUIScoreEditor::INSERT_MODE:
       execute_edit_mode_action_for_key(key);
