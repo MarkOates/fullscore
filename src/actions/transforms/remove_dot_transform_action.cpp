@@ -10,9 +10,9 @@
 
 
 
-Action::RemoveDotTransform::RemoveDotTransform(std::vector<Note> *notes)
+Action::RemoveDotTransform::RemoveDotTransform(Note *note)
    : Base("remove_dot_transform")
-   , notes(notes)
+   , note(note)
 {}
 
 
@@ -26,10 +26,15 @@ Action::RemoveDotTransform::~RemoveDotTransform()
 
 bool Action::RemoveDotTransform::execute()
 {
-   if (!notes) return false;
+   if (!note) return false;
+
+   std::vector<Note> single_note_as_array;
+   single_note_as_array.push_back(*note);
 
    Transform::RemoveDot remove_dot_transform;
-   *notes = remove_dot_transform.transform(*notes);
+   single_note_as_array = remove_dot_transform.transform(single_note_as_array);
+
+   *note = single_note_as_array.at(0);
 
    return true;
 }

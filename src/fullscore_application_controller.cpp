@@ -143,8 +143,7 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       action = new Action::AddDotTransform(single_note);
       break;
    case ALLEGRO_KEY_COMMA:
-      // ####### //
-      action = new Action::RemoveDotTransform(notes);
+      action = new Action::RemoveDotTransform(single_note);
       break;
    case ALLEGRO_KEY_SEMICOLON:
       action = new Action::SetMode(score_editor, command_bar, GUIScoreEditor::COMMAND_MODE);
