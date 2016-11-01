@@ -319,7 +319,9 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
          if (action)
          {
-            simple_notification_screen->spawn_notification(action->get_action_name());
+            std::string success_message = "Calling ";
+            success_message += message + " using " + action->get_action_name();
+            simple_notification_screen->spawn_notification(success_message);
             action->execute();
             delete action;
 
