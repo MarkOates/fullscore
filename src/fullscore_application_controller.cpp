@@ -302,22 +302,25 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 {
    std::cout << "message: " << message << std::endl;
 
-   if (!message.empty() && message[0] == ':')
+   if (sender == command_bar)
    {
-      std::string action_identifier = message.substr(1);
-
-      Action::Base *action = create_normal_mode_action(action_identifier);
-
-      if (action)
+      if (!message.empty() && message[0] == ':')
       {
-         action->execute();
-         delete action;
-      }
-      else
-      {
-         std::string error_message = "Unfound action: ";
-         error_message += action_identifier;
-         simple_notification_screen->spawn_notification(error_message);
+         std::string action_identifier = message.substr(1);
+
+         Action::Base *action = create_normal_mode_action(action_identifier);
+
+         if (action)
+         {
+            action->execute();
+            delete action;
+         }
+         else
+         {
+            std::string error_message = "Unfound action: ";
+            error_message += action_identifier;
+            simple_notification_screen->spawn_notification(error_message);
+         }
       }
    }
 }
