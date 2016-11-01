@@ -338,6 +338,9 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
          std::string error_message = "Unrecognized input: ";
          error_message += message;
          simple_notification_screen->spawn_notification(error_message);
+
+         Action::SetNormalMode return_to_normal_mode(score_editor, command_bar);
+         return_to_normal_mode.execute();
       }
    }
 }
