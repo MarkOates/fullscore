@@ -115,7 +115,6 @@ void FullscoreApplicationController::execute_normal_mode_action_for_key(int al_k
       if (focused_measure) notes = &focused_measure->notes;
    }
 
-   // locate and build the appropriate transform
    switch(al_keycode)
    {
    case ALLEGRO_KEY_W:
