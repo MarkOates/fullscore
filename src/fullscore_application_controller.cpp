@@ -315,6 +315,9 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
             simple_notification_screen->spawn_notification(action->get_action_name());
             action->execute();
             delete action;
+
+            Action::SetMode return_to_normal_mode(score_editor, command_bar, GUIScoreEditor::NORMAL_MODE);
+            return_to_normal_mode.execute();
          }
          else
          {
