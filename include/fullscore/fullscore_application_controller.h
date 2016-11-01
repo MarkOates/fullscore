@@ -35,7 +35,7 @@ public:
    void key_down_func() override;
    void on_message(UIWidget *sender, std::string message) override;
 
-   Action::Base *create_normal_mode_action(std::string action_name);
+   Action::Base *create_action(std::string action_name);
    void execute_command_mode_action_for_key(int al_keycode);
    void execute_edit_mode_action_for_key(int al_keycode);
 

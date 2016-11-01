@@ -189,7 +189,7 @@ void FullscoreApplicationController::execute_edit_mode_action_for_key(int al_key
 
 
 
-Action::Base *FullscoreApplicationController::create_normal_mode_action(std::string action_name)
+Action::Base *FullscoreApplicationController::create_action(std::string action_name)
 {
    //
    // SCORE EDITING COMMANDS
@@ -307,7 +307,7 @@ void FullscoreApplicationController::key_down_func()
       {
          std::string identifier = find_action_identifier_by_normal_mode_keycode(key, Framework::key_shift, Framework::key_alt);
 
-         Action::Base *action = create_normal_mode_action(identifier);
+         Action::Base *action = create_action(identifier);
 
          if (action)
          {
@@ -338,7 +338,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
       {
          std::string action_identifier = message.substr(1);
 
-         Action::Base *action = create_normal_mode_action(action_identifier);
+         Action::Base *action = create_action(action_identifier);
 
          if (action)
          {
