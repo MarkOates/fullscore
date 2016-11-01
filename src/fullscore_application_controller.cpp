@@ -99,40 +99,41 @@ void FullscoreApplicationController::primary_timer_func()
 
 std::string FullscoreApplicationController::find_action_identifier_by_normal_mode_keycode(int al_keycode, bool shift, bool alt)
 {
-   switch(al_keycode)
-   {
-   case ALLEGRO_KEY_W: return "transpose_up"; break;
-   case ALLEGRO_KEY_S: return "transpose_down"; break;
-   case ALLEGRO_KEY_A: return "half_duration"; break;
-   case ALLEGRO_KEY_D: return "double_duration"; break;
-   case ALLEGRO_KEY_R: return "toggle_rest"; break;
-   case ALLEGRO_KEY_I: return "invert"; break;
-   case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
-   case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
-   case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
-   case ALLEGRO_KEY_E: return "erase_note"; break;
-   case ALLEGRO_KEY_G: return "retrograde"; break;
-   case ALLEGRO_KEY_N: return "insert_note"; break;
-   case ALLEGRO_KEY_F1: return "toggle_help_window"; break;
-   case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
-   case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
-   case ALLEGRO_KEY_Q: return "reset_playback"; break;
-   case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
-   case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
-   case ALLEGRO_KEY_UP: return "move_camera_up"; break;
-   case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
-   case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
-   case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
-   case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
-   case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
-   case ALLEGRO_KEY_H: return "move_cursor_left"; break;
-   case ALLEGRO_KEY_J: return "move_cursor_down"; break;
-   case ALLEGRO_KEY_K: return "move_cursor_up"; break;
-   case ALLEGRO_KEY_L: return "move_cursor_right"; break;
-   case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
-   case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
-   case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
-   }
+   if (score_editor->mode == GUIScoreEditor::NORMAL_MODE)
+      switch(al_keycode)
+      {
+      case ALLEGRO_KEY_W: return "transpose_up"; break;
+      case ALLEGRO_KEY_S: return "transpose_down"; break;
+      case ALLEGRO_KEY_A: return "half_duration"; break;
+      case ALLEGRO_KEY_D: return "double_duration"; break;
+      case ALLEGRO_KEY_R: return "toggle_rest"; break;
+      case ALLEGRO_KEY_I: return "invert"; break;
+      case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
+      case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
+      case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
+      case ALLEGRO_KEY_E: return "erase_note"; break;
+      case ALLEGRO_KEY_G: return "retrograde"; break;
+      case ALLEGRO_KEY_N: return "insert_note"; break;
+      case ALLEGRO_KEY_F1: return "toggle_help_window"; break;
+      case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
+      case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
+      case ALLEGRO_KEY_Q: return "reset_playback"; break;
+      case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
+      case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
+      case ALLEGRO_KEY_UP: return "move_camera_up"; break;
+      case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
+      case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
+      case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
+      case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
+      case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
+      case ALLEGRO_KEY_H: return "move_cursor_left"; break;
+      case ALLEGRO_KEY_J: return "move_cursor_down"; break;
+      case ALLEGRO_KEY_K: return "move_cursor_up"; break;
+      case ALLEGRO_KEY_L: return "move_cursor_right"; break;
+      case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
+      case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
+      case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
+      }
 
    return "";
 }
