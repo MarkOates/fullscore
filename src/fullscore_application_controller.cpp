@@ -30,6 +30,7 @@
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
+#include <fullscore/actions/set_camera_target_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
@@ -269,13 +270,13 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "load_measure_grid")
       action = new Action::LoadMeasureGrid(&score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "move_camera_up")
-      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y+200, 0.4);
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
-      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.y, score_editor->place.position.y-200, 0.4);
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
    else if (action_name == "move_camera_right")
-      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x-200, 0.4);
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x - 100, follow_camera.target.position.y);
    else if (action_name == "move_camera_left")
-      action = new Action::StartMotion(&Framework::motion(), &score_editor->place.position.x, score_editor->place.position.x+200, 0.4);
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x + 100, follow_camera.target.position.y);
    else if (action_name == "camera_zoom_in")
       action = new Action::SetScoreZoom(score_editor, &Framework::motion(), score_editor->place.scale.x + 0.1, 0.3);
    else if (action_name == "camera_zoom_default")
