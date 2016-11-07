@@ -17,7 +17,7 @@ ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
-OBJS=command_bar fullscore_application_controller gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
+OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard src/actions/*.cpp))))
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard src/actions/transforms/*.cpp))))
 OBJS+=components/time_signature_render_component

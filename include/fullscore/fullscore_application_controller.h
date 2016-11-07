@@ -9,6 +9,7 @@
 #include <fullscore/actions/action_base.h>
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/command_bar.h>
+#include <fullscore/follow_camera.h>
 #include <fullscore/gui_score_editor.h>
 #include <fullscore/mixer.h>
 #include <fullscore/playback_device_generic.h>
@@ -22,6 +23,7 @@ public:
    SimpleNotificationScreen *simple_notification_screen;
 
    Action::Queue action_queue;
+   UIFollowCamera follow_camera;
    GUIScoreEditor *score_editor;
    UICommandBar *command_bar;
    UIMixer *gui_mixer;
