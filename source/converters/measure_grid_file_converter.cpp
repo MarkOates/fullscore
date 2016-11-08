@@ -7,6 +7,7 @@
 #include <allegro_flare/data_attr.h>
 #include <allegro_flare/useful_php.h>
 #include <fullscore/converters/note_string_converter.h>
+#include <fullscore/converters/time_signature_string_converter.h>
 #include <fullscore/models/measure_grid.h>
 
 
@@ -31,6 +32,16 @@ bool MeasureGridFileConverter::save()
    state.set("grid_width", tostring(measure_grid->get_num_measures()));
    state.set("file_format_version", "v0.0.1");
 
+   // build a time signatures string
+   std::vector<std::string> time_signature_strings;
+   for (auto &time_signature : measure_grid->time_signatures)
+   {
+      TimeSignatureStringConverter converter(&time_signature);
+      time_signature_strings.push_back(converter.write());
+   }
+   state.set("time_signatures", php::implode(";", time_signature_strings));
+
+   // build the measures as "x,y = [notes]" string
    for (int y=0; y<measure_grid->get_num_staves(); y++)
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
@@ -88,12 +99,29 @@ bool MeasureGridFileConverter::load()
    int grid_width = atoi(state.get("grid_width").c_str());
    measure_grid->voices.resize(grid_height, MeasureGrid::Row(grid_width));
 
-   // for now, remove those two elements.  The rest of the data in `state` is measure data
+   // grab and parse the time_signatures string
+   measure_grid->time_signatures.clear();
+   std::string time_signatures_string = state.get("time_signatures");
+   std::vector<std::string> time_signature_string_tokens = php::explode(";", time_signatures_string);
+   for (auto &time_signature_string : time_signature_string_tokens)
+   {
+      TimeSignature t = TimeSignature(0, 0, 0);
+      measure_grid->time_signatures.push_back(t);
+      TimeSignatureStringConverter converter(&measure_grid->time_signatures.back());
+
+      if (!converter.read(time_signature_string))
+      {
+         std::cout << "There was an error parsing the time signature \"" << time_signature_string << "\"" << std::endl;
+      }
+   }
+
+   // for now, remove those elements.  The rest of the data in `state` is measure data
    state.remove("grid_height");
    state.remove("grid_width");
+   state.remove("time_signatures");
    state.remove("file_format_version");
 
-   // get the
+   // get the notes for each measure
    std::map<std::string, std::string> data = state.get_copy();
    for (std::map<std::string, std::string>::iterator it = data.begin(); it!=data.end(); it++)
    {
