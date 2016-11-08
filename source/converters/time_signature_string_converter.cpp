@@ -9,7 +9,7 @@
 
 
 
-TimeSignatureStringConverter::TimeSignatureStringConverter(TimeSignature *time_signature)
+TimeSignatureStringConverter::TimeSignatureStringConverter(TimeSignature time_signature)
    : time_signature(time_signature)
 {}
 
@@ -18,11 +18,9 @@ TimeSignatureStringConverter::TimeSignatureStringConverter(TimeSignature *time_s
 
 bool TimeSignatureStringConverter::read(std::string str)
 {
-   if (!time_signature) return false;
-
    std::stringstream ss;
    ss << str;
-   ss >> time_signature->numerator >> time_signature->denominator_duration >> time_signature->denominator_dots;
+   ss >> time_signature.numerator >> time_signature.denominator_duration >> time_signature.denominator_dots;
 
    return true;
 }
@@ -32,10 +30,8 @@ bool TimeSignatureStringConverter::read(std::string str)
 
 std::string TimeSignatureStringConverter::write()
 {
-   if (!time_signature) return "";
-
    std::stringstream ss;
-   ss << time_signature->numerator << " " << time_signature->denominator_duration << " " << time_signature->denominator_dots;
+   ss << time_signature.numerator << " " << time_signature.denominator_duration << " " << time_signature.denominator_dots;
 
    return ss.str();
 }
