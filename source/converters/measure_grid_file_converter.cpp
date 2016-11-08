@@ -99,6 +99,22 @@ bool MeasureGridFileConverter::load()
    int grid_width = atoi(state.get("grid_width").c_str());
    measure_grid->voices.resize(grid_height, MeasureGrid::Row(grid_width));
 
+   // grab and parse the time_signatures string
+   measure_grid->time_signatures.clear();
+   std::string time_signatures_string = state.get("time_signatures");
+   std::vector<std::string> time_signature_string_tokens = php::explode(";", time_signatures_string);
+   for (auto &time_signature_string : time_signature_string_tokens)
+   {
+      TimeSignature t = TimeSignature(0, 0, 0);
+      measure_grid->time_signatures.push_back(t);
+      TimeSignatureStringConverter converter(&measure_grid->time_signatures.back());
+
+      if (!converter.read(time_signature_string))
+      {
+         std::cout << "There was an error parsing the time signature \"" << time_signature_string << "\"" << std::endl;
+      }
+   }
+
    // for now, remove those elements.  The rest of the data in `state` is measure data
    state.remove("grid_height");
    state.remove("grid_width");
