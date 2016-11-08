@@ -7,6 +7,7 @@
 #include <allegro_flare/data_attr.h>
 #include <allegro_flare/useful_php.h>
 #include <fullscore/converters/note_string_converter.h>
+#include <fullscore/converters/time_signature_string_converter.h>
 #include <fullscore/models/measure_grid.h>
 
 
@@ -30,6 +31,15 @@ bool MeasureGridFileConverter::save()
    state.set("grid_height", tostring(measure_grid->get_num_staves()));
    state.set("grid_width", tostring(measure_grid->get_num_measures()));
    state.set("file_format_version", "v0.0.1");
+
+   // build a time signatures string
+   std::vector<std::string> time_signature_strings;
+   for (auto &time_signature : measure_grid->time_signatures)
+   {
+      TimeSignatureStringConverter converter(&time_signature);
+      time_signature_strings.push_back(converter.write());
+   }
+   state.set("time_signatures", php::implode(";", time_signature_strings));
 
    for (int y=0; y<measure_grid->get_num_staves(); y++)
       for (int x=0; x<measure_grid->get_num_measures(); x++)
@@ -91,6 +101,7 @@ bool MeasureGridFileConverter::load()
    // for now, remove those two elements.  The rest of the data in `state` is measure data
    state.remove("grid_height");
    state.remove("grid_width");
+   state.remove("time_signatures");
    state.remove("file_format_version");
 
    // get the
