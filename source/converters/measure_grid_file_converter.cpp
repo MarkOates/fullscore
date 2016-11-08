@@ -41,6 +41,7 @@ bool MeasureGridFileConverter::save()
    }
    state.set("time_signatures", php::implode(";", time_signature_strings));
 
+   // build the measures as "x,y = [notes]" string
    for (int y=0; y<measure_grid->get_num_staves(); y++)
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
@@ -98,13 +99,13 @@ bool MeasureGridFileConverter::load()
    int grid_width = atoi(state.get("grid_width").c_str());
    measure_grid->voices.resize(grid_height, MeasureGrid::Row(grid_width));
 
-   // for now, remove those two elements.  The rest of the data in `state` is measure data
+   // for now, remove those elements.  The rest of the data in `state` is measure data
    state.remove("grid_height");
    state.remove("grid_width");
    state.remove("time_signatures");
    state.remove("file_format_version");
 
-   // get the
+   // get the notes for each measure
    std::map<std::string, std::string> data = state.get_copy();
    for (std::map<std::string, std::string>::iterator it = data.begin(); it!=data.end(); it++)
    {
