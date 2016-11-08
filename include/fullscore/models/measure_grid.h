@@ -18,10 +18,10 @@ private:
 
    class Row
    {
-      public:
-         std::vector<Measure> measures;
-         Row(int num_measures);
-         Measure &operator[](unsigned int index);
+   public:
+      std::vector<Measure> measures;
+      Row(int num_measures);
+      Measure &operator[](unsigned int index);
    };
 
    std::vector<Row> voices;
