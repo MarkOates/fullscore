@@ -18,8 +18,8 @@ ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 
 OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
-OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard src/actions/*.cpp))))
-OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard src/actions/transforms/*.cpp))))
+OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
+OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/actions/transforms/*.cpp))))
 OBJS+=components/time_signature_render_component
 OBJS+=converters/measure_grid_file_converter converters/note_string_converter
 OBJS+=models/measure models/measure_grid models/note models/note_playback_info models/time_signature
@@ -49,7 +49,7 @@ ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
 	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
-$(OBJ_FILES): obj/%.o : src/%.cpp
+$(OBJ_FILES): obj/%.o : source/%.cpp
 	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 
 
@@ -59,8 +59,8 @@ $(OBJ_FILES): obj/%.o : src/%.cpp
 #
 
 
-tools: src/tools/generate.cpp
-	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) src/tools/generate.cpp -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS)
+tools: source/tools/generate.cpp
+	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) source/tools/generate.cpp -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS)
 
 
 
