@@ -79,6 +79,7 @@ void GUIScoreEditor::on_draw()
    if (get_measure_at_cursor())
    {
       float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
+
       // fill
       al_draw_filled_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
          measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
