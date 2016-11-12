@@ -4,6 +4,8 @@
 
 #include <fullscore/helpers/duration_helper.h>
 
+#include <fullscore/models/time_signature.h>
+
 
 
 
@@ -19,6 +21,15 @@ float DurationHelper::get_length(int duration, int dots)
    }
 
    return width + width * dots_percentage;
+}
+
+
+
+
+float DurationHelper::get_length(const TimeSignature &time_signature)
+{
+   float denominator_duration_width = get_length(time_signature.denominator_duration, time_signature.denominator_dots);
+   return denominator_duration_width * time_signature.numerator;
 }
 
 
