@@ -4,13 +4,17 @@
 
 #include<fullscore/components/measure_grid_render_component.h>
 
+#include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/models/measure_grid.h>
+#include <fullscore/constants.h>
+#include <fullscore/music_engraver.h>
 
 
 
 
-MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, float full_measure_width, float staff_height)
+MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, MusicEngraver *music_engraver, float full_measure_width, float staff_height)
    : measure_grid(measure_grid)
+   , music_engraver(music_engraver)
    , full_measure_width(full_measure_width)
    , staff_height(staff_height)
 {}
@@ -26,7 +30,7 @@ MeasureGridRenderComponent::~MeasureGridRenderComponent()
 
 void MeasureGridRenderComponent::render()
 {
-   if (!measure_grid) return;
+   if (!measure_grid || !music_engraver) return;
 
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
@@ -51,7 +55,7 @@ void MeasureGridRenderComponent::render()
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
          Measure *measure = measure_grid->get_measure(x,y);
-         music_engraver.draw(measure, x*full_measure_width, y*staff_height + staff_height/2, full_measure_width);
+         music_engraver->draw(measure, x*full_measure_width, y*staff_height + staff_height/2, full_measure_width);
 
          // draw the notes
          float x_cursor = 0;
@@ -75,58 +79,6 @@ void MeasureGridRenderComponent::render()
             x_cursor += width;
          }
       }
-
-   // draw a hilight box under the focused measure
-   Measure *measure = get_measure_at_cursor();
-   Note *note = get_note_at_cursor();
-
-   if (get_measure_at_cursor())
-   {
-      float measure_width = get_measure_width(*measure) * full_measure_width;
-      // fill
-      al_draw_filled_rounded_rectangle(measure_cursor_x*full_measure_width, measure_cursor_y*staff_height,
-         measure_cursor_x*full_measure_width+measure_width, measure_cursor_y*staff_height+staff_height,
-         4, 4, color::color(color::aliceblue, 0.2));
-
-      // outline
-      if (is_measure_target_mode())
-         al_draw_rounded_rectangle(measure_cursor_x*full_measure_width, measure_cursor_y*staff_height,
-            measure_cursor_x*full_measure_width+measure_width, measure_cursor_y*staff_height+staff_height,
-            4, 4, color::color(color::aliceblue, 0.7), 2.0);
-   }
-
-   // draw a hilight box under the focused note
-   if (measure && note)
-   {
-      float measure_cursor_real_x = get_measure_cursor_real_x();
-      float measure_cursor_real_y = get_measure_cursor_real_y();
-      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * full_measure_width;
-      float note_width = DurationHelper::get_length(note->duration, note->dots) * full_measure_width;
-
-      // fill
-      al_draw_filled_rounded_rectangle(
-            measure_cursor_real_x + note_real_offset_x,
-            measure_cursor_real_y,
-            measure_cursor_real_x + note_real_offset_x + note_width,
-            measure_cursor_real_y + staff_height,
-            6,
-            6,
-            color::color(color::pink, 0.4)
-         );
-
-      // outline
-      if (is_note_target_mode())
-         al_draw_rounded_rectangle(
-               measure_cursor_real_x + note_real_offset_x,
-               measure_cursor_real_y,
-               measure_cursor_real_x + note_real_offset_x + note_width,
-               measure_cursor_real_y + staff_height,
-               6,
-               6,
-               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
-               2.0
-            );
-   }
 }
 
 
