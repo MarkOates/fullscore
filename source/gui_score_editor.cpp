@@ -7,6 +7,7 @@
 #include <allegro_flare/allegro_flare.h>
 
 #include <fullscore/components/time_signature_render_component.h>
+#include <fullscore/components/measure_grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 
 
@@ -66,53 +67,9 @@ void GUIScoreEditor::on_draw()
       FULL_MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
       color::color(color::blanchedalmond, 0.2));
 
-   // draw barlines
-   TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
-   for (int x=0; x<measure_grid.get_num_measures(); x++)
-   {
-      Measure *measure = measure_grid.get_measure(x, 0);
-      TimeSignature time_signature = measure_grid.get_time_signature(x);
-      TimeSignatureRenderComponent time_signature_render_component(&time_signature);
-      float x_pos = x * FULL_MEASURE_WIDTH;
-
-      al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
-      if (time_signature != previous_time_signature)
-         time_signature_render_component.render(x_pos, -50);
-
-      previous_time_signature = time_signature;
-   }
-
-   // draw the notes and measures
-   Note *hovered_note = get_note_at_cursor();
-
-   for (int y=0; y<measure_grid.get_num_staves(); y++)
-      for (int x=0; x<measure_grid.get_num_measures(); x++)
-      {
-         Measure *measure = measure_grid.get_measure(x,y);
-         music_engraver.draw(measure, x*FULL_MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, FULL_MEASURE_WIDTH);
-
-         // draw the notes
-         float x_cursor = 0;
-         for (unsigned i=0; i<measure->notes.size(); i++)
-         {
-            int xx = x * FULL_MEASURE_WIDTH;
-            int yy = y * STAFF_HEIGHT;
-            Note &note = measure->notes[i];
-            float width = DurationHelper::get_length(note.duration, note.dots) * FULL_MEASURE_WIDTH;
-
-            // draw some debug info on the note
-            if (showing_debug_data)
-            {
-               ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
-               al_draw_text(text_font, color::white, xx+x_cursor, yy, 0, tostring(note.scale_degree).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+40, 0, tostring(note.playback_info.start_time).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, yy+60, 0, tostring(note.playback_info.end_time).c_str());
-            }
-
-            x_cursor += width;
-         }
-      }
+   // render the measure grid
+   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
+   measure_grid_render_component.render();
 
    // draw a hilight box under the focused measure
    Measure *measure = get_measure_at_cursor();
