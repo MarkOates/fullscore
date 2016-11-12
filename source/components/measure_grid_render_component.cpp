@@ -35,6 +35,14 @@ MeasureGridRenderComponent::~MeasureGridRenderComponent()
 
 
 
+void MeasureGridRenderComponent::set_showing_debug_data(bool show)
+{
+   showing_debug_data = show;
+}
+
+
+
+
 void MeasureGridRenderComponent::render()
 {
    if (!measure_grid || !music_engraver) return;
