@@ -13,6 +13,7 @@ private:
    MusicEngraver *music_engraver;
    float full_measure_width;
    float staff_height;
+   bool showing_debug_data;
 
 public:
    MeasureGridRenderComponent(MeasureGrid *measure_grid, MusicEngraver *engraver, float full_measure_width, float staff_height);

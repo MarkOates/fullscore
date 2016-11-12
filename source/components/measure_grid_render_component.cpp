@@ -17,6 +17,7 @@ MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid
    , music_engraver(music_engraver)
    , full_measure_width(full_measure_width)
    , staff_height(staff_height)
+   , showing_debug_data(false)
 {}
 
 
