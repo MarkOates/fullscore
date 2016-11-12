@@ -83,10 +83,13 @@ bin/generate$(EXE_EXTENSION): source/tools/generate.cpp
 TEST_OBJS=$(addprefix tests/,$(basename $(notdir $(wildcard tests/*.cpp))))
 TEST_OBJ_FILES=$(OBJS:%=bin/tests/%)
 
-tests: bin/tests/test_test$(EXE_EXTENSION)
+tests: bin/tests/test_test$(EXE_EXTENSION) bin/tests/duration_helper_test$(EXE_EXTENSION)
 
 bin/tests/test_test: tests/test_test.cpp
 	g++ -o bin/tests/test_test tests/test_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
+
+bin/tests/duration_helper_test$(EXE_EXTENSION): tests/duration_helper_test.cpp obj/helpers/duration_helper.o obj/models/time_signature.o
+	g++ obj/models/time_signature.o obj/helpers/duration_helper.o -o bin/tests/duration_helper_test tests/duration_helper_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
 
 
 
