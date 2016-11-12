@@ -35,9 +35,9 @@ void MeasureGridRenderComponent::render()
       Measure *measure = measure_grid->get_measure(x, 0);
       TimeSignature time_signature = measure_grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
-      float x_pos = x * FULL_MEASURE_WIDTH;
+      float x_pos = x * full_measure_width;
 
-      al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid->get_num_staves(), color::color(color::black, 0.2), 1.0);
+      al_draw_line(x_pos, 0, x_pos, staff_height * measure_grid->get_num_staves(), color::color(color::black, 0.2), 1.0);
       if (time_signature != previous_time_signature)
          time_signature_render_component.render(x_pos, -50);
 
@@ -51,16 +51,16 @@ void MeasureGridRenderComponent::render()
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
          Measure *measure = measure_grid->get_measure(x,y);
-         music_engraver.draw(measure, x*FULL_MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, FULL_MEASURE_WIDTH);
+         music_engraver.draw(measure, x*full_measure_width, y*staff_height + staff_height/2, full_measure_width);
 
          // draw the notes
          float x_cursor = 0;
          for (unsigned i=0; i<measure->notes.size(); i++)
          {
-            int xx = x * FULL_MEASURE_WIDTH;
-            int yy = y * STAFF_HEIGHT;
+            int xx = x * full_measure_width;
+            int yy = y * staff_height;
             Note &note = measure->notes[i];
-            float width = DurationHelper::get_length(note.duration, note.dots) * FULL_MEASURE_WIDTH;
+            float width = DurationHelper::get_length(note.duration, note.dots) * full_measure_width;
 
             // draw some debug info on the note
             if (showing_debug_data)
@@ -82,16 +82,16 @@ void MeasureGridRenderComponent::render()
 
    if (get_measure_at_cursor())
    {
-      float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
+      float measure_width = get_measure_width(*measure) * full_measure_width;
       // fill
-      al_draw_filled_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-         measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+      al_draw_filled_rounded_rectangle(measure_cursor_x*full_measure_width, measure_cursor_y*staff_height,
+         measure_cursor_x*full_measure_width+measure_width, measure_cursor_y*staff_height+staff_height,
          4, 4, color::color(color::aliceblue, 0.2));
 
       // outline
       if (is_measure_target_mode())
-         al_draw_rounded_rectangle(measure_cursor_x*FULL_MEASURE_WIDTH, measure_cursor_y*STAFF_HEIGHT,
-            measure_cursor_x*FULL_MEASURE_WIDTH+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         al_draw_rounded_rectangle(measure_cursor_x*full_measure_width, measure_cursor_y*staff_height,
+            measure_cursor_x*full_measure_width+measure_width, measure_cursor_y*staff_height+staff_height,
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
    }
 
@@ -100,15 +100,15 @@ void MeasureGridRenderComponent::render()
    {
       float measure_cursor_real_x = get_measure_cursor_real_x();
       float measure_cursor_real_y = get_measure_cursor_real_y();
-      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-      float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
+      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * full_measure_width;
+      float note_width = DurationHelper::get_length(note->duration, note->dots) * full_measure_width;
 
       // fill
       al_draw_filled_rounded_rectangle(
             measure_cursor_real_x + note_real_offset_x,
             measure_cursor_real_y,
             measure_cursor_real_x + note_real_offset_x + note_width,
-            measure_cursor_real_y + STAFF_HEIGHT,
+            measure_cursor_real_y + staff_height,
             6,
             6,
             color::color(color::pink, 0.4)
@@ -120,7 +120,7 @@ void MeasureGridRenderComponent::render()
                measure_cursor_real_x + note_real_offset_x,
                measure_cursor_real_y,
                measure_cursor_real_x + note_real_offset_x + note_width,
-               measure_cursor_real_y + STAFF_HEIGHT,
+               measure_cursor_real_y + staff_height,
                6,
                6,
                color::mix(color::color(color::pink, 0.8), color::black, 0.3),
