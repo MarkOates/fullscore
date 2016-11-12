@@ -15,6 +15,7 @@ class MeasureGrid
 {
 private:
    friend class MeasureGridFileConverter;
+   friend class MeasureGridHelper;
 
    class Row
    {
