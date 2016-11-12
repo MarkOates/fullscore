@@ -9,8 +9,10 @@
 
 
 
-MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid)
+MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, float full_measure_width, float staff_height)
    : measure_grid(measure_grid)
+   , full_measure_width(full_measure_width)
+   , staff_height(staff_height)
 {}
 
 
