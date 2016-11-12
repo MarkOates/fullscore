@@ -62,7 +62,8 @@ void MeasureGridRenderComponent::render()
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
          Measure *measure = measure_grid->get_measure(x,y);
-         music_engraver->draw(measure, x*full_measure_width, y*staff_height + staff_height/2, full_measure_width);
+         float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
+         music_engraver->draw(measure, x_pos, y*staff_height + staff_height/2, full_measure_width);
 
          // draw the notes
          float x_cursor = 0;
