@@ -49,8 +49,6 @@ void MeasureGridRenderComponent::render()
    }
 
    // draw the notes and measures
-   Note *hovered_note = get_note_at_cursor();
-
    for (int y=0; y<measure_grid->get_num_staves(); y++)
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
