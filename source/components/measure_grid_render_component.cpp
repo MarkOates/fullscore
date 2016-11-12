@@ -77,8 +77,7 @@ void MeasureGridRenderComponent::render()
          // draw debug info on the note
          if (showing_debug_data)
          {
-            float x_cursor = 0;
-            int xx = x * full_measure_width;
+            float x_cursor = x_pos;
             ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
 
             for (unsigned i=0; i<measure->notes.size(); i++)
@@ -86,10 +85,10 @@ void MeasureGridRenderComponent::render()
                Note &note = measure->notes[i];
                float width = DurationHelper::get_length(note.duration, note.dots) * full_measure_width;
 
-               al_draw_text(text_font, color::white, xx+x_cursor, y_pos, 0, tostring(note.scale_degree).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, y_pos+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, y_pos+40, 0, tostring(note.playback_info.start_time).c_str());
-               al_draw_text(text_font, color::white, xx+x_cursor, y_pos+60, 0, tostring(note.playback_info.end_time).c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.scale_degree).c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos+40, 0, tostring(note.playback_info.start_time).c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos+60, 0, tostring(note.playback_info.end_time).c_str());
 
                x_cursor += width;
             }
