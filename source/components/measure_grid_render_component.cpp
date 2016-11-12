@@ -30,14 +30,14 @@ void MeasureGridRenderComponent::render()
 
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
-   for (int x=0; x<measure_grid.get_num_measures(); x++)
+   for (int x=0; x<measure_grid->get_num_measures(); x++)
    {
-      Measure *measure = measure_grid.get_measure(x, 0);
-      TimeSignature time_signature = measure_grid.get_time_signature(x);
+      Measure *measure = measure_grid->get_measure(x, 0);
+      TimeSignature time_signature = measure_grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
       float x_pos = x * FULL_MEASURE_WIDTH;
 
-      al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid.get_num_staves(), color::color(color::black, 0.2), 1.0);
+      al_draw_line(x_pos, 0, x_pos, STAFF_HEIGHT * measure_grid->get_num_staves(), color::color(color::black, 0.2), 1.0);
       if (time_signature != previous_time_signature)
          time_signature_render_component.render(x_pos, -50);
 
@@ -47,10 +47,10 @@ void MeasureGridRenderComponent::render()
    // draw the notes and measures
    Note *hovered_note = get_note_at_cursor();
 
-   for (int y=0; y<measure_grid.get_num_staves(); y++)
-      for (int x=0; x<measure_grid.get_num_measures(); x++)
+   for (int y=0; y<measure_grid->get_num_staves(); y++)
+      for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
-         Measure *measure = measure_grid.get_measure(x,y);
+         Measure *measure = measure_grid->get_measure(x,y);
          music_engraver.draw(measure, x*FULL_MEASURE_WIDTH, y*STAFF_HEIGHT + STAFF_HEIGHT/2, FULL_MEASURE_WIDTH);
 
          // draw the notes
