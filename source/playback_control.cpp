@@ -4,6 +4,7 @@
 
 #include <fullscore/playback_control.h>
 
+#include <fullscore/helpers/duration_helper.h>
 #include <fullscore/models/note.h>
 
 
@@ -135,9 +136,10 @@ void PlaybackControl::refresh_note_start_and_end_times()
          for (unsigned n=0; n<measure->notes.size(); n++)
          {
             Note &note = measure->notes[n];
+            float duration_width = DurationHelper::get_length(note.duration, note.dots);
             note.playback_info.start_time = x_cursor + x;
-            note.playback_info.end_time = note.playback_info.start_time + note.get_duration_width();
-            x_cursor += note.get_duration_width();
+            note.playback_info.end_time = note.playback_info.start_time + duration_width;
+            x_cursor += duration_width;
          }
       }
 }

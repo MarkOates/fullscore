@@ -7,6 +7,7 @@
 #include <allegro_flare/allegro_flare.h>
 
 #include <fullscore/components/time_signature_render_component.h>
+#include <fullscore/helpers/duration_helper.h>
 
 
 
@@ -97,7 +98,7 @@ void GUIScoreEditor::on_draw()
             int xx = x * FULL_MEASURE_WIDTH;
             int yy = y * STAFF_HEIGHT;
             Note &note = measure->notes[i];
-            float width = note.get_duration_width() * FULL_MEASURE_WIDTH;
+            float width = DurationHelper::get_length(note.duration, note.dots) * FULL_MEASURE_WIDTH;
 
             // draw some debug info on the note
             if (showing_debug_data)
@@ -138,7 +139,7 @@ void GUIScoreEditor::on_draw()
       float measure_cursor_real_x = get_measure_cursor_real_x();
       float measure_cursor_real_y = get_measure_cursor_real_y();
       float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-      float note_width = note->get_duration_width() * FULL_MEASURE_WIDTH;
+      float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
 
       // fill
       al_draw_filled_rounded_rectangle(
@@ -236,7 +237,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
    if (note_index < 0 || note_index >= measure.notes.size()) return 0;
 
    for (int i=0; i<note_index; i++)
-      sum += measure.notes[i].get_duration_width();
+      sum += DurationHelper::get_length(measure.notes[i].duration, measure.notes[i].dots);
    return sum;
 }
 
@@ -246,7 +247,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
 float GUIScoreEditor::get_measure_width(Measure &m)
 {
    float sum = 0;
-   for (auto &note : m.notes) sum += note.get_duration_width();
+   for (auto &note : m.notes) sum += DurationHelper::get_length(note.duration, note.dots);
    return sum;
 }
 
