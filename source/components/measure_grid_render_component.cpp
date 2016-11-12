@@ -24,6 +24,8 @@ MeasureGridRenderComponent::~MeasureGridRenderComponent()
 
 void MeasureGridRenderComponent::render()
 {
+   if (!measure_grid) return;
+
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
    for (int x=0; x<measure_grid.get_num_measures(); x++)
