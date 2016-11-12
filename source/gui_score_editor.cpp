@@ -9,6 +9,7 @@
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/components/measure_grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
+#include <fullscore/helpers/measure_grid_helper.h>
 
 
 
@@ -176,7 +177,7 @@ Note *GUIScoreEditor::get_note_at_cursor()
 
 float GUIScoreEditor::get_measure_cursor_real_x()
 {
-   return measure_cursor_x * FULL_MEASURE_WIDTH;
+   return MeasureGridHelper::get_length_to_measure(measure_grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
