@@ -63,9 +63,12 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
 
 void GUIScoreEditor::on_draw()
 {
+   float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+
    // draw a background for the score
    al_draw_filled_rectangle(-30, -30,
-      FULL_MEASURE_WIDTH * measure_grid.get_num_measures() + 30, STAFF_HEIGHT * measure_grid.get_num_staves() + 30,
+      measure_grid_real_width + 30, measure_grid_real_height + 30,
       color::color(color::blanchedalmond, 0.2));
 
    // render the measure grid
