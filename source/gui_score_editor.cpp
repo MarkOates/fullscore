@@ -77,6 +77,7 @@ void GUIScoreEditor::on_draw()
    Measure *measure = get_measure_at_cursor();
    Note *note = get_note_at_cursor();
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
+   float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
 
    if (get_measure_at_cursor())
    {
@@ -97,16 +98,15 @@ void GUIScoreEditor::on_draw()
    // draw a hilight box under the focused note
    if (measure && note)
    {
-      float measure_cursor_real_y = get_measure_cursor_real_y();
       float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
       float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
 
       // fill
       al_draw_filled_rounded_rectangle(
             CACHED_get_measure_cursor_real_x + note_real_offset_x,
-            measure_cursor_real_y,
+            CACHED_get_measure_cursor_real_y,
             CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
-            measure_cursor_real_y + STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
             6,
             6,
             color::color(color::pink, 0.4)
@@ -116,9 +116,9 @@ void GUIScoreEditor::on_draw()
       if (is_note_target_mode())
          al_draw_rounded_rectangle(
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
-               measure_cursor_real_y,
+               CACHED_get_measure_cursor_real_y,
                CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
-               measure_cursor_real_y + STAFF_HEIGHT,
+               CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
                6,
                6,
                color::mix(color::color(color::pink, 0.8), color::black, 0.3),
@@ -129,9 +129,8 @@ void GUIScoreEditor::on_draw()
    // draw the measure cursor
    if (measure_cursor_x >= 0 && measure_cursor_y >= 0)
    {
-      float measure_cursor_real_y = get_measure_cursor_real_y();
-      al_draw_line(CACHED_get_measure_cursor_real_x, measure_cursor_real_y,
-            CACHED_get_measure_cursor_real_x, measure_cursor_real_y+STAFF_HEIGHT,
+      al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
+            CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
             color::white, 3.0);
    }
 
