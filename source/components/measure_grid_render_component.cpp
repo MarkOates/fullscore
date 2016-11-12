@@ -9,6 +9,7 @@
 #include <allegro_flare/useful.h>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
+#include <fullscore/helpers/measure_grid_helper.h>
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/constants.h>
@@ -43,13 +44,15 @@ void MeasureGridRenderComponent::render()
    for (int x=0; x<measure_grid->get_num_measures(); x++)
    {
       Measure *measure = measure_grid->get_measure(x, 0);
+      float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
       TimeSignature time_signature = measure_grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
-      float x_pos = x * full_measure_width;
 
+      // draw barline
       al_draw_line(x_pos, 0, x_pos, staff_height * measure_grid->get_num_staves(), color::color(color::black, 0.2), 1.0);
-      if (time_signature != previous_time_signature)
-         time_signature_render_component.render(x_pos, -50);
+
+      // draw time signature
+      if (time_signature != previous_time_signature) time_signature_render_component.render(x_pos, -50);
 
       previous_time_signature = time_signature;
    }
