@@ -4,7 +4,12 @@
 
 #include<fullscore/components/measure_grid_render_component.h>
 
+#include <allegro_flare/color.h>
+#include <allegro_flare/framework.h>
+#include <allegro_flare/useful.h>
 #include <fullscore/components/time_signature_render_component.h>
+#include <fullscore/helpers/duration_helper.h>
+#include <fullscore/models/note.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/constants.h>
 #include <fullscore/music_engraver.h>
