@@ -8,6 +8,7 @@ BASE_DIR=/Users/markoates/Repos
 ALLEGRO_DIR=$(BASE_DIR)/allegro5
 ALLEGROFLARE_DIR=$(BASE_DIR)/allegro_flare
 ALLEGROFLARE_LIB_NAME=allegro_flare-0.8.8wip
+GOOGLE_TEST_DIR=$(BASE_DIR)/googletest
 
 
 
@@ -16,6 +17,8 @@ ALLEGRO_LIB_DIR=$(ALLEGRO_DIR)/build/lib
 ALLEGRO_INCLUDE_DIR=$(ALLEGRO_DIR)/include
 ALLEGROFLARE_LIB_DIR=$(ALLEGROFLARE_DIR)/lib
 ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
+GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
+GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
 OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
@@ -39,6 +42,7 @@ OBJ_FILES=$(OBJS:%=obj/%.o)
 
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
 ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
+GOOGLE_TEST_LIBS=-lgtest
 
 
 
@@ -66,6 +70,24 @@ tools: bin/generate$(EXE_EXTENSION)
 
 bin/generate$(EXE_EXTENSION): source/tools/generate.cpp
 	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) source/tools/generate.cpp -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS)
+
+
+
+
+#
+# Tests
+#
+
+.PHONY: tests
+
+TEST_OBJS=$(addprefix tests/,$(basename $(notdir $(wildcard tests/*.cpp))))
+TEST_OBJ_FILES=$(OBJS:%=bin/tests/%)
+
+tests: bin/tests/test_test$(EXE_EXTENSION)
+
+bin/tests/test_test: tests/test_test.cpp
+	g++ -o bin/tests/test_test tests/test_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
+
 
 
 
