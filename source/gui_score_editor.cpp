@@ -106,13 +106,13 @@ void GUIScoreEditor::on_draw()
       if (note)
       {
          float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-         float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
+         float real_note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
 
          // fill
          al_draw_filled_rounded_rectangle(
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
-               CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
+               CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
                CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
                6,
                6,
@@ -124,7 +124,7 @@ void GUIScoreEditor::on_draw()
             al_draw_rounded_rectangle(
                   CACHED_get_measure_cursor_real_x + note_real_offset_x,
                   CACHED_get_measure_cursor_real_y,
-                  CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
+                  CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
                   CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
                   6,
                   6,
