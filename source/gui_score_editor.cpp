@@ -136,7 +136,7 @@ void GUIScoreEditor::on_draw()
 
    // draw the playhead
    float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
-   al_draw_line(playhead_x, -40, playhead_x, STAFF_HEIGHT * measure_grid.get_num_staves() + 40, color::color(color::lightcyan, 0.5), 3);
+   al_draw_line(playhead_x, -40, playhead_x, measure_grid_real_height + 40, color::color(color::lightcyan, 0.5), 3);
    al_draw_filled_triangle(playhead_x-8, -48, playhead_x+8, -48, playhead_x, -40+6, color::lightcyan);
    al_draw_filled_rectangle(playhead_x-8, -48-14, playhead_x+8, -48, color::lightcyan);
 }
