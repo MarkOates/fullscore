@@ -15,6 +15,7 @@ class MeasureGrid
 {
 private:
    friend class MeasureGridFileConverter;
+   friend class MeasureGridHelper;
 
    class Row
    {
@@ -31,8 +32,8 @@ public:
    MeasureGrid(int num_x_measures, int num_y_staves);
    Measure *get_measure(int x_measure, int y_staff);
 
-   int get_num_staves();
-   int get_num_measures();
+   int get_num_staves() const;
+   int get_num_measures() const;
 
    void insert_staff(int index);
    bool delete_staff(int index);

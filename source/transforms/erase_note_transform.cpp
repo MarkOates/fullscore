@@ -5,7 +5,6 @@
 #include <fullscore/transforms/erase_note_transform.h>
 
 #include <algorithm>
-#include <fullscore/constants.h>
 
 
 

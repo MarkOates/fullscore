@@ -9,6 +9,7 @@ class TimeSignature
 private:
    friend class TimeSignatureRenderComponent;
    friend class TimeSignatureStringConverter;
+   friend class DurationHelper;
 
    int numerator;
    int denominator_duration;

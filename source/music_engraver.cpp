@@ -11,6 +11,7 @@
 #include <allegro_flare/useful.h>
 #include <allegro_flare/drawing_interfaces/drawing_interface_allegro5.h>
 
+#include <fullscore/helpers/duration_helper.h>
 #include <fullscore/models/note.h>
 #include <fullscore/music_engraver.h>
 
@@ -62,7 +63,7 @@ void MusicEngraver::draw(Measure *measure, float x, float y, const float whole_n
 	for (unsigned i=0; i<measure->notes.size(); i++)
 	{
 		music_notation.draw(x + cursor_x, y, translate_note_to_str(measure->notes[i]));
-		cursor_x += measure->notes[i].get_duration_width() * whole_note_width;
+		cursor_x += DurationHelper::get_length(measure->notes[i].duration, measure->notes[i].dots) * whole_note_width;
 	}
 }
 
