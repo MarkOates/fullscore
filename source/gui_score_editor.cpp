@@ -82,7 +82,7 @@ void GUIScoreEditor::on_draw()
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
    float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
 
-   if (get_measure_at_cursor())
+   if (measure)
    {
       float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
 
