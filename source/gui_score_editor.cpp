@@ -101,37 +101,37 @@ void GUIScoreEditor::on_draw()
       al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
             CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
             color::white, 3.0);
-   }
 
-   // draw a hilight box at the focused note
-   if (measure && note)
-   {
-      float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-      float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
+      // draw a hilight box at the focused note
+      if (note)
+      {
+         float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
+         float note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
 
-      // fill
-      al_draw_filled_rounded_rectangle(
-            CACHED_get_measure_cursor_real_x + note_real_offset_x,
-            CACHED_get_measure_cursor_real_y,
-            CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
-            CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
-            6,
-            6,
-            color::color(color::pink, 0.4)
-         );
-
-      // outline
-      if (is_note_target_mode())
-         al_draw_rounded_rectangle(
+         // fill
+         al_draw_filled_rounded_rectangle(
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
                CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
                CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
                6,
                6,
-               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
-               2.0
+               color::color(color::pink, 0.4)
             );
+
+         // outline
+         if (is_note_target_mode())
+            al_draw_rounded_rectangle(
+                  CACHED_get_measure_cursor_real_x + note_real_offset_x,
+                  CACHED_get_measure_cursor_real_y,
+                  CACHED_get_measure_cursor_real_x + note_real_offset_x + note_width,
+                  CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
+                  6,
+                  6,
+                  color::mix(color::color(color::pink, 0.8), color::black, 0.3),
+                  2.0
+               );
+      }
    }
 
    // draw the playhead
