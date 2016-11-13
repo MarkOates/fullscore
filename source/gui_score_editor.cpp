@@ -98,7 +98,7 @@ void GUIScoreEditor::on_draw()
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
    }
 
-   // draw a hilight box under the focused note
+   // draw a hilight box at the focused note
    if (measure && note)
    {
       float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
