@@ -96,6 +96,11 @@ void GUIScoreEditor::on_draw()
          al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
             CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::aliceblue, 0.7), 2.0);
+
+      // left bar
+      al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
+            CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
+            color::white, 3.0);
    }
 
    // draw a hilight box at the focused note
@@ -127,14 +132,6 @@ void GUIScoreEditor::on_draw()
                color::mix(color::color(color::pink, 0.8), color::black, 0.3),
                2.0
             );
-   }
-
-   // draw the measure cursor
-   if (measure_cursor_x >= 0 && measure_cursor_y >= 0)
-   {
-      al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
-            CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
-            color::white, 3.0);
    }
 
    // draw the playhead
