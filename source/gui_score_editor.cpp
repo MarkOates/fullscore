@@ -86,12 +86,12 @@ void GUIScoreEditor::on_draw()
    {
       float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
 
-      // fill
+      // measure box fill
       al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
          CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.2));
 
-      // outline
+      // measure box outline
       if (is_measure_target_mode())
          al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
             CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
@@ -108,7 +108,7 @@ void GUIScoreEditor::on_draw()
          float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
          float real_note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
 
-         // fill
+         // note box fill
          al_draw_filled_rounded_rectangle(
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
@@ -119,7 +119,7 @@ void GUIScoreEditor::on_draw()
                color::color(color::pink, 0.4)
             );
 
-         // outline
+         // note box outline
          if (is_note_target_mode())
             al_draw_rounded_rectangle(
                   CACHED_get_measure_cursor_real_x + note_real_offset_x,
