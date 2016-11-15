@@ -24,7 +24,7 @@ public:
 
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
-   GUIScoreEditor *score_editor;
+   GUIScoreEditor *gui_score_editor;
    UICommandBar *command_bar;
    UIMixer *gui_mixer;
    UIFramedWindow *help_window;
