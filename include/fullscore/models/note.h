@@ -4,8 +4,9 @@
 
 
 
-#include <fullscore/models/note.h>
 #include <fullscore/models/note_playback_info.h>
+
+
 
 
 class Note
