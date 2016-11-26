@@ -22,7 +22,7 @@ UIFollowCamera::~UIFollowCamera()
 
 
 
-void UIFollowCamera::primary_timer_func()
+void UIFollowCamera::on_timer()
 {
    const float THRESHOLD = 0.01;
    const float REDUCTION_PERCENT = 0.2;

@@ -16,7 +16,7 @@ public:
    UIFollowCamera(UIWidget *parent);
    ~UIFollowCamera();
 
-   void primary_timer_func();
+   void on_timer() override;
 };
 
 
