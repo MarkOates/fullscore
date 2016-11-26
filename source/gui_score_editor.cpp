@@ -22,7 +22,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    : UIWidget(parent, "GUIScoreEditor",
       new UISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
    , measure_grid(8, 3)
-   , playback_control(&measure_grid, playback_device)
+   , playback_control()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)

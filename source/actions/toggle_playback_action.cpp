@@ -31,13 +31,6 @@ bool Action::TogglePlayback::execute()
 {
    if (!score_editor || !ui_mixer) return false;
 
-   // send the patches before play
-   PlaybackDeviceInterface *device = score_editor->playback_control.playback_device;
-   for (unsigned i=0; i<score_editor->measure_grid.get_num_staves(); i++)
-   {
-      device->patch_change(i, ui_mixer->get_patch_num(i));
-   }
-
    // toggle playback
    score_editor->playback_control.toggle_playback();
 
