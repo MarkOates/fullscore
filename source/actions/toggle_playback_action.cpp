@@ -11,6 +11,7 @@
 
 Action::TogglePlayback::TogglePlayback(PlaybackControl *playback_control)
    : Base("toggle_playback")
+   , playback_control(playback_control)
 {
 }
 
