@@ -26,7 +26,7 @@ OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/acti
 OBJS+=$(addprefix helpers/,$(basename $(notdir $(wildcard source/helpers/*.cpp))))
 OBJS+=components/time_signature_render_component components/measure_grid_render_component
 OBJS+=converters/measure_grid_file_converter converters/note_string_converter converters/time_signature_string_converter
-OBJS+=models/measure models/measure_grid models/note models/playback_note models/time_signature
+OBJS+=models/index_set models/measure models/measure_grid models/note models/playback_note models/projection_pitch models/projection_set models/time_signature
 OBJS+=transforms/add_dot_transform transforms/double_duration_transform transforms/erase_note_transform transforms/half_duration_transform transforms/remove_dot_transform transforms/retrograde_transform transforms/insert_note_transform transforms/invert_transform transforms/toggle_rest_transform transforms/transform_base transforms/transpose_transform
 
 ifeq ($(OS), Windows_NT)
