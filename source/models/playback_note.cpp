@@ -2,12 +2,12 @@
 
 
 
-#include <fullscore/models/note_playback_info.h>
+#include <fullscore/models/playback_note.h>
 
 
 
 
-NotePlaybackInfo::NotePlaybackInfo()
+PlaybackNote::PlaybackNote()
    : start_time(0)
    , end_time(0)
    , attacked(false)
@@ -21,7 +21,7 @@ NotePlaybackInfo::NotePlaybackInfo()
 
 
 
-NotePlaybackInfo::~NotePlaybackInfo()
+PlaybackNote::~PlaybackNote()
 {
 }
 
