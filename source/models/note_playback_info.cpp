@@ -12,6 +12,9 @@ NotePlaybackInfo::NotePlaybackInfo()
    , end_time(0)
    , attacked(false)
    , released(false)
+   , pitch(0)
+   , channel(0)
+   , velocity(0)
 {
 };
 
