@@ -48,6 +48,30 @@ TEST(PitchProjectorTest, extends_a_projection)
 
 
 
+TEST(PitchProjectorTest, extends_a_projection_into_negative_numbers_TEST_1)
+{
+   PitchProjector projector(ProjectionSet({0}, 4), IndexSet({0, -1, -2, -3}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({0, -4, -8, -12});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
+TEST(PitchProjectorTest, extends_a_projection_into_negative_numbers_TEST_2)
+{
+   PitchProjector projector(ProjectionSet({0, 1}, 12), IndexSet({0, -1, -2, -3}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({0, -11, -12, -23});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
