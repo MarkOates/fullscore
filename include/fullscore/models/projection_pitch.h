@@ -6,10 +6,8 @@ class ProjectionPitch
 {
 public:
    int pitch;
-   int extension;
-   int accidental;
 
-   ProjectionPitch(int pitch, int extension=0, int accidental=0);
+   ProjectionPitch(int pitch);
 
    bool operator==(const ProjectionPitch &other) const;
 };
