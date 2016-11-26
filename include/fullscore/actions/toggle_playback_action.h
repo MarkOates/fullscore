@@ -9,19 +9,17 @@
 
 
 
-class GUIScoreEditor;
-class UIMixer;
+class PlaybackControl;
 
 namespace Action
 {
    class TogglePlayback : public Base
    {
    private:
-      GUIScoreEditor *score_editor;
-      UIMixer *ui_mixer;
+      PlaybackControl *playback_control;
 
    public:
-      TogglePlayback(GUIScoreEditor *score_editor, UIMixer *ui_mixer);
+      TogglePlayback(PlaybackControl *playback_control);
       ~TogglePlayback();
       bool execute() override;
    };
