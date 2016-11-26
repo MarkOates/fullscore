@@ -1,14 +1,12 @@
-#ifndef __FULLSCORE_NOTE_PLAYBACK_INFO_HEADER
-#define __FULLSCORE_NOTE_PLAYBACK_INFO_HEADER
-
+#pragma once
 
 
 
 class NotePlaybackInfo
 {
 public:
-   bool attacked, released;
    float start_time, end_time;
+   bool attacked, released;
 
    NotePlaybackInfo();
    ~NotePlaybackInfo();
@@ -16,5 +14,3 @@ public:
 
 
 
-
-#endif
