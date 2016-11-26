@@ -147,8 +147,6 @@ void GUIScoreEditor::on_draw()
 
 void GUIScoreEditor::on_timer()
 {
-   UIWidget::on_timer();
-
    playback_control.update(Framework::time_now);
 }
 
