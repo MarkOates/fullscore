@@ -20,7 +20,7 @@ ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
-OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver playback_control playback_device_interface run_script
+OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver pitch_projector playback_control playback_device_interface run_script
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/actions/transforms/*.cpp))))
 OBJS+=$(addprefix helpers/,$(basename $(notdir $(wildcard source/helpers/*.cpp))))
@@ -82,14 +82,20 @@ bin/generate$(EXE_EXTENSION): source/tools/generate.cpp
 
 TEST_OBJS=$(addprefix tests/,$(basename $(notdir $(wildcard tests/*.cpp))))
 TEST_OBJ_FILES=$(OBJS:%=bin/tests/%)
+EVERYTHING=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGROFLARE_LIBS) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
 
-tests: bin/tests/test_test$(EXE_EXTENSION) bin/tests/duration_helper_test$(EXE_EXTENSION) bin/tests/measure_grid_helper_test$(EXE_EXTENSION)
+tests: bin/tests/test_test$(EXE_EXTENSION) bin/tests/duration_helper_test$(EXE_EXTENSION) bin/tests/measure_grid_helper_test$(EXE_EXTENSION) bin/tests/pitch_projector_test$(EXE_EXTENSION)
 
 bin/tests/test_test: tests/test_test.cpp
 	g++ -o bin/tests/test_test tests/test_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
 
 bin/tests/duration_helper_test$(EXE_EXTENSION): tests/duration_helper_test.cpp obj/helpers/duration_helper.o obj/models/time_signature.o
 	g++ obj/models/time_signature.o obj/helpers/duration_helper.o -o bin/tests/duration_helper_test tests/duration_helper_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
+
+bin/tests/pitch_projector_test$(EXE_EXTENSION): tests/pitch_projector_test.cpp $(OBJ_FILES)
+	@echo -n compiling $@...
+	@g++ -std=gnu++11 $^ -o $@ $(EVERYTHING)
+	@echo done
 
 bin/tests/measure_grid_helper_test$(EXE_EXTENSION): tests/measure_grid_helper_test.cpp obj/helpers/measure_grid_helper.o obj/models/measure_grid.o obj/models/time_signature.o obj/models/note.o obj/helpers/duration_helper.o
 	g++ obj/models/measure_grid.o obj/helpers/duration_helper.o obj/models/note.o obj/models/time_signature.o obj/helpers/measure_grid_helper.o -o bin/tests/measure_grid_helper_test tests/measure_grid_helper_test.cpp -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
