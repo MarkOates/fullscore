@@ -36,6 +36,18 @@ TEST(PitchProjectorTest, projects_an_index_set_through_a_projection_set__TEST_2)
 
 
 
+TEST(PitchProjectorTest, extends_a_projection)
+{
+   PitchProjector projector(ProjectionSet({0}, 3), IndexSet({0, 1, 2, 3}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({0, 3, 6, 9});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

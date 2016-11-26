@@ -21,14 +21,17 @@ IndexSet PitchProjector::get_projection()
       ProjectionPitch pitch(0);
 
       int local_index = index_element.pitch % projection_set.pitches.size();
+      int local_extension = index_element.pitch / projection_set.pitches.size();
+
       pitch.pitch = projection_set.pitches[local_index].pitch;
-      pitch.extension = index_element.pitch / projection_set.extension + index_element.extension;
+      pitch.pitch += local_extension * projection_set.extension;
 
       result.pitches.push_back(pitch);
    }
 
    return result;
 }
+
 
 
 /*
@@ -66,7 +69,6 @@ public:
    }
 };
 */
-
 
 
 
