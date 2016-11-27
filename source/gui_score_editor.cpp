@@ -19,7 +19,7 @@ const bool TEMPORARILY_DISABLE = false;
 
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBox(0, 0, 300, 200))
+   : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(8, 3)
    , playback_control()
    , measure_cursor_x(0)
@@ -59,6 +59,14 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
 
 void GUIScoreEditor::on_draw()
 {
+   // draw the bounding box for the widget
+   float pt, pr, pb, pl;
+   UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
+   sa->get_padding(&pt, &pr, &pb, &pl);
+   al_draw_rounded_rectangle(-pl, -pt, place.size.x+pr, place.size.y+pb, 6, 6, color::color(color::chartreuse, 0.7), 2.0);
+   al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::blanchedalmond, 0.2));
+
+   // get_width_of_score
    float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
    float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
 
