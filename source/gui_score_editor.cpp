@@ -20,7 +20,7 @@ const bool TEMPORARILY_DISABLE = false;
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
-   , measure_grid(8, 3)
+   , measure_grid(0, 0)
    , playback_control()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
@@ -31,28 +31,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
    , edit_mode_target(MEASURE_TARGET)
    , mode(NORMAL_MODE)
-{
-   // twinkle twinkle, little star
-   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(4, 2));
-
-   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
-
-   // test time signatures
-   measure_grid.set_time_signature(2, TimeSignature(3, 4));
-   measure_grid.set_time_signature(5, TimeSignature(5, 8));
-}
+{}
 
 
 

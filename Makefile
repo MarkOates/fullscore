@@ -24,6 +24,7 @@ OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/actions/transforms/*.cpp))))
 OBJS+=$(addprefix helpers/,$(basename $(notdir $(wildcard source/helpers/*.cpp))))
+OBJS+=$(addprefix factories/,$(basename $(notdir $(wildcard source/factories/*.cpp))))
 OBJS+=components/time_signature_render_component components/measure_grid_render_component
 OBJS+=converters/measure_grid_file_converter converters/note_string_converter converters/time_signature_string_converter
 OBJS+=models/index_set models/measure models/measure_grid models/note models/playback_note models/projection_pitch models/projection_set models/time_signature

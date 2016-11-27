@@ -42,6 +42,8 @@
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
+#include <fullscore/factories/measure_grid_factory.h>
+
 
 
 
@@ -60,6 +62,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    gui_score_editor = new GUIScoreEditor(&follow_camera);
+   gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
    gui_mixer = new UIMixer(this, 1600, 1200);
    command_bar = new UICommandBar(this);
 
