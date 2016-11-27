@@ -68,10 +68,15 @@ $(OBJ_FILES): obj/%.o : source/%.cpp source/main.cpp
 
 .PHONY: tools
 
-tools: bin/generate$(EXE_EXTENSION)
+tools: bin/generate$(EXE_EXTENSION) bin/projection_calculator$(EXE_EXTENSION)
 
 bin/generate$(EXE_EXTENSION): source/tools/generate.cpp
 	g++ -std=gnu++11 -o bin/generate$(EXE_EXTENSION) source/tools/generate.cpp -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS)
+
+bin/projection_calculator$(EXE_EXTENSION): source/tools/projection_calculator.cpp $(OBJ_FILES)
+	@echo -n compiling $@...
+	@g++ -std=gnu++11 $^ -o $@ $(EVERYTHING)
+	@echo done
 
 
 
