@@ -107,6 +107,17 @@ TEST(PitchProjectorTest, with_an_empty_index_set_will_return_an_empty_result)
 
 
 
+TEST(PitchProjectorTest, does_not_explode_like_in_the_projection_calculator_program)
+{
+   PitchProjector projector(ProjectionSet({0, 1, 2, 3, 4}, 12), IndexSet({0, -1, 2, 3, 4}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({0, -8, 2, 3, 4});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
 
 int main(int argc, char **argv)
 {

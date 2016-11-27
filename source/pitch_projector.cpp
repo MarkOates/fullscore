@@ -20,13 +20,15 @@ IndexSet PitchProjector::get_projection()
 
    for (auto &index_element : index_set.pitches)
    {
+      int scale_degree = index_element.pitch;
+      int cardinality = projection_set.pitches.size();
+      int extension = 0;
       ProjectionPitch pitch(0);
 
-      int local_index = index_element.pitch % projection_set.pitches.size();
-      int local_extension = index_element.pitch / projection_set.pitches.size();
+      while (scale_degree < 0) { scale_degree += cardinality; extension--; }
+      while (scale_degree >= cardinality) { scale_degree -= cardinality; extension++; }
 
-      pitch.pitch = projection_set.pitches[local_index].pitch;
-      pitch.pitch += local_extension * projection_set.extension;
+      pitch.pitch = projection_set.pitches[scale_degree].pitch + extension * projection_set.extension;
 
       result.pitches.push_back(pitch);
    }
