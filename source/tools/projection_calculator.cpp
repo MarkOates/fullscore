@@ -29,11 +29,16 @@ IndexSet str_to_index_set(std::string str)
 
 
 
-std::string index_set_to_engraver_str(IndexSet &index_set)
+std::string index_set_to_engraver_str(IndexSet &set)
 {
    std::stringstream ss;
-   for (auto &pitch : index_set.pitches)
+   ss << "  ";
+   for (auto &pitch : set.pitches)
+   {
+      ss << (pitch.accidental < 0 ? "-" : pitch.accidental > 0 ? "+" : "");
       ss << "(" << pitch.pitch << ")";
+   }
+   ss << "  ";
    return ss.str();
 }
 
@@ -58,12 +63,15 @@ ProjectionSet str_to_projection_set(std::string str, std::string extension_str)
 
 
 
-std::string projection_set_to_engraver_str(ProjectionSet &index_set)
+std::string projection_set_to_engraver_str(ProjectionSet &set)
 {
    std::stringstream ss;
    ss << "  ";
-   for (auto &pitch : index_set.pitches)
+   for (auto &pitch : set.pitches)
+   {
+      ss << (pitch.accidental < 0 ? "-" : pitch.accidental > 0 ? "+" : "");
       ss << "(" << pitch.pitch << ")";
+   }
    ss << "  ";
    return ss.str();
 }
