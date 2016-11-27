@@ -17,10 +17,9 @@
 const bool TEMPORARILY_DISABLE = false;
 
 
-GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
+GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "GUIScoreEditor",
-      new UISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
+   : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBox(0, 0, 300, 200))
    , measure_grid(8, 3)
    , playback_control()
    , measure_cursor_x(0)

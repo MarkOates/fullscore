@@ -5,7 +5,6 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <allegro_flare/display.h>
 #include <allegro_flare/placement2d.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/music_engraver.h>
@@ -47,7 +46,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
+   GUIScoreEditor(UIWidget *parent);
    void on_draw() override;
    void on_timer() override;
    Measure *get_measure_at_cursor();

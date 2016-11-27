@@ -59,7 +59,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   gui_score_editor = new GUIScoreEditor(&follow_camera, display, new PlaybackDeviceGeneric());
+   gui_score_editor = new GUIScoreEditor(&follow_camera);
    gui_mixer = new UIMixer(this, 1600, 1200);
    command_bar = new UICommandBar(this);
 
