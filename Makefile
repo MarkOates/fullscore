@@ -56,9 +56,9 @@ EVERYTHING_NO_ALLEGRO_MAIN=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_
 
 
 bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
-	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
+	g++ -std=gnu++11 $^ source/main.cpp -o $@ $(EVERYTHING)
 
-$(OBJ_FILES): obj/%.o : source/%.cpp source/main.cpp
+$(OBJ_FILES): obj/%.o : source/%.cpp
 	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 
 
