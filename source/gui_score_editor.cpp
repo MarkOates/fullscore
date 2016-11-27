@@ -32,9 +32,6 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    , edit_mode_target(MEASURE_TARGET)
    , mode(NORMAL_MODE)
 {
-   attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
-   attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
-
    // twinkle twinkle, little star
    measure_grid.get_measure(0,0)->notes.push_back(Note(0));
    measure_grid.get_measure(0,0)->notes.push_back(Note(0));
