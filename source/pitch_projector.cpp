@@ -28,7 +28,9 @@ IndexSet PitchProjector::get_projection()
       while (scale_degree < 0) { scale_degree += cardinality; extension--; }
       while (scale_degree >= cardinality) { scale_degree -= cardinality; extension++; }
 
-      pitch.pitch = projection_set.pitches[scale_degree].pitch + extension * projection_set.extension;
+      ProjectionPitch &projected_pitch = projection_set.pitches[scale_degree];
+      pitch.pitch = projected_pitch.pitch + extension * projection_set.extension;
+      pitch.accidental = projected_pitch.accidental + index_element.accidental;
 
       result.pitches.push_back(pitch);
    }
