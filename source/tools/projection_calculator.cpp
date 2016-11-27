@@ -8,7 +8,6 @@
 
 #include <fullscore/models/projection_set.h>
 #include <fullscore/models/index_set.h>
-#include <fullscore/pitch_projector.h>
 
 
 
@@ -39,38 +38,49 @@ std::string index_set_to_engraver_str(IndexSet &index_set)
 
 
 
+class UITextInputKeypress : public UITextInput
+{
+public:
+   using UITextInput::UITextInput;
+
+   void on_key_char() override
+   {
+      UITextInput::on_key_char();
+      send_message_to_parent("keydown");
+   }
+};
+
+
 
 class ProjectionCalculator : public UIScreen
 {
 private:
-   DrawingInterfaceAllegro5 drawing_interface_allegro5;
-   MusicNotation music_notation;
-   std::string music_notation_content_string;
-   int notation_width;
-   UITextInput *text_input;
+   UICamera *camera;
+
+   UITextInputKeypress *index_set_input;
+   UIMusicNotation *index_set_notation;
+
 
 public:
    ProjectionCalculator(Display *display)
       : UIScreen(display)
-      , drawing_interface_allegro5()
-      , music_notation(&drawing_interface_allegro5, 12)
-      , music_notation_content_string("")
-      , notation_width(0)
-      , text_input(new UITextInput(this, display->width()/2, display->height()-120, display->width()/2, 60))
+      , camera(new UICamera(this, 0, 0, 0, 0))
+      , index_set_input(new UITextInputKeypress(camera, 0, 0, 600, 60))
+      , index_set_notation(new UIMusicNotation(camera, 0, 100))
    {
-      text_input->set_text("0 1 2 3 4 5");
+      camera->place.position = vec2d(display->width()/2, display->height()/2);
    }
 
-   void on_timer() override
+   void update_calculation()
    {
       // update calculations
-      IndexSet index_set = str_to_index_set(text_input->get_text());
-      music_notation_content_string = index_set_to_engraver_str(index_set);
+      IndexSet index_set = str_to_index_set(index_set_input->get_text());
+      index_set_notation->set_val(index_set_to_engraver_str(index_set));
    }
 
-   void on_draw() override
+   void on_message(UIWidget *sender, std::string message) override
    {
-      notation_width = music_notation.draw(display->width()/2 - notation_width/2, 300, music_notation_content_string);
+      if (sender == index_set_input) update_calculation();
    }
 };
 
