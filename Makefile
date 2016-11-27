@@ -20,7 +20,7 @@ ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
-OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor main mixer music_engraver pitch_projector playback_control playback_device_interface run_script
+OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor mixer music_engraver pitch_projector playback_control playback_device_interface run_script
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/actions/transforms/*.cpp))))
 OBJS+=$(addprefix helpers/,$(basename $(notdir $(wildcard source/helpers/*.cpp))))
@@ -45,6 +45,8 @@ ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 GOOGLE_TEST_LIBS=-lgtest
 
 
+EVERYTHING=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGROFLARE_LIBS) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
+
 
 #
 # Build Targets
@@ -54,7 +56,7 @@ GOOGLE_TEST_LIBS=-lgtest
 bin/fullscore$(EXE_EXTENSION): $(OBJ_FILES)
 	g++ $(OBJ_FILES) -o $@ -L$(ALLEGRO_LIB_DIR) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGRO_LIBS) $(ALLEGROFLARE_LIBS)
 
-$(OBJ_FILES): obj/%.o : source/%.cpp
+$(OBJ_FILES): obj/%.o : source/%.cpp source/main.cpp
 	g++ -std=gnu++11 -c -o $@ $< -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR)
 
 
@@ -82,7 +84,6 @@ bin/generate$(EXE_EXTENSION): source/tools/generate.cpp
 
 TEST_OBJS=$(addprefix tests/,$(basename $(notdir $(wildcard tests/*.cpp))))
 TEST_OBJ_FILES=$(OBJS:%=bin/tests/%)
-EVERYTHING=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGROFLARE_LIBS) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
 
 tests: bin/tests/test_test$(EXE_EXTENSION) bin/tests/duration_helper_test$(EXE_EXTENSION) bin/tests/measure_grid_helper_test$(EXE_EXTENSION) bin/tests/pitch_projector_test$(EXE_EXTENSION)
 
