@@ -17,7 +17,7 @@ namespace Transform
       int transposition;
       Transpose(int transposition);
       ~Transpose();
-      std::vector<Note> transform(std::vector<Note> notes) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 };
 

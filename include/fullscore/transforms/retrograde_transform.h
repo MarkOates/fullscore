@@ -16,7 +16,7 @@ namespace Transform
    public:
       Retrograde();
       ~Retrograde();
-      std::vector<Note> transform(std::vector<Note> notes) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 };
 

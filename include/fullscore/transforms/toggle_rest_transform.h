@@ -16,7 +16,7 @@ namespace Transform
    public:
       ToggleRest();
       ~ToggleRest();
-      std::vector<Note> transform(std::vector<Note> notes) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 };
 
