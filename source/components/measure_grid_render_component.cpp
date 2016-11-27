@@ -87,8 +87,6 @@ void MeasureGridRenderComponent::render()
 
                al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.scale_degree).c_str());
                al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
-               al_draw_text(text_font, color::white, x_cursor, y_pos+40, 0, tostring(note.playback_info.start_time).c_str());
-               al_draw_text(text_font, color::white, x_cursor, y_pos+60, 0, tostring(note.playback_info.end_time).c_str());
 
                x_cursor += width;
             }

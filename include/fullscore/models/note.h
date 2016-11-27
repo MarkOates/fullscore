@@ -4,10 +4,6 @@
 
 
 
-#include <fullscore/models/note.h>
-#include <fullscore/models/note_playback_info.h>
-
-
 class Note
 {
 public:
@@ -16,8 +12,6 @@ public:
 	int duration;
 	int dots;
 	int is_rest;
-
-   NotePlaybackInfo playback_info;
 
 	Note(int _scale_degree=0, int _duration=4, int _dots=0);
 	~Note();

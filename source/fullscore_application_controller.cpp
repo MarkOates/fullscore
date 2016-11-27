@@ -262,7 +262,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(gui_score_editor);
    else if (action_name == "toggle_playback")
-      action = new Action::TogglePlayback(gui_score_editor, gui_mixer);
+      action = new Action::TogglePlayback(&gui_score_editor->playback_control);
    else if (action_name == "reset_playback")
       action = new Action::ResetPlayback(gui_score_editor);
    else if (action_name == "save_measure_grid")
