@@ -72,6 +72,42 @@ TEST(PitchProjectorTest, extends_a_projection_into_negative_numbers_TEST_2)
 
 
 
+TEST(PitchProjectorTest, with_an_extension_of_0_will_wrap_on_outside_index_values)
+{
+   PitchProjector projector(ProjectionSet({0, 2}, 0), IndexSet({0, -1, -2, -3}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({0, 2, 0, 2});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
+TEST(PitchProjectorTest, with_an_empty_projection_set_will_return_an_empty_result)
+{
+   PitchProjector projector(ProjectionSet({}, 0), IndexSet({0, -1, -2, -3}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
+TEST(PitchProjectorTest, with_an_empty_index_set_will_return_an_empty_result)
+{
+   PitchProjector projector(ProjectionSet({1, 2, 3, 4}, 5), IndexSet({}));
+   IndexSet result = projector.get_projection();
+   IndexSet expected_result = IndexSet({});
+
+   EXPECT_EQ(expected_result, result);
+}
+
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

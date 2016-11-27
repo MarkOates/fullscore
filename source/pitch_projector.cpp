@@ -16,6 +16,8 @@ IndexSet PitchProjector::get_projection()
 {
    IndexSet result({});
 
+   if (projection_set.pitches.empty() || index_set.pitches.empty()) return result;
+
    for (auto &index_element : index_set.pitches)
    {
       ProjectionPitch pitch(0);
