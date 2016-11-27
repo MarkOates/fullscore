@@ -12,28 +12,56 @@
 
 
 
+int only_ints_to_int(std::string str)
+{
+   std::string result = "";
+
+   std::size_t found = str.find_first_of("0123456789");
+   while (found!=std::string::npos)
+   {
+      result.push_back(str[found]);
+      found = str.find_first_of("0123456789",found+1);
+   }
+
+   found = str.find_first_of("-");
+   int result_int = atoi(result.c_str()) * (found == std::string::npos ? 1 : -1);
+
+   return result_int;
+}
+
+
+
 IndexSet str_to_index_set(std::string str)
 {
    IndexSet result({});
 
    std::vector<std::string> tokens = php::explode(" ", str);
-   std::vector<int> ints;
    for (auto &token : tokens)
-      if (!token.empty()) ints.push_back(atoi(token.c_str()));
+   {
+      if (token.empty()) continue;
 
-   for (auto &i : ints)
-      result.pitches.push_back(ProjectionPitch(i));
+      int num_flats = std::count(token.begin(), token.end(), 'b');
+      int num_sharps = std::count(token.begin(), token.end(), '#');
+      int ints_only_int = only_ints_to_int(token);
+
+      result.pitches.push_back(ProjectionPitch(ints_only_int, num_sharps-num_flats));
+   }
 
    return result;
 }
 
 
 
-std::string index_set_to_engraver_str(IndexSet &index_set)
+std::string index_set_to_engraver_str(IndexSet &set)
 {
    std::stringstream ss;
-   for (auto &pitch : index_set.pitches)
+   ss << "  ";
+   for (auto &pitch : set.pitches)
+   {
+      ss << (pitch.accidental < 0 ? "-" : pitch.accidental > 0 ? "+" : "");
       ss << "(" << pitch.pitch << ")";
+   }
+   ss << "  ";
    return ss.str();
 }
 
@@ -46,24 +74,31 @@ ProjectionSet str_to_projection_set(std::string str, std::string extension_str)
    ProjectionSet result({}, extension);
 
    std::vector<std::string> tokens = php::explode(" ", str);
-   std::vector<int> ints;
    for (auto &token : tokens)
-      if (!token.empty()) ints.push_back(atoi(token.c_str()));
+   {
+      if (token.empty()) continue;
 
-   for (auto &i : ints)
-      result.pitches.push_back(ProjectionPitch(i));
+      int num_flats = std::count(token.begin(), token.end(), 'b');
+      int num_sharps = std::count(token.begin(), token.end(), '#');
+      int ints_only_int = only_ints_to_int(token);
+
+      result.pitches.push_back(ProjectionPitch(ints_only_int, num_sharps-num_flats));
+   }
 
    return result;
 }
 
 
 
-std::string projection_set_to_engraver_str(ProjectionSet &index_set)
+std::string projection_set_to_engraver_str(ProjectionSet &set)
 {
    std::stringstream ss;
    ss << "  ";
-   for (auto &pitch : index_set.pitches)
+   for (auto &pitch : set.pitches)
+   {
+      ss << (pitch.accidental < 0 ? "-" : pitch.accidental > 0 ? "+" : "");
       ss << "(" << pitch.pitch << ")";
+   }
    ss << "  ";
    return ss.str();
 }
