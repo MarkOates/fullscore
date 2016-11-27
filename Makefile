@@ -41,11 +41,13 @@ endif
 OBJ_FILES=$(OBJS:%=obj/%.o)
 
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
+ALLEGRO_LIBS_NO_MAIN=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro
 ALLEGROFLARE_LIBS=-l$(ALLEGROFLARE_LIB_NAME)
 GOOGLE_TEST_LIBS=-lgtest
 
 
 EVERYTHING=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGROFLARE_LIBS) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
+EVERYTHING_NO_ALLEGRO_MAIN=-I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGROFLARE_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_NO_MAIN) -L$(ALLEGROFLARE_LIB_DIR) $(ALLEGROFLARE_LIBS) -L$(GOOGLE_TEST_LIB_DIR) $(GOOGLE_TEST_LIBS)
 
 
 #
@@ -100,7 +102,7 @@ bin/tests/duration_helper_test$(EXE_EXTENSION): tests/duration_helper_test.cpp o
 
 bin/tests/pitch_projector_test$(EXE_EXTENSION): tests/pitch_projector_test.cpp $(OBJ_FILES)
 	@echo -n compiling $@...
-	@g++ -std=gnu++11 $^ -o $@ $(EVERYTHING)
+	@g++ -std=gnu++11 $^ -o $@ $(EVERYTHING_NO_ALLEGRO_MAIN)
 	@echo done
 
 bin/tests/measure_grid_helper_test$(EXE_EXTENSION): tests/measure_grid_helper_test.cpp obj/helpers/measure_grid_helper.o obj/models/measure_grid.o obj/models/time_signature.o obj/models/note.o obj/helpers/duration_helper.o
