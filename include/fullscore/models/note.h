@@ -15,6 +15,8 @@ public:
 
 	Note(int _scale_degree=0, int _duration=4, int _dots=0);
 	~Note();
+
+   bool operator==(const Note &other) const;
 };
 
 

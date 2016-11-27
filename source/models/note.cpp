@@ -22,3 +22,15 @@ Note::~Note()
 
 
 
+bool Note::operator==(const Note &other) const
+{
+   return (scale_degree == other.scale_degree
+         && accidental == other.accidental
+         && duration == other.duration
+         && is_rest == other.is_rest
+         && dots == other.dots);
+}
+
+
+
+
