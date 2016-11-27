@@ -5,8 +5,9 @@
 
 
 
-ProjectionPitch::ProjectionPitch(int pitch)
+ProjectionPitch::ProjectionPitch(int pitch, int accidental)
    : pitch(pitch)
+   , accidental(accidental)
 {}
 
 
