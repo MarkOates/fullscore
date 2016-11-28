@@ -27,12 +27,10 @@ public:
    GUIScoreEditor *gui_score_editor;
    UICommandBar *command_bar;
    UIMixer *gui_mixer;
-   UIFramedWindow *help_window;
    Measure yank_measure_buffer;
    bool showing_help_menu;
 
    FullscoreApplicationController(Display *display);
-   void create_help_window();
    void primary_timer_func() override;
    void key_down_func() override;
    void on_message(UIWidget *sender, std::string message) override;

@@ -34,7 +34,6 @@
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
-#include <fullscore/actions/toggle_help_window_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/set_command_mode_action.h>
@@ -55,9 +54,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , gui_score_editor(NULL)
    , command_bar(NULL)
    , gui_mixer(NULL)
-   , help_window(NULL)
    , yank_measure_buffer()
-   , showing_help_menu(false)
 {
    UIScreen::draw_focused_outline = false;
 
@@ -66,29 +63,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    gui_mixer = new UIMixer(this, 1600, 1200);
    command_bar = new UICommandBar(this);
 
-   simple_notification_screen->spawn_notification("Press F1 for help");
-
-   create_help_window();
-
    Framework::motion().cmove(&gui_score_editor->place.position.y, 200, 0.4);
    Framework::motion().cmove(&gui_score_editor->place.position.x, 200, 0.4);
-}
-
-
-
-
-void FullscoreApplicationController::create_help_window()
-{
-   help_window = new UIFramedWindow(this, -600, -100, 550, 700);
-   help_window->set_title("Help");
-
-   UIText *help_title = new UIText(help_window, 25, 25, "Controls");
-   UITextBox *help_paragraph = new UITextBox(help_window, 25, 25+70, 500, 500, php::file_get_contents("data/documents/help.txt"));
-
-   help_paragraph->set_text_color(color::white);
-
-   help_title->place.align = vec2d(0, 0);
-   help_paragraph->place.align = vec2d(0, 0);
 }
 
 
@@ -120,7 +96,6 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_E: return "erase_note"; break;
       case ALLEGRO_KEY_G: return "retrograde"; break;
       case ALLEGRO_KEY_N: return "insert_note"; break;
-      case ALLEGRO_KEY_F1: return "toggle_help_window"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
       case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
       case ALLEGRO_KEY_Q: return "reset_playback"; break;
@@ -260,8 +235,6 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "insert_note")
       action = new Action::InsertNoteTransform(notes, gui_score_editor->note_cursor_x, Note());
-   else if (action_name == "toggle_help_window")
-      action = new Action::ToggleHelpWindow(&Framework::motion(), this);
    else if (action_name == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(gui_score_editor);
    else if (action_name == "toggle_playback")
