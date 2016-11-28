@@ -385,6 +385,7 @@ GUIScoreEditor *FullscoreApplicationController::create_new_score_editor()
    new_gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
 
    new_gui_score_editor->place.position = vec2d(new_x, new_y);
+   new_gui_score_editor->place.align = vec2d(0.0, 0.0);
 
    new_x += 300;
    new_y += 200;
