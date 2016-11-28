@@ -17,6 +17,7 @@
 #include <fullscore/actions/transforms/transpose_down_action.h>
 #include <fullscore/actions/append_measure_action.h>
 #include <fullscore/actions/append_staff_action.h>
+#include <fullscore/actions/create_new_score_editor_action.h>
 #include <fullscore/actions/delete_measure_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
@@ -75,10 +76,11 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool alt)
+std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
+      case ALLEGRO_KEY_N: if(ctrl) return "create_new_score_editor"; break;
       case ALLEGRO_KEY_UP: return "move_camera_up"; break;
       case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
       case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
@@ -140,7 +142,9 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
    Action::Base *action = nullptr;
 
-   if (action_name == "move_camera_up")
+   if (action_name == "create_new_score_editor")
+      action = new Action::CreateNewScoreEditor(this);
+   else if (action_name == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
@@ -311,8 +315,9 @@ void FullscoreApplicationController::key_down_func()
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
+   auto ctrl_pressed  = Framework::key_ctrl;
 
-   std::string identifier = find_action_identifier(mode, keycode, shift_pressed, alt_pressed);
+   std::string identifier = find_action_identifier(mode, keycode, shift_pressed, ctrl_pressed, alt_pressed);
    Action::Base *action = create_action(identifier);
 
    if (action)

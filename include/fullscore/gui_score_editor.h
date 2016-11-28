@@ -25,7 +25,8 @@ public:
 
    enum mode_t
    {
-      NORMAL_MODE=0, // navigation, manipulation, etc
+      NONE=0,
+      NORMAL_MODE, // navigation, manipulation, etc
       INSERT_MODE,   // inserting new content
       COMMAND_MODE   // editing on the command windows
    };
