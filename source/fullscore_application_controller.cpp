@@ -53,14 +53,12 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , follow_camera(this)
    , gui_score_editor(NULL)
    , command_bar(NULL)
-   , gui_mixer(NULL)
    , yank_measure_buffer()
 {
    UIScreen::draw_focused_outline = false;
 
    gui_score_editor = new GUIScoreEditor(&follow_camera);
    gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
-   gui_mixer = new UIMixer(this, 1600, 1200);
    command_bar = new UICommandBar(this);
 
    Framework::motion().cmove(&gui_score_editor->place.position.y, 200, 0.4);

@@ -20,7 +20,7 @@ ALLEGROFLARE_INCLUDE_DIR=$(ALLEGROFLARE_DIR)/include
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
-OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor mixer music_engraver pitch_projector playback_control playback_device_interface run_script
+OBJS=command_bar fullscore_application_controller follow_camera gui_score_editor music_engraver pitch_projector playback_control playback_device_interface run_script
 OBJS+=$(addprefix actions/,$(basename $(notdir $(wildcard source/actions/*.cpp))))
 OBJS+=$(addprefix actions/transforms/,$(basename $(notdir $(wildcard source/actions/transforms/*.cpp))))
 OBJS+=$(addprefix helpers/,$(basename $(notdir $(wildcard source/helpers/*.cpp))))

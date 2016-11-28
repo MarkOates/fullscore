@@ -11,7 +11,6 @@
 #include <fullscore/command_bar.h>
 #include <fullscore/follow_camera.h>
 #include <fullscore/gui_score_editor.h>
-#include <fullscore/mixer.h>
 #include <fullscore/playback_device_generic.h>
 
 
@@ -26,7 +25,6 @@ public:
    UIFollowCamera follow_camera;
    GUIScoreEditor *gui_score_editor;
    UICommandBar *command_bar;
-   UIMixer *gui_mixer;
    Measure yank_measure_buffer;
    bool showing_help_menu;
 
