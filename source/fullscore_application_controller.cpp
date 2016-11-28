@@ -51,7 +51,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
-   , gui_score_editor(NULL)
+   , gui_score_editor(nullptr)
    , command_bar(new UICommandBar(this))
    , yank_measure_buffer()
 {
