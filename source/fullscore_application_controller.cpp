@@ -362,3 +362,22 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
 
 
+bool FullscoreApplicationController::create_new_score_editor()
+{
+   static int new_x = 0;
+   static int new_y = 0;
+
+   GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera);
+   new_gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
+
+   new_gui_score_editor->place.position = vec2d(new_x, new_y);
+
+   new_x += 300;
+   new_y += 200;
+
+   return true;
+}
+
+
+
+
