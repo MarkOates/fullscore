@@ -131,6 +131,12 @@ void GUIScoreEditor::on_draw()
 void GUIScoreEditor::on_timer()
 {
    playback_control.update(Framework::time_now);
+
+   // match the width of the widget to the width of the score
+   float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+
+   place.size = vec2d(measure_grid_real_width, measure_grid_real_height);
 }
 
 
