@@ -57,8 +57,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   gui_score_editor = new GUIScoreEditor(&follow_camera);
-   gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
+   //gui_score_editor = new GUIScoreEditor(&follow_camera);
+   //gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -70,7 +70,6 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 void FullscoreApplicationController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
-   command_bar->set_time(gui_score_editor->playback_control.position);
 }
 
 
@@ -78,6 +77,14 @@ void FullscoreApplicationController::primary_timer_func()
 
 std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool alt)
 {
+   switch(al_keycode)
+   {
+      case ALLEGRO_KEY_UP: return "move_camera_up"; break;
+      case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
+      case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
+      case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
+   }
+
    if (mode == GUIScoreEditor::NORMAL_MODE)
       switch(al_keycode)
       {
@@ -98,10 +105,6 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_Q: return "reset_playback"; break;
       case ALLEGRO_KEY_F7: return "save_measure_grid"; break;
       case ALLEGRO_KEY_F8: return "load_measure_grid"; break;
-      case ALLEGRO_KEY_UP: return "move_camera_up"; break;
-      case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
-      case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
-      case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
       case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
       case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
       case ALLEGRO_KEY_H: return "move_cursor_left"; break;
@@ -132,10 +135,29 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
 Action::Base *FullscoreApplicationController::create_action(std::string action_name)
 {
    //
-   // SCORE EDITING COMMANDS
+   // APP COMMANDS
    //
 
    Action::Base *action = nullptr;
+
+   if (action_name == "move_camera_up")
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
+   else if (action_name == "move_camera_down")
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
+   else if (action_name == "move_camera_right")
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x - 100, follow_camera.target.position.y);
+   else if (action_name == "move_camera_left")
+      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x + 100, follow_camera.target.position.y);
+
+   if (action) return action;
+
+
+   //
+   // SCORE EDITING COMMANDS
+   //
+
+   if (!gui_score_editor) return nullptr;
+
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure *focused_measure = nullptr;
@@ -242,14 +264,6 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::SaveMeasureGrid(&gui_score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "load_measure_grid")
       action = new Action::LoadMeasureGrid(&gui_score_editor->measure_grid, "score_filename.fs");
-   else if (action_name == "move_camera_up")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
-   else if (action_name == "move_camera_down")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
-   else if (action_name == "move_camera_right")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x - 100, follow_camera.target.position.y);
-   else if (action_name == "move_camera_left")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x + 100, follow_camera.target.position.y);
    else if (action_name == "camera_zoom_in")
       action = new Action::SetScoreZoom(gui_score_editor, &Framework::motion(), gui_score_editor->place.scale.x + 0.1, 0.3);
    else if (action_name == "camera_zoom_default")
@@ -293,7 +307,7 @@ void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   auto mode          = gui_score_editor->mode;
+   auto mode          = gui_score_editor ? gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
