@@ -58,8 +58,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   //gui_score_editor = new GUIScoreEditor(&follow_camera);
-   //gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
+   gui_score_editor = create_new_score_editor();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -381,7 +380,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
 
 
-bool FullscoreApplicationController::create_new_score_editor()
+GUIScoreEditor *FullscoreApplicationController::create_new_score_editor()
 {
    static int new_x = 0;
    static int new_y = 0;
@@ -394,7 +393,9 @@ bool FullscoreApplicationController::create_new_score_editor()
    new_x += 300;
    new_y += 200;
 
-   return true;
+   gui_score_editor = new_gui_score_editor;
+
+   return new_gui_score_editor;
 }
 
 
