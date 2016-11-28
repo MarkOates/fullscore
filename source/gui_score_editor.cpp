@@ -42,7 +42,7 @@ void GUIScoreEditor::on_draw()
    float pt, pr, pb, pl;
    UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
    sa->get_padding(&pt, &pr, &pb, &pl);
-   al_draw_rounded_rectangle(-pl, -pt, place.size.x+pr, place.size.y+pb, 6, 6, color::color(color::chartreuse, 0.7), 2.0);
+   al_draw_rounded_rectangle(-pl, -pt, place.size.x+pr, place.size.y+pb, 6, 6, color::color(color::black, 0.7), 2.0);
    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::blanchedalmond, 0.2));
 
    // get_width_of_score
