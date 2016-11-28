@@ -61,8 +61,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
    command_bar = new UICommandBar(this);
 
-   Framework::motion().cmove(&gui_score_editor->place.position.y, 200, 0.4);
-   Framework::motion().cmove(&gui_score_editor->place.position.x, 200, 0.4);
+   follow_camera.target.position.y = 200;
+   follow_camera.target.position.x = 200;
 }
 
 
