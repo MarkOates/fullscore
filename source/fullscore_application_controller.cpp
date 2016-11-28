@@ -52,14 +52,13 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , action_queue("master_queue")
    , follow_camera(this)
    , gui_score_editor(NULL)
-   , command_bar(NULL)
+   , command_bar(new UICommandBar(this))
    , yank_measure_buffer()
 {
    UIScreen::draw_focused_outline = false;
 
    gui_score_editor = new GUIScoreEditor(&follow_camera);
    gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
-   command_bar = new UICommandBar(this);
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
