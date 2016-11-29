@@ -414,3 +414,18 @@ bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor
 
 
 
+GUIScoreEditor *FullscoreApplicationController::get_next_gui_score_editor()
+{
+   if (!current_gui_score_editor || gui_score_editors.size() <= 1) return nullptr;
+
+   std::vector<GUIScoreEditor *>::iterator it = std::find(gui_score_editors.begin(), gui_score_editors.end(), current_gui_score_editor);
+
+   if (it == gui_score_editors.end()) return nullptr; // does not exist in list
+   if (it == gui_score_editors.end()-1) return gui_score_editors.front(); // loop back to first element
+   ++it;
+   return *it;
+}
+
+
+
+

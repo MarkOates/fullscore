@@ -40,6 +40,7 @@ public:
 
    GUIScoreEditor *create_new_score_editor();
    bool set_current_gui_score_editor(GUIScoreEditor *editor);
+   GUIScoreEditor *get_next_gui_score_editor();
 };
 
 
