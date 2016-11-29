@@ -52,12 +52,14 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , action_queue("master_queue")
    , follow_camera(this)
    , current_gui_score_editor(nullptr)
+   , gui_score_editors()
    , command_bar(new UICommandBar(this))
    , yank_measure_buffer()
 {
    UIScreen::draw_focused_outline = false;
 
-   current_gui_score_editor = create_new_score_editor();
+   create_new_score_editor();
+   set_current_gui_score_editor(create_new_score_editor());
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -387,12 +389,23 @@ GUIScoreEditor *FullscoreApplicationController::create_new_score_editor()
    new_gui_score_editor->place.position = vec2d(new_x, new_y);
    new_gui_score_editor->place.align = vec2d(0.0, 0.0);
 
-   new_x += 300;
-   new_y += 200;
+   gui_score_editors.push_back(new_gui_score_editor);
 
-   gui_score_editor = new_gui_score_editor;
+   new_y += 300;
 
    return new_gui_score_editor;
+}
+
+
+
+
+bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor *editor)
+{
+   if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
+
+   current_gui_score_editor = editor;
+
+   return true;
 }
 
 

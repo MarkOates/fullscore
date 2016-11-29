@@ -24,6 +24,7 @@ public:
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
    GUIScoreEditor *current_gui_score_editor;
+   std::vector<GUIScoreEditor *> gui_score_editors;
    UICommandBar *command_bar;
    Measure yank_measure_buffer;
    bool showing_help_menu;
@@ -38,6 +39,7 @@ public:
    std::string find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
    GUIScoreEditor *create_new_score_editor();
+   bool set_current_gui_score_editor(GUIScoreEditor *editor);
 };
 
 
