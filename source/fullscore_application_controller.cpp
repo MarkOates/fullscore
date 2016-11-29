@@ -32,6 +32,7 @@
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
+#include <fullscore/actions/set_current_gui_score_editor_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
@@ -82,6 +83,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
    switch(al_keycode)
    {
       case ALLEGRO_KEY_N: if(ctrl) return "create_new_score_editor"; break;
+      case ALLEGRO_KEY_X: if(ctrl) return "set_current_gui_score_editor"; break;
       case ALLEGRO_KEY_UP: return "move_camera_up"; break;
       case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
       case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
@@ -145,6 +147,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
    if (action_name == "create_new_score_editor")
       action = new Action::CreateNewScoreEditor(this);
+   else if (action_name == "set_current_gui_score_editor")
+      action = new Action::SetCurrentGUIScoreEditor(this, get_next_gui_score_editor());
    else if (action_name == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
@@ -411,6 +415,9 @@ bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor
       e->set_state(e == editor ? GUIScoreEditor::STATE_ACTIVE : GUIScoreEditor::STATE_INACTIVE);
 
    current_gui_score_editor = editor;
+
+   // move the camera to the new current_gui_score_editor
+   follow_camera.target.position = -current_gui_score_editor->place.position + vec2d(200, 200);
 
    return true;
 }
