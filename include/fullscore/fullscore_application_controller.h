@@ -23,7 +23,7 @@ public:
 
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
-   GUIScoreEditor *gui_score_editor;
+   GUIScoreEditor *current_gui_score_editor;
    UICommandBar *command_bar;
    Measure yank_measure_buffer;
    bool showing_help_menu;

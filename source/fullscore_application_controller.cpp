@@ -51,13 +51,13 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
-   , gui_score_editor(nullptr)
+   , current_gui_score_editor(nullptr)
    , command_bar(new UICommandBar(this))
    , yank_measure_buffer()
 {
    UIScreen::draw_focused_outline = false;
 
-   gui_score_editor = create_new_score_editor();
+   current_gui_score_editor = create_new_score_editor();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -155,25 +155,25 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    // SCORE EDITING COMMANDS
    //
 
-   if (!gui_score_editor) return nullptr;
+   if (!current_gui_score_editor) return nullptr;
 
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure *focused_measure = nullptr;
 
-   if (gui_score_editor->is_note_target_mode())
+   if (current_gui_score_editor->is_note_target_mode())
    {
-      single_note = gui_score_editor->get_note_at_cursor();
+      single_note = current_gui_score_editor->get_note_at_cursor();
    }
-   if (gui_score_editor->is_measure_target_mode())
+   if (current_gui_score_editor->is_measure_target_mode())
    {
-      focused_measure = gui_score_editor->get_measure_at_cursor();
+      focused_measure = current_gui_score_editor->get_measure_at_cursor();
       if (focused_measure) notes = &focused_measure->notes;
    }
 
    if (action_name == "transpose_up")
    {
-      if (gui_score_editor->is_note_target_mode())
+      if (current_gui_score_editor->is_note_target_mode())
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -191,7 +191,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "transpose_down")
    {
-      if (gui_score_editor->is_note_target_mode())
+      if (current_gui_score_editor->is_note_target_mode())
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -209,7 +209,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "half_duration")
    {
-      if (gui_score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
+      if (current_gui_score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
       else
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
@@ -219,7 +219,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "double_duration")
    {
-      if (gui_score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
+      if (current_gui_score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
       else
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
@@ -229,7 +229,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    }
    else if (action_name == "toggle_rest")
    {
-      if (gui_score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
+      if (current_gui_score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
       else
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
@@ -244,57 +244,57 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
    else if (action_name == "set_command_mode")
-      action = new Action::SetCommandMode(gui_score_editor, command_bar);
+      action = new Action::SetCommandMode(current_gui_score_editor, command_bar);
    else if (action_name == "set_normal_mode")
-      action = new Action::SetNormalMode(gui_score_editor, command_bar);
+      action = new Action::SetNormalMode(current_gui_score_editor, command_bar);
    else if (action_name == "erase_note")
-      action = new Action::EraseNote(notes, gui_score_editor->note_cursor_x);
+      action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "insert_note")
-      action = new Action::InsertNoteTransform(notes, gui_score_editor->note_cursor_x, Note());
+      action = new Action::InsertNoteTransform(notes, current_gui_score_editor->note_cursor_x, Note());
    else if (action_name == "toggle_show_debug_data")
-      action = new Action::ToggleShowDebugData(gui_score_editor);
+      action = new Action::ToggleShowDebugData(current_gui_score_editor);
    else if (action_name == "toggle_playback")
-      action = new Action::TogglePlayback(&gui_score_editor->playback_control);
+      action = new Action::TogglePlayback(&current_gui_score_editor->playback_control);
    else if (action_name == "reset_playback")
-      action = new Action::ResetPlayback(gui_score_editor);
+      action = new Action::ResetPlayback(current_gui_score_editor);
    else if (action_name == "save_measure_grid")
-      action = new Action::SaveMeasureGrid(&gui_score_editor->measure_grid, "score_filename.fs");
+      action = new Action::SaveMeasureGrid(&current_gui_score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "load_measure_grid")
-      action = new Action::LoadMeasureGrid(&gui_score_editor->measure_grid, "score_filename.fs");
+      action = new Action::LoadMeasureGrid(&current_gui_score_editor->measure_grid, "score_filename.fs");
    else if (action_name == "camera_zoom_in")
-      action = new Action::SetScoreZoom(gui_score_editor, &Framework::motion(), gui_score_editor->place.scale.x + 0.1, 0.3);
+      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), current_gui_score_editor->place.scale.x + 0.1, 0.3);
    else if (action_name == "camera_zoom_default")
-      action = new Action::SetScoreZoom(gui_score_editor, &Framework::motion(), 1, 0.3);
+      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), 1, 0.3);
    else if (action_name == "camera_zoom_out")
-      action = new Action::SetScoreZoom(gui_score_editor, &Framework::motion(), gui_score_editor->place.scale.x - 0.1, 0.3);
+      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), current_gui_score_editor->place.scale.x - 0.1, 0.3);
    else if (action_name == "move_cursor_left")
-      action = new Action::MoveCursorLeft(gui_score_editor);
+      action = new Action::MoveCursorLeft(current_gui_score_editor);
    else if (action_name == "move_cursor_down")
-      action = new Action::MoveCursorDown(gui_score_editor);
+      action = new Action::MoveCursorDown(current_gui_score_editor);
    else if (action_name == "move_cursor_up")
-      action = new Action::MoveCursorUp(gui_score_editor);
+      action = new Action::MoveCursorUp(current_gui_score_editor);
    else if (action_name == "move_cursor_right")
-      action = new Action::MoveCursorRight(gui_score_editor);
+      action = new Action::MoveCursorRight(current_gui_score_editor);
    else if (action_name == "yank_measure_to_buffer")
       action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
    else if (action_name == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
-      action = new Action::ToggleEditModeTarget(gui_score_editor);
+      action = new Action::ToggleEditModeTarget(current_gui_score_editor);
    else if (action_name == "insert_measure")
-      action = new Action::InsertMeasure(&gui_score_editor->measure_grid, gui_score_editor->measure_cursor_x);
+      action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
-      action = new Action::DeleteMeasure(&gui_score_editor->measure_grid, gui_score_editor->measure_cursor_x);
+      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
-      action = new Action::InsertStaff(&gui_score_editor->measure_grid, gui_score_editor->measure_cursor_y);
+      action = new Action::InsertStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
-      action = new Action::DeleteStaff(&gui_score_editor->measure_grid, gui_score_editor->measure_cursor_y);
+      action = new Action::DeleteStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "append_measure")
-      action = new Action::AppendMeasure(&gui_score_editor->measure_grid);
+      action = new Action::AppendMeasure(&current_gui_score_editor->measure_grid);
    else if (action_name == "append_staff")
-      action = new Action::AppendStaff(&gui_score_editor->measure_grid);
+      action = new Action::AppendStaff(&current_gui_score_editor->measure_grid);
 
    return action;
 }
@@ -306,7 +306,7 @@ void FullscoreApplicationController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   auto mode          = gui_score_editor ? gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
+   auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -351,7 +351,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
             action->execute();
             delete action;
 
-            Action::SetNormalMode return_to_normal_mode(gui_score_editor, command_bar);
+            Action::SetNormalMode return_to_normal_mode(current_gui_score_editor, command_bar);
             return_to_normal_mode.execute();
          }
          else
@@ -367,7 +367,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
          error_message += message;
          simple_notification_screen->spawn_notification(error_message);
 
-         Action::SetNormalMode return_to_normal_mode(gui_score_editor, command_bar);
+         Action::SetNormalMode return_to_normal_mode(current_gui_score_editor, command_bar);
          return_to_normal_mode.execute();
       }
    }
