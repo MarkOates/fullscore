@@ -14,9 +14,6 @@
 
 
 
-const bool TEMPORARILY_DISABLE = false;
-
-
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
