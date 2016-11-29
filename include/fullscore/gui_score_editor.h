@@ -31,6 +31,13 @@ public:
       COMMAND_MODE   // editing on the command windows
    };
 
+   enum state_t
+   {
+      STATE_NONE=0,
+      STATE_ACTIVE,
+      STATE_INACTIVE
+   };
+
    MeasureGrid measure_grid;
    PlaybackControl playback_control;
 
@@ -39,6 +46,7 @@ public:
    int note_cursor_x;
    edit_mode_target_t edit_mode_target;
    mode_t mode;
+   state_t state;
 
    MusicEngraver music_engraver;
 
@@ -65,6 +73,8 @@ public:
    void toggle_edit_mode_target();
    bool is_measure_target_mode();
    bool is_note_target_mode();
+
+   void set_state(state_t new_state);
 };
 
 

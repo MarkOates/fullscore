@@ -403,6 +403,9 @@ bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor
 {
    if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
 
+   for (auto &e : gui_score_editors)
+      e->set_state(e == editor ? GUIScoreEditor::STATE_ACTIVE : GUIScoreEditor::STATE_INACTIVE);
+
    current_gui_score_editor = editor;
 
    return true;
