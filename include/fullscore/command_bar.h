@@ -12,9 +12,6 @@
 class UICommandBar : public UIWidget
 {
 public:
-   UIScaledText *time;
-   UIButton *play_button;
-   UIButton *rewind_button;
    UITextInput *text_input;
 
    UICommandBar(UIWidget *parent);

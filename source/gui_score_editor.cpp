@@ -14,14 +14,10 @@
 
 
 
-const bool TEMPORARILY_DISABLE = false;
-
-
-GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device)
+GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "GUIScoreEditor",
-      new UISurfaceAreaBox(display->center(), display->middle(), display->width()-20, display->height()-20))
-   , measure_grid(8, 3)
+   : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
+   , measure_grid(0, 0)
    , playback_control()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
@@ -32,49 +28,40 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDevic
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
    , edit_mode_target(MEASURE_TARGET)
    , mode(NORMAL_MODE)
-{
-   attr.set(UI_ATTR__UI_WIDGET_TYPE, "UIScoreEditor");
-   attr.set("id", "UIScoreEditor" + tostring(UIWidget::get_num_created_widgets()));
-
-   // twinkle twinkle, little star
-   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(0));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
-   measure_grid.get_measure(0,0)->notes.push_back(Note(4));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(4, 2));
-
-   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
-   measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
-
-   // test time signatures
-   measure_grid.set_time_signature(2, TimeSignature(3, 4));
-   measure_grid.set_time_signature(5, TimeSignature(5, 8));
-}
+{}
 
 
 
 
 void GUIScoreEditor::on_draw()
 {
+   // get_width_of_score
    float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
    float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
 
-   // draw a background for the score
-   al_draw_filled_rectangle(-30, -30,
-      measure_grid_real_width + 30, measure_grid_real_height + 30,
-      color::color(color::blanchedalmond, 0.2));
+   // draw the bounding box for the widget
+   float pt, pr, pb, pl;
+   UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
+   sa->get_padding(&pt, &pr, &pb, &pl);
+   al_draw_rounded_rectangle(-pl, -pt, place.size.x+pr, place.size.y+pb, 6, 6, color::color(color::black, state == STATE_ACTIVE ? 0.7 : 0.1), 2.0);
+
+   if (state == STATE_ACTIVE)
+   {
+      // draw the inner-rectangle for the grid
+      al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::blanchedalmond, 0.2));
+
+      // draw a background for the score
+      al_draw_filled_rectangle(-30, -30,
+         measure_grid_real_width + 30, measure_grid_real_height + 30,
+         color::color(color::blanchedalmond, 0.2));
+   }
 
    // render the measure grid
    MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
    measure_grid_render_component.set_showing_debug_data(showing_debug_data);
    measure_grid_render_component.render();
+
+   if (state != STATE_ACTIVE) return;
 
    // draw a hilight box under the focused measure
    Measure *measure = get_measure_at_cursor();
@@ -148,6 +135,12 @@ void GUIScoreEditor::on_draw()
 void GUIScoreEditor::on_timer()
 {
    playback_control.update(Framework::time_now);
+
+   // match the width of the widget to the width of the score
+   float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+
+   place.size = vec2d(measure_grid_real_width, measure_grid_real_height);
 }
 
 
@@ -269,6 +262,16 @@ bool GUIScoreEditor::is_measure_target_mode()
 bool GUIScoreEditor::is_note_target_mode()
 {
    return edit_mode_target == NOTE_TARGET;
+}
+
+
+
+
+void GUIScoreEditor::set_state(state_t new_state)
+{
+   if (new_state == state) return;
+
+   state = new_state;
 }
 
 

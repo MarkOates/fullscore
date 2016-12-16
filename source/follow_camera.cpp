@@ -59,3 +59,4 @@ void UIFollowCamera::on_timer()
 
 
 
+void UIFollowCamera::on_draw() {}

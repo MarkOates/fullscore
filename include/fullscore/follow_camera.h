@@ -17,6 +17,7 @@ public:
    ~UIFollowCamera();
 
    void on_timer() override;
+   void on_draw() override;
 };
 
 

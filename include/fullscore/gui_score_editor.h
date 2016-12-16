@@ -5,7 +5,6 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <allegro_flare/display.h>
 #include <allegro_flare/placement2d.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/music_engraver.h>
@@ -26,9 +25,17 @@ public:
 
    enum mode_t
    {
-      NORMAL_MODE=0, // navigation, manipulation, etc
+      NONE=0,
+      NORMAL_MODE, // navigation, manipulation, etc
       INSERT_MODE,   // inserting new content
       COMMAND_MODE   // editing on the command windows
+   };
+
+   enum state_t
+   {
+      STATE_NONE=0,
+      STATE_ACTIVE,
+      STATE_INACTIVE
    };
 
    MeasureGrid measure_grid;
@@ -39,6 +46,7 @@ public:
    int note_cursor_x;
    edit_mode_target_t edit_mode_target;
    mode_t mode;
+   state_t state;
 
    MusicEngraver music_engraver;
 
@@ -47,7 +55,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   GUIScoreEditor(UIWidget *parent, Display *display, PlaybackDeviceInterface *playback_device);
+   GUIScoreEditor(UIWidget *parent);
    void on_draw() override;
    void on_timer() override;
    Measure *get_measure_at_cursor();
@@ -65,6 +73,8 @@ public:
    void toggle_edit_mode_target();
    bool is_measure_target_mode();
    bool is_note_target_mode();
+
+   void set_state(state_t new_state);
 };
 
 
