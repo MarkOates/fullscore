@@ -7,7 +7,7 @@
 BASE_DIR=/Users/markoates/Repos
 ALLEGRO_DIR=$(BASE_DIR)/allegro5
 ALLEGROFLARE_DIR=$(BASE_DIR)/allegro_flare
-ALLEGROFLARE_LIB_NAME=allegro_flare-0.8.8wip
+ALLEGROFLARE_LIB_NAME=allegro_flare-0.8.9wip
 GOOGLE_TEST_DIR=$(BASE_DIR)/googletest
 
 
