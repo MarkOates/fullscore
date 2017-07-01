@@ -4,7 +4,7 @@
 
 #include <fullscore/converters/measure_grid_file_converter.h>
 
-#include <allegro_flare/data_attr.h>
+#include <allegro_flare/attributes.h>
 #include <allegro_flare/useful_php.h>
 #include <fullscore/converters/note_string_converter.h>
 #include <fullscore/converters/time_signature_string_converter.h>
@@ -26,7 +26,7 @@ bool MeasureGridFileConverter::save()
    if (!measure_grid) return false;
    if (filename.empty()) return false;
 
-   DataAttr state;
+   Attributes state;
 
    state.set("grid_height", tostring(measure_grid->get_num_staves()));
    state.set("grid_width", tostring(measure_grid->get_num_measures()));
@@ -80,7 +80,7 @@ bool MeasureGridFileConverter::load()
    if (!measure_grid) return false;
    if (filename.empty()) return false;
 
-   DataAttr state;
+   Attributes state;
    if (!state.load(filename)) return false;
 
    // clear out the contents of the current measure-grid

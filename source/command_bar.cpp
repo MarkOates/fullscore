@@ -31,7 +31,7 @@ void UICommandBar::on_message(UIWidget *sender, std::string message)
 {
    // right now... the message is just being passed up to the next widget
    // there is certainly a better way to do this (*cough* signals and slots)
-   family.parent->on_message(sender, message);
+   send_message_to_parent(message, sender);
 }
 
 
@@ -42,7 +42,7 @@ void UICommandBar::on_key_down()
    switch (Framework::current_event->keyboard.keycode)
    {
    case ALLEGRO_KEY_ENTER:
-      family.parent->on_message(this, text_input->get_text());
+      send_message_to_parent(text_input->get_text(), this);
       text_input->set_text("");
       break;
    default:
