@@ -93,16 +93,16 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
    if (mode == GUIScoreEditor::NORMAL_MODE)
       switch(al_keycode)
       {
-      case ALLEGRO_KEY_W: return "transpose_up"; break;
-      case ALLEGRO_KEY_S: return "transpose_down"; break;
-      case ALLEGRO_KEY_A: return "half_duration"; break;
-      case ALLEGRO_KEY_D: return "double_duration"; break;
+      case ALLEGRO_KEY_E: return "transpose_up"; break;
+      case ALLEGRO_KEY_D: return "transpose_down"; break;
+      case ALLEGRO_KEY_S: return "half_duration"; break;
+      case ALLEGRO_KEY_F: return "double_duration"; break;
       case ALLEGRO_KEY_R: return "toggle_rest"; break;
       case ALLEGRO_KEY_I: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
-      case ALLEGRO_KEY_E: return "erase_note"; break;
+      case ALLEGRO_KEY_W: return "erase_note"; break;
       case ALLEGRO_KEY_G: return "retrograde"; break;
       case ALLEGRO_KEY_N: return "insert_note"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
