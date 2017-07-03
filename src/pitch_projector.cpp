@@ -23,12 +23,12 @@ IndexSet PitchProjector::get_projection()
       int scale_degree = index_element.pitch;
       int cardinality = projection_set.pitches.size();
       int extension = 0;
-      ProjectionPitch pitch(0);
+      Pitch pitch(0);
 
       while (scale_degree < 0) { scale_degree += cardinality; extension--; }
       while (scale_degree >= cardinality) { scale_degree -= cardinality; extension++; }
 
-      ProjectionPitch &projected_pitch = projection_set.pitches[scale_degree];
+      Pitch &projected_pitch = projection_set.pitches[scale_degree];
       pitch.pitch = projected_pitch.pitch + extension * projection_set.extension;
       pitch.accidental = projected_pitch.accidental + index_element.accidental;
 

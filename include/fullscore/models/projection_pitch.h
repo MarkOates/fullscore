@@ -2,15 +2,15 @@
 
 
 
-class ProjectionPitch
+class Pitch
 {
 public:
    int pitch;
    int accidental;
 
-   ProjectionPitch(int pitch, int accidental=0);
+   Pitch(int pitch, int accidental=0);
 
-   bool operator==(const ProjectionPitch &other) const;
+   bool operator==(const Pitch &other) const;
 };
 
 

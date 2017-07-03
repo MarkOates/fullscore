@@ -5,14 +5,14 @@
 
 
 
-ProjectionPitch::ProjectionPitch(int pitch, int accidental)
+Pitch::Pitch(int pitch, int accidental)
    : pitch(pitch)
    , accidental(accidental)
 {}
 
 
 
-bool ProjectionPitch::operator==(const ProjectionPitch &other) const
+bool Pitch::operator==(const Pitch &other) const
 {
    return (other.pitch == pitch);
 }
