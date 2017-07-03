@@ -1,12 +1,10 @@
 
 
 
-
 #include <fullscore/models/time_signature.h>
 
 #include <fullscore/models/duration.h>
 #include <fullscore/helpers/duration_helper.h>
-
 
 
 
@@ -18,11 +16,9 @@ TimeSignature::TimeSignature(int numerator, Duration denominator)
 
 
 
-
 TimeSignature::~TimeSignature()
 {
 }
-
 
 
 
@@ -37,13 +33,11 @@ bool TimeSignature::set_numerator(int numerator)
 
 
 
-
 bool TimeSignature::set_denominator(Duration denominator)
 {
    this->denominator = denominator;
    return true;
 }
-
 
 
 
@@ -54,12 +48,10 @@ bool TimeSignature::operator==(TimeSignature &other)
 
 
 
-
 bool TimeSignature::operator!=(TimeSignature &other)
 {
    return !(*this == other);
 }
-
 
 
 
