@@ -29,11 +29,11 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 	//if (note.playback_info.released) result += "{ color=gray }";
 	//else if (note.playback_info.attacked) result += "{ color=greenyellow }";
 
-	int num_octaves = abs(note.pitch.pitch) / 8;
-	int local_degree = abs(note.pitch.pitch) % 8;
-	if (note.pitch.pitch < 0) local_degree = 8 - local_degree;
-	char octave_char = (note.pitch.pitch < 0) ? ',' : '\'';
-	int octave_offset = (note.pitch.pitch < 0) ? 1 : 0;
+	int num_octaves = abs(note.pitch.scale_degree) / 8;
+	int local_degree = abs(note.pitch.scale_degree) % 8;
+	if (note.pitch.scale_degree < 0) local_degree = 8 - local_degree;
+	char octave_char = (note.pitch.scale_degree < 0) ? ',' : '\'';
+	int octave_offset = (note.pitch.scale_degree < 0) ? 1 : 0;
 
 	// write the duration
 	result += music_notation.duration_denominator_to_char(note.duration.denominator);
