@@ -59,12 +59,7 @@ bool TimeSignature::set_numerator(int numerator)
 
 bool TimeSignature::set_denominator(Duration denominator)
 {
-   if (!_is_valid_duration(denominator.denominator)) return false;
-   if (denominator.dots < 0) return false;
-   if (denominator.dots > 2) return false;
-
-   this->denominator.denominator = denominator.denominator;
-   this->denominator.dots = denominator.dots;
+   this->denominator = denominator;
    return true;
 }
 
