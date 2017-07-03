@@ -5,13 +5,14 @@
 
 #include <fullscore/models/duration.h>
 
+#include <fullscore/models/pitch.h>
+
 
 
 class Note
 {
 public:
-	int scale_degree;
-	int accidental;
+   Pitch pitch;
 	Duration duration;
 	int is_rest;
 

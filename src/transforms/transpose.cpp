@@ -25,7 +25,7 @@ Transform::Transpose::~Transpose()
 std::vector<Note> Transform::Transpose::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = source;
-   for (auto &note : notes) note.scale_degree += transposition;
+   for (auto &note : notes) note.pitch.pitch += transposition;
    return notes;
 }
 

@@ -84,7 +84,7 @@ void MeasureGridRenderComponent::render()
                Note &note = measure->notes[i];
                float width = DurationHelper::get_length(note.duration.denominator, note.duration.dots) * full_measure_width;
 
-               al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.scale_degree).c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.pitch.pitch).c_str());
                al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration.denominator) + "(" + tostring(note.duration.dots) + ")").c_str());
 
                x_cursor += width;
