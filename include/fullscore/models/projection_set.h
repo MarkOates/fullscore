@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <Fullscore/models/projection_pitch.h>
+#include <Fullscore/models/pitch.h>
 
 
 
