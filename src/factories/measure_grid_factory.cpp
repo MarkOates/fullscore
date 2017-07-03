@@ -4,6 +4,7 @@
 #include <fullscore/factories/measure_grid_factory.h>
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure.h>
+#include <iostream>
 
 
 
@@ -37,6 +38,17 @@ MeasureGrid MeasureGridFactory::big_score()
 {
    MeasureGrid measure_grid(60, 12);
    return measure_grid;
+}
+
+
+
+MeasureGrid MeasureGridFactory::create(std::string identifier)
+{
+   if (identifier == "big_score") return big_score();
+   if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
+
+   std::cout << "Could not find score " << identifier << std::endl;
+   return MeasureGrid(4, 1);
 }
 
 
