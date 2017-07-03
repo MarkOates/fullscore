@@ -4,14 +4,14 @@
 
 #include <fullscore/transforms/double_duration.h>
 
+#include <fullscore/models/duration.h>
 #include <algorithm>
-#include <fullscore/constants.h>
 
 
 
 
 Transform::DoubleDuration::DoubleDuration()
-   : maximum_duration(DURATION_WHOLE)
+   : maximum_duration(Duration::WHOLE)
 {
 }
 

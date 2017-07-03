@@ -4,7 +4,7 @@
 
 #include <fullscore/models/time_signature.h>
 
-#include <fullscore/constants.h>
+#include <fullscore/models/duration.h>
 
 
 
@@ -30,13 +30,13 @@ bool TimeSignature::_is_valid_duration(int duration)
 {
    switch(duration)
    {
-   case DURATION_WHOLE:
-   case DURATION_HALF:
-   case DURATION_QUARTER:
-   case DURATION_EIGHTH:
-   case DURATION_SIXTEENTH:
-   case DURATION_THIRTYSECOND:
-   case DURATION_SIXTYFOURTH:
+   case Duration::WHOLE:
+   case Duration::HALF:
+   case Duration::QUARTER:
+   case Duration::EIGHTH:
+   case Duration::SIXTEENTH:
+   case Duration::THIRTYSECOND:
+   case Duration::SIXTYFOURTH:
       return true;
    }
 

@@ -4,14 +4,14 @@
 
 #include <fullscore/transforms/half_duration.h>
 
+#include <fullscore/models/duration.h>
 #include <algorithm>
-#include <fullscore/constants.h>
 
 
 
 
 Transform::HalfDuration::HalfDuration()
-   : minimum_duration(DURATION_THIRTYSECOND)
+   : minimum_duration(Duration::THIRTYSECOND)
 {
 }
 
