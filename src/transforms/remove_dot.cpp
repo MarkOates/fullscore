@@ -24,7 +24,7 @@ Transform::RemoveDot::~RemoveDot()
 std::vector<Note> Transform::RemoveDot::transform(std::vector<Note> n)
 {
    for (auto &note : n)
-      note.dots = std::max(0, note.dots-1);
+      note.duration.dots = std::max(0, note.duration.dots-1);
 
    return n;
 }

@@ -22,7 +22,7 @@ bool NoteStringConverter::read(std::string str)
 
    std::stringstream ss;
    ss << str;
-   ss >> note->scale_degree >> note->accidental >> note->duration >> note->dots >> note->is_rest;
+   ss >> note->scale_degree >> note->accidental >> note->duration.denominator >> note->duration.dots >> note->is_rest;
 
    return true;
 }
@@ -35,7 +35,7 @@ std::string NoteStringConverter::write()
    if (!note) return "";
 
    std::stringstream ss;
-   ss << note->scale_degree << " " << note->accidental << " " << note->duration << " " << note->dots << " " << note->is_rest;
+   ss << note->scale_degree << " " << note->accidental << " " << note->duration.denominator << " " << note->duration.dots << " " << note->is_rest;
 
    return ss.str();
 }

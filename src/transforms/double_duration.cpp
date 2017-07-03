@@ -29,7 +29,7 @@ std::vector<Note> Transform::DoubleDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)
-      note.duration = std::max(maximum_duration, note.duration / 2);
+      note.duration.denominator = std::max(maximum_duration, note.duration.denominator / 2);
    return result;
 }
 
