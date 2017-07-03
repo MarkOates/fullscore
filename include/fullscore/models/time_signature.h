@@ -17,8 +17,6 @@ private:
    int numerator;
    Duration denominator;
 
-   bool _is_valid_duration(int duration);
-
 public:
    TimeSignature(int numerator, Duration denominator);
    ~TimeSignature();

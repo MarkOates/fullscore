@@ -25,26 +25,6 @@ TimeSignature::~TimeSignature()
 
 
 
-bool TimeSignature::_is_valid_duration(int duration)
-{
-   switch(duration)
-   {
-   case Duration::WHOLE:
-   case Duration::HALF:
-   case Duration::QUARTER:
-   case Duration::EIGHTH:
-   case Duration::SIXTEENTH:
-   case Duration::THIRTYSECOND:
-   case Duration::SIXTYFOURTH:
-      return true;
-   }
-
-   return false;
-}
-
-
-
-
 bool TimeSignature::set_numerator(int numerator)
 {
    if (numerator <= 0) return false;
