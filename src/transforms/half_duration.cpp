@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/half_duration.h>
 
 #include <algorithm>
 #include <fullscore/constants.h>

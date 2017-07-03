@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/toggle_rest_transform.h>
+#include <fullscore/transforms/toggle_rest.h>
 
 
 

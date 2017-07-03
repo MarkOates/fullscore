@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/erase_note_transform.h>
+#include <fullscore/transforms/erase_note.h>
 
 #include <algorithm>
 
