@@ -5,10 +5,10 @@
 class Pitch
 {
 public:
-   int pitch;
+   int scale_degree;
    int accidental;
 
-   Pitch(int pitch, int accidental=0);
+   Pitch(int scale_degree, int accidental=0);
 
    bool operator==(const Pitch &other) const;
 };

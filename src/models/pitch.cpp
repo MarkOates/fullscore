@@ -5,8 +5,8 @@
 
 
 
-Pitch::Pitch(int pitch, int accidental)
-   : pitch(pitch)
+Pitch::Pitch(int scale_degree, int accidental)
+   : scale_degree(scale_degree)
    , accidental(accidental)
 {}
 
@@ -14,7 +14,8 @@ Pitch::Pitch(int pitch, int accidental)
 
 bool Pitch::operator==(const Pitch &other) const
 {
-   return (other.pitch == pitch);
+   //TODO fix
+   return (other.scale_degree == scale_degree);
 }
 
 
