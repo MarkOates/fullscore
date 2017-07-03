@@ -85,9 +85,7 @@ float TimeSignature::get_width()
 
 bool TimeSignature::operator==(TimeSignature &other)
 {
-   return (numerator == other.numerator)
-      && (denominator.denominator == other.denominator.denominator)
-      && (denominator.dots == other.denominator.dots);
+   return (numerator == other.numerator) && (denominator == other.denominator);
 }
 
 
