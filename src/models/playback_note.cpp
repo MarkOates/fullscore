@@ -1,9 +1,7 @@
 
 
 
-
 #include <fullscore/models/playback_note.h>
-
 
 
 
@@ -20,11 +18,9 @@ PlaybackNote::PlaybackNote()
 
 
 
-
 PlaybackNote::~PlaybackNote()
 {
 }
-
 
 
 

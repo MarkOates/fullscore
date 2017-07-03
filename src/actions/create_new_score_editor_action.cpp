@@ -28,7 +28,7 @@ bool Action::CreateNewScoreEditor::execute()
 {
    if (!app_controller) return false;
 
-   app_controller->create_new_score_editor();
+   app_controller->create_new_score_editor("");
 
    return true;
 }

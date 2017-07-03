@@ -1,7 +1,6 @@
 
 
 
-
 #include <fullscore/models/measure_grid.h>
 
 #include <iostream>
@@ -9,12 +8,10 @@
 
 
 
-
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
    measures.resize(num_measures, Measure());
 }
-
 
 
 
@@ -26,7 +23,6 @@ Measure &MeasureGrid::Row::operator[](unsigned int index)
 
 
 
-
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
   , time_signatures()
@@ -34,7 +30,6 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    voices.resize(num_y_staves, Row(num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
-
 
 
 
@@ -49,7 +44,6 @@ Measure *MeasureGrid::get_measure(int x_measure, int y_staff)
 
 
 
-
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;
@@ -58,12 +52,10 @@ int MeasureGrid::get_num_measures() const
 
 
 
-
 int MeasureGrid::get_num_staves() const
 {
    return voices.size();
 }
-
 
 
 
@@ -84,7 +76,6 @@ void MeasureGrid::insert_staff(int index)
 
 
 
-
 bool MeasureGrid::delete_staff(int index)
 {
    if (index < 0 || index >= (int)voices.size()) return false;
@@ -94,13 +85,11 @@ bool MeasureGrid::delete_staff(int index)
 
 
 
-
 void MeasureGrid::append_staff()
 {
    int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
    voices.push_back(Row(num_measures));
 }
-
 
 
 
@@ -130,7 +119,6 @@ void MeasureGrid::insert_measure(int index)
 
 
 
-
 bool MeasureGrid::delete_measure(int index)
 {
    int num_measures = get_num_measures();
@@ -149,7 +137,6 @@ bool MeasureGrid::delete_measure(int index)
 
 
 
-
 void MeasureGrid::append_measure()
 {
    // append time signature
@@ -164,7 +151,6 @@ void MeasureGrid::append_measure()
 
 
 
-
 bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 {
    if (index < 0) return false;
@@ -176,7 +162,6 @@ bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 
 
 
-
 TimeSignature MeasureGrid::get_time_signature(int index)
 {
    if (index < 0) return TimeSignature(0, Duration());
@@ -184,7 +169,6 @@ TimeSignature MeasureGrid::get_time_signature(int index)
 
    return time_signatures[index];
 }
-
 
 
 

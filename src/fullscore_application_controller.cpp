@@ -60,8 +60,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   create_new_score_editor();
-   set_current_gui_score_editor(create_new_score_editor());
+   create_new_score_editor("");
+   set_current_gui_score_editor(create_new_score_editor("big_score"));
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -386,13 +386,13 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
 
 
-GUIScoreEditor *FullscoreApplicationController::create_new_score_editor()
+GUIScoreEditor *FullscoreApplicationController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
 
    GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera);
-   new_gui_score_editor->measure_grid = MeasureGridFactory::twinkle_twinkle_little_star();
+   new_gui_score_editor->measure_grid = MeasureGridFactory::create(name);
 
    new_gui_score_editor->place.position = vec2d(new_x, new_y);
    new_gui_score_editor->place.align = vec2d(0.0, 0.0);
