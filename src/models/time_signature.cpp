@@ -22,14 +22,14 @@ TimeSignature::~TimeSignature()
 
 
 
-int TimeSignature::get_numerator()
+int TimeSignature::get_numerator() const
 {
    return numerator;
 }
 
 
 
-Duration TimeSignature::get_denominator()
+Duration TimeSignature::get_denominator() const
 {
    return denominator;
 }
