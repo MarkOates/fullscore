@@ -5,6 +5,7 @@
 #include <fullscore/models/time_signature.h>
 
 #include <fullscore/models/duration.h>
+#include <fullscore/helpers/duration_helper.h>
 
 
 
@@ -48,16 +49,7 @@ bool TimeSignature::set_denominator(Duration denominator)
 
 float TimeSignature::get_width()
 {
-   float width = 1.0f / denominator.denominator;
-   float dots_percentage = 0.0f;
-   float previous_ammount = 1.0f;
-   for (int i=0; i<denominator.dots; i++)
-   {
-      previous_ammount *= 0.5f;
-      dots_percentage += previous_ammount;
-   }
-
-   return width + width * dots_percentage;
+   return numerator * DurationHelper::get_length(denominator.denominator, denominator.dots);
 }
 
 
