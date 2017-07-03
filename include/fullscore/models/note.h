@@ -1,5 +1,4 @@
-#ifndef __FULLSCORE_NOTE_HEADER
-#define __FULLSCORE_NOTE_HEADER
+#pragma once
 
 
 
@@ -13,16 +12,14 @@ class Note
 {
 public:
    Pitch pitch;
-	Duration duration;
-	int is_rest;
+   Duration duration;
+   int is_rest;
 
-	Note(int _scale_degree=0, Duration duration = Duration());
-	~Note();
+   Note(int _scale_degree=0, Duration duration = Duration());
+   ~Note();
 
    bool operator==(const Note &other) const;
 };
 
 
 
-
-#endif
