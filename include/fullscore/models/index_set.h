@@ -4,16 +4,16 @@
 
 #include <vector>
 
-#include <Fullscore/models/projection_pitch.h>
+#include <Fullscore/models/pitch.h>
 
 
 
 class IndexSet
 {
 public:
-   std::vector<ProjectionPitch> pitches;
+   std::vector<Pitch> pitches;
 
-   IndexSet(std::vector<ProjectionPitch> pitches);
+   IndexSet(std::vector<Pitch> pitches);
 
    bool operator==(const IndexSet &other) const;
 };

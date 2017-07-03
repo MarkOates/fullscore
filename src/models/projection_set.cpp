@@ -5,7 +5,7 @@
 
 
 
-ProjectionSet::ProjectionSet(std::vector<ProjectionPitch> pitches, int extension)
+ProjectionSet::ProjectionSet(std::vector<Pitch> pitches, int extension)
    : pitches(pitches)
    , extension(extension)
 {}

@@ -5,6 +5,7 @@
 #include <fullscore/models/time_signature.h>
 
 #include <fullscore/models/duration.h>
+#include <fullscore/helpers/duration_helper.h>
 
 
 
@@ -25,26 +26,6 @@ TimeSignature::~TimeSignature()
 
 
 
-bool TimeSignature::_is_valid_duration(int duration)
-{
-   switch(duration)
-   {
-   case Duration::WHOLE:
-   case Duration::HALF:
-   case Duration::QUARTER:
-   case Duration::EIGHTH:
-   case Duration::SIXTEENTH:
-   case Duration::THIRTYSECOND:
-   case Duration::SIXTYFOURTH:
-      return true;
-   }
-
-   return false;
-}
-
-
-
-
 bool TimeSignature::set_numerator(int numerator)
 {
    if (numerator <= 0) return false;
@@ -59,30 +40,8 @@ bool TimeSignature::set_numerator(int numerator)
 
 bool TimeSignature::set_denominator(Duration denominator)
 {
-   if (!_is_valid_duration(denominator.denominator)) return false;
-   if (denominator.dots < 0) return false;
-   if (denominator.dots > 2) return false;
-
-   this->denominator.denominator = denominator.denominator;
-   this->denominator.dots = denominator.dots;
+   this->denominator = denominator;
    return true;
-}
-
-
-
-
-float TimeSignature::get_width()
-{
-   float width = 1.0f / denominator.denominator;
-   float dots_percentage = 0.0f;
-   float previous_ammount = 1.0f;
-   for (int i=0; i<denominator.dots; i++)
-   {
-      previous_ammount *= 0.5f;
-      dots_percentage += previous_ammount;
-   }
-
-   return width + width * dots_percentage;
 }
 
 
@@ -90,9 +49,7 @@ float TimeSignature::get_width()
 
 bool TimeSignature::operator==(TimeSignature &other)
 {
-   return (numerator == other.numerator)
-      && (denominator.denominator == other.denominator.denominator)
-      && (denominator.dots == other.denominator.dots);
+   return (numerator == other.numerator) && (denominator == other.denominator);
 }
 
 

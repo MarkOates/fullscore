@@ -4,7 +4,7 @@
 #include <fullscore/models/index_set.h>
 
 
-IndexSet::IndexSet(std::vector<ProjectionPitch> pitches)
+IndexSet::IndexSet(std::vector<Pitch> pitches)
    : pitches(pitches)
 {}
 

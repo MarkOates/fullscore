@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <Fullscore/models/projection_pitch.h>
+#include <Fullscore/models/pitch.h>
 
 
 
@@ -12,9 +12,9 @@ class ProjectionSet
 {
 public:
    int extension;
-   std::vector<ProjectionPitch> pitches;
+   std::vector<Pitch> pitches;
 
-   ProjectionSet(std::vector<ProjectionPitch> pitches, int extension);
+   ProjectionSet(std::vector<Pitch> pitches, int extension);
 };
 
 

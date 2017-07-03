@@ -26,7 +26,7 @@ std::vector<Note> Transform::Invert::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = source;
    for (auto &note : notes)
-      note.scale_degree = (note.scale_degree - axis) * -1 + axis;
+      note.pitch.scale_degree = (note.pitch.scale_degree - axis) * -1 + axis;
    return notes;
 }
 
