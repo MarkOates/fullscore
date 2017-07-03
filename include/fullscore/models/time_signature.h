@@ -23,7 +23,6 @@ public:
 
    bool set_numerator(int numerator);
    bool set_denominator(Duration denominator);
-   float get_width();
 
    bool operator==(TimeSignature &other);
    bool operator!=(TimeSignature &other);

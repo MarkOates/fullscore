@@ -47,14 +47,6 @@ bool TimeSignature::set_denominator(Duration denominator)
 
 
 
-float TimeSignature::get_width()
-{
-   return numerator * DurationHelper::get_length(denominator.denominator, denominator.dots);
-}
-
-
-
-
 bool TimeSignature::operator==(TimeSignature &other)
 {
    return (numerator == other.numerator) && (denominator == other.denominator);
