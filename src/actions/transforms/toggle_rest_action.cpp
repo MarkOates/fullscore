@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 
-#include <fullscore/transforms/toggle_rest_transform.h>
+#include <fullscore/transforms/toggle_rest.h>
 #include <fullscore/models/note.h>
 
 

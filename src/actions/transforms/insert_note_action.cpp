@@ -4,8 +4,7 @@
 
 #include <fullscore/actions/transforms/insert_note_action.h>
 
-#include <fullscore/transforms/insert_note_transform.h>
-
+#include <fullscore/transforms/insert_note.h>
 
 
 
@@ -27,7 +26,7 @@ Action::InsertNoteTransform::~InsertNoteTransform()
 
 bool Action::InsertNoteTransform::execute()
 {
-   if (!notes || notes->empty() || at_index < 0 || at_index >= notes->size()) return false;
+   if (!notes) throw std::runtime_error("Cannot transform NULL notes");
 
    ::Transform::InsertNote insert_note_transform(at_index, note);
    *notes = insert_note_transform.transform(*notes);
