@@ -10,16 +10,15 @@
 class TimeSignature
 {
 private:
-   friend class TimeSignatureRenderComponent;
-   friend class TimeSignatureStringConverter;
-   friend class DurationHelper;
-
    int numerator;
    Duration denominator;
 
 public:
    TimeSignature(int numerator, Duration denominator);
    ~TimeSignature();
+
+   int get_numerator() const;
+   Duration get_denominator() const;
 
    bool set_numerator(int numerator);
    bool set_denominator(Duration denominator);

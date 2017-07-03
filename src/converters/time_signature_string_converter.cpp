@@ -21,8 +21,15 @@ bool TimeSignatureStringConverter::read(std::string str)
    if (!time_signature) return false;
 
    std::stringstream ss;
+   int numerator = 0;
+   int denominator_denominator = 0;
+   int denominator_dots = 0;
+
    ss << str;
-   ss >> time_signature->numerator >> time_signature->denominator.denominator >> time_signature->denominator.dots;
+   ss >> numerator >> denominator_denominator >> denominator_dots;
+
+   time_signature->set_numerator(numerator);
+   time_signature->set_denominator(Duration(denominator_denominator, denominator_dots));
 
    return true;
 }
@@ -35,7 +42,7 @@ std::string TimeSignatureStringConverter::write()
    if (!time_signature) return "";
 
    std::stringstream ss;
-   ss << time_signature->numerator << " " << time_signature->denominator.denominator << " " << time_signature->denominator.dots;
+   ss << time_signature->get_numerator() << " " << time_signature->get_denominator().denominator << " " << time_signature->get_denominator().dots;
 
    return ss.str();
 }

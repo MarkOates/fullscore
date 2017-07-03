@@ -22,6 +22,20 @@ TimeSignature::~TimeSignature()
 
 
 
+int TimeSignature::get_numerator() const
+{
+   return numerator;
+}
+
+
+
+Duration TimeSignature::get_denominator() const
+{
+   return denominator;
+}
+
+
+
 bool TimeSignature::set_numerator(int numerator)
 {
    if (numerator <= 0) return false;
