@@ -10,6 +10,7 @@ class MeasureGridFactory
 {
 public:
    static MeasureGrid twinkle_twinkle_little_star();
+   static MeasureGrid big_score();
 };
 
 

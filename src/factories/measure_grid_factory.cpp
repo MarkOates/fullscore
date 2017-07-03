@@ -33,3 +33,11 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
 
 
 
+MeasureGrid MeasureGridFactory::big_score()
+{
+   MeasureGrid measure_grid(60, 12);
+   return measure_grid;
+}
+
+
+
