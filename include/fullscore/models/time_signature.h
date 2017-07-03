@@ -21,6 +21,9 @@ public:
    TimeSignature(int numerator, Duration denominator);
    ~TimeSignature();
 
+   int get_numerator();
+   Duration get_denominator();
+
    bool set_numerator(int numerator);
    bool set_denominator(Duration denominator);
 
