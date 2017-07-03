@@ -47,7 +47,7 @@ void MeasureGridRenderComponent::render()
    if (!measure_grid || !music_engraver) return;
 
    // draw barlines
-   TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
+   TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<measure_grid->get_num_measures(); x++)
    {
       Measure *measure = measure_grid->get_measure(x, 0);

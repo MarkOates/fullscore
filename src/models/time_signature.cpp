@@ -9,10 +9,9 @@
 
 
 
-TimeSignature::TimeSignature(int numerator, int denominator_duration, int denominator_dots)
+TimeSignature::TimeSignature(int numerator, Duration denominator)
    : numerator(numerator)
-   , denominator_duration(denominator_duration)
-   , denominator_dots(denominator_dots)
+   , denominator(denominator)
 {
 }
 
@@ -58,14 +57,14 @@ bool TimeSignature::set_numerator(int numerator)
 
 
 
-bool TimeSignature::set_denominator(int denominator_duration, int denominator_dots)
+bool TimeSignature::set_denominator(Duration denominator)
 {
-   if (!_is_valid_duration(denominator_duration)) return false;
-   if (denominator_dots < 0) return false;
-   if (denominator_dots > 2) return false;
+   if (!_is_valid_duration(denominator.denominator)) return false;
+   if (denominator.dots < 0) return false;
+   if (denominator.dots > 2) return false;
 
-   this->denominator_duration = denominator_duration;
-   this->denominator_dots = denominator_dots;
+   this->denominator.denominator = denominator.denominator;
+   this->denominator.dots = denominator.dots;
    return true;
 }
 
@@ -74,10 +73,10 @@ bool TimeSignature::set_denominator(int denominator_duration, int denominator_do
 
 float TimeSignature::get_width()
 {
-   float width = 1.0f / denominator_duration;
+   float width = 1.0f / denominator.denominator;
    float dots_percentage = 0.0f;
    float previous_ammount = 1.0f;
-   for (int i=0; i<denominator_dots; i++)
+   for (int i=0; i<denominator.dots; i++)
    {
       previous_ammount *= 0.5f;
       dots_percentage += previous_ammount;
@@ -92,8 +91,8 @@ float TimeSignature::get_width()
 bool TimeSignature::operator==(TimeSignature &other)
 {
    return (numerator == other.numerator)
-      && (denominator_duration == other.denominator_duration)
-      && (denominator_dots == other.denominator_dots);
+      && (denominator.denominator == other.denominator.denominator)
+      && (denominator.dots == other.denominator.dots);
 }
 
 

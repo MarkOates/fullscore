@@ -105,7 +105,7 @@ bool MeasureGridFileConverter::load()
    std::vector<std::string> time_signature_string_tokens = php::explode(";", time_signatures_string);
    for (auto &time_signature_string : time_signature_string_tokens)
    {
-      TimeSignature t = TimeSignature(0, 0, 0);
+      TimeSignature t = TimeSignature(0, Duration());
       measure_grid->time_signatures.push_back(t);
       TimeSignatureStringConverter converter(&measure_grid->time_signatures.back());
 
