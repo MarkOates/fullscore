@@ -5,7 +5,6 @@
 #include <fullscore/models/measure_grid.h>
 
 #include <iostream>
-#include <fullscore/constants.h>
 #include <fullscore/models/note.h>
 
 
@@ -33,7 +32,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
   , time_signatures()
 {
    voices.resize(num_y_staves, Row(num_x_measures));
-   time_signatures.resize(num_x_measures, TimeSignature(4, DURATION_QUARTER, 0));
+   time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
 
@@ -117,7 +116,7 @@ void MeasureGrid::insert_measure(int index)
    else
    {
       // insert a time signature
-      time_signatures.insert(time_signatures.begin() + index, TimeSignature(4, DURATION_QUARTER, 0));
+      time_signatures.insert(time_signatures.begin() + index, TimeSignature(4, Duration()));
 
       // insert a measure into each row
       for (unsigned i=0; i<voices.size(); i++)
@@ -154,7 +153,7 @@ bool MeasureGrid::delete_measure(int index)
 void MeasureGrid::append_measure()
 {
    // append time signature
-   time_signatures.push_back(TimeSignature(4, DURATION_QUARTER, 0));
+   time_signatures.push_back(TimeSignature(4, Duration()));
 
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
@@ -180,8 +179,8 @@ bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 
 TimeSignature MeasureGrid::get_time_signature(int index)
 {
-   if (index < 0) return TimeSignature(0, 0, 0);
-   if (index >= get_num_measures()) return TimeSignature(0, 0, 0);
+   if (index < 0) return TimeSignature(0, Duration());
+   if (index >= get_num_measures()) return TimeSignature(0, Duration());
 
    return time_signatures[index];
 }

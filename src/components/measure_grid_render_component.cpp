@@ -12,7 +12,6 @@
 #include <fullscore/helpers/measure_grid_helper.h>
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure_grid.h>
-#include <fullscore/constants.h>
 #include <fullscore/music_engraver.h>
 
 
@@ -48,7 +47,7 @@ void MeasureGridRenderComponent::render()
    if (!measure_grid || !music_engraver) return;
 
    // draw barlines
-   TimeSignature previous_time_signature = TimeSignature(0, 0, 0);
+   TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<measure_grid->get_num_measures(); x++)
    {
       Measure *measure = measure_grid->get_measure(x, 0);
@@ -83,10 +82,10 @@ void MeasureGridRenderComponent::render()
             for (unsigned i=0; i<measure->notes.size(); i++)
             {
                Note &note = measure->notes[i];
-               float width = DurationHelper::get_length(note.duration, note.dots) * full_measure_width;
+               float width = DurationHelper::get_length(note.duration.denominator, note.duration.dots) * full_measure_width;
 
                al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.scale_degree).c_str());
-               al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration) + "(" + tostring(note.dots) + ")").c_str());
+               al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration.denominator) + "(" + tostring(note.duration.dots) + ")").c_str());
 
                x_cursor += width;
             }

@@ -4,14 +4,14 @@
 
 #include <fullscore/transforms/half_duration.h>
 
+#include <fullscore/models/duration.h>
 #include <algorithm>
-#include <fullscore/constants.h>
 
 
 
 
 Transform::HalfDuration::HalfDuration()
-   : minimum_duration(DURATION_THIRTYSECOND)
+   : minimum_duration(Duration::THIRTYSECOND)
 {
 }
 
@@ -29,7 +29,7 @@ std::vector<Note> Transform::HalfDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)
-      note.duration = std::min(minimum_duration, note.duration * 2);
+      note.duration.denominator = std::min(minimum_duration, note.duration.denominator * 2);
    return result;
 }
 

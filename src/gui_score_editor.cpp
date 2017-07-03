@@ -93,7 +93,7 @@ void GUIScoreEditor::on_draw()
       if (note)
       {
          float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-         float real_note_width = DurationHelper::get_length(note->duration, note->dots) * FULL_MEASURE_WIDTH;
+         float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
 
          // note box fill
          al_draw_filled_rounded_rectangle(
@@ -187,7 +187,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
    if (note_index < 0 || note_index >= measure.notes.size()) return 0;
 
    for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(measure.notes[i].duration, measure.notes[i].dots);
+      sum += DurationHelper::get_length(measure.notes[i].duration.denominator, measure.notes[i].duration.dots);
    return sum;
 }
 
@@ -197,7 +197,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
 float GUIScoreEditor::get_measure_width(Measure &m)
 {
    float sum = 0;
-   for (auto &note : m.notes) sum += DurationHelper::get_length(note.duration, note.dots);
+   for (auto &note : m.notes) sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
    return sum;
 }
 

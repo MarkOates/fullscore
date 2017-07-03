@@ -5,12 +5,11 @@
 
 
 
-Note::Note(int _scale_degree, int _duration, int _dots)
+Note::Note(int _scale_degree, Duration duration)
 	: scale_degree(_scale_degree)
 	, accidental(0)
-	, duration(_duration)
+	, duration(duration)
 	, is_rest(false)
-	, dots(_dots)
 {}
 
 
@@ -27,8 +26,7 @@ bool Note::operator==(const Note &other) const
    return (scale_degree == other.scale_degree
          && accidental == other.accidental
          && duration == other.duration
-         && is_rest == other.is_rest
-         && dots == other.dots);
+         && is_rest == other.is_rest);
 }
 
 
