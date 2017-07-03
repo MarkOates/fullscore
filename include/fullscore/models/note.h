@@ -3,17 +3,19 @@
 
 
 
+#include <fullscore/models/duration.h>
+
+
 
 class Note
 {
 public:
 	int scale_degree;
 	int accidental;
-	int duration;
-	int dots;
+	Duration duration;
 	int is_rest;
 
-	Note(int _scale_degree=0, int _duration=4, int _dots=0);
+	Note(int _scale_degree=0, Duration duration = Duration());
 	~Note();
 
    bool operator==(const Note &other) const;
