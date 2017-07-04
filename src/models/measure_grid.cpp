@@ -151,6 +151,25 @@ void MeasureGrid::append_measure()
 
 
 
+bool MeasureGrid::set_voice_name(int row_number, std::string name)
+{
+   if (row_number < 0) return "";
+   if (row_number >= voices.size()) return "";
+   voices[row_number].name = name;
+   return true;
+}
+
+
+
+std::string MeasureGrid::get_voice_name(int row_number)
+{
+   if (row_number < 0) return "";
+   if (row_number >= voices.size()) return "";
+   return voices[row_number].name;
+}
+
+
+
 bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 {
    if (index < 0) return false;
