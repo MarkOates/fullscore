@@ -5,6 +5,7 @@
 #include <fullscore/fullscore_application_controller.h>
 
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
+#include <fullscore/actions/transforms/clear_measure_transform_action.h>
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
 #include <fullscore/actions/transforms/erase_note_action.h>
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
@@ -176,6 +177,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    if (current_gui_score_editor->is_note_target_mode())
    {
       single_note = current_gui_score_editor->get_note_at_cursor();
+      focused_measure = current_gui_score_editor->get_measure_at_cursor();
+      if (focused_measure) notes = &focused_measure->notes;
    }
    if (current_gui_score_editor->is_measure_target_mode())
    {
@@ -249,6 +252,11 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
          return action_queue;
       }
    }
+   else if (action_name == "erase_note")
+   {
+      if (current_gui_score_editor->is_note_target_mode()) action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
+      else if (current_gui_score_editor->is_measure_target_mode()) action = new Action::Transform::ClearMeasure(notes);
+   }
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
@@ -259,8 +267,6 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::SetCommandMode(current_gui_score_editor, command_bar);
    else if (action_name == "set_normal_mode")
       action = new Action::SetNormalMode(current_gui_score_editor, command_bar);
-   else if (action_name == "erase_note")
-      action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
