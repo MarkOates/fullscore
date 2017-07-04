@@ -10,6 +10,7 @@
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
 #include <fullscore/actions/transforms/insert_note_action.h>
 #include <fullscore/actions/transforms/invert_action.h>
+#include <fullscore/actions/transforms/octatonic_1_transform_action.h>
 #include <fullscore/actions/transforms/remove_dot_transform_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
@@ -118,6 +119,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_L: return "move_cursor_right"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
+      case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       }
 
@@ -261,6 +263,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
+   else if (action_name == "octatonic_1_transform")
+      action = new Action::Octatonic1Transform(notes);
    else if (action_name == "insert_note")
       action = new Action::InsertNoteTransform(notes, current_gui_score_editor->note_cursor_x, Note());
    else if (action_name == "toggle_show_debug_data")
