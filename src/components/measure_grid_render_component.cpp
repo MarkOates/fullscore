@@ -71,7 +71,9 @@ void MeasureGridRenderComponent::render()
       int y_pos = y * staff_height;
 
       // draw the row name
-      al_draw_text(text_font, color::black, -20, y_pos, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
+      float row_middle_y = y_pos + staff_height * 0.5;
+      float label_text_top_y = row_middle_y - al_get_font_line_height(text_font) * 0.5;
+      al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
 
       // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
