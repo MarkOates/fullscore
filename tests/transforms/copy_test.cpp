@@ -44,6 +44,16 @@ TEST(CopyTransformTest, when_referencing_a_measure_grid_that_does_not_exist__rai
 
 
 
+TEST(CopyTransformTest, transform__with_coordinates_that_are_outside_the_grid__raises_an_exception)
+{
+   MeasureGrid measure_grid(1, 1);
+   Transform::Copy copy_transform(&measure_grid, 9999, 9999);
+
+   ASSERT_THROW(copy_transform.transform({}), std::runtime_error);
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
