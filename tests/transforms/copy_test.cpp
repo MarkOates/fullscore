@@ -35,6 +35,15 @@ TEST(CopyTransformTest, copies_a_set_of_notes_from_a_measure_grid_and_coordinate
 
 
 
+TEST(CopyTransformTest, when_referencing_a_measure_grid_that_does_not_exist__raises_an_exception)
+{
+   Transform::Copy copy_transform(nullptr, 0, 0);
+
+   ASSERT_THROW(copy_transform.transform({}), std::runtime_error);
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
