@@ -17,6 +17,24 @@ TEST(CopyTransformTest, can_be_created)
 
 
 
+TEST(CopyTransformTest, copies_a_set_of_notes_from_a_measure_grid_and_coordinates)
+{
+   std::vector<Note> source_notes = {};
+
+   MeasureGrid measure_grid(1, 1);
+   Measure *measure = measure_grid.get_measure(0, 0);
+   measure->notes = { Note(2), Note(0), Note(1) };
+
+   Transform::Copy copy_transform(&measure_grid, 0, 0);
+
+   std::vector<Note> expected_notes = { Note(2), Note(0), Note(1) };
+   std::vector<Note> returned_notes = copy_transform.transform(source_notes);
+
+   EXPECT_EQ(expected_notes, returned_notes);
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
