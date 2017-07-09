@@ -4,6 +4,7 @@
 #include <fullscore/factories/measure_grid_factory.h>
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure.h>
+#include <allegro_flare/useful.h>
 #include <iostream>
 
 
@@ -29,6 +30,9 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
    measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
    measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
 
+   for (int i=0; i<measure_grid.get_num_staves(); i++)
+      measure_grid.set_voice_name(i, tostring("Voice ") + tostring(i));
+
    return measure_grid;
 }
 
@@ -37,6 +41,10 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
 MeasureGrid MeasureGridFactory::big_score()
 {
    MeasureGrid measure_grid(60, 12);
+
+   for (int i=0; i<measure_grid.get_num_staves(); i++)
+      measure_grid.set_voice_name(i, tostring("Voice ") + tostring(i));
+
    return measure_grid;
 }
 
