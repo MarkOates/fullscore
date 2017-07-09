@@ -66,18 +66,26 @@ void MeasureGridRenderComponent::render()
 
    // draw the notes and measures
    for (int y=0; y<measure_grid->get_num_staves(); y++)
+   {
+      ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
+      int y_pos = y * staff_height;
+
+      // draw the row name
+      float row_middle_y = y_pos + staff_height * 0.5;
+      float label_text_top_y = row_middle_y - al_get_font_line_height(text_font) * 0.5;
+      al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
+
+      // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
          Measure *measure = measure_grid->get_measure(x,y);
          float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
-         int y_pos = y * staff_height;
          music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
 
          // draw debug info on the note
          if (showing_debug_data)
          {
             float x_cursor = x_pos;
-            ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
 
             for (unsigned i=0; i<measure->notes.size(); i++)
             {
@@ -91,6 +99,7 @@ void MeasureGridRenderComponent::render()
             }
          }
       }
+   }
 }
 
 
