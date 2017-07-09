@@ -3,11 +3,10 @@
 
 
 
-
 #include <vector>
+#include <string>
 #include <fullscore/models/measure.h>
 #include <fullscore/models/time_signature.h>
-
 
 
 
@@ -20,6 +19,7 @@ private:
    class Row
    {
    public:
+      std::string name;
       std::vector<Measure> measures;
       Row(int num_measures);
       Measure &operator[](unsigned int index);
@@ -43,10 +43,12 @@ public:
    bool delete_measure(int index);
    void append_measure();
 
+   bool set_voice_name(int row_number, std::string name);
+   std::string get_voice_name(int row_number);
+
    bool set_time_signature(int index, TimeSignature time_signature);
    TimeSignature get_time_signature(int index);
 };
-
 
 
 
