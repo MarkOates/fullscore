@@ -10,8 +10,8 @@
 
 Note *Measure::operator[](int index)
 {
-	if (index < 0 || notes.empty() || index >= notes.size()) return NULL;
-	return &notes[index];
+   if (index < 0 || notes.empty() || index >= notes.size()) return NULL;
+   return &notes[index];
 }
 
 

@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_MEASURE_HEADER
-#define __FULLSCORE_MEASURE_HEADER
-
+#pragma once
 
 
 
@@ -8,9 +6,7 @@
 
 
 
-
 class Note;
-
 
 
 
@@ -18,11 +14,9 @@ class Measure
 {
 public:
    int extension;
-	std::vector<Note> notes;
+   std::vector<Note> notes;
    Note *operator[](int index);
 };
 
 
 
-
-#endif
