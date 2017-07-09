@@ -59,6 +59,7 @@ tests: $(TESTS)
 
 
 bin/tests/%: tests/%.cpp $(OBJECTS)
+	@mkdir -p $(@D)
 	@printf "compiling test \e[1m\e[36m$<\033[0m..."
 	@g++ -std=gnu++11 $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS_FOR_TESTS) $(GOOGLE_TEST_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
