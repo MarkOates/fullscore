@@ -38,14 +38,6 @@ std::istream& operator>> (std::istream &i, Duration::denominator_t &denominator)
             break;
          }
       }
-
-      //if (value == tostring(Duration::WHOLE)) denominator = Duration::WHOLE;
-      //else if (value == tostring(Duration::HALF))  denominator = Duration::HALF;
-      //else if (value == tostring(Duration::QUARTER)) denominator = Duration::QUARTER;
-      //else if (value == tostring(Duration::EIGHTH)) denominator = Duration::EIGHTH;
-      //else if (value == tostring(Duration::SIXTEENTH)) denominator = Duration::SIXTEENTH;
-      //else if (value == tostring(Duration::THIRTYSECOND)) denominator = Duration::THIRTYSECOND;
-      //else if (value == tostring(Duration::SIXTYFOURTH)) denominator = Duration::SIXTYFOURTH;
    }
    return i;
 }
