@@ -8,10 +8,37 @@
 
 
 
+Measure::Measure()
+   : genesis(nullptr)
+   , extension(12)
+{}
+
+
+
 Note *Measure::operator[](int index)
 {
    if (index < 0 || notes.empty() || index >= notes.size()) return NULL;
    return &notes[index];
+}
+
+
+
+bool Measure::end_of_the_line()
+{
+   if (genesis)
+   {
+      try
+      {
+         notes = genesis->transform({});
+         return true;
+      }
+      catch (...)
+      {
+         std::cout << "Measure genesis failed" << std::endl;
+         return false;
+      }
+   }
+   return false;
 }
 
 
