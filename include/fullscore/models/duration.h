@@ -2,6 +2,10 @@
 
 
 
+#include <sstream>
+
+
+
 class Duration
 {
 public:
@@ -16,12 +20,17 @@ public:
       SIXTYFOURTH = 64,
    };
 
-   int denominator;
+   denominator_t denominator;
    int dots;
 
-   Duration(int denominator=4, int dots=0);
+   Duration(denominator_t denominator=QUARTER, int dots=0);
    bool operator==(const Duration &other) const;
 };
+
+
+std::istream& operator>> (std::istream& i, Duration::denominator_t &denominator);
+Duration::denominator_t half_duration(Duration::denominator_t denominator);
+Duration::denominator_t double_duration(Duration::denominator_t denominator);
 
 
 
