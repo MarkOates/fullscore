@@ -10,6 +10,7 @@
 
 Measure::Measure()
    : genesis(nullptr)
+   , extension(12)
 {}
 
 
