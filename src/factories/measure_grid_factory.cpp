@@ -20,7 +20,7 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
    measure_grid.get_measure(0,0)->notes.push_back(Note(4));
    measure_grid.get_measure(1,0)->notes.push_back(Note(5));
    measure_grid.get_measure(1,0)->notes.push_back(Note(5));
-   measure_grid.get_measure(1,0)->notes.push_back(Note(4, 2));
+   measure_grid.get_measure(1,0)->notes.push_back(Note(4, Duration::HALF));
 
    measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
    measure_grid.get_measure(2,0)->notes.push_back(Note(0+3));
@@ -28,7 +28,7 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
    measure_grid.get_measure(2,0)->notes.push_back(Note(-1+3));
    measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
    measure_grid.get_measure(3,0)->notes.push_back(Note(-2+3));
-   measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, 2));
+   measure_grid.get_measure(3,0)->notes.push_back(Note(-3+3, Duration::HALF));
 
    for (int i=0; i<measure_grid.get_num_staves(); i++)
       measure_grid.set_voice_name(i, tostring("Voice ") + tostring(i));

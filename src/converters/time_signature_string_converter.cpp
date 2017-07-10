@@ -22,7 +22,7 @@ bool TimeSignatureStringConverter::read(std::string str)
 
    std::stringstream ss;
    int numerator = 0;
-   int denominator_denominator = 0;
+   Duration::denominator_t denominator_denominator = Duration::QUARTER;
    int denominator_dots = 0;
 
    ss << str;
