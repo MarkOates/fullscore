@@ -68,6 +68,7 @@ bin/tests/%: tests/%.cpp $(OBJECTS)
 
 clean:
 	-rm -rdf obj/
+	-rm -rdf bin/tests/
 	-rm bin/$(PROJECT_NAME_SNAKE_CASE)
 
 
