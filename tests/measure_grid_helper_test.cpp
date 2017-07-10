@@ -40,12 +40,12 @@ TEST(MeasureGridHelperTest, returns_the_length_to_the_measure_with_non_4_4_time_
    float expected_length = 0;
    MeasureGrid measure_grid(10, 1);
 
-   measure_grid.set_time_signature(0, TimeSignature(3, Duration(4, 0)));
-   measure_grid.set_time_signature(1, TimeSignature(5, Duration(4, 0)));
-   measure_grid.set_time_signature(2, TimeSignature(6, Duration(8, 0)));
-   measure_grid.set_time_signature(3, TimeSignature(5, Duration(16, 0)));
-   measure_grid.set_time_signature(4, TimeSignature(5, Duration(2, 0)));
-   measure_grid.set_time_signature(5, TimeSignature(9, Duration(8, 0)));
+   measure_grid.set_time_signature(0, TimeSignature(3, Duration(Duration::QUARTER, 0)));
+   measure_grid.set_time_signature(1, TimeSignature(5, Duration(Duration::QUARTER, 0)));
+   measure_grid.set_time_signature(2, TimeSignature(6, Duration(Duration::EIGHTH, 0)));
+   measure_grid.set_time_signature(3, TimeSignature(5, Duration(Duration::SIXTEENTH, 0)));
+   measure_grid.set_time_signature(4, TimeSignature(5, Duration(Duration::HALF, 0)));
+   measure_grid.set_time_signature(5, TimeSignature(9, Duration(Duration::EIGHTH, 0)));
 
    ASSERT_EQ(MeasureGridHelper::get_length_to_measure(measure_grid, 1), 0.75);
    ASSERT_EQ(MeasureGridHelper::get_length_to_measure(measure_grid, 2), 2.0);
