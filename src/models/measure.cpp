@@ -23,9 +23,22 @@ Note *Measure::operator[](int index)
 
 
 
-void Measure::end_of_the_line()
+bool Measure::end_of_the_line()
 {
-   if (genesis) notes = genesis->transform({});
+   if (genesis)
+   {
+      try
+      {
+         notes = genesis->transform({});
+         return true;
+      }
+      catch (...)
+      {
+         std::cout << "Measure genesis failed" << std::endl;
+         return false;
+      }
+   }
+   return false;
 }
 
 
