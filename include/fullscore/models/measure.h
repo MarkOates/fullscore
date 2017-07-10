@@ -16,7 +16,7 @@ class Measure
 {
 public:
    Transform::Stack *genesis;
-   bool end_of_the_line();
+   bool refresh();
 
    Measure();
 

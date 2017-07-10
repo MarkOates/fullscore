@@ -77,7 +77,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    dm->genesis = new Transform::Stack();
    dm->genesis->add_transform(&copy_transform);
    dm->genesis->add_transform(&double_duration_transform);
-   dm->end_of_the_line();
+   dm->refresh();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;

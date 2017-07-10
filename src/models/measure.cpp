@@ -23,7 +23,7 @@ Note *Measure::operator[](int index)
 
 
 
-bool Measure::end_of_the_line()
+bool Measure::refresh()
 {
    if (genesis)
    {

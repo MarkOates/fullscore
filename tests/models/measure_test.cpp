@@ -33,7 +33,7 @@ TEST(MeasureTest, with_genesis_populates_its_notes)
    Transform::InsertNote insert_note_transform(0, Note());
    for (unsigned i=0; i<3; i++) measure.genesis->add_transform(&insert_note_transform);
 
-   ASSERT_EQ(true, measure.end_of_the_line());
+   ASSERT_EQ(true, measure.refresh());
 
    std::vector<Note> expected_notes = { Note(), Note(), Note() };
    std::vector<Note> measure_notes = measure.notes;
