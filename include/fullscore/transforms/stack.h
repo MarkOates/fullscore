@@ -20,6 +20,7 @@ namespace Transform
       bool clear();
 
       virtual std::vector<Note> transform(std::vector<Note> notes) override;
+      std::vector<Transform::Base *> get_transformations();
    };
 };
 

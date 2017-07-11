@@ -38,3 +38,10 @@ std::vector<Note> Transform::Stack::transform(std::vector<Note> notes)
 
 
 
+std::vector<Transform::Base *> Transform::Stack::get_transformations()
+{
+   return transformations;
+}
+
+
+
