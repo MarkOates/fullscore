@@ -4,7 +4,7 @@
 
 #include <fullscore/fullscore_application_controller.h>
 
-#include <fullscore/transforms/copy.h>
+#include <fullscore/transforms/reference.h>
 #include <fullscore/transforms/double_duration.h>
 
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
@@ -72,10 +72,10 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    m->notes = {Note(2), Note(0), Note(1)};
 
    Measure *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
-   Transform::Copy copy_transform(&current_gui_score_editor->measure_grid, 0, 0);
+   Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
    dm->genesis = new Transform::Stack();
-   dm->genesis->add_transform(&copy_transform);
+   dm->genesis->add_transform(&reference_transform);
    dm->genesis->add_transform(&double_duration_transform);
    dm->refresh();
 
