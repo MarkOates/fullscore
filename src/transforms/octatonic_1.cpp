@@ -6,6 +6,7 @@
 
 
 Transform::Octatonic1::Octatonic1()
+   : Base("ocatatonic_1")
 {}
 
 

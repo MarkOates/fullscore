@@ -7,7 +7,8 @@
 
 
 
-Transform::Base::Base()
+Transform::Base::Base(std::string identifier)
+   : identifier(identifier)
 {
 }
 

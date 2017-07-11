@@ -8,6 +8,7 @@
 
 
 Transform::AddDot::AddDot()
+   : Base("add_dot")
 {
 }
 

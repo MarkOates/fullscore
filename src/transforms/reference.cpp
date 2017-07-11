@@ -9,7 +9,8 @@
 
 
 Transform::Reference::Reference(MeasureGrid *measure_grid, int source_x, int source_y)
-   : measure_grid(measure_grid)
+   : Base("reference")
+   , measure_grid(measure_grid)
    , source_x(source_x)
    , source_y(source_y)
 {}

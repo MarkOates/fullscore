@@ -6,7 +6,8 @@
 
 
 Transform::Stack::Stack(std::vector<Transform::Base *> transformations)
-   : transformations(transformations)
+   : Base("stack")
+   , transformations(transformations)
 {}
 
 

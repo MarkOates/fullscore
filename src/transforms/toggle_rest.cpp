@@ -8,6 +8,7 @@
 
 
 Transform::ToggleRest::ToggleRest()
+   : Base("toggle_rest")
 {
 }
 

@@ -8,6 +8,7 @@
 
 
 Transform::Retrograde::Retrograde()
+   : Base("retrograde")
 {
 }
 

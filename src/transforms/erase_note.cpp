@@ -10,7 +10,8 @@
 
 
 Transform::EraseNote::EraseNote(int index_num)
-   : index_num(index_num)
+   : Base("erase_note")
+   , index_num(index_num)
 {
 }
 

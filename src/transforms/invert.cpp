@@ -8,7 +8,8 @@
 
 
 Transform::Invert::Invert(int axis)
-   : axis(axis)
+   : Base("invert")
+   , axis(axis)
 {
 }
 
