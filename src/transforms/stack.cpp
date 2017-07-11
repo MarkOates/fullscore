@@ -45,3 +45,12 @@ std::vector<Transform::Base *> Transform::Stack::get_transformations()
 
 
 
+bool Transform::Stack::includes_reference()
+{
+   for(auto &transform : transformations)
+      if (transform->get_identifier() == "reference") return true;
+   return false;
+}
+
+
+
