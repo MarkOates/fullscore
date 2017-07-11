@@ -16,6 +16,14 @@ TEST(TransformStackTest, can_be_created)
 
 
 
+TEST(TransformStackTest, has_an_identifier_of_stack)
+{
+   Transform::Stack transform_stack;
+   EXPECT_EQ("stack", transform_stack.get_identifier());
+}
+
+
+
 TEST(TransformStackTest, executes_the_sequence_of_transforms)
 {
    std::vector<Note> source_notes = {};
