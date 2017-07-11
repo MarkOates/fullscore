@@ -17,6 +17,7 @@ class Measure
 public:
    Transform::Stack *genesis;
    bool refresh();
+   bool references_source();
 
    Measure();
 

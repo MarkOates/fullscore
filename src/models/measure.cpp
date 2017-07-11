@@ -43,3 +43,10 @@ bool Measure::refresh()
 
 
 
+bool Measure::references_source()
+{
+   return genesis && genesis->includes_reference();
+}
+
+
+
