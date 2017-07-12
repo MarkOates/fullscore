@@ -7,7 +7,8 @@
 
 
 
-Transform::Base::Base()
+Transform::Base::Base(std::string identifier)
+   : identifier(identifier)
 {
 }
 
@@ -27,6 +28,12 @@ std::vector<Note> Transform::Base::transform(std::vector<Note> source)
    return notes;
 }
 
+
+
+std::string Transform::Base::get_identifier()
+{
+   return identifier;
+}
 
 
 

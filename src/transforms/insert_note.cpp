@@ -10,7 +10,8 @@
 
 
 Transform::InsertNote::InsertNote(int position, Note note)
-   : position(position)
+   : Base("insert_note")
+   , position(position)
    , note(note)
 {
 }

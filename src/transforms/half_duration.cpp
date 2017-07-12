@@ -11,7 +11,8 @@
 
 
 Transform::HalfDuration::HalfDuration()
-   : minimum_duration(Duration::THIRTYSECOND)
+   : Base("half_duration")
+   , minimum_duration(Duration::THIRTYSECOND)
 {
 }
 

@@ -6,7 +6,8 @@
 
 
 Transform::Stack::Stack(std::vector<Transform::Base *> transformations)
-   : transformations(transformations)
+   : Base("stack")
+   , transformations(transformations)
 {}
 
 
@@ -33,6 +34,22 @@ std::vector<Note> Transform::Stack::transform(std::vector<Note> notes)
       notes = transform->transform(notes);
 
    return notes;
+}
+
+
+
+std::vector<Transform::Base *> Transform::Stack::get_transformations()
+{
+   return transformations;
+}
+
+
+
+bool Transform::Stack::includes_reference()
+{
+   for(auto &transform : transformations)
+      if (transform->get_identifier() == "reference") return true;
+   return false;
 }
 
 

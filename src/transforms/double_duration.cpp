@@ -11,7 +11,8 @@
 
 
 Transform::DoubleDuration::DoubleDuration()
-   : maximum_duration(Duration::WHOLE)
+   : Base("double_duration")
+   , maximum_duration(Duration::WHOLE)
 {
 }
 

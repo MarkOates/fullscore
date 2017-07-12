@@ -6,6 +6,7 @@
 
 
 Transform::ClearMeasure::ClearMeasure()
+   : Base("clear_measure")
 {}
 
 

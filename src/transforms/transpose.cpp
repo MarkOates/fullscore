@@ -8,7 +8,8 @@
 
 
 Transform::Transpose::Transpose(int transposition)
-   : transposition(transposition)
+   : Base("transpose")
+   , transposition(transposition)
 {
 }
 

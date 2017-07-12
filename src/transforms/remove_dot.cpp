@@ -8,6 +8,7 @@
 
 
 Transform::RemoveDot::RemoveDot()
+   : Base("remove_dot")
 {
 }
 
