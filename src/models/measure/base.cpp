@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/measures/base.h>
+#include <fullscore/models/measure/base.h>
 
 
 
