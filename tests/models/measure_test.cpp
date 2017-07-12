@@ -37,7 +37,7 @@ TEST(MeasureTest, with_genesis_populates_its_notes)
    ASSERT_EQ(true, measure.refresh());
 
    std::vector<Note> expected_notes = { Note(), Note(), Note() };
-   std::vector<Note> measure_notes = measure.notes;
+   std::vector<Note> measure_notes = measure.get_notes();
 
    ASSERT_EQ(expected_notes, measure_notes);
 }

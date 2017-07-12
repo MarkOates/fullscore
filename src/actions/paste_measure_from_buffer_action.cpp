@@ -30,7 +30,7 @@ Action::PasteMeasureFromBuffer::~PasteMeasureFromBuffer()
 bool Action::PasteMeasureFromBuffer::execute()
 {
    if (!yank_measure_buffer || !destination_measure) return false;
-   destination_measure->notes = yank_measure_buffer->notes;
+   destination_measure->set_notes(yank_measure_buffer->get_notes());
    return true;
 }
 

@@ -42,3 +42,17 @@ bool Measure::references_source()
 
 
 
+bool Measure::set_notes(std::vector<Note> notes)
+{
+   this->notes = notes;
+}
+
+
+
+std::vector<Note> Measure::get_notes()
+{
+   return notes;
+}
+
+
+

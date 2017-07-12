@@ -54,10 +54,11 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 void MusicEngraver::draw(Measure *measure, float x, float y, const float whole_note_width)
 {
 	int cursor_x = 0;
-	for (unsigned i=0; i<measure->notes.size(); i++)
+   std::vector<Note> notes = measure->get_notes();
+	for (unsigned i=0; i<notes.size(); i++)
 	{
-		music_notation.draw(x + cursor_x, y, translate_note_to_str(measure->notes[i]));
-		cursor_x += DurationHelper::get_length(measure->notes[i].duration.denominator, measure->notes[i].duration.dots) * whole_note_width;
+		music_notation.draw(x + cursor_x, y, translate_note_to_str(notes[i]));
+		cursor_x += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots) * whole_note_width;
 	}
 }
 
