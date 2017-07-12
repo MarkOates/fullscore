@@ -23,7 +23,7 @@ TEST(CopyTransformTest, copies_a_set_of_notes_from_a_measure_grid_and_coordinate
 
    MeasureGrid measure_grid(1, 1);
    Measure *measure = measure_grid.get_measure(0, 0);
-   measure->notes = { Note(2), Note(0), Note(1) };
+   measure->set_notes({ Note(2), Note(0), Note(1) });
 
    Transform::Copy copy_transform(&measure_grid, 0, 0);
 

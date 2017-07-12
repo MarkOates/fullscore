@@ -26,6 +26,21 @@ TEST(MeasureTest, has_a_default_extension_of_12)
 
 
 
+TEST(MeasureTest, can_get_and_set_notes)
+{
+   Measure measure;
+   std::vector<Note> expected_notes = { Note(2, Duration::HALF), Note(-1, Duration::EIGHTH), Note(14, Duration::QUARTER) };
+
+   ASSERT_EQ(true, measure.set_notes(expected_notes));
+
+   std::vector<Note> returned_notes = measure.get_notes();
+
+   ASSERT_EQ(3, returned_notes.size());
+   ASSERT_EQ(expected_notes, returned_notes);
+}
+
+
+
 TEST(MeasureTest, with_genesis_populates_its_notes)
 {
    Measure measure;
@@ -37,7 +52,7 @@ TEST(MeasureTest, with_genesis_populates_its_notes)
    ASSERT_EQ(true, measure.refresh());
 
    std::vector<Note> expected_notes = { Note(), Note(), Note() };
-   std::vector<Note> measure_notes = measure.notes;
+   std::vector<Note> measure_notes = measure.get_notes();
 
    ASSERT_EQ(expected_notes, measure_notes);
 }

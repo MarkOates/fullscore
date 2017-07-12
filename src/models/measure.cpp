@@ -15,14 +15,6 @@ Measure::Measure()
 
 
 
-Note *Measure::operator[](int index)
-{
-   if (index < 0 || notes.empty() || index >= notes.size()) return NULL;
-   return &notes[index];
-}
-
-
-
 bool Measure::refresh()
 {
    if (genesis)
@@ -46,6 +38,21 @@ bool Measure::refresh()
 bool Measure::references_source()
 {
    return genesis && genesis->includes_reference();
+}
+
+
+
+bool Measure::set_notes(std::vector<Note> notes)
+{
+   this->notes = notes;
+   return true;
+}
+
+
+
+std::vector<Note> Measure::get_notes()
+{
+   return notes;
 }
 
 
