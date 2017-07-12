@@ -52,10 +52,10 @@ bool MeasureGridFileConverter::save()
          for (int n=0; n<(int)measure->notes.size(); n++)
          {
             // grab the note
-            Note *note = measure->operator[](n);
+            Note note = measure->notes[n];
 
             // build the note into a string
-            NoteStringConverter note_string_converter(note);
+            NoteStringConverter note_string_converter(&note);
             std::string note_as_str = note_string_converter.write();
 
             // put it in the stack

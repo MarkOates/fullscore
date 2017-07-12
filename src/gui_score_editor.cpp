@@ -159,7 +159,9 @@ Note *GUIScoreEditor::get_note_at_cursor()
    Measure *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
 
-   return focused_measure->operator[](note_cursor_x);
+   if (note_cursor_x < 0 || note_cursor_x >= focused_measure->notes.size()) return nullptr;
+
+   return &focused_measure->notes[note_cursor_x];
 }
 
 
