@@ -7,10 +7,10 @@
 
 
 
-class TestDerivedClass : public Measure::Base
+class TestDerivedClass : public Measure2::Base
 {
 public:
-   TestDerivedClass() : Measure::Base("test_derived_class") {}
+   TestDerivedClass() : Measure2::Base("test_derived_class") {}
    virtual std::vector<Note> get_notes() override
    {
       std::vector<Note> notes;

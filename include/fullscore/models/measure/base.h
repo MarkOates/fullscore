@@ -7,7 +7,7 @@
 
 
 
-namespace Measure
+namespace Measure2
 {
    class Base
    {
@@ -20,7 +20,8 @@ namespace Measure
       std::string get_type();
       bool is_type(std::string measure_type);
 
-      virtual std::vector<Note> get_notes() = 0;
+      virtual std::vector<Note> get_notes_copy() = 0;
+      virtual bool set_notes(std::vector<Note>) = 0;
    };
 };
 

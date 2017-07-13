@@ -5,25 +5,25 @@
 
 
 
-Measure::Base::Base(std::string type)
+Measure2::Base::Base(std::string type)
    : type(type)
 {}
 
 
 
-Measure::Base::~Base()
+Measure2::Base::~Base()
 {}
 
 
 
-std::string Measure::Base::get_type()
+std::string Measure2::Base::get_type()
 {
    return type;
 }
 
 
 
-bool Measure::Base::is_type(std::string measure_type)
+bool Measure2::Base::is_type(std::string measure_type)
 {
    return type == measure_type;
 }
