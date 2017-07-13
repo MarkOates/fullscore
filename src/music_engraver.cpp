@@ -51,7 +51,7 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 
 
 
-void MusicEngraver::draw(Measure *measure, float x, float y, const float whole_note_width)
+void MusicEngraver::draw(BasicMeasure *measure, float x, float y, const float whole_note_width)
 {
 	int cursor_x = 0;
    std::vector<Note> notes = measure->get_notes_copy();

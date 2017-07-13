@@ -21,7 +21,7 @@ std::vector<Note> Transform::Reference::transform(std::vector<Note> n)
 {
    if (!measure_grid) throw std::runtime_error("cannot reference measure from empty measure_grid");
 
-   Measure *measure = measure_grid->get_measure(source_x, source_y);
+   BasicMeasure *measure = measure_grid->get_measure(source_x, source_y);
 
    if (!measure)
    {

@@ -21,7 +21,7 @@ std::vector<Note> Transform::Copy::transform(std::vector<Note> n)
 {
    if (!measure_grid) throw std::runtime_error("cannot copy measure from empty measure_grid");
 
-   Measure *measure = measure_grid->get_measure(source_x, source_y);
+   BasicMeasure *measure = measure_grid->get_measure(source_x, source_y);
 
    if (!measure)
    {
