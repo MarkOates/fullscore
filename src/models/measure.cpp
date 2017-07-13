@@ -9,7 +9,8 @@
 
 
 Measure::Measure()
-   : genesis(nullptr)
+   : Measure2::Base("measure")
+   , genesis(nullptr)
    , extension(12)
 {}
 
