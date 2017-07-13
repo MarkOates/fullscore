@@ -15,7 +15,6 @@ class Note;
 class Measure
 {
 private:
-   friend class MeasureGridFactory;
    friend class FullscoreApplicationController;
    friend class GUIScoreEditor;
 
