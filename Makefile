@@ -58,6 +58,11 @@ tests: $(TESTS)
 
 
 
+run_tests: tests
+	find bin/tests -type f -exec {} \;
+
+
+
 bin/tests/%: tests/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling test \e[1m\e[36m$<\033[0m..."
