@@ -13,7 +13,7 @@ class Note;
 
 
 
-class Measure : public Measure2::Base
+class BasicMeasure : public Measure2::Base
 {
 private:
    std::vector<Note> notes;
@@ -23,7 +23,7 @@ public:
    bool refresh();
    bool references_source();
 
-   Measure();
+   BasicMeasure();
 
    int extension;
 
