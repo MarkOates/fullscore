@@ -159,9 +159,10 @@ Note *GUIScoreEditor::get_note_at_cursor()
    Measure *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
 
-   if (note_cursor_x < 0 || note_cursor_x >= focused_measure->notes.size()) return nullptr;
+   std::vector<Note> *notes = focused_measure->get_notes_pointer();
+   if (!notes || note_cursor_x < 0 || note_cursor_x >= notes->size()) return nullptr;
 
-   return &focused_measure->notes[note_cursor_x];
+   return &notes->at(note_cursor_x);
 }
 
 
@@ -186,20 +187,23 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_index)
 {
    float sum = 0;
-   if (note_index < 0 || note_index >= measure.notes.size()) return 0;
+   std::vector<Note> notes = measure.get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
+
+   if (note_index < 0 || note_index >= notes.size()) return 0;
 
    for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(measure.notes[i].duration.denominator, measure.notes[i].duration.dots);
+      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
    return sum;
 }
 
 
 
 
-float GUIScoreEditor::get_measure_width(Measure &m)
+float GUIScoreEditor::get_measure_width(Measure &m)  // TODO: should probably use a helper
 {
    float sum = 0;
-   for (auto &note : m.notes) sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
+   for (auto &note : m.get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
+      sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
    return sum;
 }
 
@@ -235,7 +239,7 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
    }
    else
    {
-      int num_notes = current_measure->notes.size();
+      int num_notes = current_measure->get_notes_copy().size();  // TODO: ineffecient use of get_notes_copy()
       note_cursor_x = limit<int>(0, num_notes-1, note_cursor_x + delta);
    }
    return note_cursor_x;

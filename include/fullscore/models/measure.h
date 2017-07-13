@@ -15,8 +15,6 @@ class Note;
 class Measure
 {
 private:
-   friend class GUIScoreEditor;
-
    std::vector<Note> notes;
 
 public:
