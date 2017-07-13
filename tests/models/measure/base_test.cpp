@@ -11,10 +11,14 @@ class TestDerivedClass : public Measure2::Base
 {
 public:
    TestDerivedClass() : Measure2::Base("test_derived_class") {}
-   virtual std::vector<Note> get_notes() override
+   virtual std::vector<Note> get_notes_copy() override
    {
       std::vector<Note> notes;
       return notes;
+   }
+   virtual bool set_notes(std::vector<Note> notes) override
+   {
+      return false;
    }
 };
 
