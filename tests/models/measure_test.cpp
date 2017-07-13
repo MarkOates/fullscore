@@ -33,7 +33,7 @@ TEST(MeasureTest, can_get_and_set_notes)
 
    ASSERT_EQ(true, measure.set_notes(expected_notes));
 
-   std::vector<Note> returned_notes = measure.get_notes();
+   std::vector<Note> returned_notes = measure.get_notes_copy();
 
    ASSERT_EQ(3, returned_notes.size());
    ASSERT_EQ(expected_notes, returned_notes);
@@ -52,7 +52,7 @@ TEST(MeasureTest, with_genesis_populates_its_notes)
    ASSERT_EQ(true, measure.refresh());
 
    std::vector<Note> expected_notes = { Note(), Note(), Note() };
-   std::vector<Note> measure_notes = measure.get_notes();
+   std::vector<Note> measure_notes = measure.get_notes_copy();
 
    ASSERT_EQ(expected_notes, measure_notes);
 }

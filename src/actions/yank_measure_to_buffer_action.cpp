@@ -30,7 +30,7 @@ Action::YankMeasureToBuffer::~YankMeasureToBuffer()
 bool Action::YankMeasureToBuffer::execute()
 {
    if (!yank_measure_buffer || !source_measure) return false;
-   yank_measure_buffer->set_notes(source_measure->get_notes());
+   yank_measure_buffer->set_notes(source_measure->get_notes_copy());
    return true;
 }
 

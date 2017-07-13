@@ -30,7 +30,7 @@ std::vector<Note> Transform::Reference::transform(std::vector<Note> n)
       throw std::runtime_error(error_message.str());
    }
 
-   return measure->get_notes();
+   return measure->get_notes_copy();
 }
 
 

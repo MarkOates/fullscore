@@ -32,7 +32,7 @@ public:
    int extension;
 
    bool set_notes(std::vector<Note> notes);
-   std::vector<Note> get_notes();
+   std::vector<Note> get_notes_copy();
 };
 
 

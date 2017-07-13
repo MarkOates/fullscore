@@ -50,7 +50,7 @@ bool Measure::set_notes(std::vector<Note> notes)
 
 
 
-std::vector<Note> Measure::get_notes()
+std::vector<Note> Measure::get_notes_copy()
 {
    return notes;
 }
