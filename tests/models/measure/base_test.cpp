@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measure/base.h>
+#include <fullscore/models/measure2/base.h>
 
 
 
