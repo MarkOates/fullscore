@@ -46,13 +46,15 @@ bool MeasureGridFileConverter::save()
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
          Measure *measure = measure_grid->get_measure(x, y);
-         if (!measure || measure->notes.empty()) continue;
+         if (!measure) continue;
+         std::vector<Note> measure_notes = measure->get_notes_copy();
+         if (measure_notes.empty()) continue;
          std::string val = "";
          std::vector<std::string> notes_strs;
-         for (int n=0; n<(int)measure->notes.size(); n++)
+         for (int n=0; n<(int)measure_notes.size(); n++)
          {
             // grab the note
-            Note note = measure->notes[n];
+            Note note = measure_notes[n];
 
             // build the note into a string
             NoteStringConverter note_string_converter(&note);
@@ -133,6 +135,8 @@ bool MeasureGridFileConverter::load()
       // get the notes
       std::vector<std::string> notes = php::explode(";", it->second);
 
+      std::vector<Note> final_measure_notes = {};
+
       for (unsigned i=0; i<notes.size(); i++)
       {
          // create a new note
@@ -146,8 +150,10 @@ bool MeasureGridFileConverter::load()
          }
 
          // put the note into the measure
-         measure->notes.push_back(new_note);
+         final_measure_notes.push_back(new_note);
       }
+
+      measure->set_notes(final_measure_notes);
    }
 
    return true;

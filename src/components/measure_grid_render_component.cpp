@@ -87,7 +87,7 @@ void MeasureGridRenderComponent::render()
          {
             float x_cursor = x_pos;
 
-            for (auto &note : measure->get_notes())
+            for (auto &note : measure->get_notes_copy())
             {
                float width = DurationHelper::get_length(note.duration.denominator, note.duration.dots) * full_measure_width;
 
