@@ -15,7 +15,6 @@ class Note;
 class Measure
 {
 private:
-   friend class FullscoreApplicationController;
    friend class GUIScoreEditor;
 
    std::vector<Note> notes;
@@ -31,6 +30,7 @@ public:
 
    bool set_notes(std::vector<Note> notes);
    std::vector<Note> get_notes_copy();
+   std::vector<Note> *get_notes_pointer();
 };
 
 

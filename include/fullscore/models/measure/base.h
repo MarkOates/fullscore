@@ -22,6 +22,7 @@ namespace Measure2
 
       virtual std::vector<Note> get_notes_copy() = 0;
       virtual bool set_notes(std::vector<Note>) = 0;
+      virtual std::vector<Note> *get_notes_pointer();
    };
 };
 

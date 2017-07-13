@@ -30,3 +30,10 @@ bool Measure2::Base::is_type(std::string measure_type)
 
 
 
+std::vector<Note> *Measure2::Base::get_notes_pointer()
+{
+   return nullptr;
+}
+
+
+

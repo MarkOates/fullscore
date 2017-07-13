@@ -57,3 +57,10 @@ std::vector<Note> Measure::get_notes_copy()
 
 
 
+std::vector<Note> *Measure::get_notes_pointer()
+{
+   return &notes;
+}
+
+
+

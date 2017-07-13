@@ -69,7 +69,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    set_current_gui_score_editor(create_new_score_editor("big_score"));
 
    Measure *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
-   m->notes = {Note(2), Note(0), Note(1)};
+   m->set_notes({Note(2), Note(0), Note(1)});
 
    Measure *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
    Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
@@ -192,12 +192,12 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    {
       single_note = current_gui_score_editor->get_note_at_cursor();
       focused_measure = current_gui_score_editor->get_measure_at_cursor();
-      if (focused_measure) notes = &focused_measure->notes;
+      if (focused_measure && focused_measure->get_notes_pointer()) notes = focused_measure->get_notes_pointer();
    }
    if (current_gui_score_editor->is_measure_target_mode())
    {
       focused_measure = current_gui_score_editor->get_measure_at_cursor();
-      if (focused_measure) notes = &focused_measure->notes;
+      if (focused_measure && focused_measure->get_notes_pointer()) notes = focused_measure->get_notes_pointer();
    }
 
    if (action_name == "transpose_up")
