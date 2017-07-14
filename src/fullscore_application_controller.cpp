@@ -68,10 +68,10 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    create_new_score_editor("");
    set_current_gui_score_editor(create_new_score_editor("big_score"));
 
-   Measure::BasicMeasure *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
+   Measure::Basic *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
    m->set_notes({Note(2), Note(0), Note(1)});
 
-   Measure::BasicMeasure *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
+   Measure::Basic *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
    Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
    dm->genesis = new Transform::Stack();
@@ -186,7 +186,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
-   Measure::BasicMeasure *focused_measure = nullptr;
+   Measure::Basic *focused_measure = nullptr;
 
    if (current_gui_score_editor->is_note_target_mode())
    {

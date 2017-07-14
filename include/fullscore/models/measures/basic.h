@@ -15,7 +15,7 @@ class Note;
 
 namespace Measure
 {
-   class BasicMeasure : public Measure::Base
+   class Basic : public Measure::Base
    {
    private:
       std::vector<Note> notes;
@@ -25,7 +25,7 @@ namespace Measure
       bool refresh();
       bool references_source();
 
-      BasicMeasure();
+      Basic();
 
       int extension;
 

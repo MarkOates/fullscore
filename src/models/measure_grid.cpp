@@ -10,12 +10,12 @@
 
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
-   measures.resize(num_measures, Measure::BasicMeasure());
+   measures.resize(num_measures, Measure::Basic());
 }
 
 
 
-Measure::BasicMeasure &MeasureGrid::Row::operator[](unsigned int index)
+Measure::Basic &MeasureGrid::Row::operator[](unsigned int index)
 {
    if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
    return measures[index];
@@ -33,7 +33,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 
 
-Measure::BasicMeasure *MeasureGrid::get_measure(int x_measure, int y_staff)
+Measure::Basic *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
    if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return NULL;
@@ -112,7 +112,7 @@ void MeasureGrid::insert_measure(int index)
       {
          // WARNING: this assumes all staves have the same
          // number of measures (they should)
-         voices[i].measures.insert(voices[i].measures.begin() + index, Measure::BasicMeasure());
+         voices[i].measures.insert(voices[i].measures.begin() + index, Measure::Basic());
       }
    }
 }
@@ -145,7 +145,7 @@ void MeasureGrid::append_measure()
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
    {
-      voices[i].measures.push_back(Measure::BasicMeasure());
+      voices[i].measures.push_back(Measure::Basic());
    }
 }
 

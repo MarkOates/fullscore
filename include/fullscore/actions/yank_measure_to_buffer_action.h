@@ -8,18 +8,18 @@
 
 
 
-namespace Measure { class BasicMeasure; }
+namespace Measure { class Basic; }
 
 namespace Action
 {
    class YankMeasureToBuffer : public Base
    {
    private:
-      Measure::BasicMeasure *yank_measure_buffer;
-      Measure::BasicMeasure *source_measure;
+      Measure::Basic *yank_measure_buffer;
+      Measure::Basic *source_measure;
 
    public:
-      YankMeasureToBuffer(Measure::BasicMeasure *yank_measure_buffer, Measure::BasicMeasure *source_measure);
+      YankMeasureToBuffer(Measure::Basic *yank_measure_buffer, Measure::Basic *source_measure);
       ~YankMeasureToBuffer();
 
       bool execute();

@@ -20,9 +20,9 @@ private:
    {
    public:
       std::string name;
-      std::vector<Measure::BasicMeasure> measures;
+      std::vector<Measure::Basic> measures;
       Row(int num_measures);
-      Measure::BasicMeasure &operator[](unsigned int index);
+      Measure::Basic &operator[](unsigned int index);
    };
 
    std::vector<Row> voices;
@@ -30,7 +30,7 @@ private:
 
 public:
    MeasureGrid(int num_x_measures, int num_y_staves);
-   Measure::BasicMeasure *get_measure(int x_measure, int y_staff);
+   Measure::Basic *get_measure(int x_measure, int y_staff);
 
    int get_num_staves() const;
    int get_num_measures() const;

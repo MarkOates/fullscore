@@ -8,7 +8,7 @@
 
 
 
-Measure::BasicMeasure::BasicMeasure()
+Measure::Basic::Basic()
    : Measure::Base("measure")
    , genesis(nullptr)
    , extension(12)
@@ -16,7 +16,7 @@ Measure::BasicMeasure::BasicMeasure()
 
 
 
-bool Measure::BasicMeasure::refresh()
+bool Measure::Basic::refresh()
 {
    if (genesis)
    {
@@ -27,7 +27,7 @@ bool Measure::BasicMeasure::refresh()
       }
       catch (...)
       {
-         std::cout << "Measure::BasicMeasure genesis failed" << std::endl;
+         std::cout << "Measure::Basic genesis failed" << std::endl;
          return false;
       }
    }
@@ -36,14 +36,14 @@ bool Measure::BasicMeasure::refresh()
 
 
 
-bool Measure::BasicMeasure::references_source()
+bool Measure::Basic::references_source()
 {
    return genesis && genesis->includes_reference();
 }
 
 
 
-bool Measure::BasicMeasure::set_notes(std::vector<Note> notes)
+bool Measure::Basic::set_notes(std::vector<Note> notes)
 {
    this->notes = notes;
    return true;
@@ -51,14 +51,14 @@ bool Measure::BasicMeasure::set_notes(std::vector<Note> notes)
 
 
 
-std::vector<Note> Measure::BasicMeasure::get_notes_copy()
+std::vector<Note> Measure::Basic::get_notes_copy()
 {
    return notes;
 }
 
 
 
-std::vector<Note> *Measure::BasicMeasure::get_notes_pointer()
+std::vector<Note> *Measure::Basic::get_notes_pointer()
 {
    return &notes;
 }

@@ -50,7 +50,7 @@ void MeasureGridRenderComponent::render()
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<measure_grid->get_num_measures(); x++)
    {
-      Measure::BasicMeasure *measure = measure_grid->get_measure(x, 0);
+      Measure::Basic *measure = measure_grid->get_measure(x, 0);
       float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
       TimeSignature time_signature = measure_grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
@@ -78,7 +78,7 @@ void MeasureGridRenderComponent::render()
       // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
-         Measure::BasicMeasure *measure = measure_grid->get_measure(x,y);
+         Measure::Basic *measure = measure_grid->get_measure(x,y);
          float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
          music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
 

@@ -64,7 +64,7 @@ void GUIScoreEditor::on_draw()
    if (state != STATE_ACTIVE) return;
 
    // draw a hilight box under the focused measure
-   Measure::BasicMeasure *measure = get_measure_at_cursor();
+   Measure::Basic *measure = get_measure_at_cursor();
    Note *note = get_note_at_cursor();
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
    float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
@@ -146,7 +146,7 @@ void GUIScoreEditor::on_timer()
 
 
 
-Measure::BasicMeasure *GUIScoreEditor::get_measure_at_cursor()
+Measure::Basic *GUIScoreEditor::get_measure_at_cursor()
 {
    return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
@@ -156,7 +156,7 @@ Measure::BasicMeasure *GUIScoreEditor::get_measure_at_cursor()
 
 Note *GUIScoreEditor::get_note_at_cursor()
 {
-   Measure::BasicMeasure *focused_measure = get_measure_at_cursor();
+   Measure::Basic *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
 
    std::vector<Note> *notes = focused_measure->get_notes_pointer();
@@ -184,7 +184,7 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 
 
 
-float GUIScoreEditor::get_measure_length_to_note(Measure::BasicMeasure &measure, int note_index)
+float GUIScoreEditor::get_measure_length_to_note(Measure::Basic &measure, int note_index)
 {
    float sum = 0;
    std::vector<Note> notes = measure.get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
@@ -199,7 +199,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure::BasicMeasure &measure,
 
 
 
-float GUIScoreEditor::get_measure_width(Measure::BasicMeasure &m)  // TODO: should probably use a helper
+float GUIScoreEditor::get_measure_width(Measure::Basic &m)  // TODO: should probably use a helper
 {
    float sum = 0;
    for (auto &note : m.get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
@@ -232,7 +232,7 @@ int GUIScoreEditor::move_measure_cursor_y(int delta)
 
 int GUIScoreEditor::move_note_cursor_x(int delta)
 {
-   Measure::BasicMeasure *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+   Measure::Basic *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
    if (!current_measure)
    {
       note_cursor_x = 0;
