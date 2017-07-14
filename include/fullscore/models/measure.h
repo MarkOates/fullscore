@@ -13,7 +13,7 @@ class Note;
 
 
 
-class BasicMeasure : public Measure2::Base
+class BasicMeasure : public Measure::Base
 {
 private:
    std::vector<Note> notes;

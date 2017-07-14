@@ -7,7 +7,7 @@
 
 
 
-namespace Measure2
+namespace Measure
 {
    class Base
    {
