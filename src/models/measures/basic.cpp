@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 
 #include <fullscore/models/note.h>
 #include <allegro_flare/useful.h>

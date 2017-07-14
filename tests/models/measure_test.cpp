@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 
 #include <fullscore/transforms/insert_note.h>
 #include <fullscore/transforms/reference.h>

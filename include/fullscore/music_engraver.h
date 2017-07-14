@@ -4,10 +4,9 @@
 
 
 
-
 #include <allegro_flare/render_music_notation.h>
 #include <fullscore/models/note.h>
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 
 
 class MusicEngraver
@@ -19,7 +18,6 @@ public:
 	std::string translate_note_to_str(const Note &note);
 	void draw(BasicMeasure *measure, float x, float y, const float whole_note_width);
 };
-
 
 
 
