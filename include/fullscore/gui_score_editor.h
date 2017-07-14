@@ -58,7 +58,7 @@ public:
    GUIScoreEditor(UIWidget *parent);
    void on_draw() override;
    void on_timer() override;
-   BasicMeasure *get_measure_at_cursor();
+   Measure::BasicMeasure *get_measure_at_cursor();
    Note *get_note_at_cursor();
 
    int move_measure_cursor_x(int delta);
@@ -67,8 +67,8 @@ public:
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
-   float get_measure_length_to_note(BasicMeasure &measure, int note_index);
-   float get_measure_width(BasicMeasure &m);
+   float get_measure_length_to_note(Measure::BasicMeasure &measure, int note_index);
+   float get_measure_width(Measure::BasicMeasure &m);
 
    void toggle_edit_mode_target();
    bool is_measure_target_mode();

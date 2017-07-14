@@ -8,18 +8,18 @@
 
 
 
-class BasicMeasure;
+namespace Measure { class BasicMeasure; }
 
 namespace Action
 {
    class PasteMeasureFromBuffer : public Base
    {
    private:
-      BasicMeasure *yank_measure_buffer;
-      BasicMeasure *destination_measure;
+      Measure::BasicMeasure *yank_measure_buffer;
+      Measure::BasicMeasure *destination_measure;
 
    public:
-      PasteMeasureFromBuffer(BasicMeasure *destination_measure, BasicMeasure *yank_measure_buffer);
+      PasteMeasureFromBuffer(Measure::BasicMeasure *destination_measure, Measure::BasicMeasure *yank_measure_buffer);
       ~PasteMeasureFromBuffer();
 
       bool execute();

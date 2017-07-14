@@ -45,7 +45,7 @@ bool MeasureGridFileConverter::save()
    for (int y=0; y<measure_grid->get_num_staves(); y++)
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
-         BasicMeasure *measure = measure_grid->get_measure(x, y);
+         Measure::BasicMeasure *measure = measure_grid->get_measure(x, y);
          if (!measure) continue;
          std::vector<Note> measure_notes = measure->get_notes_copy();
          if (measure_notes.empty()) continue;
@@ -130,7 +130,7 @@ bool MeasureGridFileConverter::load()
       // get the measure x, and y (in the format "x,y")
       std::vector<std::string> parts = php::explode(",", it->first);
       if (parts.size() != 2) continue;
-      BasicMeasure *measure = measure_grid->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
+      Measure::BasicMeasure *measure = measure_grid->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
 
       // get the notes
       std::vector<std::string> notes = php::explode(";", it->second);

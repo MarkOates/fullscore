@@ -10,7 +10,7 @@
 
 
 
-Action::YankMeasureToBuffer::YankMeasureToBuffer(BasicMeasure *yank_measure_buffer, BasicMeasure *source_measure)
+Action::YankMeasureToBuffer::YankMeasureToBuffer(Measure::BasicMeasure *yank_measure_buffer, Measure::BasicMeasure *source_measure)
    : Base("yank_measure_to_buffer")
    , yank_measure_buffer(yank_measure_buffer)
    , source_measure(source_measure)

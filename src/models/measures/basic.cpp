@@ -58,7 +58,7 @@ std::vector<Note> Measure::BasicMeasure::get_notes_copy()
 
 
 
-std::vector<Note> *BasicMeasure::get_notes_pointer()
+std::vector<Note> *Measure::BasicMeasure::get_notes_pointer()
 {
    return &notes;
 }
