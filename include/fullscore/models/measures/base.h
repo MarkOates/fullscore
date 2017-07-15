@@ -13,12 +13,14 @@ namespace Measure
    {
    private:
       std::string type;
+      int id;
 
    public:
       Base(std::string type);
       ~Base();
       std::string get_type();
       bool is_type(std::string measure_type);
+      int get_id();
 
       virtual std::vector<Note> get_notes_copy() = 0;
       virtual bool set_notes(std::vector<Note>) = 0;
