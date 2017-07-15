@@ -20,7 +20,7 @@ private:
    {
    public:
       std::string name;
-      std::vector<Measure::Basic> measures;
+      std::vector<Measure::Basic *> measures;
       Row(int num_measures);
       Measure::Basic &operator[](unsigned int index);
    };
