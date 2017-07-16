@@ -65,6 +65,7 @@ void GUIScoreEditor::on_draw()
 
    // draw a hilight box under the focused measure
    Measure::Base *measure = get_measure_at_cursor();
+
    Note *note = get_note_at_cursor();
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
    float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();

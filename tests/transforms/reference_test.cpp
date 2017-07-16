@@ -22,8 +22,9 @@ TEST(ReferenceTransformTest, copies_a_set_of_notes_from_a_measure_grid_and_coord
    std::vector<Note> source_notes = {};
 
    MeasureGrid measure_grid(1, 1);
+   measure_grid.set_measure(0, 0, new Measure::Basic({ Note(2), Note(0), Note(1) }));
    Measure::Base *measure = measure_grid.get_measure(0, 0);
-   measure->set_notes({ Note(2), Note(0), Note(1) });
+   ASSERT_NE(nullptr, measure);
 
    Transform::Reference reference_transform(&measure_grid, 0, 0);
 

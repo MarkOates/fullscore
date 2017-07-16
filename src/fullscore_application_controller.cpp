@@ -68,16 +68,20 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    create_new_score_editor("");
    set_current_gui_score_editor(create_new_score_editor("big_score"));
 
+   current_gui_score_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
    Measure::Base *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
-   m->set_notes({Note(2), Note(0), Note(1)});
+   if (!m) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 0)");
 
-   Measure::Base *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
+   current_gui_score_editor->measure_grid.set_measure(0, 1, new Measure::Basic());
+   Measure::Basic *dm = static_cast<Measure::Basic *>(current_gui_score_editor->measure_grid.get_measure(0, 1));
+   if (!dm) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 1)");
+
    Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
-   //dm->genesis = new Transform::Stack();
-   //dm->genesis->add_transform(&reference_transform);
-   //dm->genesis->add_transform(&double_duration_transform);
-   //dm->refresh();
+   dm->genesis = new Transform::Stack();
+   dm->genesis->add_transform(&reference_transform);
+   dm->genesis->add_transform(&double_duration_transform);
+   dm->refresh();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;

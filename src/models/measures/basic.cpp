@@ -16,6 +16,17 @@ Measure::Basic::Basic()
 
 
 
+Measure::Basic::Basic(std::vector<Note> notes)
+   : Base("basic")
+   , genesis(nullptr)
+   , extension(12)
+   , notes()
+{
+   set_notes(notes);
+}
+
+
+
 bool Measure::Basic::refresh()
 {
    if (genesis)

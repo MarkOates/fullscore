@@ -10,7 +10,7 @@
 
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
-   for (unsigned i=0; i<num_measures; i++) measures.push_back(new Measure::Basic());
+   for (unsigned i=0; i<num_measures; i++) measures.push_back(nullptr);
 }
 
 
@@ -126,7 +126,7 @@ void MeasureGrid::insert_measure(int index)
       {
          // WARNING: this assumes all staves have the same
          // number of measures (they should)
-         voices[i].measures.insert(voices[i].measures.begin() + index, new Measure::Basic());
+         voices[i].measures.insert(voices[i].measures.begin() + index, nullptr);
       }
    }
 }
@@ -159,7 +159,7 @@ void MeasureGrid::append_measure()
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
    {
-      voices[i].measures.push_back(new Measure::Basic());
+      voices[i].measures.push_back(nullptr);
    }
 }
 

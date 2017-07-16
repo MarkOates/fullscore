@@ -131,6 +131,7 @@ bool MeasureGridFileConverter::load()
       std::vector<std::string> parts = php::explode(",", it->first);
       if (parts.size() != 2) continue;
       Measure::Base *measure = measure_grid->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
+      if (!measure) continue;
 
       // get the notes
       std::vector<std::string> notes = php::explode(";", it->second);
