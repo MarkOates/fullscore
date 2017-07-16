@@ -15,7 +15,7 @@ MeasureGrid::Row::Row(int num_measures) : measures()
 
 
 
-Measure::Basic *MeasureGrid::Row::operator[](unsigned int index)
+Measure::Base *MeasureGrid::Row::operator[](unsigned int index)
 {
    if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
    return measures[index];
@@ -33,7 +33,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 
 
-Measure::Basic *MeasureGrid::get_measure(int x_measure, int y_staff)
+Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
    if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return NULL;

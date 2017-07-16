@@ -17,7 +17,7 @@ namespace Measure
 
    public:
       Base(std::string type);
-      ~Base();
+      virtual ~Base();
       std::string get_type();
       bool is_type(std::string measure_type);
       int get_id();
