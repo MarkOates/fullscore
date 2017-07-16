@@ -220,6 +220,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
       else
       {
+         if (!notes) { std::cout << "cannot transpose_up on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -238,6 +239,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
       else
       {
+         if (!notes) { std::cout << "cannot transpose_down on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -250,6 +252,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::HalfDurationTransform(&note));
          return action_queue;
@@ -260,6 +263,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::DoubleDurationTransform(&note));
          return action_queue;
@@ -270,6 +274,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::ToggleRest(&note));
          return action_queue;
