@@ -26,7 +26,7 @@ Action::ToggleRest::~ToggleRest()
 
 bool Action::ToggleRest::execute()
 {
-   if (!note) return false;
+   if (!note) throw std::runtime_error("Cannot toggle_rest on a nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);

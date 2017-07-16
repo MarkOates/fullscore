@@ -26,7 +26,7 @@ Action::Transform::Retrograde::~Retrograde()
 
 bool Action::Transform::Retrograde::execute()
 {
-   if (!notes) return false;
+   if (!notes) throw std::runtime_error("Cannot retrograde on nullptr notes");
 
    ::Transform::Retrograde retrograde_transform;
    *notes = retrograde_transform.transform(*notes);

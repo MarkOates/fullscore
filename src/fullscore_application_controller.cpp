@@ -38,19 +38,21 @@
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/set_basic_measure_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
+#include <fullscore/actions/set_command_mode_action.h>
 #include <fullscore/actions/set_current_gui_score_editor_action.h>
+#include <fullscore/actions/set_mode_action.h>
+#include <fullscore/actions/set_normal_mode_action.h>
+#include <fullscore/actions/set_reference_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
-#include <fullscore/actions/set_command_mode_action.h>
-#include <fullscore/actions/set_normal_mode_action.h>
-#include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
 #include <fullscore/factories/measure_grid_factory.h>
 
+#include <fullscore/models/measures/static.h>
 
 
 
@@ -83,6 +85,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    dm->genesis->add_transform(&reference_transform);
    dm->genesis->add_transform(&double_duration_transform);
    dm->refresh();
+
+   current_gui_score_editor->measure_grid.set_measure(0, 3, new Measure::Static());
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -118,7 +122,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: return "toggle_rest"; break;
+      case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
@@ -137,7 +141,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_J: return "move_cursor_down"; break;
       case ALLEGRO_KEY_K: return "move_cursor_up"; break;
       case ALLEGRO_KEY_L: return "move_cursor_right"; break;
-      case ALLEGRO_KEY_M: return "set_basic_measure"; break;
+      case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
@@ -217,6 +221,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
       else
       {
+         if (!notes) { std::cout << "cannot transpose_up on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -235,6 +240,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
       else
       {
+         if (!notes) { std::cout << "cannot transpose_down on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -247,6 +253,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::HalfDurationTransform(&note));
          return action_queue;
@@ -257,6 +264,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::DoubleDurationTransform(&note));
          return action_queue;
@@ -267,6 +275,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
       else
       {
+         if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::ToggleRest(&note));
          return action_queue;
@@ -323,6 +332,10 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_gui_score_editor);
+   else if (action_name == "set_reference_measure")
+      action = new Action::SetReferenceMeasure(
+            &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y,
+            &current_gui_score_editor->measure_grid, 0, 0);
    else if (action_name == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
