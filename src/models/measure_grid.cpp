@@ -25,9 +25,9 @@ Measure::Base *MeasureGrid::Row::operator[](unsigned int index)
 
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
-  , time_signatures()
+   , time_signatures()
 {
-   for (unsigned i=0; i<num_x_measures; i++) voices.push_back(Row(num_x_measures));
+   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(Row(num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
