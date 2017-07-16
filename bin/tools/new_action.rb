@@ -41,8 +41,8 @@ header_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name.underscore)
 
 
 # save the file with a new filename
-source_filename = "src/actions/#{class_name.underscore}_action.cpp"
-header_filename = "include/fullscore/actions/#{class_name.underscore}_action.h"
+source_filename = "../src/actions/#{class_name.underscore}_action.cpp"
+header_filename = "../include/fullscore/actions/#{class_name.underscore}_action.h"
 IO.write(source_filename, source_code)
 IO.write(header_filename, header_code)
 
