@@ -38,15 +38,16 @@
 #include <fullscore/actions/save_measure_grid_action.h>
 #include <fullscore/actions/set_basic_measure_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
+#include <fullscore/actions/set_command_mode_action.h>
 #include <fullscore/actions/set_current_gui_score_editor_action.h>
+#include <fullscore/actions/set_mode_action.h>
+#include <fullscore/actions/set_normal_mode_action.h>
+#include <fullscore/actions/set_reference_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
-#include <fullscore/actions/set_command_mode_action.h>
-#include <fullscore/actions/set_normal_mode_action.h>
-#include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
 #include <fullscore/factories/measure_grid_factory.h>
