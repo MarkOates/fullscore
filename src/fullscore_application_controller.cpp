@@ -122,7 +122,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: return "toggle_rest"; break;
+      case ALLEGRO_KEY_R: shift ? return "set_reference_measure" : return "toggle_rest"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
@@ -141,7 +141,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_J: return "move_cursor_down"; break;
       case ALLEGRO_KEY_K: return "move_cursor_up"; break;
       case ALLEGRO_KEY_L: return "move_cursor_right"; break;
-      case ALLEGRO_KEY_M: return "set_basic_measure"; break;
+      case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
@@ -332,6 +332,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_gui_score_editor);
+   else if (action_name == "set_reference_measure")
+      action = new Action::SetReferenceMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
