@@ -41,6 +41,16 @@ void MeasureGridRenderComponent::set_showing_debug_data(bool show)
 
 
 
+float __get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
+{
+   if (!m) return 0;
+   float sum = 0;
+   for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
+      sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
+   return sum;
+}
+
+
 
 void MeasureGridRenderComponent::render()
 {
@@ -81,20 +91,30 @@ void MeasureGridRenderComponent::render()
          if (!measure) continue;
 
          float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
-         music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
 
-         if (measure && measure->get_num_notes() == 0)
+         ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
+
+         int measure_width = 16;
+
+         if (measure)
          {
-            int measure_width = 16;
-
-            // measure box outline
-            ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
-            if (measure->is_type("reference")) measure_block_color = color::color(color::yellow, 0.2);
-
-            al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
-               x_pos+measure_width, row_middle_y+staff_height/2,
-               4, 4, measure_block_color);
+            if (measure->get_num_notes() == 0)
+            {
+               measure_width = 16;
+               ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
+            }
+            else if (measure->is_type("reference"))
+            {
+               measure_width = __get_measure_width(measure) * full_measure_width;
+               measure_block_color = color::color(color::yellow, 0.2);
+            }
          }
+
+         al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
+            x_pos+measure_width, row_middle_y+staff_height/2,
+            4, 4, measure_block_color);
+
+         music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
 
          // draw debug info on the note
          if (showing_debug_data)
