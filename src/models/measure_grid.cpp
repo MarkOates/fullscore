@@ -44,6 +44,20 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 
 
 
+bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
+{
+   // bounds check
+   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
+   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
+
+   Measure::Base *existing_measure = get_measure(x_measure, y_staff);
+   if (existing_measure) delete existing_measure;
+   voices[y_staff].measures[x_measure] = measure;
+   return true;
+}
+
+
+
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;

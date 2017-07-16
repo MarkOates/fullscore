@@ -18,7 +18,6 @@ TEST(MeasureGridTest, creates_successfully)
 TEST(MeasureGridTest, returns_the_number_of_staves)
 {
    MeasureGrid measure_grid(17, 13);
-
    EXPECT_EQ(13, measure_grid.get_num_staves());
 }
 
@@ -27,7 +26,6 @@ TEST(MeasureGridTest, returns_the_number_of_staves)
 TEST(MeasureGridTest, returns_the_number_of_measures)
 {
    MeasureGrid measure_grid(17, 3);
-
    EXPECT_EQ(17, measure_grid.get_num_measures());
 }
 
@@ -45,6 +43,26 @@ TEST(MeasureGridTest, sets_and_gets_the_name_of_a_row)
 
    EXPECT_EQ(true, measure_grid.set_voice_name(2, "Tuba"));
    EXPECT_EQ("Tuba", measure_grid.get_voice_name(2));
+}
+
+
+
+TEST(MeasureGridTest, sets_and_gets_a_measure_to_a_coordinate)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   Measure::Basic *basic_measure = new Measure::Basic();
+
+   EXPECT_TRUE(measure_grid.set_measure(3, 7, basic_measure));
+
+   Measure::Base *retrieved_measure = measure_grid.get_measure(3, 7);
+   ASSERT_NE(nullptr, retrieved_measure);
+   ASSERT_TRUE(retrieved_measure->is_type("basic"));
+
+   int expected_id = basic_measure->get_id();
+   int returned_id = retrieved_measure->get_id();
+
+   EXPECT_EQ(expected_id, returned_id);
 }
 
 
