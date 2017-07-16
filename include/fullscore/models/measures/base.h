@@ -22,6 +22,7 @@ namespace Measure
       bool is_type(std::string measure_type);
       int get_id();
 
+      virtual int get_num_notes() = 0;
       virtual std::vector<Note> get_notes_copy() = 0;
       virtual bool set_notes(std::vector<Note>) = 0;
       virtual std::vector<Note> *get_notes_pointer();

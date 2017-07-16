@@ -17,6 +17,10 @@ public:
       : Measure::Base("test_derived_class")
       , notes({ Note(0, Duration::HALF), Note(3, Duration::SIXTEENTH) })
    {}
+   virtual int get_num_notes() override
+   {
+      return notes.size();
+   }
    virtual std::vector<Note> get_notes_copy() override
    {
       return notes;

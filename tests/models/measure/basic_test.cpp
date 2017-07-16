@@ -93,6 +93,17 @@ TEST(MeasureTest, returns_false_if_it_does_not_reference_a_source_in_its_genesis
 
 
 
+TEST(MeasureTest, can_get_its_number_of_notes)
+{
+   Measure::Basic measure1({ Note(0), Note(0), Note(0) });
+   ASSERT_EQ(3, measure1.get_num_notes());
+
+   Measure::Basic measure2({ Note(0), Note(0), Note(0), Note(0), Note(0), Note(0), Note(0) });
+   ASSERT_EQ(7, measure2.get_num_notes());
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

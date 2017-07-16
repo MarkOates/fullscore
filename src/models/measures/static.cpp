@@ -18,6 +18,13 @@ std::vector<Note> Measure::Static::get_notes_copy()
 
 
 
+int Measure::Static::get_num_notes()
+{
+   return 7;
+}
+
+
+
 bool Measure::Static::set_notes(std::vector<Note> notes)
 {
    return false;

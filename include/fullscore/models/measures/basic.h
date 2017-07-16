@@ -30,6 +30,7 @@ namespace Measure
 
       int extension;
 
+      virtual int get_num_notes() override;
       virtual bool set_notes(std::vector<Note> notes) override;
       virtual std::vector<Note> get_notes_copy() override;
       virtual std::vector<Note> *get_notes_pointer() override;
