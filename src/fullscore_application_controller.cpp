@@ -122,7 +122,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: shift ? return "set_reference_measure" : return "toggle_rest"; break;
+      case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;

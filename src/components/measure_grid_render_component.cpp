@@ -88,9 +88,12 @@ void MeasureGridRenderComponent::render()
             int measure_width = 16;
 
             // measure box outline
+            ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
+            if (measure->is_type("reference")) measure_block_color = color::color(color::yellow, 0.2);
+
             al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
                x_pos+measure_width, row_middle_y+staff_height/2,
-               4, 4, color::color(color::black, 0.075));
+               4, 4, measure_block_color);
          }
 
          // draw debug info on the note
