@@ -29,7 +29,9 @@ Action::PasteMeasureFromBuffer::~PasteMeasureFromBuffer()
 
 bool Action::PasteMeasureFromBuffer::execute()
 {
-   if (!yank_measure_buffer || !destination_measure) return false;
+   if (!yank_measure_buffer) throw std::runtime_error("Cannot yank to a nullptr yank_measure_buffer");
+   if (!destination_measure) throw std::runtime_error("Cannot yank from a nullptr destination_measure");
+
    destination_measure->set_notes(yank_measure_buffer->get_notes_copy());
    return true;
 }

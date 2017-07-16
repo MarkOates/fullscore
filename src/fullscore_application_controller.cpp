@@ -51,6 +51,7 @@
 
 #include <fullscore/factories/measure_grid_factory.h>
 
+#include <fullscore/models/measures/static.h>
 
 
 
@@ -83,6 +84,8 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    dm->genesis->add_transform(&reference_transform);
    dm->genesis->add_transform(&double_duration_transform);
    dm->refresh();
+
+   current_gui_score_editor->measure_grid.set_measure(0, 3, new Measure::Static());
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
