@@ -36,7 +36,7 @@ bool Action::MoveCursorLeft::execute()
    }
    else if (score_editor->is_note_target_mode()) score_editor->move_note_cursor_x(-1);
 
-   return false;
+   return true;
 }
 
 

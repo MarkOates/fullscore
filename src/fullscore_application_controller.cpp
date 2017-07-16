@@ -355,7 +355,19 @@ void FullscoreApplicationController::key_down_func()
 
    if (action)
    {
-      action->execute();
+      try
+      {
+         if (!action->execute()) throw std::runtime_error("Generic could-not-execute-action exception");
+      }
+      catch (const std::runtime_error& e)
+      {
+         std::cout << "Exception caught while trying to run action "
+                   << action->get_action_name()
+                   << " with the following message \""
+                   << e.what()
+                   << "\""
+                   << std::endl;
+      }
       delete action;
    }
 }
