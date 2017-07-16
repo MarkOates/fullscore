@@ -333,7 +333,9 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_gui_score_editor);
    else if (action_name == "set_reference_measure")
-      action = new Action::SetReferenceMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+      action = new Action::SetReferenceMeasure(
+            &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y,
+            &current_gui_score_editor->measure_grid, 0, 0);
    else if (action_name == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")

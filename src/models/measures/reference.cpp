@@ -19,7 +19,7 @@ std::vector<Note> Measure::Reference::get_notes_copy()
 {
    // TODO: this could be a dead pointer if it is deleted externally
    Measure::Base *referenced_measure = measure_grid->get_measure(measure_x, staff_y);
-   if (referenced_measure) referenced_measure->get_notes_copy();
+   if (referenced_measure) return referenced_measure->get_notes_copy();
    return {};
 }
 
