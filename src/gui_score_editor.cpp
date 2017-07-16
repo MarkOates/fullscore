@@ -70,56 +70,55 @@ void GUIScoreEditor::on_draw()
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
    float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
 
-   if (measure)
-   {
-      float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
+   // draw the measure
 
-      // measure box fill
-      al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
+   float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
+
+   // measure box fill
+   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
+      CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+      4, 4, color::color(color::aliceblue, 0.2));
+
+   // measure box outline
+   if (is_measure_target_mode())
+      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
          CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
-         4, 4, color::color(color::aliceblue, 0.2));
+         4, 4, color::color(color::aliceblue, 0.7), 2.0);
 
-      // measure box outline
-      if (is_measure_target_mode())
-         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-            CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
-            4, 4, color::color(color::aliceblue, 0.7), 2.0);
+   // left bar
+   al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
+         CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
+         color::white, 3.0);
 
-      // left bar
-      al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
-            CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
-            color::white, 3.0);
+   // draw a hilight box at the focused note
+   if (note)
+   {
+      float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
+      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
 
-      // draw a hilight box at the focused note
-      if (note)
-      {
-         float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-         float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
+      // note box fill
+      al_draw_filled_rounded_rectangle(
+            CACHED_get_measure_cursor_real_x + note_real_offset_x,
+            CACHED_get_measure_cursor_real_y,
+            CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
+            CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
+            6,
+            6,
+            color::color(color::pink, 0.4)
+         );
 
-         // note box fill
-         al_draw_filled_rounded_rectangle(
+      // note box outline
+      if (is_note_target_mode())
+         al_draw_rounded_rectangle(
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
                CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
                CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
                6,
                6,
-               color::color(color::pink, 0.4)
+               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
+               2.0
             );
-
-         // note box outline
-         if (is_note_target_mode())
-            al_draw_rounded_rectangle(
-                  CACHED_get_measure_cursor_real_x + note_real_offset_x,
-                  CACHED_get_measure_cursor_real_y,
-                  CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-                  CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
-                  6,
-                  6,
-                  color::mix(color::color(color::pink, 0.8), color::black, 0.3),
-                  2.0
-               );
-      }
    }
 
    // draw the playhead
@@ -188,7 +187,8 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 float GUIScoreEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
 {
    float sum = 0;
-   std::vector<Note> notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
+   std::vector<Note> notes;
+   if (measure) notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
 
    if (note_index < 0 || note_index >= notes.size()) return 0;
 
@@ -202,6 +202,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure::Base *measure, int not
 
 float GUIScoreEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
+   if (!m) return 0;
    float sum = 0;
    for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
       sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
