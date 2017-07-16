@@ -83,6 +83,16 @@ void MeasureGridRenderComponent::render()
          float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
          music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
 
+         if (measure && measure->get_num_notes() == 0)
+         {
+            int measure_width = 16;
+
+            // measure box outline
+            al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
+               x_pos+measure_width, row_middle_y+staff_height/2,
+               4, 4, color::color(color::black, 0.075));
+         }
+
          // draw debug info on the note
          if (showing_debug_data)
          {
