@@ -8,11 +8,14 @@
 
 
 
-Action::SetReferenceMeasure::SetReferenceMeasure(MeasureGrid *measure_grid, int measure_x, int staff_y)
+Action::SetReferenceMeasure::SetReferenceMeasure(MeasureGrid *measure_grid, int measure_x, int staff_y, MeasureGrid *referenced_measure_grid, int referenced_measure_x, int referenced_staff_y)
    : Base("set_reference_measure")
    , measure_grid(measure_grid)
    , measure_x(measure_x)
    , staff_y(staff_y)
+   , referenced_measure_grid(referenced_measure_grid)
+   , referenced_measure_x(referenced_measure_x)
+   , referenced_staff_y(referenced_staff_y)
 {}
 
 
@@ -26,7 +29,7 @@ bool Action::SetReferenceMeasure::execute()
 {
    if (!measure_grid) throw std::runtime_error("Cannot set Measure::Reference on a nullptr measure_grid");
 
-   Measure::Reference *new_reference_measure = new Measure::Reference(nullptr, -1, -1);
+   Measure::Reference *new_reference_measure = new Measure::Reference(referenced_measure_grid, referenced_measure_x, referenced_staff_y);
 
    bool measure_set_successfully = measure_grid->set_measure(measure_x, staff_y, new_reference_measure);
 
