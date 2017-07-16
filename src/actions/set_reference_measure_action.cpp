@@ -29,6 +29,9 @@ bool Action::SetReferenceMeasure::execute()
 {
    if (!measure_grid) throw std::runtime_error("Cannot set Measure::Reference on a nullptr measure_grid");
 
+   if (measure_grid == referenced_measure_grid && measure_x == referenced_measure_x && staff_y == referenced_staff_y)
+      throw std::runtime_error("a Measure::Reference cannot reference itself");
+
    Measure::Reference *new_reference_measure = new Measure::Reference(referenced_measure_grid, referenced_measure_x, referenced_staff_y);
 
    bool measure_set_successfully = measure_grid->set_measure(measure_x, staff_y, new_reference_measure);
