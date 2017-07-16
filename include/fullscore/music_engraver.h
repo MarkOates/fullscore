@@ -16,7 +16,7 @@ public:
 	MusicNotation music_notation;
 	MusicEngraver();
 	std::string translate_note_to_str(const Note &note);
-	void draw(Measure::Basic *measure, float x, float y, const float whole_note_width);
+	void draw(Measure::Base *measure, float x, float y, const float whole_note_width);
 };
 
 

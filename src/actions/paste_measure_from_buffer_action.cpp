@@ -10,7 +10,7 @@
 
 
 
-Action::PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Basic *destination_measure, Measure::Basic *yank_measure_buffer)
+Action::PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Base *destination_measure, Measure::Basic *yank_measure_buffer)
    : Base("yank_measure_to_buffer")
    , yank_measure_buffer(yank_measure_buffer)
    , destination_measure(destination_measure)

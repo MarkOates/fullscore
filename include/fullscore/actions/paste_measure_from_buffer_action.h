@@ -8,7 +8,7 @@
 
 
 
-namespace Measure { class Basic; }
+namespace Measure { class Basic; class Base; }
 
 namespace Action
 {
@@ -16,10 +16,10 @@ namespace Action
    {
    private:
       Measure::Basic *yank_measure_buffer;
-      Measure::Basic *destination_measure;
+      Measure::Base *destination_measure;
 
    public:
-      PasteMeasureFromBuffer(Measure::Basic *destination_measure, Measure::Basic *yank_measure_buffer);
+      PasteMeasureFromBuffer(Measure::Base *destination_measure, Measure::Basic *yank_measure_buffer);
       ~PasteMeasureFromBuffer();
 
       bool execute();
