@@ -46,6 +46,7 @@ std::istream& operator>> (std::istream &i, Duration::denominator_t &denominator)
 
 Duration::denominator_t half_duration(Duration::denominator_t denominator)
 {
+   if (denominator >= Duration::SIXTYFOURTH) return Duration::SIXTYFOURTH;
    return (Duration::denominator_t)((int)denominator * 2);
 }
 
@@ -53,6 +54,7 @@ Duration::denominator_t half_duration(Duration::denominator_t denominator)
 
 Duration::denominator_t double_duration(Duration::denominator_t denominator)
 {
+   if (denominator <= Duration::WHOLE) return Duration::WHOLE;
    return (Duration::denominator_t)((int)denominator / 2);
 }
 
