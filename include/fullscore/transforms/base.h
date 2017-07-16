@@ -1,12 +1,9 @@
-#ifndef __FULLSCORE_TRANSFORM_BASE_HEADER
-#define __FULLSCORE_TRANSFORM_BASE_HEADER
-
+#pragma once
 
 
 
 #include <vector>
 #include <fullscore/models/note.h>
-
 
 
 
@@ -28,4 +25,3 @@ namespace Transform
 
 
 
-#endif
