@@ -1,7 +1,6 @@
 
 
 
-
 #include <fullscore/actions/set_basic_measure_action.h>
 
 #include <fullscore/models/measures/basic.h>
@@ -18,10 +17,8 @@ Action::SetBasicMeasure::SetBasicMeasure(MeasureGrid *measure_grid, int measure_
 
 
 
-
 Action::SetBasicMeasure::~SetBasicMeasure()
 {}
-
 
 
 
@@ -43,7 +40,6 @@ bool Action::SetBasicMeasure::execute()
 
    return true;
 }
-
 
 
 
