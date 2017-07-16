@@ -36,6 +36,7 @@
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
+#include <fullscore/actions/set_basic_measure_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
 #include <fullscore/actions/set_current_gui_score_editor_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
@@ -68,16 +69,20 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    create_new_score_editor("");
    set_current_gui_score_editor(create_new_score_editor("big_score"));
 
+   current_gui_score_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
    Measure::Base *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
-   m->set_notes({Note(2), Note(0), Note(1)});
+   if (!m) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 0)");
 
-   Measure::Base *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
+   current_gui_score_editor->measure_grid.set_measure(0, 1, new Measure::Basic());
+   Measure::Basic *dm = static_cast<Measure::Basic *>(current_gui_score_editor->measure_grid.get_measure(0, 1));
+   if (!dm) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 1)");
+
    Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
-   //dm->genesis = new Transform::Stack();
-   //dm->genesis->add_transform(&reference_transform);
-   //dm->genesis->add_transform(&double_duration_transform);
-   //dm->refresh();
+   dm->genesis = new Transform::Stack();
+   dm->genesis->add_transform(&reference_transform);
+   dm->genesis->add_transform(&double_duration_transform);
+   dm->refresh();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -132,6 +137,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_J: return "move_cursor_down"; break;
       case ALLEGRO_KEY_K: return "move_cursor_up"; break;
       case ALLEGRO_KEY_L: return "move_cursor_right"; break;
+      case ALLEGRO_KEY_M: return "set_basic_measure"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
@@ -269,7 +275,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "erase_note")
    {
       if (current_gui_score_editor->is_note_target_mode()) action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
-      else if (current_gui_score_editor->is_measure_target_mode()) action = new Action::Transform::ClearMeasure(notes);
+      else if (current_gui_score_editor->is_measure_target_mode()) action = new Action::Transform::ClearMeasure(notes); // TODO this should be changed to SetMeasure(nullptr) or something to that effect
    }
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
@@ -317,6 +323,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_gui_score_editor);
+   else if (action_name == "set_basic_measure")
+      action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
@@ -351,7 +359,19 @@ void FullscoreApplicationController::key_down_func()
 
    if (action)
    {
-      action->execute();
+      try
+      {
+         if (!action->execute()) throw std::runtime_error("Generic could-not-execute-action exception");
+      }
+      catch (const std::runtime_error& e)
+      {
+         std::cout << "Exception caught while trying to run action "
+                   << action->get_action_name()
+                   << " with the following message \""
+                   << e.what()
+                   << "\""
+                   << std::endl;
+      }
       delete action;
    }
 }

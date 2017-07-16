@@ -10,7 +10,7 @@
 
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
-   for (unsigned i=0; i<num_measures; i++) measures.push_back(new Measure::Basic());
+   for (unsigned i=0; i<num_measures; i++) measures.push_back(nullptr);
 }
 
 
@@ -40,6 +40,20 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
    if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return NULL;
 
    return voices[y_staff][x_measure];
+}
+
+
+
+bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
+{
+   // bounds check
+   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
+   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
+
+   Measure::Base *existing_measure = get_measure(x_measure, y_staff);
+   if (existing_measure) delete existing_measure;
+   voices[y_staff].measures[x_measure] = measure;
+   return true;
 }
 
 
@@ -112,7 +126,7 @@ void MeasureGrid::insert_measure(int index)
       {
          // WARNING: this assumes all staves have the same
          // number of measures (they should)
-         voices[i].measures.insert(voices[i].measures.begin() + index, new Measure::Basic());
+         voices[i].measures.insert(voices[i].measures.begin() + index, nullptr);
       }
    }
 }
@@ -145,7 +159,7 @@ void MeasureGrid::append_measure()
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
    {
-      voices[i].measures.push_back(new Measure::Basic());
+      voices[i].measures.push_back(nullptr);
    }
 }
 

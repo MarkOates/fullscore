@@ -26,6 +26,7 @@ namespace Measure
       bool references_source();
 
       Basic();
+      Basic(std::vector<Note> notes);
 
       int extension;
 
