@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid *measure_grid;
+class MeasureGrid;
 
 
 
