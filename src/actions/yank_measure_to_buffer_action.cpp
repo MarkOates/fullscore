@@ -4,13 +4,13 @@
 
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 #include <fullscore/models/note.h>
 
 
 
 
-Action::YankMeasureToBuffer::YankMeasureToBuffer(Measure *yank_measure_buffer, Measure *source_measure)
+Action::YankMeasureToBuffer::YankMeasureToBuffer(Measure::Basic *yank_measure_buffer, Measure::Base *source_measure)
    : Base("yank_measure_to_buffer")
    , yank_measure_buffer(yank_measure_buffer)
    , source_measure(source_measure)

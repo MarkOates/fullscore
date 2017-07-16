@@ -3,32 +3,19 @@
 
 
 #include <vector>
-
-#include <fullscore/transforms/stack.h>
-
-
-
-class Note;
+#include <fullscore/models/note.h>
 
 
 
-class Measure
+namespace Measure
 {
-private:
-   std::vector<Note> notes;
+   class Base;
 
-public:
-   Transform::Stack *genesis;
-   bool refresh();
-   bool references_source();
+   extern std::vector<Base *> pool;
+   extern int next_id;
 
-   Measure();
-
-   int extension;
-
-   bool set_notes(std::vector<Note> notes);
-   std::vector<Note> get_notes_copy();
-   std::vector<Note> *get_notes_pointer();
+   extern Base *find(int id);
+   extern bool destroy(int id);
 };
 
 

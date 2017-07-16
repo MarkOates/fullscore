@@ -10,12 +10,12 @@
 
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
-   measures.resize(num_measures, Measure());
+   for (unsigned i=0; i<num_measures; i++) measures.push_back(new Measure::Basic());
 }
 
 
 
-Measure &MeasureGrid::Row::operator[](unsigned int index)
+Measure::Base *MeasureGrid::Row::operator[](unsigned int index)
 {
    if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
    return measures[index];
@@ -25,21 +25,21 @@ Measure &MeasureGrid::Row::operator[](unsigned int index)
 
 MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
-  , time_signatures()
+   , time_signatures()
 {
-   voices.resize(num_y_staves, Row(num_x_measures));
+   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(Row(num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
 
 
-Measure *MeasureGrid::get_measure(int x_measure, int y_staff)
+Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
    if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return NULL;
    if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return NULL;
 
-   return &voices[y_staff][x_measure];
+   return voices[y_staff][x_measure];
 }
 
 
@@ -112,7 +112,7 @@ void MeasureGrid::insert_measure(int index)
       {
          // WARNING: this assumes all staves have the same
          // number of measures (they should)
-         voices[i].measures.insert(voices[i].measures.begin() + index, Measure());
+         voices[i].measures.insert(voices[i].measures.begin() + index, new Measure::Basic());
       }
    }
 }
@@ -145,7 +145,7 @@ void MeasureGrid::append_measure()
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
    {
-      voices[i].measures.push_back(Measure());
+      voices[i].measures.push_back(new Measure::Basic());
    }
 }
 

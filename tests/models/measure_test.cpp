@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 
 #include <fullscore/transforms/insert_note.h>
 #include <fullscore/transforms/reference.h>
@@ -13,14 +13,14 @@
 
 TEST(MeasureTest, can_be_created)
 {
-   Measure measure;
+   Measure::Basic measure;
 }
 
 
 
 TEST(MeasureTest, has_a_default_extension_of_12)
 {
-   Measure measure;
+   Measure::Basic measure;
    ASSERT_EQ(12, measure.extension);
 }
 
@@ -28,7 +28,7 @@ TEST(MeasureTest, has_a_default_extension_of_12)
 
 TEST(MeasureTest, can_get_and_set_notes)
 {
-   Measure measure;
+   Measure::Basic measure;
    std::vector<Note> expected_notes = { Note(2, Duration::HALF), Note(-1, Duration::EIGHTH), Note(14, Duration::QUARTER) };
 
    ASSERT_EQ(true, measure.set_notes(expected_notes));
@@ -43,7 +43,7 @@ TEST(MeasureTest, can_get_and_set_notes)
 
 TEST(MeasureTest, with_genesis_populates_its_notes)
 {
-   Measure measure;
+   Measure::Basic measure;
 
    measure.genesis = new Transform::Stack();
    Transform::InsertNote insert_note_transform(0, Note());
@@ -61,7 +61,7 @@ TEST(MeasureTest, with_genesis_populates_its_notes)
 
 TEST(MeasureTest, returns_true_if_references_a_source_in_its_genesis)
 {
-   Measure measure;
+   Measure::Basic measure;
 
    measure.genesis = new Transform::Stack();
    Transform::Reference reference_transform(nullptr, 0, 0);
@@ -74,7 +74,7 @@ TEST(MeasureTest, returns_true_if_references_a_source_in_its_genesis)
 
 TEST(MeasureTest, returns_false_if_it_does_not_reference_a_source_in_its_genesis__test_1)
 {
-   Measure measure;
+   Measure::Basic measure;
    ASSERT_EQ(false, measure.references_source());
 }
 
@@ -82,7 +82,7 @@ TEST(MeasureTest, returns_false_if_it_does_not_reference_a_source_in_its_genesis
 
 TEST(MeasureTest, returns_false_if_it_does_not_reference_a_source_in_its_genesis__test_2)
 {
-   Measure measure;
+   Measure::Basic measure;
 
    measure.genesis = new Transform::Stack();
    Transform::InsertNote insert_note_transform(0, Note());

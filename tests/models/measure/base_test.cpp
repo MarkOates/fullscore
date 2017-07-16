@@ -3,18 +3,18 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measure/base.h>
+#include <fullscore/models/measures/base.h>
 
 
 
-class TestDerivedClass : public Measure2::Base
+class TestDerivedClass : public Measure::Base
 {
 private:
    std::vector<Note> notes;
 
 public:
    TestDerivedClass()
-      : Measure2::Base("test_derived_class")
+      : Measure::Base("test_derived_class")
       , notes({ Note(0, Duration::HALF), Note(3, Duration::SIXTEENTH) })
    {}
    virtual std::vector<Note> get_notes_copy() override

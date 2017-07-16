@@ -26,7 +26,7 @@ public:
    GUIScoreEditor *current_gui_score_editor;
    std::vector<GUIScoreEditor *> gui_score_editors;
    UICommandBar *command_bar;
-   Measure yank_measure_buffer;
+   Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
 
    FullscoreApplicationController(Display *display);

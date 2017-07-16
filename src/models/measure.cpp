@@ -1,66 +1,42 @@
 
 
 
+#include <vector>
+#include <fullscore/models/measures/base.h>
 #include <fullscore/models/measure.h>
 
-#include <fullscore/models/note.h>
-#include <allegro_flare/useful.h>
 
 
-
-Measure::Measure()
-   : genesis(nullptr)
-   , extension(12)
-{}
-
-
-
-bool Measure::refresh()
+namespace Measure
 {
-   if (genesis)
+   std::vector<Base *> measure_pool = {};
+
+
+
+   int next_id = 0;
+
+
+
+   Base *find(int id)
    {
-      try
+      for (auto &measure : measure_pool)
+         if (measure->get_id() == id) return measure;
+      return nullptr;
+   }
+
+
+
+   bool destroy(int id)
+   {
+      Base *measure = Measure::find(id);
+      if (measure)
       {
-         notes = genesis->transform({});
+         delete measure;
          return true;
       }
-      catch (...)
-      {
-         std::cout << "Measure genesis failed" << std::endl;
-         return false;
-      }
+      return false;
    }
-   return false;
-}
-
-
-
-bool Measure::references_source()
-{
-   return genesis && genesis->includes_reference();
-}
-
-
-
-bool Measure::set_notes(std::vector<Note> notes)
-{
-   this->notes = notes;
-   return true;
-}
-
-
-
-std::vector<Note> Measure::get_notes_copy()
-{
-   return notes;
-}
-
-
-
-std::vector<Note> *Measure::get_notes_pointer()
-{
-   return &notes;
-}
+};
 
 
 

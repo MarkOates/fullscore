@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <string>
-#include <fullscore/models/measure.h>
+#include <fullscore/models/measures/basic.h>
 #include <fullscore/models/time_signature.h>
 
 
@@ -20,9 +20,9 @@ private:
    {
    public:
       std::string name;
-      std::vector<Measure> measures;
+      std::vector<Measure::Base *> measures;
       Row(int num_measures);
-      Measure &operator[](unsigned int index);
+      Measure::Base *operator[](unsigned int index);
    };
 
    std::vector<Row> voices;
@@ -30,7 +30,7 @@ private:
 
 public:
    MeasureGrid(int num_x_measures, int num_y_staves);
-   Measure *get_measure(int x_measure, int y_staff);
+   Measure::Base *get_measure(int x_measure, int y_staff);
 
    int get_num_staves() const;
    int get_num_measures() const;

@@ -68,16 +68,16 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    create_new_score_editor("");
    set_current_gui_score_editor(create_new_score_editor("big_score"));
 
-   Measure *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
+   Measure::Base *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
    m->set_notes({Note(2), Note(0), Note(1)});
 
-   Measure *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
+   Measure::Base *dm = current_gui_score_editor->measure_grid.get_measure(0, 1);
    Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
-   dm->genesis = new Transform::Stack();
-   dm->genesis->add_transform(&reference_transform);
-   dm->genesis->add_transform(&double_duration_transform);
-   dm->refresh();
+   //dm->genesis = new Transform::Stack();
+   //dm->genesis->add_transform(&reference_transform);
+   //dm->genesis->add_transform(&double_duration_transform);
+   //dm->refresh();
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -186,7 +186,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
-   Measure *focused_measure = nullptr;
+   Measure::Base *focused_measure = nullptr;
 
    if (current_gui_score_editor->is_note_target_mode())
    {

@@ -64,14 +64,14 @@ void GUIScoreEditor::on_draw()
    if (state != STATE_ACTIVE) return;
 
    // draw a hilight box under the focused measure
-   Measure *measure = get_measure_at_cursor();
+   Measure::Base *measure = get_measure_at_cursor();
    Note *note = get_note_at_cursor();
    float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
    float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
 
    if (measure)
    {
-      float measure_width = get_measure_width(*measure) * FULL_MEASURE_WIDTH;
+      float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
 
       // measure box fill
       al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
@@ -92,7 +92,7 @@ void GUIScoreEditor::on_draw()
       // draw a hilight box at the focused note
       if (note)
       {
-         float note_real_offset_x = get_measure_length_to_note(*measure, note_cursor_x) * FULL_MEASURE_WIDTH;
+         float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
          float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
 
          // note box fill
@@ -146,7 +146,7 @@ void GUIScoreEditor::on_timer()
 
 
 
-Measure *GUIScoreEditor::get_measure_at_cursor()
+Measure::Base *GUIScoreEditor::get_measure_at_cursor()
 {
    return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
@@ -156,7 +156,7 @@ Measure *GUIScoreEditor::get_measure_at_cursor()
 
 Note *GUIScoreEditor::get_note_at_cursor()
 {
-   Measure *focused_measure = get_measure_at_cursor();
+   Measure::Base *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
 
    std::vector<Note> *notes = focused_measure->get_notes_pointer();
@@ -184,10 +184,10 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 
 
 
-float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_index)
+float GUIScoreEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
 {
    float sum = 0;
-   std::vector<Note> notes = measure.get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
+   std::vector<Note> notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
 
    if (note_index < 0 || note_index >= notes.size()) return 0;
 
@@ -199,10 +199,10 @@ float GUIScoreEditor::get_measure_length_to_note(Measure &measure, int note_inde
 
 
 
-float GUIScoreEditor::get_measure_width(Measure &m)  // TODO: should probably use a helper
+float GUIScoreEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    float sum = 0;
-   for (auto &note : m.get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
+   for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
       sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
    return sum;
 }
@@ -232,7 +232,7 @@ int GUIScoreEditor::move_measure_cursor_y(int delta)
 
 int GUIScoreEditor::move_note_cursor_x(int delta)
 {
-   Measure *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+   Measure::Base *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
    if (!current_measure)
    {
       note_cursor_x = 0;
