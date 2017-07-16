@@ -22,7 +22,7 @@ private:
       std::string name;
       std::vector<Measure::Basic *> measures;
       Row(int num_measures);
-      Measure::Basic &operator[](unsigned int index);
+      Measure::Basic *operator[](unsigned int index);
    };
 
    std::vector<Row> voices;
