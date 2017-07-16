@@ -62,6 +62,13 @@ bool Measure::Basic::set_notes(std::vector<Note> notes)
 
 
 
+int Measure::Basic::get_num_notes()
+{
+   return notes.size();
+}
+
+
+
 std::vector<Note> Measure::Basic::get_notes_copy()
 {
    return notes;

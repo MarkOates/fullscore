@@ -73,6 +73,16 @@ void GUIScoreEditor::on_draw()
    // draw the measure
 
    float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
+   if (measure && measure->get_num_notes() == 0)
+   {
+      measure_width = 16;
+
+      // measure box outline
+      if (is_measure_target_mode())
+         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+            4, 4, color::color(color::black, 0.3), 2.0);
+   }
 
    // measure box fill
    al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
