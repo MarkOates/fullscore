@@ -44,6 +44,7 @@
 #include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_reference_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
+#include <fullscore/actions/set_stack_measure_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
@@ -120,7 +121,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
       case ALLEGRO_KEY_D: return "transpose_down"; break;
-      case ALLEGRO_KEY_S: return "half_duration"; break;
+      case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
       case ALLEGRO_KEY_N: return "invert"; break;
@@ -338,6 +339,8 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
             &current_gui_score_editor->measure_grid, 0, 0);
    else if (action_name == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+   else if (action_name == "set_stack_measure")
+      action = new Action::SetStackMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
