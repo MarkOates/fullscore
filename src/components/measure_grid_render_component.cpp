@@ -108,6 +108,11 @@ void MeasureGridRenderComponent::render()
                measure_width = __get_measure_width(measure) * full_measure_width;
                measure_block_color = color::color(color::yellow, 0.2);
             }
+            else if (measure->is_type("stack"))
+            {
+               measure_width = __get_measure_width(measure) * full_measure_width;
+               measure_block_color = color::color(color::red, 0.2);
+            }
          }
 
          al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
