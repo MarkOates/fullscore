@@ -8,6 +8,7 @@
 
 #include <fullscore/actions/action_base.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/widgets/measure_inspector.h>
 #include <fullscore/command_bar.h>
 #include <fullscore/follow_camera.h>
 #include <fullscore/gui_score_editor.h>
@@ -26,6 +27,7 @@ public:
    GUIScoreEditor *current_gui_score_editor;
    std::vector<GUIScoreEditor *> gui_score_editors;
    UICommandBar *command_bar;
+   UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
 

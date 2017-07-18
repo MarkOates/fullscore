@@ -65,6 +65,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , current_gui_score_editor(nullptr)
    , gui_score_editors()
    , command_bar(new UICommandBar(this))
+   , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
 {
    UIScreen::draw_focused_outline = false;
@@ -99,6 +100,9 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 void FullscoreApplicationController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
+   if (ui_measure_inspector) ui_measure_inspector->set_measure(current_gui_score_editor->get_measure_at_cursor());
+   ui_measure_inspector->place.position = vec2d(display->width(), 0);
+   ui_measure_inspector->place.size = vec2d(300, display->height());
 }
 
 
