@@ -11,9 +11,11 @@
 
 
 UIMeasureInspector::UIMeasureInspector(UIWidget *parent)
-   : UIWidget(parent, "UIMeasureInspector", new UISurfaceAreaBox(300, 600, 300, 600))
+   : UIWidget(parent, "UIMeasureInspector", new UISurfaceAreaBox(0, 0, 300, 600))
    , measure(nullptr)
-{}
+{
+   place.align = vec2d(1.0, 0.0);
+}
 
 
 
