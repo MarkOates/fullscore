@@ -73,7 +73,7 @@ void GUIScoreEditor::on_draw()
    }
 
    // render the measure grid
-   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
+   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, rendering_dependencies.reference_cursor, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
    measure_grid_render_component.set_showing_debug_data(showing_debug_data);
    measure_grid_render_component.render();
 

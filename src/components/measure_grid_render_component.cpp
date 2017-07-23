@@ -13,13 +13,15 @@
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/music_engraver.h>
+#include <fullscore/reference_cursor.h>
 
 
 
 
-MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, MusicEngraver *music_engraver, float full_measure_width, float staff_height)
+MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
    : measure_grid(measure_grid)
    , music_engraver(music_engraver)
+   , reference_cursor(reference_cursor)
    , full_measure_width(full_measure_width)
    , staff_height(staff_height)
    , showing_debug_data(false)
