@@ -58,6 +58,15 @@ void MeasureGridRenderComponent::render()
 {
    if (!measure_grid || !music_engraver) return;
 
+   int reference_cursor_x = -1;
+   int reference_cursor_y = -1;
+
+   if (reference_cursor && reference_cursor->is_on_measure_grid(measure_grid))
+   {
+      reference_cursor_x = reference_cursor->get_x();
+      reference_cursor_y = reference_cursor->get_y();
+   }
+
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<measure_grid->get_num_measures(); x++)
@@ -89,10 +98,26 @@ void MeasureGridRenderComponent::render()
       // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
+         // draw the reference_cursor
+         float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
+
+         bool draw_reference_cursor = (y == reference_cursor_y && x == reference_cursor_x);
+         if (draw_reference_cursor)
+         {
+            float reference_cursor_height = 20;
+            float reference_cursor_width = 18;
+            float reference_cursor_hwidth = reference_cursor_width * 0.5;
+
+            al_draw_filled_triangle(
+                  x_pos, y_pos,
+                  x_pos-reference_cursor_hwidth, y_pos-reference_cursor_height,
+                  x_pos+reference_cursor_hwidth, y_pos-reference_cursor_height,
+                  color::darkorange);
+         }
+
+         //draw the measure
          Measure::Base *measure = measure_grid->get_measure(x,y);
          if (!measure) continue;
-
-         float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
 
          ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
 
