@@ -32,7 +32,7 @@ void ReferenceCursor::set_position(MeasureGrid *measure_grid, int x, int y)
 
 
 
-void ReferenceCursor::set(int x, int y)
+void ReferenceCursor::set_coordinates(int x, int y)
 {
    this->x = x;
    this->y = y;

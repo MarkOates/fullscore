@@ -59,12 +59,12 @@ TEST(ReferenceCursorTest, can_set_its_x_y_coordinates)
 {
    ReferenceCursor reference_cursor;
 
-   reference_cursor.set(20, 30);
+   reference_cursor.set_coordinates(20, 30);
 
    EXPECT_EQ(20, reference_cursor.get_x());
    EXPECT_EQ(30, reference_cursor.get_y());
 
-   reference_cursor.set(17, 26);
+   reference_cursor.set_coordinates(17, 26);
 
    EXPECT_EQ(17, reference_cursor.get_x());
    EXPECT_EQ(26, reference_cursor.get_y());
