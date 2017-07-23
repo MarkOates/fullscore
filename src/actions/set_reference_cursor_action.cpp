@@ -24,6 +24,8 @@ bool Action::SetReferenceCursor::execute()
 
    reference_cursor->set_position(measure_grid, measure_x, staff_y);
 
+   if (!reference_cursor->is_valid()) throw std::runtime_error("Recently set reference cursor is now invalid");
+
    return true;
 }
 
