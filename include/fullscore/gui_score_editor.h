@@ -31,8 +31,9 @@ public:
 
    enum edit_mode_target_t
    {
-      NOTE_TARGET=0,
-      MEASURE_TARGET
+      NONE_TARGET=0,
+      NOTE_TARGET,
+      MEASURE_TARGET,
    };
 
    enum mode_t

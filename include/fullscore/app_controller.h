@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
-#define __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
-
+#pragma once
 
 
 
@@ -18,7 +16,7 @@
 
 
 
-class FullscoreApplicationController : public UIScreen
+class AppController : public UIScreen
 {
 public:
    SimpleNotificationScreen *simple_notification_screen;
@@ -33,14 +31,14 @@ public:
    bool showing_help_menu;
    ReferenceCursor reference_cursor;
 
-   FullscoreApplicationController(Display *display);
+   AppController(Display *display);
    void primary_timer_func() override;
    void key_down_func() override;
    void on_message(UIWidget *sender, std::string message) override;
 
    Action::Base *create_action(std::string action_name);
 
-   std::string find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::string find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
    GUIScoreEditor *create_new_score_editor(std::string identifier);
    bool set_current_gui_score_editor(GUIScoreEditor *editor);
@@ -49,5 +47,3 @@ public:
 
 
 
-
-#endif

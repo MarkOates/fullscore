@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/fullscore_application_controller.h>
+#include <fullscore/app_controller.h>
 
 #include <fullscore/transforms/reference.h>
 #include <fullscore/transforms/double_duration.h>
@@ -24,6 +24,7 @@
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_score_editor_action.h>
 #include <fullscore/actions/delete_measure_action.h>
+#include <fullscore/actions/delete_measure_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
 #include <fullscore/actions/insert_staff_action.h>
@@ -58,7 +59,7 @@
 
 
 
-FullscoreApplicationController::FullscoreApplicationController(Display *display)
+AppController::AppController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
@@ -99,7 +100,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 
 
 
-void FullscoreApplicationController::primary_timer_func()
+void AppController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
    if (ui_measure_inspector) ui_measure_inspector->set_measure(current_gui_score_editor->get_measure_at_cursor());
@@ -110,7 +111,7 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
@@ -135,7 +136,10 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
-      case ALLEGRO_KEY_X: return "erase_note"; break;
+      case ALLEGRO_KEY_X:
+         if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
+         else if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
+         break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
@@ -172,7 +176,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
 
 
 
-Action::Base *FullscoreApplicationController::create_action(std::string action_name)
+Action::Base *AppController::create_action(std::string action_name)
 {
    //
    // APP COMMANDS
@@ -290,10 +294,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       }
    }
    else if (action_name == "erase_note")
-   {
-      if (current_gui_score_editor->is_note_target_mode()) action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
-      else if (current_gui_score_editor->is_measure_target_mode()) action = new Action::Transform::ClearMeasure(notes); // TODO this should be changed to SetMeasure(nullptr) or something to that effect
-   }
+      action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
@@ -354,7 +355,9 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
-      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
+      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+   else if (action_name == "delete_measure_grid_column")
+      action = new Action::DeleteMeasureGridColumn(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
       action = new Action::InsertStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
@@ -370,17 +373,18 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
 
 
-void FullscoreApplicationController::key_down_func()
+void AppController::key_down_func()
 {
    UIScreen::key_down_func();
 
    auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
+   auto target        = current_gui_score_editor ? current_gui_score_editor->edit_mode_target : GUIScoreEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
    auto ctrl_pressed  = Framework::key_ctrl;
 
-   std::string identifier = find_action_identifier(mode, keycode, shift_pressed, ctrl_pressed, alt_pressed);
+   std::string identifier = find_action_identifier(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
    Action::Base *action = create_action(identifier);
 
    if (action)
@@ -405,7 +409,7 @@ void FullscoreApplicationController::key_down_func()
 
 
 
-void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
+void AppController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
 
@@ -456,7 +460,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
 
 
-GUIScoreEditor *FullscoreApplicationController::create_new_score_editor(std::string name)
+GUIScoreEditor *AppController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
@@ -479,7 +483,7 @@ GUIScoreEditor *FullscoreApplicationController::create_new_score_editor(std::str
 
 
 
-bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor *editor)
+bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
 {
    if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
 
@@ -497,7 +501,7 @@ bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor
 
 
 
-GUIScoreEditor *FullscoreApplicationController::get_next_gui_score_editor()
+GUIScoreEditor *AppController::get_next_gui_score_editor()
 {
    if (!current_gui_score_editor || gui_score_editors.size() <= 1) return nullptr;
 

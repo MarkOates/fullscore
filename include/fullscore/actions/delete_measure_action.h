@@ -2,13 +2,13 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
 
 
 
-
 class MeasureGrid;
+
+
 
 namespace Action
 {
@@ -16,16 +16,15 @@ namespace Action
    {
    private:
       MeasureGrid *measure_grid;
-      int at_index;
+      int measure_x;
+      int staff_y;
 
    public:
-      DeleteMeasure(MeasureGrid *measure_grid, int at_index);
-      ~DeleteMeasure();
+      DeleteMeasure(MeasureGrid *measure_grid, int measure_x, int staff_y);
 
       bool execute() override;
    };
 };
-
 
 
 
