@@ -41,7 +41,7 @@ public:
    void append_staff();
 
    void insert_measure(int index);
-   bool delete_measure(int index);
+   bool delete_column(int index);
    void append_measure();
 
    bool set_voice_name(int row_number, std::string name);

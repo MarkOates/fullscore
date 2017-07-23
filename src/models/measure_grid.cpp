@@ -133,7 +133,7 @@ void MeasureGrid::insert_measure(int index)
 
 
 
-bool MeasureGrid::delete_measure(int index)
+bool MeasureGrid::delete_column(int index)
 {
    int num_measures = get_num_measures();
 
