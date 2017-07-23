@@ -67,6 +67,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
    , command_bar(new UICommandBar(this))
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
+   , reference_cursor(nullptr, 0, 0)
 {
    UIScreen::draw_focused_outline = false;
 

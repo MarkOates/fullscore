@@ -13,6 +13,7 @@
 #include <fullscore/follow_camera.h>
 #include <fullscore/gui_score_editor.h>
 #include <fullscore/playback_device_generic.h>
+#include <fullscore/reference_cursor.h>
 
 
 
@@ -30,6 +31,7 @@ public:
    UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
+   ReferenceCursor reference_cursor;
 
    FullscoreApplicationController(Display *display);
    void primary_timer_func() override;
