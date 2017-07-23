@@ -14,11 +14,27 @@
 
 
 
+GUIScoreEditor::RenderingDependencies::RenderingDependencies()
+   : reference_cursor(nullptr)
+{}
+
+
+
+
+void GUIScoreEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
+{
+   this->reference_cursor = reference_cursor;
+}
+
+
+
+
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(0, 0)
    , playback_control()
+   , rendering_dependencies()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)
@@ -57,7 +73,7 @@ void GUIScoreEditor::on_draw()
    }
 
    // render the measure grid
-   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
+   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, rendering_dependencies.reference_cursor, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
    measure_grid_render_component.set_showing_debug_data(showing_debug_data);
    measure_grid_render_component.render();
 
@@ -256,7 +272,6 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
    }
    return note_cursor_x;
 }
-
 
 
 
