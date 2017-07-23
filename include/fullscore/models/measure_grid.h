@@ -32,6 +32,7 @@ public:
    MeasureGrid(int num_x_measures, int num_y_staves);
    Measure::Base *get_measure(int x_measure, int y_staff);
    bool set_measure(int x_measure, int y_staff, Measure::Base *measure);
+   bool delete_measure(int x_measure, int y_staff);
 
    int get_num_staves() const;
    int get_num_measures() const;

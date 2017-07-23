@@ -58,6 +58,13 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
 
 
 
+bool MeasureGrid::delete_measure(int x_measure, int y_staff)
+{
+   return set_measure(x_measure, y_staff, nullptr);
+}
+
+
+
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;

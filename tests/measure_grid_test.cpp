@@ -67,6 +67,24 @@ TEST(MeasureGridTest, sets_and_gets_a_measure_to_a_coordinate)
 
 
 
+TEST(MeasureGridTest, can_delete_a_measure)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   Measure::Basic *basic_measure = new Measure::Basic();
+   EXPECT_TRUE(measure_grid.set_measure(3, 7, basic_measure));
+
+   Measure::Base *retrieved_measure = measure_grid.get_measure(3, 7);
+   ASSERT_NE(nullptr, retrieved_measure);
+
+   measure_grid.delete_measure(3, 7);
+
+   Measure::Base  *expected_null_retrieved_measure = measure_grid.get_measure(3, 7);
+   ASSERT_EQ(nullptr, expected_null_retrieved_measure);
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
