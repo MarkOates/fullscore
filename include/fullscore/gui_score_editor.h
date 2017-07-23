@@ -13,6 +13,9 @@
 
 
 
+class ReferenceCursor;
+
+
 
 class GUIScoreEditor : public UIWidget
 {
@@ -40,6 +43,7 @@ public:
 
    MeasureGrid measure_grid;
    PlaybackControl playback_control;
+   ReferenceCursor *reference_cursor;
 
    int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
    int measure_cursor_y;
@@ -64,6 +68,7 @@ public:
    int move_measure_cursor_x(int delta);
    int move_measure_cursor_y(int delta);
    int move_note_cursor_x(int delta);
+   void set_reference_cursor(ReferenceCursor *reference_cursor);
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();

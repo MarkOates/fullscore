@@ -19,6 +19,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(0, 0)
    , playback_control()
+   , reference_cursor(nullptr)
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)
@@ -257,6 +258,12 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
    return note_cursor_x;
 }
 
+
+
+void GUIScoreEditor::set_reference_cursor(ReferenceCursor *reference_cursor)
+{
+   this->reference_cursor = reference_cursor;
+}
 
 
 
