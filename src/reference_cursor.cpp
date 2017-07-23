@@ -76,3 +76,16 @@ void ReferenceCursor::move(int delta_x, int delta_y)
 
 
 
+bool ReferenceCursor::is_valid()
+{
+   if (!measure_grid) return false;
+   if (x >= measure_grid->get_num_measures()) return false;
+   if (x < 0) return false;
+   if (y >= measure_grid->get_num_staves()) return false;
+   if (y < 0) return false;
+
+   return true;
+}
+
+
+

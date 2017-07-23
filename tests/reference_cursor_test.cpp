@@ -89,6 +89,45 @@ TEST(ReferenceCursorTest, can_move_its_x_y_coordinates)
 
 
 
+TEST(ReferenceCursorTest, with_no_measure_grid__is_invalid)
+{
+   ReferenceCursor reference_cursor;
+
+   EXPECT_FALSE(reference_cursor.is_valid());
+}
+
+
+
+TEST(ReferenceCursorTest, with_a_reference_grid_and_coordinates_within_the_grid__is_valid)
+{
+   MeasureGrid measure_grid(3, 4);
+   ReferenceCursor reference_cursor(&measure_grid, 2, 1);
+
+   EXPECT_TRUE(reference_cursor.is_valid());
+}
+
+
+
+TEST(ReferenceCursorTest, with_a_reference_grid_and_coordinates_outside_the_grid__is_invalid)
+{
+   MeasureGrid measure_grid(3, 4);
+   ReferenceCursor reference_cursor(&measure_grid, 2, 1);
+
+   reference_cursor.set_coordinates(999, 999);
+
+   EXPECT_FALSE(reference_cursor.is_valid());
+
+   reference_cursor.set_coordinates(-1, 1);
+
+   EXPECT_FALSE(reference_cursor.is_valid());
+
+   reference_cursor.set_coordinates(1, -1);
+
+   EXPECT_FALSE(reference_cursor.is_valid());
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
