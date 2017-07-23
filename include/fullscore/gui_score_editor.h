@@ -20,6 +20,15 @@ class ReferenceCursor;
 class GUIScoreEditor : public UIWidget
 {
 public:
+   class RenderingDependencies
+   {
+   public:
+      RenderingDependencies();
+
+      ReferenceCursor *reference_cursor;
+      void set_reference_cursor(ReferenceCursor *reference_cursor);
+   };
+
    enum edit_mode_target_t
    {
       NOTE_TARGET=0,
@@ -43,7 +52,8 @@ public:
 
    MeasureGrid measure_grid;
    PlaybackControl playback_control;
-   ReferenceCursor *reference_cursor;
+
+   RenderingDependencies rendering_dependencies;
 
    int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
    int measure_cursor_y;

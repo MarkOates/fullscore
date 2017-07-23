@@ -14,12 +14,27 @@
 
 
 
+GUIScoreEditor::RenderingDependencies::RenderingDependencies()
+   : reference_cursor(nullptr)
+{}
+
+
+
+
+void GUIScoreEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
+{
+   this->reference_cursor = reference_cursor;
+}
+
+
+
+
 GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(0, 0)
    , playback_control()
-   , reference_cursor(nullptr)
+   , rendering_dependencies()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)
@@ -256,13 +271,6 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
       note_cursor_x = limit<int>(0, num_notes-1, note_cursor_x + delta);
    }
    return note_cursor_x;
-}
-
-
-
-void GUIScoreEditor::set_reference_cursor(ReferenceCursor *reference_cursor)
-{
-   this->reference_cursor = reference_cursor;
 }
 
 
