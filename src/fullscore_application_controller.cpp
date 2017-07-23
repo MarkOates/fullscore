@@ -343,7 +343,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
    else if (action_name == "set_reference_measure")
       action = new Action::SetReferenceMeasure(
             &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y,
-            &current_gui_score_editor->measure_grid, 0, 0);
+            reference_cursor.get_measure_grid(), reference_cursor.get_x(), reference_cursor.get_y());
    else if (action_name == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
             &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
