@@ -12,15 +12,15 @@ class MeasureGrid;
 
 namespace Action
 {
-   class DeleteMeasure : public Base
+   class DeleteMeasureGridColumn : public Base
    {
    private:
       MeasureGrid *measure_grid;
       int at_index;
 
    public:
-      DeleteMeasure(MeasureGrid *measure_grid, int at_index);
-      ~DeleteMeasure();
+      DeleteMeasureGridColumn(MeasureGrid *measure_grid, int at_index);
+      ~DeleteMeasureGridColumn();
 
       bool execute() override;
    };

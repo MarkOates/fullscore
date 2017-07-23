@@ -354,7 +354,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "delete_measure_grid_column")
-      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
+      action = new Action::DeleteMeasureGridColumn(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
       action = new Action::InsertStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
