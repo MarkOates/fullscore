@@ -23,7 +23,7 @@
 #include <fullscore/actions/append_measure_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_score_editor_action.h>
-#include <fullscore/actions/delete_measure_action.h>
+#include <fullscore/actions/delete_measure_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
 #include <fullscore/actions/insert_staff_action.h>
@@ -353,7 +353,7 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetStackMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
-   else if (action_name == "delete_measure")
+   else if (action_name == "delete_measure_grid_column")
       action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
       action = new Action::InsertStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
