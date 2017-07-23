@@ -5,7 +5,7 @@
 #include <fullscore/actions/create_new_score_editor_action.h>
 
 #include <fullscore/factories/measure_grid_factory.h>
-#include <fullscore/fullscore_application_controller.h>
+#include <fullscore/app_controller.h>
 
 
 

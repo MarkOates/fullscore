@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/set_normal_mode_action.h>
 
-#include <fullscore/fullscore_application_controller.h>
+#include <fullscore/app_controller.h>
 
 
 

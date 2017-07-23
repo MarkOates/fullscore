@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/fullscore_application_controller.h>
+#include <fullscore/app_controller.h>
 
 #include <fullscore/transforms/reference.h>
 #include <fullscore/transforms/double_duration.h>
