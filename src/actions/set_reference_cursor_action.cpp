@@ -20,6 +20,10 @@ Action::SetReferenceCursor::SetReferenceCursor(ReferenceCursor *reference_cursor
 
 bool Action::SetReferenceCursor::execute()
 {
+   if (!reference_cursor) throw std::invalid_argument("Cannot set reference cursor on a nullptr reference_cursor");
+
+   reference_cursor->set_position(measure_grid, measure_x, staff_y);
+
    return true;
 }
 
