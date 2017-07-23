@@ -38,7 +38,7 @@ public:
 
    Action::Base *create_action(std::string action_name);
 
-   std::string find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::string find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
    GUIScoreEditor *create_new_score_editor(std::string identifier);
    bool set_current_gui_score_editor(GUIScoreEditor *editor);

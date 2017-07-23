@@ -23,6 +23,7 @@
 #include <fullscore/actions/append_measure_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_score_editor_action.h>
+#include <fullscore/actions/delete_measure_action.h>
 #include <fullscore/actions/delete_measure_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_measure_action.h>
@@ -110,7 +111,7 @@ void AppController::primary_timer_func()
 
 
 
-std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
@@ -353,6 +354,8 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetStackMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
       action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
+   else if (action_name == "delete_measure")
+      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "delete_measure_grid_column")
       action = new Action::DeleteMeasureGridColumn(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
@@ -375,12 +378,13 @@ void AppController::key_down_func()
    UIScreen::key_down_func();
 
    auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
+   auto target        = current_gui_score_editor ? current_gui_score_editor->edit_mode_target : GUIScoreEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
    auto ctrl_pressed  = Framework::key_ctrl;
 
-   std::string identifier = find_action_identifier(mode, keycode, shift_pressed, ctrl_pressed, alt_pressed);
+   std::string identifier = find_action_identifier(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
    Action::Base *action = create_action(identifier);
 
    if (action)
