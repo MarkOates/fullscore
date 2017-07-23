@@ -10,7 +10,7 @@
 
 
 
-Action::CreateNewScoreEditor::CreateNewScoreEditor(FullscoreApplicationController *app_controller)
+Action::CreateNewScoreEditor::CreateNewScoreEditor(AppController *app_controller)
    : Base("create_new_score_editor")
    , app_controller(app_controller)
 {}

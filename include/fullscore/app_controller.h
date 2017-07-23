@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
-#define __FULLSCORE_FULLSCORE_APPLICATION_CONTROLLER
-
+#pragma once
 
 
 
@@ -18,7 +16,7 @@
 
 
 
-class FullscoreApplicationController : public UIScreen
+class AppController : public UIScreen
 {
 public:
    SimpleNotificationScreen *simple_notification_screen;
@@ -33,7 +31,7 @@ public:
    bool showing_help_menu;
    ReferenceCursor reference_cursor;
 
-   FullscoreApplicationController(Display *display);
+   AppController(Display *display);
    void primary_timer_func() override;
    void key_down_func() override;
    void on_message(UIWidget *sender, std::string message) override;
@@ -49,5 +47,3 @@ public:
 
 
 
-
-#endif

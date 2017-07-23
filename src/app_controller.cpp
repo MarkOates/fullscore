@@ -58,7 +58,7 @@
 
 
 
-FullscoreApplicationController::FullscoreApplicationController(Display *display)
+AppController::AppController(Display *display)
    : UIScreen(display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
@@ -99,7 +99,7 @@ FullscoreApplicationController::FullscoreApplicationController(Display *display)
 
 
 
-void FullscoreApplicationController::primary_timer_func()
+void AppController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
    if (ui_measure_inspector) ui_measure_inspector->set_measure(current_gui_score_editor->get_measure_at_cursor());
@@ -110,7 +110,7 @@ void FullscoreApplicationController::primary_timer_func()
 
 
 
-std::string FullscoreApplicationController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
@@ -172,7 +172,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
 
 
 
-Action::Base *FullscoreApplicationController::create_action(std::string action_name)
+Action::Base *AppController::create_action(std::string action_name)
 {
    //
    // APP COMMANDS
@@ -370,7 +370,7 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
 
 
 
-void FullscoreApplicationController::key_down_func()
+void AppController::key_down_func()
 {
    UIScreen::key_down_func();
 
@@ -405,7 +405,7 @@ void FullscoreApplicationController::key_down_func()
 
 
 
-void FullscoreApplicationController::on_message(UIWidget *sender, std::string message)
+void AppController::on_message(UIWidget *sender, std::string message)
 {
    std::cout << "message: " << message << std::endl;
 
@@ -456,7 +456,7 @@ void FullscoreApplicationController::on_message(UIWidget *sender, std::string me
 
 
 
-GUIScoreEditor *FullscoreApplicationController::create_new_score_editor(std::string name)
+GUIScoreEditor *AppController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
@@ -479,7 +479,7 @@ GUIScoreEditor *FullscoreApplicationController::create_new_score_editor(std::str
 
 
 
-bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor *editor)
+bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
 {
    if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
 
@@ -497,7 +497,7 @@ bool FullscoreApplicationController::set_current_gui_score_editor(GUIScoreEditor
 
 
 
-GUIScoreEditor *FullscoreApplicationController::get_next_gui_score_editor()
+GUIScoreEditor *AppController::get_next_gui_score_editor()
 {
    if (!current_gui_score_editor || gui_score_editors.size() <= 1) return nullptr;
 

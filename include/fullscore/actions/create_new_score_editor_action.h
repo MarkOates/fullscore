@@ -8,17 +8,17 @@
 
 
 
-class FullscoreApplicationController;
+class AppController;
 
 namespace Action
 {
    class CreateNewScoreEditor : public Base
    {
    private:
-      FullscoreApplicationController *app_controller;
+      AppController *app_controller;
 
    public:
-      CreateNewScoreEditor(FullscoreApplicationController *app_controller);
+      CreateNewScoreEditor(AppController *app_controller);
       ~CreateNewScoreEditor();
 
       bool execute() override;

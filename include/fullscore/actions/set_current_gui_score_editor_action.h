@@ -6,7 +6,7 @@
 
 
 
-class FullscoreApplicationController;
+class AppController;
 class GUIScoreEditor;
 
 namespace Action
@@ -14,11 +14,11 @@ namespace Action
    class SetCurrentGUIScoreEditor : public Base
    {
    private:
-      FullscoreApplicationController *app_controller;
+      AppController *app_controller;
       GUIScoreEditor *gui_score_editor;
 
    public:
-      SetCurrentGUIScoreEditor(FullscoreApplicationController *app_controller, GUIScoreEditor *gui_score_editor);
+      SetCurrentGUIScoreEditor(AppController *app_controller, GUIScoreEditor *gui_score_editor);
       ~SetCurrentGUIScoreEditor();
 
       bool execute() override;
