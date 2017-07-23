@@ -42,6 +42,7 @@
 #include <fullscore/actions/set_current_gui_score_editor_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
+#include <fullscore/actions/set_reference_cursor_action.h>
 #include <fullscore/actions/set_reference_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/set_stack_measure_action.h>
@@ -129,6 +130,7 @@ std::string FullscoreApplicationController::find_action_identifier(GUIScoreEdito
       case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
+      case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
@@ -342,6 +344,9 @@ Action::Base *FullscoreApplicationController::create_action(std::string action_n
       action = new Action::SetReferenceMeasure(
             &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y,
             &current_gui_score_editor->measure_grid, 0, 0);
+   else if (action_name == "set_reference_cursor")
+      action = new Action::SetReferenceCursor(&reference_cursor,
+            &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
    else if (action_name == "set_stack_measure")
