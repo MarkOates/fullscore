@@ -136,7 +136,10 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
-      case ALLEGRO_KEY_X: return "erase_note"; break;
+      case ALLEGRO_KEY_X:
+         if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
+         else if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
+         break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
@@ -291,10 +294,7 @@ Action::Base *AppController::create_action(std::string action_name)
       }
    }
    else if (action_name == "erase_note")
-   {
-      if (current_gui_score_editor->is_note_target_mode()) action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
-      else if (current_gui_score_editor->is_measure_target_mode()) action = new Action::Transform::ClearMeasure(notes); // TODO this should be changed to SetMeasure(nullptr) or something to that effect
-   }
+      action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
