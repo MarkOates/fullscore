@@ -125,26 +125,17 @@ void MeasureGridRenderComponent::render()
 
          if (measure)
          {
-            if (measure->get_num_notes() == 0)
-            {
-               measure_width = 16;
-               ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
-            }
-            else if (measure->is_type("reference"))
-            {
+            if (measure->get_num_notes() > 0)
                measure_width = __get_measure_width(measure) * full_measure_width;
+
+            if (measure->is_type("reference"))
                measure_block_color = color::color(color::yellow, 0.2);
-            }
             else if (measure->is_type("stack"))
-            {
-               measure_width = __get_measure_width(measure) * full_measure_width;
                measure_block_color = color::color(color::red, 0.2);
-            }
             else if (measure->is_type("static"))
-            {
-               measure_width = __get_measure_width(measure) * full_measure_width;
                measure_block_color = color::color(color::dodgerblue, 0.1);
-            }
+            else if (measure->is_type("basic"))
+               ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
          }
 
          al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
