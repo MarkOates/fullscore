@@ -119,7 +119,7 @@ void MeasureGridRenderComponent::render()
          Measure::Base *measure = measure_grid->get_measure(x,y);
          if (!measure) continue;
 
-         ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
+         ALLEGRO_COLOR measure_block_color = color::color(color::white, 0.2);
 
          int measure_width = 16;
 
