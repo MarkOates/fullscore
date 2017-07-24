@@ -465,13 +465,11 @@ GUIScoreEditor *AppController::create_new_score_editor(std::string name)
    static int new_x = 0;
    static int new_y = 0;
 
-   GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera);
+   GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera, &reference_cursor);
    new_gui_score_editor->measure_grid = MeasureGridFactory::create(name);
 
    new_gui_score_editor->place.position = vec2d(new_x, new_y);
    new_gui_score_editor->place.align = vec2d(0.0, 0.0);
-
-   new_gui_score_editor->rendering_dependencies.set_reference_cursor(&this->reference_cursor);
 
    gui_score_editors.push_back(new_gui_score_editor);
 
