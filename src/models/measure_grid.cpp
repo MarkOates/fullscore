@@ -212,3 +212,12 @@ TimeSignature MeasureGrid::get_time_signature(int index)
 
 
 
+TimeSignature *MeasureGrid::get_time_signature_ptr(int index)
+{
+   if (index < 0 || index >= get_num_measures()) return nullptr;
+
+   return &time_signatures[index];
+}
+
+
+
