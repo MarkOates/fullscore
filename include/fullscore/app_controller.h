@@ -11,8 +11,6 @@
 #include <fullscore/widgets/follow_camera.h>
 #include <fullscore/widgets/gui_score_editor.h>
 #include <fullscore/widgets/measure_inspector.h>
-#include <fullscore/playback_device_generic.h>
-
 
 
 
