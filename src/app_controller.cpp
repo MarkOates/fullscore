@@ -372,7 +372,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "append_staff")
       action = new Action::AppendStaff(&current_measure_grid_editor->measure_grid);
    else if (action_name == "set_time_signature_numerator_2")
-      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 3);
+      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 2);
    else if (action_name == "set_time_signature_numerator_3")
       action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 3);
    else if (action_name == "set_time_signature_numerator_4")
