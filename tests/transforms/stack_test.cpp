@@ -3,12 +3,12 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/stack.h>
+#include <fullscore/transforms/stack_transform.h>
 
-#include <fullscore/transforms/insert_note.h>
-#include <fullscore/transforms/reference.h>
-#include <fullscore/transforms/retrograde.h>
-#include <fullscore/transforms/toggle_rest.h>
+#include <fullscore/transforms/insert_note_transform.h>
+#include <fullscore/transforms/reference_transform.h>
+#include <fullscore/transforms/retrograde_transform.h>
+#include <fullscore/transforms/toggle_rest_transform.h>
 
 
 

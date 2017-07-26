@@ -7,10 +7,10 @@
 #include <fullscore/models/measure_grid.h>
 
 // this next few lines are for testing
-#include <fullscore/transforms/copy.h>
-#include <fullscore/transforms/double_duration.h>
-#include <fullscore/transforms/retrograde.h>
-#include <fullscore/transforms/transpose.h>
+#include <fullscore/transforms/copy_transform.h>
+#include <fullscore/transforms/double_duration_transform.h>
+#include <fullscore/transforms/retrograde_transform.h>
+#include <fullscore/transforms/transpose_transform.h>
 
 
 

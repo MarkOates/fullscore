@@ -5,9 +5,9 @@
 
 #include <fullscore/models/measures/basic.h>
 
-#include <fullscore/transforms/insert_note.h>
-#include <fullscore/transforms/reference.h>
-#include <fullscore/transforms/stack.h>
+#include <fullscore/transforms/insert_note_transform.h>
+#include <fullscore/transforms/reference_transform.h>
+#include <fullscore/transforms/stack_transform.h>
 
 
 

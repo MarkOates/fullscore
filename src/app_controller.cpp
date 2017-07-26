@@ -4,8 +4,8 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/transforms/reference.h>
-#include <fullscore/transforms/double_duration.h>
+#include <fullscore/transforms/reference_transform.h>
+#include <fullscore/transforms/double_duration_transform.h>
 
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
 #include <fullscore/actions/transforms/clear_measure_transform_action.h>

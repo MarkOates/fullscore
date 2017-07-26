@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/remove_dot.h>
+#include <fullscore/transforms/remove_dot_transform.h>
 
 
 

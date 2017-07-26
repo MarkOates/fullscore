@@ -5,10 +5,10 @@
 
 #include <fullscore/models/measures/stack.h>
 
-#include <fullscore/transforms/double_duration.h>
-#include <fullscore/transforms/erase_note.h>
-#include <fullscore/transforms/retrograde.h>
-#include <fullscore/transforms/octatonic_1.h>
+#include <fullscore/transforms/double_duration_transform.h>
+#include <fullscore/transforms/erase_note_transform.h>
+#include <fullscore/transforms/retrograde_transform.h>
+#include <fullscore/transforms/octatonic_1_transform.h>
 
 
 
