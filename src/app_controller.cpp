@@ -47,6 +47,7 @@
 #include <fullscore/actions/set_reference_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/set_stack_measure_action.h>
+#include <fullscore/actions/set_time_signature_numerator_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
@@ -158,6 +159,10 @@ std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mo
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
+      case ALLEGRO_KEY_2: return "set_time_signature_numerator_2"; break;
+      case ALLEGRO_KEY_3: return "set_time_signature_numerator_3"; break;
+      case ALLEGRO_KEY_4: return "set_time_signature_numerator_4"; break;
+      case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
       }
 
    if (mode == UIMeasureGridEditor::COMMAND_MODE)
@@ -366,6 +371,14 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::AppendMeasure(&current_measure_grid_editor->measure_grid);
    else if (action_name == "append_staff")
       action = new Action::AppendStaff(&current_measure_grid_editor->measure_grid);
+   else if (action_name == "set_time_signature_numerator_2")
+      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 3);
+   else if (action_name == "set_time_signature_numerator_3")
+      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 3);
+   else if (action_name == "set_time_signature_numerator_4")
+      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 4);
+   else if (action_name == "set_time_signature_numerator_5")
+      action = new Action::SetTimeSignatureNumerator(current_measure_grid_editor->measure_grid.get_time_signature_ptr(current_measure_grid_editor->measure_cursor_x), 5);
 
    return action;
 }
