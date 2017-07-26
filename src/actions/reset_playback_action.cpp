@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/reset_playback_action.h>
 
-#include <fullscore/gui_score_editor.h>
+#include <fullscore/widgets/gui_score_editor.h>
 
 
 

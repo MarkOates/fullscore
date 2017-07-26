@@ -5,7 +5,7 @@
 #include <fullscore/actions/set_current_gui_score_editor_action.h>
 
 #include <fullscore/app_controller.h>
-#include <fullscore/gui_score_editor.h>
+#include <fullscore/widgets/gui_score_editor.h>
 
 
 
