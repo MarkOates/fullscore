@@ -4,12 +4,12 @@
 
 #include <fullscore/actions/move_cursor_up_action.h>
 
-#include <fullscore/widgets/gui_score_editor.h>
+#include <fullscore/widgets/measure_grid_editor.h>
 
 
 
 
-Action::MoveCursorUp::MoveCursorUp(GUIScoreEditor *score_editor)
+Action::MoveCursorUp::MoveCursorUp(UIMeasureGridEditor *score_editor)
    : Base("move_cursor_up")
    , score_editor(score_editor)
 {

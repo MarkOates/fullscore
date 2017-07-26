@@ -8,17 +8,17 @@
 
 
 
-class GUIScoreEditor;
+class UIMeasureGridEditor;
 
 namespace Action
 {
    class ToggleShowDebugData : public Base
    {
    private:
-      GUIScoreEditor *gui_score_editor;
+      UIMeasureGridEditor *measure_grid_editor;
 
    public:
-      ToggleShowDebugData(GUIScoreEditor *gui_score_editor);
+      ToggleShowDebugData(UIMeasureGridEditor *measure_grid_editor);
       ~ToggleShowDebugData();
 
       bool execute() override;

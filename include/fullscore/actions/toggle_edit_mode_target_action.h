@@ -8,17 +8,17 @@
 
 
 
-class GUIScoreEditor;
+class UIMeasureGridEditor;
 
 namespace Action
 {
    class ToggleEditModeTarget : public Base
    {
    private:
-      GUIScoreEditor *gui_score_editor;
+      UIMeasureGridEditor *measure_grid_editor;
 
    public:
-      ToggleEditModeTarget(GUIScoreEditor *gui_score_editor);
+      ToggleEditModeTarget(UIMeasureGridEditor *measure_grid_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;

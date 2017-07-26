@@ -8,7 +8,7 @@
 
 
 
-Action::SetMode::SetMode(GUIScoreEditor *score_editor, UICommandBar *command_bar, GUIScoreEditor::mode_t mode)
+Action::SetMode::SetMode(UIMeasureGridEditor *score_editor, UICommandBar *command_bar, UIMeasureGridEditor::mode_t mode)
    : Base("set_mode")
    , score_editor(score_editor)
    , command_bar(command_bar)
@@ -33,16 +33,16 @@ bool Action::SetMode::execute()
 
    switch(mode)
    {
-   case GUIScoreEditor::NORMAL_MODE:
+   case UIMeasureGridEditor::NORMAL_MODE:
       command_bar->text_input->set_as_unfocused();
-      score_editor->mode = GUIScoreEditor::NORMAL_MODE;
+      score_editor->mode = UIMeasureGridEditor::NORMAL_MODE;
       break;
-   case GUIScoreEditor::INSERT_MODE:
-      score_editor->mode = GUIScoreEditor::INSERT_MODE;
+   case UIMeasureGridEditor::INSERT_MODE:
+      score_editor->mode = UIMeasureGridEditor::INSERT_MODE;
       break;
-   case GUIScoreEditor::COMMAND_MODE:
+   case UIMeasureGridEditor::COMMAND_MODE:
       command_bar->text_input->set_as_focused();
-      score_editor->mode = GUIScoreEditor::COMMAND_MODE;
+      score_editor->mode = UIMeasureGridEditor::COMMAND_MODE;
       break;
    default:
       return false;

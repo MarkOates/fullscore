@@ -4,12 +4,12 @@
 
 #include <fullscore/actions/reset_playback_action.h>
 
-#include <fullscore/widgets/gui_score_editor.h>
+#include <fullscore/widgets/measure_grid_editor.h>
 
 
 
 
-Action::ResetPlayback::ResetPlayback(GUIScoreEditor *score_editor)
+Action::ResetPlayback::ResetPlayback(UIMeasureGridEditor *score_editor)
    : Base("reset_playback")
    , score_editor(score_editor)
 {

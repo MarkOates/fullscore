@@ -8,7 +8,7 @@
 
 
 
-class GUIScoreEditor;
+class UIMeasureGridEditor;
 class Motion;
 
 namespace Action
@@ -16,13 +16,13 @@ namespace Action
    class SetScoreZoom : public Base
    {
    private:
-      GUIScoreEditor *score_editor;
+      UIMeasureGridEditor *score_editor;
       Motion *motion;
       float destination;
       float duration;
 
    public:
-      SetScoreZoom(GUIScoreEditor *score_editor, Motion *motion, float destination, float duration);
+      SetScoreZoom(UIMeasureGridEditor *score_editor, Motion *motion, float destination, float duration);
       ~SetScoreZoom();
 
       bool execute() override;

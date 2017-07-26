@@ -40,7 +40,7 @@
 #include <fullscore/actions/set_basic_measure_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
 #include <fullscore/actions/set_command_mode_action.h>
-#include <fullscore/actions/set_current_gui_score_editor_action.h>
+#include <fullscore/actions/set_current_measure_grid_editor_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_reference_cursor_action.h>
@@ -64,8 +64,8 @@ AppController::AppController(Display *display)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
-   , current_gui_score_editor(nullptr)
-   , gui_score_editors()
+   , current_measure_grid_editor(nullptr)
+   , measure_grid_editors()
    , command_bar(new UICommandBar(this))
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
@@ -74,24 +74,24 @@ AppController::AppController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    create_new_score_editor("");
-   set_current_gui_score_editor(create_new_score_editor("big_score"));
+   set_current_measure_grid_editor(create_new_score_editor("big_score"));
 
-   current_gui_score_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
-   Measure::Base *m = current_gui_score_editor->measure_grid.get_measure(0, 0);
+   current_measure_grid_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
+   Measure::Base *m = current_measure_grid_editor->measure_grid.get_measure(0, 0);
    if (!m) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 0)");
 
-   current_gui_score_editor->measure_grid.set_measure(0, 1, new Measure::Basic());
-   Measure::Basic *dm = static_cast<Measure::Basic *>(current_gui_score_editor->measure_grid.get_measure(0, 1));
+   current_measure_grid_editor->measure_grid.set_measure(0, 1, new Measure::Basic());
+   Measure::Basic *dm = static_cast<Measure::Basic *>(current_measure_grid_editor->measure_grid.get_measure(0, 1));
    if (!dm) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 1)");
 
-   Transform::Reference reference_transform(&current_gui_score_editor->measure_grid, 0, 0);
+   Transform::Reference reference_transform(&current_measure_grid_editor->measure_grid, 0, 0);
    Transform::DoubleDuration double_duration_transform;
    dm->genesis = new Transform::Stack();
    dm->genesis->add_transform(&reference_transform);
    dm->genesis->add_transform(&double_duration_transform);
    dm->refresh();
 
-   current_gui_score_editor->measure_grid.set_measure(0, 3, new Measure::Static());
+   current_measure_grid_editor->measure_grid.set_measure(0, 3, new Measure::Static());
 
    follow_camera.target.position.y = 200;
    follow_camera.target.position.x = 200;
@@ -103,7 +103,7 @@ AppController::AppController(Display *display)
 void AppController::primary_timer_func()
 {
    UIScreen::primary_timer_func();
-   if (ui_measure_inspector) ui_measure_inspector->set_measure(current_gui_score_editor->get_measure_at_cursor());
+   if (ui_measure_inspector) ui_measure_inspector->set_measure(current_measure_grid_editor->get_measure_at_cursor());
    ui_measure_inspector->place.position = vec2d(display->width(), 0);
    ui_measure_inspector->place.size = vec2d(300, display->height());
 }
@@ -111,19 +111,19 @@ void AppController::primary_timer_func()
 
 
 
-std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mode, UIMeasureGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
       case ALLEGRO_KEY_N: if(ctrl) return "create_new_score_editor"; break;
-      case ALLEGRO_KEY_X: if(ctrl) return "set_current_gui_score_editor"; break;
+      case ALLEGRO_KEY_X: if(ctrl) return "set_current_measure_grid_editor"; break;
       case ALLEGRO_KEY_UP: return "move_camera_up"; break;
       case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
       case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
       case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
    }
 
-   if (mode == GUIScoreEditor::NORMAL_MODE)
+   if (mode == UIMeasureGridEditor::NORMAL_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
@@ -137,8 +137,8 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
       case ALLEGRO_KEY_X:
-         if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
-         else if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
+         if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
+         else if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
@@ -160,13 +160,13 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       }
 
-   if (mode == GUIScoreEditor::COMMAND_MODE)
+   if (mode == UIMeasureGridEditor::COMMAND_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
 
-   if (mode == GUIScoreEditor::INSERT_MODE)
+   if (mode == UIMeasureGridEditor::INSERT_MODE)
       // no implementation
       ;
 
@@ -186,8 +186,8 @@ Action::Base *AppController::create_action(std::string action_name)
 
    if (action_name == "create_new_score_editor")
       action = new Action::CreateNewScoreEditor(this);
-   else if (action_name == "set_current_gui_score_editor")
-      action = new Action::SetCurrentGUIScoreEditor(this, get_next_gui_score_editor());
+   else if (action_name == "set_current_measure_grid_editor")
+      action = new Action::SetCurrentUIMeasureGridEditor(this, get_next_measure_grid_editor());
    else if (action_name == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
@@ -204,27 +204,27 @@ Action::Base *AppController::create_action(std::string action_name)
    // SCORE EDITING COMMANDS
    //
 
-   if (!current_gui_score_editor) return nullptr;
+   if (!current_measure_grid_editor) return nullptr;
 
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure::Base *focused_measure = nullptr;
 
-   if (current_gui_score_editor->is_note_target_mode())
+   if (current_measure_grid_editor->is_note_target_mode())
    {
-      single_note = current_gui_score_editor->get_note_at_cursor();
-      focused_measure = current_gui_score_editor->get_measure_at_cursor();
+      single_note = current_measure_grid_editor->get_note_at_cursor();
+      focused_measure = current_measure_grid_editor->get_measure_at_cursor();
       if (focused_measure && focused_measure->get_notes_pointer()) notes = focused_measure->get_notes_pointer();
    }
-   if (current_gui_score_editor->is_measure_target_mode())
+   if (current_measure_grid_editor->is_measure_target_mode())
    {
-      focused_measure = current_gui_score_editor->get_measure_at_cursor();
+      focused_measure = current_measure_grid_editor->get_measure_at_cursor();
       if (focused_measure && focused_measure->get_notes_pointer()) notes = focused_measure->get_notes_pointer();
    }
 
    if (action_name == "transpose_up")
    {
-      if (current_gui_score_editor->is_note_target_mode())
+      if (current_measure_grid_editor->is_note_target_mode())
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -243,7 +243,7 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "transpose_down")
    {
-      if (current_gui_score_editor->is_note_target_mode())
+      if (current_measure_grid_editor->is_note_target_mode())
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
@@ -262,7 +262,7 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "half_duration")
    {
-      if (current_gui_score_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
+      if (current_measure_grid_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
       else
       {
          if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
@@ -273,7 +273,7 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "double_duration")
    {
-      if (current_gui_score_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
+      if (current_measure_grid_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
       else
       {
          if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
@@ -284,7 +284,7 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "toggle_rest")
    {
-      if (current_gui_score_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
+      if (current_measure_grid_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
       else
       {
          if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
@@ -294,7 +294,7 @@ Action::Base *AppController::create_action(std::string action_name)
       }
    }
    else if (action_name == "erase_note")
-      action = new Action::EraseNote(notes, current_gui_score_editor->note_cursor_x);
+      action = new Action::EraseNote(notes, current_measure_grid_editor->note_cursor_x);
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
@@ -302,70 +302,70 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
    else if (action_name == "set_command_mode")
-      action = new Action::SetCommandMode(current_gui_score_editor, command_bar);
+      action = new Action::SetCommandMode(current_measure_grid_editor, command_bar);
    else if (action_name == "set_normal_mode")
-      action = new Action::SetNormalMode(current_gui_score_editor, command_bar);
+      action = new Action::SetNormalMode(current_measure_grid_editor, command_bar);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
       action = new Action::Octatonic1Transform(notes);
    else if (action_name == "insert_note")
-      action = new Action::InsertNoteTransform(notes, current_gui_score_editor->note_cursor_x, Note());
+      action = new Action::InsertNoteTransform(notes, current_measure_grid_editor->note_cursor_x, Note());
    else if (action_name == "toggle_show_debug_data")
-      action = new Action::ToggleShowDebugData(current_gui_score_editor);
+      action = new Action::ToggleShowDebugData(current_measure_grid_editor);
    else if (action_name == "toggle_playback")
-      action = new Action::TogglePlayback(&current_gui_score_editor->playback_control);
+      action = new Action::TogglePlayback(&current_measure_grid_editor->playback_control);
    else if (action_name == "reset_playback")
-      action = new Action::ResetPlayback(current_gui_score_editor);
+      action = new Action::ResetPlayback(current_measure_grid_editor);
    else if (action_name == "save_measure_grid")
-      action = new Action::SaveMeasureGrid(&current_gui_score_editor->measure_grid, "score_filename.fs");
+      action = new Action::SaveMeasureGrid(&current_measure_grid_editor->measure_grid, "score_filename.fs");
    else if (action_name == "load_measure_grid")
-      action = new Action::LoadMeasureGrid(&current_gui_score_editor->measure_grid, "score_filename.fs");
+      action = new Action::LoadMeasureGrid(&current_measure_grid_editor->measure_grid, "score_filename.fs");
    else if (action_name == "camera_zoom_in")
-      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), current_gui_score_editor->place.scale.x + 0.1, 0.3);
+      action = new Action::SetScoreZoom(current_measure_grid_editor, &Framework::motion(), current_measure_grid_editor->place.scale.x + 0.1, 0.3);
    else if (action_name == "camera_zoom_default")
-      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), 1, 0.3);
+      action = new Action::SetScoreZoom(current_measure_grid_editor, &Framework::motion(), 1, 0.3);
    else if (action_name == "camera_zoom_out")
-      action = new Action::SetScoreZoom(current_gui_score_editor, &Framework::motion(), current_gui_score_editor->place.scale.x - 0.1, 0.3);
+      action = new Action::SetScoreZoom(current_measure_grid_editor, &Framework::motion(), current_measure_grid_editor->place.scale.x - 0.1, 0.3);
    else if (action_name == "move_cursor_left")
-      action = new Action::MoveCursorLeft(current_gui_score_editor);
+      action = new Action::MoveCursorLeft(current_measure_grid_editor);
    else if (action_name == "move_cursor_down")
-      action = new Action::MoveCursorDown(current_gui_score_editor);
+      action = new Action::MoveCursorDown(current_measure_grid_editor);
    else if (action_name == "move_cursor_up")
-      action = new Action::MoveCursorUp(current_gui_score_editor);
+      action = new Action::MoveCursorUp(current_measure_grid_editor);
    else if (action_name == "move_cursor_right")
-      action = new Action::MoveCursorRight(current_gui_score_editor);
+      action = new Action::MoveCursorRight(current_measure_grid_editor);
    else if (action_name == "yank_measure_to_buffer")
       action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
    else if (action_name == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
-      action = new Action::ToggleEditModeTarget(current_gui_score_editor);
+      action = new Action::ToggleEditModeTarget(current_measure_grid_editor);
    else if (action_name == "set_reference_measure")
       action = new Action::SetReferenceMeasure(
-            &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y,
+            &current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y,
             reference_cursor.get_measure_grid(), reference_cursor.get_x(), reference_cursor.get_y());
    else if (action_name == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
-            &current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+            &current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "set_basic_measure")
-      action = new Action::SetBasicMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+      action = new Action::SetBasicMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "set_stack_measure")
-      action = new Action::SetStackMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+      action = new Action::SetStackMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "insert_measure")
-      action = new Action::InsertMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
+      action = new Action::InsertMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
-      action = new Action::DeleteMeasure(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x, current_gui_score_editor->measure_cursor_y);
+      action = new Action::DeleteMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "delete_measure_grid_column")
-      action = new Action::DeleteMeasureGridColumn(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_x);
+      action = new Action::DeleteMeasureGridColumn(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
-      action = new Action::InsertStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
+      action = new Action::InsertStaff(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
-      action = new Action::DeleteStaff(&current_gui_score_editor->measure_grid, current_gui_score_editor->measure_cursor_y);
+      action = new Action::DeleteStaff(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "append_measure")
-      action = new Action::AppendMeasure(&current_gui_score_editor->measure_grid);
+      action = new Action::AppendMeasure(&current_measure_grid_editor->measure_grid);
    else if (action_name == "append_staff")
-      action = new Action::AppendStaff(&current_gui_score_editor->measure_grid);
+      action = new Action::AppendStaff(&current_measure_grid_editor->measure_grid);
 
    return action;
 }
@@ -377,8 +377,8 @@ void AppController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
-   auto target        = current_gui_score_editor ? current_gui_score_editor->edit_mode_target : GUIScoreEditor::edit_mode_target_t::NONE_TARGET;
+   auto mode          = current_measure_grid_editor ? current_measure_grid_editor->mode : UIMeasureGridEditor::mode_t::NONE;
+   auto target        = current_measure_grid_editor ? current_measure_grid_editor->edit_mode_target : UIMeasureGridEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -435,7 +435,7 @@ void AppController::on_message(UIWidget *sender, std::string message)
             action->execute();
             delete action;
 
-            Action::SetNormalMode return_to_normal_mode(current_gui_score_editor, command_bar);
+            Action::SetNormalMode return_to_normal_mode(current_measure_grid_editor, command_bar);
             return_to_normal_mode.execute();
          }
          else
@@ -451,7 +451,7 @@ void AppController::on_message(UIWidget *sender, std::string message)
          error_message += message;
          simple_notification_screen->spawn_notification(error_message);
 
-         Action::SetNormalMode return_to_normal_mode(current_gui_score_editor, command_bar);
+         Action::SetNormalMode return_to_normal_mode(current_measure_grid_editor, command_bar);
          return_to_normal_mode.execute();
       }
    }
@@ -460,38 +460,38 @@ void AppController::on_message(UIWidget *sender, std::string message)
 
 
 
-GUIScoreEditor *AppController::create_new_score_editor(std::string name)
+UIMeasureGridEditor *AppController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
 
-   GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera, &reference_cursor);
-   new_gui_score_editor->measure_grid = MeasureGridFactory::create(name);
+   UIMeasureGridEditor *new_measure_grid_editor = new UIMeasureGridEditor(&follow_camera, &reference_cursor);
+   new_measure_grid_editor->measure_grid = MeasureGridFactory::create(name);
 
-   new_gui_score_editor->place.position = vec2d(new_x, new_y);
-   new_gui_score_editor->place.align = vec2d(0.0, 0.0);
+   new_measure_grid_editor->place.position = vec2d(new_x, new_y);
+   new_measure_grid_editor->place.align = vec2d(0.0, 0.0);
 
-   gui_score_editors.push_back(new_gui_score_editor);
+   measure_grid_editors.push_back(new_measure_grid_editor);
 
    new_y += 300;
 
-   return new_gui_score_editor;
+   return new_measure_grid_editor;
 }
 
 
 
 
-bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
+bool AppController::set_current_measure_grid_editor(UIMeasureGridEditor *editor)
 {
-   if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
+   if (std::find(measure_grid_editors.begin(), measure_grid_editors.end(), editor) == measure_grid_editors.end()) return false;
 
-   for (auto &e : gui_score_editors)
-      e->set_state(e == editor ? GUIScoreEditor::STATE_ACTIVE : GUIScoreEditor::STATE_INACTIVE);
+   for (auto &e : measure_grid_editors)
+      e->set_state(e == editor ? UIMeasureGridEditor::STATE_ACTIVE : UIMeasureGridEditor::STATE_INACTIVE);
 
-   current_gui_score_editor = editor;
+   current_measure_grid_editor = editor;
 
-   // move the camera to the new current_gui_score_editor
-   follow_camera.target.position = -current_gui_score_editor->place.position + vec2d(200, 200);
+   // move the camera to the new current_measure_grid_editor
+   follow_camera.target.position = -current_measure_grid_editor->place.position + vec2d(200, 200);
 
    return true;
 }
@@ -499,14 +499,14 @@ bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
 
 
 
-GUIScoreEditor *AppController::get_next_gui_score_editor()
+UIMeasureGridEditor *AppController::get_next_measure_grid_editor()
 {
-   if (!current_gui_score_editor || gui_score_editors.size() <= 1) return nullptr;
+   if (!current_measure_grid_editor || measure_grid_editors.size() <= 1) return nullptr;
 
-   std::vector<GUIScoreEditor *>::iterator it = std::find(gui_score_editors.begin(), gui_score_editors.end(), current_gui_score_editor);
+   std::vector<UIMeasureGridEditor *>::iterator it = std::find(measure_grid_editors.begin(), measure_grid_editors.end(), current_measure_grid_editor);
 
-   if (it == gui_score_editors.end()) return nullptr; // does not exist in list
-   if (it == gui_score_editors.end()-1) return gui_score_editors.front(); // loop back to first element
+   if (it == measure_grid_editors.end()) return nullptr; // does not exist in list
+   if (it == measure_grid_editors.end()-1) return measure_grid_editors.front(); // loop back to first element
    ++it;
    return *it;
 }
