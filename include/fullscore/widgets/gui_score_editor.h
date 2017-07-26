@@ -9,7 +9,6 @@
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/services/music_engraver.h>
 #include <fullscore/playback_control.h>
-#include <fullscore/playback_device_interface.h>
 
 
 
