@@ -39,7 +39,7 @@ Duration TimeSignature::get_denominator() const
 bool TimeSignature::set_numerator(int numerator)
 {
    if (numerator <= 0) return false;
-   if (numerator > 12) return false;
+   if (numerator > NUMERATOR_MAX) return false;
 
    this->numerator = numerator;
    return true;

@@ -14,6 +14,8 @@ private:
    Duration denominator;
 
 public:
+   static const int NUMERATOR_MAX = 12;
+
    TimeSignature(int numerator, Duration denominator);
    ~TimeSignature();
 
