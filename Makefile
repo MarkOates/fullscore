@@ -27,7 +27,7 @@ OPENGL_LIB=-framework OpenGL
 GOOGLE_TEST_LIBS=-lgtest
 
 
-.PHONY: all clean main
+.PHONY: all clean main fresh
 
 
 
@@ -77,4 +77,7 @@ clean:
 	-rm bin/$(PROJECT_NAME_SNAKE_CASE)
 
 
+
+fresh:
+	make clean; make -j8; make run_tests -j8
 
