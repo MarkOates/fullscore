@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_PLAYBACK_CONTROL
-#define __FULLSCORE_PLAYBACK_CONTROL
-
+#pragma once
 
 
 
@@ -21,5 +19,3 @@ public:
 
 
 
-
-#endif

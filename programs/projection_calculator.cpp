@@ -8,7 +8,7 @@
 
 #include <fullscore/models/projection_set.h>
 #include <fullscore/models/index_set.h>
-#include <fullscore/pitch_projector.h>
+#include <fullscore/services/pitch_projector.h>
 
 
 
