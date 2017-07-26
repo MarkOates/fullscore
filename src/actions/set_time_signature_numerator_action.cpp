@@ -17,12 +17,12 @@ Action::SetTimeSignatureNumerator::SetTimeSignatureNumerator(TimeSignature *time
 
 bool Action::SetTimeSignatureNumerator::execute()
 {
-   if (!time_signature) throw std::invalid_argument("Cannot set time signature's numerator on a nullprt time_signature");
+   if (!time_signature) throw std::invalid_argument("Cannot set time signature's numerator on a nullptr time_signature");
    if (numerator <= 0) throw std::invalid_argument("Cannot set a time signature's numerator to <= 0");
    if (numerator > TimeSignature::NUMERATOR_MAX)
    {
       std::stringstream error_message;
-      error_message << "Cannot set a time signature's numerator to greater than" << TimeSignature::NUMERATOR_MAX;
+      error_message << "Cannot set a time signature's numerator to greater than " << TimeSignature::NUMERATOR_MAX;
       throw std::invalid_argument(error_message.str());
    }
 
