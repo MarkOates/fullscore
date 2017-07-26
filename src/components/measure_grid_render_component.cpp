@@ -12,7 +12,7 @@
 #include <fullscore/helpers/measure_grid_helper.h>
 #include <fullscore/models/note.h>
 #include <fullscore/models/measure_grid.h>
-#include <fullscore/music_engraver.h>
+#include <fullscore/services/music_engraver.h>
 #include <fullscore/reference_cursor.h>
 
 
