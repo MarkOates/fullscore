@@ -61,6 +61,26 @@ TEST(SetTimeSignatureNumeratorActionTest, with_an_numerator_that_is_greater_than
 
 
 
+TEST(SetTimeSignatureNumeratorActionTest, with_an_numerator_that_is_less_than_allowed_raises_an_exception)
+{
+   try
+   {
+      TimeSignature time_signature(4, Duration());
+      Action::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, 0);
+      set_time_signature_numerator_action.execute();
+   }
+   catch (std::invalid_argument const &e)
+   {
+      EXPECT_EQ(e.what(), std::string("Cannot set a time signature's numerator to <= 0"));
+   }
+   catch (...)
+   {
+      FAIL() << "Expected std::invalid_argument";
+   }
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
