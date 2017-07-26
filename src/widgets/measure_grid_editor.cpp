@@ -10,6 +10,7 @@
 #include <fullscore/components/measure_grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/measure_grid_helper.h>
+#include <cmath>
 
 
 
@@ -108,10 +109,12 @@ void UIMeasureGridEditor::on_draw()
          CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.7), 2.0);
 
-   // left bar
+   // left bar (blinking)
+
+   ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
    al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
          CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
-         color::white, 3.0);
+         cursor_color, 3.0);
 
    // draw a hilight box at the focused note
    if (note)
