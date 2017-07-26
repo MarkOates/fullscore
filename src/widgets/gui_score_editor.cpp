@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/gui_score_editor.h>
+#include <fullscore/widgets/gui_score_editor.h>
 
 #include <allegro_flare/allegro_flare.h>
 
@@ -14,8 +14,8 @@
 
 
 
-GUIScoreEditor::RenderingDependencies::RenderingDependencies()
-   : reference_cursor(nullptr)
+GUIScoreEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
+   : reference_cursor(reference_cursor)
 {}
 
 
@@ -29,12 +29,12 @@ void GUIScoreEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor
 
 
 
-GUIScoreEditor::GUIScoreEditor(UIWidget *parent)
+GUIScoreEditor::GUIScoreEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(0, 0)
    , playback_control()
-   , rendering_dependencies()
+   , rendering_dependencies(reference_cursor)
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)

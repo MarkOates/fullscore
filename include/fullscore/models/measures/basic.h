@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <fullscore/transforms/stack.h>
+#include <fullscore/transforms/stack_transform.h>
 #include <fullscore/models/measures/base.h>
 
 
@@ -23,7 +23,6 @@ namespace Measure
    public:
       Transform::Stack *genesis;
       bool refresh();
-      bool references_source();
 
       Basic();
       Basic(std::vector<Note> notes);

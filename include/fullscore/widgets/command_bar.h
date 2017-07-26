@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_COMMAND_BAR
-#define __FULLSCORE_COMMAND_BAR
-
+#pragma once
 
 
 
 #include <allegro_flare/allegro_flare.h>
-
 
 
 
@@ -24,4 +21,3 @@ public:
 
 
 
-#endif

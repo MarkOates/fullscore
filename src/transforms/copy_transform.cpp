@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/copy.h>
+#include <fullscore/transforms/copy_transform.h>
 
 #include <fullscore/models/measure_grid.h>
 #include <sstream>

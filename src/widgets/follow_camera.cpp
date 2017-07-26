@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/follow_camera.h>
+#include <fullscore/widgets/follow_camera.h>
 
 #include <cmath>
 

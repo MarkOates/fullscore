@@ -5,7 +5,7 @@
 
 
 
-#include <fullscore/reference_cursor.h>
+#include <fullscore/models/reference_cursor.h>
 
 #include <fullscore/models/measure_grid.h>
 

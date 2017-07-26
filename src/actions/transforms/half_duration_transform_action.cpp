@@ -4,8 +4,8 @@
 
 #include <fullscore/actions/transforms/half_duration_transform_action.h>
 
-#include <fullscore/transforms/half_duration.h>
 #include <fullscore/models/note.h>
+#include <fullscore/transforms/half_duration_transform.h>
 
 
 

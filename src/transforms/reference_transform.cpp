@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/reference.h>
+#include <fullscore/transforms/reference_transform.h>
 
 #include <fullscore/models/measure_grid.h>
 #include <sstream>

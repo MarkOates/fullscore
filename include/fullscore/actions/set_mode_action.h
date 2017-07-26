@@ -1,13 +1,10 @@
-#ifndef __FULLSCORE_SET_MODE_ACTION_HEADER
-#define __FULLSCORE_SET_MODE_ACTION_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/actions/action_base.h>
 
-#include <fullscore/gui_score_editor.h>
-
+#include <fullscore/widgets/gui_score_editor.h>
 
 
 
@@ -31,5 +28,3 @@ namespace Action
 
 
 
-
-#endif

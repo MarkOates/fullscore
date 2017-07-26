@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/command_bar.h>
+#include <fullscore/widgets/command_bar.h>
 
 
 

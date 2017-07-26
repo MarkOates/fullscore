@@ -7,9 +7,8 @@
 #include <allegro_flare/gui/widget.h>
 #include <allegro_flare/placement2d.h>
 #include <fullscore/models/measure_grid.h>
-#include <fullscore/music_engraver.h>
-#include <fullscore/playback_control.h>
-#include <fullscore/playback_device_interface.h>
+#include <fullscore/models/playback_control.h>
+#include <fullscore/services/music_engraver.h>
 
 
 
@@ -23,7 +22,7 @@ public:
    class RenderingDependencies
    {
    public:
-      RenderingDependencies();
+      RenderingDependencies(ReferenceCursor *reference_cursor);
 
       ReferenceCursor *reference_cursor;
       void set_reference_cursor(ReferenceCursor *reference_cursor);
@@ -70,7 +69,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   GUIScoreEditor(UIWidget *parent);
+   GUIScoreEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
    void on_draw() override;
    void on_timer() override;
    Measure::Base *get_measure_at_cursor();

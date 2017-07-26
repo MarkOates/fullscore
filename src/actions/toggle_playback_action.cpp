@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/toggle_playback_action.h>
 
-#include <fullscore/playback_control.h>
+#include <fullscore/models/playback_control.h>
 
 
 

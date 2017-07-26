@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/transforms/retrograde_action.h>
 
-#include <fullscore/transforms/retrograde.h>
+#include <fullscore/transforms/retrograde_transform.h>
 #include <fullscore/models/note.h>
 
 
