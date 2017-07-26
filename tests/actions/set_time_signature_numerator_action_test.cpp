@@ -22,6 +22,25 @@ TEST(SetTimeSignatureNumeratorActionTest, sets_the_time_signatures_numerator)
 
 
 
+TEST(SetTimeSignatureNumeratorActionTest, with_an_invalid_time_signature_raises_an_exception)
+{
+   try
+   {
+      Action::SetTimeSignatureNumerator set_time_signature_numerator_action(nullptr, 3);
+      set_time_signature_numerator_action.execute();
+   }
+   catch (std::invalid_argument const &e)
+   {
+      EXPECT_EQ(e.what(), std::string("Cannot set time signature's numerator on a nullprt time_signature"));
+   }
+   catch (...)
+   {
+      FAIL() << "Expected std::invalid_argument";
+   }
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
