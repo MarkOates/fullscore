@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/playback_control.h>
+#include <fullscore/models/playback_control.h>
 
 #include <fullscore/helpers/duration_helper.h>
 
