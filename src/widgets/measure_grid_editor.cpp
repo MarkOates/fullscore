@@ -59,16 +59,13 @@ void UIMeasureGridEditor::on_draw()
    float pt, pr, pb, pl;
    UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
    sa->get_padding(&pt, &pr, &pb, &pl);
-   al_draw_rounded_rectangle(-pl, -pt, place.size.x+pr, place.size.y+pb, 6, 6, color::color(color::black, state == STATE_ACTIVE ? 0.7 : 0.1), 2.0);
 
    if (state == STATE_ACTIVE)
    {
-      // draw the inner-rectangle for the grid
-      al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::blanchedalmond, 0.2));
-
       // draw a background for the score
-      al_draw_filled_rectangle(-30, -30,
-         measure_grid_real_width + 30, measure_grid_real_height + 30,
+      float padding = 30;
+      al_draw_filled_rectangle(-padding, -padding,
+         measure_grid_real_width + padding, measure_grid_real_height + padding,
          color::color(color::blanchedalmond, 0.2));
    }
 
