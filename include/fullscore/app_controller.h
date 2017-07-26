@@ -6,12 +6,12 @@
 
 #include <fullscore/actions/action_base.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/models/reference_cursor.h>
 #include <fullscore/widgets/measure_inspector.h>
 #include <fullscore/command_bar.h>
 #include <fullscore/follow_camera.h>
 #include <fullscore/gui_score_editor.h>
 #include <fullscore/playback_device_generic.h>
-#include <fullscore/reference_cursor.h>
 
 
 
