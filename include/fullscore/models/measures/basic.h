@@ -23,7 +23,6 @@ namespace Measure
    public:
       Transform::Stack *genesis;
       bool refresh();
-      bool references_source();
 
       Basic();
       Basic(std::vector<Note> notes);

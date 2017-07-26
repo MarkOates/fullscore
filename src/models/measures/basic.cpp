@@ -47,13 +47,6 @@ bool Measure::Basic::refresh()
 
 
 
-bool Measure::Basic::references_source()
-{
-   return genesis && genesis->includes_reference();
-}
-
-
-
 bool Measure::Basic::set_notes(std::vector<Note> notes)
 {
    this->notes = notes;
