@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/move_cursor_up_action.h>
 
-#include <fullscore/widgets/gui_score_editor.h>
+#include <fullscore/widgets/measure_grid_editor.h>
 
 
 

@@ -15,10 +15,10 @@ namespace Action
    {
    private:
       AppController *app_controller;
-      UIMeasureGridEditor *gui_score_editor;
+      UIMeasureGridEditor *measure_grid_editor;
 
    public:
-      SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *gui_score_editor);
+      SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *measure_grid_editor);
       ~SetCurrentUIMeasureGridEditor();
 
       bool execute() override;
