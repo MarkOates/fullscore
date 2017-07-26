@@ -14,14 +14,14 @@
 
 
 
-GUIScoreEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
+UIMeasureGridEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
    : reference_cursor(reference_cursor)
 {}
 
 
 
 
-void GUIScoreEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
+void UIMeasureGridEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
 {
    this->reference_cursor = reference_cursor;
 }
@@ -29,9 +29,9 @@ void GUIScoreEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor
 
 
 
-GUIScoreEditor::GUIScoreEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
+UIMeasureGridEditor::UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "GUIScoreEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
+   : UIWidget(parent, "UIMeasureGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , measure_grid(0, 0)
    , playback_control()
    , rendering_dependencies(reference_cursor)
@@ -49,7 +49,7 @@ GUIScoreEditor::GUIScoreEditor(UIWidget *parent, ReferenceCursor *reference_curs
 
 
 
-void GUIScoreEditor::on_draw()
+void UIMeasureGridEditor::on_draw()
 {
    // get_width_of_score
    float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
@@ -158,7 +158,7 @@ void GUIScoreEditor::on_draw()
 
 
 
-void GUIScoreEditor::on_timer()
+void UIMeasureGridEditor::on_timer()
 {
    playback_control.update(Framework::time_now);
 
@@ -172,7 +172,7 @@ void GUIScoreEditor::on_timer()
 
 
 
-Measure::Base *GUIScoreEditor::get_measure_at_cursor()
+Measure::Base *UIMeasureGridEditor::get_measure_at_cursor()
 {
    return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
@@ -180,7 +180,7 @@ Measure::Base *GUIScoreEditor::get_measure_at_cursor()
 
 
 
-Note *GUIScoreEditor::get_note_at_cursor()
+Note *UIMeasureGridEditor::get_note_at_cursor()
 {
    Measure::Base *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
@@ -194,7 +194,7 @@ Note *GUIScoreEditor::get_note_at_cursor()
 
 
 
-float GUIScoreEditor::get_measure_cursor_real_x()
+float UIMeasureGridEditor::get_measure_cursor_real_x()
 {
    return MeasureGridHelper::get_length_to_measure(measure_grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
 }
@@ -202,7 +202,7 @@ float GUIScoreEditor::get_measure_cursor_real_x()
 
 
 
-float GUIScoreEditor::get_measure_cursor_real_y()
+float UIMeasureGridEditor::get_measure_cursor_real_y()
 {
    return measure_cursor_y * STAFF_HEIGHT;
 }
@@ -210,7 +210,7 @@ float GUIScoreEditor::get_measure_cursor_real_y()
 
 
 
-float GUIScoreEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
+float UIMeasureGridEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
 {
    float sum = 0;
    std::vector<Note> notes;
@@ -226,7 +226,7 @@ float GUIScoreEditor::get_measure_length_to_note(Measure::Base *measure, int not
 
 
 
-float GUIScoreEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
+float UIMeasureGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    if (!m) return 0;
    float sum = 0;
@@ -238,7 +238,7 @@ float GUIScoreEditor::get_measure_width(Measure::Base *m)  // TODO: should proba
 
 
 
-int GUIScoreEditor::move_measure_cursor_x(int delta)
+int UIMeasureGridEditor::move_measure_cursor_x(int delta)
 {
    int num_measures = measure_grid.get_num_measures();
    measure_cursor_x = limit<int>(0, num_measures-1, measure_cursor_x + delta);
@@ -248,7 +248,7 @@ int GUIScoreEditor::move_measure_cursor_x(int delta)
 
 
 
-int GUIScoreEditor::move_measure_cursor_y(int delta)
+int UIMeasureGridEditor::move_measure_cursor_y(int delta)
 {
    int num_staves = measure_grid.get_num_staves();
    measure_cursor_y = limit<int>(0, num_staves-1, measure_cursor_y + delta);
@@ -258,7 +258,7 @@ int GUIScoreEditor::move_measure_cursor_y(int delta)
 
 
 
-int GUIScoreEditor::move_note_cursor_x(int delta)
+int UIMeasureGridEditor::move_note_cursor_x(int delta)
 {
    Measure::Base *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
    if (!current_measure)
@@ -275,7 +275,7 @@ int GUIScoreEditor::move_note_cursor_x(int delta)
 
 
 
-void GUIScoreEditor::toggle_edit_mode_target()
+void UIMeasureGridEditor::toggle_edit_mode_target()
 {
    if (edit_mode_target == NOTE_TARGET) edit_mode_target = MEASURE_TARGET;
    else if (edit_mode_target == MEASURE_TARGET) edit_mode_target = NOTE_TARGET;
@@ -284,7 +284,7 @@ void GUIScoreEditor::toggle_edit_mode_target()
 
 
 
-bool GUIScoreEditor::is_measure_target_mode()
+bool UIMeasureGridEditor::is_measure_target_mode()
 {
    return edit_mode_target == MEASURE_TARGET;
 }
@@ -292,7 +292,7 @@ bool GUIScoreEditor::is_measure_target_mode()
 
 
 
-bool GUIScoreEditor::is_note_target_mode()
+bool UIMeasureGridEditor::is_note_target_mode()
 {
    return edit_mode_target == NOTE_TARGET;
 }
@@ -300,7 +300,7 @@ bool GUIScoreEditor::is_note_target_mode()
 
 
 
-void GUIScoreEditor::set_state(state_t new_state)
+void UIMeasureGridEditor::set_state(state_t new_state)
 {
    if (new_state == state) return;
 

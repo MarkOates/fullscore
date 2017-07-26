@@ -17,11 +17,11 @@ namespace Action
    class SetCommandMode : public Base
    {
    private:
-      GUIScoreEditor *score_editor;
+      UIMeasureGridEditor *score_editor;
       UICommandBar *command_bar;
 
    public:
-      SetCommandMode(GUIScoreEditor *score_editor, UICommandBar *command_bar);
+      SetCommandMode(UIMeasureGridEditor *score_editor, UICommandBar *command_bar);
       ~SetCommandMode();
       bool execute() override;
    };

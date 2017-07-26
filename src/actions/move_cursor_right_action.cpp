@@ -9,7 +9,7 @@
 
 
 
-Action::MoveCursorRight::MoveCursorRight(GUIScoreEditor *score_editor)
+Action::MoveCursorRight::MoveCursorRight(UIMeasureGridEditor *score_editor)
    : Base("move_cursor_right")
    , score_editor(score_editor)
 {

@@ -7,19 +7,19 @@
 
 
 class AppController;
-class GUIScoreEditor;
+class UIMeasureGridEditor;
 
 namespace Action
 {
-   class SetCurrentGUIScoreEditor : public Base
+   class SetCurrentUIMeasureGridEditor : public Base
    {
    private:
       AppController *app_controller;
-      GUIScoreEditor *gui_score_editor;
+      UIMeasureGridEditor *gui_score_editor;
 
    public:
-      SetCurrentGUIScoreEditor(AppController *app_controller, GUIScoreEditor *gui_score_editor);
-      ~SetCurrentGUIScoreEditor();
+      SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *gui_score_editor);
+      ~SetCurrentUIMeasureGridEditor();
 
       bool execute() override;
    };

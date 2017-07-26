@@ -111,7 +111,7 @@ void AppController::primary_timer_func()
 
 
 
-std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mode, UIMeasureGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
@@ -123,7 +123,7 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
    }
 
-   if (mode == GUIScoreEditor::NORMAL_MODE)
+   if (mode == UIMeasureGridEditor::NORMAL_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
@@ -137,8 +137,8 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
       case ALLEGRO_KEY_X:
-         if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
-         else if (edit_mode_target == GUIScoreEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
+         if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
+         else if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
@@ -160,13 +160,13 @@ std::string AppController::find_action_identifier(GUIScoreEditor::mode_t mode, G
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       }
 
-   if (mode == GUIScoreEditor::COMMAND_MODE)
+   if (mode == UIMeasureGridEditor::COMMAND_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
 
-   if (mode == GUIScoreEditor::INSERT_MODE)
+   if (mode == UIMeasureGridEditor::INSERT_MODE)
       // no implementation
       ;
 
@@ -187,7 +187,7 @@ Action::Base *AppController::create_action(std::string action_name)
    if (action_name == "create_new_score_editor")
       action = new Action::CreateNewScoreEditor(this);
    else if (action_name == "set_current_gui_score_editor")
-      action = new Action::SetCurrentGUIScoreEditor(this, get_next_gui_score_editor());
+      action = new Action::SetCurrentUIMeasureGridEditor(this, get_next_gui_score_editor());
    else if (action_name == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
@@ -377,8 +377,8 @@ void AppController::key_down_func()
 {
    UIScreen::key_down_func();
 
-   auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : GUIScoreEditor::mode_t::NONE;
-   auto target        = current_gui_score_editor ? current_gui_score_editor->edit_mode_target : GUIScoreEditor::edit_mode_target_t::NONE_TARGET;
+   auto mode          = current_gui_score_editor ? current_gui_score_editor->mode : UIMeasureGridEditor::mode_t::NONE;
+   auto target        = current_gui_score_editor ? current_gui_score_editor->edit_mode_target : UIMeasureGridEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -460,12 +460,12 @@ void AppController::on_message(UIWidget *sender, std::string message)
 
 
 
-GUIScoreEditor *AppController::create_new_score_editor(std::string name)
+UIMeasureGridEditor *AppController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
 
-   GUIScoreEditor *new_gui_score_editor = new GUIScoreEditor(&follow_camera, &reference_cursor);
+   UIMeasureGridEditor *new_gui_score_editor = new UIMeasureGridEditor(&follow_camera, &reference_cursor);
    new_gui_score_editor->measure_grid = MeasureGridFactory::create(name);
 
    new_gui_score_editor->place.position = vec2d(new_x, new_y);
@@ -481,12 +481,12 @@ GUIScoreEditor *AppController::create_new_score_editor(std::string name)
 
 
 
-bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
+bool AppController::set_current_gui_score_editor(UIMeasureGridEditor *editor)
 {
    if (std::find(gui_score_editors.begin(), gui_score_editors.end(), editor) == gui_score_editors.end()) return false;
 
    for (auto &e : gui_score_editors)
-      e->set_state(e == editor ? GUIScoreEditor::STATE_ACTIVE : GUIScoreEditor::STATE_INACTIVE);
+      e->set_state(e == editor ? UIMeasureGridEditor::STATE_ACTIVE : UIMeasureGridEditor::STATE_INACTIVE);
 
    current_gui_score_editor = editor;
 
@@ -499,11 +499,11 @@ bool AppController::set_current_gui_score_editor(GUIScoreEditor *editor)
 
 
 
-GUIScoreEditor *AppController::get_next_gui_score_editor()
+UIMeasureGridEditor *AppController::get_next_gui_score_editor()
 {
    if (!current_gui_score_editor || gui_score_editors.size() <= 1) return nullptr;
 
-   std::vector<GUIScoreEditor *>::iterator it = std::find(gui_score_editors.begin(), gui_score_editors.end(), current_gui_score_editor);
+   std::vector<UIMeasureGridEditor *>::iterator it = std::find(gui_score_editors.begin(), gui_score_editors.end(), current_gui_score_editor);
 
    if (it == gui_score_editors.end()) return nullptr; // does not exist in list
    if (it == gui_score_editors.end()-1) return gui_score_editors.front(); // loop back to first element

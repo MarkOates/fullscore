@@ -9,7 +9,7 @@
 
 
 
-Action::ToggleEditModeTarget::ToggleEditModeTarget(GUIScoreEditor *gui_score_editor)
+Action::ToggleEditModeTarget::ToggleEditModeTarget(UIMeasureGridEditor *gui_score_editor)
    : Base("toggle_edit_mode_target")
    , gui_score_editor(gui_score_editor)
 {}

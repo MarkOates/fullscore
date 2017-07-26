@@ -21,8 +21,8 @@ public:
 
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
-   GUIScoreEditor *current_gui_score_editor;
-   std::vector<GUIScoreEditor *> gui_score_editors;
+   UIMeasureGridEditor *current_gui_score_editor;
+   std::vector<UIMeasureGridEditor *> gui_score_editors;
    UICommandBar *command_bar;
    UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
@@ -36,11 +36,11 @@ public:
 
    Action::Base *create_action(std::string action_name);
 
-   std::string find_action_identifier(GUIScoreEditor::mode_t mode, GUIScoreEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::string find_action_identifier(UIMeasureGridEditor::mode_t mode, UIMeasureGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
-   GUIScoreEditor *create_new_score_editor(std::string identifier);
-   bool set_current_gui_score_editor(GUIScoreEditor *editor);
-   GUIScoreEditor *get_next_gui_score_editor();
+   UIMeasureGridEditor *create_new_score_editor(std::string identifier);
+   bool set_current_gui_score_editor(UIMeasureGridEditor *editor);
+   UIMeasureGridEditor *get_next_gui_score_editor();
 };
 
 

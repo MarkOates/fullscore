@@ -8,7 +8,7 @@
 
 
 
-Action::ToggleShowDebugData::ToggleShowDebugData(GUIScoreEditor *gui_score_editor)
+Action::ToggleShowDebugData::ToggleShowDebugData(UIMeasureGridEditor *gui_score_editor)
    : Base("toggle_show_debug_data")
    , gui_score_editor(gui_score_editor)
 {}

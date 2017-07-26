@@ -9,7 +9,7 @@
 
 
 
-Action::ResetPlayback::ResetPlayback(GUIScoreEditor *score_editor)
+Action::ResetPlayback::ResetPlayback(UIMeasureGridEditor *score_editor)
    : Base("reset_playback")
    , score_editor(score_editor)
 {

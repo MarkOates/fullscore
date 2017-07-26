@@ -16,7 +16,7 @@ class ReferenceCursor;
 
 
 
-class GUIScoreEditor : public UIWidget
+class UIMeasureGridEditor : public UIWidget
 {
 public:
    class RenderingDependencies
@@ -69,7 +69,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   GUIScoreEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
+   UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
    void on_draw() override;
    void on_timer() override;
    Measure::Base *get_measure_at_cursor();

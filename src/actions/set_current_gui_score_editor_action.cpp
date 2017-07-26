@@ -9,7 +9,7 @@
 
 
 
-Action::SetCurrentGUIScoreEditor::SetCurrentGUIScoreEditor(AppController *app_controller, GUIScoreEditor *gui_score_editor)
+Action::SetCurrentUIMeasureGridEditor::SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *gui_score_editor)
    : Base("set_current_gui_score_editor")
    , app_controller(app_controller)
    , gui_score_editor(gui_score_editor)
@@ -18,13 +18,13 @@ Action::SetCurrentGUIScoreEditor::SetCurrentGUIScoreEditor(AppController *app_co
 
 
 
-Action::SetCurrentGUIScoreEditor::~SetCurrentGUIScoreEditor()
+Action::SetCurrentUIMeasureGridEditor::~SetCurrentUIMeasureGridEditor()
 {}
 
 
 
 
-bool Action::SetCurrentGUIScoreEditor::execute()
+bool Action::SetCurrentUIMeasureGridEditor::execute()
 {
    if (!app_controller || !gui_score_editor) return false;
 
