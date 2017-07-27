@@ -75,7 +75,7 @@ AppController::AppController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    create_new_score_editor("");
-   set_current_measure_grid_editor(create_new_score_editor("big_score"));
+   set_current_measure_grid_editor(create_new_score_editor("full_score"));
 
    current_measure_grid_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
    Measure::Base *m = current_measure_grid_editor->measure_grid.get_measure(0, 0);
