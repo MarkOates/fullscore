@@ -50,7 +50,7 @@ obj/%.o: src/%.cpp
 	@mkdir -p $(@D)
 	@printf "compiling object for \e[1m\e[34m$<\033[0m..."
 	@g++ -c -std=gnu++11 -Wall -Wuninitialized -Weffc++ $< -o $@ -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
-	@echo "done."
+	@echo "done. object at \033[1m\033[32m$@\033[0m"
 
 
 
