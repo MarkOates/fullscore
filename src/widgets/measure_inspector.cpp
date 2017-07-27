@@ -66,7 +66,6 @@ void UIMeasureInspector::on_draw()
 {
    UIStyleAssets::draw_outset(0, 0, place.size.x, place.size.y);
 
-   Measure::Base *measure = get_measure();
    std::string str = _get_measure_string();
 
    ALLEGRO_FONT *font = UIStyleAssets::get_text_font();

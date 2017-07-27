@@ -52,7 +52,7 @@ void MeasureRenderComponent::render()
    else if (measure->is_type("static"))
       measure_block_color = color::color(color::dodgerblue, 0.1);
    else if (measure->is_type("basic"))
-      ALLEGRO_COLOR measure_block_color = color::color(color::black, 0.075);
+      measure_block_color = color::color(color::black, 0.075);
 
    al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
          x_pos+measure_width, row_middle_y+staff_height/2,

@@ -39,12 +39,13 @@ UIMeasureGridEditor::UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *refe
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)
+   , edit_mode_target(MEASURE_TARGET)
+   , mode(NORMAL_MODE)
+   , state(STATE_INACTIVE) //TODO insure STATE_INACTIVE is a good initizliation value
    , music_engraver()
    , showing_debug_data(false)
    , STAFF_HEIGHT(80)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
-   , edit_mode_target(MEASURE_TARGET)
-   , mode(NORMAL_MODE)
 {}
 
 

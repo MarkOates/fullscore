@@ -13,8 +13,8 @@ class MeasureGrid;
 class MeasureGridFileConverter
 {
 private:
-   std::string filename;
    MeasureGrid *measure_grid;
+   std::string filename;
 
 public:
    MeasureGridFileConverter(MeasureGrid *measure_grid, std::string filename);
