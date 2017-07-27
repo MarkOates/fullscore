@@ -15,13 +15,9 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
 
    // twinkle twinkle, little star
    measure_grid.set_measure(0,0, new Measure::Basic({ Note(0), Note(0), Note(4), Note(4) }));
-   //measure_grid.get_measure(0,0)->set_notes({ Note(0), Note(0), Note(4), Note(4) });
    measure_grid.set_measure(1,0, new Measure::Basic({ Note(5), Note(5), Note(4, Duration::HALF) }));
-   //measure_grid.get_measure(1,0)->set_notes({ Note(5), Note(5), Note(4, Duration::HALF) });
    measure_grid.set_measure(2,0, new Measure::Basic({ Note(3), Note(3), Note(2), Note(2) }));
-   //measure_grid.get_measure(2,0)->set_notes({ Note(3), Note(3), Note(2), Note(2) });
    measure_grid.set_measure(3,0, new Measure::Basic({ Note(1), Note(1), Note(0, Duration::HALF) }));
-   //measure_grid.get_measure(3,0)->set_notes({ Note(1), Note(1), Note(0, Duration::HALF) });
 
    for (int i=0; i<measure_grid.get_num_staves(); i++)
       measure_grid.set_voice_name(i, tostring("Voice ") + tostring(i));
@@ -43,10 +39,58 @@ MeasureGrid MeasureGridFactory::big_score()
 
 
 
+MeasureGrid MeasureGridFactory::full_score()
+{
+   std::vector<std::string> voices = {
+      "Flute I",
+      "Flute II",
+      "Flute III",
+      "Oboe",
+      "English Horn",
+      "Clarinet I",
+      "Clarinet II",
+      "Clarinet III",
+      "Bassoon I",
+      "Bassoon II",
+      "Trumpet I",
+      "Trumpet II",
+      "Trumpet III",
+      "F Horn I",
+      "F Horn II",
+      "F Horn III",
+      "F Horn IV",
+      "Trombone I",
+      "Trombone II",
+      "Trombone III",
+      "Bass Trombone",
+      "Tuba",
+      "Percussion I",
+      "Percussion II",
+      "Percussion III",
+      "Piano {Grand Staff}",
+      "Harp {Grand Staff}",
+      "Violin I",
+      "Violin II",
+      "Viola",
+      "Cello",
+      "Bass",
+   };
+
+   MeasureGrid measure_grid(20, voices.size());
+
+   for (int i=0; i<voices.size(); i++)
+      measure_grid.set_voice_name(i, voices[i]);
+
+   return measure_grid;
+}
+
+
+
 MeasureGrid MeasureGridFactory::create(std::string identifier)
 {
    if (identifier == "big_score") return big_score();
    if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
+   if (identifier == "full_score") return full_score();
 
    std::cout << "Could not find score " << identifier << std::endl;
    return MeasureGrid(4, 1);

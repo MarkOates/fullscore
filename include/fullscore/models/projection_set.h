@@ -11,8 +11,8 @@
 class ProjectionSet
 {
 public:
-   int extension;
    std::vector<Pitch> pitches;
+   int extension;
 
    ProjectionSet(std::vector<Pitch> pitches, int extension);
 };

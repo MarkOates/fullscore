@@ -36,8 +36,6 @@ TEST(MeasureGridHelperTest, returns_the_length_to_the_end_of_the_grid_when_measu
 
 TEST(MeasureGridHelperTest, returns_the_length_to_the_measure_with_non_4_4_time_signatures)
 {
-   int measure_num = 0;
-   float expected_length = 0;
    MeasureGrid measure_grid(10, 1);
 
    measure_grid.set_time_signature(0, TimeSignature(3, Duration(Duration::QUARTER, 0)));

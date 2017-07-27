@@ -12,8 +12,8 @@
 PlaybackControl::PlaybackControl()
    : position(0)
    , playing(false)
-   , tempo_bpm(120)
    , tempo_duration(4) // quarter note
+   , tempo_bpm(120)
 {}
 
 

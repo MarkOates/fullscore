@@ -18,9 +18,9 @@ Measure::Basic::Basic()
 
 Measure::Basic::Basic(std::vector<Note> notes)
    : Base("basic")
+   , notes()
    , genesis(nullptr)
    , extension(12)
-   , notes()
 {
    set_notes(notes);
 }
