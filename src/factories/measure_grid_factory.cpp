@@ -15,13 +15,9 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
 
    // twinkle twinkle, little star
    measure_grid.set_measure(0,0, new Measure::Basic({ Note(0), Note(0), Note(4), Note(4) }));
-   //measure_grid.get_measure(0,0)->set_notes({ Note(0), Note(0), Note(4), Note(4) });
    measure_grid.set_measure(1,0, new Measure::Basic({ Note(5), Note(5), Note(4, Duration::HALF) }));
-   //measure_grid.get_measure(1,0)->set_notes({ Note(5), Note(5), Note(4, Duration::HALF) });
    measure_grid.set_measure(2,0, new Measure::Basic({ Note(3), Note(3), Note(2), Note(2) }));
-   //measure_grid.get_measure(2,0)->set_notes({ Note(3), Note(3), Note(2), Note(2) });
    measure_grid.set_measure(3,0, new Measure::Basic({ Note(1), Note(1), Note(0, Duration::HALF) }));
-   //measure_grid.get_measure(3,0)->set_notes({ Note(1), Note(1), Note(0, Duration::HALF) });
 
    for (int i=0; i<measure_grid.get_num_staves(); i++)
       measure_grid.set_voice_name(i, tostring("Voice ") + tostring(i));
