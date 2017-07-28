@@ -344,7 +344,13 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "move_cursor_right")
       action = new Action::MoveCursorRight(current_measure_grid_editor);
    else if (action_name == "yank_measure_to_buffer")
-      action = new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure);
+   {
+      action = new Action::Queue("yank_measure_to_buffer and set_reference_measure");
+      static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
+      static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&reference_cursor,
+            &current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y)
+         );
+   }
    else if (action_name == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
    else if (action_name == "toggle_edit_mode_target")
