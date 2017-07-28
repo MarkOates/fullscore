@@ -77,6 +77,8 @@ AppController::AppController(Display *display)
    create_new_score_editor("");
    set_current_measure_grid_editor(create_new_score_editor("full_score"));
 
+   reference_cursor.set_position(&current_measure_grid_editor->measure_grid, 0, 0);
+
    current_measure_grid_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
    Measure::Base *m = current_measure_grid_editor->measure_grid.get_measure(0, 0);
    if (!m) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 0)");

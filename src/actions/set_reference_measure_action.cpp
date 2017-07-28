@@ -28,6 +28,8 @@ Action::SetReferenceMeasure::~SetReferenceMeasure()
 bool Action::SetReferenceMeasure::execute()
 {
    if (!measure_grid) throw std::runtime_error("Cannot set Measure::Reference on a nullptr measure_grid");
+   // this next line has been commented out because it is probably not needed
+   //if (!referenced_measure_grid) throw std::runtime_error("Cannot set Measure::Reference on a nullptr reference_measure_grid");
 
    if (measure_grid == referenced_measure_grid && measure_x == referenced_measure_x && staff_y == referenced_staff_y)
       throw std::runtime_error("a Measure::Reference cannot reference itself");
