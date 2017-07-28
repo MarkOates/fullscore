@@ -17,6 +17,8 @@ Measure::Reference::Reference(MeasureGrid *measure_grid, int measure_x, int staf
 
 std::vector<Note> Measure::Reference::get_notes_copy()
 {
+   if (!measure_grid) return {};
+
    // TODO: this could be a dead pointer if it is deleted externally
    Measure::Base *referenced_measure = measure_grid->get_measure(measure_x, staff_y);
    if (referenced_measure) return referenced_measure->get_notes_copy();
@@ -27,6 +29,8 @@ std::vector<Note> Measure::Reference::get_notes_copy()
 
 Measure::Base *Measure::Reference::get_referenced_measure()
 {
+   if (!measure_grid) return nullptr;
+
    return measure_grid->get_measure(measure_x, staff_y);
 }
 
@@ -50,7 +54,7 @@ bool Measure::Reference::set_notes(std::vector<Note> notes)
 
 std::vector<Note> *Measure::Reference::get_notes_pointer()
 {
-   return nullptr;
+   return nullptr; //TODO ensure all calls to get_notes_pointer() check for validity
 }
 
 
