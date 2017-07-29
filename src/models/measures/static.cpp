@@ -3,10 +3,12 @@
 
 #include <fullscore/models/measures/static.h>
 
+#include <fullscore/models/measure.h>
+
 
 
 Measure::Static::Static()
-   : Base(MEASURE_TYPE_IDENTIFIER_STATIC)
+   : Base(Measure::TYPE_IDENTIFIER_STATIC)
 {}
 
 

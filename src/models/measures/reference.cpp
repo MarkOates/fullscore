@@ -2,12 +2,14 @@
 
 
 #include <fullscore/models/measures/reference.h>
+
+#include <fullscore/models/measure.h>
 #include <fullscore/models/measure_grid.h>
 
 
 
 Measure::Reference::Reference(MeasureGrid *measure_grid, int measure_x, int staff_y)
-   : Base(MEASURE_TYPE_IDENTIFIER_REFERENCE)
+   : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
    , measure_grid(measure_grid)
    , measure_x(measure_x)
    , staff_y(staff_y)

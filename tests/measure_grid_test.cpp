@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include <fullscore/models/measure.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/models/note.h>
 
@@ -57,7 +58,7 @@ TEST(MeasureGridTest, sets_and_gets_a_measure_to_a_coordinate)
 
    Measure::Base *retrieved_measure = measure_grid.get_measure(3, 7);
    ASSERT_NE(nullptr, retrieved_measure);
-   ASSERT_TRUE(retrieved_measure->is_type(MEASURE_TYPE_IDENTIFIER_BASIC));
+   ASSERT_TRUE(retrieved_measure->is_type(Measure::TYPE_IDENTIFIER_BASIC));
 
    int expected_id = basic_measure->get_id();
    int returned_id = retrieved_measure->get_id();

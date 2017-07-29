@@ -3,13 +3,14 @@
 
 #include <fullscore/models/measures/basic.h>
 
+#include <fullscore/models/measure.h>
 #include <fullscore/models/note.h>
 #include <allegro_flare/useful.h>
 
 
 
 Measure::Basic::Basic()
-   : Base(MEASURE_TYPE_IDENTIFIER_BASIC)
+   : Base(Measure::TYPE_IDENTIFIER_BASIC)
    , genesis(nullptr)
    , extension(12)
 {}
@@ -17,7 +18,7 @@ Measure::Basic::Basic()
 
 
 Measure::Basic::Basic(std::vector<Note> notes)
-   : Base(MEASURE_TYPE_IDENTIFIER_BASIC)
+   : Base(Measure::TYPE_IDENTIFIER_BASIC)
    , notes()
    , genesis(nullptr)
    , extension(12)

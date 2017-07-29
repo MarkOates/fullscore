@@ -3,13 +3,14 @@
 
 #include <fullscore/models/measures/stack.h>
 
+#include <fullscore/models/measure.h>
 #include <fullscore/models/note.h>
 #include <allegro_flare/useful.h>
 
 
 
 Measure::Stack::Stack()
-   : Base(MEASURE_TYPE_IDENTIFIER_STACK)
+   : Base(Measure::TYPE_IDENTIFIER_STACK)
    , transformations()
 {}
 
