@@ -4,9 +4,6 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/transforms/reference_transform.h>
-#include <fullscore/transforms/double_duration_transform.h>
-
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
 #include <fullscore/actions/transforms/clear_measure_transform_action.h>
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
@@ -54,9 +51,7 @@
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
-
 #include <fullscore/factories/measure_grid_factory.h>
-
 #include <fullscore/models/measure.h>
 
 
