@@ -70,9 +70,6 @@ AppController::AppController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   follow_camera.target.position.y = 200;
-   follow_camera.target.position.x = 200;
-
    set_current_measure_grid_editor(create_new_score_editor("full_score"));
 }
 
