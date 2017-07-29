@@ -34,6 +34,7 @@
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
+#include <fullscore/actions/paste_measure_from_buffer_to_measure_grid_coordinates_action.h>
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_measure_grid_action.h>
@@ -353,7 +354,28 @@ Action::Base *AppController::create_action(std::string action_name)
          );
    }
    else if (action_name == "paste_measure_from_buffer")
-      action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
+   {
+      Measure::Base *measure_at_cursor = current_measure_grid_editor->get_measure_at_cursor();
+      if (measure_at_cursor && measure_at_cursor->get_type() == Measure::TYPE_IDENTIFIER_BASIC)
+      {
+         action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
+      }
+      else
+      {
+         // a measure already exists here.  Delete it, create a _new_ basic measure, and then paste the contents into that measure
+         Action::Queue *action_as_queue = new Action::Queue("stack: delete_measure, set_basic_measure, paste_measure_from_buffer_to_measure_grid_coordinates");
+
+         action_as_queue->add_action(new Action::DeleteMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y));
+         action_as_queue->add_action(new Action::SetBasicMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y));
+         action_as_queue->add_action(new Action::PasteMeasureFromBufferToMeasureGridCoordinates(&yank_measure_buffer,
+               &current_measure_grid_editor->measure_grid,
+               current_measure_grid_editor->measure_cursor_x,
+               current_measure_grid_editor->measure_cursor_y)
+            );
+
+         action = action_as_queue;
+      }
+   }
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_measure_grid_editor);
    else if (action_name == "set_reference_measure")
