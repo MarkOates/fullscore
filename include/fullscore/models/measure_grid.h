@@ -18,11 +18,17 @@ private:
 
    class Row
    {
-   public:
+   private:
       std::string name;
+
+   public:
       std::vector<Measure::Base *> measures;
 
       Row(int num_measures);
+
+      void set_name(std::string name);
+      std::string get_name();
+
       Measure::Base *get_measure(int x_measure);
    };
 

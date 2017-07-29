@@ -8,6 +8,10 @@
 
 
 
+////// MeasureGrid::Row
+
+
+
 MeasureGrid::Row::Row(int num_measures) : measures()
 {
    for (unsigned i=0; i<num_measures; i++) measures.push_back(nullptr);
@@ -20,6 +24,24 @@ Measure::Base *MeasureGrid::Row::get_measure(int x_measure)
    if (x_measure < 0 || x_measure >= measures.size()) return nullptr;
    return measures[x_measure];
 }
+
+
+
+void MeasureGrid::Row::set_name(std::string name)
+{
+   this->name = name;
+}
+
+
+
+std::string MeasureGrid::Row::get_name()
+{
+   return name;
+}
+
+
+
+////// MeasureGrid
 
 
 
@@ -205,7 +227,7 @@ bool MeasureGrid::set_voice_name(int row_number, std::string name)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
-   voices[row_number]->name = name;
+   voices[row_number]->set_name(name);
    return true;
 }
 
@@ -215,7 +237,7 @@ std::string MeasureGrid::get_voice_name(int row_number)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
-   return voices[row_number]->name;
+   return voices[row_number]->get_name();
 }
 
 
