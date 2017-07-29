@@ -9,7 +9,7 @@
 
 
 Measure::Basic::Basic()
-   : Base("basic")
+   : Base(MEASURE_TYPE_IDENTIFIER_BASIC)
    , genesis(nullptr)
    , extension(12)
 {}
@@ -17,7 +17,7 @@ Measure::Basic::Basic()
 
 
 Measure::Basic::Basic(std::vector<Note> notes)
-   : Base("basic")
+   : Base(MEASURE_TYPE_IDENTIFIER_BASIC)
    , notes()
    , genesis(nullptr)
    , extension(12)

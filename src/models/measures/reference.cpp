@@ -7,7 +7,7 @@
 
 
 Measure::Reference::Reference(MeasureGrid *measure_grid, int measure_x, int staff_y)
-   : Base("reference")
+   : Base(MEASURE_TYPE_IDENTIFIER_REFERENCE)
    , measure_grid(measure_grid)
    , measure_x(measure_x)
    , staff_y(staff_y)

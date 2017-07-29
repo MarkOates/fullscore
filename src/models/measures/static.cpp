@@ -6,7 +6,7 @@
 
 
 Measure::Static::Static()
-   : Base("static")
+   : Base(MEASURE_TYPE_IDENTIFIER_STATIC)
 {}
 
 
