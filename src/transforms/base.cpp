@@ -1,9 +1,7 @@
 
 
 
-
 #include <fullscore/transforms/base.h>
-
 
 
 
@@ -14,11 +12,9 @@ Transform::Base::Base(std::string identifier)
 
 
 
-
 Transform::Base::~Base()
 {
 }
-
 
 
 
