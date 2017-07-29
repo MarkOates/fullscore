@@ -86,6 +86,30 @@ TEST(MeasureGridTest, can_delete_a_measure)
 
 
 
+TEST(MeasureGridTest, returns_true_if_coordinates_are_within_the_measure_grid)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(measure_grid.get_num_measures()-1, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, measure_grid.get_num_staves()-1));
+}
+
+
+
+TEST(MeasureGridTest, returns_false_if_coordinates_are_outside_the_measure_grid)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   ASSERT_EQ(false, measure_grid.in_grid_range(-1, 0));
+   ASSERT_EQ(false, measure_grid.in_grid_range(0, -1));
+   ASSERT_EQ(false, measure_grid.in_grid_range(measure_grid.get_num_measures(), 0));
+   ASSERT_EQ(false, measure_grid.in_grid_range(0, measure_grid.get_num_staves()));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

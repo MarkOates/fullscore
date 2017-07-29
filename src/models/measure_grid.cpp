@@ -65,6 +65,16 @@ bool MeasureGrid::delete_measure(int x_measure, int y_staff)
 
 
 
+bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
+{
+   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
+   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
+
+   return true;
+}
+
+
+
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;
