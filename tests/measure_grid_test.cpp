@@ -217,7 +217,19 @@ TEST(MeasureGridTest, when_attempting_to_delete_a_staff_that_is_out_of_bounds__r
 
 TEST(MeasureGridTest, can_append_a_staff)
 {
-   // skip
+   MeasureGrid measure_grid(1, 2);
+
+   measure_grid.set_voice_name(0, "voice 0");
+   measure_grid.set_voice_name(1, "voice 1");
+
+   measure_grid.append_staff();
+
+   std::vector<std::string> expected_voice_name_order = { "voice 0", "voice 1", "" };
+
+   ASSERT_EQ(expected_voice_name_order.size(), measure_grid.get_num_staves());
+
+   for (int i=0; i<expected_voice_name_order.size(); i++)
+      ASSERT_EQ(expected_voice_name_order[i], measure_grid.get_voice_name(i));
 }
 
 
