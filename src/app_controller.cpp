@@ -441,7 +441,7 @@ void AppController::key_char_func()
       catch (const std::runtime_error& e)
       {
          std::cout << "Exception caught while trying to run action "
-                   << action->get_action_name()
+                   << "\"" << action->get_action_name() << "\""
                    << " with the following message \""
                    << e.what()
                    << "\""
