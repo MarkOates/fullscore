@@ -199,6 +199,22 @@ TEST(MeasureGridTest, can_delete_staff)
 
 
 
+TEST(MeasureGridTest, when_attempting_to_delete_a_staff_that_is_out_of_bounds__returns_false)
+{
+   MeasureGrid measure_grid(1, 3);
+
+   measure_grid.set_voice_name(0, "voice 0");
+   measure_grid.set_voice_name(1, "voice 1");
+   measure_grid.set_voice_name(2, "voice 2");
+
+   EXPECT_EQ(false, measure_grid.delete_staff(-1));
+   EXPECT_EQ(false, measure_grid.delete_staff(7));
+
+   ASSERT_EQ(3, measure_grid.get_num_staves());
+}
+
+
+
 TEST(MeasureGridTest, can_append_a_staff)
 {
    // skip
