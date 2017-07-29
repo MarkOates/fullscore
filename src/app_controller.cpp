@@ -4,9 +4,6 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/transforms/reference_transform.h>
-#include <fullscore/transforms/double_duration_transform.h>
-
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
 #include <fullscore/actions/transforms/clear_measure_transform_action.h>
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
@@ -54,10 +51,7 @@
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
-
 #include <fullscore/factories/measure_grid_factory.h>
-
-#include <fullscore/models/measures/static.h>
 #include <fullscore/models/measure.h>
 
 
@@ -76,30 +70,7 @@ AppController::AppController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   create_new_score_editor("");
    set_current_measure_grid_editor(create_new_score_editor("full_score"));
-
-   reference_cursor.set_position(&current_measure_grid_editor->measure_grid, 0, 0);
-
-   current_measure_grid_editor->measure_grid.set_measure(0, 0, new Measure::Basic({Note(2), Note(0), Note(1)}));
-   Measure::Base *m = current_measure_grid_editor->measure_grid.get_measure(0, 0);
-   if (!m) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 0)");
-
-   current_measure_grid_editor->measure_grid.set_measure(0, 1, new Measure::Basic());
-   Measure::Basic *dm = static_cast<Measure::Basic *>(current_measure_grid_editor->measure_grid.get_measure(0, 1));
-   if (!dm) throw std::runtime_error("hmm, ApplicationController not able to set/get a measure from the MeasureGrid (0, 1)");
-
-   Transform::Reference reference_transform(&current_measure_grid_editor->measure_grid, 0, 0);
-   Transform::DoubleDuration double_duration_transform;
-   dm->genesis = new Transform::Stack();
-   dm->genesis->add_transform(&reference_transform);
-   dm->genesis->add_transform(&double_duration_transform);
-   dm->refresh();
-
-   current_measure_grid_editor->measure_grid.set_measure(0, 3, new Measure::Static());
-
-   follow_camera.target.position.y = 200;
-   follow_camera.target.position.x = 200;
 }
 
 
@@ -418,9 +389,9 @@ Action::Base *AppController::create_action(std::string action_name)
 
 
 
-void AppController::key_down_func()
+void AppController::key_char_func()
 {
-   UIScreen::key_down_func();
+   UIScreen::key_char_func();
 
    auto mode          = current_measure_grid_editor ? current_measure_grid_editor->mode : UIMeasureGridEditor::mode_t::NONE;
    auto target        = current_measure_grid_editor ? current_measure_grid_editor->edit_mode_target : UIMeasureGridEditor::edit_mode_target_t::NONE_TARGET;
@@ -441,7 +412,7 @@ void AppController::key_down_func()
       catch (const std::runtime_error& e)
       {
          std::cout << "Exception caught while trying to run action "
-                   << action->get_action_name()
+                   << "\"" << action->get_action_name() << "\""
                    << " with the following message \""
                    << e.what()
                    << "\""

@@ -8,7 +8,7 @@
 
 
 Action::Queue::Queue(std::string name, std::vector<Action::Base *> actions)
-   : Base(name + " [queue]")
+   : Base(std::string("queue: (") + name + ")")
    , actions(actions)
 {
 }
