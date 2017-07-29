@@ -26,7 +26,7 @@ private:
       Measure::Base *get_measure(int x_measure);
    };
 
-   std::vector<Row> voices;
+   std::vector<Row *> voices;
    std::vector<TimeSignature> time_signatures;
 
 public:

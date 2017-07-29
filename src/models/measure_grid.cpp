@@ -27,7 +27,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
    , time_signatures()
 {
-   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(Row(num_x_measures));
+   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Row(num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
@@ -38,7 +38,7 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return nullptr;
 
-   Row *row = &voices[y_staff];
+   Row *row = voices[y_staff];
    if (!row) return nullptr;
 
    return row->get_measure(x_measure);
@@ -53,7 +53,12 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
 
    Measure::Base *existing_measure = get_measure(x_measure, y_staff);
    if (existing_measure) delete existing_measure;
-   voices[y_staff].measures[x_measure] = measure;
+   // WARNING
+   // this implementation directly assigns a measure to the voice, assuming
+   // that a voice has measures, and the voice's measures are of Measure::Base type
+   // this should likely be handled by a method on the Row, like
+   // voices[i]->set_measure(x_measure, measure);
+   voices[y_staff]->measures[x_measure] = measure;
    return true;
 }
 
@@ -79,7 +84,7 @@ bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;
-   return voices[0].measures.size();
+   return voices[0]->measures.size();
 }
 
 
@@ -101,8 +106,10 @@ void MeasureGrid::insert_staff(int index)
    }
    else 
    {
-      int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-      voices.insert(voices.begin() + index, Row(num_measures)); 
+      // TODO: IMPORTANT here we are depending on voices[0] to currectly
+      // report the current number of measures
+      int num_measures = (voices.empty()) ? 8 : voices[0]->measures.size();
+      voices.insert(voices.begin() + index, new Row(num_measures));
    }
 }
 
@@ -119,8 +126,10 @@ bool MeasureGrid::delete_staff(int index)
 
 void MeasureGrid::append_staff()
 {
-   int num_measures = (voices.empty()) ? 8 : voices[0].measures.size();
-   voices.push_back(Row(num_measures));
+   // TODO: IMPORTANT here we are depending on voices[0] to currectly
+   // report the current number of measures
+   int num_measures = (voices.empty()) ? 8 : voices[0]->measures.size();
+   voices.push_back(new Row(num_measures));
 }
 
 
@@ -143,8 +152,10 @@ void MeasureGrid::insert_measure(int index)
       for (unsigned i=0; i<voices.size(); i++)
       {
          // WARNING: this assumes all staves have the same
-         // number of measures (they should)
-         voices[i].measures.insert(voices[i].measures.begin() + index, nullptr);
+         // number of measures (they likely may not once there are different "staff" types)
+         // TODO: this method is "constructing" the voice.  Probably should not
+         // be doing this here
+         voices[i]->measures.insert(voices[i]->measures.begin() + index, nullptr);
       }
    }
 }
@@ -161,8 +172,12 @@ bool MeasureGrid::delete_column(int index)
    time_signatures.erase(time_signatures.begin() + index);
 
    // remove the measure from each row
+   // WARNING: this assumes voices have "measures" to remove, also
+   // is assuming the role of being responsible for deleting contents
+   // inside another class
+   // This should likely be replaced with a voice[i]->delete_measure(int) function
    for (unsigned i=0; i<voices.size(); i++)
-      voices[i].measures.erase(voices[i].measures.begin() + index);
+      voices[i]->measures.erase(voices[i]->measures.begin() + index);
 
    return true;
 }
@@ -177,7 +192,10 @@ void MeasureGrid::append_measure()
    // append measure to each row
    for (unsigned i=0; i<voices.size(); i++)
    {
-      voices[i].measures.push_back(nullptr);
+      // warning, this is responsible for constructing the measures
+      // that are appended.  This should likely be replaced by a
+      // Voice::append_column();
+      voices[i]->measures.push_back(nullptr);
    }
 }
 
@@ -187,7 +205,7 @@ bool MeasureGrid::set_voice_name(int row_number, std::string name)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
-   voices[row_number].name = name;
+   voices[row_number]->name = name;
    return true;
 }
 
@@ -197,7 +215,7 @@ std::string MeasureGrid::get_voice_name(int row_number)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
-   return voices[row_number].name;
+   return voices[row_number]->name;
 }
 
 
