@@ -31,7 +31,7 @@ public:
 
    AppController(Display *display);
    void primary_timer_func() override;
-   void key_down_func() override;
+   void key_char_func() override;
    void on_message(UIWidget *sender, std::string message) override;
 
    Action::Base *create_action(std::string action_name);

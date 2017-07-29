@@ -418,9 +418,9 @@ Action::Base *AppController::create_action(std::string action_name)
 
 
 
-void AppController::key_down_func()
+void AppController::key_char_func()
 {
-   UIScreen::key_down_func();
+   UIScreen::key_char_func();
 
    auto mode          = current_measure_grid_editor ? current_measure_grid_editor->mode : UIMeasureGridEditor::mode_t::NONE;
    auto target        = current_measure_grid_editor ? current_measure_grid_editor->edit_mode_target : UIMeasureGridEditor::edit_mode_target_t::NONE_TARGET;
