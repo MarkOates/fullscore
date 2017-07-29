@@ -113,6 +113,43 @@ TEST(MeasureGridTest, returns_false_if_coordinates_are_outside_the_measure_grid)
 
 TEST(MeasureGridTest, can_insert_a_staff)
 {
+   MeasureGrid measure_grid(1, 3);
+
+   measure_grid.set_voice_name(0, "voice 0");
+   measure_grid.set_voice_name(1, "voice 1");
+   measure_grid.set_voice_name(2, "voice 2");
+
+   measure_grid.insert_staff(1);
+   measure_grid.set_voice_name(1, "inserted voice 1");
+
+   measure_grid.insert_staff(3);
+   measure_grid.set_voice_name(3, "inserted voice 2");
+
+   std::vector<std::string> expected_voice_name_order = {
+      "voice 0",
+      "inserted voice 1",
+      "voice 1",
+      "inserted voice 2",
+      "voice 2",
+   };
+
+   ASSERT_EQ(expected_voice_name_order.size(), measure_grid.get_num_staves());
+
+   for (int i=0; i<expected_voice_name_order.size(); i++)
+      ASSERT_EQ(expected_voice_name_order[i], measure_grid.get_voice_name(i));
+}
+
+
+
+TEST(MeasureGridTest, when_inserting_a_staff_at_index_lt_zero_inserts_at_the_begingging)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, when_inserting_a_staff_at_index_gt_the_number_of_staves_appends_to_the_end)
+{
    // skip
 }
 
