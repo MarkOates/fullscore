@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <string>
-#include <fullscore/models/measures/basic.h>
+#include <fullscore/models/measures/base.h>
 #include <fullscore/models/time_signature.h>
 
 
