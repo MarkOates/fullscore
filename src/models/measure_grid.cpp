@@ -15,10 +15,10 @@ MeasureGrid::Row::Row(int num_measures) : measures()
 
 
 
-Measure::Base *MeasureGrid::Row::operator[](unsigned int index)
+Measure::Base *MeasureGrid::Row::get_measure(int x_measure)
 {
-   if (index >= measures.size()) std::cout << "measure index out of bounds" << std::endl;
-   return measures[index];
+   if (x_measure < 0 || x_measure >= measures.size()) return nullptr;
+   return measures[x_measure];
 }
 
 
@@ -38,7 +38,10 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return nullptr;
 
-   return voices[y_staff][x_measure];
+   Row *row = &voices[y_staff];
+   if (!row) return nullptr;
+
+   return row->get_measure(x_measure);
 }
 
 

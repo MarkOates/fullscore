@@ -21,8 +21,9 @@ private:
    public:
       std::string name;
       std::vector<Measure::Base *> measures;
+
       Row(int num_measures);
-      Measure::Base *operator[](unsigned int index);
+      Measure::Base *get_measure(int x_measure);
    };
 
    std::vector<Row> voices;
