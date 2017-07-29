@@ -57,6 +57,7 @@
 #include <fullscore/factories/measure_grid_factory.h>
 
 #include <fullscore/models/measures/static.h>
+#include <fullscore/models/measure.h>
 
 
 
