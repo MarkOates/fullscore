@@ -111,6 +111,62 @@ TEST(MeasureGridTest, returns_false_if_coordinates_are_outside_the_measure_grid)
 
 
 
+TEST(MeasureGridTest, can_insert_a_staff)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_delete_staff)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_append_a_staff)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_insert_a_measure)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_delete_measure)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_append_a_measure)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_get_and_set_a_time_signature)
+{
+   // skip
+}
+
+
+
+TEST(MeasureGridTest, can_get_a_pointer_to_a_time_signature)
+{
+   // skip
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
