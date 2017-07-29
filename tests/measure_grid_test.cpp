@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include <fullscore/models/measure.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/models/note.h>
 
@@ -57,7 +58,7 @@ TEST(MeasureGridTest, sets_and_gets_a_measure_to_a_coordinate)
 
    Measure::Base *retrieved_measure = measure_grid.get_measure(3, 7);
    ASSERT_NE(nullptr, retrieved_measure);
-   ASSERT_TRUE(retrieved_measure->is_type("basic"));
+   ASSERT_TRUE(retrieved_measure->is_type(Measure::TYPE_IDENTIFIER_BASIC));
 
    int expected_id = basic_measure->get_id();
    int returned_id = retrieved_measure->get_id();
@@ -81,6 +82,30 @@ TEST(MeasureGridTest, can_delete_a_measure)
 
    Measure::Base  *expected_null_retrieved_measure = measure_grid.get_measure(3, 7);
    ASSERT_EQ(nullptr, expected_null_retrieved_measure);
+}
+
+
+
+TEST(MeasureGridTest, returns_true_if_coordinates_are_within_the_measure_grid)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(measure_grid.get_num_measures()-1, 0));
+   ASSERT_EQ(true, measure_grid.in_grid_range(0, measure_grid.get_num_staves()-1));
+}
+
+
+
+TEST(MeasureGridTest, returns_false_if_coordinates_are_outside_the_measure_grid)
+{
+   MeasureGrid measure_grid(17, 13);
+
+   ASSERT_EQ(false, measure_grid.in_grid_range(-1, 0));
+   ASSERT_EQ(false, measure_grid.in_grid_range(0, -1));
+   ASSERT_EQ(false, measure_grid.in_grid_range(measure_grid.get_num_measures(), 0));
+   ASSERT_EQ(false, measure_grid.in_grid_range(0, measure_grid.get_num_staves()));
 }
 
 

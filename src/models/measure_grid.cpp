@@ -36,8 +36,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
-   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return NULL;
-   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return NULL;
+   if (!in_grid_range(x_measure, y_staff)) return nullptr;
 
    return voices[y_staff][x_measure];
 }
@@ -47,8 +46,7 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
 {
    // bounds check
-   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
-   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
+   if (!in_grid_range(x_measure, y_staff)) return false;
 
    Measure::Base *existing_measure = get_measure(x_measure, y_staff);
    if (existing_measure) delete existing_measure;
@@ -61,6 +59,16 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
 bool MeasureGrid::delete_measure(int x_measure, int y_staff)
 {
    return set_measure(x_measure, y_staff, nullptr);
+}
+
+
+
+bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
+{
+   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
+   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
+
+   return true;
 }
 
 

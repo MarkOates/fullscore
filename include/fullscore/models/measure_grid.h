@@ -34,6 +34,8 @@ public:
    bool set_measure(int x_measure, int y_staff, Measure::Base *measure);
    bool delete_measure(int x_measure, int y_staff);
 
+   bool in_grid_range(int x_measure, int y_staff);
+
    int get_num_staves() const;
    int get_num_measures() const;
 
