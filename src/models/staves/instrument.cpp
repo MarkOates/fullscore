@@ -1,88 +1,28 @@
 
 
 
+#include <fullscore/models/staves/instrument.h>
+
 #include <fullscore/models/measures/base.h>
-#include <fullscore/models/staves/base.h>
-#include <fullscore/models/staff.h>
 
 
 
-Staff::Base::Base(std::string type)
-   : type(type)
-   , id(Staff::next_id++)
-   , name()
-   , measures()
-{}
-
-
-
-Staff::Base::~Base()
-{}
-
-
-
-std::string Staff::Base::get_type()
+Staff::Instrument::Instrument(int num_columns)
+   : Base("instrument")
 {
-   return type;
+   for (unsigned i=0; i<num_columns; i++) measures.push_back(nullptr);
 }
 
 
 
-bool Staff::Base::is_type(std::string type)
+Staff::Instrument::~Instrument()
 {
-   return type == type;
+   // TODO erase all the measures here
 }
 
 
 
-int Staff::Base::get_id()
-{
-   return id;
-}
-
-
-
-/////
-
-
-
-//Staff::Base(int num_measures) : measures()
-//{
-   //for (unsigned i=0; i<num_measures; i++) measures.push_back(nullptr);
-//}
-
-
-
-Measure::Base *Staff::Base::get_measure(int column_num)
-{
-   if (column_num < 0 || column_num >= get_num_columns()) return nullptr;
-   return measures[column_num];
-}
-
-
-
-void Staff::Base::set_name(std::string name)
-{
-   this->name = name;
-}
-
-
-
-std::string Staff::Base::get_name()
-{
-   return name;
-}
-
-
-
-int Staff::Base::get_num_columns()
-{
-   return measures.size();
-}
-
-
-
-bool Staff::Base::set_column(int column_num, Measure::Base *measure)
+bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
 {
    // TODO move the bounds check to be handled in here
    // TODO if there is already a measure present, the deletion should be moved to here as well
@@ -92,7 +32,7 @@ bool Staff::Base::set_column(int column_num, Measure::Base *measure)
 
 
 
-bool Staff::Base::insert_column(int at_index, Measure::Base *measure)
+bool Staff::Instrument::insert_column(int at_index, Measure::Base *measure)
 {
    // TODO move the bounds check to here
    // behavior that < 0 inserts are corrected to 0 and
@@ -105,7 +45,7 @@ bool Staff::Base::insert_column(int at_index, Measure::Base *measure)
 
 
 
-bool Staff::Base::erase_column(int at_index)
+bool Staff::Instrument::erase_column(int at_index)
 {
    // TODO move the bounds check to here
    // behavior that < 0 inserts are corrected to 0 and
@@ -125,10 +65,18 @@ bool Staff::Base::erase_column(int at_index)
 
 
 
-bool Staff::Base::append_column(Measure::Base *measure)
+bool Staff::Instrument::append_column(Measure::Base *measure)
 {
    measures.push_back(measure);
    return true;
+}
+
+
+
+Measure::Base *Staff::Instrument::get_measure(int column_num)
+{
+   if (column_num < 0 || column_num >= get_num_columns()) return nullptr;
+   return measures[column_num];
 }
 
 
