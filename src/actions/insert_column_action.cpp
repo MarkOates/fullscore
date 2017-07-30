@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/insert_measure_action.h>
+#include <fullscore/actions/insert_column_action.h>
 
 #include <fullscore/models/measure_grid.h>
 

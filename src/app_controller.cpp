@@ -23,7 +23,7 @@
 #include <fullscore/actions/delete_measure_action.h>
 #include <fullscore/actions/delete_measure_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
-#include <fullscore/actions/insert_measure_action.h>
+#include <fullscore/actions/insert_column_action.h>
 #include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_measure_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
