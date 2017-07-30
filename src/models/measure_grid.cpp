@@ -3,103 +3,10 @@
 
 #include <fullscore/models/measure_grid.h>
 
-#include <iostream>
+#include <fullscore/models/measures/base.h>
+#include <fullscore/models/staves/base.h>
 #include <fullscore/models/note.h>
-
-
-
-////// MeasureGrid::Row
-
-
-
-MeasureGrid::Row::Row(int num_measures) : measures()
-{
-   for (unsigned i=0; i<num_measures; i++) measures.push_back(nullptr);
-}
-
-
-
-Measure::Base *MeasureGrid::Row::get_measure(int x_measure)
-{
-   if (x_measure < 0 || x_measure >= get_num_measures()) return nullptr;
-   return measures[x_measure];
-}
-
-
-
-void MeasureGrid::Row::set_name(std::string name)
-{
-   this->name = name;
-}
-
-
-
-std::string MeasureGrid::Row::get_name()
-{
-   return name;
-}
-
-
-
-int MeasureGrid::Row::get_num_measures()
-{
-   return measures.size();
-}
-
-
-
-bool MeasureGrid::Row::set_measure(int measure_x, Measure::Base *measure)
-{
-   // TODO move the bounds check to be handled in here
-   // TODO if there is already a measure present, the deletion should be moved to here as well
-   measures[measure_x] = measure;
-   return true;
-}
-
-
-
-bool MeasureGrid::Row::insert_measure(int at_index, Measure::Base *measure)
-{
-   // TODO move the bounds check to here
-   // behavior that < 0 inserts are corrected to 0 and
-   // >= size measures default to append() should probably be handled
-   // at the MeasureGrid layer, since it would need to be implement in
-   // all of the derived classes, and is expected behavior of the MeasureGrid
-   measures.insert(measures.begin() + at_index, measure);
-   return true;
-}
-
-
-
-bool MeasureGrid::Row::erase_measure(int at_index)
-{
-   // TODO move the bounds check to here
-   // behavior that < 0 inserts are corrected to 0 and
-
-   // >= size measures default to append() should probably be handled
-   // at the MeasureGrid layer, since it would need to be implement in
-   // all of the derived classes, and is expected behavior of the MeasureGrid
-   if (at_index < 0) std::runtime_error("Cannot erase measure < 0");
-   if (at_index >= measures.size()) std::runtime_error("Cannot erase measure >= size()");
-
-   if (measures[at_index]) delete measures[at_index];
-
-   measures.erase(measures.begin() + at_index);
-
-   return true;
-}
-
-
-
-bool MeasureGrid::Row::append_measure(Measure::Base *measure)
-{
-   measures.push_back(measure);
-   return true;
-}
-
-
-
-////// MeasureGrid
+#include <iostream>
 
 
 
@@ -107,7 +14,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
    , time_signatures()
 {
-   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Row(num_x_measures));
+   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Staff::Base("underived", num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
@@ -118,10 +25,10 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return nullptr;
 
-   Row *row = voices[y_staff];
-   if (!row) return nullptr;
+   Staff::Base *staff = voices[y_staff];
+   if (!staff) return nullptr;
 
-   return row->get_measure(x_measure);
+   return staff->get_measure(x_measure);
 }
 
 
@@ -189,7 +96,7 @@ void MeasureGrid::insert_staff(int index)
       // TODO: IMPORTANT here we are depending on voices[0] to currectly
       // report the current number of measures
       int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
-      voices.insert(voices.begin() + index, new Row(num_measures));
+      voices.insert(voices.begin() + index, new Staff::Base("underived", num_measures));
    }
 }
 
@@ -209,7 +116,7 @@ void MeasureGrid::append_staff()
    // TODO: IMPORTANT here we are depending on voices[0] to currectly
    // report the current number of measures
    int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
-   voices.push_back(new Row(num_measures));
+   voices.push_back(new Staff::Base("underived", num_measures));
 }
 
 

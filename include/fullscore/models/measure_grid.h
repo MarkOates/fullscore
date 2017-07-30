@@ -1,12 +1,15 @@
-#ifndef __FULLSCORE_MEASURE_GRID
-#define __FULLSCORE_MEASURE_GRID
+#pragma once
 
 
 
-#include <vector>
-#include <string>
-#include <fullscore/models/measures/base.h>
 #include <fullscore/models/time_signature.h>
+#include <string>
+#include <vector>
+
+
+
+namespace Measure { class Base; }
+namespace Staff { class Base; }
 
 
 
@@ -16,28 +19,7 @@ private:
    friend class MeasureGridFileConverter;
    friend class MeasureGridHelper;
 
-   class Row
-   {
-   private:
-      std::string name;
-      std::vector<Measure::Base *> measures;
-
-   public:
-      Row(int num_measures);
-
-      void set_name(std::string name);
-      std::string get_name();
-
-      int get_num_measures();
-      bool set_measure(int measure_x, Measure::Base *measure);
-      bool insert_measure(int at_index, Measure::Base *measure);
-      bool erase_measure(int at_index);
-      bool append_measure(Measure::Base *measure);
-
-      Measure::Base *get_measure(int x_measure);
-   };
-
-   std::vector<Row *> voices;
+   std::vector<Staff::Base *> voices;
    std::vector<TimeSignature> time_signatures;
 
 public:
@@ -69,4 +51,3 @@ public:
 
 
 
-#endif
