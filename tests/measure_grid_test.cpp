@@ -240,7 +240,24 @@ TEST(MeasureGridTest, can_append_a_staff)
 
 TEST(MeasureGridTest, can_insert_a_measure)
 {
-   // skip
+   MeasureGrid measure_grid(3, 1);
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      measure_grid.set_time_signature(i, TimeSignature(3, Duration(Duration::QUARTER)));
+
+   measure_grid.insert_measure(1);
+
+   std::vector<TimeSignature> expected_time_signature_order = {
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(4, Duration(Duration::QUARTER)),
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(3, Duration(Duration::QUARTER)),
+   };
+
+   ASSERT_EQ(expected_time_signature_order.size(), measure_grid.get_num_measures());
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      ASSERT_EQ(expected_time_signature_order[i], measure_grid.get_time_signature(i));
 }
 
 
