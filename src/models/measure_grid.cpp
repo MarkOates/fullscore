@@ -121,7 +121,7 @@ void MeasureGrid::append_staff()
 
 
 
-void MeasureGrid::insert_measure(int index)
+void MeasureGrid::insert_column(int index)
 {
    int num_measures = get_num_measures();
    if (index < 0) index = 0;

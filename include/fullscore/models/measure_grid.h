@@ -37,7 +37,7 @@ public:
    bool delete_staff(int index);
    void append_staff();
 
-   void insert_measure(int index);
+   void insert_column(int index);
    bool delete_column(int index);
    void append_measure();
 
