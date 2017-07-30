@@ -16,16 +16,17 @@ Staff::Instrument::Instrument(int num_columns)
 
 
 Staff::Instrument::~Instrument()
-{
-   // TODO erase all the columns here
-}
+{}
 
 
 
 bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
 {
-   // TODO move the bounds check to be handled in here
-   // TODO if there is already a measure present, the deletion should be moved to here as well
+   if (column_num < 0) return false;
+   if (column_num >= columns.size()) return false;
+
+   if (columns[column_num]) delete columns[column_num];
+
    columns[column_num] = measure;
    return true;
 }
@@ -34,11 +35,9 @@ bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
 
 bool Staff::Instrument::insert_column(int at_index, Measure::Base *measure)
 {
-   // TODO move the bounds check to here
-   // behavior that < 0 inserts are corrected to 0 and
-   // >= size columns default to append() should probably be handled
-   // at the MeasureGrid layer, since it would need to be implement in
-   // all of the derived classes, and is expected behavior of the MeasureGrid
+   if (at_index < 0) return false;
+   if (at_index >= columns.size()) return false;
+
    columns.insert(columns.begin() + at_index, measure);
    return true;
 }
@@ -47,12 +46,6 @@ bool Staff::Instrument::insert_column(int at_index, Measure::Base *measure)
 
 bool Staff::Instrument::erase_column(int at_index)
 {
-   // TODO move the bounds check to here
-   // behavior that < 0 inserts are corrected to 0 and
-
-   // >= size columns default to append() should probably be handled
-   // at the MeasureGrid layer, since it would need to be implement in
-   // all of the derived classes, and is expected behavior of the MeasureGrid
    if (at_index < 0) std::runtime_error("Cannot erase measure < 0");
    if (at_index >= columns.size()) std::runtime_error("Cannot erase measure >= size()");
 
