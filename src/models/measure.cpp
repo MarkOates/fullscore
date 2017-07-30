@@ -17,6 +17,21 @@ namespace Measure
 
 
 
+   bool push_back(Measure::Base *measure)
+   {
+      measure_pool.push_back(measure);
+      return true;
+   }
+
+
+
+   int count()
+   {
+      return measure_pool.size();
+   }
+
+
+
    Base *find(int id)
    {
       for (auto &measure : measure_pool)
@@ -26,14 +41,27 @@ namespace Measure
 
 
 
+   bool remove(int id)
+   {
+      for (unsigned i=0; i<measure_pool.size(); i++)
+         if (measure_pool[i]->get_id() == id)
+         {
+            measure_pool.erase(measure_pool.begin() + i);
+            return true;
+         }
+      return false;
+   }
+
+
+
    bool destroy(int id)
    {
-      Base *measure = Measure::find(id);
-      if (measure)
-      {
-         delete measure;
-         return true;
-      }
+      for (unsigned i=0; i<measure_pool.size(); i++)
+         if (measure_pool[i]->get_id() == id)
+         {
+            delete measure_pool[i];
+            return true;
+         }
       return false;
    }
 };

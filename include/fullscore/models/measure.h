@@ -21,6 +21,9 @@ namespace Measure
    extern std::vector<Base *> pool;
    extern int next_id;
 
+   extern bool push_back(Base *measure);
+   extern bool remove(int id);
+   extern int count();
    extern Base *find(int id);
    extern bool destroy(int id);
 };
