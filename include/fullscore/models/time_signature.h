@@ -25,8 +25,8 @@ public:
    bool set_numerator(int numerator);
    bool set_denominator(Duration denominator);
 
-   bool operator==(TimeSignature &other);
-   bool operator!=(TimeSignature &other);
+   bool operator==(const TimeSignature &other) const;
+   bool operator!=(const TimeSignature &other) const;
 };
 
 

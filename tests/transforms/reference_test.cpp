@@ -5,6 +5,7 @@
 
 #include <fullscore/transforms/reference_transform.h>
 
+#include <fullscore/models/measures/basic.h>
 #include <fullscore/models/measure_grid.h>
 
 

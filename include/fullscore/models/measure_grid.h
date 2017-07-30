@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <string>
-#include <fullscore/models/measures/basic.h>
+#include <fullscore/models/measures/base.h>
 #include <fullscore/models/time_signature.h>
 
 
@@ -18,14 +18,26 @@ private:
 
    class Row
    {
-   public:
+   private:
       std::string name;
       std::vector<Measure::Base *> measures;
+
+   public:
       Row(int num_measures);
-      Measure::Base *operator[](unsigned int index);
+
+      void set_name(std::string name);
+      std::string get_name();
+
+      int get_num_measures();
+      bool set_measure(int measure_x, Measure::Base *measure);
+      bool insert_measure(int at_index, Measure::Base *measure);
+      bool erase_measure(int at_index);
+      bool append_measure(Measure::Base *measure);
+
+      Measure::Base *get_measure(int x_measure);
    };
 
-   std::vector<Row> voices;
+   std::vector<Row *> voices;
    std::vector<TimeSignature> time_signatures;
 
 public:
@@ -52,7 +64,7 @@ public:
 
    bool set_time_signature(int index, TimeSignature time_signature);
    TimeSignature get_time_signature(int index);
-   TimeSignature *get_time_signature_ptr(int index);
+   TimeSignature *get_time_signature_ptr(int index); // consider removing this method (having the dependent action rely on a *measure_grid and measure number)
 };
 
 

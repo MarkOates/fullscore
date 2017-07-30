@@ -55,14 +55,14 @@ bool TimeSignature::set_denominator(Duration denominator)
 
 
 
-bool TimeSignature::operator==(TimeSignature &other)
+bool TimeSignature::operator==(const TimeSignature &other) const
 {
    return (numerator == other.numerator) && (denominator == other.denominator);
 }
 
 
 
-bool TimeSignature::operator!=(TimeSignature &other)
+bool TimeSignature::operator!=(const TimeSignature &other) const
 {
    return !(*this == other);
 }

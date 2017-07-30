@@ -99,7 +99,8 @@ bool MeasureGridFileConverter::load()
    // the the size of the board, and resize the current measure-grid
    int grid_height = atoi(state.get("grid_height").c_str());
    int grid_width = atoi(state.get("grid_width").c_str());
-   measure_grid->voices.resize(grid_height, MeasureGrid::Row(grid_width));
+   for (unsigned i=0; i<grid_height; i++)
+      measure_grid->voices.push_back(new MeasureGrid::Row(grid_width));
 
    // grab and parse the time_signatures string
    measure_grid->time_signatures.clear();

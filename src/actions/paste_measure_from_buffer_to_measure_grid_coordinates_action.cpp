@@ -3,6 +3,7 @@
 
 #include <fullscore/actions/paste_measure_from_buffer_to_measure_grid_coordinates_action.h>
 
+#include <fullscore/models/measures/basic.h>
 #include <fullscore/models/measure_grid.h>
 
 
