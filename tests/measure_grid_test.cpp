@@ -367,7 +367,21 @@ TEST(MeasureGridTest, when_attempting_to_delete_a_measure_lt_zero_or_gte_num_mea
 
 TEST(MeasureGridTest, can_append_a_measure)
 {
-   // skip
+   MeasureGrid measure_grid(1, 1);
+
+   measure_grid.set_time_signature(0, TimeSignature(3, Duration(Duration::QUARTER)));
+
+   measure_grid.append_measure();
+
+   std::vector<TimeSignature> expected_time_signature_order = {
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(4, Duration(Duration::QUARTER)),
+   };
+
+   ASSERT_EQ(expected_time_signature_order.size(), measure_grid.get_num_measures());
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      ASSERT_EQ(expected_time_signature_order[i], measure_grid.get_time_signature(i));
 }
 
 
