@@ -31,6 +31,7 @@ private:
       int get_num_measures();
       bool set_measure(int measure_x, Measure::Base *measure);
       bool insert_measure(int at_index, Measure::Base *measure);
+      bool erase_measure(int at_index);
 
       Measure::Base *get_measure(int x_measure);
    };

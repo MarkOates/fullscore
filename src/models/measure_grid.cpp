@@ -71,6 +71,26 @@ bool MeasureGrid::Row::insert_measure(int at_index, Measure::Base *measure)
 
 
 
+bool MeasureGrid::Row::erase_measure(int at_index)
+{
+   // TODO move the bounds check to here
+   // behavior that < 0 inserts are corrected to 0 and
+
+   // >= size measures default to append() should probably be handled
+   // at the MeasureGrid layer, since it would need to be implement in
+   // all of the derived classes, and is expected behavior of the MeasureGrid
+   if (at_index < 0) std::runtime_error("Cannot erase measure < 0");
+   if (at_index >= measures.size()) std::runtime_error("Cannot erase measure >= size()");
+
+   if (measures[at_index]) delete measures[at_index];
+
+   measures.erase(measures.begin() + at_index);
+
+   return true;
+}
+
+
+
 ////// MeasureGrid
 
 
@@ -229,7 +249,7 @@ bool MeasureGrid::delete_column(int index)
    // inside another class
    // This should likely be replaced with a voice[i]->delete_measure(int) function
    for (unsigned i=0; i<voices.size(); i++)
-      voices[i]->measures.erase(voices[i]->measures.begin() + index);
+      voices[i]->erase_measure(index);
 
    return true;
 }
