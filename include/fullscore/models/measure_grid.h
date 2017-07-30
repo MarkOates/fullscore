@@ -29,6 +29,7 @@ private:
       std::string get_name();
 
       int get_num_measures();
+      bool set_measure(int measure_x, Measure::Base *measure);
 
       Measure::Base *get_measure(int x_measure);
    };

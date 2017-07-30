@@ -48,6 +48,15 @@ int MeasureGrid::Row::get_num_measures()
 
 
 
+bool MeasureGrid::Row::set_measure(int measure_x, Measure::Base *measure)
+{
+   // TODO move the bounds check to be handled in here
+   // TODO if there is already a measure present, the deletion should be moved to here as well
+   measures[measure_x] = measure;
+}
+
+
+
 ////// MeasureGrid
 
 
@@ -87,7 +96,7 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
    // that a voice has measures, and the voice's measures are of Measure::Base type
    // this should likely be handled by a method on the Row, like
    // voices[i]->set_measure(x_measure, measure);
-   voices[y_staff]->measures[x_measure] = measure;
+   voices[y_staff]->set_measure(x_measure, measure);
    return true;
 }
 
