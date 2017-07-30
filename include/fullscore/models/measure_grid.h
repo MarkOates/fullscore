@@ -20,14 +20,15 @@ private:
    {
    private:
       std::string name;
-
-   public:
       std::vector<Measure::Base *> measures;
 
+   public:
       Row(int num_measures);
 
       void set_name(std::string name);
       std::string get_name();
+
+      int get_num_measures();
 
       Measure::Base *get_measure(int x_measure);
    };

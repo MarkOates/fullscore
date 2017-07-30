@@ -21,7 +21,7 @@ MeasureGrid::Row::Row(int num_measures) : measures()
 
 Measure::Base *MeasureGrid::Row::get_measure(int x_measure)
 {
-   if (x_measure < 0 || x_measure >= measures.size()) return nullptr;
+   if (x_measure < 0 || x_measure >= get_num_measures()) return nullptr;
    return measures[x_measure];
 }
 
@@ -37,6 +37,13 @@ void MeasureGrid::Row::set_name(std::string name)
 std::string MeasureGrid::Row::get_name()
 {
    return name;
+}
+
+
+
+int MeasureGrid::Row::get_num_measures()
+{
+   return measures.size();
 }
 
 
@@ -106,7 +113,7 @@ bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;
-   return voices[0]->measures.size();
+   return voices[0]->get_num_measures();
 }
 
 
@@ -130,7 +137,7 @@ void MeasureGrid::insert_staff(int index)
    {
       // TODO: IMPORTANT here we are depending on voices[0] to currectly
       // report the current number of measures
-      int num_measures = (voices.empty()) ? 8 : voices[0]->measures.size();
+      int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
       voices.insert(voices.begin() + index, new Row(num_measures));
    }
 }
@@ -150,7 +157,7 @@ void MeasureGrid::append_staff()
 {
    // TODO: IMPORTANT here we are depending on voices[0] to currectly
    // report the current number of measures
-   int num_measures = (voices.empty()) ? 8 : voices[0]->measures.size();
+   int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
    voices.push_back(new Row(num_measures));
 }
 
