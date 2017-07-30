@@ -245,7 +245,7 @@ TEST(MeasureGridTest, can_insert_a_measure)
    for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
       measure_grid.set_time_signature(i, TimeSignature(3, Duration(Duration::QUARTER)));
 
-   measure_grid.insert_measure(1);
+   measure_grid.insert_column(1);
 
    std::vector<TimeSignature> expected_time_signature_order = {
       TimeSignature(3, Duration(Duration::QUARTER)),
@@ -269,7 +269,7 @@ TEST(MeasureGridTest, when_inserting_a_measure_at_index_lt_zero__inserts_at_inde
    for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
       measure_grid.set_time_signature(i, TimeSignature(3, Duration(Duration::QUARTER)));
 
-   measure_grid.insert_measure(-999);
+   measure_grid.insert_column(-999);
 
    std::vector<TimeSignature> expected_time_signature_order = {
       TimeSignature(4, Duration(Duration::QUARTER)),
@@ -292,11 +292,11 @@ TEST(MeasureGridTest, when_inserting_a_measure_at_index_gte_size__appends_measur
    for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
       measure_grid.set_time_signature(i, TimeSignature(3, Duration(Duration::QUARTER)));
 
-   measure_grid.insert_measure(measure_grid.get_num_measures());
+   measure_grid.insert_column(measure_grid.get_num_measures());
 
    measure_grid.set_time_signature(2, TimeSignature(2, Duration(Duration::QUARTER)));
 
-   measure_grid.insert_measure(999);
+   measure_grid.insert_column(999);
 
    std::vector<TimeSignature> expected_time_signature_order = {
       TimeSignature(3, Duration(Duration::QUARTER)),

@@ -3,6 +3,7 @@
 
 #include <fullscore/transforms/reference_transform.h>
 
+#include <fullscore/models/measures/base.h>
 #include <fullscore/models/measure_grid.h>
 #include <sstream>
 

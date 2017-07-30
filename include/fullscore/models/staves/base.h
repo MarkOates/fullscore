@@ -3,6 +3,11 @@
 
 
 #include <string>
+#include <vector>
+
+
+
+namespace Measure { class Base; }
 
 
 
@@ -13,6 +18,10 @@ namespace Staff
    private:
       std::string type;
       int id;
+      std::string name;
+
+   protected:
+      std::vector<Measure::Base *> columns;
 
    public:
       Base(std::string type);
@@ -20,6 +29,16 @@ namespace Staff
       std::string get_type();
       bool is_type(std::string type);
       int get_id();
+      void set_name(std::string name);
+      std::string get_name();
+
+      int get_num_columns();
+
+      virtual bool set_column(int column_num, Measure::Base *measure) = 0;
+      virtual bool insert_column(int at_index, Measure::Base *measure) = 0;
+      virtual bool erase_column(int at_index) = 0;
+      virtual bool append_column(Measure::Base *measure) = 0;
+      virtual Measure::Base *get_measure(int column_num) = 0;
    };
 };
 

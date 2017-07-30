@@ -23,7 +23,7 @@
 #include <fullscore/actions/delete_measure_action.h>
 #include <fullscore/actions/delete_measure_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
-#include <fullscore/actions/insert_measure_action.h>
+#include <fullscore/actions/insert_column_action.h>
 #include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_measure_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
@@ -360,8 +360,8 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetBasicMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "set_stack_measure")
       action = new Action::SetStackMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
-   else if (action_name == "insert_measure")
-      action = new Action::InsertMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x);
+   else if (action_name == "insert_column")
+      action = new Action::InsertColumn(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x);
    else if (action_name == "delete_measure")
       action = new Action::DeleteMeasure(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_x, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "delete_measure_grid_column")
