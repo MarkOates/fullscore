@@ -38,8 +38,6 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return false;
 
-   Measure::Base *existing_measure = get_measure(x_measure, y_staff);
-   if (existing_measure) delete existing_measure;
    // WARNING
    // this implementation directly assigns a measure to the voice, assuming
    // that a voice has measures, and the voice's measures are of Measure::Base type
@@ -105,6 +103,7 @@ void MeasureGrid::insert_staff(int index)
 bool MeasureGrid::delete_staff(int index)
 {
    if (index < 0 || index >= (int)voices.size()) return false;
+   // TODO: Thinking a delete voice[index] should happen here
    voices.erase(voices.begin() + index);
    return true;
 }
