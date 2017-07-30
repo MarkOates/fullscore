@@ -4,7 +4,7 @@
 #include <fullscore/models/measure_grid.h>
 
 #include <fullscore/models/measures/base.h>
-#include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/note.h>
 #include <iostream>
 
@@ -14,7 +14,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
    : voices()
    , time_signatures()
 {
-   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Staff::Base("underived", num_x_measures));
+   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Staff::Instrument(num_x_measures));
    time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
 }
 
@@ -96,7 +96,7 @@ void MeasureGrid::insert_staff(int index)
       // TODO: IMPORTANT here we are depending on voices[0] to currectly
       // report the current number of measures
       int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
-      voices.insert(voices.begin() + index, new Staff::Base("underived", num_measures));
+      voices.insert(voices.begin() + index, new Staff::Instrument(num_measures));
    }
 }
 
@@ -116,7 +116,7 @@ void MeasureGrid::append_staff()
    // TODO: IMPORTANT here we are depending on voices[0] to currectly
    // report the current number of measures
    int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
-   voices.push_back(new Staff::Base("underived", num_measures));
+   voices.push_back(new Staff::Instrument(num_measures));
 }
 
 

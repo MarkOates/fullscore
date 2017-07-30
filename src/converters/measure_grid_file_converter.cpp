@@ -5,7 +5,7 @@
 #include <fullscore/converters/measure_grid_file_converter.h>
 
 #include <fullscore/models/measures/base.h>
-#include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/instrument.h>
 #include <fullscore/converters/note_string_converter.h>
 #include <fullscore/converters/time_signature_string_converter.h>
 #include <fullscore/models/measure_grid.h>
@@ -102,7 +102,7 @@ bool MeasureGridFileConverter::load()
    int grid_height = atoi(state.get("grid_height").c_str());
    int grid_width = atoi(state.get("grid_width").c_str());
    for (unsigned i=0; i<grid_height; i++)
-      measure_grid->voices.push_back(new Staff::Base("underived", grid_width));
+      measure_grid->voices.push_back(new Staff::Instrument(grid_width));
 
    // grab and parse the time_signatures string
    measure_grid->time_signatures.clear();
