@@ -148,9 +148,13 @@ TEST(MeasureGridTest, when_inserting_a_staff_at_index_gte_the_number_of_staves__
    measure_grid.set_voice_name(0, "voice 0");
    measure_grid.set_voice_name(1, "voice 1");
 
+   measure_grid.insert_staff(measure_grid.get_num_staves());
+
+   measure_grid.set_voice_name(2, "inserted voice 1");
+
    measure_grid.insert_staff(100);
 
-   std::vector<std::string> expected_voice_name_order = { "voice 0", "voice 1", "" };
+   std::vector<std::string> expected_voice_name_order = { "voice 0", "voice 1", "inserted voice 1", "" };
 
    ASSERT_EQ(expected_voice_name_order.size(), measure_grid.get_num_staves());
 
