@@ -55,10 +55,10 @@ int Staff::Base::get_id()
 
 
 
-Measure::Base *Staff::Base::get_measure(int x_measure)
+Measure::Base *Staff::Base::get_measure(int column_num)
 {
-   if (x_measure < 0 || x_measure >= get_num_columns()) return nullptr;
-   return measures[x_measure];
+   if (column_num < 0 || column_num >= get_num_columns()) return nullptr;
+   return measures[column_num];
 }
 
 
@@ -84,11 +84,11 @@ int Staff::Base::get_num_columns()
 
 
 
-bool Staff::Base::set_column(int measure_x, Measure::Base *measure)
+bool Staff::Base::set_column(int column_num, Measure::Base *measure)
 {
    // TODO move the bounds check to be handled in here
    // TODO if there is already a measure present, the deletion should be moved to here as well
-   measures[measure_x] = measure;
+   measures[column_num] = measure;
    return true;
 }
 

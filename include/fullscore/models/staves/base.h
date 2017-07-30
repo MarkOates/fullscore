@@ -38,12 +38,12 @@ namespace Staff
 
       int get_num_columns();
 
-      bool set_column(int measure_x, Measure::Base *measure);
+      bool set_column(int column_num, Measure::Base *measure);
       bool insert_column(int at_index, Measure::Base *measure);
       bool erase_column(int at_index);
       bool append_column(Measure::Base *measure);
 
-      Measure::Base *get_measure(int x_measure);
+      Measure::Base *get_measure(int column_num);
    };
 };
 
