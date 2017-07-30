@@ -53,6 +53,7 @@ bool MeasureGrid::Row::set_measure(int measure_x, Measure::Base *measure)
    // TODO move the bounds check to be handled in here
    // TODO if there is already a measure present, the deletion should be moved to here as well
    measures[measure_x] = measure;
+   return true;
 }
 
 
