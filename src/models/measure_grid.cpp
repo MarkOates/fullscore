@@ -58,6 +58,19 @@ bool MeasureGrid::Row::set_measure(int measure_x, Measure::Base *measure)
 
 
 
+bool MeasureGrid::Row::insert_measure(int at_index, Measure::Base *measure)
+{
+   // TODO move the bounds check to here
+   // behavior that < 0 inserts are corrected to 0 and
+   // >= size measures default to append() should probably be handled
+   // at the MeasureGrid layer, since it would need to be implement in
+   // all of the derived classes, and is expected behavior of the MeasureGrid
+   measures.insert(measures.begin() + at_index, measure);
+   return true;
+}
+
+
+
 ////// MeasureGrid
 
 
@@ -194,7 +207,7 @@ void MeasureGrid::insert_measure(int index)
          // number of measures (they likely may not once there are different "staff" types)
          // TODO: this method is "constructing" the voice.  Probably should not
          // be doing this here
-         voices[i]->measures.insert(voices[i]->measures.begin() + index, nullptr);
+         voices[i]->insert_measure(index, nullptr);
       }
    }
 }
