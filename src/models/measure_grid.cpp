@@ -45,7 +45,7 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
    // that a voice has measures, and the voice's measures are of Measure::Base type
    // this should likely be handled by a method on the Row, like
    // voices[i]->set_measure(x_measure, measure);
-   voices[y_staff]->set_measure(x_measure, measure);
+   voices[y_staff]->set_column(x_measure, measure);
    return true;
 }
 
@@ -71,7 +71,7 @@ bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
 int MeasureGrid::get_num_measures() const
 {
    if (voices.empty()) return 0;
-   return voices[0]->get_num_measures();
+   return voices[0]->get_num_columns();
 }
 
 
@@ -95,7 +95,7 @@ void MeasureGrid::insert_staff(int index)
    {
       // TODO: IMPORTANT here we are depending on voices[0] to currectly
       // report the current number of measures
-      int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
+      int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
       voices.insert(voices.begin() + index, new Staff::Base("underived", num_measures));
    }
 }
@@ -115,7 +115,7 @@ void MeasureGrid::append_staff()
 {
    // TODO: IMPORTANT here we are depending on voices[0] to currectly
    // report the current number of measures
-   int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_measures();
+   int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
    voices.push_back(new Staff::Base("underived", num_measures));
 }
 
@@ -142,7 +142,7 @@ void MeasureGrid::insert_measure(int index)
          // number of measures (they likely may not once there are different "staff" types)
          // TODO: this method is "constructing" the voice.  Probably should not
          // be doing this here
-         voices[i]->insert_measure(index, nullptr);
+         voices[i]->insert_column(index, nullptr);
       }
    }
 }
@@ -164,7 +164,7 @@ bool MeasureGrid::delete_column(int index)
    // inside another class
    // This should likely be replaced with a voice[i]->delete_measure(int) function
    for (unsigned i=0; i<voices.size(); i++)
-      voices[i]->erase_measure(index);
+      voices[i]->erase_column(index);
 
    return true;
 }
@@ -182,7 +182,7 @@ void MeasureGrid::append_measure()
       // warning, this is responsible for constructing the measures
       // that are appended.  This should likely be replaced by a
       // Voice::append_column();
-      voices[i]->append_measure(nullptr);
+      voices[i]->append_column(nullptr);
    }
 }
 

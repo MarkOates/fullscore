@@ -57,7 +57,7 @@ int Staff::Base::get_id()
 
 Measure::Base *Staff::Base::get_measure(int x_measure)
 {
-   if (x_measure < 0 || x_measure >= get_num_measures()) return nullptr;
+   if (x_measure < 0 || x_measure >= get_num_columns()) return nullptr;
    return measures[x_measure];
 }
 
@@ -77,14 +77,14 @@ std::string Staff::Base::get_name()
 
 
 
-int Staff::Base::get_num_measures()
+int Staff::Base::get_num_columns()
 {
    return measures.size();
 }
 
 
 
-bool Staff::Base::set_measure(int measure_x, Measure::Base *measure)
+bool Staff::Base::set_column(int measure_x, Measure::Base *measure)
 {
    // TODO move the bounds check to be handled in here
    // TODO if there is already a measure present, the deletion should be moved to here as well
@@ -94,7 +94,7 @@ bool Staff::Base::set_measure(int measure_x, Measure::Base *measure)
 
 
 
-bool Staff::Base::insert_measure(int at_index, Measure::Base *measure)
+bool Staff::Base::insert_column(int at_index, Measure::Base *measure)
 {
    // TODO move the bounds check to here
    // behavior that < 0 inserts are corrected to 0 and
@@ -107,7 +107,7 @@ bool Staff::Base::insert_measure(int at_index, Measure::Base *measure)
 
 
 
-bool Staff::Base::erase_measure(int at_index)
+bool Staff::Base::erase_column(int at_index)
 {
    // TODO move the bounds check to here
    // behavior that < 0 inserts are corrected to 0 and
@@ -127,7 +127,7 @@ bool Staff::Base::erase_measure(int at_index)
 
 
 
-bool Staff::Base::append_measure(Measure::Base *measure)
+bool Staff::Base::append_column(Measure::Base *measure)
 {
    measures.push_back(measure);
    return true;
