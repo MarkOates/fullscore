@@ -17,7 +17,11 @@ Staff::Base::Base(std::string type)
 
 
 Staff::Base::~Base()
-{}
+{
+   if (!columns.empty())
+      for (int i=columns.size()-1; i>=0; i--)
+         delete columns[i];
+}
 
 
 
