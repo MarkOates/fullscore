@@ -336,6 +336,35 @@ TEST(MeasureGridTest, can_delete_measure)
 
 
 
+TEST(MeasureGridTest, when_attempting_to_delete_a_measure_lt_zero_or_gte_num_measures__returns_false_and_does_nothing_to_the_score)
+{
+   int num_columns_to_test = 4;
+   MeasureGrid measure_grid(num_columns_to_test, 1);
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      measure_grid.set_time_signature(i, TimeSignature(i+1, Duration(Duration::QUARTER)));
+
+   ASSERT_EQ(false, measure_grid.delete_column(-1));
+   ASSERT_EQ(false, measure_grid.delete_column(measure_grid.get_num_measures()));
+   ASSERT_EQ(false, measure_grid.delete_column(999));
+
+   ASSERT_EQ(num_columns_to_test, measure_grid.get_num_measures());
+
+   std::vector<TimeSignature> expected_time_signature_order = {
+      TimeSignature(1, Duration(Duration::QUARTER)),
+      TimeSignature(2, Duration(Duration::QUARTER)),
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(4, Duration(Duration::QUARTER)),
+   };
+
+   ASSERT_EQ(expected_time_signature_order.size(), measure_grid.get_num_measures());
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      ASSERT_EQ(expected_time_signature_order[i], measure_grid.get_time_signature(i));
+}
+
+
+
 TEST(MeasureGridTest, can_append_a_measure)
 {
    // skip
