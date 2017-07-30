@@ -91,6 +91,14 @@ bool MeasureGrid::Row::erase_measure(int at_index)
 
 
 
+bool MeasureGrid::Row::append_measure(Measure::Base *measure)
+{
+   measures.push_back(measure);
+   return true;
+}
+
+
+
 ////// MeasureGrid
 
 
@@ -267,7 +275,7 @@ void MeasureGrid::append_measure()
       // warning, this is responsible for constructing the measures
       // that are appended.  This should likely be replaced by a
       // Voice::append_column();
-      voices[i]->measures.push_back(nullptr);
+      voices[i]->append_measure(nullptr);
    }
 }
 

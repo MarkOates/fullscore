@@ -32,6 +32,7 @@ private:
       bool set_measure(int measure_x, Measure::Base *measure);
       bool insert_measure(int at_index, Measure::Base *measure);
       bool erase_measure(int at_index);
+      bool append_measure(Measure::Base *measure);
 
       Measure::Base *get_measure(int x_measure);
    };
