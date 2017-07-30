@@ -18,13 +18,10 @@ namespace Staff
    private:
       std::string type;
       int id;
-
-      // MeasureGrid::Row attributes
-
       std::string name;
 
    protected:
-      std::vector<Measure::Base *> measures;
+      std::vector<Measure::Base *> columns;
 
    public:
       Base(std::string type);
@@ -32,9 +29,6 @@ namespace Staff
       std::string get_type();
       bool is_type(std::string type);
       int get_id();
-
-      // MeasureGrid::Row functions
-
       void set_name(std::string name);
       std::string get_name();
 

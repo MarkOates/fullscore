@@ -11,7 +11,7 @@ namespace Staff
    class Instrument : public Base
    {
    public:
-      Instrument(int num_measures);
+      Instrument(int num_columns);
       ~Instrument();
 
       virtual bool set_column(int column_num, Measure::Base *measure) override;

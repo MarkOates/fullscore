@@ -11,7 +11,7 @@ Staff::Base::Base(std::string type)
    : type(type)
    , id(Staff::next_id++)
    , name()
-   , measures()
+   , columns()
 {}
 
 
@@ -58,7 +58,7 @@ std::string Staff::Base::get_name()
 
 int Staff::Base::get_num_columns()
 {
-   return measures.size();
+   return columns.size();
 }
 
 
