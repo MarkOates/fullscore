@@ -285,6 +285,34 @@ TEST(MeasureGridTest, when_inserting_a_measure_at_index_lt_zero__inserts_at_inde
 
 
 
+TEST(MeasureGridTest, when_inserting_a_measure_at_index_gte_size__appends_measure_at_the_end)
+{
+   MeasureGrid measure_grid(2, 1);
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      measure_grid.set_time_signature(i, TimeSignature(3, Duration(Duration::QUARTER)));
+
+   measure_grid.insert_measure(measure_grid.get_num_measures());
+
+   measure_grid.set_time_signature(2, TimeSignature(2, Duration(Duration::QUARTER)));
+
+   measure_grid.insert_measure(999);
+
+   std::vector<TimeSignature> expected_time_signature_order = {
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(3, Duration(Duration::QUARTER)),
+      TimeSignature(2, Duration(Duration::QUARTER)),
+      TimeSignature(4, Duration(Duration::QUARTER)),
+   };
+
+   ASSERT_EQ(expected_time_signature_order.size(), measure_grid.get_num_measures());
+
+   for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
+      ASSERT_EQ(expected_time_signature_order[i], measure_grid.get_time_signature(i));
+}
+
+
+
 TEST(MeasureGridTest, can_delete_measure)
 {
    // skip
