@@ -141,7 +141,7 @@ TEST(MeasureGridTest, can_insert_a_staff)
 
 
 
-TEST(MeasureGridTest, when_inserting_a_staff_at_index_lt_zero_inserts_at_the_begingging)
+TEST(MeasureGridTest, when_inserting_a_staff_at_index_gte_the_number_of_staves__appends_to_the_end)
 {
    MeasureGrid measure_grid(1, 2);
 
@@ -160,7 +160,7 @@ TEST(MeasureGridTest, when_inserting_a_staff_at_index_lt_zero_inserts_at_the_beg
 
 
 
-TEST(MeasureGridTest, when_inserting_a_staff_at_index_gt_the_number_of_staves_appends_to_the_end)
+TEST(MeasureGridTest, when_inserting_a_staff_at_index_lt_zero__inserts_at_the_begingging)
 {
    MeasureGrid measure_grid(1, 2);
 
