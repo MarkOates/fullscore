@@ -13,6 +13,7 @@
 
 
 std::string const SPACER = "-";
+std::string const MEASURE_NUMBERS = "#";
 
 
 
@@ -49,6 +50,7 @@ MeasureGrid MeasureGridFactory::big_score()
 MeasureGrid MeasureGridFactory::full_score()
 {
    std::vector<std::string> voices = {
+      MEASURE_NUMBERS,
       "Flute I",
       "Flute II",
       "Flute III",
@@ -101,10 +103,12 @@ MeasureGrid MeasureGridFactory::full_score()
 
    MeasureGrid measure_grid(NUM_MEASURES, 0);
 
-   measure_grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
-
    for (int i=0; i<voices.size(); i++)
    {
+      if (voices[i] == MEASURE_NUMBERS)
+      {
+         measure_grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
+      }
       if (voices[i] == SPACER)
       {
          measure_grid.append_staff(new Staff::Spacer(NUM_MEASURES));
