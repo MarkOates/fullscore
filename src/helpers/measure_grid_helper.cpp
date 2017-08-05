@@ -27,6 +27,17 @@ float MeasureGridHelper::get_length_to_measure(const MeasureGrid &measure_grid, 
 
 
 
+float MeasureGridHelper::get_width(const MeasureGrid &measure_grid)
+{
+   float length = 0;
+   for (unsigned i=0; i<measure_grid.time_signatures.size(); i++)
+      length += DurationHelper::get_length(measure_grid.time_signatures[i]);
+   return length;
+}
+
+
+
+
 float MeasureGridHelper::get_height_to_staff(const MeasureGrid &measure_grid, int staff_index)
 {
    if (staff_index < 0) return 0.0;

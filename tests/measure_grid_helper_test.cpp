@@ -58,7 +58,25 @@ TEST(MeasureGridHelperTest, returns_the_length_to_the_measure_with_non_4_4_time_
 
 
 
-TEST(MeasureGridHelperTest, can_get_its_height)
+TEST(MeasureGridHelperTest, can_get_the_width_of_a_measure_grid)
+{
+   MeasureGrid measure_grid(0, 1);
+
+   measure_grid.append_measure();
+   measure_grid.append_measure();
+   measure_grid.append_measure();
+   measure_grid.append_measure();
+   measure_grid.append_measure();
+
+   measure_grid.set_time_signature(3, TimeSignature(3, Duration(Duration::EIGHTH)));
+
+   ASSERT_EQ(4.375, MeasureGridHelper::get_width(measure_grid));
+}
+
+
+
+
+TEST(MeasureGridHelperTest, can_get_its_height_up_to_a_staff)
 {
    MeasureGrid measure_grid(1, 0);
 
