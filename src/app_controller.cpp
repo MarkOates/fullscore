@@ -439,9 +439,9 @@ void AppController::on_message(UIWidget *sender, std::string message)
 
    if (sender == command_bar && message != "on_submit")
    {
-      if (!message.empty() && message[0] == ':')
+      if (!message.empty())
       {
-         std::string action_identifier = message.substr(1);
+         std::string action_identifier = message;
 
          Action::Base *action = create_action(action_identifier);
 
