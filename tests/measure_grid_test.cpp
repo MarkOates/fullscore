@@ -146,7 +146,7 @@ TEST(MeasureGridTest, when_inserting_a_nullptr_staff_returns_false)
 {
    MeasureGrid measure_grid(1, 1);
 
-   measure_grid.insert_staff(nullptr, 1);
+   ASSERT_EQ(false, measure_grid.insert_staff(nullptr, 1));
 
    ASSERT_EQ(1, measure_grid.get_num_staves());
 }
