@@ -30,7 +30,7 @@ std::string Staff::Base::get_type()
 
 bool Staff::Base::is_type(std::string type)
 {
-   return type == type;
+   return this->type == type;
 }
 
 

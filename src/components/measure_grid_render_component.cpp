@@ -112,6 +112,12 @@ void MeasureGridRenderComponent::render()
                   color::darkorange);
          }
 
+         if (staff->is_type("measure_numbers"))
+         {
+            al_draw_text(text_font, color::black, x_pos+5, label_text_top_y, ALLEGRO_ALIGN_LEFT, tostring(x).c_str());
+            continue;
+         }
+
          Measure::Base *measure = measure_grid->get_measure(x,y);
          if (!measure) continue;
 

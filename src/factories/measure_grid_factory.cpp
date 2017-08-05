@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/measure_grid_factory.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/note.h>
@@ -12,6 +13,7 @@
 
 
 std::string const SPACER = "-";
+std::string const MEASURE_NUMBERS = "#";
 
 
 
@@ -48,6 +50,7 @@ MeasureGrid MeasureGridFactory::big_score()
 MeasureGrid MeasureGridFactory::full_score()
 {
    std::vector<std::string> voices = {
+      MEASURE_NUMBERS,
       "Flute I",
       "Flute II",
       "Flute III",
@@ -96,17 +99,23 @@ MeasureGrid MeasureGridFactory::full_score()
       "Bass",
    };
 
-   MeasureGrid measure_grid(20, 0);
+   const int NUM_MEASURES = 20;
+
+   MeasureGrid measure_grid(NUM_MEASURES, 0);
 
    for (int i=0; i<voices.size(); i++)
    {
-      if (voices[i] == SPACER)
+      if (voices[i] == MEASURE_NUMBERS)
       {
-         measure_grid.append_staff(new Staff::Spacer(20));
+         measure_grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
+      }
+      else if (voices[i] == SPACER)
+      {
+         measure_grid.append_staff(new Staff::Spacer(NUM_MEASURES));
       }
       else
       {
-         measure_grid.append_staff(new Staff::Instrument(20));
+         measure_grid.append_staff(new Staff::Instrument(NUM_MEASURES));
          measure_grid.set_voice_name(i, voices[i]);
       }
    }
