@@ -66,9 +66,6 @@ void MeasureGridRenderComponent::render()
       TimeSignature time_signature = measure_grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
 
-      // draw barline
-      al_draw_line(x_pos, 0, x_pos, staff_height * measure_grid->get_height(), color::color(color::black, 0.2), 1.0);
-
       // draw time signature
       if (time_signature != previous_time_signature) time_signature_render_component.render(x_pos, -50);
 
@@ -84,6 +81,7 @@ void MeasureGridRenderComponent::render()
       if (!staff) continue;
 
       float this_staff_height = staff_height * staff->get_height();
+      float this_staff_half_height = this_staff_height * 0.5;
 
       ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
 
@@ -102,9 +100,21 @@ void MeasureGridRenderComponent::render()
       // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
-         // draw the reference_cursor
          float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
+         float x_pos_plus_width = MeasureGridHelper::get_length_to_measure(*measure_grid, x+1) * full_measure_width;
 
+         if (staff->is_type("instrument"))
+         {
+            // draw barline
+            al_draw_line(x_pos_plus_width, row_middle_y-this_staff_half_height, x_pos_plus_width, row_middle_y+this_staff_half_height, color::color(color::black, 0.2), 1.0);
+         }
+         if (staff->is_type("measure_numbers"))
+         {
+            al_draw_text(text_font, color::black, x_pos+5, label_text_top_y, ALLEGRO_ALIGN_LEFT, tostring(x).c_str());
+            continue;
+         }
+
+         // draw the reference_cursor
          bool draw_reference_cursor = (y == reference_cursor_y && x == reference_cursor_x);
          if (draw_reference_cursor)
          {
@@ -119,12 +129,7 @@ void MeasureGridRenderComponent::render()
                   color::darkorange);
          }
 
-         if (staff->is_type("measure_numbers"))
-         {
-            al_draw_text(text_font, color::black, x_pos+5, label_text_top_y, ALLEGRO_ALIGN_LEFT, tostring(x).c_str());
-            continue;
-         }
-
+         // draw the measure
          Measure::Base *measure = measure_grid->get_measure(x,y);
          if (!measure) continue;
 
