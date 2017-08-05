@@ -84,6 +84,32 @@ TEST(MeasureGridHelperTest, can_get_its_height)
 
 
 
+TEST(MeasureGridHelperTest, can_get_height_of_a_staff)
+{
+   MeasureGrid measure_grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Spacer spacer1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(1.0, MeasureGridHelper::get_height_of_staff(measure_grid, 0));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 1));
+   ASSERT_EQ(1.0, MeasureGridHelper::get_height_of_staff(measure_grid, 2));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 3));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 4));
+}
+
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

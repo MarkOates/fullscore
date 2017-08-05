@@ -94,20 +94,20 @@ void UIMeasureGridEditor::on_draw()
 
       // measure box outline
       if (is_measure_target_mode())
-         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-            CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+STAFF_HEIGHT,
             4, 4, color::color(color::black, 0.3), 2.0);
    }
 
    // measure box fill
-   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-      CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+      CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+STAFF_HEIGHT,
       4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
    if (is_measure_target_mode())
-      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-         CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+         CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.7), 2.0);
 
    // left bar (blinking)
@@ -205,7 +205,7 @@ float UIMeasureGridEditor::get_measure_cursor_real_x()
 
 float UIMeasureGridEditor::get_measure_cursor_real_y()
 {
-   return measure_cursor_y * STAFF_HEIGHT;
+   return MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y) * STAFF_HEIGHT;
 }
 
 

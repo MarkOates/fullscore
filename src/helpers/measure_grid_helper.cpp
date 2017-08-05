@@ -46,3 +46,13 @@ float MeasureGridHelper::get_height_to_staff(const MeasureGrid &measure_grid, in
 
 
 
+float MeasureGridHelper::get_height_of_staff(MeasureGrid &measure_grid, int staff_index) // TODO make const
+{
+   Staff::Base *staff = measure_grid.get_staff(staff_index);
+   if (!staff) return 0.0;
+   return staff->get_height();
+}
+
+
+
+
