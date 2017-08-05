@@ -83,7 +83,7 @@ void MeasureGridRenderComponent::render()
       float this_staff_height = staff_height * staff->get_height();
       float this_staff_half_height = this_staff_height * 0.5;
 
-      ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
+      ALLEGRO_FONT *text_font = Framework::font("plantin-mt-light.ttf 22");
 
       // draw the row name
       float row_middle_y = y_counter + this_staff_height * 0.5;
