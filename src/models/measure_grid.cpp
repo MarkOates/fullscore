@@ -22,7 +22,9 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 MeasureGrid::~MeasureGrid()
 {
-   for (int i=voices.size(); i>=0; i--) if (voices[i]) delete voices[i];
+   // these should likely be destructed here or handled in some way other than being left dangling,
+   // but a measure grid is frequently created elsewhere and returned in a function
+   //for (int i=voices.size(); i>=0; i--) if (voices[i]) delete voices[i];
 }
 
 
