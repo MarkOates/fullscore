@@ -1,7 +1,6 @@
 
 
 
-
 #include <fullscore/actions/transforms/append_note_action.h>
 
 #include <fullscore/transforms/append_note_transform.h>
@@ -16,10 +15,8 @@ Action::AppendNoteTransform::AppendNoteTransform(std::vector<Note> *notes, Note 
 
 
 
-
 Action::AppendNoteTransform::~AppendNoteTransform()
 {}
-
 
 
 
@@ -32,7 +29,6 @@ bool Action::AppendNoteTransform::execute()
 
    return true;
 }
-
 
 
 
