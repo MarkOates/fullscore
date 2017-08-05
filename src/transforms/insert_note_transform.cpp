@@ -28,7 +28,7 @@ Transform::InsertNote::~InsertNote()
 
 std::vector<Note> Transform::InsertNote::transform(std::vector<Note> notes)
 {
-   position = limit<int>(0, notes.size()-1, position);
+   position = limit<int>(0, notes.size(), position);
 	notes.insert(notes.begin() + position, note);
    return notes;
 }
