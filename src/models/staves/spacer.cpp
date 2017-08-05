@@ -60,3 +60,10 @@ int Staff::Spacer::get_num_columns()
 
 
 
+float Staff::Spacer::get_height()
+{
+   return 0.5;
+}
+
+
+
