@@ -4,6 +4,7 @@
 
 #include <fullscore/app_controller.h>
 
+#include <fullscore/actions/transforms/append_note_action.h>
 #include <fullscore/actions/transforms/add_dot_transform_action.h>
 #include <fullscore/actions/transforms/clear_measure_transform_action.h>
 #include <fullscore/actions/transforms/double_duration_transform_action.h>
@@ -118,6 +119,7 @@ std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mo
          else if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
+      case ALLEGRO_KEY_A: return "insert_note_after"; break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
       case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
@@ -292,6 +294,12 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::Octatonic1Transform(notes);
    else if (action_name == "insert_note")
       action = new Action::InsertNoteTransform(notes, current_measure_grid_editor->note_cursor_x, Note());
+   else if (action_name == "insert_note_after")
+   {
+      action = new Action::Queue("insert_note_after: insert_note and move_cursor_right");
+      static_cast<Action::Queue *>(action)->add_action(new Action::InsertNoteTransform(notes, current_measure_grid_editor->note_cursor_x+1, Note()));
+      static_cast<Action::Queue *>(action)->add_action(new Action::MoveCursorRight(current_measure_grid_editor));
+   }
    else if (action_name == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(current_measure_grid_editor);
    else if (action_name == "toggle_playback")
