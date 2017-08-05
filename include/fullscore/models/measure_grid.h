@@ -51,7 +51,7 @@ public:
    TimeSignature get_time_signature(int index);
    TimeSignature *get_time_signature_ptr(int index); // consider removing this method (having the dependent action rely on a *measure_grid and measure number)
 
-   float get_height();
+   float get_height() const;
 };
 
 

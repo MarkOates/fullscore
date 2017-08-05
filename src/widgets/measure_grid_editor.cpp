@@ -55,7 +55,7 @@ void UIMeasureGridEditor::on_draw()
 {
    // get_width_of_score
    float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
-   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+   float measure_grid_real_height = measure_grid.get_height() * STAFF_HEIGHT;
 
    // draw the bounding box for the widget
    float pt, pr, pb, pl;
