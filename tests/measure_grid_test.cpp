@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/measures/basic.h>
 #include <fullscore/models/measure.h>
 #include <fullscore/models/measure_grid.h>
@@ -119,10 +120,10 @@ TEST(MeasureGridTest, can_insert_a_staff)
    measure_grid.set_voice_name(1, "voice 1");
    measure_grid.set_voice_name(2, "voice 2");
 
-   measure_grid.insert_staff(1);
+   measure_grid.insert_staff(new Staff::Instrument(measure_grid.get_num_measures()), 1);
    measure_grid.set_voice_name(1, "inserted voice 1");
 
-   measure_grid.insert_staff(3);
+   measure_grid.insert_staff(new Staff::Instrument(measure_grid.get_num_measures()), 3);
    measure_grid.set_voice_name(3, "inserted voice 2");
 
    std::vector<std::string> expected_voice_name_order = {
@@ -141,6 +142,17 @@ TEST(MeasureGridTest, can_insert_a_staff)
 
 
 
+TEST(MeasureGridTest, when_inserting_a_nullptr_staff_returns_false)
+{
+   MeasureGrid measure_grid(1, 1);
+
+   measure_grid.insert_staff(nullptr, 1);
+
+   ASSERT_EQ(1, measure_grid.get_num_staves());
+}
+
+
+
 TEST(MeasureGridTest, when_inserting_a_staff_at_index_gte_the_number_of_staves__appends_to_the_end)
 {
    MeasureGrid measure_grid(1, 2);
@@ -148,11 +160,11 @@ TEST(MeasureGridTest, when_inserting_a_staff_at_index_gte_the_number_of_staves__
    measure_grid.set_voice_name(0, "voice 0");
    measure_grid.set_voice_name(1, "voice 1");
 
-   measure_grid.insert_staff(measure_grid.get_num_staves());
+   measure_grid.insert_staff(new Staff::Instrument(measure_grid.get_num_measures()), measure_grid.get_num_staves());
 
    measure_grid.set_voice_name(2, "inserted voice 1");
 
-   measure_grid.insert_staff(100);
+   measure_grid.insert_staff(new Staff::Instrument(measure_grid.get_num_measures()), 100);
 
    std::vector<std::string> expected_voice_name_order = { "voice 0", "voice 1", "inserted voice 1", "" };
 
@@ -171,7 +183,7 @@ TEST(MeasureGridTest, when_inserting_a_staff_at_index_lt_zero__inserts_at_the_be
    measure_grid.set_voice_name(0, "voice 0");
    measure_grid.set_voice_name(1, "voice 1");
 
-   measure_grid.insert_staff(-100);
+   measure_grid.insert_staff(new Staff::Instrument(measure_grid.get_num_measures()), -100);
 
    std::vector<std::string> expected_voice_name_order = { "", "voice 0", "voice 1" };
 
@@ -226,7 +238,7 @@ TEST(MeasureGridTest, can_append_a_staff)
    measure_grid.set_voice_name(0, "voice 0");
    measure_grid.set_voice_name(1, "voice 1");
 
-   measure_grid.append_staff();
+   measure_grid.append_staff(new Staff::Instrument(measure_grid.get_num_staves()));
 
    std::vector<std::string> expected_voice_name_order = { "voice 0", "voice 1", "" };
 
@@ -234,6 +246,17 @@ TEST(MeasureGridTest, can_append_a_staff)
 
    for (int i=0; i<expected_voice_name_order.size(); i++)
       ASSERT_EQ(expected_voice_name_order[i], measure_grid.get_voice_name(i));
+}
+
+
+
+TEST(MeasureGridTest, when_appending_a_nullptr_staff_returns_false)
+{
+   MeasureGrid measure_grid(1, 1);
+
+   ASSERT_EQ(false, measure_grid.append_staff(nullptr));
+
+   ASSERT_EQ(1, measure_grid.get_num_measures());
 }
 
 
