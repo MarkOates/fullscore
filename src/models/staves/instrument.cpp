@@ -9,6 +9,7 @@
 
 Staff::Instrument::Instrument(int num_columns)
    : Base("instrument")
+   , columns()
 {
    for (unsigned i=0; i<num_columns; i++) columns.push_back(nullptr);
 }
@@ -16,7 +17,18 @@ Staff::Instrument::Instrument(int num_columns)
 
 
 Staff::Instrument::~Instrument()
-{}
+{
+   if (!columns.empty())
+      for (int i=columns.size()-1; i>=0; i--)
+         delete columns[i];
+}
+
+
+
+int Staff::Instrument::get_num_columns()
+{
+   return columns.size();
+}
 
 
 

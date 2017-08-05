@@ -20,9 +20,6 @@ namespace Staff
       int id;
       std::string name;
 
-   protected:
-      std::vector<Measure::Base *> columns;
-
    public:
       Base(std::string type);
       virtual ~Base();
@@ -32,7 +29,7 @@ namespace Staff
       void set_name(std::string name);
       std::string get_name();
 
-      int get_num_columns();
+      virtual int get_num_columns() = 0;
 
       virtual bool set_column(int column_num, Measure::Base *measure) = 0;
       virtual bool insert_column(int at_index, Measure::Base *measure) = 0;
