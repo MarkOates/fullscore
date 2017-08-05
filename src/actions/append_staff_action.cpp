@@ -4,6 +4,7 @@
 
 #include <fullscore/actions/append_staff_action.h>
 
+#include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/measure_grid.h>
 
 
@@ -27,7 +28,7 @@ bool Action::AppendStaff::execute()
 {
    if (!measure_grid) return false;
 
-   measure_grid->append_staff();
+   measure_grid->append_staff(new Staff::Instrument(measure_grid->get_num_measures()));
 
    return false;
 }
