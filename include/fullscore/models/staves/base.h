@@ -30,6 +30,7 @@ namespace Staff
       std::string get_name();
 
       virtual int get_num_columns() = 0;
+      virtual float get_height() = 0;
 
       virtual bool set_column(int column_num, Measure::Base *measure) = 0;
       virtual bool insert_column(int at_index, Measure::Base *measure) = 0;

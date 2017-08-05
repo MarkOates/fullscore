@@ -55,7 +55,7 @@ void UIMeasureGridEditor::on_draw()
 {
    // get_width_of_score
    float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
-   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+   float measure_grid_real_height = measure_grid.get_height() * STAFF_HEIGHT;
 
    // draw the bounding box for the widget
    float pt, pr, pb, pl;
@@ -94,27 +94,27 @@ void UIMeasureGridEditor::on_draw()
 
       // measure box outline
       if (is_measure_target_mode())
-         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-            CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
             4, 4, color::color(color::black, 0.3), 2.0);
    }
 
    // measure box fill
-   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-      CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+      CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
       4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
    if (is_measure_target_mode())
-      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, measure_cursor_y*STAFF_HEIGHT,
-         CACHED_get_measure_cursor_real_x+measure_width, measure_cursor_y*STAFF_HEIGHT+STAFF_HEIGHT,
+      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+         CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.7), 2.0);
 
    // left bar (blinking)
 
    ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
    al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
-         CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+STAFF_HEIGHT,
+         CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
          cursor_color, 3.0);
 
    // draw a hilight box at the focused note
@@ -128,7 +128,7 @@ void UIMeasureGridEditor::on_draw()
             CACHED_get_measure_cursor_real_x + note_real_offset_x,
             CACHED_get_measure_cursor_real_y,
             CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-            CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_y + MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
             6,
             6,
             color::color(color::pink, 0.4)
@@ -140,7 +140,7 @@ void UIMeasureGridEditor::on_draw()
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
                CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-               CACHED_get_measure_cursor_real_y + STAFF_HEIGHT,
+               CACHED_get_measure_cursor_real_y + MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
                6,
                6,
                color::mix(color::color(color::pink, 0.8), color::black, 0.3),
@@ -205,7 +205,7 @@ float UIMeasureGridEditor::get_measure_cursor_real_x()
 
 float UIMeasureGridEditor::get_measure_cursor_real_y()
 {
-   return measure_cursor_y * STAFF_HEIGHT;
+   return MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y) * STAFF_HEIGHT;
 }
 
 

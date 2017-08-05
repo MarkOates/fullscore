@@ -32,6 +32,13 @@ int Staff::Instrument::get_num_columns()
 
 
 
+float Staff::Instrument::get_height()
+{
+   return 1.0;
+}
+
+
+
 bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
 {
    if (column_num < 0) return false;

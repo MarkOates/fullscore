@@ -220,6 +220,27 @@ bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 
 
 
+float MeasureGrid::get_height() const
+{
+   float height = 0;
+   for (int i=0; i<get_num_staves(); i++)
+      if (voices[i]) height += voices[i]->get_height();
+   return height;
+}
+
+
+
+Staff::Base *MeasureGrid::get_staff(int y_staff)
+{
+   if (y_staff < 0 || y_staff >= voices.size()) return nullptr;
+
+   Staff::Base *staff = voices[y_staff];
+   if (!staff) return nullptr;
+   return staff;
+}
+
+
+
 TimeSignature MeasureGrid::get_time_signature(int index)
 {
    if (index < 0) return TimeSignature(0, Duration());

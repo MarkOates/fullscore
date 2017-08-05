@@ -15,6 +15,7 @@ namespace Staff
       ~Spacer();
 
       virtual int get_num_columns() override;
+      virtual float get_height() override;
 
       virtual Measure::Base *get_measure(int column_num) override;
       virtual bool set_column(int column_num, Measure::Base *measure) override;

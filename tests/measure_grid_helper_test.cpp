@@ -4,6 +4,8 @@
 
 #include <gtest/gtest.h>
 
+#include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/staves/spacer.h>
 #include <fullscore/helpers/measure_grid_helper.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/models/note.h>
@@ -51,6 +53,58 @@ TEST(MeasureGridHelperTest, returns_the_length_to_the_measure_with_non_4_4_time_
    ASSERT_EQ(MeasureGridHelper::get_length_to_measure(measure_grid, 4), 3.0625); // + 0.3125
    ASSERT_EQ(MeasureGridHelper::get_length_to_measure(measure_grid, 5), 5.5625); // + 2.5
    ASSERT_EQ(MeasureGridHelper::get_length_to_measure(measure_grid, 6), 6.6875); // + 1.125
+}
+
+
+
+
+TEST(MeasureGridHelperTest, can_get_its_height)
+{
+   MeasureGrid measure_grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Spacer spacer1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(0.0, MeasureGridHelper::get_height_to_staff(measure_grid, 0));
+   ASSERT_EQ(1.0, MeasureGridHelper::get_height_to_staff(measure_grid, 1));
+   ASSERT_EQ(1.5, MeasureGridHelper::get_height_to_staff(measure_grid, 2));
+   ASSERT_EQ(2.5, MeasureGridHelper::get_height_to_staff(measure_grid, 3));
+   ASSERT_EQ(3.0, MeasureGridHelper::get_height_to_staff(measure_grid, 4));
+}
+
+
+
+
+TEST(MeasureGridHelperTest, can_get_height_of_a_staff)
+{
+   MeasureGrid measure_grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Spacer spacer1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(1.0, MeasureGridHelper::get_height_of_staff(measure_grid, 0));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 1));
+   ASSERT_EQ(1.0, MeasureGridHelper::get_height_of_staff(measure_grid, 2));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 3));
+   ASSERT_EQ(0.5, MeasureGridHelper::get_height_of_staff(measure_grid, 4));
 }
 
 
