@@ -5,6 +5,8 @@
 
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/measure.h>
 #include <fullscore/models/measure_grid.h>
 #include <fullscore/models/note.h>
@@ -405,6 +407,76 @@ TEST(MeasureGridTest, can_append_a_measure)
 
    for (unsigned i=0; i<measure_grid.get_num_measures(); i++)
       ASSERT_EQ(expected_time_signature_order[i], measure_grid.get_time_signature(i));
+}
+
+
+
+TEST(MeasureGridTest, can_get_its_height)
+{
+   MeasureGrid measure_grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer1(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(3.5, measure_grid.get_height());
+}
+
+
+
+TEST(MeasureGridTest, can_get_a_staff)
+{
+   MeasureGrid measure_grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer1(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(&instrument1, measure_grid.get_staff(0));
+   ASSERT_EQ(&instrument2, measure_grid.get_staff(1));
+   ASSERT_EQ(&spacer1, measure_grid.get_staff(2));
+   ASSERT_EQ(&spacer2, measure_grid.get_staff(3));
+   ASSERT_EQ(&spacer3, measure_grid.get_staff(4));
+}
+
+
+
+TEST(MeasureGridTest, when_getting_a_staff_out_of_bounds__returns_nullptr)
+{
+   MeasureGrid measure_grid(0, 1);
+
+   Staff::Instrument instrument1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer1(1);
+   Staff::Spacer spacer2(1);
+   Staff::Spacer spacer3(1);
+
+   measure_grid.append_staff(&instrument1);
+   measure_grid.append_staff(&instrument2);
+   measure_grid.append_staff(&spacer1);
+   measure_grid.append_staff(&spacer2);
+   measure_grid.append_staff(&spacer3);
+
+   ASSERT_EQ(nullptr, measure_grid.get_staff(-1));
+   ASSERT_EQ(nullptr, measure_grid.get_staff(-100));
+   ASSERT_EQ(nullptr, measure_grid.get_staff(measure_grid.get_num_staves()));
+   ASSERT_EQ(nullptr, measure_grid.get_staff(9999));
 }
 
 

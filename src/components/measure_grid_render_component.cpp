@@ -7,6 +7,7 @@
 #include <allegro_flare/color.h>
 #include <allegro_flare/framework.h>
 #include <allegro_flare/useful.h>
+#include <fullscore/models/staves/base.h>
 #include <fullscore/components/measure_render_component.h>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
@@ -66,7 +67,7 @@ void MeasureGridRenderComponent::render()
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
 
       // draw barline
-      al_draw_line(x_pos, 0, x_pos, staff_height * measure_grid->get_num_staves(), color::color(color::black, 0.2), 1.0);
+      al_draw_line(x_pos, 0, x_pos, staff_height * measure_grid->get_height(), color::color(color::black, 0.2), 1.0);
 
       // draw time signature
       if (time_signature != previous_time_signature) time_signature_render_component.render(x_pos, -50);
@@ -74,14 +75,20 @@ void MeasureGridRenderComponent::render()
       previous_time_signature = time_signature;
    }
 
+   float y_counter = 0;
+
    // draw the notes and measures
    for (int y=0; y<measure_grid->get_num_staves(); y++)
    {
+      Staff::Base *staff = measure_grid->get_staff(y);
+      if (!staff) continue;
+
+      float this_staff_height = staff_height * staff->get_height();
+
       ALLEGRO_FONT *text_font = Framework::font("DroidSans.ttf 20");
-      int y_pos = y * staff_height;
 
       // draw the row name
-      float row_middle_y = y_pos + staff_height * 0.5;
+      float row_middle_y = y_counter + this_staff_height * 0.5;
       float label_text_top_y = row_middle_y - al_get_font_line_height(text_font) * 0.5;
       al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
 
@@ -99,18 +106,20 @@ void MeasureGridRenderComponent::render()
             float reference_cursor_hwidth = reference_cursor_width * 0.5;
 
             al_draw_filled_triangle(
-                  x_pos, y_pos,
-                  x_pos-reference_cursor_hwidth, y_pos-reference_cursor_height,
-                  x_pos+reference_cursor_hwidth, y_pos-reference_cursor_height,
+                  x_pos, y_counter,
+                  x_pos-reference_cursor_hwidth, y_counter-reference_cursor_height,
+                  x_pos+reference_cursor_hwidth, y_counter-reference_cursor_height,
                   color::darkorange);
          }
 
          Measure::Base *measure = measure_grid->get_measure(x,y);
          if (!measure) continue;
 
-         MeasureRenderComponent measure_render_component(measure, music_engraver, full_measure_width, x_pos, y_pos, row_middle_y, staff_height, showing_debug_data);
+         MeasureRenderComponent measure_render_component(measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
          measure_render_component.render();
       }
+
+      y_counter += this_staff_height;
    }
 }
 
