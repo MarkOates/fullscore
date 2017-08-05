@@ -109,7 +109,7 @@ MeasureGrid MeasureGridFactory::full_score()
       {
          measure_grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
       }
-      if (voices[i] == SPACER)
+      else if (voices[i] == SPACER)
       {
          measure_grid.append_staff(new Staff::Spacer(NUM_MEASURES));
       }

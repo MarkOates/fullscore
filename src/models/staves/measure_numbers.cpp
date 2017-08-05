@@ -28,6 +28,7 @@ bool Staff::MeasureNumbers::set_column(int column_num, Measure::Base *measure)
 
 bool Staff::MeasureNumbers::insert_column(int at_index, Measure::Base *measure)
 {
+   num_columns++;
    return true;
 }
 
@@ -35,6 +36,8 @@ bool Staff::MeasureNumbers::insert_column(int at_index, Measure::Base *measure)
 
 bool Staff::MeasureNumbers::erase_column(int at_index)
 {
+   if (at_index < 0 || at_index >= num_columns) return false;
+   num_columns--;
    return true;
 }
 
@@ -42,6 +45,7 @@ bool Staff::MeasureNumbers::erase_column(int at_index)
 
 bool Staff::MeasureNumbers::append_column(Measure::Base *measure)
 {
+   num_columns++;
    return true;
 }
 
