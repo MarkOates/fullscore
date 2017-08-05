@@ -11,16 +11,12 @@ Staff::Base::Base(std::string type)
    : type(type)
    , id(Staff::next_id++)
    , name()
-   , columns()
 {}
 
 
 
 Staff::Base::~Base()
 {
-   if (!columns.empty())
-      for (int i=columns.size()-1; i>=0; i--)
-         delete columns[i];
 }
 
 
@@ -56,13 +52,6 @@ void Staff::Base::set_name(std::string name)
 std::string Staff::Base::get_name()
 {
    return name;
-}
-
-
-
-int Staff::Base::get_num_columns()
-{
-   return columns.size();
 }
 
 

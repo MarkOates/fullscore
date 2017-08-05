@@ -8,14 +8,11 @@
 
 namespace Staff
 {
-   class Instrument : public Base
+   class Spacer : public Base
    {
-   private:
-      std::vector<Measure::Base *> columns;
-
    public:
-      Instrument(int num_columns);
-      ~Instrument();
+      Spacer(int num_columns);
+      ~Spacer();
 
       virtual int get_num_columns() override;
 

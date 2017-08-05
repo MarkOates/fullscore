@@ -20,6 +20,15 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 
 
+MeasureGrid::~MeasureGrid()
+{
+   // these should likely be destructed here or handled in some way other than being left dangling,
+   // but a measure grid is frequently created elsewhere and returned in a function
+   //for (int i=voices.size(); i>=0; i--) if (voices[i]) delete voices[i];
+}
+
+
+
 Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
@@ -81,21 +90,16 @@ int MeasureGrid::get_num_staves() const
 
 
 
-void MeasureGrid::insert_staff(int index)
+bool MeasureGrid::insert_staff(Staff::Base *staff, int index)
 {
+   if (!staff) return false;
+
    if (index < 0) index = 0;
 
-   if (index >= (int)voices.size())
-   {
-      append_staff();
-   }
-   else 
-   {
-      // TODO: IMPORTANT here we are depending on voices[0] to currectly
-      // report the current number of measures
-      int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
-      voices.insert(voices.begin() + index, new Staff::Instrument(num_measures));
-   }
+   if (index >= (int)voices.size()) return append_staff(staff);
+   else voices.insert(voices.begin() + index, staff);
+
+   return true;
 }
 
 
@@ -110,12 +114,11 @@ bool MeasureGrid::delete_staff(int index)
 
 
 
-void MeasureGrid::append_staff()
+bool MeasureGrid::append_staff(Staff::Base *staff)
 {
-   // TODO: IMPORTANT here we are depending on voices[0] to currectly
-   // report the current number of measures
-   int num_measures = (voices.empty()) ? 8 : voices[0]->get_num_columns();
-   voices.push_back(new Staff::Instrument(num_measures));
+   if (!staff) return false;
+   voices.push_back(staff);
+   return true;
 }
 
 

@@ -3,9 +3,15 @@
 
 #include <fullscore/factories/measure_grid_factory.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/note.h>
 #include <allegro_flare/useful.h>
 #include <iostream>
+
+
+
+std::string const SPACER = "-";
 
 
 
@@ -45,30 +51,44 @@ MeasureGrid MeasureGridFactory::full_score()
       "Flute I",
       "Flute II",
       "Flute III",
+      SPACER,
       "Oboe",
       "English Horn",
+      SPACER,
       "Clarinet I",
       "Clarinet II",
       "Clarinet III",
+      SPACER,
       "Bassoon I",
       "Bassoon II",
+      SPACER,
+      SPACER,
       "Trumpet I",
       "Trumpet II",
       "Trumpet III",
+      SPACER,
       "F Horn I",
       "F Horn II",
       "F Horn III",
       "F Horn IV",
+      SPACER,
       "Trombone I",
       "Trombone II",
       "Trombone III",
       "Bass Trombone",
+      SPACER,
       "Tuba",
+      SPACER,
+      SPACER,
       "Percussion I",
       "Percussion II",
       "Percussion III",
+      SPACER,
       "Piano {Grand Staff}",
+      SPACER,
       "Harp {Grand Staff}",
+      SPACER,
+      SPACER,
       "Violin I",
       "Violin II",
       "Viola",
@@ -76,10 +96,20 @@ MeasureGrid MeasureGridFactory::full_score()
       "Bass",
    };
 
-   MeasureGrid measure_grid(20, voices.size());
+   MeasureGrid measure_grid(20, 0);
 
    for (int i=0; i<voices.size(); i++)
-      measure_grid.set_voice_name(i, voices[i]);
+   {
+      if (voices[i] == SPACER)
+      {
+         measure_grid.append_staff(new Staff::Spacer(20));
+      }
+      else
+      {
+         measure_grid.append_staff(new Staff::Instrument(20));
+         measure_grid.set_voice_name(i, voices[i]);
+      }
+   }
 
    return measure_grid;
 }
