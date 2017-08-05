@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/measure_grid_factory.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/note.h>
@@ -96,17 +97,21 @@ MeasureGrid MeasureGridFactory::full_score()
       "Bass",
    };
 
-   MeasureGrid measure_grid(20, 0);
+   const int NUM_MEASURES = 20;
+
+   MeasureGrid measure_grid(NUM_MEASURES, 0);
+
+   measure_grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
 
    for (int i=0; i<voices.size(); i++)
    {
       if (voices[i] == SPACER)
       {
-         measure_grid.append_staff(new Staff::Spacer(20));
+         measure_grid.append_staff(new Staff::Spacer(NUM_MEASURES));
       }
       else
       {
-         measure_grid.append_staff(new Staff::Instrument(20));
+         measure_grid.append_staff(new Staff::Instrument(NUM_MEASURES));
          measure_grid.set_voice_name(i, voices[i]);
       }
    }
