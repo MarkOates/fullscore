@@ -92,6 +92,13 @@ void MeasureGridRenderComponent::render()
       float label_text_top_y = row_middle_y - al_get_font_line_height(text_font) * 0.5;
       al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
 
+      // horizontal guide line for the staff
+      if (staff->is_type("instrument"))
+      {
+         float width = MeasureGridHelper::get_width(*measure_grid);
+         al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
+      }
+
       // draw the measures
       for (int x=0; x<measure_grid->get_num_measures(); x++)
       {
