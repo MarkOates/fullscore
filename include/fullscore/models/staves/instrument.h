@@ -6,10 +6,6 @@
 
 
 
-#define NO_RECORD -1
-
-
-
 namespace Staff
 {
    class Instrument : public Base

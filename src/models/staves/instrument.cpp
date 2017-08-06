@@ -14,7 +14,7 @@ Staff::Instrument::Instrument(int num_columns)
    , columns_of_measure_ids()
 {
    //for (unsigned i=0; i<num_columns; i++) columns.push_back(nullptr);
-   for (unsigned i=0; i<num_columns; i++) columns_of_measure_ids.push_back(NO_RECORD);
+   for (unsigned i=0; i<num_columns; i++) columns_of_measure_ids.push_back(Measure::NO_RECORD);
 }
 
 
@@ -47,7 +47,7 @@ bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
    if (column_num < 0) return false;
    if (column_num >= columns_of_measure_ids.size()) return false;
 
-   int measure_id_to_write = NO_RECORD;
+   int measure_id_to_write = Measure::NO_RECORD;
    if (measure) measure_id_to_write = measure->get_id();
 
    //if (columns[column_num]) delete columns[column_num];
@@ -63,7 +63,7 @@ bool Staff::Instrument::insert_column(int at_index, Measure::Base *measure)
    if (at_index < 0) return false;
    if (at_index >= columns_of_measure_ids.size()) return false;
 
-   int measure_id_to_write = NO_RECORD;
+   int measure_id_to_write = Measure::NO_RECORD;
    if (measure) measure_id_to_write = measure->get_id();
 
    columns_of_measure_ids.insert(columns_of_measure_ids.begin() + at_index, measure_id_to_write);
@@ -88,7 +88,7 @@ bool Staff::Instrument::erase_column(int at_index)
 
 bool Staff::Instrument::append_column(Measure::Base *measure)
 {
-   int measure_id_to_write = NO_RECORD;
+   int measure_id_to_write = Measure::NO_RECORD;
    if (measure) measure_id_to_write = measure->get_id();
 
    columns_of_measure_ids.push_back(measure_id_to_write);
