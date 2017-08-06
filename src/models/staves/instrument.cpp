@@ -10,10 +10,8 @@
 
 Staff::Instrument::Instrument(int num_columns)
    : Base("instrument")
-   //, columns()
    , columns_of_measure_ids()
 {
-   //for (unsigned i=0; i<num_columns; i++) columns.push_back(nullptr);
    for (unsigned i=0; i<num_columns; i++) columns_of_measure_ids.push_back(Measure::NO_RECORD);
 }
 
@@ -50,8 +48,6 @@ bool Staff::Instrument::set_column(int column_num, Measure::Base *measure)
    int measure_id_to_write = Measure::NO_RECORD;
    if (measure) measure_id_to_write = measure->get_id();
 
-   //if (columns[column_num]) delete columns[column_num];
-
    columns_of_measure_ids[column_num] = measure_id_to_write;
    return true;
 }
@@ -77,8 +73,6 @@ bool Staff::Instrument::erase_column(int at_index)
    if (at_index < 0) std::runtime_error("Cannot erase measure < 0");
    if (at_index >= columns_of_measure_ids.size()) std::runtime_error("Cannot erase measure >= size()");
 
-   //if (columns[at_index]) delete columns[at_index];
-
    columns_of_measure_ids.erase(columns_of_measure_ids.begin() + at_index);
 
    return true;
@@ -103,7 +97,6 @@ Measure::Base *Staff::Instrument::get_measure(int column_num)
 
    Measure::Base *found_measure = Measure::find(columns_of_measure_ids[column_num]);
 
-   //return columns[column_num];
    return found_measure;
 }
 
