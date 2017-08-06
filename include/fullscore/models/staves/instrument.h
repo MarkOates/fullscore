@@ -6,12 +6,17 @@
 
 
 
+#define NO_RECORD -1
+
+
+
 namespace Staff
 {
    class Instrument : public Base
    {
    private:
-      std::vector<Measure::Base *> columns;
+      //std::vector<Measure::Base *> columns;
+      std::vector<int> columns_of_measure_ids;
 
    public:
       Instrument(int num_columns);
