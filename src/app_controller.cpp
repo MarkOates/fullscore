@@ -290,7 +290,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
-      action = new Action::AddDotTransform(single_note);
+      action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
       action = new Action::RemoveDotTransform(single_note);
    else if (action_name == "set_command_mode")

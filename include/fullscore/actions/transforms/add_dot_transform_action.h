@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class AddDotTransform : public Base
+   namespace Transform
    {
-   private:
-      Note *note;
+      class AddDot : public Base
+      {
+      private:
+         Note *note;
 
-   public:
-      AddDotTransform(Note *note);
-      ~AddDotTransform();
+      public:
+         AddDot(Note *note);
+         ~AddDot();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 
