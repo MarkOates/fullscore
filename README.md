@@ -14,7 +14,7 @@ There are no binary releases yet so you will have to build from source.
 #### Dependencies
 
 Fullscore is written in C++ and requires AllegroFlare.  If you're building with `gcc` or `clang`
-you should be able to compile Fullscore by first getting the dependencies AllegroFlare and Google Test.  (AllegroFlare is dependent on Allegro 5.)
+you should be able to compile Fullscore by first getting the dependencies AllegroFlare and Google Test, and then following the build instructions below.  (AllegroFlare is dependent on Allegro 5.)
 
 #### Building Fullscore
 
