@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/transforms/insert_note_action.h>
+#include <fullscore/actions/transforms/InsertNote.h>
 
 #include <fullscore/transforms/insert_note_transform.h>
 

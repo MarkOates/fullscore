@@ -4,20 +4,20 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/actions/transforms/append_note_action.h>
-#include <fullscore/actions/transforms/add_dot_action.h>
-#include <fullscore/actions/transforms/clear_measure_action.h>
-#include <fullscore/actions/transforms/double_duration_action.h>
-#include <fullscore/actions/transforms/erase_note_action.h>
-#include <fullscore/actions/transforms/half_duration_action.h>
-#include <fullscore/actions/transforms/insert_note_action.h>
-#include <fullscore/actions/transforms/invert_action.h>
-#include <fullscore/actions/transforms/octatonic_1_action.h>
-#include <fullscore/actions/transforms/remove_dot_action.h>
-#include <fullscore/actions/transforms/retrograde_action.h>
-#include <fullscore/actions/transforms/toggle_rest_action.h>
-#include <fullscore/actions/transforms/transpose_up_action.h>
-#include <fullscore/actions/transforms/transpose_down_action.h>
+#include <fullscore/actions/transforms/AppendNote.h>
+#include <fullscore/actions/transforms/AddDot.h>
+#include <fullscore/actions/transforms/ClearMeasure.h>
+#include <fullscore/actions/transforms/DoubleDuration.h>
+#include <fullscore/actions/transforms/EraseNote.h>
+#include <fullscore/actions/transforms/HalfDuration.h>
+#include <fullscore/actions/transforms/InsertNote.h>
+#include <fullscore/actions/transforms/Invert.h>
+#include <fullscore/actions/transforms/Octatonic1.h>
+#include <fullscore/actions/transforms/RemoveDot.h>
+#include <fullscore/actions/transforms/Retrograde.h>
+#include <fullscore/actions/transforms/ToggleRest.h>
+#include <fullscore/actions/transforms/TransposeUp.h>
+#include <fullscore/actions/transforms/TransposeDown.h>
 #include <fullscore/actions/append_column_to_grid_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
