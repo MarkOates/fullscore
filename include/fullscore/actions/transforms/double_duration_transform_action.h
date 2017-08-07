@@ -13,14 +13,14 @@ namespace Action
 {
    namespace Transform
    {
-      class DoubleDurationTransform : public Base
+      class DoubleDuration : public Base
       {
       private:
          Note *note;
 
       public:
-         DoubleDurationTransform(Note *note);
-         ~DoubleDurationTransform();
+         DoubleDuration(Note *note);
+         ~DoubleDuration();
 
          bool execute() override;
       };

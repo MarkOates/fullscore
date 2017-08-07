@@ -10,7 +10,7 @@
 
 
 
-Action::Transform::DoubleDurationTransform::DoubleDurationTransform(Note *note)
+Action::Transform::DoubleDuration::DoubleDuration(Note *note)
    : Base("double_duration")
    , note(note)
 {}
@@ -18,13 +18,13 @@ Action::Transform::DoubleDurationTransform::DoubleDurationTransform(Note *note)
 
 
 
-Action::Transform::DoubleDurationTransform::~DoubleDurationTransform()
+Action::Transform::DoubleDuration::~DoubleDuration()
 {}
 
 
 
 
-bool Action::Transform::DoubleDurationTransform::execute()
+bool Action::Transform::DoubleDuration::execute()
 {
    if (!note) return false;
 
