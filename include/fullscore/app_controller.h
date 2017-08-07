@@ -4,7 +4,7 @@
 
 #include <allegro_flare/screens/simple_notification_screen.h>
 
-#include <fullscore/actions/action_base.h>
+#include <fullscore/actions/base.h>
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/widgets/command_bar.h>
