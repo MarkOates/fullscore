@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_MOVE_CURSOR_RIGHT_ACTION_HEADER
-#define __FULLSCORE_MOVE_CURSOR_RIGHT_ACTION_HEADER
-
+#pragma once
 
 
 
@@ -8,17 +6,17 @@
 
 
 
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class MoveCursorRight : public Base
    {
    private:
-      UIMeasureGridEditor *score_editor;
+      UIGridEditor *score_editor;
 
    public:
-      MoveCursorRight(UIMeasureGridEditor *score_editor);
+      MoveCursorRight(UIGridEditor *score_editor);
       ~MoveCursorRight();
       bool execute() override;
    };
@@ -26,5 +24,3 @@ namespace Action
 
 
 
-
-#endif

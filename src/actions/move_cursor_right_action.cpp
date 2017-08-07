@@ -4,12 +4,12 @@
 
 #include <fullscore/actions/move_cursor_right_action.h>
 
-#include <fullscore/widgets/measure_grid_editor.h>
+#include <fullscore/widgets/grid_editor.h>
 
 
 
 
-Action::MoveCursorRight::MoveCursorRight(UIMeasureGridEditor *score_editor)
+Action::MoveCursorRight::MoveCursorRight(UIGridEditor *score_editor)
    : Base("move_cursor_right")
    , score_editor(score_editor)
 {

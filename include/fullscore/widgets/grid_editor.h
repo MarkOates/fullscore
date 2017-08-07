@@ -6,7 +6,7 @@
 
 #include <allegro_flare/gui/widget.h>
 #include <allegro_flare/placement2d.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 #include <fullscore/models/playback_control.h>
 #include <fullscore/services/music_engraver.h>
 
@@ -16,7 +16,7 @@ class ReferenceCursor;
 
 
 
-class UIMeasureGridEditor : public UIWidget
+class UIGridEditor : public UIWidget
 {
 public:
    class RenderingDependencies
@@ -50,7 +50,7 @@ public:
       STATE_INACTIVE
    };
 
-   MeasureGrid measure_grid;
+   Grid grid;
    PlaybackControl playback_control;
 
    RenderingDependencies rendering_dependencies;
@@ -69,7 +69,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
+   UIGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
    void on_draw() override;
    void on_timer() override;
    Measure::Base *get_measure_at_cursor();

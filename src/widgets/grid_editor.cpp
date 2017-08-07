@@ -2,27 +2,27 @@
 
 
 
-#include <fullscore/widgets/measure_grid_editor.h>
+#include <fullscore/widgets/grid_editor.h>
 
 #include <allegro_flare/allegro_flare.h>
 
 #include <fullscore/components/time_signature_render_component.h>
-#include <fullscore/components/measure_grid_render_component.h>
+#include <fullscore/components/grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/helpers/measure_grid_helper.h>
+#include <fullscore/helpers/grid_helper.h>
 #include <cmath>
 
 
 
 
-UIMeasureGridEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
+UIGridEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
    : reference_cursor(reference_cursor)
 {}
 
 
 
 
-void UIMeasureGridEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
+void UIGridEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
 {
    this->reference_cursor = reference_cursor;
 }
@@ -30,10 +30,10 @@ void UIMeasureGridEditor::RenderingDependencies::set_reference_cursor(ReferenceC
 
 
 
-UIMeasureGridEditor::UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
+UIGridEditor::UIGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "UIMeasureGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
-   , measure_grid(0, 0)
+   : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
+   , grid(0, 0)
    , playback_control()
    , rendering_dependencies(reference_cursor)
    , measure_cursor_x(0)
@@ -51,11 +51,11 @@ UIMeasureGridEditor::UIMeasureGridEditor(UIWidget *parent, ReferenceCursor *refe
 
 
 
-void UIMeasureGridEditor::on_draw()
+void UIGridEditor::on_draw()
 {
    // get_width_of_score
-   float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
-   float measure_grid_real_height = measure_grid.get_height() * STAFF_HEIGHT;
+   float grid_real_width = GridHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_height = grid.get_height() * STAFF_HEIGHT;
 
    // draw the bounding box for the widget
    float pt, pr, pb, pl;
@@ -67,14 +67,14 @@ void UIMeasureGridEditor::on_draw()
       // draw a background for the score
       float padding = 30;
       al_draw_filled_rectangle(-padding, -padding,
-         measure_grid_real_width + padding, measure_grid_real_height + padding,
+         grid_real_width + padding, grid_real_height + padding,
          color::color(color::blanchedalmond, 0.2));
    }
 
    // render the measure grid
-   MeasureGridRenderComponent measure_grid_render_component(&measure_grid, &music_engraver, rendering_dependencies.reference_cursor, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
-   measure_grid_render_component.set_showing_debug_data(showing_debug_data);
-   measure_grid_render_component.render();
+   GridRenderComponent grid_render_component(&grid, &music_engraver, rendering_dependencies.reference_cursor, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
+   grid_render_component.set_showing_debug_data(showing_debug_data);
+   grid_render_component.render();
 
    if (state != STATE_ACTIVE) return;
 
@@ -94,27 +94,27 @@ void UIMeasureGridEditor::on_draw()
 
       // measure box outline
       if (is_measure_target_mode())
-         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
-            CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_x+measure_width, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
             4, 4, color::color(color::black, 0.3), 2.0);
    }
 
    // measure box fill
-   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
-      CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+   al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
+      CACHED_get_measure_cursor_real_x+measure_width, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
       4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
    if (is_measure_target_mode())
-      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
-         CACHED_get_measure_cursor_real_x+measure_width, MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
+         CACHED_get_measure_cursor_real_x+measure_width, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
          4, 4, color::color(color::aliceblue, 0.7), 2.0);
 
    // left bar (blinking)
 
    ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
    al_draw_line(CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y,
-         CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+         CACHED_get_measure_cursor_real_x, CACHED_get_measure_cursor_real_y+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
          cursor_color, 3.0);
 
    // draw a hilight box at the focused note
@@ -128,7 +128,7 @@ void UIMeasureGridEditor::on_draw()
             CACHED_get_measure_cursor_real_x + note_real_offset_x,
             CACHED_get_measure_cursor_real_y,
             CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-            CACHED_get_measure_cursor_real_y + MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+            CACHED_get_measure_cursor_real_y + GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
             6,
             6,
             color::color(color::pink, 0.4)
@@ -140,7 +140,7 @@ void UIMeasureGridEditor::on_draw()
                CACHED_get_measure_cursor_real_x + note_real_offset_x,
                CACHED_get_measure_cursor_real_y,
                CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-               CACHED_get_measure_cursor_real_y + MeasureGridHelper::get_height_of_staff(measure_grid, measure_cursor_y)*STAFF_HEIGHT,
+               CACHED_get_measure_cursor_real_y + GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
                6,
                6,
                color::mix(color::color(color::pink, 0.8), color::black, 0.3),
@@ -151,7 +151,7 @@ void UIMeasureGridEditor::on_draw()
    // draw the playhead
    float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
    float playhead_y = -40;
-   al_draw_line(playhead_x, playhead_y, playhead_x, measure_grid_real_height + 40, color::color(color::lightcyan, 0.5), 3);
+   al_draw_line(playhead_x, playhead_y, playhead_x, grid_real_height + 40, color::color(color::lightcyan, 0.5), 3);
    al_draw_filled_triangle(playhead_x-8, playhead_y-8, playhead_x+8, playhead_y-8, playhead_x, playhead_y+6, color::lightcyan);
    al_draw_filled_rectangle(playhead_x-8, playhead_y-8-14, playhead_x+8, playhead_y-8, color::lightcyan);
 }
@@ -159,29 +159,29 @@ void UIMeasureGridEditor::on_draw()
 
 
 
-void UIMeasureGridEditor::on_timer()
+void UIGridEditor::on_timer()
 {
    playback_control.update(Framework::time_now);
 
    // match the width of the widget to the width of the score
-   float measure_grid_real_width = MeasureGridHelper::get_length_to_measure(measure_grid, measure_grid.get_num_measures()) * FULL_MEASURE_WIDTH;
-   float measure_grid_real_height = measure_grid.get_num_staves() * STAFF_HEIGHT;
+   float grid_real_width = GridHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_height = grid.get_num_staves() * STAFF_HEIGHT;
 
-   place.size = vec2d(measure_grid_real_width, measure_grid_real_height);
+   place.size = vec2d(grid_real_width, grid_real_height);
 }
 
 
 
 
-Measure::Base *UIMeasureGridEditor::get_measure_at_cursor()
+Measure::Base *UIGridEditor::get_measure_at_cursor()
 {
-   return measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+   return grid.get_measure(measure_cursor_x, measure_cursor_y);
 }
 
 
 
 
-Note *UIMeasureGridEditor::get_note_at_cursor()
+Note *UIGridEditor::get_note_at_cursor()
 {
    Measure::Base *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
@@ -195,23 +195,23 @@ Note *UIMeasureGridEditor::get_note_at_cursor()
 
 
 
-float UIMeasureGridEditor::get_measure_cursor_real_x()
+float UIGridEditor::get_measure_cursor_real_x()
 {
-   return MeasureGridHelper::get_length_to_measure(measure_grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
+   return GridHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
 
 
-float UIMeasureGridEditor::get_measure_cursor_real_y()
+float UIGridEditor::get_measure_cursor_real_y()
 {
-   return MeasureGridHelper::get_height_to_staff(measure_grid, measure_cursor_y) * STAFF_HEIGHT;
+   return GridHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
 }
 
 
 
 
-float UIMeasureGridEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
+float UIGridEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
 {
    float sum = 0;
    std::vector<Note> notes;
@@ -227,7 +227,7 @@ float UIMeasureGridEditor::get_measure_length_to_note(Measure::Base *measure, in
 
 
 
-float UIMeasureGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
+float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    if (!m) return 0;
    float sum = 0;
@@ -239,9 +239,9 @@ float UIMeasureGridEditor::get_measure_width(Measure::Base *m)  // TODO: should 
 
 
 
-int UIMeasureGridEditor::move_measure_cursor_x(int delta)
+int UIGridEditor::move_measure_cursor_x(int delta)
 {
-   int num_measures = measure_grid.get_num_measures();
+   int num_measures = grid.get_num_measures();
    measure_cursor_x = limit<int>(0, num_measures-1, measure_cursor_x + delta);
    return measure_cursor_x;
 }
@@ -249,9 +249,9 @@ int UIMeasureGridEditor::move_measure_cursor_x(int delta)
 
 
 
-int UIMeasureGridEditor::move_measure_cursor_y(int delta)
+int UIGridEditor::move_measure_cursor_y(int delta)
 {
-   int num_staves = measure_grid.get_num_staves();
+   int num_staves = grid.get_num_staves();
    measure_cursor_y = limit<int>(0, num_staves-1, measure_cursor_y + delta);
    return measure_cursor_y;
 }
@@ -259,9 +259,9 @@ int UIMeasureGridEditor::move_measure_cursor_y(int delta)
 
 
 
-int UIMeasureGridEditor::move_note_cursor_x(int delta)
+int UIGridEditor::move_note_cursor_x(int delta)
 {
-   Measure::Base *current_measure = measure_grid.get_measure(measure_cursor_x, measure_cursor_y);
+   Measure::Base *current_measure = grid.get_measure(measure_cursor_x, measure_cursor_y);
    if (!current_measure)
    {
       note_cursor_x = 0;
@@ -276,7 +276,7 @@ int UIMeasureGridEditor::move_note_cursor_x(int delta)
 
 
 
-void UIMeasureGridEditor::toggle_edit_mode_target()
+void UIGridEditor::toggle_edit_mode_target()
 {
    if (edit_mode_target == NOTE_TARGET) edit_mode_target = MEASURE_TARGET;
    else if (edit_mode_target == MEASURE_TARGET) edit_mode_target = NOTE_TARGET;
@@ -285,7 +285,7 @@ void UIMeasureGridEditor::toggle_edit_mode_target()
 
 
 
-bool UIMeasureGridEditor::is_measure_target_mode()
+bool UIGridEditor::is_measure_target_mode()
 {
    return edit_mode_target == MEASURE_TARGET;
 }
@@ -293,7 +293,7 @@ bool UIMeasureGridEditor::is_measure_target_mode()
 
 
 
-bool UIMeasureGridEditor::is_note_target_mode()
+bool UIGridEditor::is_note_target_mode()
 {
    return edit_mode_target == NOTE_TARGET;
 }
@@ -301,7 +301,7 @@ bool UIMeasureGridEditor::is_note_target_mode()
 
 
 
-void UIMeasureGridEditor::set_state(state_t new_state)
+void UIGridEditor::set_state(state_t new_state)
 {
    if (new_state == state) return;
 

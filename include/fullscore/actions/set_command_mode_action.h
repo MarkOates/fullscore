@@ -2,11 +2,9 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
 
-#include <fullscore/widgets/measure_grid_editor.h>
-
+#include <fullscore/widgets/grid_editor.h>
 
 
 
@@ -17,16 +15,15 @@ namespace Action
    class SetCommandMode : public Base
    {
    private:
-      UIMeasureGridEditor *score_editor;
+      UIGridEditor *score_editor;
       UICommandBar *command_bar;
 
    public:
-      SetCommandMode(UIMeasureGridEditor *score_editor, UICommandBar *command_bar);
+      SetCommandMode(UIGridEditor *score_editor, UICommandBar *command_bar);
       ~SetCommandMode();
       bool execute() override;
    };
 }
-
 
 
 

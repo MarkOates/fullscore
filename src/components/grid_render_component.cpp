@@ -2,7 +2,7 @@
 
 
 
-#include<fullscore/components/measure_grid_render_component.h>
+#include<fullscore/components/grid_render_component.h>
 
 #include <allegro_flare/color.h>
 #include <allegro_flare/framework.h>
@@ -11,17 +11,17 @@
 #include <fullscore/components/measure_render_component.h>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/helpers/measure_grid_helper.h>
+#include <fullscore/helpers/grid_helper.h>
 #include <fullscore/models/note.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/services/music_engraver.h>
 
 
 
 
-MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
-   : measure_grid(measure_grid)
+GridRenderComponent::GridRenderComponent(Grid *grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
+   : grid(grid)
    , music_engraver(music_engraver)
    , reference_cursor(reference_cursor)
    , full_measure_width(full_measure_width)
@@ -32,27 +32,27 @@ MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *measure_grid
 
 
 
-MeasureGridRenderComponent::~MeasureGridRenderComponent()
+GridRenderComponent::~GridRenderComponent()
 {}
 
 
 
 
-void MeasureGridRenderComponent::set_showing_debug_data(bool show)
+void GridRenderComponent::set_showing_debug_data(bool show)
 {
    showing_debug_data = show;
 }
 
 
 
-void MeasureGridRenderComponent::render()
+void GridRenderComponent::render()
 {
-   if (!measure_grid || !music_engraver) return;
+   if (!grid || !music_engraver) return;
 
    int reference_cursor_x = -1;
    int reference_cursor_y = -1;
 
-   if (reference_cursor && reference_cursor->is_on_measure_grid(measure_grid))
+   if (reference_cursor && reference_cursor->is_on_grid(grid))
    {
       reference_cursor_x = reference_cursor->get_x();
       reference_cursor_y = reference_cursor->get_y();
@@ -60,10 +60,10 @@ void MeasureGridRenderComponent::render()
 
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
-   for (int x=0; x<measure_grid->get_num_measures(); x++)
+   for (int x=0; x<grid->get_num_measures(); x++)
    {
-      float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
-      TimeSignature time_signature = measure_grid->get_time_signature(x);
+      float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
+      TimeSignature time_signature = grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
 
       // draw time signature
@@ -75,9 +75,9 @@ void MeasureGridRenderComponent::render()
    float y_counter = 0;
 
    // draw the notes and measures
-   for (int y=0; y<measure_grid->get_num_staves(); y++)
+   for (int y=0; y<grid->get_num_staves(); y++)
    {
-      Staff::Base *staff = measure_grid->get_staff(y);
+      Staff::Base *staff = grid->get_staff(y);
       if (!staff) continue;
 
       float this_staff_height = staff_height * staff->get_height();
@@ -88,20 +88,20 @@ void MeasureGridRenderComponent::render()
       // draw the row name
       float row_middle_y = y_counter + this_staff_height * 0.5;
       float label_text_top_y = row_middle_y - al_get_font_line_height(text_font) * 0.5;
-      al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, measure_grid->get_voice_name(y).c_str());
+      al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, grid->get_voice_name(y).c_str());
 
       // horizontal guide line for the staff
       if (staff->is_type("instrument"))
       {
-         float width = MeasureGridHelper::get_width(*measure_grid);
+         float width = GridHelper::get_width(*grid);
          al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
       }
 
       // draw the measures
-      for (int x=0; x<measure_grid->get_num_measures(); x++)
+      for (int x=0; x<grid->get_num_measures(); x++)
       {
-         float x_pos = MeasureGridHelper::get_length_to_measure(*measure_grid, x) * full_measure_width;
-         float x_pos_plus_width = MeasureGridHelper::get_length_to_measure(*measure_grid, x+1) * full_measure_width;
+         float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
+         float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
 
          if (staff->is_type("instrument"))
          {
@@ -130,7 +130,7 @@ void MeasureGridRenderComponent::render()
          }
 
          // draw the measure
-         Measure::Base *measure = measure_grid->get_measure(x,y);
+         Measure::Base *measure = grid->get_measure(x,y);
          if (!measure) continue;
 
          MeasureRenderComponent measure_render_component(measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);

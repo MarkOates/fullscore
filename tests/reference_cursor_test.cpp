@@ -7,7 +7,7 @@
 
 #include <fullscore/models/reference_cursor.h>
 
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 
 
 
@@ -15,7 +15,7 @@ TEST(ReferenceCursorTest, can_be_constructed_with_an_empty_constructor)
 {
    ReferenceCursor reference_cursor;
 
-   EXPECT_EQ(nullptr, reference_cursor.get_measure_grid());
+   EXPECT_EQ(nullptr, reference_cursor.get_grid());
    EXPECT_EQ(0, reference_cursor.get_x());
    EXPECT_EQ(0, reference_cursor.get_y());
 }
@@ -24,10 +24,10 @@ TEST(ReferenceCursorTest, can_be_constructed_with_an_empty_constructor)
 
 TEST(ReferenceCursorTest, can_be_constructed_with_arguments)
 {
-   MeasureGrid measure_grid(1, 1);
-   ReferenceCursor reference_cursor(&measure_grid, 9, 16);
+   Grid grid(1, 1);
+   ReferenceCursor reference_cursor(&grid, 9, 16);
 
-   EXPECT_EQ(&measure_grid, reference_cursor.get_measure_grid());
+   EXPECT_EQ(&grid, reference_cursor.get_grid());
    EXPECT_EQ(9, reference_cursor.get_x());
    EXPECT_EQ(16, reference_cursor.get_y());
 }
@@ -36,19 +36,19 @@ TEST(ReferenceCursorTest, can_be_constructed_with_arguments)
 
 TEST(ReferenceCursorTest, can_set_its_position)
 {
-   MeasureGrid measure_grid_1(1, 1);
-   MeasureGrid measure_grid_2(1, 1);
+   Grid grid_1(1, 1);
+   Grid grid_2(1, 1);
    ReferenceCursor reference_cursor;
 
-   reference_cursor.set_position(&measure_grid_1, 9, 16);
+   reference_cursor.set_position(&grid_1, 9, 16);
 
-   EXPECT_EQ(&measure_grid_1, reference_cursor.get_measure_grid());
+   EXPECT_EQ(&grid_1, reference_cursor.get_grid());
    EXPECT_EQ(9, reference_cursor.get_x());
    EXPECT_EQ(16, reference_cursor.get_y());
 
-   reference_cursor.set_position(&measure_grid_2, 19, 7);
+   reference_cursor.set_position(&grid_2, 19, 7);
 
-   EXPECT_EQ(&measure_grid_2, reference_cursor.get_measure_grid());
+   EXPECT_EQ(&grid_2, reference_cursor.get_grid());
    EXPECT_EQ(19, reference_cursor.get_x());
    EXPECT_EQ(7, reference_cursor.get_y());
 }
@@ -89,7 +89,7 @@ TEST(ReferenceCursorTest, can_move_its_x_y_coordinates)
 
 
 
-TEST(ReferenceCursorTest, with_no_measure_grid__is_invalid)
+TEST(ReferenceCursorTest, with_no_grid__is_invalid)
 {
    ReferenceCursor reference_cursor;
 
@@ -100,8 +100,8 @@ TEST(ReferenceCursorTest, with_no_measure_grid__is_invalid)
 
 TEST(ReferenceCursorTest, with_a_reference_grid_and_coordinates_within_the_grid__is_valid)
 {
-   MeasureGrid measure_grid(3, 4);
-   ReferenceCursor reference_cursor(&measure_grid, 2, 1);
+   Grid grid(3, 4);
+   ReferenceCursor reference_cursor(&grid, 2, 1);
 
    EXPECT_TRUE(reference_cursor.is_valid());
 }
@@ -110,8 +110,8 @@ TEST(ReferenceCursorTest, with_a_reference_grid_and_coordinates_within_the_grid_
 
 TEST(ReferenceCursorTest, with_a_reference_grid_and_coordinates_outside_the_grid__is_invalid)
 {
-   MeasureGrid measure_grid(3, 4);
-   ReferenceCursor reference_cursor(&measure_grid, 2, 1);
+   Grid grid(3, 4);
+   ReferenceCursor reference_cursor(&grid, 2, 1);
 
    reference_cursor.set_coordinates(999, 999);
 

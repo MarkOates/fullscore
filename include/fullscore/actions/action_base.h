@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_ACTION_BASE_HEADER
-#define __FULLSCORE_ACTION_BASE_HEADER
-
+#pragma once
 
 
 
 #include <string>
-
 
 
 
@@ -26,5 +23,3 @@ namespace Action
 
 
 
-
-#endif

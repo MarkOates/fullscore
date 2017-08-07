@@ -2,29 +2,26 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
 
 
 
-
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class ToggleEditModeTarget : public Base
    {
    private:
-      UIMeasureGridEditor *measure_grid_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      ToggleEditModeTarget(UIMeasureGridEditor *measure_grid_editor);
+      ToggleEditModeTarget(UIGridEditor *grid_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;
    };
 };
-
 
 
 

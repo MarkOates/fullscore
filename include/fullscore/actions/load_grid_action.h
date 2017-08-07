@@ -2,31 +2,28 @@
 
 
 
-
 #include <string>
 #include <fullscore/actions/action_base.h>
 
 
 
-
-class MeasureGrid;
+class Grid;
 
 namespace Action
 {
-   class LoadMeasureGrid : public Base
+   class LoadGrid : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      Grid *grid;
       std::string filename;
 
    public:
-      LoadMeasureGrid(MeasureGrid *measure_grid, std::string filename);
-      ~LoadMeasureGrid();
+      LoadGrid(Grid *grid, std::string filename);
+      ~LoadGrid();
 
       bool execute();
    };
 };
-
 
 
 

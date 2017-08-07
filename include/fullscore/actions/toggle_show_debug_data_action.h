@@ -2,29 +2,26 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
 
 
 
-
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class ToggleShowDebugData : public Base
    {
    private:
-      UIMeasureGridEditor *measure_grid_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      ToggleShowDebugData(UIMeasureGridEditor *measure_grid_editor);
+      ToggleShowDebugData(UIGridEditor *grid_editor);
       ~ToggleShowDebugData();
 
       bool execute() override;
    };
 };
-
 
 
 

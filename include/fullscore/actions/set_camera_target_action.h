@@ -2,9 +2,7 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
-
 
 
 
@@ -25,7 +23,6 @@ namespace Action
       bool execute() override;
    };
 };
-
 
 
 

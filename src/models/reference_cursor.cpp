@@ -3,29 +3,29 @@
 
 #include <fullscore/models/reference_cursor.h>
 
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 
 
 
 ReferenceCursor::ReferenceCursor()
-   : measure_grid(nullptr)
+   : grid(nullptr)
    , x(0)
    , y(0)
 {}
 
 
 
-ReferenceCursor::ReferenceCursor(MeasureGrid *measure_grid, int x, int y)
-   : measure_grid(measure_grid)
+ReferenceCursor::ReferenceCursor(Grid *grid, int x, int y)
+   : grid(grid)
    , x(x)
    , y(y)
 {}
 
 
 
-void ReferenceCursor::set_position(MeasureGrid *measure_grid, int x, int y)
+void ReferenceCursor::set_position(Grid *grid, int x, int y)
 {
-   this->measure_grid = measure_grid;
+   this->grid = grid;
    this->x = x;
    this->y = y;
 }
@@ -40,9 +40,9 @@ void ReferenceCursor::set_coordinates(int x, int y)
 
 
 
-MeasureGrid *ReferenceCursor::get_measure_grid()
+Grid *ReferenceCursor::get_grid()
 {
-   return measure_grid;
+   return grid;
 }
 
 
@@ -61,9 +61,9 @@ int ReferenceCursor::get_y()
 
 
 
-bool ReferenceCursor::is_on_measure_grid(const MeasureGrid *measure_grid)
+bool ReferenceCursor::is_on_grid(const Grid *grid)
 {
-   return this->measure_grid == measure_grid;
+   return this->grid == grid;
 }
 
 
@@ -78,10 +78,10 @@ void ReferenceCursor::move(int delta_x, int delta_y)
 
 bool ReferenceCursor::is_valid()
 {
-   if (!measure_grid) return false;
-   if (x >= measure_grid->get_num_measures()) return false;
+   if (!grid) return false;
+   if (x >= grid->get_num_measures()) return false;
    if (x < 0) return false;
-   if (y >= measure_grid->get_num_staves()) return false;
+   if (y >= grid->get_num_staves()) return false;
    if (y < 0) return false;
 
    return true;

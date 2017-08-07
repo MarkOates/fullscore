@@ -2,41 +2,41 @@
 
 
 
-#include <fullscore/converters/measure_grid_file_converter.h>
+#include <fullscore/converters/grid_file_converter.h>
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/converters/note_string_converter.h>
 #include <fullscore/converters/time_signature_string_converter.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 #include <allegro_flare/attributes.h>
 #include <allegro_flare/useful_php.h>
 
 
 
 
-MeasureGridFileConverter::MeasureGridFileConverter(MeasureGrid *measure_grid, std::string filename)
-   : measure_grid(measure_grid)
+GridFileConverter::GridFileConverter(Grid *grid, std::string filename)
+   : grid(grid)
    , filename(filename)
 {}
 
 
 
 
-bool MeasureGridFileConverter::save()
+bool GridFileConverter::save()
 {
-   if (!measure_grid) return false;
+   if (!grid) return false;
    if (filename.empty()) return false;
 
    Attributes state;
 
-   state.set("grid_height", tostring(measure_grid->get_num_staves()));
-   state.set("grid_width", tostring(measure_grid->get_num_measures()));
+   state.set("grid_height", tostring(grid->get_num_staves()));
+   state.set("grid_width", tostring(grid->get_num_measures()));
    state.set("file_format_version", "v0.0.1");
 
    // build a time signatures string
    std::vector<std::string> time_signature_strings;
-   for (auto &time_signature : measure_grid->time_signatures)
+   for (auto &time_signature : grid->time_signatures)
    {
       TimeSignatureStringConverter converter(&time_signature);
       time_signature_strings.push_back(converter.write());
@@ -44,10 +44,10 @@ bool MeasureGridFileConverter::save()
    state.set("time_signatures", php::implode(";", time_signature_strings));
 
    // build the measures as "x,y = [notes]" string
-   for (int y=0; y<measure_grid->get_num_staves(); y++)
-      for (int x=0; x<measure_grid->get_num_measures(); x++)
+   for (int y=0; y<grid->get_num_staves(); y++)
+      for (int x=0; x<grid->get_num_measures(); x++)
       {
-         Measure::Base *measure = measure_grid->get_measure(x, y);
+         Measure::Base *measure = grid->get_measure(x, y);
          if (!measure) continue;
          std::vector<Note> measure_notes = measure->get_notes_copy();
          if (measure_notes.empty()) continue;
@@ -79,22 +79,22 @@ bool MeasureGridFileConverter::save()
 
 
 
-bool MeasureGridFileConverter::load()
+bool GridFileConverter::load()
 {
-   if (!measure_grid) return false;
+   if (!grid) return false;
    if (filename.empty()) return false;
 
    Attributes state;
    if (!state.load(filename)) return false;
 
    // clear out the contents of the current measure-grid
-   measure_grid->voices.clear(); // TODO: fix this: mkay, this will create dangling pointers of Note* in the measures
+   grid->voices.clear(); // TODO: fix this: mkay, this will create dangling pointers of Note* in the measures
 
    // check the format version
    std::string file_format_version = state.get("file_format_version");
    if (file_format_version != "v0.0.1")
    {
-      std::cout << "[MeasureGrid::load(std::string filename)] could not load this format version" << std::endl;
+      std::cout << "[Grid::load(std::string filename)] could not load this format version" << std::endl;
       return false;
    }
 
@@ -102,17 +102,17 @@ bool MeasureGridFileConverter::load()
    int grid_height = atoi(state.get("grid_height").c_str());
    int grid_width = atoi(state.get("grid_width").c_str());
    for (unsigned i=0; i<grid_height; i++)
-      measure_grid->voices.push_back(new Staff::Instrument(grid_width));
+      grid->voices.push_back(new Staff::Instrument(grid_width));
 
    // grab and parse the time_signatures string
-   measure_grid->time_signatures.clear();
+   grid->time_signatures.clear();
    std::string time_signatures_string = state.get("time_signatures");
    std::vector<std::string> time_signature_string_tokens = php::explode(";", time_signatures_string);
    for (auto &time_signature_string : time_signature_string_tokens)
    {
       TimeSignature t = TimeSignature(0, Duration());
-      measure_grid->time_signatures.push_back(t);
-      TimeSignatureStringConverter converter(&measure_grid->time_signatures.back());
+      grid->time_signatures.push_back(t);
+      TimeSignatureStringConverter converter(&grid->time_signatures.back());
 
       if (!converter.read(time_signature_string))
       {
@@ -133,7 +133,7 @@ bool MeasureGridFileConverter::load()
       // get the measure x, and y (in the format "x,y")
       std::vector<std::string> parts = php::explode(",", it->first);
       if (parts.size() != 2) continue;
-      Measure::Base *measure = measure_grid->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
+      Measure::Base *measure = grid->get_measure(atoi(parts[0].c_str()), atoi(parts[1].c_str()));
       if (!measure) continue;
 
       // get the notes
