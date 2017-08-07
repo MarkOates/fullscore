@@ -12,14 +12,14 @@ class MeasureGrid;
 
 namespace Action
 {
-   class AppendMeasure : public Base
+   class AppendColumnToMeasureGrid : public Base
    {
    private:
       MeasureGrid *measure_grid;
 
    public:
-      AppendMeasure(MeasureGrid *measure_grid);
-      ~AppendMeasure();
+      AppendColumnToMeasureGrid(MeasureGrid *measure_grid);
+      ~AppendColumnToMeasureGrid();
 
       bool execute() override;
    };

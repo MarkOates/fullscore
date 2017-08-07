@@ -379,7 +379,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "delete_staff")
       action = new Action::DeleteStaff(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "append_column_to_measure_grid")
-      action = new Action::AppendMeasure(&current_measure_grid_editor->measure_grid);
+      action = new Action::AppendColumnToMeasureGrid(&current_measure_grid_editor->measure_grid);
    else if (action_name == "append_staff")
       action = new Action::AppendStaff(&current_measure_grid_editor->measure_grid);
    else if (action_name == "set_time_signature_numerator_2")
