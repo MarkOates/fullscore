@@ -9,8 +9,6 @@
 namespace Measure { class Basic; class Base; }
 class Grid;
 
-
-
 namespace Action
 {
    class PasteMeasureFromBufferToGridCoordinates : public Base

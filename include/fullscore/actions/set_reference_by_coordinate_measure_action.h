@@ -8,8 +8,6 @@
 
 class Grid;
 
-
-
 namespace Action
 {
    class SetReferenceByCoordinateMeasure : public Base
