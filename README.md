@@ -18,7 +18,7 @@ you should be able to compile Fullscore by first getting the dependencies Allegr
 
 #### Building Fullscore
 
-1. from the terminal clone the git repo:
+1. from the terminal, clone the git repo:
 
 ```
 $ git clone https://github.com/MarkOates/fullscore.git
