@@ -5,15 +5,15 @@
 #include <fullscore/app_controller.h>
 
 #include <fullscore/actions/transforms/append_note_action.h>
-#include <fullscore/actions/transforms/add_dot_transform_action.h>
-#include <fullscore/actions/transforms/clear_measure_transform_action.h>
-#include <fullscore/actions/transforms/double_duration_transform_action.h>
+#include <fullscore/actions/transforms/add_dot_action.h>
+#include <fullscore/actions/transforms/clear_measure_action.h>
+#include <fullscore/actions/transforms/double_duration_action.h>
 #include <fullscore/actions/transforms/erase_note_action.h>
-#include <fullscore/actions/transforms/half_duration_transform_action.h>
+#include <fullscore/actions/transforms/half_duration_action.h>
 #include <fullscore/actions/transforms/insert_note_action.h>
 #include <fullscore/actions/transforms/invert_action.h>
-#include <fullscore/actions/transforms/octatonic_1_transform_action.h>
-#include <fullscore/actions/transforms/remove_dot_transform_action.h>
+#include <fullscore/actions/transforms/octatonic_1_action.h>
+#include <fullscore/actions/transforms/remove_dot_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_up_action.h>
@@ -220,7 +220,7 @@ Action::Base *AppController::create_action(std::string action_name)
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-            action_queue->add_action(new Action::TransposeUp(single_note));
+            action_queue->add_action(new Action::Transform::TransposeUp(single_note));
          return action_queue;
       }
       else
@@ -229,7 +229,7 @@ Action::Base *AppController::create_action(std::string action_name)
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-               action_queue->add_action(new Action::TransposeUp(&note));
+               action_queue->add_action(new Action::Transform::TransposeUp(&note));
          return action_queue;
       }
    }
@@ -239,7 +239,7 @@ Action::Base *AppController::create_action(std::string action_name)
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-            action_queue->add_action(new Action::TransposeDown(single_note));
+            action_queue->add_action(new Action::Transform::TransposeDown(single_note));
          return action_queue;
       }
       else
@@ -248,51 +248,51 @@ Action::Base *AppController::create_action(std::string action_name)
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-               action_queue->add_action(new Action::TransposeDown(&note));
+               action_queue->add_action(new Action::Transform::TransposeDown(&note));
          return action_queue;
       }
    }
    else if (action_name == "half_duration")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::HalfDuration(single_note);
       else
       {
          if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::HalfDurationTransform(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::HalfDuration(&note));
          return action_queue;
       }
    }
    else if (action_name == "double_duration")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::DoubleDuration(single_note);
       else
       {
          if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::DoubleDurationTransform(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::DoubleDuration(&note));
          return action_queue;
       }
    }
    else if (action_name == "toggle_rest")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::ToggleRest(single_note);
       else
       {
          if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::ToggleRest(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::ToggleRest(&note));
          return action_queue;
       }
    }
    else if (action_name == "erase_note")
-      action = new Action::EraseNote(notes, current_grid_editor->note_cursor_x);
+      action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
-      action = new Action::AddDotTransform(single_note);
+      action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
-      action = new Action::RemoveDotTransform(single_note);
+      action = new Action::Transform::RemoveDot(single_note);
    else if (action_name == "set_command_mode")
       action = new Action::SetCommandMode(current_grid_editor, command_bar);
    else if (action_name == "set_normal_mode")
@@ -300,13 +300,13 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
-      action = new Action::Octatonic1Transform(notes);
+      action = new Action::Transform::Octatonic1(notes);
    else if (action_name == "insert_note")
-      action = new Action::InsertNoteTransform(notes, current_grid_editor->note_cursor_x, Note());
+      action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
    else if (action_name == "insert_note_after")
    {
       action = new Action::Queue("insert_note_after: insert_note and move_cursor_right");
-      static_cast<Action::Queue *>(action)->add_action(new Action::InsertNoteTransform(notes, current_grid_editor->note_cursor_x+1, Note()));
+      static_cast<Action::Queue *>(action)->add_action(new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x+1, Note()));
       static_cast<Action::Queue *>(action)->add_action(new Action::MoveCursorRight(current_grid_editor));
    }
    else if (action_name == "toggle_show_debug_data")

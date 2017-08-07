@@ -7,7 +7,7 @@
 
 
 
-Action::AppendNoteTransform::AppendNoteTransform(std::vector<Note> *notes, Note note)
+Action::Transform::AppendNote::AppendNote(std::vector<Note> *notes, Note note)
    : Base("append_note")
    , notes(notes)
    , note(note)
@@ -15,12 +15,12 @@ Action::AppendNoteTransform::AppendNoteTransform(std::vector<Note> *notes, Note 
 
 
 
-Action::AppendNoteTransform::~AppendNoteTransform()
+Action::Transform::AppendNote::~AppendNote()
 {}
 
 
 
-bool Action::AppendNoteTransform::execute()
+bool Action::Transform::AppendNote::execute()
 {
    if (!notes) throw std::runtime_error("Cannot append note to NULL notes");
 

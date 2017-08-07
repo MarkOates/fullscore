@@ -13,19 +13,19 @@ namespace Action
 {
    namespace Transform
    {
-      class ClearMeasure : public Base
+      class AddDot : public Base
       {
       private:
-         std::vector<Note> *notes;
+         Note *note;
 
       public:
-         ClearMeasure(std::vector<Note> *notes);
-         ~ClearMeasure();
+         AddDot(Note *note);
+         ~AddDot();
 
          bool execute() override;
       };
-   };
-};
+   }
+}
 
 
 

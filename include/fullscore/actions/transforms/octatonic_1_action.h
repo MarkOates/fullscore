@@ -13,14 +13,14 @@ namespace Action
 {
    namespace Transform
    {
-      class TransposeDown : public Base
+      class Octatonic1 : public Base
       {
       private:
-         Note *note;
+         std::vector<Note> *notes;
 
       public:
-         TransposeDown(Note *note);
-         ~TransposeDown();
+         Octatonic1(std::vector<Note> *notes);
+         ~Octatonic1();
 
          bool execute() override;
       };

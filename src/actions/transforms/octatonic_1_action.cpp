@@ -1,26 +1,26 @@
 
 
 
-#include <fullscore/actions/transforms/octatonic_1_transform_action.h>
+#include <fullscore/actions/transforms/octatonic_1_action.h>
 
 #include <fullscore/transforms/octatonic_1_transform.h>
 #include <fullscore/models/note.h>
 
 
 
-Action::Octatonic1Transform::Octatonic1Transform(std::vector<Note> *notes)
+Action::Transform::Octatonic1::Octatonic1(std::vector<Note> *notes)
    : Base("octatonic_1_transform")
    , notes(notes)
 {}
 
 
 
-Action::Octatonic1Transform::~Octatonic1Transform()
+::Action::Transform::Octatonic1::~Octatonic1()
 {}
 
 
 
-bool Action::Octatonic1Transform::execute()
+bool Action::Transform::Octatonic1::execute()
 {
    if (!notes) return false;
 

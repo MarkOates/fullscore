@@ -10,7 +10,7 @@
 
 
 
-Action::TransposeUp::TransposeUp(Note *note)
+Action::Transform::TransposeUp::TransposeUp(Note *note)
    : Base("transpose_up")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::TransposeUp::TransposeUp(Note *note)
 
 
 
-Action::TransposeUp::~TransposeUp()
+Action::Transform::TransposeUp::~TransposeUp()
 {}
 
 
 
 
-bool Action::TransposeUp::execute()
+bool Action::Transform::TransposeUp::execute()
 {
    if (!note) return false;
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   Transform::Transpose transpose_transform(1);
+   ::Transform::Transpose transpose_transform(1);
    single_note_as_array = transpose_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

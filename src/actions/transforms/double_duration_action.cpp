@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/transforms/double_duration_transform_action.h>
+#include <fullscore/actions/transforms/double_duration_action.h>
 
 #include <fullscore/transforms/double_duration_transform.h>
 #include <fullscore/models/note.h>
@@ -10,7 +10,7 @@
 
 
 
-Action::DoubleDurationTransform::DoubleDurationTransform(Note *note)
+Action::Transform::DoubleDuration::DoubleDuration(Note *note)
    : Base("double_duration")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::DoubleDurationTransform::DoubleDurationTransform(Note *note)
 
 
 
-Action::DoubleDurationTransform::~DoubleDurationTransform()
+Action::Transform::DoubleDuration::~DoubleDuration()
 {}
 
 
 
 
-bool Action::DoubleDurationTransform::execute()
+bool Action::Transform::DoubleDuration::execute()
 {
    if (!note) return false;
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   Transform::DoubleDuration double_duration_transform;
+   ::Transform::DoubleDuration double_duration_transform;
    single_note_as_array = double_duration_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

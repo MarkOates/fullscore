@@ -13,14 +13,14 @@ namespace Action
 {
    namespace Transform
    {
-      class TransposeDown : public Base
+      class HalfDuration : public Base
       {
       private:
          Note *note;
 
       public:
-         TransposeDown(Note *note);
-         ~TransposeDown();
+         HalfDuration(Note *note);
+         ~HalfDuration();
 
          bool execute() override;
       };

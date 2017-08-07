@@ -13,14 +13,14 @@ namespace Action
 {
    namespace Transform
    {
-      class TransposeDown : public Base
+      class ClearMeasure : public Base
       {
       private:
-         Note *note;
+         std::vector<Note> *notes;
 
       public:
-         TransposeDown(Note *note);
-         ~TransposeDown();
+         ClearMeasure(std::vector<Note> *notes);
+         ~ClearMeasure();
 
          bool execute() override;
       };

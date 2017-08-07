@@ -45,8 +45,10 @@ void MeasureRenderComponent::render()
    if (measure->get_num_notes() > 0)
       measure_width = __get_measure_width(measure) * full_measure_width;
 
-   if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE))
+   if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_COORDINATE))
       measure_block_color = color::color(color::yellow, 0.1);
+   if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID))
+      measure_block_color = color::color(color::orange, 0.1);
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STACK))
       measure_block_color = color::color(color::red, 0.1);
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STATIC))

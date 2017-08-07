@@ -10,7 +10,7 @@
 
 
 
-Action::EraseNote::EraseNote(std::vector<Note> *notes, int index)
+Action::Transform::EraseNote::EraseNote(std::vector<Note> *notes, int index)
    : Base("erase_note")
    , notes(notes)
    , index(index)
@@ -19,17 +19,17 @@ Action::EraseNote::EraseNote(std::vector<Note> *notes, int index)
 
 
 
-Action::EraseNote::~EraseNote()
+Action::Transform::EraseNote::~EraseNote()
 {}
 
 
 
 
-bool Action::EraseNote::execute()
+bool Action::Transform::EraseNote::execute()
 {
    if (!notes || notes->empty() || index < 0 || index >= notes->size()) return false;
 
-   Transform::EraseNote erase_note_transform(index);
+   ::Transform::EraseNote erase_note_transform(index);
    *notes = erase_note_transform.transform(*notes);
    return true;
 }
