@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_MOVE_CURSOR_UP_ACTION_HEADER
-#define __FULLSCORE_MOVE_CURSOR_UP_ACTION_HEADER
-
+#pragma once
 
 
 
@@ -26,5 +24,3 @@ namespace Action
 
 
 
-
-#endif

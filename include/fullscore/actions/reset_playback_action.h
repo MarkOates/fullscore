@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_RESET_PLAYBACK_ACTION
-#define __FULLSCORE_RESET_PLAYBACK_ACTION
-
+#pragma once
 
 
 
@@ -26,5 +24,3 @@ namespace Action
 
 
 
-
-#endif

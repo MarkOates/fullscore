@@ -2,11 +2,9 @@
 
 
 
-
 #include <vector>
 #include <fullscore/actions/action_base.h>
 #include <fullscore/models/note.h>
-
 
 
 
@@ -26,7 +24,6 @@ namespace Action
       bool execute() override;
    };
 };
-
 
 
 

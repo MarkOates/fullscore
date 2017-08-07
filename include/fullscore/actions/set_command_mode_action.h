@@ -2,11 +2,9 @@
 
 
 
-
 #include <fullscore/actions/action_base.h>
 
 #include <fullscore/widgets/grid_editor.h>
-
 
 
 
@@ -26,7 +24,6 @@ namespace Action
       bool execute() override;
    };
 }
-
 
 
 
