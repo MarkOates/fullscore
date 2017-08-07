@@ -302,11 +302,11 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "octatonic_1_transform")
       action = new Action::Octatonic1Transform(notes);
    else if (action_name == "insert_note")
-      action = new Action::InsertNoteTransform(notes, current_grid_editor->note_cursor_x, Note());
+      action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
    else if (action_name == "insert_note_after")
    {
       action = new Action::Queue("insert_note_after: insert_note and move_cursor_right");
-      static_cast<Action::Queue *>(action)->add_action(new Action::InsertNoteTransform(notes, current_grid_editor->note_cursor_x+1, Note()));
+      static_cast<Action::Queue *>(action)->add_action(new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x+1, Note()));
       static_cast<Action::Queue *>(action)->add_action(new Action::MoveCursorRight(current_grid_editor));
    }
    else if (action_name == "toggle_show_debug_data")

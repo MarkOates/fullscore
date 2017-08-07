@@ -8,7 +8,7 @@
 
 
 
-Action::InsertNoteTransform::InsertNoteTransform(std::vector<Note> *notes, int at_index, Note note)
+Action::Transform::InsertNote::InsertNote(std::vector<Note> *notes, int at_index, Note note)
    : Base("insert_note")
    , notes(notes)
    , at_index(at_index)
@@ -18,13 +18,13 @@ Action::InsertNoteTransform::InsertNoteTransform(std::vector<Note> *notes, int a
 
 
 
-Action::InsertNoteTransform::~InsertNoteTransform()
+Action::Transform::InsertNote::~InsertNote()
 {}
 
 
 
 
-bool Action::InsertNoteTransform::execute()
+bool Action::Transform::InsertNote::execute()
 {
    if (!notes) throw std::runtime_error("Cannot transform NULL notes");
 
