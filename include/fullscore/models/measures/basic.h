@@ -21,11 +21,7 @@ namespace Measure
       std::vector<Note> notes;
 
    public:
-      Transform::Stack *genesis;
-      bool refresh();
-
-      Basic();
-      Basic(std::vector<Note> notes);
+      Basic(std::vector<Note> notes = {});
 
       int extension;
 

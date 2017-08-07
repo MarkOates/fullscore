@@ -12,15 +12,13 @@ class Grid;
 
 namespace Measure
 {
-   class Reference : public Base
+   class ReferenceByID : public Base
    {
    private:
-      Grid *grid;
-      int measure_x;
-      int staff_y;
+      int measure_id;
 
    public:
-      Reference(Grid *grid, int measure_x, int staff_y);
+      ReferenceByID(int measure_id);
 
       Measure::Base *get_referenced_measure();
 

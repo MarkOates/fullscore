@@ -43,7 +43,8 @@
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_reference_cursor_action.h>
-#include <fullscore/actions/set_reference_measure_action.h>
+#include <fullscore/actions/set_reference_by_coordinate_measure_action.h>
+#include <fullscore/actions/set_reference_by_id_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/set_stack_measure_action.h>
 #include <fullscore/actions/set_time_signature_numerator_action.h>
@@ -108,7 +109,9 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
+      case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
+      case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
+      case ALLEGRO_KEY_R: return "toggle_rest"; break;
       case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
@@ -192,6 +195,12 @@ Action::Base *AppController::create_action(std::string action_name)
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure::Base *focused_measure = nullptr;
+   Measure::Base *measure_at_reference_cursor = nullptr;
+
+   if (reference_cursor.is_valid())
+   {
+      measure_at_reference_cursor = reference_cursor.get_grid()->get_measure(reference_cursor.get_x(), reference_cursor.get_y());
+   }
 
    if (current_grid_editor->is_note_target_mode())
    {
@@ -326,7 +335,7 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::MoveCursorRight(current_grid_editor);
    else if (action_name == "yank_measure_to_buffer")
    {
-      action = new Action::Queue("yank_measure_to_buffer and set_reference_measure");
+      action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
       static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
       static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
@@ -357,10 +366,17 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
-   else if (action_name == "set_reference_measure")
-      action = new Action::SetReferenceMeasure(
+   else if (action_name == "set_reference_by_coordinate_measure")
+      action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
+   else if (action_name == "set_reference_by_id_measure")
+   {
+      action = new Action::SetReferenceByIDMeasure(
+            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
+            measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
+         );
+   }
    else if (action_name == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
