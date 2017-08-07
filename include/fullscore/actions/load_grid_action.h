@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include <fullscore/actions/action_base.h>
+#include <fullscore/actions/base.h>
 
 
 
