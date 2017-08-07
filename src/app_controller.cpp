@@ -20,7 +20,7 @@
 #include <fullscore/actions/transforms/transpose_down_action.h>
 #include <fullscore/actions/append_column_to_grid_action.h>
 #include <fullscore/actions/append_staff_action.h>
-#include <fullscore/actions/create_new_score_editor_action.h>
+#include <fullscore/actions/create_new_grid_editor_action.h>
 #include <fullscore/actions/delete_measure_action.h>
 #include <fullscore/actions/delete_grid_column_action.h>
 #include <fullscore/actions/delete_staff_action.h>
@@ -71,7 +71,7 @@ AppController::AppController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   set_current_grid_editor(create_new_score_editor("full_score"));
+   set_current_grid_editor(create_new_grid_editor("full_score"));
 }
 
 
@@ -93,7 +93,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
 {
    switch(al_keycode)
    {
-      case ALLEGRO_KEY_N: if(ctrl) return "create_new_score_editor"; break;
+      case ALLEGRO_KEY_N: if(ctrl) return "create_new_grid_editor"; break;
       case ALLEGRO_KEY_X: if(ctrl) return "set_current_grid_editor"; break;
       case ALLEGRO_KEY_UP: return "move_camera_up"; break;
       case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
@@ -167,7 +167,7 @@ Action::Base *AppController::create_action(std::string action_name)
 
    Action::Base *action = nullptr;
 
-   if (action_name == "create_new_score_editor")
+   if (action_name == "create_new_grid_editor")
       action = new Action::CreateNewScoreEditor(this);
    else if (action_name == "set_current_grid_editor")
       action = new Action::SetCurrentUIGridEditor(this, get_next_grid_editor());
@@ -484,7 +484,7 @@ void AppController::on_message(UIWidget *sender, std::string message)
 
 
 
-UIGridEditor *AppController::create_new_score_editor(std::string name)
+UIGridEditor *AppController::create_new_grid_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;

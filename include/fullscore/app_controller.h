@@ -38,7 +38,7 @@ public:
 
    std::string find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
-   UIGridEditor *create_new_score_editor(std::string identifier);
+   UIGridEditor *create_new_grid_editor(std::string identifier);
    bool set_current_grid_editor(UIGridEditor *editor);
    UIGridEditor *get_next_grid_editor();
 };

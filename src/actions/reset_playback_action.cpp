@@ -9,9 +9,9 @@
 
 
 
-Action::ResetPlayback::ResetPlayback(UIGridEditor *score_editor)
+Action::ResetPlayback::ResetPlayback(UIGridEditor *grid_editor)
    : Base("reset_playback")
-   , score_editor(score_editor)
+   , grid_editor(grid_editor)
 {
 }
 
@@ -27,9 +27,9 @@ Action::ResetPlayback::~ResetPlayback()
 
 bool Action::ResetPlayback::execute()
 {
-   if (!score_editor) return false;
+   if (!grid_editor) return false;
 
-   score_editor->playback_control.reset();
+   grid_editor->playback_control.reset();
 
    return false;
 }

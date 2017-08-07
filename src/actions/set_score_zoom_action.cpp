@@ -9,9 +9,9 @@
 
 
 
-Action::SetScoreZoom::SetScoreZoom(UIGridEditor *score_editor, Motion *motion, float destination, float duration)
+Action::SetScoreZoom::SetScoreZoom(UIGridEditor *grid_editor, Motion *motion, float destination, float duration)
    : Base("set_score_zoom")
-   , score_editor(score_editor)
+   , grid_editor(grid_editor)
    , motion(motion)
    , destination(destination)
    , duration(duration)
@@ -28,10 +28,10 @@ Action::SetScoreZoom::~SetScoreZoom()
 
 bool Action::SetScoreZoom::execute()
 {
-   if (!score_editor || !motion) return false;
+   if (!grid_editor || !motion) return false;
 
-   motion->cmove_to(&score_editor->place.scale.x, destination, duration);
-   motion->cmove_to(&score_editor->place.scale.y, destination, duration);
+   motion->cmove_to(&grid_editor->place.scale.x, destination, duration);
+   motion->cmove_to(&grid_editor->place.scale.y, destination, duration);
 
    return true;
 }

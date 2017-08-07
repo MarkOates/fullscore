@@ -13,10 +13,10 @@ namespace Action
    class ResetPlayback : public Base
    {
    private:
-      UIGridEditor *score_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      ResetPlayback(UIGridEditor *score_editor);
+      ResetPlayback(UIGridEditor *grid_editor);
       ~ResetPlayback();
       bool execute() override;
    };
