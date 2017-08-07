@@ -4,13 +4,13 @@
 #include <fullscore/models/measures/reference.h>
 
 #include <fullscore/models/measure.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 
 
 
-Measure::Reference::Reference(MeasureGrid *measure_grid, int measure_x, int staff_y)
+Measure::Reference::Reference(MeasureGrid *grid, int measure_x, int staff_y)
    : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
-   , measure_grid(measure_grid)
+   , grid(grid)
    , measure_x(measure_x)
    , staff_y(staff_y)
 {}
@@ -19,10 +19,10 @@ Measure::Reference::Reference(MeasureGrid *measure_grid, int measure_x, int staf
 
 std::vector<Note> Measure::Reference::get_notes_copy()
 {
-   if (!measure_grid) return {};
+   if (!grid) return {};
 
    // TODO: this could be a dead pointer if it is deleted externally
-   Measure::Base *referenced_measure = measure_grid->get_measure(measure_x, staff_y);
+   Measure::Base *referenced_measure = grid->get_measure(measure_x, staff_y);
    if (referenced_measure) return referenced_measure->get_notes_copy();
    return {};
 }
@@ -31,9 +31,9 @@ std::vector<Note> Measure::Reference::get_notes_copy()
 
 Measure::Base *Measure::Reference::get_referenced_measure()
 {
-   if (!measure_grid) return nullptr;
+   if (!grid) return nullptr;
 
-   return measure_grid->get_measure(measure_x, staff_y);
+   return grid->get_measure(measure_x, staff_y);
 }
 
 

@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/staves/instrument.h>

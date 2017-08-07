@@ -15,10 +15,10 @@ namespace Action
    class AppendStaff : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
 
    public:
-      AppendStaff(MeasureGrid *measure_grid);
+      AppendStaff(MeasureGrid *grid);
       ~AppendStaff();
 
       bool execute() override;

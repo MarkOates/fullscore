@@ -16,11 +16,11 @@ namespace Action
    class LoadMeasureGrid : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       std::string filename;
 
    public:
-      LoadMeasureGrid(MeasureGrid *measure_grid, std::string filename);
+      LoadMeasureGrid(MeasureGrid *grid, std::string filename);
       ~LoadMeasureGrid();
 
       bool execute();

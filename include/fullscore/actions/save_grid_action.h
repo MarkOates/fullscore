@@ -16,11 +16,11 @@ namespace Action
    class SaveMeasureGrid : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       std::string filename;
 
    public:
-      SaveMeasureGrid(MeasureGrid *measure_grid, std::string filename);
+      SaveMeasureGrid(MeasureGrid *grid, std::string filename);
       ~SaveMeasureGrid();
 
       bool execute();

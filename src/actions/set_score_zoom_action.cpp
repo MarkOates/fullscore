@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/set_score_zoom_action.h>
 
-#include <fullscore/widgets/measure_grid_editor.h>
+#include <fullscore/widgets/grid_editor.h>
 #include <allegro_flare/motion.h>
 
 

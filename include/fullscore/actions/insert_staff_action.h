@@ -15,11 +15,11 @@ namespace Action
    class InsertStaff : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       int at_index;
 
    public:
-      InsertStaff(MeasureGrid *measure_grid, int at_index);
+      InsertStaff(MeasureGrid *grid, int at_index);
       ~InsertStaff();
 
       bool execute() override;

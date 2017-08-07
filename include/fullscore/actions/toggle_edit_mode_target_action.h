@@ -15,10 +15,10 @@ namespace Action
    class ToggleEditModeTarget : public Base
    {
    private:
-      UIMeasureGridEditor *measure_grid_editor;
+      UIMeasureGridEditor *grid_editor;
 
    public:
-      ToggleEditModeTarget(UIMeasureGridEditor *measure_grid_editor);
+      ToggleEditModeTarget(UIMeasureGridEditor *grid_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;

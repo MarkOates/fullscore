@@ -3,13 +3,13 @@
 
 #include <fullscore/actions/delete_measure_action.h>
 
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 
 
 
-Action::DeleteMeasure::DeleteMeasure(MeasureGrid *measure_grid, int measure_x, int staff_y)
+Action::DeleteMeasure::DeleteMeasure(MeasureGrid *grid, int measure_x, int staff_y)
    : Base("delete_measure")
-   , measure_grid(measure_grid)
+   , grid(grid)
    , measure_x(measure_x)
    , staff_y(staff_y)
 {}
@@ -18,9 +18,9 @@ Action::DeleteMeasure::DeleteMeasure(MeasureGrid *measure_grid, int measure_x, i
 
 bool Action::DeleteMeasure::execute()
 {
-   if (!measure_grid) std::runtime_error("Cannot delete a measure on a nullptr measure_grid");
+   if (!grid) std::runtime_error("Cannot delete a measure on a nullptr grid");
 
-   return measure_grid->delete_measure(measure_x, staff_y);
+   return grid->delete_measure(measure_x, staff_y);
 }
 
 

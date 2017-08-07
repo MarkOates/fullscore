@@ -4,14 +4,14 @@
 #include <fullscore/transforms/copy_transform.h>
 
 #include <fullscore/models/measures/base.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 #include <sstream>
 
 
 
-Transform::Copy::Copy(MeasureGrid *measure_grid, int source_x, int source_y)
+Transform::Copy::Copy(MeasureGrid *grid, int source_x, int source_y)
    : Base("copy")
-   , measure_grid(measure_grid)
+   , grid(grid)
    , source_x(source_x)
    , source_y(source_y)
 {}
@@ -20,9 +20,9 @@ Transform::Copy::Copy(MeasureGrid *measure_grid, int source_x, int source_y)
 
 std::vector<Note> Transform::Copy::transform(std::vector<Note> n)
 {
-   if (!measure_grid) throw std::runtime_error("cannot copy measure from empty measure_grid");
+   if (!grid) throw std::runtime_error("cannot copy measure from empty grid");
 
-   Measure::Base *measure = measure_grid->get_measure(source_x, source_y);
+   Measure::Base *measure = grid->get_measure(source_x, source_y);
 
    if (!measure)
    {

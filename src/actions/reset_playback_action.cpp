@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/reset_playback_action.h>
 
-#include <fullscore/widgets/measure_grid_editor.h>
+#include <fullscore/widgets/grid_editor.h>
 
 
 

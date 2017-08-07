@@ -15,11 +15,11 @@ namespace Action
    class InsertColumn : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       int at_index;
 
    public:
-      InsertColumn(MeasureGrid *measure_grid, int at_index);
+      InsertColumn(MeasureGrid *grid, int at_index);
       ~InsertColumn();
 
       bool execute() override;

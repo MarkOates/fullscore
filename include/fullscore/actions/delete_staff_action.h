@@ -15,11 +15,11 @@ namespace Action
    class DeleteStaff : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       int at_index;
 
    public:
-      DeleteStaff(MeasureGrid *measure_grid, int at_index);
+      DeleteStaff(MeasureGrid *grid, int at_index);
       ~DeleteStaff();
 
       bool execute() override;

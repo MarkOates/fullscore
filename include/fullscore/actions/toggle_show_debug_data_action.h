@@ -15,10 +15,10 @@ namespace Action
    class ToggleShowDebugData : public Base
    {
    private:
-      UIMeasureGridEditor *measure_grid_editor;
+      UIMeasureGridEditor *grid_editor;
 
    public:
-      ToggleShowDebugData(UIMeasureGridEditor *measure_grid_editor);
+      ToggleShowDebugData(UIMeasureGridEditor *grid_editor);
       ~ToggleShowDebugData();
 
       bool execute() override;

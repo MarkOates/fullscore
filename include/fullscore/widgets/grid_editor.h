@@ -6,7 +6,7 @@
 
 #include <allegro_flare/gui/widget.h>
 #include <allegro_flare/placement2d.h>
-#include <fullscore/models/measure_grid.h>
+#include <fullscore/models/grid.h>
 #include <fullscore/models/playback_control.h>
 #include <fullscore/services/music_engraver.h>
 
@@ -50,7 +50,7 @@ public:
       STATE_INACTIVE
    };
 
-   MeasureGrid measure_grid;
+   MeasureGrid grid;
    PlaybackControl playback_control;
 
    RenderingDependencies rendering_dependencies;

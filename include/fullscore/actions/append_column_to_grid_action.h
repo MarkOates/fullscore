@@ -13,10 +13,10 @@ namespace Action
    class AppendColumnToMeasureGrid : public Base
    {
    private:
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
 
    public:
-      AppendColumnToMeasureGrid(MeasureGrid *measure_grid);
+      AppendColumnToMeasureGrid(MeasureGrid *grid);
       ~AppendColumnToMeasureGrid();
 
       bool execute() override;

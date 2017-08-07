@@ -17,12 +17,12 @@ namespace Action
    {
    private:
       Measure::Basic *yank_measure_buffer;
-      MeasureGrid *measure_grid;
+      MeasureGrid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      PasteMeasureFromBufferToMeasureGridCoordinates(Measure::Basic *yank_measure_buffer, MeasureGrid *measure_grid, int measure_x, int staff_y);
+      PasteMeasureFromBufferToMeasureGridCoordinates(Measure::Basic *yank_measure_buffer, MeasureGrid *grid, int measure_x, int staff_y);
       ~PasteMeasureFromBufferToMeasureGridCoordinates();
 
       bool execute();
