@@ -5,7 +5,7 @@
 
 #include <fullscore/converters/note_string_converter.h>
 
-#include <fullscore/models/duration.h>
+#include <fullscore/models/Duration.h>
 #include <fullscore/models/note.h>
 
 

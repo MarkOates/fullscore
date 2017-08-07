@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/duration.h>
+#include <fullscore/models/Duration.h>
 
 #include <allegro_flare/enum_iterator.h>
 #include <allegro_flare/useful.h>

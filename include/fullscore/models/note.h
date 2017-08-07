@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/duration.h>
+#include <fullscore/models/Duration.h>
 
 #include <fullscore/models/pitch.h>
 
