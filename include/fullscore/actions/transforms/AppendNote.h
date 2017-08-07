@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <fullscore/actions/base.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

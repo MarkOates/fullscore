@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/actions/transforms/half_duration_action.h>
+#include <fullscore/actions/transforms/HalfDuration.h>
 
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <fullscore/transforms/half_duration_transform.h>
 
 

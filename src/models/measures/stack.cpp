@@ -4,7 +4,7 @@
 #include <fullscore/models/measures/stack.h>
 
 #include <fullscore/models/measure.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <allegro_flare/useful.h>
 
 

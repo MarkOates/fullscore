@@ -8,7 +8,7 @@
 #include <fullscore/models/staves/spacer.h>
 #include <fullscore/helpers/grid_helper.h>
 #include <fullscore/models/grid.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

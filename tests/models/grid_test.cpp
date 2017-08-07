@@ -9,7 +9,7 @@
 #include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/measure.h>
 #include <fullscore/models/grid.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

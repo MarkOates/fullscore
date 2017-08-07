@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/actions/transforms/retrograde_action.h>
+#include <fullscore/actions/transforms/Retrograde.h>
 
 #include <fullscore/transforms/retrograde_transform.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

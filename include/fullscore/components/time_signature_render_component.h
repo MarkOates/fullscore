@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_TIME_SIGNATURE_RENDER_COMPONENT_HEADER
-#define __FULLSCORE_TIME_SIGNATURE_RENDER_COMPONENT_HEADER
-
+#pragma once
 
 
 
@@ -20,5 +18,3 @@ public:
 
 
 
-
-#endif

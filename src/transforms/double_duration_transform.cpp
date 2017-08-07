@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/double_duration_transform.h>
 
-#include <fullscore/models/duration.h>
+#include <fullscore/models/Duration.h>
 #include <algorithm>
 
 

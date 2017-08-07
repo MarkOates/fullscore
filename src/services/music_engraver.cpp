@@ -6,7 +6,7 @@
 #include <allegro_flare/drawing_interfaces/drawing_interface_allegro5.h>
 
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <fullscore/services/music_engraver.h>
 
 

@@ -3,7 +3,7 @@
 
 #include <fullscore/models/time_signature.h>
 
-#include <fullscore/models/duration.h>
+#include <fullscore/models/Duration.h>
 #include <fullscore/helpers/duration_helper.h>
 
 

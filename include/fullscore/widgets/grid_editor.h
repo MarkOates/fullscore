@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_GUI_SCORE_EDITOR_HEADER
-#define __FULLSCORE_GUI_SCORE_EDITOR_HEADER
-
+#pragma once
 
 
 
@@ -94,5 +92,3 @@ public:
 
 
 
-
-#endif

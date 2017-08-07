@@ -5,7 +5,7 @@
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/staves/instrument.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <iostream>
 
 

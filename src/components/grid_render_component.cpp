@@ -12,7 +12,7 @@
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_helper.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/services/music_engraver.h>

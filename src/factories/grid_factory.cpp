@@ -6,7 +6,7 @@
 #include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/staves/spacer.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <allegro_flare/useful.h>
 #include <iostream>
 

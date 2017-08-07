@@ -2,9 +2,7 @@
 
 
 
-
 #include <allegro_flare/gui/widgets/camera.h>
-
 
 
 
@@ -19,7 +17,6 @@ public:
    void on_timer() override;
    void on_draw() override;
 };
-
 
 
 
