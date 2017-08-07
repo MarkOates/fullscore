@@ -254,12 +254,12 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "half_duration")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::HalfDurationTransform(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::HalfDuration(single_note);
       else
       {
          if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::HalfDurationTransform(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::HalfDuration(&note));
          return action_queue;
       }
    }

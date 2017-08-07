@@ -10,7 +10,7 @@
 
 
 
-Action::HalfDurationTransform::HalfDurationTransform(Note *note)
+Action::Transform::HalfDuration::HalfDuration(Note *note)
    : Base("half_duration")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::HalfDurationTransform::HalfDurationTransform(Note *note)
 
 
 
-Action::HalfDurationTransform::~HalfDurationTransform()
+Action::Transform::HalfDuration::~HalfDuration()
 {}
 
 
 
 
-bool Action::HalfDurationTransform::execute()
+bool Action::Transform::HalfDuration::execute()
 {
    if (!note) return false;
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   Transform::HalfDuration half_duration_transform;
+   ::Transform::HalfDuration half_duration_transform;
    single_note_as_array = half_duration_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

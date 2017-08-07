@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class HalfDurationTransform : public Base
+   namespace Transform
    {
-   private:
-      Note *note;
+      class HalfDuration : public Base
+      {
+      private:
+         Note *note;
 
-   public:
-      HalfDurationTransform(Note *note);
-      ~HalfDurationTransform();
+      public:
+         HalfDuration(Note *note);
+         ~HalfDuration();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 
