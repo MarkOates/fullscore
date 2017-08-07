@@ -11,7 +11,6 @@
 
 Measure::Basic::Basic()
    : Base(Measure::TYPE_IDENTIFIER_BASIC)
-   , genesis(nullptr)
    , extension(12)
 {}
 
@@ -20,30 +19,9 @@ Measure::Basic::Basic()
 Measure::Basic::Basic(std::vector<Note> notes)
    : Base(Measure::TYPE_IDENTIFIER_BASIC)
    , notes()
-   , genesis(nullptr)
    , extension(12)
 {
    set_notes(notes);
-}
-
-
-
-bool Measure::Basic::refresh()
-{
-   if (genesis)
-   {
-      try
-      {
-         notes = genesis->transform({});
-         return true;
-      }
-      catch (...)
-      {
-         std::cout << "Measure::Basic genesis failed" << std::endl;
-         return false;
-      }
-   }
-   return false;
 }
 
 

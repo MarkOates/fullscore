@@ -5,10 +5,6 @@
 
 #include <fullscore/models/measures/basic.h>
 
-#include <fullscore/transforms/insert_note_transform.h>
-#include <fullscore/transforms/reference_transform.h>
-#include <fullscore/transforms/stack_transform.h>
-
 
 
 TEST(MeasureTest, can_be_created)
@@ -37,24 +33,6 @@ TEST(MeasureTest, can_get_and_set_notes)
 
    ASSERT_EQ(3, returned_notes.size());
    ASSERT_EQ(expected_notes, returned_notes);
-}
-
-
-
-TEST(MeasureTest, with_genesis_populates_its_notes)
-{
-   Measure::Basic measure;
-
-   measure.genesis = new Transform::Stack();
-   Transform::InsertNote insert_note_transform(0, Note());
-   for (unsigned i=0; i<3; i++) measure.genesis->add_transform(&insert_note_transform);
-
-   ASSERT_EQ(true, measure.refresh());
-
-   std::vector<Note> expected_notes = { Note(), Note(), Note() };
-   std::vector<Note> measure_notes = measure.get_notes_copy();
-
-   ASSERT_EQ(expected_notes, measure_notes);
 }
 
 
