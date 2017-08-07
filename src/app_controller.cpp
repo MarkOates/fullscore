@@ -18,7 +18,7 @@
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_up_action.h>
 #include <fullscore/actions/transforms/transpose_down_action.h>
-#include <fullscore/actions/append_measure_action.h>
+#include <fullscore/actions/append_column_to_measure_grid_action.h>
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_score_editor_action.h>
 #include <fullscore/actions/delete_measure_action.h>
@@ -378,7 +378,7 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::InsertStaff(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
       action = new Action::DeleteStaff(&current_measure_grid_editor->measure_grid, current_measure_grid_editor->measure_cursor_y);
-   else if (action_name == "append_measure")
+   else if (action_name == "append_column_to_measure_grid")
       action = new Action::AppendMeasure(&current_measure_grid_editor->measure_grid);
    else if (action_name == "append_staff")
       action = new Action::AppendStaff(&current_measure_grid_editor->measure_grid);

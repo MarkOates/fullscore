@@ -17,6 +17,7 @@ namespace Measure
    std::string const TYPE_IDENTIFIER_STATIC    = "static";
 
    int const NO_RECORD = -1;
+   typedef int measure_id_t;
 
    class Base;
 
