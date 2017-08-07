@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/ClearMeasure.h>
 
 #include <fullscore/transforms/clear_measure_transform.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

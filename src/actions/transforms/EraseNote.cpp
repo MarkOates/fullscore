@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/transforms/EraseNote.h>
 
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 #include <fullscore/transforms/erase_note_transform.h>
 
 

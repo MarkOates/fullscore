@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/SNAKECASE_ACTION_NAME_action.h>
 
 #include <fullscore/transforms/SNAKECASE_ACTION_NAME_transform.h>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

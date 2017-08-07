@@ -5,7 +5,7 @@
 
 
 #include <string>
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 

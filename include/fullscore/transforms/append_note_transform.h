@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/base.h>
 
-#include <fullscore/models/note.h>
+#include <fullscore/models/Note.h>
 
 
 
