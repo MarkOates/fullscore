@@ -9,7 +9,7 @@
 
 
 Measure::ReferenceByCoordinate::ReferenceByCoordinate(Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y)
-   : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
+   : Base(Measure::TYPE_IDENTIFIER_REFERENCE_BY_COORDINATE)
    , referenced_grid(referenced_grid)
    , referenced_measure_x(referenced_measure_x)
    , referenced_staff_y(referenced_staff_y)

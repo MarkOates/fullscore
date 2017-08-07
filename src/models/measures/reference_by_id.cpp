@@ -8,7 +8,7 @@
 
 
 Measure::ReferenceByID::ReferenceByID(int measure_id)
-   : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
+   : Base(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID)
    , measure_id(measure_id)
 {}
 
