@@ -44,6 +44,7 @@
 #include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_reference_cursor_action.h>
 #include <fullscore/actions/set_reference_by_coordinate_measure_action.h>
+#include <fullscore/actions/set_reference_by_id_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/set_stack_measure_action.h>
 #include <fullscore/actions/set_time_signature_numerator_action.h>
@@ -361,6 +362,10 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
+   else if (action_name == "set_reference_by_id_measure")
+      action = new Action::SetReferenceByIDMeasure(
+            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
+            current_grid_editor->get_measure_at_cursor() ? current_grid_editor->get_measure_at_cursor()->get_id() : Measure::NO_RECORD);
    else if (action_name == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
