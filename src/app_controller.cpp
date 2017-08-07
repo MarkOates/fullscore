@@ -287,10 +287,19 @@ Action::Base *AppController::create_action(std::string action_name)
          return action_queue;
       }
    }
+   else if (action_name == "invert")
+   {
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::Invert(single_note);
+      else
+      {
+         if (!notes) { std::cout << "cannot invert_note on nullptr notes" << std::endl; return nullptr; }
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::Invert(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "erase_note")
       action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
-   else if (action_name == "invert")
-      action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")
       action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
