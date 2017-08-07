@@ -30,7 +30,7 @@ $ git clone https://github.com/MarkOates/fullscore.git
 $ cd fullscore
 ```
 
-3. update the following constants in the `Makefile` to point to the location of the dependencies on your system.  The values shown are the default for my mac:
+3. update the following constants in the `Makefile` to point to the location of the dependencies on your system.  The values shown are the default for my Mac:
 
 ```
 LIBS_ROOT=/Users/markoates/Repos
