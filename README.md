@@ -32,7 +32,7 @@ $ cd fullscore
 
 3. update the following constants in the `Makefile` to point to the location of the dependencies on your system.  The values shown are the default for my Mac:
 
-```
+```make
 LIBS_ROOT=/Users/markoates/Repos
 ALLEGRO_DIR=$(LIBS_ROOT)/allegro5/build
 ALLEGRO_FLARE_DIR=$(LIBS_ROOT)/allegro_flare
