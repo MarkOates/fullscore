@@ -109,7 +109,9 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: if (shift) { return "set_reference_by_coordinate_measure"; } else { return "toggle_rest"; } break;
+      case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
+      case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
+      case ALLEGRO_KEY_R: return "toggle_rest"; break;
       case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
@@ -363,9 +365,13 @@ Action::Base *AppController::create_action(std::string action_name)
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
    else if (action_name == "set_reference_by_id_measure")
+   {
+      Measure::Base *measure_at_reference_cursor = reference_cursor.get_grid()->get_measure(reference_cursor.get_x(), reference_cursor.get_y());
       action = new Action::SetReferenceByIDMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
-            current_grid_editor->get_measure_at_cursor() ? current_grid_editor->get_measure_at_cursor()->get_id() : Measure::NO_RECORD);
+            measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
+         );
+   }
    else if (action_name == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
