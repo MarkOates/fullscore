@@ -326,7 +326,7 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::MoveCursorRight(current_grid_editor);
    else if (action_name == "yank_measure_to_buffer")
    {
-      action = new Action::Queue("yank_measure_to_buffer and set_reference_measure");
+      action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
       static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
       static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
