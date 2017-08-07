@@ -122,7 +122,9 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
          else if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
-      case ALLEGRO_KEY_A: return "insert_note_after"; break;
+      case ALLEGRO_KEY_A:
+         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note_after"; }
+         break;
       case ALLEGRO_KEY_I: return "insert_note"; break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
       case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
