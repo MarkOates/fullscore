@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class Octatonic1Transform : public Base
+   namespace Transform
    {
-   private:
-      std::vector<Note> *notes;
+      class Octatonic1 : public Base
+      {
+      private:
+         std::vector<Note> *notes;
 
-   public:
-      Octatonic1Transform(std::vector<Note> *notes);
-      ~Octatonic1Transform();
+      public:
+         Octatonic1(std::vector<Note> *notes);
+         ~Octatonic1();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 

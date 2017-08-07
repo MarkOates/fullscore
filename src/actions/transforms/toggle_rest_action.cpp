@@ -10,7 +10,7 @@
 
 
 
-Action::ToggleRest::ToggleRest(Note *note)
+Action::Transform::ToggleRest::ToggleRest(Note *note)
    : Base("toggle_rest")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::ToggleRest::ToggleRest(Note *note)
 
 
 
-Action::ToggleRest::~ToggleRest()
+Action::Transform::ToggleRest::~ToggleRest()
 {}
 
 
 
 
-bool Action::ToggleRest::execute()
+bool Action::Transform::ToggleRest::execute()
 {
    if (!note) throw std::runtime_error("Cannot toggle_rest on a nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   Transform::ToggleRest toggle_rest_transform;
+   ::Transform::ToggleRest toggle_rest_transform;
    single_note_as_array = toggle_rest_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

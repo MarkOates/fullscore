@@ -220,7 +220,7 @@ Action::Base *AppController::create_action(std::string action_name)
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-            action_queue->add_action(new Action::TransposeUp(single_note));
+            action_queue->add_action(new Action::Transform::TransposeUp(single_note));
          return action_queue;
       }
       else
@@ -229,7 +229,7 @@ Action::Base *AppController::create_action(std::string action_name)
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-               action_queue->add_action(new Action::TransposeUp(&note));
+               action_queue->add_action(new Action::Transform::TransposeUp(&note));
          return action_queue;
       }
    }
@@ -239,7 +239,7 @@ Action::Base *AppController::create_action(std::string action_name)
       {
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-            action_queue->add_action(new Action::TransposeDown(single_note));
+            action_queue->add_action(new Action::Transform::TransposeDown(single_note));
          return action_queue;
       }
       else
@@ -248,7 +248,7 @@ Action::Base *AppController::create_action(std::string action_name)
          Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
-               action_queue->add_action(new Action::TransposeDown(&note));
+               action_queue->add_action(new Action::Transform::TransposeDown(&note));
          return action_queue;
       }
    }
@@ -276,12 +276,12 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "toggle_rest")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::ToggleRest(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::ToggleRest(single_note);
       else
       {
          if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::ToggleRest(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::ToggleRest(&note));
          return action_queue;
       }
    }
@@ -292,7 +292,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "add_dot")
       action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
-      action = new Action::RemoveDotTransform(single_note);
+      action = new Action::Transform::RemoveDot(single_note);
    else if (action_name == "set_command_mode")
       action = new Action::SetCommandMode(current_grid_editor, command_bar);
    else if (action_name == "set_normal_mode")
@@ -300,7 +300,7 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
-      action = new Action::Octatonic1Transform(notes);
+      action = new Action::Transform::Octatonic1(notes);
    else if (action_name == "insert_note")
       action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
    else if (action_name == "insert_note_after")

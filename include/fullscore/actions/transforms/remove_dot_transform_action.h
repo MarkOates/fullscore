@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class RemoveDotTransform : public Base
+   namespace Transform
    {
-   private:
-      Note *note;
+      class RemoveDot : public Base
+      {
+      private:
+         Note *note;
 
-   public:
-      RemoveDotTransform(Note *note);
-      ~RemoveDotTransform();
+      public:
+         RemoveDot(Note *note);
+         ~RemoveDot();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 

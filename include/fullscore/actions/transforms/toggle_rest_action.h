@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class ToggleRest : public Base
+   namespace Transform
    {
-   private:
-      Note *note;
+      class ToggleRest : public Base
+      {
+      private:
+         Note *note;
 
-   public:
-      ToggleRest(Note *note);
-      ~ToggleRest();
+      public:
+         ToggleRest(Note *note);
+         ~ToggleRest();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 

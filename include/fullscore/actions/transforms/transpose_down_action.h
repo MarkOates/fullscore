@@ -11,18 +11,21 @@ class Note;
 
 namespace Action
 {
-   class TransposeDown : public Base
+   namespace Transform
    {
-   private:
-      Note *note;
+      class TransposeDown : public Base
+      {
+      private:
+         Note *note;
 
-   public:
-      TransposeDown(Note *note);
-      ~TransposeDown();
+      public:
+         TransposeDown(Note *note);
+         ~TransposeDown();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 
