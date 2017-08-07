@@ -19,9 +19,11 @@ Staff::Instrument::Instrument(int num_columns)
 
 Staff::Instrument::~Instrument()
 {
-   //if (!columns.empty())
-      //for (int i=columns.size()-1; i>=0; i--)
-         //delete columns[i];
+   // assume that all measures in columns_of_measure_ids are directly
+   // used in this instrument, and the measures (ids) are not stored
+   // anywhere else
+   for (int i=0; i<columns_of_measure_ids.size(); i++)
+      Measure::destroy(columns_of_measure_ids[i]);
 }
 
 
