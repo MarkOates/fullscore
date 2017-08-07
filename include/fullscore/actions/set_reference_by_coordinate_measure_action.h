@@ -15,15 +15,15 @@ namespace Action
    class SetReferenceByCoordinateMeasure : public Base
    {
    private:
-      Grid *grid;
-      int measure_x;
-      int staff_y;
+      Grid *destination_grid;
+      int destination_measure_x;
+      int destination_staff_y;
       Grid *referenced_grid;
       int referenced_measure_x;
       int referenced_staff_y;
 
    public:
-      SetReferenceByCoordinateMeasure(Grid *grid, int measure_x, int staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
+      SetReferenceByCoordinateMeasure(Grid *destination_grid, int destination_measure_x, int destination_staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
       ~SetReferenceByCoordinateMeasure();
 
       bool execute() override;
