@@ -107,7 +107,8 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
       case ALLEGRO_KEY_D: return "transpose_down"; break;
-      case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
+      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; } break; // #
+      case ALLEGRO_KEY_S: return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
       case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
