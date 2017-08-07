@@ -118,7 +118,7 @@ void UIGridEditor::on_draw()
          cursor_color, 3.0);
 
    // draw a hilight box at the focused note
-   if (note)
+   if (is_note_target_mode() && note)
    {
       float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
       float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
