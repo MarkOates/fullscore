@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/transforms/add_dot_transform_action.h>
+#include <fullscore/actions/transforms/add_dot_action.h>
 
 #include <fullscore/transforms/add_dot_transform.h>
 #include <fullscore/models/note.h>

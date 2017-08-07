@@ -5,15 +5,15 @@
 #include <fullscore/app_controller.h>
 
 #include <fullscore/actions/transforms/append_note_action.h>
-#include <fullscore/actions/transforms/add_dot_transform_action.h>
-#include <fullscore/actions/transforms/clear_measure_transform_action.h>
-#include <fullscore/actions/transforms/double_duration_transform_action.h>
+#include <fullscore/actions/transforms/add_dot_action.h>
+#include <fullscore/actions/transforms/clear_measure_action.h>
+#include <fullscore/actions/transforms/double_duration_action.h>
 #include <fullscore/actions/transforms/erase_note_action.h>
-#include <fullscore/actions/transforms/half_duration_transform_action.h>
+#include <fullscore/actions/transforms/half_duration_action.h>
 #include <fullscore/actions/transforms/insert_note_action.h>
 #include <fullscore/actions/transforms/invert_action.h>
-#include <fullscore/actions/transforms/octatonic_1_transform_action.h>
-#include <fullscore/actions/transforms/remove_dot_transform_action.h>
+#include <fullscore/actions/transforms/octatonic_1_action.h>
+#include <fullscore/actions/transforms/remove_dot_action.h>
 #include <fullscore/actions/transforms/retrograde_action.h>
 #include <fullscore/actions/transforms/toggle_rest_action.h>
 #include <fullscore/actions/transforms/transpose_up_action.h>

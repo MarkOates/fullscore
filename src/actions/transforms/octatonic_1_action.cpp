@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/actions/transforms/octatonic_1_transform_action.h>
+#include <fullscore/actions/transforms/octatonic_1_action.h>
 
 #include <fullscore/transforms/octatonic_1_transform.h>
 #include <fullscore/models/note.h>
