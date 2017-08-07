@@ -52,7 +52,7 @@ TEST(GridTest, sets_and_gets_the_name_of_a_row)
 
 
 
-TEST(GridTest, sets_and_gets_a_measure_to_a_coordinate)
+TEST(GridTest, sets_and_gets_a_measure_at_a_coordinate)
 {
    Grid grid(17, 13);
 

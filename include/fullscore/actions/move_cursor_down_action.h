@@ -13,10 +13,10 @@ namespace Action
    class MoveCursorDown : public Base
    {
    private:
-      UIGridEditor *score_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      MoveCursorDown(UIGridEditor *score_editor);
+      MoveCursorDown(UIGridEditor *grid_editor);
       ~MoveCursorDown();
       bool execute() override;
    };

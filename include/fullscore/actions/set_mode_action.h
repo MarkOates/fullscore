@@ -15,12 +15,12 @@ namespace Action
    class SetMode : public Base
    {
    private:
-      UIGridEditor *score_editor;
+      UIGridEditor *grid_editor;
       UICommandBar *command_bar;
       UIGridEditor::mode_t mode;
 
    public:
-      SetMode(UIGridEditor *score_editor, UICommandBar *command_bar, UIGridEditor::mode_t mode);
+      SetMode(UIGridEditor *grid_editor, UICommandBar *command_bar, UIGridEditor::mode_t mode);
       ~SetMode();
       bool execute() override;
    };

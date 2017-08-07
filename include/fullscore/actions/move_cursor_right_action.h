@@ -13,10 +13,10 @@ namespace Action
    class MoveCursorRight : public Base
    {
    private:
-      UIGridEditor *score_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      MoveCursorRight(UIGridEditor *score_editor);
+      MoveCursorRight(UIGridEditor *grid_editor);
       ~MoveCursorRight();
       bool execute() override;
    };

@@ -9,9 +9,9 @@
 
 
 
-Action::MoveCursorUp::MoveCursorUp(UIGridEditor *score_editor)
+Action::MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
    : Base("move_cursor_up")
-   , score_editor(score_editor)
+   , grid_editor(grid_editor)
 {
 }
 
@@ -27,9 +27,9 @@ Action::MoveCursorUp::~MoveCursorUp()
 
 bool Action::MoveCursorUp::execute()
 {
-   if (!score_editor) return false;
+   if (!grid_editor) return false;
 
-   score_editor->move_measure_cursor_y(-1);
+   grid_editor->move_measure_cursor_y(-1);
 
    return true;
 }

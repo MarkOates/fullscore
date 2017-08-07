@@ -10,11 +10,13 @@ PROJECT_NAME_SNAKE_CASE=fullscore
 LIBS_ROOT=/Users/markoates/Repos
 ALLEGRO_DIR=$(LIBS_ROOT)/allegro5/build
 ALLEGRO_FLARE_DIR=$(LIBS_ROOT)/allegro_flare
-PROJECT_DIR=$(LIBS_ROOT)/$(PROJECT_NAME_SNAKE_CASE)
 GOOGLE_TEST_DIR=$(LIBS_ROOT)/googletest
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
+
+# this is the directory of the project (it's auto_generated)
+PROJECT_DIR=$(LIBS_ROOT)/$(PROJECT_NAME_SNAKE_CASE)
 
 
 # these are the names of the libs you are linking

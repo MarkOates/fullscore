@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/create_new_score_editor_action.h>
+#include <fullscore/actions/create_new_grid_editor_action.h>
 
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/app_controller.h>
@@ -11,7 +11,7 @@
 
 
 Action::CreateNewScoreEditor::CreateNewScoreEditor(AppController *app_controller)
-   : Base("create_new_score_editor")
+   : Base("create_new_grid_editor")
    , app_controller(app_controller)
 {}
 
@@ -28,7 +28,7 @@ bool Action::CreateNewScoreEditor::execute()
 {
    if (!app_controller) return false;
 
-   app_controller->create_new_score_editor("");
+   app_controller->create_new_grid_editor("");
 
    return true;
 }

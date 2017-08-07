@@ -9,9 +9,9 @@
 
 
 
-Action::MoveCursorDown::MoveCursorDown(UIGridEditor *score_editor)
+Action::MoveCursorDown::MoveCursorDown(UIGridEditor *grid_editor)
    : Base("move_cursor_down")
-   , score_editor(score_editor)
+   , grid_editor(grid_editor)
 {
 }
 
@@ -27,9 +27,9 @@ Action::MoveCursorDown::~MoveCursorDown()
 
 bool Action::MoveCursorDown::execute()
 {
-   if (!score_editor) return false;
+   if (!grid_editor) return false;
 
-   score_editor->move_measure_cursor_y(1);
+   grid_editor->move_measure_cursor_y(1);
 
    return true;
 }

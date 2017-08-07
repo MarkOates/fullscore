@@ -46,13 +46,13 @@ void MeasureRenderComponent::render()
       measure_width = __get_measure_width(measure) * full_measure_width;
 
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE))
-      measure_block_color = color::color(color::yellow, 0.2);
+      measure_block_color = color::color(color::yellow, 0.1);
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STACK))
-      measure_block_color = color::color(color::red, 0.2);
+      measure_block_color = color::color(color::red, 0.1);
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STATIC))
       measure_block_color = color::color(color::dodgerblue, 0.1);
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_BASIC))
-      measure_block_color = color::color(color::black, 0.075);
+      measure_block_color = color::color(color::white, 0.075);
 
    al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
          x_pos+measure_width, row_middle_y+staff_height/2,
