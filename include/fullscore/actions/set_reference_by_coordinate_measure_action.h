@@ -12,7 +12,7 @@ class Grid;
 
 namespace Action
 {
-   class SetReferenceMeasure : public Base
+   class SetReferenceByCoordinateMeasure : public Base
    {
    private:
       Grid *grid;
@@ -23,8 +23,8 @@ namespace Action
       int referenced_staff_y;
 
    public:
-      SetReferenceMeasure(Grid *grid, int measure_x, int staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
-      ~SetReferenceMeasure();
+      SetReferenceByCoordinateMeasure(Grid *grid, int measure_x, int staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
+      ~SetReferenceByCoordinateMeasure();
 
       bool execute() override;
    };

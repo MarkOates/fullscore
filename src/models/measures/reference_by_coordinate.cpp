@@ -1,14 +1,14 @@
 
 
 
-#include <fullscore/models/measures/reference.h>
+#include <fullscore/models/measures/reference_by_coordinate.h>
 
 #include <fullscore/models/measure.h>
 #include <fullscore/models/grid.h>
 
 
 
-Measure::Reference::Reference(Grid *grid, int measure_x, int staff_y)
+Measure::ReferenceByCoordinate::ReferenceByCoordinate(Grid *grid, int measure_x, int staff_y)
    : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
    , grid(grid)
    , measure_x(measure_x)
@@ -17,7 +17,7 @@ Measure::Reference::Reference(Grid *grid, int measure_x, int staff_y)
 
 
 
-std::vector<Note> Measure::Reference::get_notes_copy()
+std::vector<Note> Measure::ReferenceByCoordinate::get_notes_copy()
 {
    if (!grid) return {};
 
@@ -29,7 +29,7 @@ std::vector<Note> Measure::Reference::get_notes_copy()
 
 
 
-Measure::Base *Measure::Reference::get_referenced_measure()
+Measure::Base *Measure::ReferenceByCoordinate::get_referenced_measure()
 {
    if (!grid) return nullptr;
 
@@ -38,7 +38,7 @@ Measure::Base *Measure::Reference::get_referenced_measure()
 
 
 
-int Measure::Reference::get_num_notes()
+int Measure::ReferenceByCoordinate::get_num_notes()
 {
    Measure::Base *measure = get_referenced_measure();
    if (!measure) return 0;
@@ -47,14 +47,14 @@ int Measure::Reference::get_num_notes()
 
 
 
-bool Measure::Reference::set_notes(std::vector<Note> notes)
+bool Measure::ReferenceByCoordinate::set_notes(std::vector<Note> notes)
 {
    return false;
 }
 
 
 
-std::vector<Note> *Measure::Reference::get_notes_pointer()
+std::vector<Note> *Measure::ReferenceByCoordinate::get_notes_pointer()
 {
    return nullptr; //TODO ensure all calls to get_notes_pointer() check for validity
 }

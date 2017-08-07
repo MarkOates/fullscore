@@ -43,7 +43,7 @@
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/actions/set_reference_cursor_action.h>
-#include <fullscore/actions/set_reference_measure_action.h>
+#include <fullscore/actions/set_reference_by_coordinate_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
 #include <fullscore/actions/set_stack_measure_action.h>
 #include <fullscore/actions/set_time_signature_numerator_action.h>
@@ -108,7 +108,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_D: return "transpose_down"; break;
       case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_R: if (shift) { return "set_reference_measure"; } else { return "toggle_rest"; } break;
+      case ALLEGRO_KEY_R: if (shift) { return "set_reference_by_coordinate_measure"; } else { return "toggle_rest"; } break;
       case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
       case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
@@ -357,8 +357,8 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
-   else if (action_name == "set_reference_measure")
-      action = new Action::SetReferenceMeasure(
+   else if (action_name == "set_reference_by_coordinate_measure")
+      action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
    else if (action_name == "set_reference_cursor")
