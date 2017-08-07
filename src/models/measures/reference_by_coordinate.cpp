@@ -8,21 +8,21 @@
 
 
 
-Measure::ReferenceByCoordinate::ReferenceByCoordinate(Grid *grid, int measure_x, int staff_y)
+Measure::ReferenceByCoordinate::ReferenceByCoordinate(Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y)
    : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
-   , grid(grid)
-   , measure_x(measure_x)
-   , staff_y(staff_y)
+   , referenced_grid(referenced_grid)
+   , referenced_measure_x(referenced_measure_x)
+   , referenced_staff_y(referenced_staff_y)
 {}
 
 
 
 std::vector<Note> Measure::ReferenceByCoordinate::get_notes_copy()
 {
-   if (!grid) return {};
+   if (!referenced_grid) return {};
 
    // TODO: this could be a dead pointer if it is deleted externally
-   Measure::Base *referenced_measure = grid->get_measure(measure_x, staff_y);
+   Measure::Base *referenced_measure = referenced_grid->get_measure(referenced_measure_x, referenced_staff_y);
    if (referenced_measure) return referenced_measure->get_notes_copy();
    return {};
 }
@@ -31,9 +31,9 @@ std::vector<Note> Measure::ReferenceByCoordinate::get_notes_copy()
 
 Measure::Base *Measure::ReferenceByCoordinate::get_referenced_measure()
 {
-   if (!grid) return nullptr;
+   if (!referenced_grid) return nullptr;
 
-   return grid->get_measure(measure_x, staff_y);
+   return referenced_grid->get_measure(referenced_measure_x, referenced_staff_y);
 }
 
 

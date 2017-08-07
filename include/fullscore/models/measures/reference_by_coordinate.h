@@ -15,12 +15,12 @@ namespace Measure
    class ReferenceByCoordinate : public Base
    {
    private:
-      Grid *grid;
-      int measure_x;
-      int staff_y;
+      Grid *referenced_grid;
+      int referenced_measure_x;
+      int referenced_staff_y;
 
    public:
-      ReferenceByCoordinate(Grid *grid, int measure_x, int staff_y);
+      ReferenceByCoordinate(Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
 
       Measure::Base *get_referenced_measure();
 
