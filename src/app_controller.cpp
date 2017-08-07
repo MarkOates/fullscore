@@ -195,6 +195,12 @@ Action::Base *AppController::create_action(std::string action_name)
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure::Base *focused_measure = nullptr;
+   Measure::Base *measure_at_reference_cursor = nullptr;
+
+   if (reference_cursor.is_valid())
+   {
+      measure_at_reference_cursor = reference_cursor.get_grid()->get_measure(reference_cursor.get_x(), reference_cursor.get_y());
+   }
 
    if (current_grid_editor->is_note_target_mode())
    {
@@ -366,7 +372,6 @@ Action::Base *AppController::create_action(std::string action_name)
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
    else if (action_name == "set_reference_by_id_measure")
    {
-      Measure::Base *measure_at_reference_cursor = reference_cursor.get_grid()->get_measure(reference_cursor.get_x(), reference_cursor.get_y());
       action = new Action::SetReferenceByIDMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
