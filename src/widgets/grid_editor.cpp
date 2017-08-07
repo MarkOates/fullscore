@@ -133,19 +133,6 @@ void UIGridEditor::on_draw()
             6,
             color::color(color::pink, 0.4)
          );
-
-      // note box outline
-      if (is_note_target_mode())
-         al_draw_rounded_rectangle(
-               CACHED_get_measure_cursor_real_x + note_real_offset_x,
-               CACHED_get_measure_cursor_real_y,
-               CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-               CACHED_get_measure_cursor_real_y + GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-               6,
-               6,
-               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
-               2.0
-            );
    }
 
    // draw the playhead
