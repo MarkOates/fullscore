@@ -21,8 +21,7 @@ namespace Measure
       std::vector<Note> notes;
 
    public:
-      Basic();
-      Basic(std::vector<Note> notes);
+      Basic(std::vector<Note> notes = {});
 
       int extension;
 

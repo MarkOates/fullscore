@@ -9,13 +9,6 @@
 
 
 
-Measure::Basic::Basic()
-   : Base(Measure::TYPE_IDENTIFIER_BASIC)
-   , extension(12)
-{}
-
-
-
 Measure::Basic::Basic(std::vector<Note> notes)
    : Base(Measure::TYPE_IDENTIFIER_BASIC)
    , notes()
