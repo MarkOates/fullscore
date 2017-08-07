@@ -11,19 +11,22 @@ class Note;
 
 namespace Action
 {
-   class EraseNote : public Base
+   namespace Transform
    {
-   private:
-      std::vector<Note> *notes;
-      int index;
+      class EraseNote : public Base
+      {
+      private:
+         std::vector<Note> *notes;
+         int index;
 
-   public:
-      EraseNote(std::vector<Note> *notes, int index);
-      ~EraseNote();
+      public:
+         EraseNote(std::vector<Note> *notes, int index);
+         ~EraseNote();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 

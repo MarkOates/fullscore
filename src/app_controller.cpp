@@ -265,12 +265,12 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "double_duration")
    {
-      if (current_grid_editor->is_note_target_mode()) action = new Action::DoubleDurationTransform(single_note);
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::DoubleDurationTransform(single_note);
       else
       {
          if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
          Action::Queue *action_queue = new Action::Queue(action_name);
-         for (auto &note : *notes) action_queue->add_action(new Action::DoubleDurationTransform(&note));
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::DoubleDurationTransform(&note));
          return action_queue;
       }
    }
@@ -286,7 +286,7 @@ Action::Base *AppController::create_action(std::string action_name)
       }
    }
    else if (action_name == "erase_note")
-      action = new Action::EraseNote(notes, current_grid_editor->note_cursor_x);
+      action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
    else if (action_name == "invert")
       action = new Action::Transform::Invert(single_note, 0);
    else if (action_name == "add_dot")

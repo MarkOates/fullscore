@@ -10,7 +10,7 @@
 
 
 
-Action::DoubleDurationTransform::DoubleDurationTransform(Note *note)
+Action::Transform::DoubleDurationTransform::DoubleDurationTransform(Note *note)
    : Base("double_duration")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::DoubleDurationTransform::DoubleDurationTransform(Note *note)
 
 
 
-Action::DoubleDurationTransform::~DoubleDurationTransform()
+Action::Transform::DoubleDurationTransform::~DoubleDurationTransform()
 {}
 
 
 
 
-bool Action::DoubleDurationTransform::execute()
+bool Action::Transform::DoubleDurationTransform::execute()
 {
    if (!note) return false;
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   Transform::DoubleDuration double_duration_transform;
+   ::Transform::DoubleDuration double_duration_transform;
    single_note_as_array = double_duration_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

@@ -10,19 +10,22 @@
 
 namespace Action
 {
-   class AppendNoteTransform : public Base
+   namespace Transform
    {
-   private:
-      std::vector<Note> *notes;
-      Note note;
+      class AppendNoteTransform : public Base
+      {
+      private:
+         std::vector<Note> *notes;
+         Note note;
 
-   public:
-      AppendNoteTransform(std::vector<Note> *notes, Note note);
-      ~AppendNoteTransform();
+      public:
+         AppendNoteTransform(std::vector<Note> *notes, Note note);
+         ~AppendNoteTransform();
 
-      bool execute() override;
-   };
-};
+         bool execute() override;
+      };
+   }
+}
 
 
 
