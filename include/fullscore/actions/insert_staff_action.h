@@ -8,18 +8,18 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 namespace Action
 {
    class InsertStaff : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int at_index;
 
    public:
-      InsertStaff(MeasureGrid *grid, int at_index);
+      InsertStaff(Grid *grid, int at_index);
       ~InsertStaff();
 
       bool execute() override;

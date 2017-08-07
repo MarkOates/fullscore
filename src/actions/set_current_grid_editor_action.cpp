@@ -9,7 +9,7 @@
 
 
 
-Action::SetCurrentUIMeasureGridEditor::SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *grid_editor)
+Action::SetCurrentUIGridEditor::SetCurrentUIGridEditor(AppController *app_controller, UIGridEditor *grid_editor)
    : Base("set_current_grid_editor")
    , app_controller(app_controller)
    , grid_editor(grid_editor)
@@ -18,13 +18,13 @@ Action::SetCurrentUIMeasureGridEditor::SetCurrentUIMeasureGridEditor(AppControll
 
 
 
-Action::SetCurrentUIMeasureGridEditor::~SetCurrentUIMeasureGridEditor()
+Action::SetCurrentUIGridEditor::~SetCurrentUIGridEditor()
 {}
 
 
 
 
-bool Action::SetCurrentUIMeasureGridEditor::execute()
+bool Action::SetCurrentUIGridEditor::execute()
 {
    if (!app_controller || !grid_editor) return false;
 

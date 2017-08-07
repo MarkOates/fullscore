@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 
 
@@ -15,12 +15,12 @@ namespace Action
    class SetStackMeasure : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      SetStackMeasure(MeasureGrid *grid, int measure_x, int staff_y);
+      SetStackMeasure(Grid *grid, int measure_x, int staff_y);
       ~SetStackMeasure();
 
       bool execute() override;

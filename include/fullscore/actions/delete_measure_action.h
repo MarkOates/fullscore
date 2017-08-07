@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 
 
@@ -15,12 +15,12 @@ namespace Action
    class DeleteMeasure : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      DeleteMeasure(MeasureGrid *grid, int measure_x, int staff_y);
+      DeleteMeasure(Grid *grid, int measure_x, int staff_y);
 
       bool execute() override;
    };

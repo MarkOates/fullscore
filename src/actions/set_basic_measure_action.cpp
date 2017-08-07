@@ -8,7 +8,7 @@
 
 
 
-Action::SetBasicMeasure::SetBasicMeasure(MeasureGrid *grid, int measure_x, int staff_y)
+Action::SetBasicMeasure::SetBasicMeasure(Grid *grid, int measure_x, int staff_y)
    : Base("set_basic_measure")
    , grid(grid)
    , measure_x(measure_x)

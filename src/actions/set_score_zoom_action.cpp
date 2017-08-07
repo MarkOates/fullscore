@@ -9,7 +9,7 @@
 
 
 
-Action::SetScoreZoom::SetScoreZoom(UIMeasureGridEditor *score_editor, Motion *motion, float destination, float duration)
+Action::SetScoreZoom::SetScoreZoom(UIGridEditor *score_editor, Motion *motion, float destination, float duration)
    : Base("set_score_zoom")
    , score_editor(score_editor)
    , motion(motion)

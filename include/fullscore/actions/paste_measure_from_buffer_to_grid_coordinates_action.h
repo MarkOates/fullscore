@@ -7,23 +7,23 @@
 
 
 namespace Measure { class Basic; class Base; }
-class MeasureGrid;
+class Grid;
 
 
 
 namespace Action
 {
-   class PasteMeasureFromBufferToMeasureGridCoordinates : public Base
+   class PasteMeasureFromBufferToGridCoordinates : public Base
    {
    private:
       Measure::Basic *yank_measure_buffer;
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      PasteMeasureFromBufferToMeasureGridCoordinates(Measure::Basic *yank_measure_buffer, MeasureGrid *grid, int measure_x, int staff_y);
-      ~PasteMeasureFromBufferToMeasureGridCoordinates();
+      PasteMeasureFromBufferToGridCoordinates(Measure::Basic *yank_measure_buffer, Grid *grid, int measure_x, int staff_y);
+      ~PasteMeasureFromBufferToGridCoordinates();
 
       bool execute();
    };

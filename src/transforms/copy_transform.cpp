@@ -9,7 +9,7 @@
 
 
 
-Transform::Copy::Copy(MeasureGrid *grid, int source_x, int source_y)
+Transform::Copy::Copy(Grid *grid, int source_x, int source_y)
    : Base("copy")
    , grid(grid)
    , source_x(source_x)

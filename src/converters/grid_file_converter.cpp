@@ -15,7 +15,7 @@
 
 
 
-MeasureGridFileConverter::MeasureGridFileConverter(MeasureGrid *grid, std::string filename)
+GridFileConverter::GridFileConverter(Grid *grid, std::string filename)
    : grid(grid)
    , filename(filename)
 {}
@@ -23,7 +23,7 @@ MeasureGridFileConverter::MeasureGridFileConverter(MeasureGrid *grid, std::strin
 
 
 
-bool MeasureGridFileConverter::save()
+bool GridFileConverter::save()
 {
    if (!grid) return false;
    if (filename.empty()) return false;
@@ -79,7 +79,7 @@ bool MeasureGridFileConverter::save()
 
 
 
-bool MeasureGridFileConverter::load()
+bool GridFileConverter::load()
 {
    if (!grid) return false;
    if (filename.empty()) return false;
@@ -94,7 +94,7 @@ bool MeasureGridFileConverter::load()
    std::string file_format_version = state.get("file_format_version");
    if (file_format_version != "v0.0.1")
    {
-      std::cout << "[MeasureGrid::load(std::string filename)] could not load this format version" << std::endl;
+      std::cout << "[Grid::load(std::string filename)] could not load this format version" << std::endl;
       return false;
    }
 

@@ -14,7 +14,7 @@
 
 
 
-Action::SetStackMeasure::SetStackMeasure(MeasureGrid *grid, int measure_x, int staff_y)
+Action::SetStackMeasure::SetStackMeasure(Grid *grid, int measure_x, int staff_y)
    : Base("set_stack_measure")
    , grid(grid)
    , measure_x(measure_x)

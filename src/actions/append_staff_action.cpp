@@ -10,7 +10,7 @@
 
 
 
-Action::AppendStaff::AppendStaff(MeasureGrid *grid)
+Action::AppendStaff::AppendStaff(Grid *grid)
    : Base("append_staff")
    , grid(grid)
 {}

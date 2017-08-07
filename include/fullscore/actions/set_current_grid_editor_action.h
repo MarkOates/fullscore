@@ -7,19 +7,19 @@
 
 
 class AppController;
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
-   class SetCurrentUIMeasureGridEditor : public Base
+   class SetCurrentUIGridEditor : public Base
    {
    private:
       AppController *app_controller;
-      UIMeasureGridEditor *grid_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      SetCurrentUIMeasureGridEditor(AppController *app_controller, UIMeasureGridEditor *grid_editor);
-      ~SetCurrentUIMeasureGridEditor();
+      SetCurrentUIGridEditor(AppController *app_controller, UIGridEditor *grid_editor);
+      ~SetCurrentUIGridEditor();
 
       bool execute() override;
    };

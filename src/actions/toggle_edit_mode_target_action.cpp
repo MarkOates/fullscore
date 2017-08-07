@@ -9,7 +9,7 @@
 
 
 
-Action::ToggleEditModeTarget::ToggleEditModeTarget(UIMeasureGridEditor *grid_editor)
+Action::ToggleEditModeTarget::ToggleEditModeTarget(UIGridEditor *grid_editor)
    : Base("toggle_edit_mode_target")
    , grid_editor(grid_editor)
 {}

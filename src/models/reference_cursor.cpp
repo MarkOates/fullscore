@@ -15,7 +15,7 @@ ReferenceCursor::ReferenceCursor()
 
 
 
-ReferenceCursor::ReferenceCursor(MeasureGrid *grid, int x, int y)
+ReferenceCursor::ReferenceCursor(Grid *grid, int x, int y)
    : grid(grid)
    , x(x)
    , y(y)
@@ -23,7 +23,7 @@ ReferenceCursor::ReferenceCursor(MeasureGrid *grid, int x, int y)
 
 
 
-void ReferenceCursor::set_position(MeasureGrid *grid, int x, int y)
+void ReferenceCursor::set_position(Grid *grid, int x, int y)
 {
    this->grid = grid;
    this->x = x;
@@ -40,7 +40,7 @@ void ReferenceCursor::set_coordinates(int x, int y)
 
 
 
-MeasureGrid *ReferenceCursor::get_grid()
+Grid *ReferenceCursor::get_grid()
 {
    return grid;
 }
@@ -61,7 +61,7 @@ int ReferenceCursor::get_y()
 
 
 
-bool ReferenceCursor::is_on_grid(const MeasureGrid *grid)
+bool ReferenceCursor::is_on_grid(const Grid *grid)
 {
    return this->grid == grid;
 }

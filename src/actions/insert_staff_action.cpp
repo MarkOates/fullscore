@@ -10,7 +10,7 @@
 
 
 
-Action::InsertStaff::InsertStaff(MeasureGrid *grid, int at_index)
+Action::InsertStaff::InsertStaff(Grid *grid, int at_index)
    : Base("insert_staff")
    , grid(grid)
    , at_index(at_index)

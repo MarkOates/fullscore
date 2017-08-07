@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 
 
@@ -15,12 +15,12 @@ namespace Measure
    class Reference : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      Reference(MeasureGrid *grid, int measure_x, int staff_y);
+      Reference(Grid *grid, int measure_x, int staff_y);
 
       Measure::Base *get_referenced_measure();
 

@@ -9,7 +9,7 @@
 
 
 
-Action::AppendColumnToMeasureGrid::AppendColumnToMeasureGrid(MeasureGrid *grid)
+Action::AppendColumnToGrid::AppendColumnToGrid(Grid *grid)
    : Base("append_column_to_grid")
    , grid(grid)
 {}
@@ -17,13 +17,13 @@ Action::AppendColumnToMeasureGrid::AppendColumnToMeasureGrid(MeasureGrid *grid)
 
 
 
-Action::AppendColumnToMeasureGrid::~AppendColumnToMeasureGrid()
+Action::AppendColumnToGrid::~AppendColumnToGrid()
 {}
 
 
 
 
-bool Action::AppendColumnToMeasureGrid::execute()
+bool Action::AppendColumnToGrid::execute()
 {
    if (!grid) return false;
 

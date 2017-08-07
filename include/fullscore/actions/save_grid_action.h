@@ -9,19 +9,19 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 namespace Action
 {
-   class SaveMeasureGrid : public Base
+   class SaveGrid : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       std::string filename;
 
    public:
-      SaveMeasureGrid(MeasureGrid *grid, std::string filename);
-      ~SaveMeasureGrid();
+      SaveGrid(Grid *grid, std::string filename);
+      ~SaveGrid();
 
       bool execute();
    };

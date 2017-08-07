@@ -9,7 +9,7 @@
 
 
 
-Action::DeleteMeasureGridColumn::DeleteMeasureGridColumn(MeasureGrid *grid, int at_index)
+Action::DeleteGridColumn::DeleteGridColumn(Grid *grid, int at_index)
    : Base("delete_grid_column")
    , grid(grid)
    , at_index(at_index)
@@ -18,13 +18,13 @@ Action::DeleteMeasureGridColumn::DeleteMeasureGridColumn(MeasureGrid *grid, int 
 
 
 
-Action::DeleteMeasureGridColumn::~DeleteMeasureGridColumn()
+Action::DeleteGridColumn::~DeleteGridColumn()
 {}
 
 
 
 
-bool Action::DeleteMeasureGridColumn::execute()
+bool Action::DeleteGridColumn::execute()
 {
    if (!grid) return false;
    if (at_index < 0 || at_index >= grid->get_num_measures()) return false;

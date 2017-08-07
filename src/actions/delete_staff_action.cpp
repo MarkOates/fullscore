@@ -9,7 +9,7 @@
 
 
 
-Action::DeleteStaff::DeleteStaff(MeasureGrid *grid, int at_index)
+Action::DeleteStaff::DeleteStaff(Grid *grid, int at_index)
    : Base("delete_staff")
    , grid(grid)
    , at_index(at_index)

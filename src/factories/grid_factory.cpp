@@ -17,9 +17,9 @@ std::string const MEASURE_NUMBERS = "#";
 
 
 
-MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
+Grid GridFactory::twinkle_twinkle_little_star()
 {
-   MeasureGrid grid(4, 2);
+   Grid grid(4, 2);
 
    // twinkle twinkle, little star
    grid.set_measure(0,0, new Measure::Basic({ Note(0), Note(0), Note(4), Note(4) }));
@@ -35,9 +35,9 @@ MeasureGrid MeasureGridFactory::twinkle_twinkle_little_star()
 
 
 
-MeasureGrid MeasureGridFactory::big_score()
+Grid GridFactory::big_score()
 {
-   MeasureGrid grid(60, 12);
+   Grid grid(60, 12);
 
    for (int i=0; i<grid.get_num_staves(); i++)
       grid.set_voice_name(i, tostring("Voice ") + tostring(i));
@@ -47,7 +47,7 @@ MeasureGrid MeasureGridFactory::big_score()
 
 
 
-MeasureGrid MeasureGridFactory::full_score()
+Grid GridFactory::full_score()
 {
    std::vector<std::string> voices = {
       MEASURE_NUMBERS,
@@ -101,7 +101,7 @@ MeasureGrid MeasureGridFactory::full_score()
 
    const int NUM_MEASURES = 20;
 
-   MeasureGrid grid(NUM_MEASURES, 0);
+   Grid grid(NUM_MEASURES, 0);
 
    for (int i=0; i<voices.size(); i++)
    {
@@ -125,14 +125,14 @@ MeasureGrid MeasureGridFactory::full_score()
 
 
 
-MeasureGrid MeasureGridFactory::create(std::string identifier)
+Grid GridFactory::create(std::string identifier)
 {
    if (identifier == "big_score") return big_score();
    if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
    if (identifier == "full_score") return full_score();
 
    std::cout << "Could not find score " << identifier << std::endl;
-   return MeasureGrid(4, 1);
+   return Grid(4, 1);
 }
 
 

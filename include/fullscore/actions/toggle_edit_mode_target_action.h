@@ -8,17 +8,17 @@
 
 
 
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class ToggleEditModeTarget : public Base
    {
    private:
-      UIMeasureGridEditor *grid_editor;
+      UIGridEditor *grid_editor;
 
    public:
-      ToggleEditModeTarget(UIMeasureGridEditor *grid_editor);
+      ToggleEditModeTarget(UIGridEditor *grid_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;

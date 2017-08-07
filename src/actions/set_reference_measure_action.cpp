@@ -8,7 +8,7 @@
 
 
 
-Action::SetReferenceMeasure::SetReferenceMeasure(MeasureGrid *grid, int measure_x, int staff_y, MeasureGrid *referenced_grid, int referenced_measure_x, int referenced_staff_y)
+Action::SetReferenceMeasure::SetReferenceMeasure(Grid *grid, int measure_x, int staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y)
    : Base("set_reference_measure")
    , grid(grid)
    , measure_x(measure_x)

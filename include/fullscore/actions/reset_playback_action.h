@@ -8,17 +8,17 @@
 
 
 
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class ResetPlayback : public Base
    {
    private:
-      UIMeasureGridEditor *score_editor;
+      UIGridEditor *score_editor;
 
    public:
-      ResetPlayback(UIMeasureGridEditor *score_editor);
+      ResetPlayback(UIGridEditor *score_editor);
       ~ResetPlayback();
       bool execute() override;
    };

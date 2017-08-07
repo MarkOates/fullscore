@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 
 
@@ -15,15 +15,15 @@ namespace Action
    class SetReferenceMeasure : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
-      MeasureGrid *referenced_grid;
+      Grid *referenced_grid;
       int referenced_measure_x;
       int referenced_staff_y;
 
    public:
-      SetReferenceMeasure(MeasureGrid *grid, int measure_x, int staff_y, MeasureGrid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
+      SetReferenceMeasure(Grid *grid, int measure_x, int staff_y, Grid *referenced_grid, int referenced_measure_x, int referenced_staff_y);
       ~SetReferenceMeasure();
 
       bool execute() override;

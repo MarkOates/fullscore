@@ -8,16 +8,16 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
-class MeasureGridFileConverter
+class GridFileConverter
 {
 private:
-   MeasureGrid *grid;
+   Grid *grid;
    std::string filename;
 
 public:
-   MeasureGridFileConverter(MeasureGrid *grid, std::string filename);
+   GridFileConverter(Grid *grid, std::string filename);
 
    bool save();
    bool load();

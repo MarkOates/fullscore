@@ -17,11 +17,11 @@ namespace Action
    class SetNormalMode : public Base
    {
    private:
-      UIMeasureGridEditor *score_editor;
+      UIGridEditor *score_editor;
       UICommandBar *command_bar;
 
    public:
-      SetNormalMode(UIMeasureGridEditor *score_editor, UICommandBar *command_bar);
+      SetNormalMode(UIGridEditor *score_editor, UICommandBar *command_bar);
       ~SetNormalMode();
       bool execute() override;
    };

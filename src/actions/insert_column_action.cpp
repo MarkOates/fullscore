@@ -9,7 +9,7 @@
 
 
 
-Action::InsertColumn::InsertColumn(MeasureGrid *grid, int at_index)
+Action::InsertColumn::InsertColumn(Grid *grid, int at_index)
    : Base("insert_column")
    , grid(grid)
    , at_index(at_index)

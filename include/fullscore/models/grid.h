@@ -13,18 +13,18 @@ namespace Staff { class Base; }
 
 
 
-class MeasureGrid
+class Grid
 {
 private:
-   friend class MeasureGridFileConverter;
-   friend class MeasureGridHelper;
+   friend class GridFileConverter;
+   friend class GridHelper;
 
    std::vector<Staff::Base *> voices;
    std::vector<TimeSignature> time_signatures;
 
 public:
-   MeasureGrid(int num_x_measures, int num_y_staves);
-   ~MeasureGrid();
+   Grid(int num_x_measures, int num_y_staves);
+   ~Grid();
 
    Measure::Base *get_measure(int x_measure, int y_staff);
    bool set_measure(int x_measure, int y_staff, Measure::Base *measure);

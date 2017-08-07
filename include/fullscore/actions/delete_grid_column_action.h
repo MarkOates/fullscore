@@ -8,19 +8,19 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 namespace Action
 {
-   class DeleteMeasureGridColumn : public Base
+   class DeleteGridColumn : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
       int at_index;
 
    public:
-      DeleteMeasureGridColumn(MeasureGrid *grid, int at_index);
-      ~DeleteMeasureGridColumn();
+      DeleteGridColumn(Grid *grid, int at_index);
+      ~DeleteGridColumn();
 
       bool execute() override;
    };

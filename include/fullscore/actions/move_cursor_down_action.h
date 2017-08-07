@@ -8,17 +8,17 @@
 
 
 
-class UIMeasureGridEditor;
+class UIGridEditor;
 
 namespace Action
 {
    class MoveCursorDown : public Base
    {
    private:
-      UIMeasureGridEditor *score_editor;
+      UIGridEditor *score_editor;
 
    public:
-      MoveCursorDown(UIMeasureGridEditor *score_editor);
+      MoveCursorDown(UIGridEditor *score_editor);
       ~MoveCursorDown();
       bool execute() override;
    };

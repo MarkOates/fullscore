@@ -9,7 +9,7 @@
 
 
 
-Action::LoadMeasureGrid::LoadMeasureGrid(MeasureGrid *grid, std::string filename)
+Action::LoadGrid::LoadGrid(Grid *grid, std::string filename)
    : Base("load_grid")
    , grid(grid)
    , filename(filename)
@@ -19,16 +19,16 @@ Action::LoadMeasureGrid::LoadMeasureGrid(MeasureGrid *grid, std::string filename
 
 
 
-Action::LoadMeasureGrid::~LoadMeasureGrid()
+Action::LoadGrid::~LoadGrid()
 {
 }
 
 
 
 
-bool Action::LoadMeasureGrid::execute()
+bool Action::LoadGrid::execute()
 {
-   MeasureGridFileConverter grid_file_converter(grid, filename);
+   GridFileConverter grid_file_converter(grid, filename);
    return grid_file_converter.load();
 }
 

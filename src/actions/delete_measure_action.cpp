@@ -7,7 +7,7 @@
 
 
 
-Action::DeleteMeasure::DeleteMeasure(MeasureGrid *grid, int measure_x, int staff_y)
+Action::DeleteMeasure::DeleteMeasure(Grid *grid, int measure_x, int staff_y)
    : Base("delete_measure")
    , grid(grid)
    , measure_x(measure_x)

@@ -6,7 +6,7 @@
 
 
 
-class MeasureGrid;
+class Grid;
 class ReferenceCursor;
 
 
@@ -17,12 +17,12 @@ namespace Action
    {
    private:
       ReferenceCursor *reference_cursor;
-      MeasureGrid *grid;
+      Grid *grid;
       int measure_x;
       int staff_y;
 
    public:
-      SetReferenceCursor(ReferenceCursor *reference_cursor, MeasureGrid *grid, int measure_x, int staff_y);
+      SetReferenceCursor(ReferenceCursor *reference_cursor, Grid *grid, int measure_x, int staff_y);
 
       bool execute() override;
    };

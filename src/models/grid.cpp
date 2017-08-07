@@ -10,7 +10,7 @@
 
 
 
-MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
+Grid::Grid(int num_x_measures, int num_y_staves)
    : voices()
    , time_signatures()
 {
@@ -20,7 +20,7 @@ MeasureGrid::MeasureGrid(int num_x_measures, int num_y_staves)
 
 
 
-MeasureGrid::~MeasureGrid()
+Grid::~Grid()
 {
    // these should likely be destructed here or handled in some way other than being left dangling,
    // but a measure grid is frequently created elsewhere and returned in a function
@@ -29,7 +29,7 @@ MeasureGrid::~MeasureGrid()
 
 
 
-Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
+Measure::Base *Grid::get_measure(int x_measure, int y_staff)
 {
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return nullptr;
@@ -42,7 +42,7 @@ Measure::Base *MeasureGrid::get_measure(int x_measure, int y_staff)
 
 
 
-bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
+bool Grid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
 {
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return false;
@@ -58,14 +58,14 @@ bool MeasureGrid::set_measure(int x_measure, int y_staff, Measure::Base *measure
 
 
 
-bool MeasureGrid::delete_measure(int x_measure, int y_staff)
+bool Grid::delete_measure(int x_measure, int y_staff)
 {
    return set_measure(x_measure, y_staff, nullptr);
 }
 
 
 
-bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
+bool Grid::in_grid_range(int x_measure, int y_staff)
 {
    if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
    if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
@@ -75,7 +75,7 @@ bool MeasureGrid::in_grid_range(int x_measure, int y_staff)
 
 
 
-int MeasureGrid::get_num_measures() const
+int Grid::get_num_measures() const
 {
    if (voices.empty()) return 0;
    return voices[0]->get_num_columns();
@@ -83,14 +83,14 @@ int MeasureGrid::get_num_measures() const
 
 
 
-int MeasureGrid::get_num_staves() const
+int Grid::get_num_staves() const
 {
    return voices.size();
 }
 
 
 
-bool MeasureGrid::insert_staff(Staff::Base *staff, int index)
+bool Grid::insert_staff(Staff::Base *staff, int index)
 {
    if (!staff) return false;
 
@@ -104,7 +104,7 @@ bool MeasureGrid::insert_staff(Staff::Base *staff, int index)
 
 
 
-bool MeasureGrid::delete_staff(int index)
+bool Grid::delete_staff(int index)
 {
    if (index < 0 || index >= (int)voices.size()) return false;
    // TODO: Thinking a delete voice[index] should happen here
@@ -114,7 +114,7 @@ bool MeasureGrid::delete_staff(int index)
 
 
 
-bool MeasureGrid::append_staff(Staff::Base *staff)
+bool Grid::append_staff(Staff::Base *staff)
 {
    if (!staff) return false;
    voices.push_back(staff);
@@ -123,7 +123,7 @@ bool MeasureGrid::append_staff(Staff::Base *staff)
 
 
 
-void MeasureGrid::insert_column(int index)
+void Grid::insert_column(int index)
 {
    int num_measures = get_num_measures();
    if (index < 0) index = 0;
@@ -151,7 +151,7 @@ void MeasureGrid::insert_column(int index)
 
 
 
-bool MeasureGrid::delete_column(int index)
+bool Grid::delete_column(int index)
 {
    int num_measures = get_num_measures();
 
@@ -173,7 +173,7 @@ bool MeasureGrid::delete_column(int index)
 
 
 
-void MeasureGrid::append_measure()
+void Grid::append_measure()
 {
    // append time signature
    time_signatures.push_back(TimeSignature(4, Duration()));
@@ -190,7 +190,7 @@ void MeasureGrid::append_measure()
 
 
 
-bool MeasureGrid::set_voice_name(int row_number, std::string name)
+bool Grid::set_voice_name(int row_number, std::string name)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
@@ -200,7 +200,7 @@ bool MeasureGrid::set_voice_name(int row_number, std::string name)
 
 
 
-std::string MeasureGrid::get_voice_name(int row_number)
+std::string Grid::get_voice_name(int row_number)
 {
    if (row_number < 0) return "";
    if (row_number >= voices.size()) return "";
@@ -209,7 +209,7 @@ std::string MeasureGrid::get_voice_name(int row_number)
 
 
 
-bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
+bool Grid::set_time_signature(int index, TimeSignature time_signature)
 {
    if (index < 0) return false;
    if (index >= get_num_measures()) return false;
@@ -220,7 +220,7 @@ bool MeasureGrid::set_time_signature(int index, TimeSignature time_signature)
 
 
 
-float MeasureGrid::get_height() const
+float Grid::get_height() const
 {
    float height = 0;
    for (int i=0; i<get_num_staves(); i++)
@@ -230,7 +230,7 @@ float MeasureGrid::get_height() const
 
 
 
-Staff::Base *MeasureGrid::get_staff(int y_staff)
+Staff::Base *Grid::get_staff(int y_staff)
 {
    if (y_staff < 0 || y_staff >= voices.size()) return nullptr;
 
@@ -241,7 +241,7 @@ Staff::Base *MeasureGrid::get_staff(int y_staff)
 
 
 
-TimeSignature MeasureGrid::get_time_signature(int index)
+TimeSignature Grid::get_time_signature(int index)
 {
    if (index < 0) return TimeSignature(0, Duration());
    if (index >= get_num_measures()) return TimeSignature(0, Duration());
@@ -251,7 +251,7 @@ TimeSignature MeasureGrid::get_time_signature(int index)
 
 
 
-TimeSignature *MeasureGrid::get_time_signature_ptr(int index)
+TimeSignature *Grid::get_time_signature_ptr(int index)
 {
    if (index < 0 || index >= get_num_measures()) return nullptr;
 

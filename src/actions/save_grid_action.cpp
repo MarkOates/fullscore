@@ -9,7 +9,7 @@
 
 
 
-Action::SaveMeasureGrid::SaveMeasureGrid(MeasureGrid *grid, std::string filename)
+Action::SaveGrid::SaveGrid(Grid *grid, std::string filename)
    : Base("save_grid")
    , grid(grid)
    , filename(filename)
@@ -19,16 +19,16 @@ Action::SaveMeasureGrid::SaveMeasureGrid(MeasureGrid *grid, std::string filename
 
 
 
-Action::SaveMeasureGrid::~SaveMeasureGrid()
+Action::SaveGrid::~SaveGrid()
 {
 }
 
 
 
 
-bool Action::SaveMeasureGrid::execute()
+bool Action::SaveGrid::execute()
 {
-   MeasureGridFileConverter grid_file_converter(grid, filename);
+   GridFileConverter grid_file_converter(grid, filename);
    return grid_file_converter.save();
 }
 

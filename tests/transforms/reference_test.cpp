@@ -12,7 +12,7 @@
 
 TEST(ReferenceTransformTest, can_be_created)
 {
-   MeasureGrid grid(1, 1);
+   Grid grid(1, 1);
    Transform::Reference reference_transform(&grid, 0, 0);
 }
 
@@ -22,7 +22,7 @@ TEST(ReferenceTransformTest, copies_a_set_of_notes_from_a_grid_and_coordinates)
 {
    std::vector<Note> source_notes = {};
 
-   MeasureGrid grid(1, 1);
+   Grid grid(1, 1);
    grid.set_measure(0, 0, new Measure::Basic({ Note(2), Note(0), Note(1) }));
    Measure::Base *measure = grid.get_measure(0, 0);
    ASSERT_NE(nullptr, measure);
@@ -48,7 +48,7 @@ TEST(ReferenceTransformTest, when_referencing_a_grid_that_does_not_exist__raises
 
 TEST(ReferenceTransformTest, transform__with_coordinates_that_are_outside_the_grid__raises_an_exception)
 {
-   MeasureGrid grid(1, 1);
+   Grid grid(1, 1);
    Transform::Reference reference_transform(&grid, 9999, 9999);
 
    ASSERT_THROW(reference_transform.transform({}), std::runtime_error);

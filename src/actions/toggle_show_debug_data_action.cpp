@@ -8,7 +8,7 @@
 
 
 
-Action::ToggleShowDebugData::ToggleShowDebugData(UIMeasureGridEditor *grid_editor)
+Action::ToggleShowDebugData::ToggleShowDebugData(UIGridEditor *grid_editor)
    : Base("toggle_show_debug_data")
    , grid_editor(grid_editor)
 {}

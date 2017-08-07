@@ -6,18 +6,18 @@
 
 
 
-class MeasureGrid;
+class Grid;
 
 namespace Action
 {
-   class AppendColumnToMeasureGrid : public Base
+   class AppendColumnToGrid : public Base
    {
    private:
-      MeasureGrid *grid;
+      Grid *grid;
 
    public:
-      AppendColumnToMeasureGrid(MeasureGrid *grid);
-      ~AppendColumnToMeasureGrid();
+      AppendColumnToGrid(Grid *grid);
+      ~AppendColumnToGrid();
 
       bool execute() override;
    };

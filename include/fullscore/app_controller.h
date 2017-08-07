@@ -21,8 +21,8 @@ public:
 
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
-   UIMeasureGridEditor *current_grid_editor;
-   std::vector<UIMeasureGridEditor *> grid_editors;
+   UIGridEditor *current_grid_editor;
+   std::vector<UIGridEditor *> grid_editors;
    UICommandBar *command_bar;
    UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
@@ -36,11 +36,11 @@ public:
 
    Action::Base *create_action(std::string action_name);
 
-   std::string find_action_identifier(UIMeasureGridEditor::mode_t mode, UIMeasureGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::string find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
-   UIMeasureGridEditor *create_new_score_editor(std::string identifier);
-   bool set_current_grid_editor(UIMeasureGridEditor *editor);
-   UIMeasureGridEditor *get_next_grid_editor();
+   UIGridEditor *create_new_score_editor(std::string identifier);
+   bool set_current_grid_editor(UIGridEditor *editor);
+   UIGridEditor *get_next_grid_editor();
 };
 
 

@@ -8,7 +8,7 @@
 
 
 
-Action::PasteMeasureFromBufferToMeasureGridCoordinates::PasteMeasureFromBufferToMeasureGridCoordinates(Measure::Basic *yank_measure_buffer, MeasureGrid *grid, int measure_x, int staff_y)
+Action::PasteMeasureFromBufferToGridCoordinates::PasteMeasureFromBufferToGridCoordinates(Measure::Basic *yank_measure_buffer, Grid *grid, int measure_x, int staff_y)
    : Base("paste_measure_from_buffer_to_grid_coordinates_action")
    , yank_measure_buffer(yank_measure_buffer)
    , grid(grid)
@@ -19,13 +19,13 @@ Action::PasteMeasureFromBufferToMeasureGridCoordinates::PasteMeasureFromBufferTo
 
 
 
-Action::PasteMeasureFromBufferToMeasureGridCoordinates::~PasteMeasureFromBufferToMeasureGridCoordinates()
+Action::PasteMeasureFromBufferToGridCoordinates::~PasteMeasureFromBufferToGridCoordinates()
 {
 }
 
 
 
-bool Action::PasteMeasureFromBufferToMeasureGridCoordinates::execute()
+bool Action::PasteMeasureFromBufferToGridCoordinates::execute()
 {
    if (!yank_measure_buffer) throw std::runtime_error("Cannot paste to a nullptr grid");
    if (!grid) throw std::runtime_error("Cannot paste to a nullptr grid");

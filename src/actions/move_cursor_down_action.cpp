@@ -9,7 +9,7 @@
 
 
 
-Action::MoveCursorDown::MoveCursorDown(UIMeasureGridEditor *score_editor)
+Action::MoveCursorDown::MoveCursorDown(UIGridEditor *score_editor)
    : Base("move_cursor_down")
    , score_editor(score_editor)
 {

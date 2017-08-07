@@ -8,7 +8,7 @@
 
 
 
-Action::SetReferenceCursor::SetReferenceCursor(ReferenceCursor *reference_cursor, MeasureGrid *grid, int measure_x, int staff_y)
+Action::SetReferenceCursor::SetReferenceCursor(ReferenceCursor *reference_cursor, Grid *grid, int measure_x, int staff_y)
    : Base("set_reference_cursor")
    , reference_cursor(reference_cursor)
    , grid(grid)

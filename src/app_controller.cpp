@@ -89,7 +89,7 @@ void AppController::primary_timer_func()
 
 
 
-std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mode, UIMeasureGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
+std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    switch(al_keycode)
    {
@@ -101,7 +101,7 @@ std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mo
       case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
    }
 
-   if (mode == UIMeasureGridEditor::NORMAL_MODE)
+   if (mode == UIGridEditor::NORMAL_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
@@ -115,8 +115,8 @@ std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mo
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
       case ALLEGRO_KEY_X:
-         if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
-         else if (edit_mode_target == UIMeasureGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
+         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
+         else if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
       case ALLEGRO_KEY_A: return "insert_note_after"; break;
@@ -143,13 +143,13 @@ std::string AppController::find_action_identifier(UIMeasureGridEditor::mode_t mo
       case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
       }
 
-   if (mode == UIMeasureGridEditor::COMMAND_MODE)
+   if (mode == UIGridEditor::COMMAND_MODE)
       switch(al_keycode)
       {
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
 
-   if (mode == UIMeasureGridEditor::INSERT_MODE)
+   if (mode == UIGridEditor::INSERT_MODE)
       // no implementation
       ;
 
@@ -170,7 +170,7 @@ Action::Base *AppController::create_action(std::string action_name)
    if (action_name == "create_new_score_editor")
       action = new Action::CreateNewScoreEditor(this);
    else if (action_name == "set_current_grid_editor")
-      action = new Action::SetCurrentUIMeasureGridEditor(this, get_next_grid_editor());
+      action = new Action::SetCurrentUIGridEditor(this, get_next_grid_editor());
    else if (action_name == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
@@ -307,9 +307,9 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "reset_playback")
       action = new Action::ResetPlayback(current_grid_editor);
    else if (action_name == "save_grid")
-      action = new Action::SaveMeasureGrid(&current_grid_editor->grid, "score_filename.fs");
+      action = new Action::SaveGrid(&current_grid_editor->grid, "score_filename.fs");
    else if (action_name == "load_grid")
-      action = new Action::LoadMeasureGrid(&current_grid_editor->grid, "score_filename.fs");
+      action = new Action::LoadGrid(&current_grid_editor->grid, "score_filename.fs");
    else if (action_name == "camera_zoom_in")
       action = new Action::SetScoreZoom(current_grid_editor, &Framework::motion(), current_grid_editor->place.scale.x + 0.1, 0.3);
    else if (action_name == "camera_zoom_default")
@@ -346,7 +346,7 @@ Action::Base *AppController::create_action(std::string action_name)
 
          action_as_queue->add_action(new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
          action_as_queue->add_action(new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
-         action_as_queue->add_action(new Action::PasteMeasureFromBufferToMeasureGridCoordinates(&yank_measure_buffer,
+         action_as_queue->add_action(new Action::PasteMeasureFromBufferToGridCoordinates(&yank_measure_buffer,
                &current_grid_editor->grid,
                current_grid_editor->measure_cursor_x,
                current_grid_editor->measure_cursor_y)
@@ -373,13 +373,13 @@ Action::Base *AppController::create_action(std::string action_name)
    else if (action_name == "delete_measure")
       action = new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
    else if (action_name == "delete_grid_column")
-      action = new Action::DeleteMeasureGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
+      action = new Action::DeleteGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
    else if (action_name == "insert_staff")
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_name == "delete_staff")
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_name == "append_column_to_grid")
-      action = new Action::AppendColumnToMeasureGrid(&current_grid_editor->grid);
+      action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
    else if (action_name == "append_staff")
       action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_name == "set_time_signature_numerator_2")
@@ -401,8 +401,8 @@ void AppController::key_char_func()
 {
    UIScreen::key_char_func();
 
-   auto mode          = current_grid_editor ? current_grid_editor->mode : UIMeasureGridEditor::mode_t::NONE;
-   auto target        = current_grid_editor ? current_grid_editor->edit_mode_target : UIMeasureGridEditor::edit_mode_target_t::NONE_TARGET;
+   auto mode          = current_grid_editor ? current_grid_editor->mode : UIGridEditor::mode_t::NONE;
+   auto target        = current_grid_editor ? current_grid_editor->edit_mode_target : UIGridEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -484,13 +484,13 @@ void AppController::on_message(UIWidget *sender, std::string message)
 
 
 
-UIMeasureGridEditor *AppController::create_new_score_editor(std::string name)
+UIGridEditor *AppController::create_new_score_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
 
-   UIMeasureGridEditor *new_grid_editor = new UIMeasureGridEditor(&follow_camera, &reference_cursor);
-   new_grid_editor->grid = MeasureGridFactory::create(name);
+   UIGridEditor *new_grid_editor = new UIGridEditor(&follow_camera, &reference_cursor);
+   new_grid_editor->grid = GridFactory::create(name);
 
    new_grid_editor->place.position = vec2d(new_x, new_y);
    new_grid_editor->place.align = vec2d(0.0, 0.0);
@@ -505,12 +505,12 @@ UIMeasureGridEditor *AppController::create_new_score_editor(std::string name)
 
 
 
-bool AppController::set_current_grid_editor(UIMeasureGridEditor *editor)
+bool AppController::set_current_grid_editor(UIGridEditor *editor)
 {
    if (std::find(grid_editors.begin(), grid_editors.end(), editor) == grid_editors.end()) return false;
 
    for (auto &e : grid_editors)
-      e->set_state(e == editor ? UIMeasureGridEditor::STATE_ACTIVE : UIMeasureGridEditor::STATE_INACTIVE);
+      e->set_state(e == editor ? UIGridEditor::STATE_ACTIVE : UIGridEditor::STATE_INACTIVE);
 
    current_grid_editor = editor;
 
@@ -523,11 +523,11 @@ bool AppController::set_current_grid_editor(UIMeasureGridEditor *editor)
 
 
 
-UIMeasureGridEditor *AppController::get_next_grid_editor()
+UIGridEditor *AppController::get_next_grid_editor()
 {
    if (!current_grid_editor || grid_editors.size() <= 1) return nullptr;
 
-   std::vector<UIMeasureGridEditor *>::iterator it = std::find(grid_editors.begin(), grid_editors.end(), current_grid_editor);
+   std::vector<UIGridEditor *>::iterator it = std::find(grid_editors.begin(), grid_editors.end(), current_grid_editor);
 
    if (it == grid_editors.end()) return nullptr; // does not exist in list
    if (it == grid_editors.end()-1) return grid_editors.front(); // loop back to first element

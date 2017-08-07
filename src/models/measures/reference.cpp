@@ -8,7 +8,7 @@
 
 
 
-Measure::Reference::Reference(MeasureGrid *grid, int measure_x, int staff_y)
+Measure::Reference::Reference(Grid *grid, int measure_x, int staff_y)
    : Base(Measure::TYPE_IDENTIFIER_REFERENCE)
    , grid(grid)
    , measure_x(measure_x)

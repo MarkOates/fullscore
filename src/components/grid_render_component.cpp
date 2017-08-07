@@ -20,7 +20,7 @@
 
 
 
-MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
+GridRenderComponent::GridRenderComponent(Grid *grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
    : grid(grid)
    , music_engraver(music_engraver)
    , reference_cursor(reference_cursor)
@@ -32,20 +32,20 @@ MeasureGridRenderComponent::MeasureGridRenderComponent(MeasureGrid *grid, MusicE
 
 
 
-MeasureGridRenderComponent::~MeasureGridRenderComponent()
+GridRenderComponent::~GridRenderComponent()
 {}
 
 
 
 
-void MeasureGridRenderComponent::set_showing_debug_data(bool show)
+void GridRenderComponent::set_showing_debug_data(bool show)
 {
    showing_debug_data = show;
 }
 
 
 
-void MeasureGridRenderComponent::render()
+void GridRenderComponent::render()
 {
    if (!grid || !music_engraver) return;
 
@@ -62,7 +62,7 @@ void MeasureGridRenderComponent::render()
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<grid->get_num_measures(); x++)
    {
-      float x_pos = MeasureGridHelper::get_length_to_measure(*grid, x) * full_measure_width;
+      float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
       TimeSignature time_signature = grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
 
@@ -93,15 +93,15 @@ void MeasureGridRenderComponent::render()
       // horizontal guide line for the staff
       if (staff->is_type("instrument"))
       {
-         float width = MeasureGridHelper::get_width(*grid);
+         float width = GridHelper::get_width(*grid);
          al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
       }
 
       // draw the measures
       for (int x=0; x<grid->get_num_measures(); x++)
       {
-         float x_pos = MeasureGridHelper::get_length_to_measure(*grid, x) * full_measure_width;
-         float x_pos_plus_width = MeasureGridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
+         float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
+         float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
 
          if (staff->is_type("instrument"))
          {
