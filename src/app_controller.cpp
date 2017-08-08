@@ -4,9 +4,11 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/actions/transforms/AppendNote.h>
 #include <fullscore/actions/transforms/AddDot.h>
+#include <fullscore/actions/transforms/AppendNote.h>
+#include <fullscore/actions/transforms/Ascend.h>
 #include <fullscore/actions/transforms/ClearMeasure.h>
+#include <fullscore/actions/transforms/Descend.h>
 #include <fullscore/actions/transforms/DoubleDuration.h>
 #include <fullscore/actions/transforms/EraseNote.h>
 #include <fullscore/actions/transforms/HalfDuration.h>
@@ -106,8 +108,14 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
    if (mode == UIGridEditor::NORMAL_MODE)
       switch(al_keycode)
       {
-      case ALLEGRO_KEY_F: return "transpose_up"; break;
-      case ALLEGRO_KEY_D: return "transpose_down"; break;
+      case ALLEGRO_KEY_F:
+         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "ascend"; }
+         return "transpose_up";
+         break;
+      case ALLEGRO_KEY_D:
+         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
+         return "transpose_down";
+         break;
       case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
@@ -303,6 +311,10 @@ Action::Base *AppController::create_action(std::string action_name)
    }
    else if (action_name == "erase_note")
       action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
+   else if (action_name == "ascend")
+      action = new Action::Transform::Ascend(notes);
+   else if (action_name == "descend")
+      action = new Action::Transform::Descend(notes);
    else if (action_name == "add_dot")
       action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
