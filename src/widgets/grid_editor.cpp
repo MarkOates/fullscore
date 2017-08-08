@@ -88,16 +88,7 @@ void UIGridEditor::on_draw()
    // draw the measure
 
    float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
-   if (measure && measure->get_num_notes() == 0)
-   {
-      measure_width = 16;
-
-      // measure box outline
-      if (is_measure_target_mode())
-         al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-            CACHED_get_measure_cursor_real_x+measure_width, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-            4, 4, color::color(color::black, 0.3), 2.0);
-   }
+   if (measure && measure->get_num_notes() == 0) measure_width = 16;
 
    // measure box fill
    al_draw_filled_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
@@ -106,9 +97,32 @@ void UIGridEditor::on_draw()
 
    // measure box outline
    if (is_measure_target_mode())
-      al_draw_rounded_rectangle(CACHED_get_measure_cursor_real_x, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-         CACHED_get_measure_cursor_real_x+measure_width, GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-         4, 4, color::color(color::aliceblue, 0.7), 2.0);
+   {
+      float thickness = 2.0;
+      float h_thickness = thickness * 0.5;
+
+      al_draw_rounded_rectangle(
+            CACHED_get_measure_cursor_real_x - h_thickness*2,
+            GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT - h_thickness*2,
+            CACHED_get_measure_cursor_real_x+measure_width + h_thickness*2,
+            GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT + h_thickness*2,
+            4,
+            4,
+            color::color(color::black, 0.3),
+            thickness
+         );
+
+      al_draw_rounded_rectangle(
+            CACHED_get_measure_cursor_real_x - h_thickness,
+            GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT - h_thickness,
+            CACHED_get_measure_cursor_real_x+measure_width + h_thickness,
+            GridHelper::get_height_to_staff(grid, measure_cursor_y)*STAFF_HEIGHT+GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT + h_thickness,
+            4,
+            4,
+            color::color(color::aliceblue, 0.7),
+            thickness
+         );
+   }
 
    // left bar (blinking)
 
@@ -118,7 +132,7 @@ void UIGridEditor::on_draw()
          cursor_color, 3.0);
 
    // draw a hilight box at the focused note
-   if (note)
+   if (is_note_target_mode() && note)
    {
       float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
       float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
@@ -133,19 +147,6 @@ void UIGridEditor::on_draw()
             6,
             color::color(color::pink, 0.4)
          );
-
-      // note box outline
-      if (is_note_target_mode())
-         al_draw_rounded_rectangle(
-               CACHED_get_measure_cursor_real_x + note_real_offset_x,
-               CACHED_get_measure_cursor_real_y,
-               CACHED_get_measure_cursor_real_x + note_real_offset_x + real_note_width,
-               CACHED_get_measure_cursor_real_y + GridHelper::get_height_of_staff(grid, measure_cursor_y)*STAFF_HEIGHT,
-               6,
-               6,
-               color::mix(color::color(color::pink, 0.8), color::black, 0.3),
-               2.0
-            );
    }
 
    // draw the playhead

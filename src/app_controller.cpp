@@ -4,9 +4,11 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/actions/transforms/AppendNote.h>
 #include <fullscore/actions/transforms/AddDot.h>
+#include <fullscore/actions/transforms/AppendNote.h>
+#include <fullscore/actions/transforms/Ascend.h>
 #include <fullscore/actions/transforms/ClearMeasure.h>
+#include <fullscore/actions/transforms/Descend.h>
 #include <fullscore/actions/transforms/DoubleDuration.h>
 #include <fullscore/actions/transforms/EraseNote.h>
 #include <fullscore/actions/transforms/HalfDuration.h>
@@ -15,6 +17,7 @@
 #include <fullscore/actions/transforms/Octatonic1.h>
 #include <fullscore/actions/transforms/RemoveDot.h>
 #include <fullscore/actions/transforms/Retrograde.h>
+#include <fullscore/actions/transforms/SplitNote.h>
 #include <fullscore/actions/transforms/ToggleRest.h>
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
@@ -105,9 +108,15 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
    if (mode == UIGridEditor::NORMAL_MODE)
       switch(al_keycode)
       {
-      case ALLEGRO_KEY_F: return "transpose_up"; break;
-      case ALLEGRO_KEY_D: return "transpose_down"; break;
-      case ALLEGRO_KEY_S: if (shift) { return "set_stack_measure"; } else { return "half_duration"; } break;
+      case ALLEGRO_KEY_F:
+         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "ascend"; }
+         return "transpose_up";
+         break;
+      case ALLEGRO_KEY_D:
+         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
+         return "transpose_down";
+         break;
+      case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
       case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
@@ -122,8 +131,12 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
          else if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
          break;
       case ALLEGRO_KEY_Z: return "retrograde"; break;
-      case ALLEGRO_KEY_A: return "insert_note_after"; break;
-      case ALLEGRO_KEY_I: return "insert_note"; break;
+      case ALLEGRO_KEY_A:
+         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note_after"; }
+         break;
+      case ALLEGRO_KEY_I:
+         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note"; }
+         break;
       case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
       case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
       case ALLEGRO_KEY_Q: return "reset_playback"; break;
@@ -141,7 +154,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       case ALLEGRO_KEY_2: return "set_time_signature_numerator_2"; break;
-      case ALLEGRO_KEY_3: return "set_time_signature_numerator_3"; break;
+      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; return "set_time_signature_numerator_3"; break;
       case ALLEGRO_KEY_4: return "set_time_signature_numerator_4"; break;
       case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
       }
@@ -285,10 +298,23 @@ Action::Base *AppController::create_action(std::string action_name)
          return action_queue;
       }
    }
+   else if (action_name == "invert")
+   {
+      if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::Invert(single_note);
+      else
+      {
+         if (!notes) { std::cout << "cannot invert_note on nullptr notes" << std::endl; return nullptr; }
+         Action::Queue *action_queue = new Action::Queue(action_name);
+         for (auto &note : *notes) action_queue->add_action(new Action::Transform::Invert(&note));
+         return action_queue;
+      }
+   }
    else if (action_name == "erase_note")
       action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
-   else if (action_name == "invert")
-      action = new Action::Transform::Invert(single_note, 0);
+   else if (action_name == "ascend")
+      action = new Action::Transform::Ascend(notes);
+   else if (action_name == "descend")
+      action = new Action::Transform::Descend(notes);
    else if (action_name == "add_dot")
       action = new Action::Transform::AddDot(single_note);
    else if (action_name == "remove_dot")
@@ -297,6 +323,8 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetCommandMode(current_grid_editor, command_bar);
    else if (action_name == "set_normal_mode")
       action = new Action::SetNormalMode(current_grid_editor, command_bar);
+   else if (action_name == "split_note")
+      action = new Action::Transform::SplitNote(notes);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
