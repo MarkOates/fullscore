@@ -15,6 +15,7 @@
 #include <fullscore/actions/transforms/Octatonic1.h>
 #include <fullscore/actions/transforms/RemoveDot.h>
 #include <fullscore/actions/transforms/Retrograde.h>
+#include <fullscore/actions/transforms/SplitNote.h>
 #include <fullscore/actions/transforms/ToggleRest.h>
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
@@ -107,8 +108,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       {
       case ALLEGRO_KEY_F: return "transpose_up"; break;
       case ALLEGRO_KEY_D: return "transpose_down"; break;
-      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; } break; // #
-      case ALLEGRO_KEY_S: return "half_duration"; break;
+      case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; return "half_duration"; break;
       case ALLEGRO_KEY_G: return "double_duration"; break;
       case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
       case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
@@ -146,7 +146,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       case ALLEGRO_KEY_2: return "set_time_signature_numerator_2"; break;
-      case ALLEGRO_KEY_3: return "set_time_signature_numerator_3"; break;
+      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; return "set_time_signature_numerator_3"; break;
       case ALLEGRO_KEY_4: return "set_time_signature_numerator_4"; break;
       case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
       }
@@ -311,6 +311,8 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::SetCommandMode(current_grid_editor, command_bar);
    else if (action_name == "set_normal_mode")
       action = new Action::SetNormalMode(current_grid_editor, command_bar);
+   else if (action_name == "split_note")
+      action = new Action::Transform::SplitNote(notes);
    else if (action_name == "retrograde")
       action = new Action::Transform::Retrograde(notes);
    else if (action_name == "octatonic_1_transform")
