@@ -23,6 +23,7 @@ namespace Action
 
    public:
       SetReferenceCursor(ReferenceCursor *reference_cursor, Grid *grid, int measure_x, int staff_y);
+      ~SetReferenceCursor();
 
       bool execute() override;
    };

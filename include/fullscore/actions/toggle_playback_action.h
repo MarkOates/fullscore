@@ -18,6 +18,7 @@ namespace Action
    public:
       TogglePlayback(PlaybackControl *playback_control);
       ~TogglePlayback();
+
       bool execute() override;
    };
 }

@@ -15,6 +15,11 @@ Action::SetTimeSignatureNumerator::SetTimeSignatureNumerator(TimeSignature *time
 
 
 
+Action::SetTimeSignatureNumerator::~SetTimeSignatureNumerator()
+{}
+
+
+
 bool Action::SetTimeSignatureNumerator::execute()
 {
    if (!time_signature) throw std::invalid_argument("Cannot set time signature's numerator on a nullptr time_signature");

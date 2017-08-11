@@ -18,6 +18,7 @@ namespace Action
    public:
       MoveCursorRight(UIGridEditor *grid_editor);
       ~MoveCursorRight();
+
       bool execute() override;
    };
 }

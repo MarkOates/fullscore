@@ -18,6 +18,7 @@ namespace Action
    public:
       ResetPlayback(UIGridEditor *grid_editor);
       ~ResetPlayback();
+
       bool execute() override;
    };
 }

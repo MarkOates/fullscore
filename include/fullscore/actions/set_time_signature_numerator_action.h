@@ -20,6 +20,7 @@ namespace Action
 
    public:
       SetTimeSignatureNumerator(TimeSignature *time_signature, int numerator);
+      ~SetTimeSignatureNumerator();
 
       bool execute() override;
    };

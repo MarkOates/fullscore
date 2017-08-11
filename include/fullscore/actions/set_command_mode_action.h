@@ -21,6 +21,7 @@ namespace Action
    public:
       SetCommandMode(UIGridEditor *grid_editor, UICommandBar *command_bar);
       ~SetCommandMode();
+
       bool execute() override;
    };
 }

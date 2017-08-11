@@ -22,6 +22,7 @@ namespace Action
    public:
       SetMode(UIGridEditor *grid_editor, UICommandBar *command_bar, UIGridEditor::mode_t mode);
       ~SetMode();
+
       bool execute() override;
    };
 }

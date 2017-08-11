@@ -18,6 +18,11 @@ Action::SetReferenceCursor::SetReferenceCursor(ReferenceCursor *reference_cursor
 
 
 
+Action::SetReferenceCursor::~SetReferenceCursor()
+{}
+
+
+
 bool Action::SetReferenceCursor::execute()
 {
    if (!reference_cursor) throw std::invalid_argument("Cannot set reference cursor on a nullptr reference_cursor");

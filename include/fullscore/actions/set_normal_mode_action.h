@@ -21,6 +21,7 @@ namespace Action
    public:
       SetNormalMode(UIGridEditor *grid_editor, UICommandBar *command_bar);
       ~SetNormalMode();
+
       bool execute() override;
    };
 }

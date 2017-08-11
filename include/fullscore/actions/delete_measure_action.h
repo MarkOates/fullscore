@@ -19,6 +19,7 @@ namespace Action
 
    public:
       DeleteMeasure(Grid *grid, int measure_x, int staff_y);
+      ~DeleteMeasure();
 
       bool execute() override;
    };

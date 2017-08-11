@@ -16,6 +16,11 @@ Action::DeleteMeasure::DeleteMeasure(Grid *grid, int measure_x, int staff_y)
 
 
 
+Action::DeleteMeasure::~DeleteMeasure()
+{}
+
+
+
 bool Action::DeleteMeasure::execute()
 {
    if (!grid) std::runtime_error("Cannot delete a measure on a nullptr grid");
