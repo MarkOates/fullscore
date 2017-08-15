@@ -55,6 +55,7 @@
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
+#include <fullscore/models/measure.h>
 #include <fullscore/app_controller.h>
 
 
