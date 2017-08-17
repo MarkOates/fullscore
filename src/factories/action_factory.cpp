@@ -61,6 +61,8 @@
 
 Action::Base *ActionFactory::create_action(AppController *app_controller, std::string action_identifier)
 {
+   if (!app_controller) throw std::runtime_error("Cannot create action with an nullptr app_controller");
+
    //
    // APP COMMANDS
    //
