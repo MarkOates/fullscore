@@ -72,13 +72,13 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "set_current_grid_editor")
       action = new Action::SetCurrentUIGridEditor(app_controller, get_next_grid_editor());
    else if (action_identifier == "move_camera_up")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
+      action = new Action::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x, app_controller->follow_camera.target.position.y + 100);
    else if (action_identifier == "move_camera_down")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
+      action = new Action::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x, app_controller->follow_camera.target.position.y - 100);
    else if (action_identifier == "move_camera_right")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x - 100, follow_camera.target.position.y);
+      action = new Action::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x - 100, app_controller->follow_camera.target.position.y);
    else if (action_identifier == "move_camera_left")
-      action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x + 100, follow_camera.target.position.y);
+      action = new Action::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x + 100, app_controller->follow_camera.target.position.y);
 
    if (action) return action;
 
