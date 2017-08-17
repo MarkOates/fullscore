@@ -89,6 +89,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    //
    // SCORE EDITING COMMANDS
    //
+   UIGridEditor *current_grid_editor = app_controller->current_grid_editor;
 
    if (!current_grid_editor) return nullptr;
 
