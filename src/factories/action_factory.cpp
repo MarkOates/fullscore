@@ -73,7 +73,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    if (action_identifier == "create_new_grid_editor")
       action = new Action::CreateNewScoreEditor(app_controller);
    else if (action_identifier == "set_current_grid_editor")
-      action = new Action::SetCurrentUIGridEditor(app_controller, get_next_grid_editor());
+      action = new Action::SetCurrentUIGridEditor(app_controller, app_controller->get_next_grid_editor());
    else if (action_identifier == "move_camera_up")
       action = new Action::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x, app_controller->follow_camera.target.position.y + 100);
    else if (action_identifier == "move_camera_down")
