@@ -94,9 +94,9 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    Measure::Base *focused_measure = nullptr;
    Measure::Base *measure_at_reference_cursor = nullptr;
 
-   if (reference_cursor.is_valid())
+   if (app_controller->reference_cursor.is_valid())
    {
-      measure_at_reference_cursor = reference_cursor.get_grid()->get_measure(reference_cursor.get_x(), reference_cursor.get_y());
+      measure_at_reference_cursor = app_controller->reference_cursor.get_grid()->get_measure(app_controller->reference_cursor.get_x(), app_controller->reference_cursor.get_y());
    }
 
    if (current_grid_editor->is_note_target_mode())
@@ -249,7 +249,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    {
       action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
       static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
-      static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&reference_cursor,
+      static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&app_controller->reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
          );
    }
@@ -281,7 +281,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "set_reference_by_coordinate_measure")
       action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
-            reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
+            app_controller->reference_cursor.get_grid(), app_controller->reference_cursor.get_x(), app_controller->reference_cursor.get_y());
    else if (action_identifier == "set_reference_by_id_measure")
    {
       action = new Action::SetReferenceByIDMeasure(
@@ -290,7 +290,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
          );
    }
    else if (action_identifier == "set_reference_cursor")
-      action = new Action::SetReferenceCursor(&reference_cursor,
+      action = new Action::SetReferenceCursor(&app_controller->reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
    else if (action_identifier == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
