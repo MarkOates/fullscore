@@ -15,7 +15,7 @@ namespace Transform
 
       HalfDuration();
       ~HalfDuration();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 

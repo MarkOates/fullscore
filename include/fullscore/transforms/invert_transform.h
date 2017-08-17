@@ -15,7 +15,7 @@ namespace Transform
 
       Invert(int axis);
       ~Invert();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 

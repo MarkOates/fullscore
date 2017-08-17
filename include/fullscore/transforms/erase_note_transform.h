@@ -15,7 +15,7 @@ namespace Transform
 
       EraseNote(int index_num);
       ~EraseNote();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 

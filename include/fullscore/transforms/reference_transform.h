@@ -22,7 +22,7 @@ namespace Transform
    public:
       Reference(Grid *grid, int source_x, int source_y);
 
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 };
 
