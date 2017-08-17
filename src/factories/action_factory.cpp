@@ -206,9 +206,9 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "remove_dot")
       action = new Action::Transform::RemoveDot(single_note);
    else if (action_identifier == "set_command_mode")
-      action = new Action::SetCommandMode(current_grid_editor, command_bar);
+      action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
    else if (action_identifier == "set_normal_mode")
-      action = new Action::SetNormalMode(current_grid_editor, command_bar);
+      action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
    else if (action_identifier == "split_note")
       action = new Action::Transform::SplitNote(notes);
    else if (action_identifier == "retrograde")
