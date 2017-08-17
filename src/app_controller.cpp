@@ -4,7 +4,6 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/actions/set_normal_mode_action.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/measure.h>
@@ -187,8 +186,10 @@ void AppController::on_message(UIWidget *sender, std::string message)
             action->execute();
             delete action;
 
-            Action::SetNormalMode return_to_normal_mode(current_grid_editor, command_bar);
-            return_to_normal_mode.execute();
+            Action::Base *set_normal_mode_action = ActionFactory::create_action(this, "set_normal_mode");
+            if (!set_normal_mode_action) throw std::runtime_error("Cannot return to NORMAL_MODE; \"set_normal_mode\" action not found");
+            set_normal_mode_action->execute();
+            delete set_normal_mode_action;
          }
          else
          {
@@ -203,8 +204,10 @@ void AppController::on_message(UIWidget *sender, std::string message)
          error_message += message;
          simple_notification_screen->spawn_notification(error_message);
 
-         Action::SetNormalMode return_to_normal_mode(current_grid_editor, command_bar);
-         return_to_normal_mode.execute();
+         Action::Base *set_normal_mode_action = ActionFactory::create_action(this, "set_normal_mode");
+         if (!set_normal_mode_action) throw std::runtime_error("Cannot return to NORMAL_MODE; \"set_normal_mode\" action not found");
+         set_normal_mode_action->execute();
+         delete set_normal_mode_action;
       }
    }
 }
