@@ -59,7 +59,7 @@
 
 
 
-Action::Base *ActionFactory::create_action(AppController *app_controller, std::string identifier)
+Action::Base *ActionFactory::create_action(AppController *app_controller, std::string action_identifier)
 {
    //
    // APP COMMANDS
@@ -67,17 +67,17 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
 
    Action::Base *action = nullptr;
 
-   if (action_name == "create_new_grid_editor")
+   if (action_identifier == "create_new_grid_editor")
       action = new Action::CreateNewScoreEditor(app_controller);
-   else if (action_name == "set_current_grid_editor")
+   else if (action_identifier == "set_current_grid_editor")
       action = new Action::SetCurrentUIGridEditor(app_controller, get_next_grid_editor());
-   else if (action_name == "move_camera_up")
+   else if (action_identifier == "move_camera_up")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y + 100);
-   else if (action_name == "move_camera_down")
+   else if (action_identifier == "move_camera_down")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x, follow_camera.target.position.y - 100);
-   else if (action_name == "move_camera_right")
+   else if (action_identifier == "move_camera_right")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x - 100, follow_camera.target.position.y);
-   else if (action_name == "move_camera_left")
+   else if (action_identifier == "move_camera_left")
       action = new Action::SetCameraTarget(&follow_camera, follow_camera.target.position.x + 100, follow_camera.target.position.y);
 
    if (action) return action;
@@ -111,11 +111,11 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       if (focused_measure && focused_measure->get_notes_pointer()) notes = focused_measure->get_notes_pointer();
    }
 
-   if (action_name == "transpose_up")
+   if (action_identifier == "transpose_up")
    {
       if (current_grid_editor->is_note_target_mode())
       {
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
             action_queue->add_action(new Action::Transform::TransposeUp(single_note));
          return action_queue;
@@ -123,18 +123,18 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       else
       {
          if (!notes) { std::cout << "cannot transpose_up on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
                action_queue->add_action(new Action::Transform::TransposeUp(&note));
          return action_queue;
       }
    }
-   else if (action_name == "transpose_down")
+   else if (action_identifier == "transpose_down")
    {
       if (current_grid_editor->is_note_target_mode())
       {
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
             action_queue->add_action(new Action::Transform::TransposeDown(single_note));
          return action_queue;
@@ -142,110 +142,110 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       else
       {
          if (!notes) { std::cout << "cannot transpose_down on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
                action_queue->add_action(new Action::Transform::TransposeDown(&note));
          return action_queue;
       }
    }
-   else if (action_name == "half_duration")
+   else if (action_identifier == "half_duration")
    {
       if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::HalfDuration(single_note);
       else
       {
          if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::HalfDuration(&note));
          return action_queue;
       }
    }
-   else if (action_name == "double_duration")
+   else if (action_identifier == "double_duration")
    {
       if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::DoubleDuration(single_note);
       else
       {
          if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::DoubleDuration(&note));
          return action_queue;
       }
    }
-   else if (action_name == "toggle_rest")
+   else if (action_identifier == "toggle_rest")
    {
       if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::ToggleRest(single_note);
       else
       {
          if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::ToggleRest(&note));
          return action_queue;
       }
    }
-   else if (action_name == "invert")
+   else if (action_identifier == "invert")
    {
       if (current_grid_editor->is_note_target_mode()) action = new Action::Transform::Invert(single_note);
       else
       {
          if (!notes) { std::cout << "cannot invert_note on nullptr notes" << std::endl; return nullptr; }
-         Action::Queue *action_queue = new Action::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_identifier);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::Invert(&note));
          return action_queue;
       }
    }
-   else if (action_name == "erase_note")
+   else if (action_identifier == "erase_note")
       action = new Action::Transform::EraseNote(notes, current_grid_editor->note_cursor_x);
-   else if (action_name == "ascend")
+   else if (action_identifier == "ascend")
       action = new Action::Transform::Ascend(notes);
-   else if (action_name == "descend")
+   else if (action_identifier == "descend")
       action = new Action::Transform::Descend(notes);
-   else if (action_name == "add_dot_to_note")
+   else if (action_identifier == "add_dot_to_note")
       action = new Action::Transform::AddDotToNote(single_note);
-   else if (action_name == "remove_dot")
+   else if (action_identifier == "remove_dot")
       action = new Action::Transform::RemoveDot(single_note);
-   else if (action_name == "set_command_mode")
+   else if (action_identifier == "set_command_mode")
       action = new Action::SetCommandMode(current_grid_editor, command_bar);
-   else if (action_name == "set_normal_mode")
+   else if (action_identifier == "set_normal_mode")
       action = new Action::SetNormalMode(current_grid_editor, command_bar);
-   else if (action_name == "split_note")
+   else if (action_identifier == "split_note")
       action = new Action::Transform::SplitNote(notes);
-   else if (action_name == "retrograde")
+   else if (action_identifier == "retrograde")
       action = new Action::Transform::Retrograde(notes);
-   else if (action_name == "octatonic_1_transform")
+   else if (action_identifier == "octatonic_1_transform")
       action = new Action::Transform::Octatonic1(notes);
-   else if (action_name == "insert_note")
+   else if (action_identifier == "insert_note")
       action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
-   else if (action_name == "insert_note_after")
+   else if (action_identifier == "insert_note_after")
    {
       action = new Action::Queue("insert_note_after: insert_note and move_cursor_right");
       static_cast<Action::Queue *>(action)->add_action(new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x+1, Note()));
       static_cast<Action::Queue *>(action)->add_action(new Action::MoveCursorRight(current_grid_editor));
    }
-   else if (action_name == "toggle_show_debug_data")
+   else if (action_identifier == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(current_grid_editor);
-   else if (action_name == "toggle_playback")
+   else if (action_identifier == "toggle_playback")
       action = new Action::TogglePlayback(&current_grid_editor->playback_control);
-   else if (action_name == "reset_playback")
+   else if (action_identifier == "reset_playback")
       action = new Action::ResetPlayback(current_grid_editor);
-   else if (action_name == "save_grid")
+   else if (action_identifier == "save_grid")
       action = new Action::SaveGrid(&current_grid_editor->grid, "score_filename.fs");
-   else if (action_name == "load_grid")
+   else if (action_identifier == "load_grid")
       action = new Action::LoadGrid(&current_grid_editor->grid, "score_filename.fs");
-   else if (action_name == "camera_zoom_in")
+   else if (action_identifier == "camera_zoom_in")
       action = new Action::SetScoreZoom(current_grid_editor, &Framework::motion(), current_grid_editor->place.scale.x + 0.1, 0.3);
-   else if (action_name == "camera_zoom_default")
+   else if (action_identifier == "camera_zoom_default")
       action = new Action::SetScoreZoom(current_grid_editor, &Framework::motion(), 1, 0.3);
-   else if (action_name == "camera_zoom_out")
+   else if (action_identifier == "camera_zoom_out")
       action = new Action::SetScoreZoom(current_grid_editor, &Framework::motion(), current_grid_editor->place.scale.x - 0.1, 0.3);
-   else if (action_name == "move_cursor_left")
+   else if (action_identifier == "move_cursor_left")
       action = new Action::MoveCursorLeft(current_grid_editor);
-   else if (action_name == "move_cursor_down")
+   else if (action_identifier == "move_cursor_down")
       action = new Action::MoveCursorDown(current_grid_editor);
-   else if (action_name == "move_cursor_up")
+   else if (action_identifier == "move_cursor_up")
       action = new Action::MoveCursorUp(current_grid_editor);
-   else if (action_name == "move_cursor_right")
+   else if (action_identifier == "move_cursor_right")
       action = new Action::MoveCursorRight(current_grid_editor);
-   else if (action_name == "yank_measure_to_buffer")
+   else if (action_identifier == "yank_measure_to_buffer")
    {
       action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
       static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
@@ -253,7 +253,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
          );
    }
-   else if (action_name == "paste_measure_from_buffer")
+   else if (action_identifier == "paste_measure_from_buffer")
    {
       Measure::Base *measure_at_cursor = current_grid_editor->get_measure_at_cursor();
       if (measure_at_cursor && measure_at_cursor->get_type() == Measure::TYPE_IDENTIFIER_BASIC)
@@ -276,47 +276,47 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
          action = action_as_queue;
       }
    }
-   else if (action_name == "toggle_edit_mode_target")
+   else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
-   else if (action_name == "set_reference_by_coordinate_measure")
+   else if (action_identifier == "set_reference_by_coordinate_measure")
       action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             reference_cursor.get_grid(), reference_cursor.get_x(), reference_cursor.get_y());
-   else if (action_name == "set_reference_by_id_measure")
+   else if (action_identifier == "set_reference_by_id_measure")
    {
       action = new Action::SetReferenceByIDMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
          );
    }
-   else if (action_name == "set_reference_cursor")
+   else if (action_identifier == "set_reference_cursor")
       action = new Action::SetReferenceCursor(&reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_name == "set_basic_measure")
+   else if (action_identifier == "set_basic_measure")
       action = new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_name == "set_stack_measure")
+   else if (action_identifier == "set_stack_measure")
       action = new Action::SetStackMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_name == "insert_column")
+   else if (action_identifier == "insert_column")
       action = new Action::InsertColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_name == "delete_measure")
+   else if (action_identifier == "delete_measure")
       action = new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_name == "delete_grid_column")
+   else if (action_identifier == "delete_grid_column")
       action = new Action::DeleteGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_name == "insert_staff")
+   else if (action_identifier == "insert_staff")
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_name == "delete_staff")
+   else if (action_identifier == "delete_staff")
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_name == "append_column_to_grid")
+   else if (action_identifier == "append_column_to_grid")
       action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
-   else if (action_name == "append_staff")
+   else if (action_identifier == "append_staff")
       action = new Action::AppendStaff(&current_grid_editor->grid);
-   else if (action_name == "set_time_signature_numerator_2")
+   else if (action_identifier == "set_time_signature_numerator_2")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
-   else if (action_name == "set_time_signature_numerator_3")
+   else if (action_identifier == "set_time_signature_numerator_3")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 3);
-   else if (action_name == "set_time_signature_numerator_4")
+   else if (action_identifier == "set_time_signature_numerator_4")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 4);
-   else if (action_name == "set_time_signature_numerator_5")
+   else if (action_identifier == "set_time_signature_numerator_5")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 5);
 
    return action;
