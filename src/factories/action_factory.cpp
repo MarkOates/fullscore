@@ -250,7 +250,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "yank_measure_to_buffer")
    {
       action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
-      static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&yank_measure_buffer, focused_measure));
+      static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure));
       static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&app_controller->reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
          );
@@ -260,7 +260,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       Measure::Base *measure_at_cursor = current_grid_editor->get_measure_at_cursor();
       if (measure_at_cursor && measure_at_cursor->get_type() == Measure::TYPE_IDENTIFIER_BASIC)
       {
-         action = new Action::PasteMeasureFromBuffer(focused_measure, &yank_measure_buffer);
+         action = new Action::PasteMeasureFromBuffer(focused_measure, &app_controller->yank_measure_buffer);
       }
       else
       {
@@ -269,7 +269,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
 
          action_as_queue->add_action(new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
          action_as_queue->add_action(new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
-         action_as_queue->add_action(new Action::PasteMeasureFromBufferToGridCoordinates(&yank_measure_buffer,
+         action_as_queue->add_action(new Action::PasteMeasureFromBufferToGridCoordinates(&app_controller->yank_measure_buffer,
                &current_grid_editor->grid,
                current_grid_editor->measure_cursor_x,
                current_grid_editor->measure_cursor_y)
