@@ -100,7 +100,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
       case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
-      case ALLEGRO_KEY_O: return "octatonic_1_transform"; break;
+      case ALLEGRO_KEY_O: return "octatonic_1"; break;
       case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
       case ALLEGRO_KEY_2: return "set_time_signature_numerator_2"; break;
       case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; return "set_time_signature_numerator_3"; break;

@@ -215,7 +215,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::Transform::SplitNote(notes);
    else if (action_identifier == "retrograde")
       action = new Action::Transform::Retrograde(notes);
-   else if (action_identifier == "octatonic_1_transform")
+   else if (action_identifier == "octatonic_1")
       action = new Action::Transform::Octatonic1(notes);
    else if (action_identifier == "insert_note")
       action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
