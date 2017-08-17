@@ -4,7 +4,7 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/actions/transforms/AddDot.h>
+#include <fullscore/actions/transforms/AddDotToNote.h>
 #include <fullscore/actions/transforms/AppendNote.h>
 #include <fullscore/actions/transforms/Ascend.h>
 #include <fullscore/actions/transforms/ClearMeasure.h>
@@ -123,7 +123,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_R: return "toggle_rest"; break;
       case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
       case ALLEGRO_KEY_N: return "invert"; break;
-      case ALLEGRO_KEY_FULLSTOP: return "add_dot"; break;
+      case ALLEGRO_KEY_FULLSTOP: return "add_dot_to_note"; break;
       case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
       case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
       case ALLEGRO_KEY_X:
@@ -315,8 +315,8 @@ Action::Base *AppController::create_action(std::string action_name)
       action = new Action::Transform::Ascend(notes);
    else if (action_name == "descend")
       action = new Action::Transform::Descend(notes);
-   else if (action_name == "add_dot")
-      action = new Action::Transform::AddDot(single_note);
+   else if (action_name == "add_dot_to_note")
+      action = new Action::Transform::AddDotToNote(single_note);
    else if (action_name == "remove_dot")
       action = new Action::Transform::RemoveDot(single_note);
    else if (action_name == "set_command_mode")
