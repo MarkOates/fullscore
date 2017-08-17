@@ -1,13 +1,10 @@
-#ifndef __FULLSCORE_INSERT_NOTE_TRANSFORM_HEADER
-#define __FULLSCORE_INSERT_NOTE_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
 
 #include <fullscore/models/Note.h>
-
 
 
 
@@ -27,5 +24,3 @@ namespace Transform
 
 
 
-
-#endif

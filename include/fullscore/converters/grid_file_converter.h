@@ -1,6 +1,4 @@
-#ifndef __FULLSCORE_MEASURE_GRID_FILE_CONVERTER_HEADER
-#define __FULLSCORE_MEASURE_GRID_FILE_CONVERTER_HEADER
-
+#pragma once
 
 
 
@@ -25,5 +23,3 @@ public:
 
 
 
-
-#endif

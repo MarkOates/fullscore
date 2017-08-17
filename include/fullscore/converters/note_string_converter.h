@@ -1,12 +1,9 @@
-#ifndef __FULLSCORE_NOTE_STRING_CONVERTER_HEADER
-#define __FULLSCORE_NOTE_STRING_CONVERTER_HEADER
+#pragma once
 
 
 
-
-#include <string>
 #include <fullscore/models/Note.h>
-
+#include <string>
 
 
 
@@ -24,5 +21,3 @@ public:
 
 
 
-
-#endif

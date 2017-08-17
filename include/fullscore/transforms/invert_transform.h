@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_INVERT_TRANSFORM_HEADER
-#define __FULLSCORE_INVERT_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
-
 
 
 
@@ -24,5 +21,3 @@ namespace Transform
 
 
 
-
-#endif
