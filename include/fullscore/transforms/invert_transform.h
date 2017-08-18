@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_INVERT_TRANSFORM_HEADER
-#define __FULLSCORE_INVERT_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
-
 
 
 
@@ -18,11 +15,9 @@ namespace Transform
 
       Invert(int axis);
       ~Invert();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 
 
 
-
-#endif

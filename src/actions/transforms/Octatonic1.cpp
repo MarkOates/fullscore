@@ -9,7 +9,7 @@
 
 
 Action::Transform::Octatonic1::Octatonic1(std::vector<Note> *notes)
-   : Base("octatonic_1_transform")
+   : Base("octatonic_1")
    , notes(notes)
 {}
 

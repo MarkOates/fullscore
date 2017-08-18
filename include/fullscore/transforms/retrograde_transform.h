@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_RETROGRADE_TRANSFORM_HEADER
-#define __FULLSCORE_RETROGRADE_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
-
 
 
 
@@ -22,5 +19,3 @@ namespace Transform
 
 
 
-
-#endif

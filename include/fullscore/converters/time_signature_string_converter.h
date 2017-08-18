@@ -2,10 +2,8 @@
 
 
 
-
-#include <string>
 #include <fullscore/models/time_signature.h>
-
+#include <string>
 
 
 
@@ -20,7 +18,6 @@ public:
    bool read(std::string);
    std::string write();
 };
-
 
 
 

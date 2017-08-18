@@ -14,7 +14,7 @@ namespace Transform
       Descend();
       ~Descend();
 
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 };
 

@@ -1,11 +1,8 @@
-#ifndef __FULLSCORE_REMOVE_DOT_TRANSFORM_HEADER
-#define __FULLSCORE_REMOVE_DOT_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
-
 
 
 
@@ -16,11 +13,9 @@ namespace Transform
    public:
       RemoveDot();
       ~RemoveDot();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 
 
 
-
-#endif

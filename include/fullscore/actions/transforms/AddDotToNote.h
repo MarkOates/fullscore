@@ -13,14 +13,14 @@ namespace Action
 {
    namespace Transform
    {
-      class AddDot : public Base
+      class AddDotToNote : public Base
       {
       private:
          Note *note;
 
       public:
-         AddDot(Note *note);
-         ~AddDot();
+         AddDotToNote(Note *note);
+         ~AddDotToNote();
 
          bool execute() override;
       };

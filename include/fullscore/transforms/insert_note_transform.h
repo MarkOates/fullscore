@@ -1,13 +1,10 @@
-#ifndef __FULLSCORE_INSERT_NOTE_TRANSFORM_HEADER
-#define __FULLSCORE_INSERT_NOTE_TRANSFORM_HEADER
-
+#pragma once
 
 
 
 #include <fullscore/transforms/base.h>
 
 #include <fullscore/models/Note.h>
-
 
 
 
@@ -21,11 +18,9 @@ namespace Transform
 
       InsertNote(int position, Note note);
       ~InsertNote();
-      virtual std::vector<Note> transform(std::vector<Note> n) override;
+      virtual std::vector<Note> transform(std::vector<Note> notes) override;
    };
 }
 
 
 
-
-#endif

@@ -1,30 +1,26 @@
 
 
 
-
-#include <fullscore/actions/transforms/AddDot.h>
+#include <fullscore/actions/transforms/AddDotToNote.h>
 
 #include <fullscore/transforms/add_dot_transform.h>
 #include <fullscore/models/Note.h>
 
 
 
-
-Action::Transform::AddDot::AddDot(Note *note)
-   : Base("add_dot_transform")
+Action::Transform::AddDotToNote::AddDotToNote(Note *note)
+   : Base("add_dot_to_note")
    , note(note)
 {}
 
 
 
-
-Action::Transform::AddDot::~AddDot()
+Action::Transform::AddDotToNote::~AddDotToNote()
 {}
 
 
 
-
-bool Action::Transform::AddDot::execute()
+bool Action::Transform::AddDotToNote::execute()
 {
    if (!note) return false;
 
@@ -38,7 +34,6 @@ bool Action::Transform::AddDot::execute()
 
    return true;
 }
-
 
 
 

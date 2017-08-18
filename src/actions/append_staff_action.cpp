@@ -6,12 +6,13 @@
 
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/grid.h>
+#include <fullscore/action.h>
 
 
 
 
 Action::AppendStaff::AppendStaff(Grid *grid)
-   : Base("append_staff")
+   : Base(Action::APPEND_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
 {}
 
