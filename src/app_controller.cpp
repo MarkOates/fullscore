@@ -95,7 +95,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
       case ALLEGRO_KEY_H: return "move_cursor_left"; break;
       case ALLEGRO_KEY_J: return "move_cursor_down"; break;
-      case ALLEGRO_KEY_K: return "move_cursor_up"; break;
+      case ALLEGRO_KEY_K: return Measure::MOVE_CURSOR_UP_ACTION_IDENTIFIER; break;
       case ALLEGRO_KEY_L: return "move_cursor_right"; break;
       case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
       case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;

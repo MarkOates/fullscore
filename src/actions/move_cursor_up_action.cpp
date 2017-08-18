@@ -10,7 +10,7 @@
 
 
 Action::MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
-   : Base("move_cursor_up")
+   : Base(Measure::MOVE_CURSOR_UP_ACTION_IDENTIFIER)
    , grid_editor(grid_editor)
 {
 }

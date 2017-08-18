@@ -245,7 +245,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorLeft(current_grid_editor);
    else if (action_identifier == "move_cursor_down")
       action = new Action::MoveCursorDown(current_grid_editor);
-   else if (action_identifier == "move_cursor_up")
+   else if (action_identifier == Measure::MOVE_CURSOR_UP_ACTION_IDENTIFIER)
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == "move_cursor_right")
       action = new Action::MoveCursorRight(current_grid_editor);
