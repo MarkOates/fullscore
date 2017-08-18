@@ -12,6 +12,7 @@
 #include <fullscore/actions/transforms/EraseNote.h>
 #include <fullscore/actions/transforms/HalfDuration.h>
 #include <fullscore/actions/transforms/InsertNote.h>
+#include <fullscore/actions/transforms/InsertNoteAfter.h>
 #include <fullscore/actions/transforms/Invert.h>
 #include <fullscore/actions/transforms/Octatonic1.h>
 #include <fullscore/actions/transforms/RemoveDot.h>
@@ -220,12 +221,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::Transform::Octatonic1(notes);
    else if (action_identifier == "insert_note")
       action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
-   else if (action_identifier == "insert_note_after")
-   {
-      action = new Action::Queue("insert_note_after: insert_note and move_cursor_right");
-      static_cast<Action::Queue *>(action)->add_action(new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x+1, Note()));
-      static_cast<Action::Queue *>(action)->add_action(new Action::MoveCursorRight(current_grid_editor));
-   }
+   else if (action_identifier == Action::INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER)
+      action = new Action::Transform::InsertNoteAfter(current_grid_editor, notes, current_grid_editor->note_cursor_x, Note());
    else if (action_identifier == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(current_grid_editor);
    else if (action_identifier == "toggle_playback")
