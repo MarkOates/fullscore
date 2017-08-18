@@ -56,6 +56,7 @@
 #include <fullscore/actions/toggle_show_debug_data_action.h>
 #include <fullscore/actions/yank_measure_to_buffer_action.h>
 #include <fullscore/models/measure.h>
+#include <fullscore/action.h>
 #include <fullscore/app_controller.h>
 
 
@@ -245,9 +246,9 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorLeft(current_grid_editor);
    else if (action_identifier == "move_cursor_down")
       action = new Action::MoveCursorDown(current_grid_editor);
-   else if (action_identifier == Measure::MOVE_CURSOR_UP_ACTION_IDENTIFIER)
+   else if (action_identifier == Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER)
       action = new Action::MoveCursorUp(current_grid_editor);
-   else if (action_identifier == "move_cursor_right")
+   else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
    else if (action_identifier == "yank_measure_to_buffer")
    {
@@ -312,7 +313,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_identifier == Action::APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
       action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
-   else if (action_identifier == "append_staff")
+   else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
       action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_identifier == "set_time_signature_numerator_2")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
