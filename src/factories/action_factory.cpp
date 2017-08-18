@@ -310,7 +310,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_identifier == "delete_staff")
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "append_column_to_grid")
+   else if (action_identifier == Action::APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
       action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
    else if (action_identifier == "append_staff")
       action = new Action::AppendStaff(&current_grid_editor->grid);

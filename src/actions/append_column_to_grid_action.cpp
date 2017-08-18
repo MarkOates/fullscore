@@ -5,12 +5,13 @@
 #include <fullscore/actions/append_column_to_grid_action.h>
 
 #include <fullscore/models/grid.h>
+#include <fullscore/action.h>
 
 
 
 
 Action::AppendColumnToGrid::AppendColumnToGrid(Grid *grid)
-   : Base("append_column_to_grid")
+   : Base(APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
    , grid(grid)
 {}
 
