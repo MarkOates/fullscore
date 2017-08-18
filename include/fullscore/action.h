@@ -39,6 +39,7 @@ namespace Action
    std::string const TOGGLE_EDIT_MODE_TARGET_ACTION_IDENTIFIER = "toggle_edit_mode_target";
    std::string const TOGGLE_PLAYBACK_ACTION_IDENTIFIER = "toggle_playback";
    std::string const TOGGLE_SHOW_DEBUG_DATA_ACTION_IDENTIFIER = "toggle_show_debug_data";
+   std::string const YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER = "yank_grid_measure_to_buffer";
 }
 
 

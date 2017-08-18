@@ -55,7 +55,7 @@
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
 #include <fullscore/actions/toggle_playback_action.h>
 #include <fullscore/actions/toggle_show_debug_data_action.h>
-#include <fullscore/actions/yank_measure_to_buffer_action.h>
+#include <fullscore/actions/yank_grid_measure_to_buffer_action.h>
 #include <fullscore/models/measure.h>
 #include <fullscore/action.h>
 #include <fullscore/app_controller.h>
@@ -247,10 +247,40 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
-   else if (action_identifier == "yank_measure_to_buffer")
+   else if (action_identifier == "set_reference_cursor")
+      action = new Action::SetReferenceCursor(&app_controller->reference_cursor, &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "toggle_edit_mode_target")
+      action = new Action::ToggleEditModeTarget(current_grid_editor);
+   else if (action_identifier == "set_basic_measure")
+      action = new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "set_stack_measure")
+      action = new Action::SetStackMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "insert_column")
+      action = new Action::InsertColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
+   else if (action_identifier == "delete_measure")
+      action = new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "delete_grid_column")
+      action = new Action::DeleteGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
+   else if (action_identifier == "insert_staff")
+      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "delete_staff")
+      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == Action::APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
+      action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
+   else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
+      action = new Action::AppendStaff(&current_grid_editor->grid);
+   else if (action_identifier == "set_time_signature_numerator_2")
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
+   else if (action_identifier == "set_time_signature_numerator_3")
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 3);
+   else if (action_identifier == "set_time_signature_numerator_4")
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 4);
+   else if (action_identifier == "set_time_signature_numerator_5")
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 5);
+   else if (action_identifier == "yank_grid_measure_to_buffer")
    {
-      action = new Action::Queue("yank_measure_to_buffer and set_reference_cursor");
-      static_cast<Action::Queue *>(action)->add_action(new Action::YankMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure));
+      action = new Action::Queue("yank_grid_measure_to_buffer and set_reference_cursor");
+      static_cast<Action::Queue *>(action)->add_action(new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure));
       static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&app_controller->reference_cursor,
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
          );
@@ -278,8 +308,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
          action = action_as_queue;
       }
    }
-   else if (action_identifier == "toggle_edit_mode_target")
-      action = new Action::ToggleEditModeTarget(current_grid_editor);
    else if (action_identifier == "set_reference_by_coordinate_measure")
       action = new Action::SetReferenceByCoordinateMeasure(
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
@@ -290,35 +318,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
             &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
             measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
          );
-   else if (action_identifier == "set_reference_cursor")
-      action = new Action::SetReferenceCursor(&app_controller->reference_cursor,
-            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "set_basic_measure")
-      action = new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "set_stack_measure")
-      action = new Action::SetStackMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "insert_column")
-      action = new Action::InsertColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_identifier == "delete_measure")
-      action = new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "delete_grid_column")
-      action = new Action::DeleteGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_identifier == "insert_staff")
-      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "delete_staff")
-      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == Action::APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
-      action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
-   else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
-      action = new Action::AppendStaff(&current_grid_editor->grid);
-   else if (action_identifier == "set_time_signature_numerator_2")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
-   else if (action_identifier == "set_time_signature_numerator_3")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 3);
-   else if (action_identifier == "set_time_signature_numerator_4")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 4);
-   else if (action_identifier == "set_time_signature_numerator_5")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 5);
 
    return action;
 }
