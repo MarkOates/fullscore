@@ -10,6 +10,7 @@ namespace Action
    std::string const DELETE_GRID_COLUMN_ACTION_IDENTIFIER = "delete_grid_column";
    std::string const DELETE_MEASURE_ACTION_IDENTIFIER = "delete_measure";
    std::string const DELETE_STAFF_ACTION_IDENTIFIER = "delete_staff";
+   std::string const INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER = "insert_note_after";
    std::string const INSERT_COLUMN_ACTION_IDENTIFIER = "insert_column";
    std::string const INSERT_STAFF_ACTION_IDENTIFIER = "insert_staff";
    std::string const LOAD_GRID_ACTION_IDENTIFIER = "load_grid";
