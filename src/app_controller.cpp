@@ -62,6 +62,8 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "set_time_signature_numerator_3");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F,         false, false, false, "transpose_up");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_D,         false, false, false, "transpose_down");
 
    // shift commands
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         true,  false, false, "split_note");
@@ -115,11 +117,9 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       {
       case ALLEGRO_KEY_F:
          if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "ascend"; }
-         return "transpose_up";
          break;
       case ALLEGRO_KEY_D:
          if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
-         return "transpose_down";
          break;
       case ALLEGRO_KEY_X:
          if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
