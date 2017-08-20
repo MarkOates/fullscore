@@ -44,8 +44,6 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Z,         false, false, false, "retrograde");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_H,         false, false, false, "move_cursor_left");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_J,         false, false, false, "move_cursor_down");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_FULLSTOP,  false, false, false, "add_dot_to_note");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_COMMA,     false, false, false, "remove_dot");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SEMICOLON, false, false, false, "set_command_mode");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F2,        false, false, false, "toggle_show_debug_data");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SPACE,     false, false, false, "toggle_playback");
@@ -85,9 +83,11 @@ void AppController::set_keyboard_input_mappings()
 
 
    // note mode commands
-   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_A, false, false, false, "insert_note_after");
-   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "erase_note");
-   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_I, false, false, false, "insert_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_A,        false, false, false, "insert_note_after");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,        false, false, false, "erase_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_I,        false, false, false, "insert_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_COMMA,    false, false, false, "remove_dot");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_FULLSTOP, false, false, false, "add_dot_to_note");
 }
 
 
@@ -130,7 +130,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
          std::string found_mapping = normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
       }
-      if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
+      else if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
       {
          std::string found_mapping = normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
