@@ -23,6 +23,8 @@ AppController::AppController(Display *display)
    , yank_measure_buffer()
    , reference_cursor(nullptr, 0, 0)
    , normal_mode_keyboard_mappings()
+   , normal_mode_note_keyboard_mappings()
+   , normal_mode_measure_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
 
@@ -74,6 +76,20 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         true,  false, false, "set_basic_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
+
+
+
+   // measure mode commands
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_F, false, true,  false, "ascend");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_D, false, true,  false, "descend");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "delete_measure");
+
+
+
+   // note mode commands
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_A, false, false, false, "insert_note_after");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "erase_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_I, false, false, false, "insert_note");
 }
 
 
@@ -111,28 +127,19 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
 
    if (mode == UIGridEditor::NORMAL_MODE)
    {
+      if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET)
+      {
+         std::string found_mapping = normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+      if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
+      {
+         std::string found_mapping = normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+
       std::string found_mapping = normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
       if (!found_mapping.empty()) return found_mapping;
-
-      switch(al_keycode)
-      {
-      case ALLEGRO_KEY_F:
-         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "ascend"; }
-         break;
-      case ALLEGRO_KEY_D:
-         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
-         break;
-      case ALLEGRO_KEY_X:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
-         else if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
-         break;
-      case ALLEGRO_KEY_A:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note_after"; }
-         break;
-      case ALLEGRO_KEY_I:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note"; }
-         break;
-      }
    }
 
    return "";

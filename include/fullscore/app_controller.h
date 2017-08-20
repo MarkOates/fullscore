@@ -30,6 +30,8 @@ public:
    bool showing_help_menu;
    ReferenceCursor reference_cursor;
    KeyboardCommandMapper normal_mode_keyboard_mappings;
+   KeyboardCommandMapper normal_mode_note_keyboard_mappings;
+   KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
 
    AppController(Display *display);
    void primary_timer_func() override;
