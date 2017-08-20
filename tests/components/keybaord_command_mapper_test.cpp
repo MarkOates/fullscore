@@ -19,6 +19,27 @@ TEST(KeyboardCommandMapperTest, can_get_and_set_mappings)
 
 
 
+TEST(KeyboardCommandMapperTest, can_get_and_set_all_valid_allegro_keycodes)
+{
+   KeyboardCommandMapper mapper;
+
+   for (unsigned k=0 /*ALLEGRO_KEY_A*/; k<215/*ALLEGRO_KEY_MODIFIERS*/; k++)
+   {
+      std::string identifier = "this is a test identifier";
+
+      EXPECT_TRUE(          mapper.set_mapping(k, true, true, true, identifier));
+      EXPECT_EQ(identifier, mapper.get_mapping(k, true, true, true));
+
+      EXPECT_TRUE(          mapper.set_mapping(k, true, false, true, identifier));
+      EXPECT_EQ(identifier, mapper.get_mapping(k, true, false, true));
+
+      EXPECT_TRUE(          mapper.set_mapping(k, true, true, false, identifier));
+      EXPECT_EQ(identifier, mapper.get_mapping(k, true, true, false));
+   }
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
