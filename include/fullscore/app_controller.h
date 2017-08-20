@@ -6,6 +6,7 @@
 
 #include <fullscore/actions/base.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/components/keyboard_command_mapper.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/widgets/command_bar.h>
 #include <fullscore/widgets/follow_camera.h>
@@ -28,6 +29,7 @@ public:
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    ReferenceCursor reference_cursor;
+   KeyboardCommandMapper normal_mode_keyboard_mappings;
 
    AppController(Display *display);
    void primary_timer_func() override;

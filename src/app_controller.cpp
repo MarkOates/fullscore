@@ -56,6 +56,10 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
    }
 
    if (mode == UIGridEditor::NORMAL_MODE)
+   {
+      std::string found_mapping = normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+      if (!found_mapping.empty()) return found_mapping;
+
       switch(al_keycode)
       {
       case ALLEGRO_KEY_F:
@@ -108,6 +112,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_4: return "set_time_signature_numerator_4"; break;
       case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
       }
+   }
 
    if (mode == UIGridEditor::COMMAND_MODE)
       switch(al_keycode)
