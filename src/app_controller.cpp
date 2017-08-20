@@ -22,6 +22,7 @@ AppController::AppController(Display *display)
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
    , reference_cursor(nullptr, 0, 0)
+   , normal_mode_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
 
