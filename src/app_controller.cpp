@@ -83,6 +83,12 @@ void AppController::primary_timer_func()
 
 std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
+   if (mode == UIGridEditor::COMMAND_MODE)
+      switch(al_keycode)
+      {
+      case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
+      }
+
    switch(al_keycode)
    {
       case ALLEGRO_KEY_N: if(ctrl) return "create_new_grid_editor"; break;
@@ -127,12 +133,6 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; break;
       }
    }
-
-   if (mode == UIGridEditor::COMMAND_MODE)
-      switch(al_keycode)
-      {
-      case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
-      }
 
    return "";
 }
