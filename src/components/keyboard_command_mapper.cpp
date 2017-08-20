@@ -25,7 +25,12 @@ bool KeyboardCommandMapper::set_mapping(int al_keycode, bool shift, bool ctrl, b
 
 std::string KeyboardCommandMapper::get_mapping(int al_keycode, bool shift, bool ctrl, bool alt)
 {
-   return mapping[std::tuple<int, bool, bool, bool>(al_keycode, shift, ctrl, alt)];
+   std::map<std::tuple<int, bool, bool, bool>, std::string>::iterator mapper_iterator
+      = mapping.find(std::tuple<int, bool, bool, bool>(al_keycode, shift, ctrl, alt));
+
+   if (mapper_iterator == mapping.end()) return "";
+
+   return (*mapper_iterator).second;
 }
 
 
