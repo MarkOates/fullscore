@@ -41,6 +41,8 @@ public:
    UIGridEditor *create_new_grid_editor(std::string identifier);
    bool set_current_grid_editor(UIGridEditor *editor);
    UIGridEditor *get_next_grid_editor();
+
+   void set_keyboard_input_mappings();
 };
 
 
