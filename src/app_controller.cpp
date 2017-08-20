@@ -72,6 +72,12 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         true,  false, false, "set_basic_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,   true, false, "create_new_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,   true, false, "set_current_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false,  false, false, "move_camera_up");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false,  false, false, "move_camera_down");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false,  false, false, "move_camera_right");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false,  false, false, "move_camera_left");
 
 
 
@@ -112,16 +118,6 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       {
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
-
-   switch(al_keycode)
-   {
-      case ALLEGRO_KEY_N: if(ctrl) return "create_new_grid_editor"; break;
-      case ALLEGRO_KEY_X: if(ctrl) return "set_current_grid_editor"; break;
-      case ALLEGRO_KEY_UP: return "move_camera_up"; break;
-      case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
-      case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
-      case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
-   }
 
    if (mode == UIGridEditor::NORMAL_MODE)
    {
