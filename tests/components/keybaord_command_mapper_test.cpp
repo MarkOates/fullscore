@@ -40,6 +40,17 @@ TEST(KeyboardCommandMapperTest, can_get_and_set_all_valid_allegro_keycodes)
 
 
 
+TEST(KeyboardCommandMapperTest, returns_an_empty_string_if_identifier_is_not_found)
+{
+   KeyboardCommandMapper mapper;
+
+   EXPECT_EQ("", mapper.get_mapping(16, true, false, false));
+   EXPECT_EQ("", mapper.get_mapping(24, false, true, false));
+   EXPECT_EQ("", mapper.get_mapping(0, false, false, true));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
