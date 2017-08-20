@@ -37,9 +37,6 @@ bool Action::SetMode::execute()
       command_bar->text_input->set_as_unfocused();
       grid_editor->mode = UIGridEditor::NORMAL_MODE;
       break;
-   case UIGridEditor::INSERT_MODE:
-      grid_editor->mode = UIGridEditor::INSERT_MODE;
-      break;
    case UIGridEditor::COMMAND_MODE:
       command_bar->text_input->set_as_focused();
       grid_editor->mode = UIGridEditor::COMMAND_MODE;
