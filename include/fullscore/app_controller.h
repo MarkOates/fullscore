@@ -6,6 +6,7 @@
 
 #include <fullscore/actions/base.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/components/keyboard_command_mapper.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/widgets/command_bar.h>
 #include <fullscore/widgets/follow_camera.h>
@@ -28,6 +29,9 @@ public:
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    ReferenceCursor reference_cursor;
+   KeyboardCommandMapper normal_mode_keyboard_mappings;
+   KeyboardCommandMapper normal_mode_note_keyboard_mappings;
+   KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
 
    AppController(Display *display);
    void primary_timer_func() override;
@@ -39,6 +43,8 @@ public:
    UIGridEditor *create_new_grid_editor(std::string identifier);
    bool set_current_grid_editor(UIGridEditor *editor);
    UIGridEditor *get_next_grid_editor();
+
+   void set_keyboard_input_mappings();
 };
 
 

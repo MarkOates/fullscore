@@ -22,10 +22,78 @@ AppController::AppController(Display *display)
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
    , reference_cursor(nullptr, 0, 0)
+   , normal_mode_keyboard_mappings()
+   , normal_mode_note_keyboard_mappings()
+   , normal_mode_measure_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
 
    set_current_grid_editor(create_new_grid_editor("full_score"));
+
+   set_keyboard_input_mappings();
+}
+
+
+
+void AppController::set_keyboard_input_mappings()
+{
+   //                                        keycode,               shift, ctrl,  alt,   identifier
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_G,         false, false, false, "double_duration");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_R,         false, false, false, "toggle_rest");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false, false, false, "invert");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Z,         false, false, false, "retrograde");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_H,         false, false, false, "move_cursor_left");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_J,         false, false, false, "move_cursor_down");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SEMICOLON, false, false, false, "set_command_mode");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F2,        false, false, false, "toggle_show_debug_data");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SPACE,     false, false, false, "toggle_playback");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Q,         false, false, false, "reset_playback");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F7,        false, false, false, "save_grid");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, "load_grid");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, "set_time_signature_numerator_4");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, "set_time_signature_numerator_5");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, "yank_measure_to_buffer");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, "paste_measure_from_buffer");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, "octatonic_1");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, "toggle_edit_mode_target");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_2,         false, false, false, "set_time_signature_numerator_2");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, "camera_zoom_out");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "set_time_signature_numerator_3");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F,         false, false, false, "transpose_up");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_D,         false, false, false, "transpose_down");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         true,  false, false, "split_note");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_7,         true,  false, false, "set_reference_by_id_measure");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_8,         true,  false, false, "set_reference_by_coordinate_measure");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_C,         true,  false, false, "set_reference_cursor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         true,  false, false, "set_basic_measure");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,   true, false, "create_new_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,   true, false, "set_current_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false,  false, false, "move_camera_up");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false,  false, false, "move_camera_down");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false,  false, false, "move_camera_right");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false,  false, false, "move_camera_left");
+
+
+
+   // measure mode commands
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_F, false, true,  false, "ascend");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_D, false, true,  false, "descend");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "delete_measure");
+
+
+
+   // note mode commands
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_A,        false, false, false, "insert_note_after");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,        false, false, false, "erase_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_I,        false, false, false, "insert_note");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_COMMA,    false, false, false, "remove_dot");
+   normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_FULLSTOP, false, false, false, "add_dot_to_note");
 }
 
 
@@ -45,79 +113,22 @@ void AppController::primary_timer_func()
 
 std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
-   switch(al_keycode)
-   {
-      case ALLEGRO_KEY_N: if(ctrl) return "create_new_grid_editor"; break;
-      case ALLEGRO_KEY_X: if(ctrl) return "set_current_grid_editor"; break;
-      case ALLEGRO_KEY_UP: return "move_camera_up"; break;
-      case ALLEGRO_KEY_DOWN: return "move_camera_down"; break;
-      case ALLEGRO_KEY_RIGHT: return "move_camera_right"; break;
-      case ALLEGRO_KEY_LEFT: return "move_camera_left"; break;
-   }
-
    if (mode == UIGridEditor::NORMAL_MODE)
-      switch(al_keycode)
+   {
+      if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET)
       {
-      case ALLEGRO_KEY_F:
-         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "ascend"; }
-         return "transpose_up";
-         break;
-      case ALLEGRO_KEY_D:
-         if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
-         return "transpose_down";
-         break;
-      case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; return "half_duration"; break;
-      case ALLEGRO_KEY_G: return "double_duration"; break;
-      case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
-      case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
-      case ALLEGRO_KEY_R: return "toggle_rest"; break;
-      case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
-      case ALLEGRO_KEY_N: return "invert"; break;
-      case ALLEGRO_KEY_FULLSTOP: return "add_dot_to_note"; break;
-      case ALLEGRO_KEY_COMMA: return "remove_dot"; break;
-      case ALLEGRO_KEY_SEMICOLON: return "set_command_mode"; break;
-      case ALLEGRO_KEY_X:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "erase_note"; }
-         else if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "delete_measure"; }
-         break;
-      case ALLEGRO_KEY_Z: return "retrograde"; break;
-      case ALLEGRO_KEY_A:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note_after"; }
-         break;
-      case ALLEGRO_KEY_I:
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note"; }
-         break;
-      case ALLEGRO_KEY_F2: return "toggle_show_debug_data"; break;
-      case ALLEGRO_KEY_SPACE: return "toggle_playback"; break;
-      case ALLEGRO_KEY_Q: return "reset_playback"; break;
-      case ALLEGRO_KEY_F7: return "save_grid"; break;
-      case ALLEGRO_KEY_F8: return "load_grid"; break;
-      case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
-      case ALLEGRO_KEY_MINUS: return "camera_zoom_out"; break;
-      case ALLEGRO_KEY_H: return "move_cursor_left"; break;
-      case ALLEGRO_KEY_J: return "move_cursor_down"; break;
-      case ALLEGRO_KEY_K: return Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER; break;
-      case ALLEGRO_KEY_L: return "move_cursor_right"; break;
-      case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
-      case ALLEGRO_KEY_Y: return "yank_measure_to_buffer"; break;
-      case ALLEGRO_KEY_P: return "paste_measure_from_buffer"; break;
-      case ALLEGRO_KEY_O: return "octatonic_1"; break;
-      case ALLEGRO_KEY_TAB: return "toggle_edit_mode_target"; break;
-      case ALLEGRO_KEY_2: return "set_time_signature_numerator_2"; break;
-      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; return "set_time_signature_numerator_3"; break;
-      case ALLEGRO_KEY_4: return "set_time_signature_numerator_4"; break;
-      case ALLEGRO_KEY_5: return "set_time_signature_numerator_5"; break;
+         std::string found_mapping = normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+      else if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
+      {
+         std::string found_mapping = normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
       }
 
-   if (mode == UIGridEditor::COMMAND_MODE)
-      switch(al_keycode)
-      {
-      case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
-      }
-
-   if (mode == UIGridEditor::INSERT_MODE)
-      // no implementation
-      ;
+      std::string found_mapping = normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+      if (!found_mapping.empty()) return found_mapping;
+   }
 
    return "";
 }

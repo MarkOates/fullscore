@@ -37,7 +37,6 @@ public:
    {
       NONE=0,
       NORMAL_MODE, // navigation, manipulation, etc
-      INSERT_MODE,   // inserting new content
       COMMAND_MODE   // editing on the command windows
    };
 
