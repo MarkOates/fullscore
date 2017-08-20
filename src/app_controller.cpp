@@ -60,6 +60,10 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, "camera_zoom_out");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER);
+
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "set_time_signature_numerator_3");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
 }
 
 
@@ -104,7 +108,7 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
          if (ctrl && edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET) { return "descend"; }
          return "transpose_down";
          break;
-      case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; return "half_duration"; break;
+      case ALLEGRO_KEY_S: if (shift) { return "split_note"; }; break;
       case ALLEGRO_KEY_7: if (shift) { return "set_reference_by_id_measure"; } break;
       case ALLEGRO_KEY_8: if (shift) { return "set_reference_by_coordinate_measure"; } break;
       case ALLEGRO_KEY_C: if (shift) return "set_reference_cursor"; break;
@@ -118,9 +122,9 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_I:
          if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET) { return "insert_note"; }
          break;
-      case ALLEGRO_KEY_EQUALS: return shift ? "camera_zoom_default" : "camera_zoom_in"; break;
+      case ALLEGRO_KEY_EQUALS: if (shift) return "camera_zoom_default"; break;
       case ALLEGRO_KEY_M: if(shift) return "set_basic_measure"; break;
-      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; return "set_time_signature_numerator_3"; break;
+      case ALLEGRO_KEY_3: if (shift) { return "set_stack_measure"; }; break;
       }
    }
 
