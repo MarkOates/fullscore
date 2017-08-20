@@ -134,10 +134,6 @@ std::string AppController::find_action_identifier(UIGridEditor::mode_t mode, UIG
       case ALLEGRO_KEY_SEMICOLON: return "set_normal_mode"; break;
       }
 
-   if (mode == UIGridEditor::INSERT_MODE)
-      // no implementation
-      ;
-
    return "";
 }
 
