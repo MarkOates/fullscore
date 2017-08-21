@@ -30,7 +30,11 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
    std::vector<Note> notes = context->get_notes_copy();
    if (notes.empty()) return "=";
 
-   int context_pitch = notes[note->pitch.scale_degree % notes.size()].pitch.scale_degree;
+   int offset = 128;
+   int scale_degree = note->pitch.scale_degree;
+   int octave_offset = 0;
+
+   int context_pitch = notes[(scale_degree+(int)notes.size()) % (int)notes.size()].pitch.scale_degree;
    int context_extension = (int)note->pitch.scale_degree / notes.size();
 
    return std::tuple<std::string, std::string>(tostring(context_pitch), tostring(context_extension));
