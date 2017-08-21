@@ -10,6 +10,7 @@ class MusicEngraver;
 class MeasureRenderComponent
 {
 private:
+   Measure::Base *context;
    Measure::Base *measure;
    MusicEngraver *music_engraver;
    float full_measure_width;
@@ -20,7 +21,7 @@ private:
    bool showing_debug_data;
 
 public:
-   MeasureRenderComponent(Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data);
+   MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data);
 
    void render();
 };
