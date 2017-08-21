@@ -23,8 +23,22 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
 
 
 
-MeasureRenderComponent::MeasureRenderComponent(Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data)
-   : measure(measure)
+std::string __get_context_pitch(Measure::Base *context, Note *note)
+{
+   if (!context && !note) return "E";
+
+   std::vector<Note> notes = context->get_notes_copy();
+   if (notes.empty()) return "=";
+
+   int context_pitch = notes[note->pitch.scale_degree % notes.size()].pitch.scale_degree;
+   return tostring(context_pitch);
+}
+
+
+
+MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data)
+   : context(context)
+   , measure(measure)
    , music_engraver(music_engraver)
    , full_measure_width(full_measure_width)
    , x_pos(x_pos)
@@ -74,6 +88,9 @@ void MeasureRenderComponent::render()
 
          al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.pitch.scale_degree).c_str());
          al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration.denominator) + "(" + tostring(note.duration.dots) + ")").c_str());
+
+         std::string context_pitch_str = __get_context_pitch(context, &note);
+         al_draw_text(text_font, color::red, x_cursor, y_pos-20, ALLEGRO_FLAGS_EMPTY, context_pitch_str.c_str());
 
          x_cursor += width;
       }
