@@ -23,7 +23,7 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
 
 
 
-std::string __get_context_pitch(Measure::Base *context, Note *note)
+std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::Base *context, Note *note)
 {
    if (!context && !note) return "E";
 
@@ -31,7 +31,9 @@ std::string __get_context_pitch(Measure::Base *context, Note *note)
    if (notes.empty()) return "=";
 
    int context_pitch = notes[note->pitch.scale_degree % notes.size()].pitch.scale_degree;
-   return tostring(context_pitch);
+   int context_extension = (int)note->pitch.scale_degree / notes.size();
+
+   return std::tuple<std::string, std::string>(tostring(context_pitch), tostring(context_extension));
 }
 
 
@@ -89,8 +91,9 @@ void MeasureRenderComponent::render()
          al_draw_text(text_font, color::white, x_cursor, y_pos, 0, tostring(note.pitch.scale_degree).c_str());
          al_draw_text(text_font, color::white, x_cursor, y_pos+20, 0, (tostring(note.duration.denominator) + "(" + tostring(note.duration.dots) + ")").c_str());
 
-         std::string context_pitch_str = __get_context_pitch(context, &note);
-         al_draw_text(text_font, color::red, x_cursor, y_pos-20, ALLEGRO_FLAGS_EMPTY, context_pitch_str.c_str());
+         std::tuple<std::string, std::string> context_pitch = __get_context_pitch_and_extension(context, &note);
+         al_draw_text(text_font, color::red, x_cursor, y_pos-30, ALLEGRO_FLAGS_EMPTY, std::get<0>(context_pitch).c_str());
+         al_draw_text(text_font, color::red, x_cursor, y_pos-15, ALLEGRO_FLAGS_EMPTY, std::get<1>(context_pitch).c_str());
 
          x_cursor += width;
       }
