@@ -52,7 +52,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, "load_grid");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, "set_time_signature_numerator_4");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, "set_time_signature_numerator_5");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, "yank_grid_measure_to_buffer");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, "paste_measure_from_buffer");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, "octatonic_1");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, "toggle_edit_mode_target");
