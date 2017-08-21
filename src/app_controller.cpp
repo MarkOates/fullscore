@@ -52,7 +52,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, "load_grid");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, "set_time_signature_numerator_4");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, "set_time_signature_numerator_5");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, "yank_measure_to_buffer");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, "paste_measure_from_buffer");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, "octatonic_1");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, "toggle_edit_mode_target");
@@ -61,7 +61,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "set_time_signature_numerator_3");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         false, false, false, "set_time_signature_numerator_3");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F,         false, false, false, "transpose_up");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_D,         false, false, false, "transpose_down");
@@ -72,12 +72,12 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         true,  false, false, "set_basic_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,   true, false, "create_new_grid_editor");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,   true, false, "set_current_grid_editor");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false,  false, false, "move_camera_up");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false,  false, false, "move_camera_down");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false,  false, false, "move_camera_right");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false,  false, false, "move_camera_left");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,  true, false, "create_new_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,  true, false, "set_current_grid_editor");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false, false, false, "move_camera_up");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false, false, false, "move_camera_down");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false, false, false, "move_camera_right");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false, false, false, "move_camera_left");
 
 
 
