@@ -28,7 +28,7 @@ AppController::AppController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   set_current_grid_editor(create_new_grid_editor("full_score"));
+   set_current_grid_editor(create_new_grid_editor("string_quartet"));
 
    set_keyboard_input_mappings();
 }
