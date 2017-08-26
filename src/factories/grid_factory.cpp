@@ -55,7 +55,6 @@ Grid GridFactory::string_quartet()
       "Violin II",
       "Viola",
       "Cello",
-      "Bass",
    };
 
    const int NUM_MEASURES = 20;
