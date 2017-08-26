@@ -47,6 +47,43 @@ Grid GridFactory::big_score()
 
 
 
+Grid GridFactory::string_quartet()
+{
+   std::vector<std::string> voices = {
+      MEASURE_NUMBERS,
+      "Violin I",
+      "Violin II",
+      "Viola",
+      "Cello",
+      "Bass",
+   };
+
+   const int NUM_MEASURES = 20;
+
+   Grid grid(NUM_MEASURES, 0);
+
+   for (int i=0; i<voices.size(); i++)
+   {
+      if (voices[i] == MEASURE_NUMBERS)
+      {
+         grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
+      }
+      else if (voices[i] == SPACER)
+      {
+         grid.append_staff(new Staff::Spacer(NUM_MEASURES));
+      }
+      else
+      {
+         grid.append_staff(new Staff::Instrument(NUM_MEASURES));
+         grid.set_voice_name(i, voices[i]);
+      }
+   }
+
+   return grid;
+}
+
+
+
 Grid GridFactory::full_score()
 {
    std::vector<std::string> voices = {
@@ -130,6 +167,7 @@ Grid GridFactory::create(std::string identifier)
    if (identifier == "big_score") return big_score();
    if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
    if (identifier == "full_score") return full_score();
+   if (identifier == "string_quartet") return string_quartet();
 
    std::cout << "Could not find score " << identifier << std::endl;
    return Grid(4, 1);
