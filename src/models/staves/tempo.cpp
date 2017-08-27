@@ -36,6 +36,19 @@ bool Staff::Tempo::set_tempo_marking(int measure_number, float position, TempoMa
 
 
 
+std::vector<std::pair<TempoMarking, float>> Staff::Tempo::get_tempo_markings_in_measure(int measure_number)
+{
+   std::vector<std::pair<TempoMarking, float>> result = {};
+
+   for (unsigned i=0; i<markings.size(); i++)
+      if (markings[i].measure_number == measure_number)
+         result.push_back(std::pair<TempoMarking, float>(markings[i].tempo_marking, markings[i].position));
+
+   return result;
+}
+
+
+
 bool Staff::Tempo::set_column(int column_num, Measure::Base *measure)
 {
    throw std::runtime_error("Cannot set a measure on a Tempo column");

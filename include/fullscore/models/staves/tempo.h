@@ -39,6 +39,7 @@ namespace Staff
       virtual bool append_column(Measure::Base *measure) override;
 
       bool set_tempo_marking(int measure_number, float position, TempoMarking marking);
+      std::vector<std::pair<TempoMarking, float>> get_tempo_markings_in_measure(int measure_number);
    };
 };
 
