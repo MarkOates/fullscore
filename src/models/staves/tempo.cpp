@@ -28,6 +28,7 @@ Staff::Tempo::~Tempo()
 
 bool Staff::Tempo::set_tempo_marking(int measure_number, float position, TempoMarking marking)
 {
+   if (position < 0.0 || position > 1.0) throw std::invalid_argument("Setting a tempo marking to be > 1 or < 0 is not allowed");
    markings.push_back(TempoMarkingCoordinate(measure_number, position, marking));
    return true;
 }
