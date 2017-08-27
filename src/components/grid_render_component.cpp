@@ -8,7 +8,9 @@
 #include <allegro_flare/framework.h>
 #include <allegro_flare/useful.h>
 #include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/tempo.h>
 #include <fullscore/components/measure_render_component.h>
+#include <fullscore/components/tempo_marking_render_component.hpp>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_helper.h>
@@ -107,6 +109,17 @@ void GridRenderComponent::render()
          {
             // draw barline
             al_draw_line(x_pos_plus_width, row_middle_y-this_staff_half_height, x_pos_plus_width, row_middle_y+this_staff_half_height, color::color(color::black, 0.2), 1.0);
+         }
+         if (staff->is_type("tempo"))
+         {
+            Staff::Tempo &tempo_staff = static_cast<Staff::Tempo &>(*staff);
+            if (x == 0)
+            {
+               //Staff::Tempo::TempoMarkingCoordinate::TempoMarkingCoordinate(int measure_number, float position, TempoMarking tempo_marking)
+               TempoMarking tempo_marking = TempoMarking(Duration(Duration::QUARTER), 128);
+               TempoMarkingRenderComponent tempo_marking_render_component(text_font, x_pos, label_text_top_y, tempo_marking);
+               tempo_marking_render_component.render();
+            }
          }
          if (staff->is_type("measure_numbers"))
          {
