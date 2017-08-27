@@ -3,6 +3,7 @@
 
 #include <fullscore/components/tempo_marking_render_component.hpp>
 
+#include <allegro5/allegro_font.h>
 #include <allegro_flare/color.h>
 
 

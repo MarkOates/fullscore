@@ -2,8 +2,11 @@
 
 
 
-#include <allegro5/allegro_font.h>
 #include <fullscore/models/tempo_marking.hpp>
+
+
+
+struct ALLEGRO_FONT;
 
 
 
