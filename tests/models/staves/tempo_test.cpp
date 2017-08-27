@@ -34,6 +34,26 @@ TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_lt_0_throws_a
 
 
 
+TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_gt_0_throws_an_exception)
+{
+   Staff::Tempo tempo_staff(1);
+
+   try
+   {
+      tempo_staff.set_tempo_marking(0, 1.1, TempoMarking(Duration(Duration::QUARTER), 128));
+   }
+   catch (std::invalid_argument const &e)
+   {
+      EXPECT_EQ(e.what(), std::string("Setting a tempo marking to be > 1 or < 0 is not allowed"));
+   }
+   catch (...)
+   {
+      FAIL() << "Expected std::invalid_argument";
+   }
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
