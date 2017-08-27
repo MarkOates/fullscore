@@ -7,6 +7,14 @@
 
 
 
+Staff::Tempo::TempoMarkingCoordinate::TempoMarkingCoordinate(int measure_number, float position, TempoMarking tempo_marking)
+   : measure_number(measure_number)
+   , position(position)
+   , tempo_marking(tempo_marking)
+{}
+
+
+
 Staff::Tempo::Tempo(int num_columns)
    : Base("tempo")
 {}
@@ -15,6 +23,14 @@ Staff::Tempo::Tempo(int num_columns)
 
 Staff::Tempo::~Tempo()
 {}
+
+
+
+bool Staff::Tempo::set_tempo_marking(int measure_number, float position, TempoMarking marking)
+{
+   markings.push_back(TempoMarkingCoordinate(measure_number, position, marking));
+   return true;
+}
 
 
 

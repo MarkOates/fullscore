@@ -4,12 +4,27 @@
 
 #include <fullscore/models/staves/base.h>
 
+#include <fullscore/models/tempo_marking.hpp>
+
 
 
 namespace Staff
 {
    class Tempo : public Base
    {
+   private:
+      class TempoMarkingCoordinate
+      {
+      public:
+         int measure_number;
+         float position;
+         TempoMarking tempo_marking;
+
+         TempoMarkingCoordinate(int measure_number, float position, TempoMarking tempo_marking);
+      };
+
+      std::vector<TempoMarkingCoordinate> markings;
+
    public:
       Tempo(int num_columns);
       ~Tempo();
@@ -22,6 +37,8 @@ namespace Staff
       virtual bool insert_column(int at_index, Measure::Base *measure) override;
       virtual bool erase_column(int at_index) override;
       virtual bool append_column(Measure::Base *measure) override;
+
+      bool set_tempo_marking(int measure_number, float position, TempoMarking marking);
    };
 };
 
