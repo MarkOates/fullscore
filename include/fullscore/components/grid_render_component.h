@@ -2,7 +2,6 @@
 
 
 
-
 class Grid;
 class MusicEngraver;
 class ReferenceCursor;
@@ -25,7 +24,6 @@ public:
 
    void render();
 };
-
 
 
 
