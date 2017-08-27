@@ -17,6 +17,7 @@ Staff::Tempo::TempoMarkingCoordinate::TempoMarkingCoordinate(int measure_number,
 
 Staff::Tempo::Tempo(int num_columns)
    : Base("tempo")
+   , markings()
 {}
 
 
