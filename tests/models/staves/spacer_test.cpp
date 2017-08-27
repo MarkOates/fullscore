@@ -9,16 +9,16 @@
 
 TEST(Staff_SpacerTest, can_be_created)
 {
-   Staff::Spacer instrument(1);
+   Staff::Spacer spacer(1);
 }
 
 
 
 TEST(Staff_SpacerTest, returns_a_staff_height_of_0_5)
 {
-   Staff::Spacer instrument(1);
+   Staff::Spacer spacer(1);
 
-   ASSERT_EQ(0.5, instrument.get_height());
+   ASSERT_EQ(0.5, spacer.get_height());
 }
 
 

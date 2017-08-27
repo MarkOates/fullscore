@@ -8,7 +8,9 @@
 #include <allegro_flare/framework.h>
 #include <allegro_flare/useful.h>
 #include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/tempo.h>
 #include <fullscore/components/measure_render_component.h>
+#include <fullscore/components/tempo_marking_render_component.hpp>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_helper.h>
@@ -102,11 +104,27 @@ void GridRenderComponent::render()
       {
          float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
          float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
+         float real_measure_width = x_pos_plus_width - x_pos;
 
          if (staff->is_type("instrument"))
          {
             // draw barline
             al_draw_line(x_pos_plus_width, row_middle_y-this_staff_half_height, x_pos_plus_width, row_middle_y+this_staff_half_height, color::color(color::black, 0.2), 1.0);
+         }
+         if (staff->is_type("tempo"))
+         {
+            Staff::Tempo &tempo_staff = static_cast<Staff::Tempo &>(*staff);
+            std::vector<std::pair<TempoMarking, float>> tempo_markings_in_measure = tempo_staff.get_tempo_markings_in_measure(x);
+
+            for (auto &marking : tempo_markings_in_measure)
+            {
+               TempoMarking &tempo_marking = std::get<0>(marking);
+               float position = std::get<1>(marking);
+               float marking_x_pos = x_pos + real_measure_width * position;
+
+               TempoMarkingRenderComponent tempo_marking_render_component(text_font, marking_x_pos, label_text_top_y, tempo_marking);
+               tempo_marking_render_component.render();
+            }
          }
          if (staff->is_type("measure_numbers"))
          {

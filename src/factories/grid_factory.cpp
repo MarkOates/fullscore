@@ -6,6 +6,7 @@
 #include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/staves/spacer.h>
+#include <fullscore/models/staves/tempo.h>
 #include <fullscore/models/Note.h>
 #include <allegro_flare/useful.h>
 #include <iostream>
@@ -14,6 +15,7 @@
 
 std::string const SPACER = "-";
 std::string const MEASURE_NUMBERS = "#";
+std::string const TEMPO = "!";
 
 
 
@@ -51,6 +53,7 @@ Grid GridFactory::string_quartet()
 {
    std::vector<std::string> voices = {
       MEASURE_NUMBERS,
+      TEMPO,
       "Violin I",
       "Violin II",
       "Viola",
@@ -70,6 +73,13 @@ Grid GridFactory::string_quartet()
       else if (voices[i] == SPACER)
       {
          grid.append_staff(new Staff::Spacer(NUM_MEASURES));
+      }
+      else if (voices[i] == TEMPO)
+      {
+         Staff::Tempo *tempo_staff = new Staff::Tempo(NUM_MEASURES);
+         grid.append_staff(tempo_staff);
+         TempoMarking tempo_marking(Duration(Duration::QUARTER), 128);
+         tempo_staff->set_tempo_marking(0, 0, tempo_marking);
       }
       else
       {
@@ -148,6 +158,10 @@ Grid GridFactory::full_score()
       else if (voices[i] == SPACER)
       {
          grid.append_staff(new Staff::Spacer(NUM_MEASURES));
+      }
+      else if (voices[i] == TEMPO)
+      {
+         grid.append_staff(new Staff::Tempo(NUM_MEASURES));
       }
       else
       {
