@@ -104,6 +104,7 @@ void GridRenderComponent::render()
       {
          float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
          float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
+         float real_measure_width = x_pos_plus_width - x_pos;
 
          if (staff->is_type("instrument"))
          {
@@ -113,11 +114,15 @@ void GridRenderComponent::render()
          if (staff->is_type("tempo"))
          {
             Staff::Tempo &tempo_staff = static_cast<Staff::Tempo &>(*staff);
-            if (x == 0)
+            std::vector<std::pair<TempoMarking, float>> tempo_markings_in_measure = tempo_staff.get_tempo_markings_in_measure(x);
+
+            for (auto &marking : tempo_markings_in_measure)
             {
-               //Staff::Tempo::TempoMarkingCoordinate::TempoMarkingCoordinate(int measure_number, float position, TempoMarking tempo_marking)
-               TempoMarking tempo_marking = TempoMarking(Duration(Duration::QUARTER), 128);
-               TempoMarkingRenderComponent tempo_marking_render_component(text_font, x_pos, label_text_top_y, tempo_marking);
+               TempoMarking &tempo_marking = std::get<0>(marking);
+               float position = std::get<1>(marking);
+               float marking_x_pos = x_pos + real_measure_width * position;
+
+               TempoMarkingRenderComponent tempo_marking_render_component(text_font, marking_x_pos, label_text_top_y, tempo_marking);
                tempo_marking_render_component.render();
             }
          }
