@@ -76,7 +76,10 @@ Grid GridFactory::string_quartet()
       }
       else if (voices[i] == TEMPO)
       {
-         grid.append_staff(new Staff::Tempo(NUM_MEASURES));
+         Staff::Tempo *tempo_staff = new Staff::Tempo(NUM_MEASURES);
+         grid.append_staff(tempo_staff);
+         TempoMarking tempo_marking(Duration(Duration::QUARTER), 128);
+         tempo_staff->set_tempo_marking(0, 0, tempo_marking);
       }
       else
       {
