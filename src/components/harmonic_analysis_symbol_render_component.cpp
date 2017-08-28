@@ -25,8 +25,7 @@ void HarmonicAnalysisSymbolRenderComponent::render()
 
    ss << symbol.fundamental.scale_degree
       << ":" << symbol.fundamental.accidental
-      << ":" << HarmonicAnalysisSymbol::get_chord_quality_string(symbol.chord_quality)
-      << std::endl;
+      << ":" << HarmonicAnalysisSymbol::get_chord_quality_string(symbol.chord_quality);
 
    al_draw_text(font, color::black, x, y, ALLEGRO_ALIGN_CENTER, ss.str().c_str());
 }
