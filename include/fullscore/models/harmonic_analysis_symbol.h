@@ -24,7 +24,7 @@ public:
    int inversion;
    std::vector<int> extensions;
 
-   HarmonicAnalysisSymbol();
+   HarmonicAnalysisSymbol(Pitch fundamental, chord_quality_t chord_quality, int inversion, std::vector<int> extensions);
    ~HarmonicAnalysisSymbol();
 
    static std::string get_chord_quality_string(chord_quality_t chord_quality, bool abbreviated=false);

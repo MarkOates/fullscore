@@ -5,11 +5,11 @@
 
 
 
-HarmonicAnalysisSymbol::HarmonicAnalysisSymbol()
-   : fundamental(0, 0)
-   , chord_quality(MAJOR)
-   , inversion(0)
-   , extensions()
+HarmonicAnalysisSymbol::HarmonicAnalysisSymbol(Pitch fundamental, chord_quality_t chord_quality, int inversion, std::vector<int> extensions)
+   : fundamental(fundamental)
+   , chord_quality(chord_quality)
+   , inversion(inversion)
+   , extensions(extensions)
 {}
 
 
