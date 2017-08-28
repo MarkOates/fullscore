@@ -20,7 +20,7 @@ public:
    };
 
    Pitch fundamental;
-   chord_quality_t quality;
+   chord_quality_t chord_quality;
    int inversion;
    std::vector<int> extensions;
 

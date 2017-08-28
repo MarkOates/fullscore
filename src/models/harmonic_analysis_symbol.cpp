@@ -7,7 +7,7 @@
 
 HarmonicAnalysisSymbol::HarmonicAnalysisSymbol()
    : fundamental(0, 0)
-   , quality(MAJOR)
+   , chord_quality(MAJOR)
    , inversion(0)
    , extensions()
 {}
