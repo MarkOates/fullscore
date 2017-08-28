@@ -7,9 +7,18 @@
 
 
 
+Staff::HarmonicAnalysis::HarmonicAnalysisSymbolPlacement::HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, int measure_num, int beat)
+   : symbol(symbol)
+   , measure_num(measure_num)
+   , beat(beat)
+{}
+
+
+
 Staff::HarmonicAnalysis::HarmonicAnalysis(int num_columns)
    : Base("harmonic_analysis")
    , num_columns(num_columns)
+   , symbols()
 {}
 
 
@@ -68,6 +77,26 @@ int Staff::HarmonicAnalysis::get_num_columns()
 float Staff::HarmonicAnalysis::get_height()
 {
    return 0.9;
+}
+
+
+
+std::vector<std::pair<int, HarmonicAnalysisSymbol>> Staff::HarmonicAnalysis::get_symbols_in_measure(int measure_num)
+{
+   std::vector<std::pair<int, HarmonicAnalysisSymbol>> result = {};
+
+   for (unsigned i=0; i<symbols.size(); i++)
+      if (symbols[i].measure_num == measure_num)
+         result.push_back(std::pair<int, HarmonicAnalysisSymbol>(symbols[i].beat, symbols[i].symbol));
+
+   return result;
+}
+
+
+
+void Staff::HarmonicAnalysis::set_symbol(HarmonicAnalysisSymbol symbol, int measure_num, int beat)
+{
+   symbols.push_back({symbol, measure_num, beat});
 }
 
 
