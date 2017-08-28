@@ -6,15 +6,20 @@
 
 
 
+struct ALLEGRO_FONT;
+
+
+
 class HarmonicAnalysisSymbolRenderComponent
 {
 private:
    HarmonicAnalysisSymbol symbol;
+   ALLEGRO_FONT *font;
    float x;
    float y;
 
 public:
-   HarmonicAnalysisSymbolRenderComponent(float x, float y, HarmonicAnalysisSymbol symbol);
+   HarmonicAnalysisSymbolRenderComponent(ALLEGRO_FONT *font, float x, float y, HarmonicAnalysisSymbol symbol);
    void render();
 };
 
