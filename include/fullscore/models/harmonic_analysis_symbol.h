@@ -27,7 +27,7 @@ public:
    HarmonicAnalysisSymbol();
    ~HarmonicAnalysisSymbol();
 
-   static std::string get_chord_quality_string(chord_quality_t chord_quality);
+   static std::string get_chord_quality_string(chord_quality_t chord_quality, bool abbreviated=false);
 };
 
 

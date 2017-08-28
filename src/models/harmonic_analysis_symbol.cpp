@@ -19,14 +19,14 @@ HarmonicAnalysisSymbol::~HarmonicAnalysisSymbol()
 
 
 
-std::string HarmonicAnalysisSymbol::get_chord_quality_string(chord_quality_t chord_quality)
+std::string HarmonicAnalysisSymbol::get_chord_quality_string(chord_quality_t chord_quality, bool abbreviated)
 {
    switch(chord_quality)
    {
-      case HarmonicAnalysisSymbol::MAJOR: return "major";
-      case HarmonicAnalysisSymbol::MINOR: return "minor";
-      case HarmonicAnalysisSymbol::AUGMENTED: return "augmented";
-      case HarmonicAnalysisSymbol::DIMINISHED: return "diminished";
+      case HarmonicAnalysisSymbol::MAJOR: return abbreviated ? "maj" : "major";
+      case HarmonicAnalysisSymbol::MINOR: return abbreviated ? "min" : "minor";
+      case HarmonicAnalysisSymbol::AUGMENTED: return abbreviated ? "aug" : "augmented";
+      case HarmonicAnalysisSymbol::DIMINISHED: return abbreviated ? "dim" : "diminished";
    }
 
    return "[undef]";
