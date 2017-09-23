@@ -8,7 +8,9 @@
 #include <allegro_flare/framework.h>
 #include <allegro_flare/useful.h>
 #include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/harmonic_analysis.h>
 #include <fullscore/models/staves/tempo.h>
+#include <fullscore/components/harmonic_analysis_symbol_render_component.hpp>
 #include <fullscore/components/measure_render_component.h>
 #include <fullscore/components/tempo_marking_render_component.hpp>
 #include <fullscore/components/time_signature_render_component.h>
@@ -124,6 +126,21 @@ void GridRenderComponent::render()
 
                TempoMarkingRenderComponent tempo_marking_render_component(text_font, marking_x_pos, label_text_top_y, tempo_marking);
                tempo_marking_render_component.render();
+            }
+         }
+         if (staff->is_type("harmonic_analysis"))
+         {
+            Staff::HarmonicAnalysis &harmonic_analysis_staff = static_cast<Staff::HarmonicAnalysis &>(*staff);
+            std::vector<std::pair<int, HarmonicAnalysisSymbol>> harmonic_analysis_symbols_in_measure = harmonic_analysis_staff.get_symbols_in_measure(x);
+
+            for (auto &marking : harmonic_analysis_symbols_in_measure)
+            {
+               int beat = std::get<0>(marking);
+               HarmonicAnalysisSymbol &harmonic_analysis_symbol = std::get<1>(marking);
+               float marking_x_pos = x_pos + (full_measure_width * 0.25 * beat);
+
+               HarmonicAnalysisSymbolRenderComponent harmonic_analysis_symbol_render_component(text_font, marking_x_pos, label_text_top_y, harmonic_analysis_symbol);
+               harmonic_analysis_symbol_render_component.render();
             }
          }
          if (staff->is_type("measure_numbers"))

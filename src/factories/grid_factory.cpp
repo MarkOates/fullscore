@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/staves/harmonic_analysis.h>
 #include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/staves/spacer.h>
@@ -16,6 +17,7 @@
 std::string const SPACER = "-";
 std::string const MEASURE_NUMBERS = "#";
 std::string const TEMPO = "!";
+std::string const HARMONIC_ANALYSIS = "V";
 
 
 
@@ -58,6 +60,7 @@ Grid GridFactory::string_quartet()
       "Violin II",
       "Viola",
       "Cello",
+      HARMONIC_ANALYSIS,
    };
 
    const int NUM_MEASURES = 20;
@@ -73,6 +76,13 @@ Grid GridFactory::string_quartet()
       else if (voices[i] == SPACER)
       {
          grid.append_staff(new Staff::Spacer(NUM_MEASURES));
+      }
+      else if (voices[i] == HARMONIC_ANALYSIS)
+      {
+         Staff::HarmonicAnalysis *staff = new Staff::HarmonicAnalysis(NUM_MEASURES);
+         grid.append_staff(staff);
+         HarmonicAnalysisSymbol harmonic_analysis_symbol(Pitch(3, -1), HarmonicAnalysisSymbol::MAJOR, 1, {});
+         staff->set_symbol(harmonic_analysis_symbol, 1, 2);
       }
       else if (voices[i] == TEMPO)
       {
