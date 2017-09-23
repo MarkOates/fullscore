@@ -16,7 +16,7 @@ namespace Transform
 
    public:
       Base(std::string identifier);
-      ~Base();
+      virtual ~Base();
       virtual std::vector<Note> transform(std::vector<Note> source);
       std::string get_identifier();
    };
