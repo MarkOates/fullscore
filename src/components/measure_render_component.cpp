@@ -72,9 +72,9 @@ void MeasureRenderComponent::render()
    {
       float width = DurationHelper::get_length(note.duration.denominator, note.duration.dots) * full_measure_width;
 
-      if (note.exists("hilight_color"))
+      if (note.exists(Note::HILIGHT_COLOR_IDENTIFIER))
       {
-         std::string hilight_color = note.get_as_string("hilight_color");
+         std::string hilight_color = note.get_as_string(Note::HILIGHT_COLOR_IDENTIFIER);
          al_draw_filled_rectangle(x_cursor, y_pos, x_cursor+width, y_pos+staff_height, color::name(hilight_color.c_str()));
       }
 

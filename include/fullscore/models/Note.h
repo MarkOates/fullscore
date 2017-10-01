@@ -11,6 +11,8 @@
 class Note : public Attributes
 {
 public:
+   static const std::string HILIGHT_COLOR_IDENTIFIER;
+
    Pitch pitch;
    Duration duration;
    int is_rest;

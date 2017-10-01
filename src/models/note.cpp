@@ -27,3 +27,7 @@ bool Note::operator==(const Note &other) const
 
 
 
+const std::string Note::HILIGHT_COLOR_IDENTIFIER = "hilight_color";
+
+
+
