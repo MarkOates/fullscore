@@ -3,6 +3,7 @@
 
 #include <fullscore/components/measure_render_component.h>
 
+#include <allegro_flare/allegro_color_attribute_datatype.h>
 #include <allegro_flare/framework.h>
 #include <allegro_flare/color.h>
 #include <allegro_flare/useful_php.h>
@@ -65,6 +66,24 @@ void MeasureRenderComponent::render()
    if (measure->get_num_notes() > 0)
       measure_width = __get_measure_width(measure) * full_measure_width;
 
+   // draw hilight info on the note
+   float x_cursor = x_pos;
+
+   for (auto &note : measure->get_notes_copy())
+   {
+      float width = DurationHelper::get_length(note.duration.denominator, note.duration.dots) * full_measure_width;
+
+      if (note.exists(Note::HILIGHT_COLOR_IDENTIFIER))
+      {
+         ALLEGRO_COLOR col;
+         note.get_as_custom(&col, AllegroColorAttributeDatatype::IDENTIFIER, Note::HILIGHT_COLOR_IDENTIFIER);
+         al_draw_filled_rectangle(x_cursor, y_pos, x_cursor+width, y_pos+staff_height, col);
+      }
+
+      x_cursor += width;
+   }
+
+   // draw the hilight selection box for the measure
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_COORDINATE))
       measure_block_color = color::color(color::yellow, 0.1);
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID))

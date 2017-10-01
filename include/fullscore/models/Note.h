@@ -3,14 +3,16 @@
 
 
 #include <fullscore/models/Duration.h>
-
 #include <fullscore/models/pitch.h>
+#include <allegro_flare/attributes.h>
 
 
 
-class Note
+class Note : public Attributes
 {
 public:
+   static const std::string HILIGHT_COLOR_IDENTIFIER;
+
    Pitch pitch;
    Duration duration;
    int is_rest;
