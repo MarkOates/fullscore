@@ -15,7 +15,7 @@ public:
    Duration duration;
    int is_rest;
 
-   Note(int _scale_degree=0, Duration duration = Duration());
+   Note(int _scale_degree=0, Duration duration=Duration());
    ~Note();
 
    bool operator==(const Note &other) const;
