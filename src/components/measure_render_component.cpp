@@ -3,6 +3,7 @@
 
 #include <fullscore/components/measure_render_component.h>
 
+#include <allegro_flare/allegro_color_attribute_datatype.h>
 #include <allegro_flare/framework.h>
 #include <allegro_flare/color.h>
 #include <allegro_flare/useful_php.h>
@@ -74,8 +75,9 @@ void MeasureRenderComponent::render()
 
       if (note.exists(Note::HILIGHT_COLOR_IDENTIFIER))
       {
-         std::string hilight_color = note.get_as_string(Note::HILIGHT_COLOR_IDENTIFIER);
-         al_draw_filled_rectangle(x_cursor, y_pos, x_cursor+width, y_pos+staff_height, color::name(hilight_color.c_str()));
+         ALLEGRO_COLOR col;
+         note.get_as_custom(&col, AllegroColorAttributeDatatype::IDENTIFIER, Note::HILIGHT_COLOR_IDENTIFIER);
+         al_draw_filled_rectangle(x_cursor, y_pos, x_cursor+width, y_pos+staff_height, col);
       }
 
       x_cursor += width;
