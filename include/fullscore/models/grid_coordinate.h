@@ -26,6 +26,9 @@ public:
    int get_staff_id();
    int get_measure_num();
    int get_beat_num();
+
+   bool operator==(const GridCoordinate &other) const;
+   bool operator!=(const GridCoordinate &other) const;
 };
 
 

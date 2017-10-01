@@ -72,3 +72,22 @@ int GridCoordinate::get_beat_num()
 
 
 
+bool GridCoordinate::operator==(const GridCoordinate &other) const
+{
+   return (
+     grid == other.grid
+     && staff_id == other.staff_id
+     && measure_num == other.measure_num
+     && beat_num == other.beat_num
+  );
+}
+
+
+
+bool GridCoordinate::operator!=(const GridCoordinate &other) const
+{
+   return !(*this == other);
+}
+
+
+

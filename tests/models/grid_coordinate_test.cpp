@@ -87,6 +87,31 @@ TEST(GridCoordinate, gets_and_sets_the_beat_num)
 
 
 
+TEST(GridCoordinate, compares_equality_with_another_grid_coordinate)
+{
+   EXPECT_EQ(
+      GridCoordinate(nullptr, 67, 195, 84),
+      GridCoordinate(nullptr, 67, 195, 84)
+   );
+
+   EXPECT_NE(
+      GridCoordinate(nullptr, 67, 195, 84),
+      GridCoordinate(nullptr, 0,  195, 84)
+   );
+
+   EXPECT_NE(
+      GridCoordinate(nullptr, 67, 195, 84),
+      GridCoordinate(nullptr, 67, 0,   84)
+   );
+
+   EXPECT_NE(
+      GridCoordinate(nullptr, 67, 195, 84),
+      GridCoordinate(nullptr, 67, 195, 0)
+   );
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
