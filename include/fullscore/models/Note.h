@@ -3,12 +3,12 @@
 
 
 #include <fullscore/models/Duration.h>
-
 #include <fullscore/models/pitch.h>
+#include <allegro_flare/attributes.h>
 
 
 
-class Note
+class Note : public Attributes
 {
 public:
    Pitch pitch;
