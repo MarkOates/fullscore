@@ -87,6 +87,12 @@ void MeasureRenderComponent::render()
    {
       measure_block_color = color::color(color::white, 0.075);
    }
+   else if (measure->is_type(Measure::TYPE_IDENTIFIER_PLOTTED))
+   {
+      measure_block_color = color::color(color::aliceblue, 0.3);
+      notation_color = color::blue;
+      staff_line_color = color::blue;
+   }
 
    al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
          x_pos+measure_width, row_middle_y+staff_height/2,

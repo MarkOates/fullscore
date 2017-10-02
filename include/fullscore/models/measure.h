@@ -12,6 +12,7 @@ namespace Measure
 {
    std::string const TYPE_IDENTIFIER_BASE                    = "base";
    std::string const TYPE_IDENTIFIER_BASIC                   = "basic";
+   std::string const TYPE_IDENTIFIER_PLOTTED                 = "plotted";
    std::string const TYPE_IDENTIFIER_REFERENCE_BY_ID         = "reference_by_id";
    std::string const TYPE_IDENTIFIER_REFERENCE_BY_COORDINATE = "reference_by_coordinate";
    std::string const TYPE_IDENTIFIER_STACK                   = "stack";

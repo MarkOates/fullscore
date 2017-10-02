@@ -3,6 +3,8 @@
 
 #include <fullscore/models/plotter.h>
 
+#include <fullscore/models/measures/plotted.h>
+#include <fullscore/models/grid.h>
 #include <allegro_flare/useful.h>
 #include <algorithm>
 
@@ -62,11 +64,45 @@ std::vector<GridCoordinate> Plotter::get_destinations()
 
 std::vector<Note> Plotter::get_notes_for(GridCoordinate destination)
 {
-   // temp code
+   // TODO: replace temp code below
+   return { Note(-7), Note(0), Note(2), Note(4) };
+}
 
-   std::vector<Note> source_notes = { Note(-7), Note(0), Note(2), Note(4) };
 
-   return { random_element(source_notes), random_element(source_notes) };
+
+bool Plotter::plot()
+{
+   for (auto &destination : destinations)
+   {
+      Grid *destination_grid = destination.get_grid();
+      int staff_id = destination.get_staff_id();
+      int measure_num = destination.get_measure_num();
+      //int beat_num = destination.get_grid(); // <- unused until feature is added
+
+      if (!destination_grid) throw std::runtime_error("Plotter cannot plot to a nullptr destination_grid");
+
+      Staff::Base *destination_staff = destination_grid->get_staff(staff_id);
+      if (!destination_staff) throw std::runtime_error("Plotter cannot plot to a nullptr destination_staff");
+      if (!destination_staff->is_type("instrument"))
+      {
+         std::stringstream error_message;
+         error_message << "Plotter cannot plot to a \"" << destination_staff->get_type() << "\" staff type";
+         throw std::runtime_error(error_message.str());
+      }
+
+      // create the measure
+      Measure::Plotted *plotted_measure = new Measure::Plotted(this);
+
+      if (!destination_grid->set_measure(measure_num, staff_id, plotted_measure))
+      {
+         delete plotted_measure;
+         std::stringstream error_message;
+         error_message << "Plotter was not able to set a plotted measure to (measure_num: " << measure_num << ", staff_id: " << staff_id << ")";
+         throw std::runtime_error(error_message.str());
+      }
+   }
+
+   return true;
 }
 
 
