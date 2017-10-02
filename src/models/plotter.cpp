@@ -3,6 +3,7 @@
 
 #include <fullscore/models/plotter.h>
 
+#include <allegro_flare/useful.h>
 #include <algorithm>
 
 
@@ -55,6 +56,17 @@ int Plotter::num_destinations()
 std::vector<GridCoordinate> Plotter::get_destinations()
 {
    return destinations;
+}
+
+
+
+std::vector<Note> Plotter::get_notes_for(GridCoordinate destination)
+{
+   // temp code
+
+   std::vector<Note> source_notes = { Note(-7), Note(0), Note(2), Note(4) };
+
+   return { random_element(source_notes), random_element(source_notes) };
 }
 
 

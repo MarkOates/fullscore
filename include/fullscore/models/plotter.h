@@ -4,6 +4,7 @@
 
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/grid_coordinate.h>
+#include <fullscore/models/Note.h>
 
 
 
@@ -22,6 +23,8 @@ public:
    int num_destinations();
 
    std::vector<GridCoordinate> get_destinations();
+
+   std::vector<Note> get_notes_for(GridCoordinate destination);
 };
 
 
