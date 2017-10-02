@@ -59,6 +59,8 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
 void MeasureRenderComponent::render()
 {
    ALLEGRO_COLOR measure_block_color = color::color(color::white, 0.2);
+   ALLEGRO_COLOR notation_color = color::null_color;
+   ALLEGRO_COLOR staff_line_color = color::null_color;
 
    int measure_width = 16;
 
@@ -66,21 +68,31 @@ void MeasureRenderComponent::render()
       measure_width = __get_measure_width(measure) * full_measure_width;
 
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_COORDINATE))
+   {
       measure_block_color = color::color(color::yellow, 0.1);
+   }
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID))
+   {
       measure_block_color = color::color(color::orange, 0.1);
+   }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STACK))
+   {
       measure_block_color = color::color(color::red, 0.1);
+   }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STATIC))
+   {
       measure_block_color = color::color(color::dodgerblue, 0.1);
+   }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_BASIC))
+   {
       measure_block_color = color::color(color::white, 0.075);
+   }
 
    al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
          x_pos+measure_width, row_middle_y+staff_height/2,
          4, 4, measure_block_color);
 
-   music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width);
+   music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width, notation_color, staff_line_color);
 
    // draw debug info on the note
    if (showing_debug_data)
