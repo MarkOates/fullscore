@@ -6,7 +6,9 @@
 
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
+#include <fullscore/models/grid_coordinate.h>
 #include <fullscore/models/measure.h>
+#include <fullscore/models/plotter.h>
 #include <fullscore/action.h>
 
 
@@ -29,6 +31,22 @@ AppController::AppController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    set_current_grid_editor(create_new_grid_editor("string_quartet"));
+
+
+
+   Plotter *plotter = new Plotter();
+
+   std::vector<GridCoordinate> destinations = {
+      GridCoordinate(&current_grid_editor->grid, 2, 3, 0),
+      GridCoordinate(&current_grid_editor->grid, 3, 2, 0),
+      GridCoordinate(&current_grid_editor->grid, 4, 3, 0)
+   };
+
+   for (auto &destination : destinations) plotter->add_destination(destination);
+
+   plotter->plot();
+
+
 
    set_keyboard_input_mappings();
 }
