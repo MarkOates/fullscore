@@ -89,7 +89,7 @@ void MeasureRenderComponent::render()
    }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_PLOTTED))
    {
-      measure_block_color = color::color(color::aliceblue, 0.3);
+      measure_block_color = color::color(color::aliceblue, 0.5);
       notation_color = color::blue;
       staff_line_color = color::blue;
    }
