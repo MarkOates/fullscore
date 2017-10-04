@@ -10,7 +10,7 @@
 
 
 
-Measure::Plotted::Plotted(Plotter *plotter)
+Measure::Plotted::Plotted(Plotter::Base *plotter)
    : Base(Measure::TYPE_IDENTIFIER_PLOTTED)
    , plotter(plotter)
 {}

@@ -6,7 +6,7 @@
 
 
 
-class Plotter;
+namespace Plotter { class Base; }
 
 
 
@@ -15,11 +15,11 @@ namespace Measure
    class Plotted : public Base
    {
    private:
-      Plotter *plotter;
+      Plotter::Base *plotter;
       std::vector<Note> get_plotted_notes();
 
    public:
-      Plotted(Plotter *plotter);
+      Plotted(Plotter::Base *plotter);
 
       virtual int get_num_notes() override;
       virtual std::vector<Note> get_notes_copy() override;

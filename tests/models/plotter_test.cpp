@@ -13,9 +13,9 @@
 
 
 
-TEST(PlotterTest, can_be_constructed_with_an_empty_constructor)
+TEST(Plotter_BaseTest, can_be_constructed_with_an_empty_constructor)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
 
    std::vector<GridCoordinate> expected_destinations = { /* empty */ };
 
@@ -24,9 +24,9 @@ TEST(PlotterTest, can_be_constructed_with_an_empty_constructor)
 
 
 
-TEST(PlotterTest, can_add_and_check_presence_of_destination)
+TEST(Plotter_BaseTest, can_add_and_check_presence_of_destination)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A(nullptr, 1, 5, 7);
    GridCoordinate grid_coordinate_B(nullptr, 2, 5, 7);
 
@@ -37,9 +37,9 @@ TEST(PlotterTest, can_add_and_check_presence_of_destination)
 
 
 
-TEST(PlotterTest, can_remove_a_destination)
+TEST(Plotter_BaseTest, can_remove_a_destination)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A;
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
@@ -51,9 +51,9 @@ TEST(PlotterTest, can_remove_a_destination)
 
 
 
-TEST(PlotterTest, returns_false_when_attempting_to_remove_a_destination_that_is_not_present)
+TEST(Plotter_BaseTest, returns_false_when_attempting_to_remove_a_destination_that_is_not_present)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A(nullptr, 1, 5, 7);
 
    ASSERT_FALSE(plotter.remove_destination(grid_coordinate_A));
@@ -61,9 +61,9 @@ TEST(PlotterTest, returns_false_when_attempting_to_remove_a_destination_that_is_
 
 
 
-TEST(PlotterTest, returns_a_list_of_destinations)
+TEST(Plotter_BaseTest, returns_a_list_of_destinations)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
    GridCoordinate grid_coordinate_B(nullptr, 1, 5, 7);
    GridCoordinate grid_coordinate_C(nullptr, 2, 5, 7);
@@ -80,9 +80,9 @@ TEST(PlotterTest, returns_a_list_of_destinations)
 
 
 
-TEST(PlotterTest, returns_the_number_of_destinations)
+TEST(Plotter_BaseTest, returns_the_number_of_destinations)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
    GridCoordinate grid_coordinate_B(nullptr, 1, 5, 7);
    GridCoordinate grid_coordinate_C(nullptr, 2, 5, 7);
@@ -102,9 +102,9 @@ TEST(PlotterTest, returns_the_number_of_destinations)
 
 
 
-TEST(PlotterTest, cannot_add_a_destination_that_already_exists)
+TEST(Plotter_BaseTest, cannot_add_a_destination_that_already_exists)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
@@ -118,10 +118,10 @@ TEST(PlotterTest, cannot_add_a_destination_that_already_exists)
 
 
 
-TEST(PlotterTest, plots_plotted_measure_types_into_the_grid)
+TEST(Plotter_BaseTest, plots_plotted_measure_types_into_the_grid)
 {
    Grid grid(10, 10);
-   Plotter plotter;
+   Plotter::Base plotter;
 
    std::vector<GridCoordinate> destinations = {
       GridCoordinate(&grid, 0, 4, 0),
@@ -147,9 +147,9 @@ TEST(PlotterTest, plots_plotted_measure_types_into_the_grid)
 
 
 
-TEST(PlotterTest, when_plotting_to_a_nullptr_destination_grid_raises_an_error)
+TEST(Plotter_BaseTest, when_plotting_to_a_nullptr_destination_grid_raises_an_error)
 {
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate(nullptr, 0, 0, 0);
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate));
@@ -159,12 +159,12 @@ TEST(PlotterTest, when_plotting_to_a_nullptr_destination_grid_raises_an_error)
 
 
 
-TEST(PlotterTest, when_plotting_to_a_destination_staff_that_is_not_an_instrument_type_raises_an_error)
+TEST(Plotter_BaseTest, when_plotting_to_a_destination_staff_that_is_not_an_instrument_type_raises_an_error)
 {
    Grid grid(1, 0);
    grid.append_staff(new Staff::MeasureNumbers(1));
 
-   Plotter plotter;
+   Plotter::Base plotter;
    GridCoordinate grid_coordinate(&grid, 0, 0, 0);
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate));
@@ -174,14 +174,14 @@ TEST(PlotterTest, when_plotting_to_a_destination_staff_that_is_not_an_instrument
 
 
 
-TEST(PlotterTest, DISABLED_when_plotting_to_a_destination_staff_that_does_not_exist_raises_an_error)
+TEST(Plotter_BaseTest, DISABLED_when_plotting_to_a_destination_staff_that_does_not_exist_raises_an_error)
 {
    // currently disabled because the implementation uses the y_coordinate of the staff, and not the staff_id
 }
 
 
 
-TEST(PlotterTest, DISABLED_when_plotter_cannot_add_a_plotted_measure_to_the_grid_raises_an_exception)
+TEST(Plotter_BaseTest, DISABLED_when_plotter_cannot_add_a_plotted_measure_to_the_grid_raises_an_exception)
 {
    // TODO
 }

@@ -33,7 +33,7 @@ AppController::AppController(Display *display)
 
 
 
-   Plotter *plotter = new Plotter();
+   Plotter::Base *plotter = new Plotter::Base();
 
    std::vector<GridCoordinate> destinations = {
       GridCoordinate(&current_grid_editor->grid, 2, 3, 0),
