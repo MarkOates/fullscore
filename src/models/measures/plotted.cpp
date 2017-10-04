@@ -3,14 +3,14 @@
 
 #include <fullscore/models/measures/plotted.h>
 
+#include <fullscore/models/plotters/destination.h>
 #include <fullscore/models/measure.h>
 #include <fullscore/models/Note.h>
-#include <fullscore/models/plotter.h>
 #include <allegro_flare/useful.h>
 
 
 
-Measure::Plotted::Plotted(Plotter *plotter)
+Measure::Plotted::Plotted(Plotter::Base *plotter)
    : Base(Measure::TYPE_IDENTIFIER_PLOTTED)
    , plotter(plotter)
 {}
@@ -27,12 +27,8 @@ std::vector<Note> Measure::Plotted::get_plotted_notes()
    }
 
    // some placeholder code
-   if (plotter->num_destinations() == 0) throw std::runtime_error("Plotted measure cannot exist without destinations.");
-
-   std::vector<GridCoordinate> plotter_destinations = plotter->get_destinations();
-   std::vector<Note> dummy_plotted_notes = plotter->get_notes_for(random_element(plotter_destinations));
-
-   return dummy_plotted_notes;
+   // TODO figure out how to place notes into a plotted staff
+   return { Note(0), Note(3), Note(4), Note(5) };
 }
 
 

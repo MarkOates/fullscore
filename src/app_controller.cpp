@@ -1,14 +1,13 @@
 
 
 
-
 #include <fullscore/app_controller.h>
 
+#include <fullscore/models/plotters/destination.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/grid_coordinate.h>
 #include <fullscore/models/measure.h>
-#include <fullscore/models/plotter.h>
 #include <fullscore/action.h>
 
 
@@ -34,7 +33,7 @@ AppController::AppController(Display *display)
 
 
 
-   Plotter *plotter = new Plotter();
+   Plotter::Destination *destination_plotter = new Plotter::Destination();
 
    std::vector<GridCoordinate> destinations = {
       GridCoordinate(&current_grid_editor->grid, 2, 3, 0),
@@ -42,9 +41,9 @@ AppController::AppController(Display *display)
       GridCoordinate(&current_grid_editor->grid, 4, 3, 0)
    };
 
-   for (auto &destination : destinations) plotter->add_destination(destination);
+   for (auto &destination : destinations) destination_plotter->add_destination(destination);
 
-   plotter->plot();
+   destination_plotter->plot();
 
 
 
