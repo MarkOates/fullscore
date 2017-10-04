@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/plotter.h>
+#include <fullscore/models/plotters/base.h>
 
 #include <fullscore/models/measures/plotted.h>
 #include <fullscore/models/grid.h>

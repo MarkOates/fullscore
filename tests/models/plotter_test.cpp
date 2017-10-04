@@ -5,7 +5,7 @@
 
 
 
-#include <fullscore/models/plotter.h>
+#include <fullscore/models/plotters/base.h>
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/staves/measure_numbers.h>

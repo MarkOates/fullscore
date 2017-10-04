@@ -1,14 +1,13 @@
 
 
 
-
 #include <fullscore/app_controller.h>
 
+#include <fullscore/models/plotters/base.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/grid_coordinate.h>
 #include <fullscore/models/measure.h>
-#include <fullscore/models/plotter.h>
 #include <fullscore/action.h>
 
 

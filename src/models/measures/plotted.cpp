@@ -5,7 +5,7 @@
 
 #include <fullscore/models/measure.h>
 #include <fullscore/models/Note.h>
-#include <fullscore/models/plotter.h>
+#include <fullscore/models/plotters/base.h>
 #include <allegro_flare/useful.h>
 
 
