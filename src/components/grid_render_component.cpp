@@ -168,7 +168,11 @@ void GridRenderComponent::render()
          Measure::Base *measure = grid->get_measure(x,y);
          if (!measure) continue;
 
+         // this is the hacky measure for providing context-relative transformations when rendering
+         // (but, we shouldn't be doing transformations inside the renderer, so there needs to be a different approach)
          static Measure::Basic *context_measure = new Measure::Basic({Note(0), Note(2), Note(4), Note(5), Note(7), Note(9), Note(11)});
+
+         // render the actual measure
          MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
          measure_render_component.render();
       }

@@ -23,6 +23,17 @@ TEST(Staff_InstrumentTest, returns_a_staff_height_of_1)
 
 
 
+TEST(Staff_InstrumentTest, on_construction_all_measures_are_nullptr)
+{
+   int num_measures = 10;
+   Staff::Instrument instrument(num_measures);
+
+   for (unsigned i=0; i<num_measures; i++)
+      ASSERT_EQ(nullptr, instrument.get_measure(i));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
