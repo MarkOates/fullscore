@@ -7,9 +7,9 @@
 
 
 
-Staff::HarmonicAnalysis::HarmonicAnalysisSymbolPlacement::HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate)
-   : symbol(symbol)
-   , coordinate(coordinate)
+Staff::HarmonicAnalysis::HarmonicAnalysisSymbolPlacement::HarmonicAnalysisSymbolPlacement(GridHorizontalCoordinate coordinate, HarmonicAnalysisSymbol symbol)
+   : coordinate(coordinate)
+   , symbol(symbol)
 {}
 
 
@@ -95,7 +95,7 @@ std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAn
 
 void Staff::HarmonicAnalysis::set_symbol(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate)
 {
-   symbols.push_back({ symbol, coordinate });
+   symbols.push_back({ coordinate, symbol });
 }
 
 

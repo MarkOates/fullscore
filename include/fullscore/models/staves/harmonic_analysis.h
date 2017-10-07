@@ -18,10 +18,10 @@ namespace Staff
       class HarmonicAnalysisSymbolPlacement
       {
       public:
-         HarmonicAnalysisSymbol symbol;
          GridHorizontalCoordinate coordinate;
+         HarmonicAnalysisSymbol symbol;
 
-         HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate);
+         HarmonicAnalysisSymbolPlacement(GridHorizontalCoordinate coordinate, HarmonicAnalysisSymbol symbol);
       };
 
       std::vector<HarmonicAnalysisSymbolPlacement> symbols;
