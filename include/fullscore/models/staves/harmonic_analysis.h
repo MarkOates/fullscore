@@ -40,7 +40,7 @@ namespace Staff
       virtual bool append_column(Measure::Base *measure) override;
 
       std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> get_symbols_in_measure(int measure_num);
-      void set_symbol(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate);
+      void set_symbol(GridHorizontalCoordinate coordinate, HarmonicAnalysisSymbol symbol);
    };
 };
 

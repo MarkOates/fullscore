@@ -93,7 +93,7 @@ std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAn
 
 
 
-void Staff::HarmonicAnalysis::set_symbol(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate)
+void Staff::HarmonicAnalysis::set_symbol(GridHorizontalCoordinate coordinate, HarmonicAnalysisSymbol symbol)
 {
    symbols.push_back({ coordinate, symbol });
 }
