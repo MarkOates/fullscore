@@ -7,10 +7,9 @@
 
 
 
-Staff::HarmonicAnalysis::HarmonicAnalysisSymbolPlacement::HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, int measure_num, int beat)
+Staff::HarmonicAnalysis::HarmonicAnalysisSymbolPlacement::HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate)
    : symbol(symbol)
-   , measure_num(measure_num)
-   , beat(beat)
+   , coordinate(coordinate)
 {}
 
 
@@ -81,22 +80,22 @@ float Staff::HarmonicAnalysis::get_height()
 
 
 
-std::vector<std::pair<int, HarmonicAnalysisSymbol>> Staff::HarmonicAnalysis::get_symbols_in_measure(int measure_num)
+std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAnalysis::get_symbols_in_measure(int measure_num)
 {
-   std::vector<std::pair<int, HarmonicAnalysisSymbol>> result = {};
+   std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> result = {};
 
    for (unsigned i=0; i<symbols.size(); i++)
-      if (symbols[i].measure_num == measure_num)
-         result.push_back(std::pair<int, HarmonicAnalysisSymbol>(symbols[i].beat, symbols[i].symbol));
+      if (symbols[i].coordinate.get_measure_num() == measure_num)
+         result.push_back(std::pair<BeatCoordinate, HarmonicAnalysisSymbol>(symbols[i].coordinate.get_beat_coordinate(), symbols[i].symbol));
 
    return result;
 }
 
 
 
-void Staff::HarmonicAnalysis::set_symbol(HarmonicAnalysisSymbol symbol, int measure_num, int beat)
+void Staff::HarmonicAnalysis::set_symbol(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate)
 {
-   symbols.push_back({symbol, measure_num, beat});
+   symbols.push_back({ symbol, coordinate });
 }
 
 

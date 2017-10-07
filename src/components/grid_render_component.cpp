@@ -131,13 +131,13 @@ void GridRenderComponent::render()
          if (staff->is_type("harmonic_analysis"))
          {
             Staff::HarmonicAnalysis &harmonic_analysis_staff = static_cast<Staff::HarmonicAnalysis &>(*staff);
-            std::vector<std::pair<int, HarmonicAnalysisSymbol>> harmonic_analysis_symbols_in_measure = harmonic_analysis_staff.get_symbols_in_measure(x);
+            std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> harmonic_analysis_symbols_in_measure = harmonic_analysis_staff.get_symbols_in_measure(x);
 
             for (auto &marking : harmonic_analysis_symbols_in_measure)
             {
-               int beat = std::get<0>(marking);
+               BeatCoordinate beat_coordinate = std::get<0>(marking);
                HarmonicAnalysisSymbol &harmonic_analysis_symbol = std::get<1>(marking);
-               float marking_x_pos = x_pos + (full_measure_width * 0.25 * beat);
+               float marking_x_pos = x_pos + (full_measure_width * 0.25 * beat_coordinate.get_x_offset());
 
                HarmonicAnalysisSymbolRenderComponent harmonic_analysis_symbol_render_component(text_font, marking_x_pos, label_text_top_y, harmonic_analysis_symbol);
                harmonic_analysis_symbol_render_component.render();

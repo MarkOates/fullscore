@@ -3,6 +3,7 @@
 
 
 #include <fullscore/models/staves/base.h>
+#include <fullscore/models/grid_horizontal_coordinate.h>
 #include <fullscore/models/harmonic_analysis_symbol.h>
 
 
@@ -18,10 +19,9 @@ namespace Staff
       {
       public:
          HarmonicAnalysisSymbol symbol;
-         int measure_num;
-         int beat;
+         GridHorizontalCoordinate coordinate;
 
-         HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, int measure_num, int beat);
+         HarmonicAnalysisSymbolPlacement(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate);
       };
 
       std::vector<HarmonicAnalysisSymbolPlacement> symbols;
@@ -39,8 +39,8 @@ namespace Staff
       virtual bool erase_column(int at_index) override;
       virtual bool append_column(Measure::Base *measure) override;
 
-      std::vector<std::pair<int, HarmonicAnalysisSymbol>> get_symbols_in_measure(int measure_num);
-      void set_symbol(HarmonicAnalysisSymbol symbol, int measure_num, int beat);
+      std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> get_symbols_in_measure(int measure_num);
+      void set_symbol(HarmonicAnalysisSymbol symbol, GridHorizontalCoordinate coordinate);
    };
 };
 

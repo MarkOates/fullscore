@@ -82,7 +82,7 @@ Grid GridFactory::string_quartet()
          Staff::HarmonicAnalysis *staff = new Staff::HarmonicAnalysis(NUM_MEASURES);
          grid.append_staff(staff);
          HarmonicAnalysisSymbol harmonic_analysis_symbol(Pitch(3, -1), HarmonicAnalysisSymbol::MAJOR, 1, {});
-         staff->set_symbol(harmonic_analysis_symbol, 1, 2);
+         staff->set_symbol(harmonic_analysis_symbol, GridHorizontalCoordinate(1, 2));
       }
       else if (voices[i] == TEMPO)
       {
