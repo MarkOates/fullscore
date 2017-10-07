@@ -36,7 +36,7 @@ TEST(BeatCoordinateTest, when_constructed_with_arguments_assigns_the_arguments)
 
 
 
-TEST(BeatCoordinateTest, returns_the_corrected_offset)
+TEST(BeatCoordinateTest, returns_the_correct_x_offset)
 {
    BeatCoordinate beat_coordinate(3, 7, 8);
 
