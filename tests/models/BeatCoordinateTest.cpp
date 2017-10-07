@@ -45,6 +45,15 @@ TEST(BeatCoordinateTest, returns_the_correct_x_offset)
 
 
 
+TEST(BeatCoordinateTest, with_a_sub_beat_denominator_of_zero_does_not_divide_by_zero)
+{
+   BeatCoordinate beat_coordinate(3, 7, 0);
+
+   ASSERT_EQ(3.0, beat_coordinate.get_x_offset());
+}
+
+
+
 TEST(BeatCoordinateTest, returns_true_when_two_beat_coordinates_are_equal)
 {
    ASSERT_EQ(true, BeatCoordinate(3, 7, 8) == BeatCoordinate(3, 7, 8));

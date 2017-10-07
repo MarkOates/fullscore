@@ -15,6 +15,7 @@ BeatCoordinate::BeatCoordinate(int beat, int sub_beat_numerator, int sub_beat_de
 
 float BeatCoordinate::get_x_offset()
 {
+   if (sub_beat_denominator == 0) return (float)beat;
    return beat + (float)sub_beat_numerator / sub_beat_denominator;
 }
 
