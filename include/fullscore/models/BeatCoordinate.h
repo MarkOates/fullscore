@@ -11,6 +11,9 @@ public:
 
    BeatCoordinate(int beat=0, int sub_beat_numerator=0, int sub_beat_denominator=0);
    float get_x_offset();
+
+   bool operator==(const BeatCoordinate &other) const;
+   bool operator!=(const BeatCoordinate &other) const;
 };
 
 

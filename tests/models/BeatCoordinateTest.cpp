@@ -45,6 +45,28 @@ TEST(BeatCoordinateTest, returns_the_corrected_offset)
 
 
 
+TEST(BeatCoordinateTest, returns_true_when_two_beat_coordinates_are_equal)
+{
+   ASSERT_EQ(true, BeatCoordinate(3, 7, 8) == BeatCoordinate(3, 7, 8));
+
+   ASSERT_EQ(false, BeatCoordinate(999, 7, 8) == BeatCoordinate(3, 7, 8));
+   ASSERT_EQ(false, BeatCoordinate(3, 999, 8) == BeatCoordinate(3, 7, 8));
+   ASSERT_EQ(false, BeatCoordinate(3, 7, 999) == BeatCoordinate(3, 7, 8));
+}
+
+
+
+TEST(BeatCoordinateTest, returns_false_when_two_beat_coordinates_are_not_equal)
+{
+   ASSERT_EQ(true, BeatCoordinate(999, 7, 8) != BeatCoordinate(3, 7, 8));
+   ASSERT_EQ(true, BeatCoordinate(3, 999, 8) != BeatCoordinate(3, 7, 8));
+   ASSERT_EQ(true, BeatCoordinate(3, 7, 999) != BeatCoordinate(3, 7, 8));
+
+   ASSERT_EQ(false, BeatCoordinate(3, 7, 8) != BeatCoordinate(3, 7, 8));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

@@ -20,4 +20,21 @@ float BeatCoordinate::get_x_offset()
 
 
 
+bool BeatCoordinate::operator==(const BeatCoordinate &other) const
+{
+   return (
+      this->beat == other.beat
+      && this->sub_beat_numerator == other.sub_beat_numerator
+      && this->sub_beat_denominator == other.sub_beat_denominator
+   );
+}
+
+
+
+bool BeatCoordinate::operator!=(const BeatCoordinate &other) const
+{
+   return !(*this == other);
+}
+
+
 
