@@ -36,6 +36,28 @@ std::string HarmonicAnalysisSymbol::get_chord_quality_string(chord_quality_t cho
 
 
 
+std::string HarmonicAnalysisSymbol::get_chord_quality_symbol_string(chord_quality_t chord_quality)
+{
+   switch(chord_quality)
+   {
+   case HarmonicAnalysisSymbol::MAJOR:
+   case HarmonicAnalysisSymbol::MINOR:
+      return "";
+      break;
+   case HarmonicAnalysisSymbol::AUGMENTED:
+      return "+";
+      break;
+   case HarmonicAnalysisSymbol::DIMINISHED:
+      return "o";
+      break;
+   default:
+      return "";
+      break;
+   }
+}
+
+
+
 std::string HarmonicAnalysisSymbol::get_roman_numeral_string(int number, chord_quality_t chord_quality)
 {
    bool quality_is_major = (chord_quality == MAJOR || chord_quality == AUGMENTED);

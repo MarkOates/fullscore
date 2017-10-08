@@ -59,6 +59,17 @@ TEST(HarmonicAnalysisSymbolTest, returns_a_string_from_accidental)
 
 
 
+TEST(HarmonicAnalysisSymbolTest, returns_a_string_for_a_chord_quality_symbol)
+{
+   ASSERT_EQ("o", HarmonicAnalysisSymbol::get_chord_quality_symbol_string(HarmonicAnalysisSymbol::DIMINISHED));
+   ASSERT_EQ("+", HarmonicAnalysisSymbol::get_chord_quality_symbol_string(HarmonicAnalysisSymbol::AUGMENTED));
+
+   ASSERT_EQ("", HarmonicAnalysisSymbol::get_chord_quality_symbol_string(HarmonicAnalysisSymbol::MAJOR));
+   ASSERT_EQ("", HarmonicAnalysisSymbol::get_chord_quality_symbol_string(HarmonicAnalysisSymbol::MINOR));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

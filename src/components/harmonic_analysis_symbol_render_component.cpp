@@ -30,11 +30,11 @@ void HarmonicAnalysisSymbolRenderComponent::render()
    float roman_numeral_text_width = al_get_text_width(large_font, roman_numeral_string.c_str());
    float line_height = al_get_font_line_height(large_font);
 
-   std::string quality = HarmonicAnalysisSymbol::get_chord_quality_string(symbol.chord_quality, true);
+   std::string quality_symbol = HarmonicAnalysisSymbol::get_chord_quality_symbol_string(symbol.chord_quality);
 
    al_draw_text(large_font, color::black, x, y, ALLEGRO_ALIGN_CENTER, roman_numeral_string.c_str());
    al_draw_text(small_font, color::black, x-roman_numeral_text_width/2, y, ALLEGRO_ALIGN_RIGHT, accidental.c_str());
-   al_draw_text(small_font, color::black, x+roman_numeral_text_width/2, y, ALLEGRO_ALIGN_LEFT, quality.c_str());
+   al_draw_text(small_font, color::black, x+roman_numeral_text_width/2, y, ALLEGRO_ALIGN_LEFT, quality_symbol.c_str());
 }
 
 
