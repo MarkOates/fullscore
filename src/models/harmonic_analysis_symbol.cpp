@@ -92,3 +92,17 @@ std::string HarmonicAnalysisSymbol::get_accidental_string(int accidental)
 
 
 
+std::string HarmonicAnalysisSymbol::get_extensions_string(std::vector<int> extensions)
+{
+   std::stringstream ss;
+   int num_extensions = extensions.size();
+   for (unsigned i=0; i<num_extensions; i++)
+   {
+      ss << extensions[i];
+      if (i != num_extensions-1) ss << "\n";
+   }
+   return ss.str();
+}
+
+
+

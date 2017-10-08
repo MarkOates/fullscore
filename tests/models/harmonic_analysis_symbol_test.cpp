@@ -70,6 +70,13 @@ TEST(HarmonicAnalysisSymbolTest, returns_a_string_for_a_chord_quality_symbol)
 
 
 
+TEST(HarmonicAnalysisSymbol, returns_an_extension_string_by_interploating_newlines)
+{
+   ASSERT_EQ("6\n4\n12", HarmonicAnalysisSymbol::get_extensions_string({ 6, 4, 12 }));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);
