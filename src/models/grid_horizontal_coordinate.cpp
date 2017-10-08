@@ -5,9 +5,9 @@
 
 
 
-GridHorizontalCoordinate::GridHorizontalCoordinate(int measure_num, int beat_num)
+GridHorizontalCoordinate::GridHorizontalCoordinate(int measure_num, BeatCoordinate beat_coordinate)
    : measure_num(measure_num)
-   , beat_num(beat_num)
+   , beat_coordinate(beat_coordinate)
 {}
 
 
@@ -19,9 +19,9 @@ void GridHorizontalCoordinate::set_measure_num(int measure_num)
 
 
 
-void GridHorizontalCoordinate::set_beat_num(int beat_num)
+void GridHorizontalCoordinate::set_beat_coordinate(BeatCoordinate beat_coordinate)
 {
-   this->beat_num = beat_num;
+   this->beat_coordinate = beat_coordinate;
 }
 
 
@@ -33,9 +33,9 @@ int GridHorizontalCoordinate::get_measure_num()
 
 
 
-int GridHorizontalCoordinate::get_beat_num()
+BeatCoordinate GridHorizontalCoordinate::get_beat_coordinate()
 {
-   return beat_num;
+   return beat_coordinate;
 }
 
 
