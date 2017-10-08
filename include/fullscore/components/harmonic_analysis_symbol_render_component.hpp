@@ -14,12 +14,13 @@ class HarmonicAnalysisSymbolRenderComponent
 {
 private:
    HarmonicAnalysisSymbol symbol;
-   ALLEGRO_FONT *font;
+   ALLEGRO_FONT *large_font;
+   ALLEGRO_FONT *small_font;
    float x;
    float y;
 
 public:
-   HarmonicAnalysisSymbolRenderComponent(ALLEGRO_FONT *font, float x, float y, HarmonicAnalysisSymbol symbol);
+   HarmonicAnalysisSymbolRenderComponent(ALLEGRO_FONT *large_font, ALLEGRO_FONT *small_font, float x, float y, HarmonicAnalysisSymbol symbol);
    void render();
 };
 

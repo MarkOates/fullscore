@@ -88,6 +88,7 @@ void GridRenderComponent::render()
       float this_staff_half_height = this_staff_height * 0.5;
 
       ALLEGRO_FONT *text_font = Framework::font("plantin-mt-light.ttf 22");
+      ALLEGRO_FONT *analysis_font = Framework::font("plantin-mt-light.ttf 36");
 
       // draw the row name
       float row_middle_y = y_counter + this_staff_height * 0.5;
@@ -139,7 +140,7 @@ void GridRenderComponent::render()
                HarmonicAnalysisSymbol &harmonic_analysis_symbol = std::get<1>(marking);
                float marking_x_pos = x_pos + (full_measure_width * 0.25 * beat_coordinate.get_x_offset());
 
-               HarmonicAnalysisSymbolRenderComponent harmonic_analysis_symbol_render_component(text_font, marking_x_pos, label_text_top_y, harmonic_analysis_symbol);
+               HarmonicAnalysisSymbolRenderComponent harmonic_analysis_symbol_render_component(analysis_font, text_font, marking_x_pos, label_text_top_y, harmonic_analysis_symbol);
                harmonic_analysis_symbol_render_component.render();
             }
          }
