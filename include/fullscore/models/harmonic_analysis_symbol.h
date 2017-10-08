@@ -29,6 +29,7 @@ public:
 
    static std::string get_chord_quality_string(chord_quality_t chord_quality, bool abbreviated=false);
    static std::string get_roman_numeral_string(int number, chord_quality_t chord_quality);
+   static std::string get_accidental_string(int accidental);
 };
 
 

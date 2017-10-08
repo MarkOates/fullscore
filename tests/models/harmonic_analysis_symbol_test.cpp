@@ -46,6 +46,19 @@ TEST(HarmonicAnalysisSymbolTest, with_a_scale_degree_that_does_not_exist_returns
 
 
 
+TEST(HarmonicAnalysisSymbolTest, returns_a_string_from_accidental)
+{
+   ASSERT_EQ("b", HarmonicAnalysisSymbol::get_accidental_string(-1));
+   ASSERT_EQ("bbb", HarmonicAnalysisSymbol::get_accidental_string(-3));
+
+   ASSERT_EQ("", HarmonicAnalysisSymbol::get_accidental_string(0));
+
+   ASSERT_EQ("#", HarmonicAnalysisSymbol::get_accidental_string(1));
+   ASSERT_EQ("###", HarmonicAnalysisSymbol::get_accidental_string(3));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

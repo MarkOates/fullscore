@@ -3,6 +3,8 @@
 
 #include <fullscore/models/harmonic_analysis_symbol.h>
 
+#include <sstream>
+
 
 
 HarmonicAnalysisSymbol::HarmonicAnalysisSymbol(Pitch fundamental, chord_quality_t chord_quality, int inversion, std::vector<int> extensions)
@@ -54,6 +56,16 @@ std::string HarmonicAnalysisSymbol::get_roman_numeral_string(int number, chord_q
    case 11: return quality_is_major ? "XI" : "xi"; break;
    default: return "--"; break;
    }
+}
+
+
+
+std::string HarmonicAnalysisSymbol::get_accidental_string(int accidental)
+{
+   std::stringstream ss;
+   while (accidental < 0) { ss << "b"; accidental++; }
+   while (accidental > 0) { ss << "#"; accidental--; }
+   return ss.str();
 }
 
 
