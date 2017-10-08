@@ -26,14 +26,17 @@ void HarmonicAnalysisSymbolRenderComponent::render()
 
    std::string roman_numeral_string = HarmonicAnalysisSymbol::get_roman_numeral_string(symbol.fundamental.scale_degree, symbol.chord_quality);
    std::string accidental = HarmonicAnalysisSymbol::get_accidental_string(symbol.fundamental.accidental);
+   std::string extensions_string = HarmonicAnalysisSymbol::get_extensions_string(symbol.extensions);
    std::string quality_symbol = HarmonicAnalysisSymbol::get_chord_quality_symbol_string(symbol.chord_quality);
 
    float roman_numeral_text_width = al_get_text_width(large_font, roman_numeral_string.c_str());
+   float quality_symbol_text_width = al_get_text_width(small_font, quality_symbol.c_str());
    float line_height = al_get_font_line_height(large_font);
 
    al_draw_text(large_font, color::black, x, y, ALLEGRO_ALIGN_CENTER, roman_numeral_string.c_str());
    al_draw_text(small_font, color::black, x-roman_numeral_text_width/2, y, ALLEGRO_ALIGN_RIGHT, accidental.c_str());
    al_draw_text(small_font, color::black, x+roman_numeral_text_width/2, y, ALLEGRO_ALIGN_LEFT, quality_symbol.c_str());
+   al_draw_multiline_text(small_font, color::black, x+roman_numeral_text_width/2+quality_symbol_text_width + 3, y, 10, al_get_font_line_height(small_font)*0.8, 0, extensions_string.c_str());
 }
 
 
