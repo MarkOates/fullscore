@@ -28,7 +28,7 @@ public:
    ~HarmonicAnalysisSymbol();
 
    static std::string get_chord_quality_string(chord_quality_t chord_quality, bool abbreviated=false);
-   static std::string get_roman_numeral_string(int number, bool quality_is_major);
+   static std::string get_roman_numeral_string(int number, chord_quality_t chord_quality);
 };
 
 

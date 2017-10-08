@@ -34,8 +34,10 @@ std::string HarmonicAnalysisSymbol::get_chord_quality_string(chord_quality_t cho
 
 
 
-std::string HarmonicAnalysisSymbol::get_roman_numeral_string(int number, bool quality_is_major)
+std::string HarmonicAnalysisSymbol::get_roman_numeral_string(int number, chord_quality_t chord_quality)
 {
+   bool quality_is_major = (chord_quality == MAJOR || chord_quality == AUGMENTED);
+
    switch(number)
    {
    case 0: return quality_is_major ? "O" : "o"; break;
