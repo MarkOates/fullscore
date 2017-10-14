@@ -14,18 +14,18 @@ TEST(GridHorizontalCoordinate, can_be_created)
 
 
 
-TEST(GridHorizontalCoordinate, gets_and_sets_the_measure_num)
+TEST(GridHorizontalCoordinate, gets_and_sets_the_barline_num)
 {
    GridHorizontalCoordinate grid_horizontal_coordinate;
 
-   grid_horizontal_coordinate.set_measure_num(123);
-   EXPECT_EQ(123, grid_horizontal_coordinate.get_measure_num());
+   grid_horizontal_coordinate.set_barline_num(123);
+   EXPECT_EQ(123, grid_horizontal_coordinate.get_barline_num());
 
-   grid_horizontal_coordinate.set_measure_num(-86);
-   EXPECT_EQ(-86, grid_horizontal_coordinate.get_measure_num());
+   grid_horizontal_coordinate.set_barline_num(-86);
+   EXPECT_EQ(-86, grid_horizontal_coordinate.get_barline_num());
 
-   grid_horizontal_coordinate.set_measure_num(720782);
-   EXPECT_EQ(720782, grid_horizontal_coordinate.get_measure_num());
+   grid_horizontal_coordinate.set_barline_num(720782);
+   EXPECT_EQ(720782, grid_horizontal_coordinate.get_barline_num());
 }
 
 
@@ -50,7 +50,7 @@ TEST(GridHorizontalCoordinate, on_construction_without_arguments_hasthe_expected
 {
    GridHorizontalCoordinate grid_horizontal_coordinate;
 
-   EXPECT_EQ(0, grid_horizontal_coordinate.get_measure_num());
+   EXPECT_EQ(0, grid_horizontal_coordinate.get_barline_num());
    EXPECT_EQ(BeatCoordinate(), grid_horizontal_coordinate.get_beat_coordinate());
 }
 
@@ -60,7 +60,7 @@ TEST(GridHorizontalCoordinate, on_construction_with_arguments_initializes_the_ex
 {
    GridHorizontalCoordinate grid_horizontal_coordinate(98, BeatCoordinate(123));
 
-   EXPECT_EQ(98, grid_horizontal_coordinate.get_measure_num());
+   EXPECT_EQ(98, grid_horizontal_coordinate.get_barline_num());
    EXPECT_EQ(BeatCoordinate(123), grid_horizontal_coordinate.get_beat_coordinate());
 }
 
