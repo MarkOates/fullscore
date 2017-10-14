@@ -51,12 +51,31 @@ namespace Measure
 
 
 
-   std::vector<Base *> find(std::vector<int> ids)
+   std::vector<Base *> find(std::vector<int> ids, bool include_not_found, bool raise_not_found)
    {
       std::vector<Base *> results = {};
-      for (auto &measure : measure_pool)
-         for (unsigned i=0; i<ids.size(); i++)
-            if (measure->get_id() == ids[i]) results.push_back(measure);
+      std::vector<int> not_found_ids = {};
+
+      for (unsigned i=0; i<ids.size(); i++)
+      {
+         try
+         {
+            Base *found_measure = find(ids[i], raise_not_found);
+            if (found_measure || include_not_found) results.push_back(found_measure);
+         }
+         catch (std::runtime_error const &e)
+         {
+            not_found_ids.push_back(ids[i]);
+         }
+      }
+
+      if (!not_found_ids.empty())
+      {
+         std::stringstream error_message;
+         error_message << "Looking for " << ids.size() << " measures but only " << results.size() << " measures found.";
+         throw std::runtime_error(error_message.str());
+      }
+
       return results;
    }
 
