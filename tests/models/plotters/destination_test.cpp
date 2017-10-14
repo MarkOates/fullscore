@@ -136,10 +136,10 @@ TEST(Plotter_DestinationTest, plots_plotted_measure_types_into_the_grid)
    for (auto &destination : destinations)
    {
       int staff_id = destination.get_staff_id();
-      int measure_number = destination.get_barline_num();
+      int barline_num = destination.get_barline_num();
       // int beat_number = destination.beat_number(); // < not yet implemented
 
-      Measure::Base *measure = grid.get_measure(measure_number, staff_id);
+      Measure::Base *measure = grid.get_measure(barline_num, staff_id);
       ASSERT_NE(nullptr, measure);
       ASSERT_TRUE(measure->is_type("plotted"));
    }
