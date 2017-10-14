@@ -8,14 +8,14 @@
 
 
 
-TEST(MeasureTest, can_be_created)
+TEST(MeasureReferenceByIDTest, can_be_created)
 {
    Measure::ReferenceByID measure(0);
 }
 
 
 
-TEST(MeasureTest, can_get_notes_from_a_referenced_measure)
+TEST(MeasureReferenceByIDTest, can_get_notes_from_a_referenced_measure)
 {
    std::vector<Note> notes = { Note(2, Duration::HALF), Note(-1, Duration::EIGHTH), Note(14, Duration::QUARTER) };
 
@@ -30,7 +30,7 @@ TEST(MeasureTest, can_get_notes_from_a_referenced_measure)
 
 
 
-TEST(MeasureTest, can_get_its_number_of_notes)
+TEST(MeasureReferenceByIDTest, can_get_its_number_of_notes)
 {
    Measure::Basic measure1({ Note(0), Note(0), Note(0) });
    Measure::ReferenceByID reference_by_id_measure1(measure1.get_id());
