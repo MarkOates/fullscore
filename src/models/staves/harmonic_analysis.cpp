@@ -85,7 +85,7 @@ std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAn
    std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> result = {};
 
    for (unsigned i=0; i<symbols.size(); i++)
-      if (symbols[i].coordinate.get_measure_num() == measure_num)
+      if (symbols[i].coordinate.get_barline_num() == measure_num)
          result.push_back(std::pair<BeatCoordinate, HarmonicAnalysisSymbol>(symbols[i].coordinate.get_beat_coordinate(), symbols[i].symbol));
 
    return result;

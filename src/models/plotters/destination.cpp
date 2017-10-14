@@ -77,7 +77,7 @@ bool Plotter::Destination::plot()
    {
       Grid *destination_grid = destination.get_grid();
       int staff_id = destination.get_staff_id();
-      int measure_num = destination.get_measure_num();
+      int measure_num = destination.get_barline_num();
       //int beat_num = destination.get_grid(); // <- unused until feature is added
 
       if (!destination_grid) throw std::runtime_error("Plotter::Destination cannot plot to a nullptr destination_grid");
