@@ -29,8 +29,8 @@ TEST(MeasureTest, with_a_measure_id_that_is_not_found_returns_nullptr)
 
 TEST(MeasureTest, with_a_measure_id_that_is_not_found_raises_an_exception__if_the_option_is_set)
 {
-   ASSERT_THROW(Measure::find(-1, true), std::runtime_error);
-   ASSERT_THROW(Measure::find(99999, true), std::runtime_error);
+   ASSERT_THROW(Measure::find(-1, Measure::FIND_OPTION_RAISE_NOT_FOUND), std::runtime_error);
+   ASSERT_THROW(Measure::find(99999, Measure::FIND_OPTION_RAISE_NOT_FOUND), std::runtime_error);
 }
 
 
