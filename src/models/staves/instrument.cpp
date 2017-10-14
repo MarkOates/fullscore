@@ -8,9 +8,18 @@
 
 
 
+Staff::Instrument::PositionedMeasure::PositionedMeasure(GridHorizontalCoordinate coordinate, int measure_id)
+   : coordinate(coordinate)
+   , measure_id(measure_id)
+{
+}
+
+
+
 Staff::Instrument::Instrument(int num_columns)
    : Base("instrument")
    , columns_of_measure_ids()
+   , measures()
 {
    for (unsigned i=0; i<num_columns; i++) columns_of_measure_ids.push_back(Measure::NO_RECORD);
 }

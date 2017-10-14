@@ -3,6 +3,7 @@
 
 
 #include <fullscore/models/staves/base.h>
+#include <fullscore/models/grid_horizontal_coordinate.h>
 
 
 
@@ -12,6 +13,17 @@ namespace Staff
    {
    private:
       std::vector<int> columns_of_measure_ids;
+
+      class PositionedMeasure
+      {
+      public:
+         GridHorizontalCoordinate coordinate;
+         int measure_id;
+
+         PositionedMeasure(GridHorizontalCoordinate coordinate, int measure_id);
+      };
+
+      std::vector<PositionedMeasure> measures;
 
    public:
       Instrument(int num_columns);
