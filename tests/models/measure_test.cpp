@@ -35,6 +35,20 @@ TEST(MeasureTest, with_a_measure_id_that_is_not_found_raises_an_exception__if_th
 
 
 
+TEST(MeasureTest, can_find_multiple_measures_by_id)
+{
+   Measure::Basic basic_measure_1;
+   Measure::Basic basic_measure_2;
+   Measure::Basic basic_measure_3;
+
+   std::vector<int> measure_ids_to_find = { basic_measure_1.get_id(), basic_measure_3.get_id() };
+   std::vector<Measure::Base *> expected_returned_measures = { &basic_measure_1, &basic_measure_3 };
+
+   ASSERT_EQ(expected_returned_measures, Measure::find(measure_ids_to_find));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

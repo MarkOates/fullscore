@@ -51,6 +51,17 @@ namespace Measure
 
 
 
+   std::vector<Base *> find(std::vector<int> ids)
+   {
+      std::vector<Base *> results = {};
+      for (auto &measure : measure_pool)
+         for (unsigned i=0; i<ids.size(); i++)
+            if (measure->get_id() == ids[i]) results.push_back(measure);
+      return results;
+   }
+
+
+
    bool remove(int id)
    {
       for (unsigned i=0; i<measure_pool.size(); i++)
