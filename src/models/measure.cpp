@@ -32,11 +32,21 @@ namespace Measure
 
 
 
-   Base *find(int id)
+   Base *find(int id, bool raise_not_found)
    {
+      Base *found_measure = nullptr;
+
       for (auto &measure : measure_pool)
-         if (measure->get_id() == id) return measure;
-      return nullptr;
+         if (measure->get_id() == id) { found_measure = measure; break; }
+
+      if (raise_not_found && found_measure == nullptr)
+      {
+         std::stringstream error_message;
+         error_message << "Looking for measure with id = " << id << " but does not exist";
+         throw std::runtime_error(error_message.str());
+      }
+
+      return found_measure;
    }
 
 

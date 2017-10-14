@@ -29,7 +29,7 @@ namespace Measure
    extern bool push_back(Base *measure);
    extern bool remove(int id);
    extern int count();
-   extern Base *find(int id);
+   extern Base *find(int id, bool raise_not_found=false);
    extern bool destroy(int id);
 };
 
