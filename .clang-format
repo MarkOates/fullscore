@@ -1,0 +1,107 @@
+---
+Language:        Cpp
+# BasedOnStyle:  LLVM
+AccessModifierOffset: -2
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Right
+AlignOperands:   true
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: true # Allow them!
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None # OK
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: true # OK
+BinPackArguments: false # OK
+BinPackParameters: false # OK
+BraceWrapping:   
+  AfterClass:      false #OK
+  AfterControlStatement: true #OK
+  AfterEnum:       true #OK
+  AfterFunction:   true #OK
+  AfterNamespace:  true #OK
+  AfterObjCDeclaration: false # <- unused
+  AfterStruct:     true #OK
+  AfterUnion:      true #OK
+  # AfterExternBlock: true #OK
+  BeforeCatch:     false # <- not sure
+  BeforeElse:      true #OK
+  IndentBraces:    false #OK
+  SplitEmptyFunctionBody: true #OK
+  # SplitEmptyFunction: false #OK
+  # SplitEmptyRecord: false #OK
+  # SplitEmptyNamespace: false #OK
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman #OK
+BreakBeforeInheritanceComma: false #OK
+BreakBeforeTernaryOperators: true #OK
+BreakConstructorInitializers: BeforeComma
+BreakAfterJavaFieldAnnotations: false
+BreakStringLiterals: true #OK
+ColumnLimit:     140 #Good
+CommentPragmas:  '^ TOOD:'
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false # <- does not apply, initializer list should always break
+ConstructorInitializerIndentWidth: 3 # Good
+ContinuationIndentWidth: 3 # Good
+Cpp11BracedListStyle: false # Great
+DerivePointerAlignment: false # OK
+DisableFormat:   false # yea, why would I want to disable format? formatting is the whole point!
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: false #Guud
+ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
+IncludeCategories: 
+  - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
+    Priority:        2
+  - Regex:           '^(<|"(gtest|isl|json)/)'
+    Priority:        3
+  - Regex:           '.*'
+    Priority:        1
+IncludeIsMainRegex: '$' # Seems OK
+IndentCaseLabels: false # Good
+IndentWidth:     3 # Perfect
+IndentWrappedFunctionNames: true #good
+JavaScriptQuotes: Double # not using javascript here
+JavaScriptWrapImports: true # no opinion
+KeepEmptyLinesAtTheStartOfBlocks: false # no empty lines
+MacroBlockBegin: ''
+MacroBlockEnd:   ''
+MaxEmptyLinesToKeep: 3 # *** <- use this to keep the 3 blank-lines-between-definitions style ***, even though inside function body should be restricted to 1
+NamespaceIndentation: All # indent every nested namespace
+ObjCBlockIndentWidth: 2 # <- indifferent
+ObjCSpaceAfterProperty: false # <- indifferent
+ObjCSpaceBeforeProtocolList: true # <- indifferent
+# leaving penalties to their default values
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Right # <- I always put it on the right but believe it should be on the left
+ReflowComments:  true # cool, thanks clang-format!
+SortIncludes:    true # absolutely!
+# SortUsingDeclarations: true # <- not yet present in this version
+SpaceAfterCStyleCast: false #  good
+SpaceAfterTemplateKeyword: false #hmkay
+SpaceBeforeAssignmentOperators: true #good
+SpaceBeforeParens: ControlStatements #perfect
+SpaceInEmptyParentheses: false # true is ugly
+SpacesBeforeTrailingComments: 3 # good, migth want to expand this later for more breathing room
+SpacesInAngles:  false # definitly not!
+SpacesInCStyleCastParentheses: false # definitely no!
+SpacesInContainerLiterals: true # <- not relevent, for ObjC/JS
+SpacesInParentheses: false # no no!
+SpacesInSquareBrackets: false # no no!
+Standard:        Cpp11 # cool, yep
+TabWidth:        3 # let's not go crazy
+UseTab:          Never # yas >:D
+...
+
