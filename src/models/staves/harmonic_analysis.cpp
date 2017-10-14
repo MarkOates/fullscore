@@ -66,6 +66,13 @@ Measure::Base *Staff::HarmonicAnalysis::get_measure(int column_num)
 
 
 
+std::vector<Measure::Base *> Staff::HarmonicAnalysis::get_measures_in(int column_num)
+{
+   return {};
+}
+
+
+
 int Staff::HarmonicAnalysis::get_num_columns()
 {
    return num_columns;

@@ -30,6 +30,8 @@ public:
    bool set_measure(int x_measure, int y_staff, Measure::Base *measure);
    bool delete_measure(int x_measure, int y_staff);
 
+   std::vector<Measure::Base *> get_measures_in_barline(int x_barline, int y_staff);
+
    bool in_grid_range(int x_measure, int y_staff);
 
    int get_num_staves() const;

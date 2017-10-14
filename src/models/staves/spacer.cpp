@@ -53,6 +53,13 @@ Measure::Base *Staff::Spacer::get_measure(int column_num)
 
 
 
+std::vector<Measure::Base *> Staff::Spacer::get_measures_in(int column_num)
+{
+   return {};
+}
+
+
+
 int Staff::Spacer::get_num_columns()
 {
    return 0;

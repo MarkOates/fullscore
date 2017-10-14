@@ -113,3 +113,10 @@ Measure::Base *Staff::Instrument::get_measure(int column_num)
 
 
 
+std::vector<Measure::Base *> Staff::Instrument::get_measures_in(int column_num)
+{
+   return {};
+}
+
+
+

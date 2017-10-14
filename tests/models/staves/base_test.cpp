@@ -19,6 +19,7 @@ public:
    virtual bool erase_column(int at_index) { return true; }
    virtual bool append_column(Measure::Base *measure) { return true; }
    virtual Measure::Base *get_measure(int column_num) { return nullptr; }
+   virtual std::vector<Measure::Base *> get_measures_in(int column_num) { return {}; }
 };
 
 
