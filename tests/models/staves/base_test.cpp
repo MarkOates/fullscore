@@ -49,6 +49,51 @@ TEST(Staff_BaseTest, returns_false_if_is_not_of_type)
 
 
 
+TEST(Staff_BaseTest, add_measure_if_not_implemented_raises_an_exception_when_called)
+{
+   DerivedStaff derived_staff;
+
+   ASSERT_THROW(derived_staff.add_measure(GridHorizontalCoordinate(), nullptr), std::runtime_error);
+}
+
+
+
+TEST(Staff_BaseTest, remove_measure_if_not_implemented_raises_an_exception_when_called)
+{
+   DerivedStaff derived_staff;
+
+   ASSERT_THROW(derived_staff.remove_measure(0), std::runtime_error);
+}
+
+
+
+TEST(Staff_BaseTest, get_measures_if_not_implemented_returns_an_empty_array)
+{
+   DerivedStaff derived_staff;
+
+   ASSERT_TRUE(derived_staff.get_measures().empty());
+}
+
+
+
+TEST(Staff_BaseTest, get_measures_in_barline_if_not_implemented_returns_an_empty_array)
+{
+   DerivedStaff derived_staff;
+
+   ASSERT_TRUE(derived_staff.get_measures_in_barline(0).empty());
+}
+
+
+
+TEST(Staff_BaseTest, get_num_measures_if_not_implemented_returns_zero)
+{
+   DerivedStaff derived_staff;
+
+   ASSERT_EQ(0, derived_staff.get_num_measures());
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

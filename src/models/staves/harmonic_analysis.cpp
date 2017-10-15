@@ -80,12 +80,12 @@ float Staff::HarmonicAnalysis::get_height()
 
 
 
-std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAnalysis::get_symbols_in_measure(int measure_num)
+std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> Staff::HarmonicAnalysis::get_symbols_in_measure(int barline_num)
 {
    std::vector<std::pair<BeatCoordinate, HarmonicAnalysisSymbol>> result = {};
 
    for (unsigned i=0; i<symbols.size(); i++)
-      if (symbols[i].coordinate.get_measure_num() == measure_num)
+      if (symbols[i].coordinate.get_barline_num() == barline_num)
          result.push_back(std::pair<BeatCoordinate, HarmonicAnalysisSymbol>(symbols[i].coordinate.get_beat_coordinate(), symbols[i].symbol));
 
    return result;

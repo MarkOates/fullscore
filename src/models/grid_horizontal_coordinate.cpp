@@ -5,16 +5,16 @@
 
 
 
-GridHorizontalCoordinate::GridHorizontalCoordinate(int measure_num, BeatCoordinate beat_coordinate)
-   : measure_num(measure_num)
+GridHorizontalCoordinate::GridHorizontalCoordinate(int barline_num, BeatCoordinate beat_coordinate)
+   : barline_num(barline_num)
    , beat_coordinate(beat_coordinate)
 {}
 
 
 
-void GridHorizontalCoordinate::set_measure_num(int measure_num)
+void GridHorizontalCoordinate::set_barline_num(int barline_num)
 {
-   this->measure_num = measure_num;
+   this->barline_num = barline_num;
 }
 
 
@@ -26,9 +26,9 @@ void GridHorizontalCoordinate::set_beat_coordinate(BeatCoordinate beat_coordinat
 
 
 
-int GridHorizontalCoordinate::get_measure_num()
+int GridHorizontalCoordinate::get_barline_num()
 {
-   return measure_num;
+   return barline_num;
 }
 
 
@@ -36,6 +36,20 @@ int GridHorizontalCoordinate::get_measure_num()
 BeatCoordinate GridHorizontalCoordinate::get_beat_coordinate()
 {
    return beat_coordinate;
+}
+
+
+
+bool GridHorizontalCoordinate::operator==(const GridHorizontalCoordinate &other) const
+{
+   return (this->barline_num == other.barline_num && this->beat_coordinate == other.beat_coordinate);
+}
+
+
+
+bool GridHorizontalCoordinate::operator!=(const GridHorizontalCoordinate &other) const
+{
+   return !(*this == other);
 }
 
 

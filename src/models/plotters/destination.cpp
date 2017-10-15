@@ -77,7 +77,7 @@ bool Plotter::Destination::plot()
    {
       Grid *destination_grid = destination.get_grid();
       int staff_id = destination.get_staff_id();
-      int measure_num = destination.get_measure_num();
+      int barline_num = destination.get_barline_num();
       //int beat_num = destination.get_grid(); // <- unused until feature is added
 
       if (!destination_grid) throw std::runtime_error("Plotter::Destination cannot plot to a nullptr destination_grid");
@@ -94,11 +94,11 @@ bool Plotter::Destination::plot()
       // create the measure
       Measure::Plotted *plotted_measure = new Measure::Plotted(this);
 
-      if (!destination_grid->set_measure(measure_num, staff_id, plotted_measure))
+      if (!destination_grid->set_measure(barline_num, staff_id, plotted_measure))
       {
          delete plotted_measure;
          std::stringstream error_message;
-         error_message << "Plotter::Destination was not able to set a plotted measure to (measure_num: " << measure_num << ", staff_id: " << staff_id << ")";
+         error_message << "Plotter::Destination was not able to set a plotted measure to (barline_num: " << barline_num << ", staff_id: " << staff_id << ")";
          throw std::runtime_error(error_message.str());
       }
    }

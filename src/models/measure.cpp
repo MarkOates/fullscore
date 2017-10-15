@@ -32,11 +32,52 @@ namespace Measure
 
 
 
-   Base *find(int id)
+   Base *find(int id, find_option_t find_option)
    {
+      Base *found_measure = nullptr;
+
       for (auto &measure : measure_pool)
-         if (measure->get_id() == id) return measure;
-      return nullptr;
+         if (measure->get_id() == id) { found_measure = measure; break; }
+
+      if (find_option == FIND_OPTION_RAISE_NOT_FOUND && found_measure == nullptr)
+      {
+         std::stringstream error_message;
+         error_message << "Looking for measure with id = " << id << " but does not exist";
+         throw std::runtime_error(error_message.str());
+      }
+
+      return found_measure;
+   }
+
+
+
+   std::vector<Base *> find(std::vector<int> ids, find_option_t find_option)
+   {
+      std::vector<Base *> results = {};
+      std::vector<int> not_found_ids = {};
+      find_option_t measure_find_option = (find_option == FIND_OPTION_RAISE_NOT_FOUND) ? FIND_OPTION_RAISE_NOT_FOUND : FIND_OPTION_NONE;
+
+      for (unsigned i=0; i<ids.size(); i++)
+      {
+         try
+         {
+            Base *found_measure = find(ids[i], measure_find_option);
+            if (found_measure || (find_option == FIND_OPTION_INCLUDE_NOT_FOUND)) results.push_back(found_measure);
+         }
+         catch (std::runtime_error const &e)
+         {
+            not_found_ids.push_back(ids[i]);
+         }
+      }
+
+      if (!not_found_ids.empty())
+      {
+         std::stringstream error_message;
+         error_message << "Looking for " << ids.size() << " measures but only " << results.size() << " measures found.";
+         throw std::runtime_error(error_message.str());
+      }
+
+      return results;
    }
 
 

@@ -7,10 +7,10 @@
 
 
 
-GridCoordinate::GridCoordinate(Grid *grid, int staff_id, int measure_num, int beat_num)
+GridCoordinate::GridCoordinate(Grid *grid, int staff_id, int barline_num, int beat_num)
    : grid(grid)
    , staff_id(staff_id)
-   , measure_num(measure_num)
+   , barline_num(barline_num)
    , beat_num(beat_num)
 {}
 
@@ -30,9 +30,9 @@ void GridCoordinate::set_staff_id(int staff_id)
 
 
 
-void GridCoordinate::set_measure_num(int measure_num)
+void GridCoordinate::set_barline_num(int barline_num)
 {
-   this->measure_num = measure_num;
+   this->barline_num = barline_num;
 }
 
 
@@ -58,9 +58,9 @@ int GridCoordinate::get_staff_id()
 
 
 
-int GridCoordinate::get_measure_num()
+int GridCoordinate::get_barline_num()
 {
-   return measure_num;
+   return barline_num;
 }
 
 
@@ -77,7 +77,7 @@ bool GridCoordinate::operator==(const GridCoordinate &other) const
    return (
      grid == other.grid
      && staff_id == other.staff_id
-     && measure_num == other.measure_num
+     && barline_num == other.barline_num
      && beat_num == other.beat_num
   );
 }
