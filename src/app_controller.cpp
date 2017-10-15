@@ -6,8 +6,10 @@
 #include <fullscore/models/plotters/destination.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
+#include <fullscore/models/floating_measure.h>
 #include <fullscore/models/grid_coordinate.h>
 #include <fullscore/models/measure.h>
+#include <fullscore/models/staff.h>
 #include <fullscore/action.h>
 
 
@@ -44,6 +46,12 @@ AppController::AppController(Display *display)
    for (auto &destination : destinations) destination_plotter->add_destination(destination);
 
    destination_plotter->plot();
+
+
+
+   Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
+   Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
+   FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
 
 
 
