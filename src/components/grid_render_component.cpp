@@ -165,23 +165,42 @@ void GridRenderComponent::render()
                   color::darkorange);
          }
 
-         // draw the measure
-         Measure::Base *measure = grid->get_measure(x,y);
-         if (!measure) continue;
+         //
+         // draw the "one-per-barline measures"
+         //
 
          // this is the hacky measure for providing context-relative transformations when rendering
          // (but, we shouldn't be doing transformations inside the renderer, so there needs to be a different approach)
          static Measure::Basic *context_measure = new Measure::Basic({Note(0), Note(2), Note(4), Note(5), Note(7), Note(9), Note(11)});
 
-         // render the actual measure
-         MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
-         measure_render_component.render();
+         // draw the measure
+         Measure::Base *measure = grid->get_measure(x,y);
+         if (measure)
+         {
+            // render the actual measure
+            MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
+            measure_render_component.render();
+         }
+
+         //
+         // draw the "floating measures"
+         //
+
+         std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> floating_measures_in_this_barline = staff->get_measures_in_barline(x);
+         if (!floating_measures_in_this_barline.empty())
+         {
+            for (auto &floating_measure : floating_measures_in_this_barline)
+            {
+               float floating_measure_x_offset = std::get<0>(floating_measure).get_beat_coordinate().get_x_offset() * full_measure_width / 4.0;
+               Measure::Base *floating_measure_measure = std::get<1>(floating_measure);
+               MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data);
+               measure_render_component.render();
+            }
+         }
       }
 
       y_counter += this_staff_height;
    }
 }
-
-
 
 
