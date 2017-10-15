@@ -65,6 +65,18 @@ run_tests: tests
 
 
 
+run_match_tests:
+	@echo "usage: make run_match_tests word_youre_trying_to_match"
+	$(eval matches := $(filter-out $@,$(MAKECMDGOALS))) # see https://stackoverflow.com/a/6273809/6072362
+	$(eval matching_test_filenames := $(shell find ./tests | grep cpp | grep $(matches)))
+	$(eval filenames_with_path_subst := $(patsubst ./%, bin/%, $(matching_test_filenames)))
+	$(eval matching_binary_filenames := $(patsubst %.cpp, %, $(filenames_with_path_subst)))
+	-rm $(matching_binary_filenames)
+	make $(matching_binary_filenames)
+	find $(matching_binary_filenames) -type f -exec {} \;
+
+
+
 bin/tests/%: tests/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling test \e[1m\e[36m$<\033[0m..."

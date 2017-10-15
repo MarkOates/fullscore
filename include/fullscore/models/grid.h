@@ -36,6 +36,7 @@ public:
    int get_num_measures() const;
 
    Staff::Base *get_staff(int y_staff);
+   std::vector<Staff::Base *> get_staves();
    bool insert_staff(Staff::Base *staff, int index);
    bool delete_staff(int index);
    bool append_staff(Staff::Base *staff);

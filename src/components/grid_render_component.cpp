@@ -16,8 +16,9 @@
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_helper.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/floating_measure.h>
 #include <fullscore/models/grid.h>
+#include <fullscore/models/staff.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/services/music_engraver.h>
 
@@ -96,7 +97,7 @@ void GridRenderComponent::render()
       al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, grid->get_voice_name(y).c_str());
 
       // horizontal guide line for the staff
-      if (staff->is_type("instrument"))
+      if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
       {
          float width = GridHelper::get_width(*grid);
          al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
@@ -109,7 +110,7 @@ void GridRenderComponent::render()
          float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
          float real_measure_width = x_pos_plus_width - x_pos;
 
-         if (staff->is_type("instrument"))
+         if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
          {
             // draw barline
             al_draw_line(x_pos_plus_width, row_middle_y-this_staff_half_height, x_pos_plus_width, row_middle_y+this_staff_half_height, color::color(color::black, 0.2), 1.0);
@@ -165,23 +166,38 @@ void GridRenderComponent::render()
                   color::darkorange);
          }
 
-         // draw the measure
-         Measure::Base *measure = grid->get_measure(x,y);
-         if (!measure) continue;
+         //
+         // draw the "one-per-barline measures"
+         //
 
          // this is the hacky measure for providing context-relative transformations when rendering
          // (but, we shouldn't be doing transformations inside the renderer, so there needs to be a different approach)
          static Measure::Basic *context_measure = new Measure::Basic({Note(0), Note(2), Note(4), Note(5), Note(7), Note(9), Note(11)});
 
-         // render the actual measure
-         MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
-         measure_render_component.render();
+         // draw the measure
+         Measure::Base *measure = grid->get_measure(x,y);
+         if (measure)
+         {
+            // render the actual measure
+            MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
+            measure_render_component.render();
+         }
+
+         //
+         // draw the "floating measures"
+         //
+
+         for (auto &floating_measure : FloatingMeasure::find_at_staff_and_barline(staff->get_id(), x))
+         {
+            float floating_measure_x_offset = floating_measure->get_coordinate().get_beat_num() * full_measure_width / 4.0;
+            Measure::Base *floating_measure_measure = Measure::find(floating_measure->get_measure_id(), Measure::FIND_OPTION_RAISE_NOT_FOUND);
+            MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data);
+            measure_render_component.render();
+         }
       }
 
       y_counter += this_staff_height;
    }
 }
-
-
 
 

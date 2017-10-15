@@ -457,6 +457,35 @@ TEST(GridTest, can_get_a_staff)
 
 
 
+TEST(GridTest, can_get_a_list_of_staves)
+{
+   Grid grid(1, 0);
+
+   Staff::Instrument instrument1(1);
+   Staff::Instrument instrument2(1);
+   Staff::Spacer spacer1(1);
+   Staff::Spacer spacer2(1);
+   Staff::Instrument instrument3(1);
+
+   grid.append_staff(&instrument1);
+   grid.append_staff(&instrument2);
+   grid.append_staff(&spacer1);
+   grid.append_staff(&spacer2);
+   grid.append_staff(&instrument3);
+
+   std::vector<Staff::Base *> expected_staves = {
+      &instrument1,
+      &instrument2,
+      &spacer1,
+      &spacer2,
+      &instrument3
+   };
+
+   ASSERT_EQ(expected_staves, grid.get_staves());
+}
+
+
+
 TEST(GridTest, when_getting_a_staff_out_of_bounds__returns_nullptr)
 {
    Grid grid(0, 1);

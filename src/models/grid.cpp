@@ -241,6 +241,13 @@ Staff::Base *Grid::get_staff(int y_staff)
 
 
 
+std::vector<Staff::Base *> Grid::get_staves()
+{
+   return voices;
+}
+
+
+
 TimeSignature Grid::get_time_signature(int index)
 {
    if (index < 0) return TimeSignature(0, Duration());

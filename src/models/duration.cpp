@@ -23,6 +23,13 @@ bool Duration::operator==(const Duration &other) const
 
 
 
+bool Duration::operator!=(const Duration &other) const
+{
+   return !(*this == other);
+}
+
+
+
 std::istream& operator>> (std::istream &i, Duration::denominator_t &denominator)
 {
    denominator = Duration::QUARTER;
