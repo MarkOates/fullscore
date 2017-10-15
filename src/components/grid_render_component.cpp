@@ -16,7 +16,7 @@
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_helper.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/floating_measure.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/staff.h>
 #include <fullscore/models/reference_cursor.h>
@@ -187,16 +187,12 @@ void GridRenderComponent::render()
          // draw the "floating measures"
          //
 
-         std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> floating_measures_in_this_barline = staff->get_measures_in_barline(x);
-         if (!floating_measures_in_this_barline.empty())
+         for (auto &floating_measure : FloatingMeasure::find_at_staff_and_barline(staff->get_id(), x))
          {
-            for (auto &floating_measure : floating_measures_in_this_barline)
-            {
-               float floating_measure_x_offset = std::get<0>(floating_measure).get_beat_coordinate().get_x_offset() * full_measure_width / 4.0;
-               Measure::Base *floating_measure_measure = std::get<1>(floating_measure);
-               MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data);
-               measure_render_component.render();
-            }
+            float floating_measure_x_offset = floating_measure->get_coordinate().get_beat_num() * full_measure_width / 4.0;
+            Measure::Base *floating_measure_measure = Measure::find(floating_measure->get_measure_id(), Measure::FIND_OPTION_RAISE_NOT_FOUND);
+            MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data);
+            measure_render_component.render();
          }
       }
 
