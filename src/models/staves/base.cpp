@@ -11,12 +11,15 @@ Staff::Base::Base(std::string type)
    : type(type)
    , id(Staff::next_id++)
    , name()
-{}
+{
+   Staff::push_back(this);
+}
 
 
 
 Staff::Base::~Base()
 {
+   Staff::remove(id);
 }
 
 
