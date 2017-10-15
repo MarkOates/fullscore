@@ -66,6 +66,34 @@ TEST(GridHorizontalCoordinate, on_construction_with_arguments_initializes_the_ex
 
 
 
+TEST(GridHorizontalCoordinate, returns_true_when_two_coordinates_are_equal)
+{
+   GridHorizontalCoordinate grid_horizontal_coordinate(98, BeatCoordinate(123));
+
+   ASSERT_EQ(true, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)) == GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+
+   ASSERT_EQ(false, GridHorizontalCoordinate(42, BeatCoordinate(999, 7, 8)) == GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(false, GridHorizontalCoordinate(42, BeatCoordinate(3, 999, 8)) == GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(false, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 999)) == GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(false, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)) == GridHorizontalCoordinate(999, BeatCoordinate(3, 7, 8)));
+}
+
+
+
+TEST(GridHorizontalCoordinate, returns_false_when_two_coordinates_are_not_equal)
+{
+   GridHorizontalCoordinate grid_horizontal_coordinate(98, BeatCoordinate(123));
+
+   ASSERT_EQ(false, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)) != GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+
+   ASSERT_EQ(true, GridHorizontalCoordinate(42, BeatCoordinate(999, 7, 8)) != GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(true, GridHorizontalCoordinate(42, BeatCoordinate(3, 999, 8)) != GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(true, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 999)) != GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)));
+   ASSERT_EQ(true, GridHorizontalCoordinate(42, BeatCoordinate(3, 7, 8)) != GridHorizontalCoordinate(999, BeatCoordinate(3, 7, 8)));
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

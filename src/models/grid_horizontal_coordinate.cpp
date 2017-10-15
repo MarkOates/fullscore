@@ -40,3 +40,17 @@ BeatCoordinate GridHorizontalCoordinate::get_beat_coordinate()
 
 
 
+bool GridHorizontalCoordinate::operator==(const GridHorizontalCoordinate &other) const
+{
+   return (this->barline_num == other.barline_num && this->beat_coordinate == other.beat_coordinate);
+}
+
+
+
+bool GridHorizontalCoordinate::operator!=(const GridHorizontalCoordinate &other) const
+{
+   return !(*this == other);
+}
+
+
+

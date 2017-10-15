@@ -19,6 +19,9 @@ public:
    void set_beat_coordinate(BeatCoordinate beat_coordinate);
    int get_barline_num();
    BeatCoordinate get_beat_coordinate();
+
+   bool operator==(const GridHorizontalCoordinate &other) const;
+   bool operator!=(const GridHorizontalCoordinate &other) const;
 };
 
 
