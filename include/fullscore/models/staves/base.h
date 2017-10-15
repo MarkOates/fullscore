@@ -41,8 +41,8 @@ namespace Staff
 
       virtual bool add_measure(GridHorizontalCoordinate coordinate, Measure::Base *measure);
       virtual bool remove_measure(int measure_id);
-      virtual std::vector<Measure::Base *> get_measures_in_barline(int barline_num);
-      virtual std::vector<Measure::Base *> get_measures();
+      virtual std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> get_measures_in_barline(int barline_num);
+      virtual std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> get_measures();
       virtual int get_num_measures();
    };
 };

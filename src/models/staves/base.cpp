@@ -74,14 +74,14 @@ bool Staff::Base::remove_measure(int measure_id)
 
 
 
-std::vector<Measure::Base *> Staff::Base::get_measures_in_barline(int barline_num)
+std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> Staff::Base::get_measures_in_barline(int barline_num)
 {
    return {};
 }
 
 
 
-std::vector<Measure::Base *> Staff::Base::get_measures()
+std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> Staff::Base::get_measures()
 {
    return {};
 }
