@@ -71,7 +71,7 @@ run_match_tests:
 	$(eval matching_test_filenames := $(shell find ./tests | grep cpp | grep $(matches)))
 	$(eval filenames_with_path_subst := $(patsubst ./%, bin/%, $(matching_test_filenames)))
 	$(eval matching_binary_filenames := $(patsubst %.cpp, %, $(filenames_with_path_subst)))
-	rm $(matching_binary_filenames)
+	-rm $(matching_binary_filenames)
 	make $(matching_binary_filenames)
 	find $(matching_binary_filenames) -type f -exec {} \;
 
