@@ -36,6 +36,12 @@ namespace Staff
       virtual bool insert_column(int at_index, Measure::Base *measure) override;
       virtual bool erase_column(int at_index) override;
       virtual bool append_column(Measure::Base *measure) override;
+
+      virtual bool add_measure(GridHorizontalCoordinate coordinate, Measure::Base *measure) override;
+      virtual bool remove_measure(int measure_id) override;
+      virtual std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> get_measures_in_barline(int barline_num) override;
+      virtual std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> get_measures() override;
+      virtual int get_num_measures() override;
    };
 };
 

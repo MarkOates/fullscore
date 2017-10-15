@@ -5,6 +5,7 @@
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/measure.h>
+#include <algorithm>
 
 
 
@@ -109,6 +110,68 @@ Measure::Base *Staff::Instrument::get_measure(int column_num)
    Measure::Base *found_measure = Measure::find(columns_of_measure_ids[column_num]);
 
    return found_measure;
+}
+
+
+
+bool Staff::Instrument::add_measure(GridHorizontalCoordinate coordinate, Measure::Base *measure)
+{
+   if (!measure) std::runtime_error("Cannot add a nullptr measure to an Instrument staff");
+
+   measures.push_back(PositionedMeasure(coordinate, measure->get_id()));
+
+   return true;
+}
+
+
+
+bool Staff::Instrument::remove_measure(int measure_id)
+{
+   bool item_removed = false;
+
+   for (unsigned i=0; i<measures.size(); i++)
+   {
+      if (measures[i].measure_id != measure_id) continue;
+      measures.erase(measures.begin()+i);
+      item_removed = true;
+      i--;
+   }
+
+   return item_removed;
+}
+
+
+
+std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> Staff::Instrument::get_measures()
+{
+   std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> results;
+
+   for (auto &measure : measures)
+      results.push_back(std::pair<GridHorizontalCoordinate, Measure::Base *>(
+         measure.coordinate, Measure::find(measure.measure_id, Measure::FIND_OPTION_RAISE_NOT_FOUND)));
+
+   return results;
+}
+
+
+
+std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> Staff::Instrument::get_measures_in_barline(int barline_num)
+{
+   std::vector<std::pair<GridHorizontalCoordinate, Measure::Base *>> results;
+
+   for (auto &measure : measures)
+      if (measure.coordinate.get_barline_num() == barline_num)
+         results.push_back(std::pair<GridHorizontalCoordinate, Measure::Base *>(
+            measure.coordinate, Measure::find(measure.measure_id, Measure::FIND_OPTION_RAISE_NOT_FOUND)));
+
+   return results;
+}
+
+
+
+int Staff::Instrument::get_num_measures()
+{
+   return measures.size();
 }
 
 
