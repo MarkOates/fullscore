@@ -3,7 +3,6 @@
 
 
 #include <fullscore/models/staves/base.h>
-#include <fullscore/models/grid_horizontal_coordinate.h>
 
 
 

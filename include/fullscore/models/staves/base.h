@@ -2,6 +2,7 @@
 
 
 
+#include <fullscore/models/grid_horizontal_coordinate.h>
 #include <string>
 #include <vector>
 
@@ -37,6 +38,12 @@ namespace Staff
       virtual bool erase_column(int at_index) = 0;
       virtual bool append_column(Measure::Base *measure) = 0;
       virtual Measure::Base *get_measure(int column_num) = 0;
+
+      virtual bool add_measure(GridHorizontalCoordinate coordinate, Measure::Base *measure);
+      virtual bool remove_measure(int measure_id);
+      virtual std::vector<Measure::Base *> get_measures_in_barline(int barline_num);
+      virtual std::vector<Measure::Base *> get_measures();
+      virtual int get_num_measures();
    };
 };
 
