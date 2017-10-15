@@ -84,13 +84,6 @@ Measure::Base *Staff::Tempo::get_measure(int column_num)
 
 
 
-std::vector<Measure::Base *> Staff::Tempo::get_measures_in(int column_num)
-{
-   return {};
-}
-
-
-
 int Staff::Tempo::get_num_columns()
 {
    return 0;
