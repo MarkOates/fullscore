@@ -106,6 +106,15 @@ namespace Staff
          }
       return false;
    }
+
+
+
+   Base *find_first_of_type(std::string type)
+   {
+      for (auto &element : pool)
+         if (element->get_type() == type) return element;
+      return nullptr;
+   }
 };
 
 

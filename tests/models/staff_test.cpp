@@ -5,6 +5,7 @@
 
 #include <fullscore/models/staff.h>
 #include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/staves/spacer.h>
 
 
 
@@ -83,6 +84,18 @@ TEST(StaffTest, with_a_staff_id_in_a_list_not_found_raises_an_exception_if_the_o
    std::vector<int> staff_ids_to_find = { basic_staff_1.get_id(), basic_staff_2.get_id(), -1 };
 
    ASSERT_THROW(Staff::find(staff_ids_to_find, Staff::FIND_OPTION_RAISE_NOT_FOUND), std::runtime_error);
+}
+
+
+
+TEST(StaffTest, finds_the_first_staff_matching_type)
+{
+   Staff::Spacer spacer_staff_1(0);
+   Staff::Instrument instrument_staff_1(0);
+   Staff::Spacer spacer_staff_2(0);
+   Staff::Instrument instrument_staff_2(0);
+
+   ASSERT_EQ(&instrument_staff_1, Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT));
 }
 
 
