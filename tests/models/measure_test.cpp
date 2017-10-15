@@ -49,7 +49,7 @@ TEST(MeasureTest, can_find_multiple_measures_by_id)
 
 
 
-TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_does_not_include_it_in_the_response_if_the_option_is_set)
+TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_does_not_include_it_in_the_response_by_default)
 {
    Measure::Basic basic_measure_1;
    Measure::Basic basic_measure_2;
@@ -57,7 +57,7 @@ TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_does_not_include_it_in_t
    std::vector<int> measure_ids_to_find = { basic_measure_1.get_id(), -1, basic_measure_2.get_id(), -2 };
    std::vector<Measure::Base *> expected_returned_measures = { &basic_measure_1, &basic_measure_2 };
 
-   ASSERT_EQ(expected_returned_measures, Measure::find(measure_ids_to_find, false));
+   ASSERT_EQ(expected_returned_measures, Measure::find(measure_ids_to_find));
 }
 
 
@@ -70,7 +70,7 @@ TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_does_include_it_in_the_r
    std::vector<int> measure_ids_to_find = { basic_measure_1.get_id(), -1, basic_measure_2.get_id(), -2 };
    std::vector<Measure::Base *> expected_returned_measures = { &basic_measure_1, nullptr, &basic_measure_2, nullptr };
 
-   ASSERT_EQ(expected_returned_measures, Measure::find(measure_ids_to_find, true));
+   ASSERT_EQ(expected_returned_measures, Measure::find(measure_ids_to_find, Measure::FIND_OPTION_INCLUDE_NOT_FOUND));
 }
 
 
@@ -82,7 +82,7 @@ TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_raises_an_exception_if_t
 
    std::vector<int> measure_ids_to_find = { basic_measure_1.get_id(), basic_measure_2.get_id(), -1 };
 
-   ASSERT_THROW(Measure::find(measure_ids_to_find, false, true), std::runtime_error);
+   ASSERT_THROW(Measure::find(measure_ids_to_find, Measure::FIND_OPTION_RAISE_NOT_FOUND), std::runtime_error);
 }
 
 

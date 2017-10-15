@@ -37,7 +37,7 @@ namespace Measure
    extern bool remove(int id);
    extern int count();
    extern Base *find(int id, find_option_t find_option=FIND_OPTION_NONE);
-   extern std::vector<Base *> find(std::vector<int> ids, bool include_not_found=false, bool raise_not_found=false);
+   extern std::vector<Base *> find(std::vector<int> ids, find_option_t find_option=FIND_OPTION_NONE);
    extern bool destroy(int id);
 };
 
