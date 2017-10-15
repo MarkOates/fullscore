@@ -18,6 +18,7 @@
 #include <fullscore/helpers/grid_helper.h>
 #include <fullscore/models/Note.h>
 #include <fullscore/models/grid.h>
+#include <fullscore/models/staff.h>
 #include <fullscore/models/reference_cursor.h>
 #include <fullscore/services/music_engraver.h>
 
@@ -96,7 +97,7 @@ void GridRenderComponent::render()
       al_draw_text(text_font, color::black, -30, label_text_top_y, ALLEGRO_ALIGN_RIGHT, grid->get_voice_name(y).c_str());
 
       // horizontal guide line for the staff
-      if (staff->is_type("instrument"))
+      if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
       {
          float width = GridHelper::get_width(*grid);
          al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
@@ -109,7 +110,7 @@ void GridRenderComponent::render()
          float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
          float real_measure_width = x_pos_plus_width - x_pos;
 
-         if (staff->is_type("instrument"))
+         if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
          {
             // draw barline
             al_draw_line(x_pos_plus_width, row_middle_y-this_staff_half_height, x_pos_plus_width, row_middle_y+this_staff_half_height, color::color(color::black, 0.2), 1.0);

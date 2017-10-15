@@ -5,6 +5,7 @@
 
 #include <fullscore/models/measures/base.h>
 #include <fullscore/models/measure.h>
+#include <fullscore/models/staff.h>
 #include <algorithm>
 
 
@@ -18,7 +19,7 @@ Staff::Instrument::PositionedMeasure::PositionedMeasure(GridHorizontalCoordinate
 
 
 Staff::Instrument::Instrument(int num_columns)
-   : Base("instrument")
+   : Base(Staff::TYPE_IDENTIFIER_INSTRUMENT)
    , columns_of_measure_ids()
    , measures()
 {

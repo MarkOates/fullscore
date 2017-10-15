@@ -9,6 +9,9 @@
 
 namespace Staff
 {
+   std::string const TYPE_IDENTIFIER_NONE       = "none";
+   std::string const TYPE_IDENTIFIER_INSTRUMENT = "instrument";
+
    enum find_option_t
    {
       FIND_OPTION_NONE = 0,
