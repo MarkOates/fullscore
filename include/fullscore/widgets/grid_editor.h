@@ -17,6 +17,8 @@ class ReferenceCursor;
 class UIGridEditor : public UIWidget
 {
 public:
+   friend class UIGridEditorRenderComponent;
+
    class RenderingDependencies
    {
    public:

@@ -3,6 +3,16 @@
 
 #include <fullscore/components/ui_grid_editor_render_component.h>
 
+#include <allegro_flare/gui/surface_areas/box_padded.h>
+#include <allegro_flare/gui/surface_areas/box_padded.h>
+#include <fullscore/components/grid_render_component.h>
+#include <fullscore/helpers/duration_helper.h>
+#include <fullscore/helpers/grid_helper.h>
+#include <fullscore/models/playback_control.h>
+#include <fullscore/services/music_engraver.h>
+#include <allegro_flare/allegro_flare.h>
+#include <cmath>
+
 
 
 UIGridEditorRenderComponent::UIGridEditorRenderComponent(UIGridEditor &ui_grid_editor)
@@ -20,6 +30,19 @@ UIGridEditorRenderComponent::~UIGridEditorRenderComponent()
 
 void UIGridEditorRenderComponent::render()
 {
+   Grid &grid                                                  = ui_grid_editor.grid;
+   MusicEngraver &music_engraver                               = ui_grid_editor.music_engraver;
+   float &FULL_MEASURE_WIDTH                                   = ui_grid_editor.FULL_MEASURE_WIDTH;
+   float &STAFF_HEIGHT                                         = ui_grid_editor.STAFF_HEIGHT;
+   UIGridEditor::state_t &state                                = ui_grid_editor.state;
+   UISurfaceAreaBase *&surface_area                            = ui_grid_editor.surface_area;
+   UIGridEditor::RenderingDependencies &rendering_dependencies = ui_grid_editor.rendering_dependencies;
+   bool &showing_debug_data                                    = ui_grid_editor.showing_debug_data;
+   int &measure_cursor_y                                       = ui_grid_editor.measure_cursor_y;
+   int &note_cursor_x                                          = ui_grid_editor.note_cursor_x;
+   PlaybackControl &playback_control                           = ui_grid_editor.playback_control;
+
+
    // get_width_of_score
    float grid_real_width = GridHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
    float grid_real_height = grid.get_height() * STAFF_HEIGHT;
@@ -29,7 +52,7 @@ void UIGridEditorRenderComponent::render()
    UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
    sa->get_padding(&pt, &pr, &pb, &pl);
 
-   if (state == STATE_ACTIVE)
+   if (state == UIGridEditor::STATE_ACTIVE)
    {
       // draw a background for the score
       float padding = 30;
@@ -43,18 +66,18 @@ void UIGridEditorRenderComponent::render()
    grid_render_component.set_showing_debug_data(showing_debug_data);
    grid_render_component.render();
 
-   if (state != STATE_ACTIVE) return;
+   if (state != UIGridEditor::STATE_ACTIVE) return;
 
    // draw a hilight box under the focused measure
-   Measure::Base *measure = get_measure_at_cursor();
+   Measure::Base *measure = ui_grid_editor.get_measure_at_cursor();
 
-   Note *note = get_note_at_cursor();
-   float CACHED_get_measure_cursor_real_x = get_measure_cursor_real_x();
-   float CACHED_get_measure_cursor_real_y = get_measure_cursor_real_y();
+   Note *note = ui_grid_editor.get_note_at_cursor();
+   float CACHED_get_measure_cursor_real_x = ui_grid_editor.get_measure_cursor_real_x();
+   float CACHED_get_measure_cursor_real_y = ui_grid_editor.get_measure_cursor_real_y();
 
    // draw the measure
 
-   float measure_width = get_measure_width(measure) * FULL_MEASURE_WIDTH;
+   float measure_width = ui_grid_editor.get_measure_width(measure) * FULL_MEASURE_WIDTH;
    if (measure && measure->get_num_notes() == 0) measure_width = 16;
 
    // measure box fill
@@ -63,7 +86,7 @@ void UIGridEditorRenderComponent::render()
       4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
-   if (is_measure_target_mode())
+   if (ui_grid_editor.is_measure_target_mode())
    {
       float thickness = 2.0;
       float h_thickness = thickness * 0.5;
@@ -99,9 +122,9 @@ void UIGridEditorRenderComponent::render()
          cursor_color, 3.0);
 
    // draw a hilight box at the focused note
-   if (is_note_target_mode() && note)
+   if (ui_grid_editor.is_note_target_mode() && note)
    {
-      float note_real_offset_x = get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
+      float note_real_offset_x = ui_grid_editor.get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
       float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
 
       // note box fill
