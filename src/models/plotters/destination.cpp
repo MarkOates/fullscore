@@ -5,13 +5,14 @@
 
 #include <fullscore/models/measures/plotted.h>
 #include <fullscore/models/grid.h>
+#include <fullscore/models/plotter.h>
 #include <allegro_flare/useful.h>
 #include <algorithm>
 
 
 
 Plotter::Destination::Destination()
-   : Base("destination")
+   : Base(Plotter::TYPE_IDENTIFIER_DESTINATION)
    , destinations()
 {}
 
