@@ -3,7 +3,7 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/models/plotters/destination.h>
+#include <fullscore/models/plotters/basic.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/floating_measure.h>
@@ -35,23 +35,18 @@ AppController::AppController(Display *display)
 
 
 
-   Plotter::Destination *destination_plotter = new Plotter::Destination();
+   Plotter::Basic basic_plotter_1 = Plotter::Basic(&current_grid_editor->grid, 3, Note(-1, Duration(Duration::HALF, 1)));
+   basic_plotter_1.plot();
 
-   std::vector<GridCoordinate> destinations = {
-      GridCoordinate(&current_grid_editor->grid, 2, 3, 0),
-      GridCoordinate(&current_grid_editor->grid, 3, 2, 0),
-      GridCoordinate(&current_grid_editor->grid, 4, 3, 0)
-   };
-
-   for (auto &destination : destinations) destination_plotter->add_destination(destination);
-
-   destination_plotter->plot();
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&current_grid_editor->grid, 5, Note(-3, Duration(Duration::HALF, 1)));
+   basic_plotter_2.plot();
 
 
-
+/*
    Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
    Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
    FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
+*/
 
 
 
