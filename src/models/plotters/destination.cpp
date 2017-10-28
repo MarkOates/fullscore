@@ -93,7 +93,7 @@ bool Plotter::Destination::plot()
       }
 
       // create the measure
-      Measure::Plotted *plotted_measure = new Measure::Plotted(this);
+      Measure::Plotted *plotted_measure = new Measure::Plotted({ Note(2, Duration::QUARTER) });
 
       if (!destination_grid->set_measure(barline_num, staff_id, plotted_measure))
       {
