@@ -3,7 +3,6 @@
 
 #include <fullscore/app_controller.h>
 
-#include <fullscore/models/plotters/basic.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/floating_measure.h>
@@ -32,23 +31,6 @@ AppController::AppController(Display *display)
    UIScreen::draw_focused_outline = false;
 
    set_current_grid_editor(create_new_grid_editor("string_quartet"));
-
-
-
-   Plotter::Basic basic_plotter_1 = Plotter::Basic(&current_grid_editor->grid, 3, Note(-1, Duration(Duration::HALF, 1)));
-   basic_plotter_1.plot();
-
-   Plotter::Basic basic_plotter_2 = Plotter::Basic(&current_grid_editor->grid, 5, Note(-3, Duration(Duration::HALF, 1)));
-   basic_plotter_2.plot();
-
-
-/*
-   Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
-   Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
-   FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
-*/
-
-
 
    set_keyboard_input_mappings();
 }

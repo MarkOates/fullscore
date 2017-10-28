@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/measures/basic.h>
+#include <fullscore/models/plotters/basic.h>
 #include <fullscore/models/staves/harmonic_analysis.h>
 #include <fullscore/models/staves/measure_numbers.h>
 #include <fullscore/models/staves/instrument.h>
@@ -120,6 +121,24 @@ Grid GridFactory::string_quartet()
          grid.set_voice_name(i, voices[i]);
       }
    }
+
+
+
+   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, Note(-1, Duration(Duration::HALF, 1)));
+   basic_plotter_1.plot();
+
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, Note(-3, Duration(Duration::HALF, 1)));
+   basic_plotter_2.plot();
+
+
+/*
+   Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
+   Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
+   FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
+*/
+
+
+
 
    return grid;
 }
