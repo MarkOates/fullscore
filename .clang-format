@@ -20,7 +20,7 @@ AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true # OK
 BinPackArguments: false # OK
 BinPackParameters: false # OK
-BraceWrapping:   
+BraceWrapping:
   AfterClass:      false #OK
   AfterControlStatement: true #OK
   AfterEnum:       true #OK
@@ -56,7 +56,7 @@ DisableFormat:   false # yea, why would I want to disable format? formatting is 
 ExperimentalAutoDetectBinPacking: false
 FixNamespaceComments: false #Guud
 ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
-IncludeCategories: 
+IncludeCategories:
   - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
     Priority:        2
   - Regex:           '^(<|"(gtest|isl|json)/)'
