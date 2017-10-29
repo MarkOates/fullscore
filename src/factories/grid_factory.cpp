@@ -177,6 +177,7 @@ Grid GridFactory::full_score()
 
 Grid GridFactory::development()
 {
+   /*
    std::vector<std::string> voices = {
       MEASURE_NUMBERS,
       TEMPO,
@@ -244,7 +245,11 @@ Grid GridFactory::development()
          grid.set_voice_name(i, voices[i]);
       }
    }
+   */
 
+
+
+   Grid grid = create("full_score");
 
 
    std::vector<Note> notes_to_plot = {
