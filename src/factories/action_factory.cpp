@@ -21,34 +21,22 @@
 #include <fullscore/actions/transforms/ToggleRest.h>
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
-#include <fullscore/actions/append_column_to_grid_action.h>
-#include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
-#include <fullscore/actions/delete_measure_action.h>
-#include <fullscore/actions/delete_grid_column_action.h>
-#include <fullscore/actions/delete_staff_action.h>
-#include <fullscore/actions/insert_column_action.h>
-#include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
-#include <fullscore/actions/paste_measure_from_buffer_to_grid_coordinates_action.h>
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_grid_action.h>
-#include <fullscore/actions/set_basic_measure_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
 #include <fullscore/actions/set_command_mode_action.h>
 #include <fullscore/actions/set_current_grid_editor_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
-#include <fullscore/actions/set_reference_by_coordinate_measure_action.h>
-#include <fullscore/actions/set_reference_by_id_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
-#include <fullscore/actions/set_stack_measure_action.h>
 #include <fullscore/actions/set_time_signature_numerator_action.h>
 #include <fullscore/actions/start_motion_action.h>
 #include <fullscore/actions/toggle_edit_mode_target_action.h>
@@ -242,24 +230,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorRight(current_grid_editor);
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
-   else if (action_identifier == "set_basic_measure")
-      action = new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "set_stack_measure")
-      action = new Action::SetStackMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "insert_column")
-      action = new Action::InsertColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_identifier == "delete_measure")
-      action = new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "delete_grid_column")
-      action = new Action::DeleteGridColumn(&current_grid_editor->grid, current_grid_editor->measure_cursor_x);
-   else if (action_identifier == "insert_staff")
-      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "delete_staff")
-      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == Action::APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER)
-      action = new Action::AppendColumnToGrid(&current_grid_editor->grid);
-   else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
-      action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_identifier == "set_time_signature_numerator_2")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
    else if (action_identifier == "set_time_signature_numerator_3")
@@ -286,24 +256,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
             << "\" action disabled when there is already a measure present at this location";
          throw std::runtime_error(error_message.str());
       }
-   }
-   else if (action_identifier == "set_reference_by_coordinate_measure")
-   {
-      std::stringstream error_message;
-      error_message
-         << "the \""
-         << Action::SET_REFERENCE_BY_COORDINATE_MEASURE_ACTION_IDENTIFIER
-         << "\" action is currently disabled - no reference coordinates are available";
-      throw std::runtime_error(error_message.str());
-   }
-   else if (action_identifier == "set_reference_by_id_measure")
-   {
-      std::stringstream error_message;
-      error_message
-         << "the \""
-         << Action::SET_REFERENCE_BY_ID_MEASURE_ACTION_IDENTIFIER
-         << "\" action is currently disabled - no reference coordinates are available";
-      throw std::runtime_error(error_message.str());
    }
 
    return action;
