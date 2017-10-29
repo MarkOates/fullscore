@@ -175,7 +175,7 @@ Grid GridFactory::full_score()
 
 
 
-Grid GridFactory::testing_template()
+Grid GridFactory::development()
 {
    std::vector<std::string> voices = {
       MEASURE_NUMBERS,
@@ -280,7 +280,7 @@ Grid GridFactory::create(std::string identifier)
    if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
    if (identifier == "full_score") return full_score();
    if (identifier == "string_quartet") return string_quartet();
-   if (identifier == "testing_template") return testing_template();
+   if (identifier == "development") return development();
 
    std::cout << "Could not find score " << identifier << std::endl;
    return Grid(4, 1);
