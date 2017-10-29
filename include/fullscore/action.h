@@ -29,7 +29,6 @@ namespace Action
    std::string const SET_CURRENT_GRID_EDITOR_ACTION_IDENTIFIER = "set_current_grid_editor";
    std::string const SET_MODE_ACTION_IDENTIFIER = "set_mode";
    std::string const SET_NORMAL_MODE_ACTION_IDENTIFIER = "set_normal_mode";
-   std::string const SET_REFERENCE_BY_COORDINATE_MEASURE_ACTION_IDENTIFIER = "set_reference_by_coordinate_measure";
    std::string const SET_REFERENCE_BY_ID_MEASURE_ACTION_IDENTIFIER = "set_reference_by_id_measure";
    std::string const SET_SCORE_ZOOM_ACTION_IDENTIFIER = "set_score_zoom";
    std::string const SET_STACK_MEASURE_ACTION_IDENTIFIER = "set_stack_measure";

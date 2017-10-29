@@ -43,7 +43,7 @@ void UIGridEditorRenderComponent::render()
 
 
    // get_width_of_score
-   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_barlines()) * FULL_MEASURE_WIDTH;
    float grid_real_height = grid.get_height() * STAFF_HEIGHT;
 
    // draw the bounding box for the widget

@@ -20,18 +20,18 @@ TEST(GridTest, creates_successfully)
 
 
 
-TEST(GridTest, returns_the_number_of_staves)
+TEST(GridTest, returns_the_number_of_barlines)
 {
    Grid grid(17, 13);
-   EXPECT_EQ(13, grid.get_num_staves());
+   EXPECT_EQ(17, grid.get_num_barlines());
 }
 
 
 
-TEST(GridTest, returns_the_number_of_measures)
+TEST(GridTest, returns_the_number_of_staves)
 {
-   Grid grid(17, 3);
-   EXPECT_EQ(17, grid.get_num_measures());
+   Grid grid(17, 13);
+   EXPECT_EQ(13, grid.get_num_staves());
 }
 
 
@@ -48,44 +48,6 @@ TEST(GridTest, sets_and_gets_the_name_of_a_row)
 
    EXPECT_EQ(true, grid.set_voice_name(2, "Tuba"));
    EXPECT_EQ("Tuba", grid.get_voice_name(2));
-}
-
-
-
-TEST(GridTest, sets_and_gets_a_measure_at_a_coordinate)
-{
-   Grid grid(17, 13);
-
-   Measure::Basic *basic_measure = new Measure::Basic();
-
-   EXPECT_TRUE(grid.set_measure(3, 7, basic_measure));
-
-   Measure::Base *retrieved_measure = grid.get_measure(3, 7);
-   ASSERT_NE(nullptr, retrieved_measure);
-   ASSERT_TRUE(retrieved_measure->is_type(Measure::TYPE_IDENTIFIER_BASIC));
-
-   int expected_id = basic_measure->get_id();
-   int returned_id = retrieved_measure->get_id();
-
-   EXPECT_EQ(expected_id, returned_id);
-}
-
-
-
-TEST(GridTest, can_delete_a_measure)
-{
-   Grid grid(17, 13);
-
-   Measure::Basic *basic_measure = new Measure::Basic();
-   EXPECT_TRUE(grid.set_measure(3, 7, basic_measure));
-
-   Measure::Base *retrieved_measure = grid.get_measure(3, 7);
-   ASSERT_NE(nullptr, retrieved_measure);
-
-   grid.delete_measure(3, 7);
-
-   Measure::Base  *expected_null_retrieved_measure = grid.get_measure(3, 7);
-   ASSERT_EQ(nullptr, expected_null_retrieved_measure);
 }
 
 

@@ -54,7 +54,7 @@ void GridRenderComponent::render()
 
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
-   for (int x=0; x<grid->get_num_measures(); x++)
+   for (int x=0; x<grid->get_num_barlines(); x++)
    {
       float x_pos = GridDimensionsHelper::get_length_to_measure(*grid, x) * full_measure_width;
       TimeSignature time_signature = grid->get_time_signature(x);
@@ -93,7 +93,7 @@ void GridRenderComponent::render()
       }
 
       // draw the measures
-      for (int x=0; x<grid->get_num_measures(); x++)
+      for (int x=0; x<grid->get_num_barlines(); x++)
       {
          float x_pos = GridDimensionsHelper::get_length_to_measure(*grid, x) * full_measure_width;
          float x_pos_plus_width = GridDimensionsHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
@@ -141,25 +141,12 @@ void GridRenderComponent::render()
          }
 
          //
-         // draw the "one-per-barline measures"
+         // draw the "floating measures"
          //
 
          // this is the hacky measure for providing context-relative transformations when rendering
          // (but, we shouldn't be doing transformations inside the renderer, so there needs to be a different approach)
          static Measure::Basic *context_measure = new Measure::Basic({Note(0), Note(2), Note(4), Note(5), Note(7), Note(9), Note(11)});
-
-         // draw the measure
-         Measure::Base *measure = grid->get_measure(x,y);
-         if (measure)
-         {
-            // render the actual measure
-            MeasureRenderComponent measure_render_component(context_measure, measure, music_engraver, full_measure_width, x_pos, y_counter, row_middle_y, this_staff_height, showing_debug_data);
-            measure_render_component.render();
-         }
-
-         //
-         // draw the "floating measures"
-         //
 
          for (auto &floating_measure : FloatingMeasure::find_at_staff_and_barline(staff->get_id(), x))
          {

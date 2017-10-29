@@ -19,7 +19,7 @@
 UIGridEditor::UIGridEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
-   , grid(0, 0)
+   , grid()
    , playback_control()
    , measure_cursor_x(0)
    , measure_cursor_y(0)
@@ -50,7 +50,7 @@ void UIGridEditor::on_timer()
    playback_control.update(Framework::time_now);
 
    // match the width of the widget to the width of the score
-   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_barlines()) * FULL_MEASURE_WIDTH;
    float grid_real_height = grid.get_num_staves() * STAFF_HEIGHT;
 
    place.size = vec2d(grid_real_width, grid_real_height);
@@ -61,7 +61,8 @@ void UIGridEditor::on_timer()
 
 Measure::Base *UIGridEditor::get_measure_at_cursor()
 {
-   return grid.get_measure(measure_cursor_x, measure_cursor_y);
+   // this is the next milestone
+   throw std::runtime_error("UIGridEditor::get_measure_at_cursor() has been disabled");
 }
 
 
@@ -127,8 +128,8 @@ float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probabl
 
 int UIGridEditor::move_measure_cursor_x(int delta)
 {
-   int num_measures = grid.get_num_measures();
-   measure_cursor_x = limit<int>(0, num_measures-1, measure_cursor_x + delta);
+   int num_barlines = grid.get_num_barlines();
+   measure_cursor_x = limit<int>(0, num_barlines-1, measure_cursor_x + delta);
    return measure_cursor_x;
 }
 
@@ -147,7 +148,8 @@ int UIGridEditor::move_measure_cursor_y(int delta)
 
 int UIGridEditor::move_note_cursor_x(int delta)
 {
-   Measure::Base *current_measure = grid.get_measure(measure_cursor_x, measure_cursor_y);
+   throw std::runtime_error("UIGridEditor::move_note_cursor_x has been disabled");
+   Measure::Base *current_measure = nullptr;
    if (!current_measure)
    {
       note_cursor_x = 0;
