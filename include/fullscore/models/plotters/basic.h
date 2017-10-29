@@ -4,6 +4,7 @@
 
 #include <fullscore/models/plotters/base.h>
 #include <fullscore/models/Note.h>
+#include <vector>
 
 
 
@@ -18,10 +19,10 @@ namespace Plotter
    private:
       Grid *grid;
       int barline_num;
-      Note note;
+      std::vector<Note> notes;
 
    public:
-      Basic(Grid *grid, int barline_num, Note note);
+      Basic(Grid *grid, int barline_num, std::vector<Note> notes);
       ~Basic();
 
       bool plot() override;

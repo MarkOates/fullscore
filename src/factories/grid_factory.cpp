@@ -10,6 +10,7 @@
 #include <fullscore/models/staves/spacer.h>
 #include <fullscore/models/staves/tempo.h>
 #include <fullscore/models/Note.h>
+#include <fullscore/transforms/retrograde_transform.h>
 #include <allegro_flare/useful.h>
 #include <iostream>
 
@@ -246,10 +247,19 @@ Grid GridFactory::testing_template()
 
 
 
-   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, Note(-1, Duration(Duration::HALF, 1)));
+   std::vector<Note> notes_to_plot = {
+      Note(-1, Duration(Duration::QUARTER, 1)),
+      Note(0, Duration(Duration::QUARTER, 1)),
+      Note(1, Duration(Duration::EIGHTH)),
+      Note(2, Duration(Duration::EIGHTH)),
+   };
+
+   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, notes_to_plot);
    basic_plotter_1.plot();
 
-   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, Note(-3, Duration(Duration::HALF, 1)));
+   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
    basic_plotter_2.plot();
 
 
