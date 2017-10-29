@@ -10,4 +10,5 @@ allegro.log
 *.obj
 *.exe
 
+.DS_Store
 
