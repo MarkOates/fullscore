@@ -26,7 +26,7 @@ Action::Transform::InsertNote::~InsertNote()
 
 bool Action::Transform::InsertNote::execute()
 {
-   if (!notes) throw std::runtime_error("Cannot transform NULL notes");
+   if (!notes) throw std::runtime_error("Cannot InsertNote NULL notes");
 
    ::Transform::InsertNote insert_note_transform(at_index, note);
    *notes = insert_note_transform.transform(*notes);

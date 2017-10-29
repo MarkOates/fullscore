@@ -27,7 +27,7 @@ Action::Transform::Invert::~Invert()
 
 bool Action::Transform::Invert::execute()
 {
-   if (!note) return false;
+   if (!note) throw std::runtime_error("Cannot Invert nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);

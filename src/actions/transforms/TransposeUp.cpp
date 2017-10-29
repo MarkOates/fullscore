@@ -26,7 +26,7 @@ Action::Transform::TransposeUp::~TransposeUp()
 
 bool Action::Transform::TransposeUp::execute()
 {
-   if (!note) return false;
+   if (!note) throw std::runtime_error("Cannot TransposeUp on a nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
