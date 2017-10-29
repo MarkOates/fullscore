@@ -227,12 +227,103 @@ Grid GridFactory::full_score()
 
 
 
+Grid GridFactory::testing_template()
+{
+   std::vector<std::string> voices = {
+      MEASURE_NUMBERS,
+      TEMPO,
+      "Violin I",
+      "Violin II",
+      "Viola",
+      "Cello",
+      HARMONIC_ANALYSIS,
+   };
+
+   const int NUM_MEASURES = 20;
+
+   Grid grid(NUM_MEASURES, 0);
+
+   for (int i=0; i<voices.size(); i++)
+   {
+      if (voices[i] == MEASURE_NUMBERS)
+      {
+         grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
+      }
+      else if (voices[i] == SPACER)
+      {
+         grid.append_staff(new Staff::Spacer(NUM_MEASURES));
+      }
+      else if (voices[i] == HARMONIC_ANALYSIS)
+      {
+         Staff::HarmonicAnalysis *staff = new Staff::HarmonicAnalysis(NUM_MEASURES);
+         grid.append_staff(staff);
+
+         staff->set_symbol(
+            GridHorizontalCoordinate(0, 0),
+            HarmonicAnalysisSymbol(Pitch(6, -1), HarmonicAnalysisSymbol::DIMINISHED, 1, {})
+         );
+
+         staff->set_symbol(
+            GridHorizontalCoordinate(1, 2),
+            HarmonicAnalysisSymbol(Pitch(9, 0), HarmonicAnalysisSymbol::MAJOR, 1, {})
+         );
+
+         staff->set_symbol(
+            GridHorizontalCoordinate(2, 0),
+            HarmonicAnalysisSymbol(Pitch(10, 0), HarmonicAnalysisSymbol::MINOR, 1, {})
+         );
+
+         staff->set_symbol(
+            GridHorizontalCoordinate(3, 2),
+            HarmonicAnalysisSymbol(Pitch(4, 0), HarmonicAnalysisSymbol::AUGMENTED, 1, {})
+         );
+
+         staff->set_symbol(
+            GridHorizontalCoordinate(4, 0),
+            HarmonicAnalysisSymbol(Pitch(3, 0), HarmonicAnalysisSymbol::MAJOR, 1, {})
+         );
+      }
+      else if (voices[i] == TEMPO)
+      {
+         Staff::Tempo *tempo_staff = new Staff::Tempo(NUM_MEASURES);
+         grid.append_staff(tempo_staff);
+         TempoMarking tempo_marking(Duration(Duration::QUARTER), 128);
+         tempo_staff->set_tempo_marking(0, 0, tempo_marking);
+      }
+      else
+      {
+         grid.append_staff(new Staff::Instrument(NUM_MEASURES));
+         grid.set_voice_name(i, voices[i]);
+      }
+   }
+
+
+
+   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, Note(-1, Duration(Duration::HALF, 1)));
+   basic_plotter_1.plot();
+
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, Note(-3, Duration(Duration::HALF, 1)));
+   basic_plotter_2.plot();
+
+
+/*
+   Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
+   Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
+   FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
+*/
+
+   return grid;
+}
+
+
+
 Grid GridFactory::create(std::string identifier)
 {
    if (identifier == "big_score") return big_score();
    if (identifier == "twinkle_twinkle") return twinkle_twinkle_little_star();
    if (identifier == "full_score") return full_score();
    if (identifier == "string_quartet") return string_quartet();
+   if (identifier == "testing_template") return testing_template();
 
    std::cout << "Could not find score " << identifier << std::endl;
    return Grid(4, 1);
