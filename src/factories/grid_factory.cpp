@@ -153,6 +153,38 @@ Grid GridFactory::development()
 */
 
    Grid grid;
+
+
+   grid.append_staff(new Staff::MeasureNumbers);
+   grid.append_staff(new Staff::Tempo);
+   grid.append_staff(new Staff::Instrument);
+   grid.append_staff(new Staff::Instrument);
+   grid.append_staff(new Staff::Instrument);
+
+
+   grid.get_staff(0)->set_name("measure numbers");
+   grid.get_staff(1)->set_name("tempo");
+   grid.get_staff(2)->set_name("Trumpet I");
+   grid.get_staff(3)->set_name("Trumpet II");
+   grid.get_staff(4)->set_name("Trombone");
+
+
+   std::vector<Note> notes_to_plot = {
+      Note(-1, Duration(Duration::QUARTER, 1)),
+      Note(0, Duration(Duration::QUARTER, 1)),
+      Note(1, Duration(Duration::EIGHTH)),
+      Note(2, Duration(Duration::EIGHTH)),
+   };
+
+   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, notes_to_plot);
+   basic_plotter_1.plot();
+
+   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
+   basic_plotter_2.plot();
+
+
    return grid;
 }
 
