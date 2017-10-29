@@ -18,8 +18,8 @@
 class AppController : public UIScreen
 {
 public:
+   Config &config;
    SimpleNotificationScreen *simple_notification_screen;
-
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
    UIGridEditor *current_grid_editor;
@@ -33,7 +33,7 @@ public:
    KeyboardCommandMapper normal_mode_note_keyboard_mappings;
    KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
 
-   AppController(Display *display);
+   AppController(Display *display, Config &config);
    void primary_timer_func() override;
    void key_char_func() override;
    void on_message(UIWidget *sender, std::string message) override;

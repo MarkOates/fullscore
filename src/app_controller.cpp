@@ -13,8 +13,9 @@
 
 
 
-AppController::AppController(Display *display)
+AppController::AppController(Display *display, Config &config)
    : UIScreen(display)
+   , config(config)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
@@ -30,7 +31,8 @@ AppController::AppController(Display *display)
 {
    UIScreen::draw_focused_outline = false;
 
-   set_current_grid_editor(create_new_grid_editor("string_quartet"));
+   std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
+   set_current_grid_editor(create_new_grid_editor(init_template_identifier));
 
    set_keyboard_input_mappings();
 }
