@@ -47,11 +47,6 @@ bool Grid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
    // bounds check
    if (!in_grid_range(x_measure, y_staff)) return false;
 
-   // WARNING
-   // this implementation directly assigns a measure to the voice, assuming
-   // that a voice has measures, and the voice's measures are of Measure::Base type
-   // this should likely be handled by a method on the Row, like
-   // voices[i]->set_measure(x_measure, measure);
    voices[y_staff]->set_column(x_measure, measure);
    return true;
 }
