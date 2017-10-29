@@ -61,7 +61,6 @@ Grid GridFactory::string_quartet()
       "Violin II",
       "Viola",
       "Cello",
-      HARMONIC_ANALYSIS,
    };
 
    const int NUM_MEASURES = 20;
@@ -73,40 +72,6 @@ Grid GridFactory::string_quartet()
       if (voices[i] == MEASURE_NUMBERS)
       {
          grid.append_staff(new Staff::MeasureNumbers(NUM_MEASURES));
-      }
-      else if (voices[i] == SPACER)
-      {
-         grid.append_staff(new Staff::Spacer(NUM_MEASURES));
-      }
-      else if (voices[i] == HARMONIC_ANALYSIS)
-      {
-         Staff::HarmonicAnalysis *staff = new Staff::HarmonicAnalysis(NUM_MEASURES);
-         grid.append_staff(staff);
-
-         staff->set_symbol(
-            GridHorizontalCoordinate(0, 0),
-            HarmonicAnalysisSymbol(Pitch(6, -1), HarmonicAnalysisSymbol::DIMINISHED, 1, {})
-         );
-
-         staff->set_symbol(
-            GridHorizontalCoordinate(1, 2),
-            HarmonicAnalysisSymbol(Pitch(9, 0), HarmonicAnalysisSymbol::MAJOR, 1, {})
-         );
-
-         staff->set_symbol(
-            GridHorizontalCoordinate(2, 0),
-            HarmonicAnalysisSymbol(Pitch(10, 0), HarmonicAnalysisSymbol::MINOR, 1, {})
-         );
-
-         staff->set_symbol(
-            GridHorizontalCoordinate(3, 2),
-            HarmonicAnalysisSymbol(Pitch(4, 0), HarmonicAnalysisSymbol::AUGMENTED, 1, {})
-         );
-
-         staff->set_symbol(
-            GridHorizontalCoordinate(4, 0),
-            HarmonicAnalysisSymbol(Pitch(3, 0), HarmonicAnalysisSymbol::MAJOR, 1, {})
-         );
       }
       else if (voices[i] == TEMPO)
       {
@@ -121,24 +86,6 @@ Grid GridFactory::string_quartet()
          grid.set_voice_name(i, voices[i]);
       }
    }
-
-
-
-   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, Note(-1, Duration(Duration::HALF, 1)));
-   basic_plotter_1.plot();
-
-   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, Note(-3, Duration(Duration::HALF, 1)));
-   basic_plotter_2.plot();
-
-
-/*
-   Measure::Basic *basic_measure = new Measure::Basic({ Note(1), Note(-5), Note(3) });
-   Staff::Base *staff_to_put_measure = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
-   FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
-*/
-
-
-
 
    return grid;
 }
