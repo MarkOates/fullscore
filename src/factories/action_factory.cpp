@@ -294,15 +294,23 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       }
    }
    else if (action_identifier == "set_reference_by_coordinate_measure")
-      action = new Action::SetReferenceByCoordinateMeasure(
-            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
-            app_controller->reference_cursor.get_grid(), app_controller->reference_cursor.get_x(), app_controller->reference_cursor.get_y()
-         );
+   {
+      std::stringstream error_message;
+      error_message
+         << "the \""
+         << Action::SET_REFERENCE_BY_COORDINATE_MEASURE_ACTION_IDENTIFIER
+         << "\" action is currently disabled - no reference coordinates are available";
+      throw std::runtime_error(error_message.str());
+   }
    else if (action_identifier == "set_reference_by_id_measure")
-      action = new Action::SetReferenceByIDMeasure(
-            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y,
-            measure_at_reference_cursor ? measure_at_reference_cursor->get_id() : Measure::NO_RECORD
-         );
+   {
+      std::stringstream error_message;
+      error_message
+         << "the \""
+         << Action::SET_REFERENCE_BY_ID_MEASURE_ACTION_IDENTIFIER
+         << "\" action is currently disabled - no reference coordinates are available";
+      throw std::runtime_error(error_message.str());
+   }
 
    return action;
 }
