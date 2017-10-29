@@ -279,18 +279,12 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       }
       else
       {
-         // a measure already exists here.  Delete it, create a _new_ basic measure, and then paste the contents into that measure
-         Action::Queue *action_as_queue = new Action::Queue("stack: delete_measure, set_basic_measure, paste_measure_from_buffer_to_grid_coordinates");
-
-         action_as_queue->add_action(new Action::DeleteMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
-         action_as_queue->add_action(new Action::SetBasicMeasure(&current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y));
-         action_as_queue->add_action(new Action::PasteMeasureFromBufferToGridCoordinates(&app_controller->yank_measure_buffer,
-               &current_grid_editor->grid,
-               current_grid_editor->measure_cursor_x,
-               current_grid_editor->measure_cursor_y)
-            );
-
-         action = action_as_queue;
+         std::stringstream error_message;
+         error_message
+            << "\""
+            << Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER
+            << "\" action disabled when there is already a measure present at this location";
+         throw std::runtime_error(error_message.str());
       }
    }
    else if (action_identifier == "set_reference_by_coordinate_measure")
