@@ -15,7 +15,7 @@
 
 TEST(GridDimensionsHelperTest, returns_the_length_to_the_measure_of_4_4_measures)
 {
-   Grid grid(10, 1);
+   Grid grid(10);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 0), 0.0);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 1), 1.0);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 2), 2.0);
@@ -27,7 +27,7 @@ TEST(GridDimensionsHelperTest, returns_the_length_to_the_measure_of_4_4_measures
 
 TEST(GridDimensionsHelperTest, returns_the_length_to_the_end_of_the_grid_when_measure_index_is_gt_total_measures)
 {
-   Grid grid(10, 1);
+   Grid grid(10);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 10), 10.0);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 11), 10.0);
    EXPECT_EQ(GridDimensionsHelper::get_length_to_measure(grid, 9999), 10.0);
@@ -38,7 +38,7 @@ TEST(GridDimensionsHelperTest, returns_the_length_to_the_end_of_the_grid_when_me
 
 TEST(GridDimensionsHelperTest, returns_the_length_to_the_measure_with_non_4_4_time_signatures)
 {
-   Grid grid(10, 1);
+   Grid grid(10);
 
    grid.set_time_signature(0, TimeSignature(3, Duration(Duration::QUARTER, 0)));
    grid.set_time_signature(1, TimeSignature(5, Duration(Duration::QUARTER, 0)));
@@ -60,13 +60,7 @@ TEST(GridDimensionsHelperTest, returns_the_length_to_the_measure_with_non_4_4_ti
 
 TEST(GridDimensionsHelperTest, can_get_the_width_of_a_grid)
 {
-   Grid grid(0, 1);
-
-   grid.append_measure();
-   grid.append_measure();
-   grid.append_measure();
-   grid.append_measure();
-   grid.append_measure();
+   Grid grid(5);
 
    grid.set_time_signature(3, TimeSignature(3, Duration(Duration::EIGHTH)));
 
@@ -78,13 +72,13 @@ TEST(GridDimensionsHelperTest, can_get_the_width_of_a_grid)
 
 TEST(GridDimensionsHelperTest, can_get_its_height_up_to_a_staff)
 {
-   Grid grid(1, 0);
+   Grid grid;
 
-   Staff::Instrument instrument1(1);
-   Staff::Spacer spacer1(1);
-   Staff::Instrument instrument2(1);
-   Staff::Spacer spacer2(1);
-   Staff::Spacer spacer3(1);
+   Staff::Instrument instrument1;
+   Staff::Spacer spacer1;
+   Staff::Instrument instrument2;
+   Staff::Spacer spacer2;
+   Staff::Spacer spacer3;
 
    grid.append_staff(&instrument1);
    grid.append_staff(&spacer1);
@@ -104,13 +98,13 @@ TEST(GridDimensionsHelperTest, can_get_its_height_up_to_a_staff)
 
 TEST(GridDimensionsHelperTest, can_get_height_of_a_staff)
 {
-   Grid grid(1, 0);
+   Grid grid;
 
-   Staff::Instrument instrument1(1);
-   Staff::Spacer spacer1(1);
-   Staff::Instrument instrument2(1);
-   Staff::Spacer spacer2(1);
-   Staff::Spacer spacer3(1);
+   Staff::Instrument instrument1;
+   Staff::Spacer spacer1;
+   Staff::Instrument instrument2;
+   Staff::Spacer spacer2;
+   Staff::Spacer spacer3;
 
    grid.append_staff(&instrument1);
    grid.append_staff(&spacer1);

@@ -22,7 +22,7 @@ TEST(GridCoordinate, can_be_constructed_with_no_arguments)
 
 TEST(GridCoordinate, can_be_constructed_with_arguments)
 {
-   Grid grid(1, 1);
+   Grid grid;
    GridCoordinate grid_coordinate(&grid, 6, 13, 42);
 
    EXPECT_EQ(&grid, grid_coordinate.get_grid());
@@ -37,7 +37,7 @@ TEST(GridCoordinate, gets_and_sets_the_grid)
 {
    GridCoordinate grid_coordinate;
 
-   Grid grid(1, 1);
+   Grid grid;
 
    grid_coordinate.set_grid(&grid);
    EXPECT_EQ(&grid, grid_coordinate.get_grid());

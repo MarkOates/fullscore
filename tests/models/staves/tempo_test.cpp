@@ -9,14 +9,14 @@
 
 TEST(Staff_TempoTest, can_be_created)
 {
-   Staff::Tempo tempo_staff(1);
+   Staff::Tempo tempo_staff;
 }
 
 
 
 TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_lt_0_throws_an_exception)
 {
-   Staff::Tempo tempo_staff(1);
+   Staff::Tempo tempo_staff;
 
    try
    {
@@ -36,7 +36,7 @@ TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_lt_0_throws_a
 
 TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_gt_0_throws_an_exception)
 {
-   Staff::Tempo tempo_staff(1);
+   Staff::Tempo tempo_staff;
 
    try
    {
