@@ -45,7 +45,6 @@
 #include <fullscore/actions/set_current_grid_editor_action.h>
 #include <fullscore/actions/set_mode_action.h>
 #include <fullscore/actions/set_normal_mode_action.h>
-#include <fullscore/actions/set_reference_cursor_action.h>
 #include <fullscore/actions/set_reference_by_coordinate_measure_action.h>
 #include <fullscore/actions/set_reference_by_id_measure_action.h>
 #include <fullscore/actions/set_score_zoom_action.h>
@@ -98,12 +97,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    std::vector<Note> *notes = nullptr;
    Note *single_note = nullptr;
    Measure::Base *focused_measure = nullptr;
-   Measure::Base *measure_at_reference_cursor = nullptr;
-
-   if (app_controller->reference_cursor.is_valid())
-   {
-      measure_at_reference_cursor = app_controller->reference_cursor.get_grid()->get_measure(app_controller->reference_cursor.get_x(), app_controller->reference_cursor.get_y());
-   }
 
    if (current_grid_editor->is_note_target_mode())
    {
@@ -247,8 +240,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
-   else if (action_identifier == "set_reference_cursor")
-      action = new Action::SetReferenceCursor(&app_controller->reference_cursor, &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y);
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
    else if (action_identifier == "set_basic_measure")

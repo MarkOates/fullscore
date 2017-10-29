@@ -16,27 +16,11 @@
 
 
 
-UIGridEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
-   : reference_cursor(reference_cursor)
-{}
-
-
-
-
-void UIGridEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
-{
-   this->reference_cursor = reference_cursor;
-}
-
-
-
-
-UIGridEditor::UIGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
+UIGridEditor::UIGridEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , grid(0, 0)
    , playback_control()
-   , rendering_dependencies(reference_cursor)
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)

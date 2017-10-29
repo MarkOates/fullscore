@@ -19,16 +19,14 @@
 #include <fullscore/models/floating_measure.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/staff.h>
-#include <fullscore/models/reference_cursor.h>
 #include <fullscore/services/music_engraver.h>
 
 
 
 
-GridRenderComponent::GridRenderComponent(Grid *grid, MusicEngraver *music_engraver, ReferenceCursor *reference_cursor, float full_measure_width, float staff_height)
+GridRenderComponent::GridRenderComponent(Grid *grid, MusicEngraver *music_engraver, float full_measure_width, float staff_height)
    : grid(grid)
    , music_engraver(music_engraver)
-   , reference_cursor(reference_cursor)
    , full_measure_width(full_measure_width)
    , staff_height(staff_height)
    , showing_debug_data(false)
@@ -53,15 +51,6 @@ void GridRenderComponent::set_showing_debug_data(bool show)
 void GridRenderComponent::render()
 {
    if (!grid || !music_engraver) return;
-
-   int reference_cursor_x = -1;
-   int reference_cursor_y = -1;
-
-   if (reference_cursor && reference_cursor->is_on_grid(grid))
-   {
-      reference_cursor_x = reference_cursor->get_x();
-      reference_cursor_y = reference_cursor->get_y();
-   }
 
    // draw barlines
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
@@ -149,21 +138,6 @@ void GridRenderComponent::render()
          {
             al_draw_text(text_font, color::black, x_pos+5, label_text_top_y, ALLEGRO_ALIGN_LEFT, tostring(x).c_str());
             continue;
-         }
-
-         // draw the reference_cursor
-         bool draw_reference_cursor = (y == reference_cursor_y && x == reference_cursor_x);
-         if (draw_reference_cursor)
-         {
-            float reference_cursor_height = 20;
-            float reference_cursor_width = 18;
-            float reference_cursor_hwidth = reference_cursor_width * 0.5;
-
-            al_draw_filled_triangle(
-                  x_pos, y_counter,
-                  x_pos-reference_cursor_hwidth, y_counter-reference_cursor_height,
-                  x_pos+reference_cursor_hwidth, y_counter-reference_cursor_height,
-                  color::darkorange);
          }
 
          //
