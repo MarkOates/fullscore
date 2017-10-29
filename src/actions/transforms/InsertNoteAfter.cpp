@@ -26,7 +26,7 @@ Action::Transform::InsertNoteAfter::~InsertNoteAfter()
 
 bool Action::Transform::InsertNoteAfter::execute()
 {
-   if (!notes) throw std::runtime_error("Cannot transform nullptr notes");
+   if (!notes) throw std::runtime_error("Cannot InsertNoteAfter nullptr notes");
 
    try
    {

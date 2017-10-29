@@ -22,7 +22,7 @@ Action::Transform::SplitNote::~SplitNote()
 
 bool Action::Transform::SplitNote::execute()
 {
-   if (!notes) throw std::runtime_error("Cannot split_note on nullptr notes");
+   if (!notes) throw std::runtime_error("Cannot SplitNote on nullptr notes");
 
    ::Transform::SplitNote split_note_transform;
    *notes = split_note_transform.transform(*notes);

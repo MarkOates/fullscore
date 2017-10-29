@@ -27,10 +27,12 @@ Action::Transform::EraseNote::~EraseNote()
 
 bool Action::Transform::EraseNote::execute()
 {
-   if (!notes || notes->empty() || index < 0 || index >= notes->size()) return false;
+   if (!notes) throw std::runtime_error("Cannot EraseNote on a nullptr note");
+   if (notes->empty() || index < 0 || index >= notes->size()) throw std::runtime_error("Cannot EraseNote at out of bounds index");
 
    ::Transform::EraseNote erase_note_transform(index);
    *notes = erase_note_transform.transform(*notes);
+
    return true;
 }
 

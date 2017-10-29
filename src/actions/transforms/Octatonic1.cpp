@@ -22,7 +22,7 @@ Action::Transform::Octatonic1::Octatonic1(std::vector<Note> *notes)
 
 bool Action::Transform::Octatonic1::execute()
 {
-   if (!notes) return false;
+   if (!notes) throw std::runtime_error("Cannot Octatonic1 nullptr notes");
 
    ::Transform::Octatonic1 octatonic_1_transform;
    *notes = octatonic_1_transform.transform(*notes);
