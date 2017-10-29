@@ -278,13 +278,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "set_time_signature_numerator_5")
       action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 5);
    else if (action_identifier == Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER)
-   {
-      action = new Action::Queue("yank_grid_measure_to_buffer and set_reference_cursor");
-      static_cast<Action::Queue *>(action)->add_action(new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure));
-      static_cast<Action::Queue *>(action)->add_action(new Action::SetReferenceCursor(&app_controller->reference_cursor,
-            &current_grid_editor->grid, current_grid_editor->measure_cursor_x, current_grid_editor->measure_cursor_y)
-         );
-   }
+      action = new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure);
    else if (action_identifier == "paste_measure_from_buffer")
    {
       Measure::Base *measure_at_cursor = current_grid_editor->get_measure_at_cursor();
