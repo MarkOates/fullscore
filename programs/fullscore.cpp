@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
          config.get_or_default_int("GLOBAL_SETTINGS", "resolution_x", 800),
          config.get_or_default_int("GLOBAL_SETTINGS", "resolution_y", 600)
       );
-   AppController app_controller(d);
+   AppController app_controller(d, config);
    Framework::run_loop();
 
    return 0;
