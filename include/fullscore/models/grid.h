@@ -17,7 +17,7 @@ class Grid
 {
 private:
    friend class GridFileConverter;
-   friend class GridHelper;
+   friend class GridDimensionsHelper;
 
    std::vector<Staff::Base *> voices;
    std::vector<TimeSignature> time_signatures;

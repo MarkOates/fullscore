@@ -10,7 +10,7 @@
 #include <fullscore/components/ui_grid_editor_render_component.h>
 #include <fullscore/components/grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/helpers/grid_helper.h>
+#include <fullscore/helpers/grid_dimensions_helper.h>
 #include <cmath>
 
 
@@ -66,7 +66,7 @@ void UIGridEditor::on_timer()
    playback_control.update(Framework::time_now);
 
    // match the width of the widget to the width of the score
-   float grid_real_width = GridHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
    float grid_real_height = grid.get_num_staves() * STAFF_HEIGHT;
 
    place.size = vec2d(grid_real_width, grid_real_height);
@@ -99,7 +99,7 @@ Note *UIGridEditor::get_note_at_cursor()
 
 float UIGridEditor::get_measure_cursor_real_x()
 {
-   return GridHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
+   return GridDimensionsHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
@@ -107,7 +107,7 @@ float UIGridEditor::get_measure_cursor_real_x()
 
 float UIGridEditor::get_measure_cursor_real_y()
 {
-   return GridHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
+   return GridDimensionsHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
 }
 
 

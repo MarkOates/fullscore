@@ -15,7 +15,7 @@
 #include <fullscore/components/tempo_marking_render_component.hpp>
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/helpers/grid_helper.h>
+#include <fullscore/helpers/grid_dimensions_helper.h>
 #include <fullscore/models/floating_measure.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/staff.h>
@@ -67,7 +67,7 @@ void GridRenderComponent::render()
    TimeSignature previous_time_signature = TimeSignature(0, Duration());
    for (int x=0; x<grid->get_num_measures(); x++)
    {
-      float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
+      float x_pos = GridDimensionsHelper::get_length_to_measure(*grid, x) * full_measure_width;
       TimeSignature time_signature = grid->get_time_signature(x);
       TimeSignatureRenderComponent time_signature_render_component(&time_signature);
 
@@ -99,15 +99,15 @@ void GridRenderComponent::render()
       // horizontal guide line for the staff
       if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
       {
-         float width = GridHelper::get_width(*grid);
+         float width = GridDimensionsHelper::get_width(*grid);
          al_draw_line(0, row_middle_y, width * full_measure_width, row_middle_y, color::color(color::black, 0.2), 1.0);
       }
 
       // draw the measures
       for (int x=0; x<grid->get_num_measures(); x++)
       {
-         float x_pos = GridHelper::get_length_to_measure(*grid, x) * full_measure_width;
-         float x_pos_plus_width = GridHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
+         float x_pos = GridDimensionsHelper::get_length_to_measure(*grid, x) * full_measure_width;
+         float x_pos_plus_width = GridDimensionsHelper::get_length_to_measure(*grid, x+1) * full_measure_width;
          float real_measure_width = x_pos_plus_width - x_pos;
 
          if (staff->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
