@@ -203,7 +203,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "insert_note")
       action = new Action::Transform::InsertNote(notes, current_grid_editor->note_cursor_x, Note());
    else if (action_identifier == Action::INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER)
-      action = new Action::Transform::InsertNoteAfter(current_grid_editor, notes, current_grid_editor->note_cursor_x, Note());
+      action = new Action::Transform::InsertNoteAfter(notes, current_grid_editor->note_cursor_x, Note());
    else if (action_identifier == "toggle_show_debug_data")
       action = new Action::ToggleShowDebugData(current_grid_editor);
    else if (action_identifier == "toggle_playback")

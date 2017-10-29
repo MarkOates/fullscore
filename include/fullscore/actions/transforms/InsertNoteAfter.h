@@ -8,8 +8,6 @@
 
 
 
-class UIGridEditor;
-
 namespace Action
 {
    namespace Transform
@@ -17,13 +15,12 @@ namespace Action
       class InsertNoteAfter : public Base
       {
       private:
-         UIGridEditor *grid_editor;
          std::vector<Note> *notes;
          int at_index;
          Note note;
 
       public:
-         InsertNoteAfter(UIGridEditor *grid_editor, std::vector<Note> *notes, int at_index, Note note);
+         InsertNoteAfter(std::vector<Note> *notes, int at_index, Note note);
          ~InsertNoteAfter();
 
          bool execute() override;
