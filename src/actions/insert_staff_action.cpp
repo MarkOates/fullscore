@@ -30,7 +30,7 @@ bool Action::InsertStaff::execute()
    if (!grid) return false;
    if (at_index < 0 || at_index >= grid->get_num_staves()) return false;
 
-   grid->insert_staff(new Staff::Instrument(grid->get_num_measures()), at_index);
+   grid->insert_staff(new Staff::Instrument(), at_index);
 
    return true;
 }

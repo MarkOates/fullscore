@@ -29,7 +29,7 @@ bool Action::AppendStaff::execute()
 {
    if (!grid) return false;
 
-   grid->append_staff(new Staff::Instrument(grid->get_num_measures()));
+   grid->append_staff(new Staff::Instrument());
 
    return false;
 }
