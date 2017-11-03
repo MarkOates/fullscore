@@ -21,7 +21,10 @@
 #include <fullscore/actions/transforms/ToggleRest.h>
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
+#include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
+#include <fullscore/actions/delete_staff_action.h>
+#include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_grid_action.h>
 #include <fullscore/actions/move_cursor_down_action.h>
 #include <fullscore/actions/move_cursor_left_action.h>
@@ -228,6 +231,12 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
+   else if (action_identifier == "insert_staff")
+      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == "delete_staff")
+      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+   else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
+      action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
    else if (action_identifier == "set_time_signature_numerator_2")
