@@ -231,9 +231,9 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
-   else if (action_identifier == "insert_staff")
+   else if (action_identifier == Action::INSERT_STAFF_ACTION_IDENTIFIER)
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
-   else if (action_identifier == "delete_staff")
+   else if (action_identifier == Action::DELETE_STAFF_ACTION_IDENTIFIER)
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
       action = new Action::AppendStaff(&current_grid_editor->grid);

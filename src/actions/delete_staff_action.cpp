@@ -5,12 +5,12 @@
 #include <fullscore/actions/delete_staff_action.h>
 
 #include <fullscore/models/grid.h>
-
+#include <fullscore/action.h>
 
 
 
 Action::DeleteStaff::DeleteStaff(Grid *grid, int at_index)
-   : Base("delete_staff")
+   : Base(Action::DELETE_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
    , at_index(at_index)
 {}
