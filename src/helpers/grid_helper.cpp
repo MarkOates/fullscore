@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/helpers/grid_helper.h>
+#include <fullscore/helpers/grid_dimensions_helper.h>
 
 #include <fullscore/models/staves/base.h>
 #include <fullscore/helpers/duration_helper.h>
@@ -11,7 +11,7 @@
 
 
 
-float GridHelper::get_length_to_measure(const Grid &grid, int measure_index)
+float GridDimensionsHelper::get_length_to_measure(const Grid &grid, int measure_index)
 {
    if (measure_index < 0) return 0.0;
 
@@ -27,7 +27,7 @@ float GridHelper::get_length_to_measure(const Grid &grid, int measure_index)
 
 
 
-float GridHelper::get_width(const Grid &grid)
+float GridDimensionsHelper::get_width(const Grid &grid)
 {
    float length = 0;
    for (unsigned i=0; i<grid.time_signatures.size(); i++)
@@ -38,7 +38,7 @@ float GridHelper::get_width(const Grid &grid)
 
 
 
-float GridHelper::get_height_to_staff(const Grid &grid, int staff_index)
+float GridDimensionsHelper::get_height_to_staff(const Grid &grid, int staff_index)
 {
    if (staff_index < 0) return 0.0;
    if (staff_index >= grid.get_num_staves()) return grid.get_height();
@@ -57,7 +57,7 @@ float GridHelper::get_height_to_staff(const Grid &grid, int staff_index)
 
 
 
-float GridHelper::get_height_of_staff(Grid &grid, int staff_index) // TODO make const
+float GridDimensionsHelper::get_height_of_staff(Grid &grid, int staff_index) // TODO make const
 {
    Staff::Base *staff = grid.get_staff(staff_index);
    if (!staff) return 0.0;

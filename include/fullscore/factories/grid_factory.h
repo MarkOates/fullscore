@@ -13,7 +13,7 @@ public:
    static Grid big_score();
    static Grid full_score();
    static Grid string_quartet();
-   static Grid testing_template();
+   static Grid development();
    static Grid create(std::string identifier);
 };
 

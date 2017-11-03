@@ -6,7 +6,6 @@
 #include <fullscore/transforms/stack_transform.h>
 
 #include <fullscore/transforms/insert_note_transform.h>
-#include <fullscore/transforms/reference_transform.h>
 #include <fullscore/transforms/retrograde_transform.h>
 #include <fullscore/transforms/toggle_rest_transform.h>
 
@@ -63,28 +62,6 @@ TEST(TransformStackTest, returns_a_list_of_transforms)
    EXPECT_EQ("insert_note", transforms[0]->get_identifier());
    EXPECT_EQ("toggle_rest", transforms[1]->get_identifier());
    EXPECT_EQ("retrograde", transforms[2]->get_identifier());
-}
-
-
-
-TEST(TransformStackTest, returns_true_if_it_includes_a_reference)
-{
-   Transform::Stack transform_stack;
-
-   Transform::Reference reference_transform(nullptr, 0, 0);
-
-   transform_stack.add_transform(&reference_transform);
-
-   EXPECT_EQ(true, transform_stack.includes_reference());
-}
-
-
-
-TEST(TransformStackTest, returns_false_if_it_does_not_include_a_reference)
-{
-   Transform::Stack transform_stack;
-
-   EXPECT_EQ(false, transform_stack.includes_reference());
 }
 
 

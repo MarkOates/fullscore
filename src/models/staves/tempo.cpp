@@ -15,7 +15,7 @@ Staff::Tempo::TempoMarkingCoordinate::TempoMarkingCoordinate(int measure_number,
 
 
 
-Staff::Tempo::Tempo(int num_columns)
+Staff::Tempo::Tempo()
    : Base("tempo")
    , markings()
 {}
@@ -45,48 +45,6 @@ std::vector<std::pair<TempoMarking, float>> Staff::Tempo::get_tempo_markings_in_
          result.push_back(std::pair<TempoMarking, float>(markings[i].tempo_marking, markings[i].position));
 
    return result;
-}
-
-
-
-bool Staff::Tempo::set_column(int column_num, Measure::Base *measure)
-{
-   throw std::runtime_error("Cannot set a measure on a Tempo column");
-}
-
-
-
-bool Staff::Tempo::insert_column(int at_index, Measure::Base *measure)
-{
-   return true;
-}
-
-
-
-bool Staff::Tempo::erase_column(int at_index)
-{
-   return true;
-}
-
-
-
-bool Staff::Tempo::append_column(Measure::Base *measure)
-{
-   return true;
-}
-
-
-
-Measure::Base *Staff::Tempo::get_measure(int column_num)
-{
-   return nullptr;
-}
-
-
-
-int Staff::Tempo::get_num_columns()
-{
-   return 0;
 }
 
 

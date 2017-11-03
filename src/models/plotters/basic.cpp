@@ -11,11 +11,11 @@
 
 
 
-Plotter::Basic::Basic(Grid *grid, int barline_num, Note note)
+Plotter::Basic::Basic(Grid *grid, int barline_num, std::vector<Note> notes)
    : Base(Plotter::TYPE_IDENTIFIER_BASIC)
    , grid(grid)
    , barline_num(barline_num)
-   , note(note)
+   , notes(notes)
 {
 }
 
@@ -38,7 +38,7 @@ bool Plotter::Basic::plot()
       if (staff->is_type("instrument"))
       {
          int staff_id = staff->get_id();
-         Measure::Base* plotted_measure = new Measure::Plotted({ note }); // < this automatically adds the measure to the base
+         Measure::Base* plotted_measure = new Measure::Plotted(notes); // < this automatically adds the measure to the base
          new FloatingMeasure(GridCoordinate(grid, staff_id, barline_num), plotted_measure->get_id());
       }
    }

@@ -24,7 +24,6 @@ AppController::AppController(Display *display, Config &config)
    , command_bar(new UICommandBar(this))
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
-   , reference_cursor(nullptr, 0, 0)
    , normal_mode_keyboard_mappings()
    , normal_mode_note_keyboard_mappings()
    , normal_mode_measure_keyboard_mappings()
@@ -71,8 +70,6 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_D,         false, false, false, "transpose_down");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         true,  false, false, "split_note");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_7,         true,  false, false, "set_reference_by_id_measure");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_8,         true,  false, false, "set_reference_by_coordinate_measure");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_C,         true,  false, false, "set_reference_cursor");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         true,  false, false, "set_basic_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
@@ -236,7 +233,7 @@ UIGridEditor *AppController::create_new_grid_editor(std::string name)
    static int new_x = 0;
    static int new_y = 0;
 
-   UIGridEditor *new_grid_editor = new UIGridEditor(&follow_camera, &reference_cursor);
+   UIGridEditor *new_grid_editor = new UIGridEditor(&follow_camera);
    new_grid_editor->grid = GridFactory::create(name);
 
    new_grid_editor->place.position = vec2d(new_x, new_y);

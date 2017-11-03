@@ -10,33 +10,17 @@
 #include <fullscore/components/ui_grid_editor_render_component.h>
 #include <fullscore/components/grid_render_component.h>
 #include <fullscore/helpers/duration_helper.h>
-#include <fullscore/helpers/grid_helper.h>
+#include <fullscore/helpers/grid_dimensions_helper.h>
 #include <cmath>
 
 
 
 
-UIGridEditor::RenderingDependencies::RenderingDependencies(ReferenceCursor *reference_cursor)
-   : reference_cursor(reference_cursor)
-{}
-
-
-
-
-void UIGridEditor::RenderingDependencies::set_reference_cursor(ReferenceCursor *reference_cursor)
-{
-   this->reference_cursor = reference_cursor;
-}
-
-
-
-
-UIGridEditor::UIGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor)
+UIGridEditor::UIGridEditor(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
    : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
-   , grid(0, 0)
+   , grid()
    , playback_control()
-   , rendering_dependencies(reference_cursor)
    , measure_cursor_x(0)
    , measure_cursor_y(0)
    , note_cursor_x(0)
@@ -66,7 +50,7 @@ void UIGridEditor::on_timer()
    playback_control.update(Framework::time_now);
 
    // match the width of the widget to the width of the score
-   float grid_real_width = GridHelper::get_length_to_measure(grid, grid.get_num_measures()) * FULL_MEASURE_WIDTH;
+   float grid_real_width = GridDimensionsHelper::get_length_to_measure(grid, grid.get_num_barlines()) * FULL_MEASURE_WIDTH;
    float grid_real_height = grid.get_num_staves() * STAFF_HEIGHT;
 
    place.size = vec2d(grid_real_width, grid_real_height);
@@ -77,7 +61,10 @@ void UIGridEditor::on_timer()
 
 Measure::Base *UIGridEditor::get_measure_at_cursor()
 {
-   return grid.get_measure(measure_cursor_x, measure_cursor_y);
+   // this is the next milestone
+   //throw std::runtime_error("UIGridEditor::get_measure_at_cursor() has been disabled");
+   std::cout << "UIGridEditor::get_measure_at_cursor() has been disabled";
+   return nullptr;
 }
 
 
@@ -99,7 +86,7 @@ Note *UIGridEditor::get_note_at_cursor()
 
 float UIGridEditor::get_measure_cursor_real_x()
 {
-   return GridHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
+   return GridDimensionsHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
@@ -107,7 +94,7 @@ float UIGridEditor::get_measure_cursor_real_x()
 
 float UIGridEditor::get_measure_cursor_real_y()
 {
-   return GridHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
+   return GridDimensionsHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
 }
 
 
@@ -143,8 +130,8 @@ float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probabl
 
 int UIGridEditor::move_measure_cursor_x(int delta)
 {
-   int num_measures = grid.get_num_measures();
-   measure_cursor_x = limit<int>(0, num_measures-1, measure_cursor_x + delta);
+   int num_barlines = grid.get_num_barlines();
+   measure_cursor_x = limit<int>(0, num_barlines-1, measure_cursor_x + delta);
    return measure_cursor_x;
 }
 
@@ -163,7 +150,8 @@ int UIGridEditor::move_measure_cursor_y(int delta)
 
 int UIGridEditor::move_note_cursor_x(int delta)
 {
-   Measure::Base *current_measure = grid.get_measure(measure_cursor_x, measure_cursor_y);
+   throw std::runtime_error("UIGridEditor::move_note_cursor_x has been disabled");
+   Measure::Base *current_measure = nullptr;
    if (!current_measure)
    {
       note_cursor_x = 0;

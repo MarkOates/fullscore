@@ -21,7 +21,6 @@ namespace Transform
 
       virtual std::vector<Note> transform(std::vector<Note> notes) override;
       std::vector<Transform::Base *> get_transformations();
-      bool includes_reference();
    };
 };
 

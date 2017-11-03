@@ -9,25 +9,16 @@
 
 TEST(Staff_MeasureNumbersTest, can_be_created)
 {
-   Staff::MeasureNumbers measure_numbers(1);
+   Staff::MeasureNumbers measure_numbers;
 }
 
 
 
 TEST(Staff_MeasureNumbersTest, returns_a_staff_height_of_0_75)
 {
-   Staff::MeasureNumbers measure_numbers(1);
+   Staff::MeasureNumbers measure_numbers;
 
    ASSERT_EQ(0.75, measure_numbers.get_height());
-}
-
-
-
-TEST(Staff_MeasureNumbersTest, returns_the_number_of_measures_or_columns)
-{
-   Staff::MeasureNumbers measure_numbers(37);
-
-   ASSERT_EQ(37, measure_numbers.get_num_columns());
 }
 
 

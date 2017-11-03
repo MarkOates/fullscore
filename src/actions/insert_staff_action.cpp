@@ -6,12 +6,13 @@
 
 #include <fullscore/models/staves/instrument.h>
 #include <fullscore/models/grid.h>
+#include <fullscore/action.h>
 
 
 
 
 Action::InsertStaff::InsertStaff(Grid *grid, int at_index)
-   : Base("insert_staff")
+   : Base(Action::INSERT_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
    , at_index(at_index)
 {}
@@ -30,7 +31,7 @@ bool Action::InsertStaff::execute()
    if (!grid) return false;
    if (at_index < 0 || at_index >= grid->get_num_staves()) return false;
 
-   grid->insert_staff(new Staff::Instrument(grid->get_num_measures()), at_index);
+   grid->insert_staff(new Staff::Instrument(), at_index);
 
    return true;
 }

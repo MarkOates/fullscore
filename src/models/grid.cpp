@@ -10,12 +10,11 @@
 
 
 
-Grid::Grid(int num_x_measures, int num_y_staves)
+Grid::Grid(int num_barlines)
    : voices()
    , time_signatures()
 {
-   for (unsigned i=0; i<num_y_staves; i++) voices.push_back(new Staff::Instrument(num_x_measures));
-   time_signatures.resize(num_x_measures, TimeSignature(4, Duration()));
+   time_signatures.resize(num_barlines, TimeSignature(4, Duration()));
 }
 
 
@@ -29,56 +28,9 @@ Grid::~Grid()
 
 
 
-Measure::Base *Grid::get_measure(int x_measure, int y_staff)
+int Grid::get_num_barlines() const
 {
-   // bounds check
-   if (!in_grid_range(x_measure, y_staff)) return nullptr;
-
-   Staff::Base *staff = voices[y_staff];
-   if (!staff) return nullptr;
-
-   return staff->get_measure(x_measure);
-}
-
-
-
-bool Grid::set_measure(int x_measure, int y_staff, Measure::Base *measure)
-{
-   // bounds check
-   if (!in_grid_range(x_measure, y_staff)) return false;
-
-   // WARNING
-   // this implementation directly assigns a measure to the voice, assuming
-   // that a voice has measures, and the voice's measures are of Measure::Base type
-   // this should likely be handled by a method on the Row, like
-   // voices[i]->set_measure(x_measure, measure);
-   voices[y_staff]->set_column(x_measure, measure);
-   return true;
-}
-
-
-
-bool Grid::delete_measure(int x_measure, int y_staff)
-{
-   return set_measure(x_measure, y_staff, nullptr);
-}
-
-
-
-bool Grid::in_grid_range(int x_measure, int y_staff)
-{
-   if (x_measure < 0 || x_measure >= this->get_num_measures() || this->get_num_measures() == 0) return false;
-   if (y_staff < 0 || y_staff >= this->get_num_staves() || this->get_num_staves() == 0) return false;
-
-   return true;
-}
-
-
-
-int Grid::get_num_measures() const
-{
-   if (voices.empty()) return 0;
-   return voices[0]->get_num_columns();
+   return time_signatures.size();
 }
 
 
@@ -123,73 +75,6 @@ bool Grid::append_staff(Staff::Base *staff)
 
 
 
-void Grid::insert_column(int index)
-{
-   int num_measures = get_num_measures();
-   if (index < 0) index = 0;
-
-   if (index >= num_measures)
-   {
-      append_measure();
-   }
-   else
-   {
-      // insert a time signature
-      time_signatures.insert(time_signatures.begin() + index, TimeSignature(4, Duration()));
-
-      // insert a measure into each row
-      for (unsigned i=0; i<voices.size(); i++)
-      {
-         // WARNING: this assumes all staves have the same
-         // number of measures (they likely may not once there are different "staff" types)
-         // TODO: this method is "constructing" the voice.  Probably should not
-         // be doing this here
-         voices[i]->insert_column(index, nullptr);
-      }
-   }
-}
-
-
-
-bool Grid::delete_column(int index)
-{
-   int num_measures = get_num_measures();
-
-   if (index < 0 || index >= num_measures) return false;
-
-   // remove the time signature
-   time_signatures.erase(time_signatures.begin() + index);
-
-   // remove the measure from each row
-   // WARNING: this assumes voices have "measures" to remove, also
-   // is assuming the role of being responsible for deleting contents
-   // inside another class
-   // This should likely be replaced with a voice[i]->delete_measure(int) function
-   for (unsigned i=0; i<voices.size(); i++)
-      voices[i]->erase_column(index);
-
-   return true;
-}
-
-
-
-void Grid::append_measure()
-{
-   // append time signature
-   time_signatures.push_back(TimeSignature(4, Duration()));
-
-   // append measure to each row
-   for (unsigned i=0; i<voices.size(); i++)
-   {
-      // warning, this is responsible for constructing the measures
-      // that are appended.  This should likely be replaced by a
-      // Voice::append_column();
-      voices[i]->append_column(nullptr);
-   }
-}
-
-
-
 bool Grid::set_voice_name(int row_number, std::string name)
 {
    if (row_number < 0) return "";
@@ -211,8 +96,18 @@ std::string Grid::get_voice_name(int row_number)
 
 bool Grid::set_time_signature(int index, TimeSignature time_signature)
 {
-   if (index < 0) return false;
-   if (index >= get_num_measures()) return false;
+   if (index < 0) throw std::runtime_error("cannot set_time_signature at index < 0");
+   if (index >= time_signatures.size())
+   {
+      std::stringstream error_message;
+      error_message
+         << "cannot set_time_signature at "
+         << index
+         << " because it is >= "
+         << time_signatures.size()
+         << " (the number of time_signatures in the grid)";
+      throw std::runtime_error(error_message.str());
+   }
 
    time_signatures[index] = time_signature;
    return true;
@@ -250,8 +145,18 @@ std::vector<Staff::Base *> Grid::get_staves()
 
 TimeSignature Grid::get_time_signature(int index)
 {
-   if (index < 0) return TimeSignature(0, Duration());
-   if (index >= get_num_measures()) return TimeSignature(0, Duration());
+   if (index < 0) throw std::runtime_error("cannot get_time_signature at index < 0");
+   if (index >= time_signatures.size())
+   {
+      std::stringstream error_message;
+      error_message
+         << "cannot get_time_signature at "
+         << index
+         << " because it is >= "
+         << time_signatures.size()
+         << " (the number of time_signatures in the grid)";
+      throw std::runtime_error(error_message.str());
+   }
 
    return time_signatures[index];
 }
@@ -260,7 +165,18 @@ TimeSignature Grid::get_time_signature(int index)
 
 TimeSignature *Grid::get_time_signature_ptr(int index)
 {
-   if (index < 0 || index >= get_num_measures()) return nullptr;
+   if (index < 0) throw std::runtime_error("cannot get_time_signature_ptr at index < 0");
+   if (index >= time_signatures.size())
+   {
+      std::stringstream error_message;
+      error_message
+         << "cannot get_time_signature_ptr at "
+         << index
+         << " because it is >= "
+         << time_signatures.size()
+         << " (the number of time_signatures in the grid)";
+      throw std::runtime_error(error_message.str());
+   }
 
    return &time_signatures[index];
 }

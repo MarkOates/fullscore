@@ -10,23 +10,10 @@
 
 
 
-class ReferenceCursor;
-
-
-
 class UIGridEditor : public UIWidget
 {
 public:
    friend class UIGridEditorRenderComponent;
-
-   class RenderingDependencies
-   {
-   public:
-      RenderingDependencies(ReferenceCursor *reference_cursor);
-
-      ReferenceCursor *reference_cursor;
-      void set_reference_cursor(ReferenceCursor *reference_cursor);
-   };
 
    enum edit_mode_target_t
    {
@@ -52,8 +39,6 @@ public:
    Grid grid;
    PlaybackControl playback_control;
 
-   RenderingDependencies rendering_dependencies;
-
    int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
    int measure_cursor_y;
    int note_cursor_x;
@@ -68,7 +53,7 @@ public:
    float STAFF_HEIGHT;
    float FULL_MEASURE_WIDTH;
 
-   UIGridEditor(UIWidget *parent, ReferenceCursor *reference_cursor);
+   UIGridEditor(UIWidget *parent);
    void on_draw() override;
    void on_timer() override;
    Measure::Base *get_measure_at_cursor();
@@ -77,7 +62,6 @@ public:
    int move_measure_cursor_x(int delta);
    int move_measure_cursor_y(int delta);
    int move_note_cursor_x(int delta);
-   void set_reference_cursor(ReferenceCursor *reference_cursor);
 
    float get_measure_cursor_real_x();
    float get_measure_cursor_real_y();
