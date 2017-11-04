@@ -21,6 +21,7 @@ namespace Action
    std::string const PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER = "paste_measure_from_buffer";
    std::string const PASTE_MEASURE_FROM_BUFFER_TO_GRID_COORDINATES_ACTION_IDENTIFIER = "paste_measure_from_buffer_to_grid_coordinates";
    std::string const QUEUE_ACTION_IDENTIFIER = "queue";
+   std::string const REMOVE_DOT_ACTION_IDENTIFIER = "remove_dot";
    std::string const RESET_PLAYBACK_ACTION_IDENTIFIER = "reset_playback";
    std::string const SAVE_GRID_ACTION_IDENTIFIER = "save_grid";
    std::string const SET_BASIC_MEASURE_ACTION_IDENTIFIER = "set_basic_measure";
