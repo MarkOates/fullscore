@@ -74,24 +74,7 @@ std::vector<Note> Plotter::Destination::get_notes_for(GridCoordinate destination
 
 bool Plotter::Destination::plot()
 {
-   for (auto &destination : destinations)
-   {
-      Grid *destination_grid = destination.get_grid();
-      int staff_id = destination.get_staff_id();
-
-      if (!destination_grid) throw std::runtime_error("Plotter::Destination cannot plot to a nullptr destination_grid");
-
-      Staff::Base *destination_staff = destination_grid->get_staff(staff_id);
-      if (!destination_staff) throw std::runtime_error("Plotter::Destination cannot plot to a nullptr destination_staff");
-      if (!destination_staff->is_type("instrument"))
-      {
-         std::stringstream error_message;
-         error_message << "Plotter::Destination cannot plot to a \"" << destination_staff->get_type() << "\" staff type";
-         throw std::runtime_error(error_message.str());
-      }
-
-      throw std::runtime_error("Plotter::Destination can not plot to measures because set_measure has been disabled");
-   }
+   throw std::runtime_error("Plotter::Destination has been disabled");
 
    return true;
 }
