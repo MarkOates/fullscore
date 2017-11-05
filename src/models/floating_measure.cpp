@@ -71,7 +71,7 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
 
    for (auto &element : pool_elements)
    {
-      if (element->coordinate.get_staff_id() == staff_id && element->coordinate.get_barline_num() == barline_num)
+      if (element->coordinate.get_staff_id() == staff_id && element->coordinate.get_grid_horizontal_coordinate().get_barline_num() == barline_num)
          results.push_back(element);
    }
 

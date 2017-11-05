@@ -13,8 +13,7 @@ TEST(GridCoordinate, can_be_constructed_with_no_arguments)
    GridCoordinate grid_coordinate;
 
    EXPECT_EQ(0, grid_coordinate.get_staff_id());
-   EXPECT_EQ(0, grid_coordinate.get_barline_num());
-   EXPECT_EQ(0, grid_coordinate.get_beat_num());
+   EXPECT_EQ(GridHorizontalCoordinate(), grid_coordinate.get_grid_horizontal_coordinate());
 }
 
 
