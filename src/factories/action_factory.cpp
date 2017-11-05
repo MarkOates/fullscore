@@ -53,7 +53,6 @@
 
 // these next 3 includes are added to temporarily construct arguments for CreateFloatingMeasureAction
 #include <fullscore/models/staves/instrument.h>
-#include <fullscore/models/measures/static.h>
 #include <fullscore/models/staff.h>
 
 
@@ -249,7 +248,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       int current_staff_id = current_cursor_staff->get_id();
       int current_measure_num = current_grid_editor->measure_cursor_x;
       GridCoordinate grid_coordinate(&current_grid_editor->grid, current_staff_id, current_measure_num, 0);
-      Measure::Base *static_measure = new Measure::Static();
+      Measure::Base *static_measure = new Measure::Basic({0, 0, 0, 0});
 
       action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());
    }
