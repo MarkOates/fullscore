@@ -88,6 +88,34 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 
 
 
+TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
+{
+   Measure::Basic basic_measure;
+
+   int initial_num_pool_elements = FloatingMeasure::get_num_pool_elements();
+   int expected_num_pool_elements = initial_num_pool_elements;
+
+   FloatingMeasure floating_measure_1({}, basic_measure.get_id());
+
+   expected_num_pool_elements++;
+
+   ASSERT_EQ(expected_num_pool_elements, FloatingMeasure::get_num_pool_elements());
+
+   FloatingMeasure floating_measure_2({}, basic_measure.get_id());
+
+   expected_num_pool_elements++;
+
+   ASSERT_EQ(expected_num_pool_elements, FloatingMeasure::get_num_pool_elements());
+
+   FloatingMeasure floating_measure_3({}, basic_measure.get_id());
+
+   expected_num_pool_elements++;
+
+   ASSERT_EQ(expected_num_pool_elements, FloatingMeasure::get_num_pool_elements());
+}
+
+
+
 int main(int argc, char **argv)
 {
    ::testing::InitGoogleTest(&argc, argv);

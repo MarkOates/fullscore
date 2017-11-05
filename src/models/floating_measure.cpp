@@ -87,3 +87,10 @@ std::vector<FloatingMeasure *> FloatingMeasure::get_pool_elements()
 
 
 
+int FloatingMeasure::get_num_pool_elements()
+{
+   return pool_elements.size();
+}
+
+
+
