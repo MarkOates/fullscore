@@ -63,7 +63,7 @@ Measure::Base *UIGridEditor::get_measure_at_cursor()
 {
    // this is the next milestone
    //throw std::runtime_error("UIGridEditor::get_measure_at_cursor() has been disabled");
-   std::cout << "UIGridEditor::get_measure_at_cursor() has been disabled";
+   //std::cout << "UIGridEditor::get_measure_at_cursor() has been disabled";
    return nullptr;
 }
 

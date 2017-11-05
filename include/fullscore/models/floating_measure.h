@@ -30,6 +30,7 @@ public:
    static int get_next_id();
    static std::vector<FloatingMeasure *> find_at_staff_and_barline(int staff_id, int barline_num);
    static std::vector<FloatingMeasure *> get_pool_elements();
+   static int get_num_pool_elements();
 };
 
 

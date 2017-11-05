@@ -22,6 +22,7 @@
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
 #include <fullscore/actions/append_staff_action.h>
+#include <fullscore/actions/create_floating_measure_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_staff_action.h>
@@ -49,6 +50,10 @@
 #include <fullscore/models/measure.h>
 #include <fullscore/action.h>
 #include <fullscore/app_controller.h>
+
+// these next 3 includes are added to temporarily construct arguments for CreateFloatingMeasureAction
+#include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/staff.h>
 
 
 
@@ -191,11 +196,11 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::Transform::Descend(notes);
    else if (action_identifier == "add_dot_to_note")
       action = new Action::Transform::AddDotToNote(single_note);
-   else if (action_identifier == "remove_dot")
+   else if (action_identifier == Action::REMOVE_DOT_ACTION_IDENTIFIER)
       action = new Action::Transform::RemoveDot(single_note);
-   else if (action_identifier == "set_command_mode")
+   else if (action_identifier == Action::SET_COMMAND_MODE_ACTION_IDENTIFIER)
       action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
-   else if (action_identifier == "set_normal_mode")
+   else if (action_identifier == Action::SET_NORMAL_MODE_ACTION_IDENTIFIER)
       action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
    else if (action_identifier == "split_note")
       action = new Action::Transform::SplitNote(notes);
@@ -237,6 +242,16 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
    else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
       action = new Action::AppendStaff(&current_grid_editor->grid);
+   else if (action_identifier == Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER)
+   {
+      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->measure_cursor_y);
+      int current_staff_id = current_cursor_staff->get_id();
+      int current_measure_num = current_grid_editor->measure_cursor_x;
+      GridCoordinate grid_coordinate(&current_grid_editor->grid, current_staff_id, current_measure_num, 0);
+      Measure::Base *static_measure = new Measure::Basic({0, 0, 0, 0});
+
+      action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());
+   }
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
    else if (action_identifier == "set_time_signature_numerator_2")
