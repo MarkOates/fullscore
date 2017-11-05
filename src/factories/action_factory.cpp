@@ -247,7 +247,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->measure_cursor_y);
       int current_staff_id = current_cursor_staff->get_id();
       int current_measure_num = current_grid_editor->measure_cursor_x;
-      GridCoordinate grid_coordinate(&current_grid_editor->grid, current_staff_id, current_measure_num, 0);
+      GridCoordinate grid_coordinate(current_staff_id, current_measure_num, 0);
       Measure::Base *static_measure = new Measure::Basic({0, 0, 0, 0});
 
       action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());

@@ -27,7 +27,7 @@ TEST(CreateFloatingMeasureActionTest, has_the_expected_action_name)
 
 TEST(CreateFloatingMeasureActionTest, creates_a_floating_measure_with_the_expected_values)
 {
-   GridCoordinate grid_coordinate = GridCoordinate(nullptr, 2, 7, 13);
+   GridCoordinate grid_coordinate = GridCoordinate(2, GridHorizontalCoordinate{7, 13});
    int measure_id = 11;
    Action::CreateFloatingMeasure create_floating_measure_action(grid_coordinate, measure_id);
 

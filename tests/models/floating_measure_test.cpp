@@ -27,7 +27,7 @@ TEST(FloatingMeasureTest, returns_its_measure_id)
 
 TEST(FloatingMeasureTest, returns_its_coordinate)
 {
-   GridCoordinate coordinate(nullptr, 7, 11, 3);
+   GridCoordinate coordinate(7, GridHorizontalCoordinate{11, 3});
    FloatingMeasure floating_measure(coordinate, 0);
 
    ASSERT_EQ(coordinate, floating_measure.get_coordinate());
@@ -56,9 +56,9 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
    Measure::Basic basic_measure_2;
    Measure::Basic basic_measure_3;
 
-   FloatingMeasure floating_measure_1(GridCoordinate(nullptr, 3, 0), basic_measure_1.get_id());
-   FloatingMeasure floating_measure_2(GridCoordinate(nullptr, 7, 2), basic_measure_2.get_id());
-   FloatingMeasure floating_measure_3(GridCoordinate(nullptr, 7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 2), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_3.get_id());
 
    std::vector<FloatingMeasure *> expected_measures = { &floating_measure_2 };
 
@@ -73,9 +73,9 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
    Measure::Basic basic_measure_2;
    Measure::Basic basic_measure_3;
 
-   FloatingMeasure floating_measure_1(GridCoordinate(nullptr, 3, 0), basic_measure_1.get_id());
-   FloatingMeasure floating_measure_2(GridCoordinate(nullptr, 7, 2), basic_measure_2.get_id());
-   FloatingMeasure floating_measure_3(GridCoordinate(nullptr, 7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 2), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_3.get_id());
 
    std::vector<FloatingMeasure *> expected_measures = {
       &floating_measure_1,

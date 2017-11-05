@@ -39,7 +39,7 @@ bool Plotter::Basic::plot()
       {
          int staff_id = staff->get_id();
          Measure::Base* plotted_measure = new Measure::Plotted(notes); // < this automatically adds the measure to the base
-         new FloatingMeasure(GridCoordinate(grid, staff_id, barline_num), plotted_measure->get_id());
+         new FloatingMeasure(GridCoordinate(staff_id, barline_num), plotted_measure->get_id());
       }
    }
 
