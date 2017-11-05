@@ -7,10 +7,10 @@
 
 
 
-Staff::Base::Base(std::string type)
+Staff::Base::Base(std::string type, std::string name)
    : type(type)
    , id(Staff::next_id++)
-   , name()
+   , name(name)
 {
    Staff::push_back(this);
 }

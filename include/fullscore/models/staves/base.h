@@ -22,7 +22,7 @@ namespace Staff
       std::string name;
 
    public:
-      Base(std::string type);
+      Base(std::string type, std::string name=std::string());
       virtual ~Base();
       std::string get_type();
       bool is_type(std::string type);
