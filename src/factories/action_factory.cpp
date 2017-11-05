@@ -245,16 +245,13 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_identifier == Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER)
    {
-      Staff::Base *first_instrument_staff = Staff::find_first_of_type(Staff::TYPE_IDENTIFIER_INSTRUMENT);
-      if (!first_instrument_staff)
-      {
-         std::cout << "Could not create a measure; No \"instrument\" type staff exists" << std::endl;
-      }
-      else
-      {
-         Measure::Base *static_measure = new Measure::Static();
-         action = new Action::CreateFloatingMeasure(GridCoordinate(&current_grid_editor->grid, first_instrument_staff->get_id(), 0, 0), static_measure->get_id());
-      }
+      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->measure_cursor_y);
+      int current_staff_id = current_cursor_staff->get_id();
+      int current_measure_num = current_grid_editor->measure_cursor_x;
+      GridCoordinate grid_coordinate(&current_grid_editor->grid, current_staff_id, current_measure_num, 0);
+      Measure::Base *static_measure = new Measure::Static();
+
+      action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());
    }
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
