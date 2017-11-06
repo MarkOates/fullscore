@@ -12,6 +12,7 @@
 
 Staff::Instrument::Instrument(std::string name)
    : Base(Staff::TYPE_IDENTIFIER_INSTRUMENT, name)
+   , attributes()
 {
 }
 
