@@ -25,12 +25,12 @@ TEST(FloatingMeasureTest, returns_its_measure_id)
 
 
 
-TEST(FloatingMeasureTest, returns_its_coordinate)
+TEST(FloatingMeasureTest, returns_its_grid_coordinate)
 {
-   GridCoordinate coordinate(7, GridHorizontalCoordinate{11, 3});
-   FloatingMeasure floating_measure(coordinate, 0);
+   GridCoordinate grid_coordinate(7, GridHorizontalCoordinate{11, 3});
+   FloatingMeasure floating_measure(grid_coordinate, 0);
 
-   ASSERT_EQ(coordinate, floating_measure.get_coordinate());
+   ASSERT_EQ(grid_coordinate, floating_measure.get_grid_coordinate());
 }
 
 
