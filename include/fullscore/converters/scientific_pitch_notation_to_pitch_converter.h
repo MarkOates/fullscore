@@ -18,3 +18,7 @@ public:
 
 
 
+using SPNToPitchConverter = ScientificPitchNotationToPitchConverter;
+
+
+
