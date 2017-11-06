@@ -157,16 +157,26 @@ Grid GridFactory::development()
 
    grid.append_staff(new Staff::MeasureNumbers);
    grid.append_staff(new Staff::Tempo);
-   grid.append_staff(new Staff::Instrument);
-   grid.append_staff(new Staff::Instrument);
-   grid.append_staff(new Staff::Instrument);
-
-
-   grid.get_staff(0)->set_name("measure numbers");
-   grid.get_staff(1)->set_name("tempo");
-   grid.get_staff(2)->set_name("Trumpet I");
-   grid.get_staff(3)->set_name("Trumpet II");
-   grid.get_staff(4)->set_name("Trombone");
+   grid.append_staff(new Staff::Instrument("Flute I"));
+   grid.append_staff(new Staff::Instrument("Flute II"));
+   grid.append_staff(new Staff::Instrument("Oboe"));
+   grid.append_staff(new Staff::Instrument("Bassoon"));
+   grid.append_staff(new Staff::Instrument("Clarinet I"));
+   grid.append_staff(new Staff::Instrument("Clarinet II"));
+   grid.append_staff(new Staff::Spacer());
+   grid.append_staff(new Staff::Instrument("Trumpet I"));
+   grid.append_staff(new Staff::Instrument("Trumpet II"));
+   grid.append_staff(new Staff::Instrument("F Horn I"));
+   grid.append_staff(new Staff::Instrument("F Horn II"));
+   grid.append_staff(new Staff::Instrument("Trombone I"));
+   grid.append_staff(new Staff::Instrument("Trombone II"));
+   grid.append_staff(new Staff::Instrument("Tuba"));
+   grid.append_staff(new Staff::Spacer());
+   grid.append_staff(new Staff::Instrument("Violin I"));
+   grid.append_staff(new Staff::Instrument("Violin II"));
+   grid.append_staff(new Staff::Instrument("Viola"));
+   grid.append_staff(new Staff::Instrument("Cello"));
+   grid.append_staff(new Staff::Instrument("Bass"));
 
 
    std::vector<Note> notes_to_plot = {
