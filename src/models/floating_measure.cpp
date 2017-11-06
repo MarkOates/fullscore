@@ -5,9 +5,9 @@
 
 
 
-FloatingMeasure::FloatingMeasure(GridCoordinate coordinate, int measure_id)
+FloatingMeasure::FloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
    : id(FloatingMeasure::next_id++)
-   , coordinate(coordinate)
+   , grid_coordinate(grid_coordinate)
    , measure_id(measure_id)
 {
    pool_elements.push_back(this);
@@ -29,9 +29,9 @@ FloatingMeasure::~FloatingMeasure()
 
 
 
-GridCoordinate FloatingMeasure::get_coordinate()
+GridCoordinate FloatingMeasure::get_grid_coordinate()
 {
-   return coordinate;
+   return grid_coordinate;
 }
 
 
@@ -71,7 +71,7 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
 
    for (auto &element : pool_elements)
    {
-      if (element->coordinate.get_staff_id() == staff_id && element->coordinate.get_barline_num() == barline_num)
+      if (element->grid_coordinate.get_staff_id() == staff_id && element->grid_coordinate.get_grid_horizontal_coordinate().get_barline_num() == barline_num)
          results.push_back(element);
    }
 

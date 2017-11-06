@@ -27,7 +27,7 @@ TEST(CreateFloatingMeasureActionTest, has_the_expected_action_name)
 
 TEST(CreateFloatingMeasureActionTest, creates_a_floating_measure_with_the_expected_values)
 {
-   GridCoordinate grid_coordinate = GridCoordinate(nullptr, 2, 7, 13);
+   GridCoordinate grid_coordinate = GridCoordinate(2, GridHorizontalCoordinate{7, 13});
    int measure_id = 11;
    Action::CreateFloatingMeasure create_floating_measure_action(grid_coordinate, measure_id);
 
@@ -40,7 +40,7 @@ TEST(CreateFloatingMeasureActionTest, creates_a_floating_measure_with_the_expect
    std::vector<FloatingMeasure *> floating_measure_elements = FloatingMeasure::get_pool_elements();
 
    ASSERT_EQ(1, floating_measure_elements.size());
-   ASSERT_EQ(grid_coordinate, floating_measure_elements[0]->get_coordinate());
+   ASSERT_EQ(grid_coordinate, floating_measure_elements[0]->get_grid_coordinate());
    ASSERT_EQ(measure_id, floating_measure_elements[0]->get_measure_id());
 }
 

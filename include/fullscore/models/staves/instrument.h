@@ -11,7 +11,7 @@ namespace Staff
    class Instrument : public Base
    {
    public:
-      Instrument();
+      Instrument(std::string name = std::string());
       ~Instrument();
 
       virtual float get_height() override;

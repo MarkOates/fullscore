@@ -27,8 +27,8 @@ TEST(Plotter_DestinationTest, can_be_constructed_with_an_empty_constructor)
 TEST(Plotter_DestinationTest, can_add_and_check_presence_of_destination)
 {
    Plotter::Destination plotter;
-   GridCoordinate grid_coordinate_A(nullptr, 1, 5, 7);
-   GridCoordinate grid_coordinate_B(nullptr, 2, 5, 7);
+   GridCoordinate grid_coordinate_A(1, GridHorizontalCoordinate{5, 7});
+   GridCoordinate grid_coordinate_B(2, GridHorizontalCoordinate{5, 7});
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
    ASSERT_TRUE(plotter.has_destination(grid_coordinate_A));
@@ -54,7 +54,7 @@ TEST(Plotter_DestinationTest, can_remove_a_destination)
 TEST(Plotter_DestinationTest, returns_false_when_attempting_to_remove_a_destination_that_is_not_present)
 {
    Plotter::Destination plotter;
-   GridCoordinate grid_coordinate_A(nullptr, 1, 5, 7);
+   GridCoordinate grid_coordinate_A(1, GridHorizontalCoordinate{5, 7});
 
    ASSERT_FALSE(plotter.remove_destination(grid_coordinate_A));
 }
@@ -64,9 +64,9 @@ TEST(Plotter_DestinationTest, returns_false_when_attempting_to_remove_a_destinat
 TEST(Plotter_DestinationTest, returns_a_list_of_destinations)
 {
    Plotter::Destination plotter;
-   GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
-   GridCoordinate grid_coordinate_B(nullptr, 1, 5, 7);
-   GridCoordinate grid_coordinate_C(nullptr, 2, 5, 7);
+   GridCoordinate grid_coordinate_A(0, GridHorizontalCoordinate{5, 7});
+   GridCoordinate grid_coordinate_B(1, GridHorizontalCoordinate{5, 7});
+   GridCoordinate grid_coordinate_C(2, GridHorizontalCoordinate{5, 7});
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_B));
@@ -83,9 +83,9 @@ TEST(Plotter_DestinationTest, returns_a_list_of_destinations)
 TEST(Plotter_DestinationTest, returns_the_number_of_destinations)
 {
    Plotter::Destination plotter;
-   GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
-   GridCoordinate grid_coordinate_B(nullptr, 1, 5, 7);
-   GridCoordinate grid_coordinate_C(nullptr, 2, 5, 7);
+   GridCoordinate grid_coordinate_A(0, GridHorizontalCoordinate{5, 7});
+   GridCoordinate grid_coordinate_B(1, GridHorizontalCoordinate{5, 7});
+   GridCoordinate grid_coordinate_C(2, GridHorizontalCoordinate{5, 7});
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
    ASSERT_EQ(1, plotter.num_destinations());
@@ -105,7 +105,7 @@ TEST(Plotter_DestinationTest, returns_the_number_of_destinations)
 TEST(Plotter_DestinationTest, cannot_add_a_destination_that_already_exists)
 {
    Plotter::Destination plotter;
-   GridCoordinate grid_coordinate_A(nullptr, 0, 5, 7);
+   GridCoordinate grid_coordinate_A(0, GridHorizontalCoordinate{5, 7});
 
    ASSERT_TRUE(plotter.add_destination(grid_coordinate_A));
    ASSERT_FALSE(plotter.add_destination(grid_coordinate_A));
@@ -121,33 +121,6 @@ TEST(Plotter_DestinationTest, cannot_add_a_destination_that_already_exists)
 TEST(Plotter_DestinationTest, DISABLED_plots_plotted_measure_types_into_the_grid)
 {
    // skip
-}
-
-
-
-TEST(Plotter_DestinationTest, when_plotting_to_a_nullptr_destination_grid_raises_an_error)
-{
-   Plotter::Destination plotter;
-   GridCoordinate grid_coordinate(nullptr, 0, 0, 0);
-
-   ASSERT_TRUE(plotter.add_destination(grid_coordinate));
-
-   ASSERT_THROW(plotter.plot(), std::runtime_error);
-}
-
-
-
-TEST(Plotter_DestinationTest, when_plotting_to_a_destination_staff_that_is_not_an_instrument_type_raises_an_error)
-{
-   Grid grid;
-   grid.append_staff(new Staff::MeasureNumbers);
-
-   Plotter::Destination plotter;
-   GridCoordinate grid_coordinate(&grid, 0, 0, 0);
-
-   ASSERT_TRUE(plotter.add_destination(grid_coordinate));
-
-   ASSERT_THROW(plotter.plot(), std::runtime_error);
 }
 
 

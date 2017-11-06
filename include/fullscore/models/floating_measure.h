@@ -11,14 +11,14 @@ class FloatingMeasure
 {
 private:
    int id;
-   GridCoordinate coordinate;
+   GridCoordinate grid_coordinate;
    int measure_id;
 
 public:
-   FloatingMeasure(GridCoordinate coordinate, int measure_id);
+   FloatingMeasure(GridCoordinate grid_coordinate, int measure_id);
    ~FloatingMeasure();
 
-   GridCoordinate get_coordinate();
+   GridCoordinate get_grid_coordinate();
    int get_measure_id();
    int get_id();
 

@@ -2,30 +2,24 @@
 
 
 
-class Grid;
+#include <fullscore/models/grid_horizontal_coordinate.h>
 
 
 
 class GridCoordinate
 {
 private:
-   Grid *grid;
    int staff_id;
-   int barline_num;
-   int beat_num;
+   GridHorizontalCoordinate grid_horizontal_coordinate;
 
 public:
-   GridCoordinate(Grid *grid=nullptr, int staff_id=0, int barline_num=0, int beat_num=0);
+   GridCoordinate(int staff_id=0, GridHorizontalCoordinate grid_horizontal_coordinate={});
 
-   void set_grid(Grid *grid);
    void set_staff_id(int staff_id);
-   void set_barline_num(int barline_num);
-   void set_beat_num(int beat_num);
+   void set_grid_horizontal_coordinate(GridHorizontalCoordinate grid_horizontal_coordinate);
 
-   Grid *get_grid();
    int get_staff_id();
-   int get_barline_num();
-   int get_beat_num();
+   GridHorizontalCoordinate get_grid_horizontal_coordinate();
 
    bool operator==(const GridCoordinate &other) const;
    bool operator!=(const GridCoordinate &other) const;
