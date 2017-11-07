@@ -10,6 +10,7 @@ class InstrumentFactory
 {
 public:
    Staff::Instrument *create_trombone();
+   Staff::Instrument *create_euphonium();
 };
 
 
