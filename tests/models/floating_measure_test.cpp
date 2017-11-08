@@ -69,6 +69,8 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 
 TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 {
+   FloatingMeasure::destroy_all();
+
    Measure::Basic basic_measure_1;
    Measure::Basic basic_measure_2;
    Measure::Basic basic_measure_3;
