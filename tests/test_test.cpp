@@ -21,11 +21,3 @@ TEST(SumTest, operates_as_expected)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -76,12 +76,3 @@ TEST(BeatCoordinateTest, returns_false_when_two_beat_coordinates_are_not_equal)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
-

@@ -23,11 +23,3 @@ TEST(Staff_MeasureNumbersTest, returns_a_staff_height_of_0_75)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

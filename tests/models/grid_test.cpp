@@ -338,11 +338,3 @@ TEST(GridTest, DISABLED_can_get_a_pointer_to_a_time_signature)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

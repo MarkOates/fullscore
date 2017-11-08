@@ -81,11 +81,3 @@ TEST(SetTimeSignatureNumeratorActionTest, with_an_numerator_that_is_less_than_al
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -29,11 +29,3 @@ TEST(InsertNoteTransformTest, can_insert_notes_at_the_end)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

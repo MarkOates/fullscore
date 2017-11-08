@@ -69,6 +69,8 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 
 TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 {
+   FloatingMeasure::destroy_all();
+
    Measure::Basic basic_measure_1;
    Measure::Basic basic_measure_2;
    Measure::Basic basic_measure_3;
@@ -116,10 +118,9 @@ TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
 
 
 
-int main(int argc, char **argv)
+TEST(FloatingMeasureTest, DISABLED_has_pool_functions)
 {
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
+   // these tests need to be added
 }
 
 

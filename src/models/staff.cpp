@@ -109,6 +109,15 @@ namespace Staff
 
 
 
+   bool destroy_all()
+   {
+      for (unsigned i=0; i<pool.size(); i++) delete pool[i];
+      pool.clear();
+      return true;
+   }
+
+
+
    Base *find_first_of_type(std::string type)
    {
       for (auto &element : pool)

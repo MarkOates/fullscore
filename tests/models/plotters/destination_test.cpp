@@ -139,11 +139,3 @@ TEST(Plotter_DestinationTest, DISABLED_when_plotter_cannot_add_a_plotted_measure
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

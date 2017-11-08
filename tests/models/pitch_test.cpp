@@ -32,11 +32,3 @@ TEST(PitchTest, equality_operator_returns_false_on_unequal_pitch)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -66,11 +66,3 @@ TEST(TransformStackTest, returns_a_list_of_transforms)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

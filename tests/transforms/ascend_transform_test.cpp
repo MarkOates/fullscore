@@ -32,11 +32,3 @@ TEST(AscendTransformTest, causes_subsequent_pitches_to_ascend_from_the_initial_s
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

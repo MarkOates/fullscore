@@ -54,11 +54,3 @@ TEST(Staff_TempoTest, when_setting_a_tempo_marking_with_a_position_gt_0_throws_a
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

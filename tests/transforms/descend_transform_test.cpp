@@ -32,11 +32,3 @@ TEST(DescendTransformTest, causes_subsequent_pitches_to_descend_from_the_initial
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

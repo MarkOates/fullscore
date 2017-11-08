@@ -43,12 +43,3 @@ TEST(MeasureReferenceByIDTest, can_get_its_number_of_notes)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
-

@@ -119,12 +119,3 @@ TEST(PitchProjectorTest, does_not_explode_like_in_the_projection_calculator_prog
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
-
