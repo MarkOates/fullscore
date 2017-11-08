@@ -105,6 +105,15 @@ namespace Measure
          }
       return false;
    }
+
+
+
+   bool destroy_all()
+   {
+      for (unsigned i=0; i<measure_pool.size(); i++) delete measure_pool[i];
+      measure_pool.clear();
+      return true;
+   }
 };
 
 

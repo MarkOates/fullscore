@@ -87,3 +87,10 @@ TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_raises_an_exception_if_t
 
 
 
+TEST(MeasureTest, DISABLED_has_pool_functions)
+{
+   // these tests need to be added
+}
+
+
+
