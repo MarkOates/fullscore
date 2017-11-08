@@ -90,6 +90,8 @@ TEST(StaffTest, with_a_staff_id_in_a_list_not_found_raises_an_exception_if_the_o
 
 TEST(StaffTest, finds_the_first_staff_matching_type)
 {
+   Staff::destroy_all();
+
    Staff::Spacer spacer_staff_1;
    Staff::Instrument instrument_staff_1;
    Staff::Spacer spacer_staff_2;
