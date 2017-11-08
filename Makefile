@@ -35,9 +35,10 @@ GOOGLE_TEST_LIBS=-lgtest
 
 SOURCES := $(shell find src -name '*.cpp')
 OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
-
 TEST_SOURCES := $(shell find tests -name '*.cpp')
-TESTS := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
+TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
+
+#TESTS := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
 
 
 
@@ -77,10 +78,27 @@ run_match_tests:
 
 
 
-bin/tests/%: tests/%.cpp $(OBJECTS)
+#bin/tests/%: tests/%.cpp $(OBJECTS)
+	#@mkdir -p $(@D)
+	#@printf "compiling test \e[1m\e[36m$<\033[0m..."
+	#@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS_FOR_TESTS) $(GOOGLE_TEST_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR)
+	#@echo "done. Executable at \033[1m\033[32m$@\033[0m"
+
+
+
+obj/tests/%.o: tests/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
-	@printf "compiling test \e[1m\e[36m$<\033[0m..."
-	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS_FOR_TESTS) $(GOOGLE_TEST_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR)
+	@printf "compiling test obj file \e[1m\e[36m$<\033[0m..."
+	@g++ -c -std=gnu++11 -Wall -Wuninitialized -Weffc++ $< -o $@ -I$(ALLEGRO_DIR)/include -I./include -I$(GOOGLE_TEST_INCLUDE_DIR)
+	@echo "done. Object at \033[1m\033[32m$@\033[0m"
+
+
+
+bin/test_runner: test_runner.cpp $(TEST_OBJECTS)
+	echo $(TEST_OBJECTS)
+	@mkdir -p $(@D)
+	@printf "compiling test_runer \e[1m\e[36m$<\033[0m..."
+	g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $(TEST_OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS_FOR_TESTS) $(GOOGLE_TEST_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
 
