@@ -116,3 +116,10 @@ TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
 
 
 
+TEST(FloatingMeasureTest, DISABLED_has_pool_functions)
+{
+   // these tests need to be added
+}
+
+
+

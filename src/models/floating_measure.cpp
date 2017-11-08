@@ -87,6 +87,15 @@ std::vector<FloatingMeasure *> FloatingMeasure::get_pool_elements()
 
 
 
+bool FloatingMeasure::destroy_all()
+{
+   for (auto &element : pool_elements) delete element;
+   pool_elements.clear();
+   return true;
+}
+
+
+
 int FloatingMeasure::get_num_pool_elements()
 {
    return pool_elements.size();
