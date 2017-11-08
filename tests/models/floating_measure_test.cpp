@@ -116,11 +116,3 @@ TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

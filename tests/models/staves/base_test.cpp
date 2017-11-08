@@ -49,11 +49,3 @@ TEST(Staff_BaseTest, returns_false_if_is_not_of_type)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -29,11 +29,3 @@ TEST(SplitNoteTest, splits_notes_into_half)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

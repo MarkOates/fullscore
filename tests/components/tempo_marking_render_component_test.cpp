@@ -34,11 +34,3 @@ TEST(TempoMarkingRenderComponentTest, with_an_invalid_font_argument_raises_an_ex
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

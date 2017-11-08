@@ -100,11 +100,3 @@ TEST(StaffTest, finds_the_first_staff_matching_type)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -69,11 +69,3 @@ TEST(CreateFloatingMeasureActionTest, if_a_floating_measure_has_not_been_created
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

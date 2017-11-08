@@ -95,11 +95,3 @@ TEST(MeasureBaseTest, returns_a_pointer_to_its_notes)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

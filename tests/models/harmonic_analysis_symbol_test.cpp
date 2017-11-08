@@ -77,11 +77,3 @@ TEST(HarmonicAnalysisSymbol, returns_an_extension_string_by_interploating_newlin
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

@@ -122,13 +122,3 @@ TEST(GridDimensionsHelperTest, can_get_height_of_a_staff)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
-
-

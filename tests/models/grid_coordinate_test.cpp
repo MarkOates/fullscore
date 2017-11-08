@@ -79,11 +79,3 @@ TEST(GridCoordinate, compares_equality_with_another_grid_coordinate)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

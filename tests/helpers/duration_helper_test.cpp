@@ -37,13 +37,3 @@ TEST(DurationHelperTest, returns_the_length_of_a_time_signature)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
-
-

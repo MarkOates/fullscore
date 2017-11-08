@@ -87,11 +87,3 @@ TEST(MeasureTest, with_a_measure_id_in_a_list_not_found_raises_an_exception_if_t
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-

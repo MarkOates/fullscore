@@ -40,11 +40,3 @@ TEST(NoteStringConverterTest, converts_a_string_to_a_note)
 
 
 
-int main(int argc, char **argv)
-{
-   ::testing::InitGoogleTest(&argc, argv);
-   return RUN_ALL_TESTS();
-}
-
-
-
