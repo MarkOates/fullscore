@@ -105,6 +105,7 @@ clean:
 fresh:
 	make clean
 	make -j8
+	make tests
 	make bin/test_runner -j8
 	bin/test_runner
 
