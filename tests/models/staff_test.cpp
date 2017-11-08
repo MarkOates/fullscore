@@ -100,3 +100,10 @@ TEST(StaffTest, finds_the_first_staff_matching_type)
 
 
 
+TEST(StaffTest, DISABLED_has_pool_functions)
+{
+   // these tests need to be added
+}
+
+
+
