@@ -39,6 +39,18 @@ namespace InstrumentAttribute
    std::string const EXTENDED_RANGE_MAX       = "extended_range_max";
    std::string const HYPER_EXTENDED_RANGE_MIN = "hyper_extended_range_min";
    std::string const HYPER_EXTENDED_RANGE_MAX = "hyper_extended_range_max";
+
+
+   // Range
+
+   std::string const SMARTMUSIC_BASIC_RANGE_MIN        = "smartmusic_basic_range_min";
+   std::string const SMARTMUSIC_BASIC_RANGE_MAX        = "smartmusic_basic_range_max";
+   std::string const SMARTMUSIC_INTERMEDIATE_RANGE_MIN = "smartmusic_intermediate_range_min";
+   std::string const SMARTMUSIC_INTERMEDIATE_RANGE_MAX = "smartmusic_intermediate_range_max";
+   std::string const SMARTMUSIC_ADVANCED_RANGE_MIN     = "smartmusic_advanced_range_min";
+   std::string const SMARTMUSIC_ADVANCED_RANGE_MAX     = "smartmusic_advanced_range_max";
+   std::string const SMARTMUSIC_EXTENDED_RANGE_MIN     = "smartmusic_extended_range_min";
+   std::string const SMARTMUSIC_EXTENDED_RANGE_MAX     = "smartmusic_extended_range_max";
 }
 
 
