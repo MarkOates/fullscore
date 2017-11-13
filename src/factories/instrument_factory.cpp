@@ -26,6 +26,47 @@ Staff::Instrument *InstrumentFactory::create_trombone()
    instrument->attributes.set(InstrumentAttribute::HYPER_EXTENDED_RANGE_MIN, SPNToPitchConverter('F', 1).convert());
    instrument->attributes.set(InstrumentAttribute::HYPER_EXTENDED_RANGE_MAX, SPNToPitchConverter('D', 5).convert());
 
+   // SmartMusic ranges
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MIN, SPNToPitchConverter('E', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MAX, SPNToPitchConverter('F', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MIN, SPNToPitchConverter('E', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MAX, SPNToPitchConverter('B', 4, -1).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MIN, SPNToPitchConverter('G', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MAX, SPNToPitchConverter('F', 5, 0).convert());
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_bass_trombone()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Bass Trombone");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
+
+   // SmartMusic ranges
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MIN, SPNToPitchConverter('C', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MAX, SPNToPitchConverter('F', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MIN, SPNToPitchConverter('B', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MAX, SPNToPitchConverter('B', 4, -1).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MIN, SPNToPitchConverter('G', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MAX, SPNToPitchConverter('F', 5, 0).convert());
+
    return instrument;
 }
 
@@ -48,6 +89,47 @@ Staff::Instrument *InstrumentFactory::create_euphonium()
    instrument->attributes.set(InstrumentAttribute::EXTENDED_RANGE_MAX, SPNToPitchConverter('A', 4, -1).convert());
    instrument->attributes.set(InstrumentAttribute::HYPER_EXTENDED_RANGE_MIN, SPNToPitchConverter('G', 1, -1).convert());
    instrument->attributes.set(InstrumentAttribute::HYPER_EXTENDED_RANGE_MAX, SPNToPitchConverter('C', 5).convert());
+
+   // SmartMusic ranges
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MIN, SPNToPitchConverter('E', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MAX, SPNToPitchConverter('F', 4, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MIN, SPNToPitchConverter('E', 2, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MAX, SPNToPitchConverter('B', 4, -1).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MIN, SPNToPitchConverter('B', 1, -1).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MAX, SPNToPitchConverter('F', 5, 0).convert());
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_tuba()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Tuba");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
+
+   // SmartMusic ranges
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 3, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MIN, SPNToPitchConverter('E', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_INTERMEDIATE_RANGE_MAX, SPNToPitchConverter('F', 3, 0).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MIN, SPNToPitchConverter('E', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_ADVANCED_RANGE_MAX, SPNToPitchConverter('B', 3, -1).convert());
+
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MIN, SPNToPitchConverter('C', 1, 0).convert());
+   instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_EXTENDED_RANGE_MAX, SPNToPitchConverter('F', 4, 0).convert());
 
    return instrument;
 }
