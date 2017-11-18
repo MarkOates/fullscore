@@ -8,6 +8,96 @@
 
 
 
+Staff::Instrument *InstrumentFactory::create_flute()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Flute");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_clarinet()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Clarinet");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_oboe()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Oboe");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_bassoon()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Bassoon");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_trumpet()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("Trumpet");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
+
+   return instrument;
+}
+
+
+
+Staff::Instrument *InstrumentFactory::create_french_horn()
+{
+   Staff::Instrument *instrument = new Staff::Instrument("French Horn");
+
+   // lineage
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
+
+   // roles
+   instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
+
+   return instrument;
+}
+
+
+
 Staff::Instrument *InstrumentFactory::create_trombone()
 {
    Staff::Instrument *instrument = new Staff::Instrument("Trombone");
