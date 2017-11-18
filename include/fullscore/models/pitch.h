@@ -11,6 +11,8 @@ public:
    Pitch(int scale_degree, int accidental=0);
 
    bool operator==(const Pitch &other) const;
+   bool operator>(const Pitch &other) const;
+   bool operator<(const Pitch &other) const;
 };
 
 

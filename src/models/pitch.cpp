@@ -19,3 +19,17 @@ bool Pitch::operator==(const Pitch &other) const
 
 
 
+bool Pitch::operator>(const Pitch &other) const
+{
+   return (scale_degree+accidental > other.scale_degree+other.accidental);
+}
+
+
+
+bool Pitch::operator<(const Pitch &other) const
+{
+   return (scale_degree+accidental < other.scale_degree+other.accidental);
+}
+
+
+
