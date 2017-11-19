@@ -30,7 +30,7 @@ bool Action::MoveCursorUp::execute()
 {
    if (!grid_editor) return false;
 
-   grid_editor->move_measure_cursor_y(-1);
+   grid_editor->move_grid_cursor_y(-1);
 
    return true;
 }

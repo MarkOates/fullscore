@@ -237,16 +237,16 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
    else if (action_identifier == Action::INSERT_STAFF_ACTION_IDENTIFIER)
-      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+      action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
    else if (action_identifier == Action::DELETE_STAFF_ACTION_IDENTIFIER)
-      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->measure_cursor_y);
+      action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
    else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
       action = new Action::AppendStaff(&current_grid_editor->grid);
    else if (action_identifier == Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER)
    {
-      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->measure_cursor_y);
+      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->grid_cursor_y);
       int current_staff_id = current_cursor_staff->get_id();
-      int current_barline_num = current_grid_editor->measure_cursor_x;
+      int current_barline_num = current_grid_editor->grid_cursor_x;
       GridCoordinate grid_coordinate(current_staff_id, GridHorizontalCoordinate(current_barline_num, 0));
       Measure::Base *static_measure = new Measure::Basic({0, 0, 0, 0});
 
@@ -255,13 +255,13 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
    else if (action_identifier == "set_time_signature_numerator_2")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 2);
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->grid_cursor_x), 2);
    else if (action_identifier == "set_time_signature_numerator_3")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 3);
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->grid_cursor_x), 3);
    else if (action_identifier == "set_time_signature_numerator_4")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 4);
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->grid_cursor_x), 4);
    else if (action_identifier == "set_time_signature_numerator_5")
-      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->measure_cursor_x), 5);
+      action = new Action::SetTimeSignatureNumerator(current_grid_editor->grid.get_time_signature_ptr(current_grid_editor->grid_cursor_x), 5);
    else if (action_identifier == Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER)
       action = new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure);
    else if (action_identifier == "paste_measure_from_buffer")

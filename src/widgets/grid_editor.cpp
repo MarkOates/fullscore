@@ -21,8 +21,8 @@ UIGridEditor::UIGridEditor(UIWidget *parent)
    : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , grid()
    , playback_control()
-   , measure_cursor_x(0)
-   , measure_cursor_y(0)
+   , grid_cursor_x(0)
+   , grid_cursor_y(0)
    , note_cursor_x(0)
    , edit_mode_target(MEASURE_TARGET)
    , mode(NORMAL_MODE)
@@ -84,17 +84,17 @@ Note *UIGridEditor::get_note_at_cursor()
 
 
 
-float UIGridEditor::get_measure_cursor_real_x()
+float UIGridEditor::get_grid_cursor_real_x()
 {
-   return GridDimensionsHelper::get_length_to_measure(grid, measure_cursor_x) * FULL_MEASURE_WIDTH;
+   return GridDimensionsHelper::get_length_to_measure(grid, grid_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
 
 
-float UIGridEditor::get_measure_cursor_real_y()
+float UIGridEditor::get_grid_cursor_real_y()
 {
-   return GridDimensionsHelper::get_height_to_staff(grid, measure_cursor_y) * STAFF_HEIGHT;
+   return GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y) * STAFF_HEIGHT;
 }
 
 
@@ -128,21 +128,21 @@ float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probabl
 
 
 
-int UIGridEditor::move_measure_cursor_x(int delta)
+int UIGridEditor::move_grid_cursor_x(int delta)
 {
    int num_barlines = grid.get_num_barlines();
-   measure_cursor_x = limit<int>(0, num_barlines-1, measure_cursor_x + delta);
-   return measure_cursor_x;
+   grid_cursor_x = limit<int>(0, num_barlines-1, grid_cursor_x + delta);
+   return grid_cursor_x;
 }
 
 
 
 
-int UIGridEditor::move_measure_cursor_y(int delta)
+int UIGridEditor::move_grid_cursor_y(int delta)
 {
    int num_staves = grid.get_num_staves();
-   measure_cursor_y = limit<int>(0, num_staves-1, measure_cursor_y + delta);
-   return measure_cursor_y;
+   grid_cursor_y = limit<int>(0, num_staves-1, grid_cursor_y + delta);
+   return grid_cursor_y;
 }
 
 
