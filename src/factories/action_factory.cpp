@@ -31,6 +31,7 @@
 #include <fullscore/actions/move_cursor_left_action.h>
 #include <fullscore/actions/move_cursor_right_action.h>
 #include <fullscore/actions/move_cursor_up_action.h>
+#include <fullscore/actions/move_floating_measure_cursor_right_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/queue_action.h>
 #include <fullscore/actions/reset_playback_action.h>
@@ -236,6 +237,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveCursorUp(current_grid_editor);
    else if (action_identifier == Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER)
       action = new Action::MoveCursorRight(current_grid_editor);
+   else if (action_identifier == Action::MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER)
+      action = new Action::MoveFloatingMeasureCursorRight(&current_grid_editor->floating_measure_cursor);
    else if (action_identifier == Action::INSERT_STAFF_ACTION_IDENTIFIER)
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
    else if (action_identifier == Action::DELETE_STAFF_ACTION_IDENTIFIER)

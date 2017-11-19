@@ -70,6 +70,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, "camera_zoom_out");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_W,         false, false, false, Action::MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         false, false, false, "set_time_signature_numerator_3");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
