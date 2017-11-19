@@ -30,16 +30,16 @@ UIGridEditorRenderComponent::~UIGridEditorRenderComponent()
 
 void UIGridEditorRenderComponent::render()
 {
-   Grid &grid                                                  = ui_grid_editor.grid;
-   MusicEngraver &music_engraver                               = ui_grid_editor.music_engraver;
-   float &FULL_MEASURE_WIDTH                                   = ui_grid_editor.FULL_MEASURE_WIDTH;
-   float &STAFF_HEIGHT                                         = ui_grid_editor.STAFF_HEIGHT;
-   UIGridEditor::state_t &state                                = ui_grid_editor.state;
-   UISurfaceAreaBase *&surface_area                            = ui_grid_editor.surface_area;
-   bool &showing_debug_data                                    = ui_grid_editor.showing_debug_data;
-   int &grid_cursor_y                                       = ui_grid_editor.grid_cursor_y;
-   int &note_cursor_x                                          = ui_grid_editor.note_cursor_x;
-   PlaybackControl &playback_control                           = ui_grid_editor.playback_control;
+   Grid &grid                        = ui_grid_editor.grid;
+   MusicEngraver &music_engraver     = ui_grid_editor.music_engraver;
+   float &FULL_MEASURE_WIDTH         = ui_grid_editor.FULL_MEASURE_WIDTH;
+   float &STAFF_HEIGHT               = ui_grid_editor.STAFF_HEIGHT;
+   UIGridEditor::state_t &state      = ui_grid_editor.state;
+   UISurfaceAreaBase *&surface_area  = ui_grid_editor.surface_area;
+   bool &showing_debug_data          = ui_grid_editor.showing_debug_data;
+   int &grid_cursor_y                = ui_grid_editor.grid_cursor_y;
+   int &note_cursor_x                = ui_grid_editor.note_cursor_x;
+   PlaybackControl &playback_control = ui_grid_editor.playback_control;
 
 
    // get_width_of_score
