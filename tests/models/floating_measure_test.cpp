@@ -103,6 +103,37 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 
 
 
+TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures_for_a_staff)
+{
+   FloatingMeasure::destroy_all();
+
+   Measure::Basic basic_measure_1;
+   Measure::Basic basic_measure_2;
+   Measure::Basic basic_measure_3;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 1), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 2), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_5(GridCoordinate(7, 9), basic_measure_3.get_id());
+
+   std::vector<FloatingMeasure *> expected_measures_in_staff_3 = {
+      &floating_measure_3,
+      &floating_measure_1
+   };
+
+   std::vector<FloatingMeasure *> expected_measures_in_staff_7 = {
+      &floating_measure_4,
+      &floating_measure_2,
+      &floating_measure_5 // note the sorting order
+   };
+
+   ASSERT_EQ(expected_measures_in_staff_3, FloatingMeasure::in_staff(3));
+   ASSERT_EQ(expected_measures_in_staff_7, FloatingMeasure::in_staff(7));
+}
+
+
+
 TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
 {
    Measure::Basic basic_measure;

@@ -99,6 +99,29 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
 
 
 
+static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingMeasure *m2)
+{
+   if (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() == m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num())
+      return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset());
+   return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num());
+}
+
+
+
+std::vector<FloatingMeasure *> FloatingMeasure::in_staff(int staff_id)
+{
+   std::vector<FloatingMeasure *> results;
+
+   for (auto &element : pool_elements)
+      if (element->grid_coordinate.get_staff_id() == staff_id) results.push_back(element);
+
+   std::sort(results.begin(), results.end(), __compare_floating_measure_x_location);
+
+   return results;
+}
+
+
+
 std::vector<FloatingMeasure *> FloatingMeasure::get_pool_elements()
 {
    return pool_elements;

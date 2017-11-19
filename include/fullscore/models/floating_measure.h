@@ -37,6 +37,7 @@ public:
    static int get_next_id();
    static FloatingMeasure *find(int id, find_option_t find_option=FIND_OPTION_NONE);
    static std::vector<FloatingMeasure *> find_at_staff_and_barline(int staff_id, int barline_num);
+   static std::vector<FloatingMeasure *> in_staff(int staff_id);
    static std::vector<FloatingMeasure *> get_pool_elements();
    static bool destroy_all();
    static int get_num_pool_elements();
