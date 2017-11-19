@@ -42,7 +42,7 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
 
 
 
-MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data)
+MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused)
    : context(context)
    , measure(measure)
    , music_engraver(music_engraver)
@@ -52,6 +52,7 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
    , row_middle_y(row_middle_y)
    , staff_height(staff_height)
    , showing_debug_data(showing_debug_data)
+   , is_focused(is_focused)
 {}
 
 
@@ -89,6 +90,11 @@ void MeasureRenderComponent::render()
       notation_color = color::blue;
       staff_line_color = color::blue;
    }
+
+   if (is_focused)
+      al_draw_rounded_rectangle(x_pos-2, row_middle_y-staff_height/2-2,
+            x_pos+measure_width+2, row_middle_y+staff_height/2+2,
+            5, 5, color::black, 2);
 
    al_draw_filled_rounded_rectangle(x_pos, row_middle_y-staff_height/2,
          x_pos+measure_width, row_middle_y+staff_height/2,

@@ -40,6 +40,7 @@ void UIGridEditorRenderComponent::render()
    int &grid_cursor_y                = ui_grid_editor.grid_cursor_y;
    int &note_cursor_x                = ui_grid_editor.note_cursor_x;
    PlaybackControl &playback_control = ui_grid_editor.playback_control;
+   int focused_floating_measure_id   = ui_grid_editor.floating_measure_cursor.get_floating_measure_id();
 
 
    // get_width_of_score
@@ -61,7 +62,7 @@ void UIGridEditorRenderComponent::render()
    }
 
    // render the measure grid
-   GridRenderComponent grid_render_component(&grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT);
+   GridRenderComponent grid_render_component(&grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT, focused_floating_measure_id);
    grid_render_component.set_showing_debug_data(showing_debug_data);
    grid_render_component.render();
 
