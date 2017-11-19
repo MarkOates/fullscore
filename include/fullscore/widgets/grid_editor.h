@@ -4,6 +4,7 @@
 
 #include <allegro_flare/gui/widget.h>
 #include <allegro_flare/placement2d.h>
+#include <fullscore/models/floating_measure_cursor.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/playback_control.h>
 #include <fullscore/services/music_engraver.h>
@@ -42,6 +43,7 @@ public:
    int grid_cursor_x;
    int grid_cursor_y;
    int note_cursor_x;
+   FloatingMeasureCursor floating_measure_cursor;
    edit_mode_target_t edit_mode_target;
    mode_t mode;
    state_t state;

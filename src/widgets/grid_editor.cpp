@@ -24,6 +24,7 @@ UIGridEditor::UIGridEditor(UIWidget *parent)
    , grid_cursor_x(0)
    , grid_cursor_y(0)
    , note_cursor_x(0)
+   , floating_measure_cursor()
    , edit_mode_target(MEASURE_TARGET)
    , mode(NORMAL_MODE)
    , state(STATE_INACTIVE) //TODO insure STATE_INACTIVE is a good initizliation value
