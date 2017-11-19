@@ -134,6 +134,38 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures_for_a_staff)
 
 
 
+TEST(FloatingMeasureTest, returns_a_staffs_floating_measures_horizontally_sorted_by_default)
+{
+   FloatingMeasure::destroy_all();
+
+   FloatingMeasure floating_measure_1(GridCoordinate(0, 3), 0);
+   FloatingMeasure floating_measure_2(GridCoordinate(0, 1), 0);
+   FloatingMeasure floating_measure_3(GridCoordinate(0, {2, {3, 8}}), 0);
+   FloatingMeasure floating_measure_4(GridCoordinate(0, {2, {3, 8}}), 0);
+   FloatingMeasure floating_measure_5(GridCoordinate(0, {3, {2, 4}}), 0);
+   FloatingMeasure floating_measure_6(GridCoordinate(0, {1, {3, 8}}), 0);
+
+   std::vector<FloatingMeasure *> expected_measures_order = {
+      &floating_measure_2,
+      &floating_measure_6,
+      &floating_measure_3,
+      &floating_measure_4,
+      &floating_measure_1,
+      &floating_measure_5
+   };
+
+   ASSERT_EQ(expected_measures_order, FloatingMeasure::in_staff(0));
+}
+
+
+
+TEST(FloatingMeasureTest, DISABLED_returns_a_staffs_floating_measures_with_undefined_sorting)
+{
+   // test not necessary
+}
+
+
+
 TEST(FloatingMeasureTest, can_get_the_number_of_floating_measures_in_the_pool)
 {
    Measure::Basic basic_measure;
