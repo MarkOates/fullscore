@@ -186,13 +186,17 @@ Grid GridFactory::development()
       Note(2, Duration(Duration::EIGHTH)),
    };
 
+   /*
    Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, notes_to_plot);
    basic_plotter_1.plot();
+   */
 
    auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
 
+   /*
    Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
    basic_plotter_2.plot();
+   */
 
 
    return grid;
