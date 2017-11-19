@@ -31,6 +31,16 @@ namespace InstrumentAttribute
    }
 
 
+   // Transposition & Clef
+
+   std::string const DEFAULT_CLEF  = "default_celf";
+   std::string const TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH = "transposition_concert_to_written_pitch";
+   std::string const TREBLE_CLEF = "treble_clef;
+   std::string const ALTO_CLEF = "alto_clef;
+   std::string const TENOR_CLEF = "tenor_clef;
+   std::string const BASS_CLEF = "bass_clef;
+
+
    // Range
 
    std::string const COMFORTABLE_RANGE_MIN    = "comfortable_range_min";

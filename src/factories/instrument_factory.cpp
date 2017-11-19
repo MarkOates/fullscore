@@ -18,6 +18,10 @@ Staff::Instrument *InstrumentFactory::create_flute()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    return instrument;
 }
 
@@ -32,6 +36,10 @@ Staff::Instrument *InstrumentFactory::create_clarinet()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 2);
 
    return instrument;
 }
@@ -48,6 +56,10 @@ Staff::Instrument *InstrumentFactory::create_oboe()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    return instrument;
 }
 
@@ -62,6 +74,10 @@ Staff::Instrument *InstrumentFactory::create_bassoon()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
 
    return instrument;
 }
@@ -78,6 +94,10 @@ Staff::Instrument *InstrumentFactory::create_trumpet()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 2);
+
    return instrument;
 }
 
@@ -93,6 +113,10 @@ Staff::Instrument *InstrumentFactory::create_french_horn()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 7);
+
    return instrument;
 }
 
@@ -107,6 +131,10 @@ Staff::Instrument *InstrumentFactory::create_trombone()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
 
    // range
    instrument->attributes.set(InstrumentAttribute::COMFORTABLE_RANGE_MIN, SPNToPitchConverter('F', 2).convert());
@@ -144,6 +172,10 @@ Staff::Instrument *InstrumentFactory::create_bass_trombone()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 2, 0).convert());
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 4, 0).convert());
@@ -171,6 +203,10 @@ Staff::Instrument *InstrumentFactory::create_euphonium()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
 
    // range
    instrument->attributes.set(InstrumentAttribute::COMFORTABLE_RANGE_MIN, SPNToPitchConverter('G', 2).convert());
@@ -208,6 +244,10 @@ Staff::Instrument *InstrumentFactory::create_tuba()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 1, 0).convert());
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 3, 0).convert());
@@ -235,6 +275,10 @@ Staff::Instrument *InstrumentFactory::create_violin()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::TREBLE_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
 
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('G', 3, 0).convert());
@@ -264,6 +308,10 @@ Staff::Instrument *InstrumentFactory::create_viola()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::ALTO_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('C', 3, 0).convert());
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('E', 5, 0).convert());
@@ -292,6 +340,10 @@ Staff::Instrument *InstrumentFactory::create_cello()
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BARITONE);
 
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 0);
+
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('C', 2, 0).convert());
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX, SPNToPitchConverter('D', 4, 0).convert());
@@ -319,6 +371,10 @@ Staff::Instrument *InstrumentFactory::create_bass()
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
+
+   // transposition & clef
+   instrument->attributes.set(InstrumentAttribute::DEFAULT_CLEF, InstrumentAttribute::BASS_CLEF);
+   instrument->attributes.set(InstrumentAttribute::TRANSPOSITION_CONCERT_TO_WRITTEN_PITCH, 12);
 
    // SmartMusic ranges
    instrument->attributes.set(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN, SPNToPitchConverter('E', 2, 0).convert());
