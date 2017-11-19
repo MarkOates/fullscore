@@ -65,6 +65,25 @@ int FloatingMeasure::get_next_id()
 
 
 
+FloatingMeasure *FloatingMeasure::find(int id, find_option_t find_option)
+{
+   FloatingMeasure *found_element = nullptr;
+
+   for (auto &element : pool_elements)
+      if (element->get_id() == id) { found_element = element; break; }
+
+   if (find_option == FIND_OPTION_RAISE_NOT_FOUND && found_element == nullptr)
+   {
+      std::stringstream error_message;
+      error_message << "Looking for FloatingMeasure with id = " << id << " but does not exist";
+      throw std::runtime_error(error_message.str());
+   }
+
+   return found_element;
+}
+
+
+
 std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int staff_id, int barline_num)
 {
    std::vector<FloatingMeasure *> results;

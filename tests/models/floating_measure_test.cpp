@@ -50,6 +50,19 @@ TEST(FloatingMeasureTest, is_assigned_an_incremented_id_when_created)
 
 
 
+TEST(FloatingMeasureTest, can_find_a_floating_measure_by_id)
+{
+   FloatingMeasure floating_measure_1(GridCoordinate(), 0);
+   FloatingMeasure floating_measure_2(GridCoordinate(), 0);
+   FloatingMeasure floating_measure_3(GridCoordinate(), 0);
+
+   ASSERT_EQ(&floating_measure_1, FloatingMeasure::find(floating_measure_1.get_id()));
+   ASSERT_EQ(&floating_measure_2, FloatingMeasure::find(floating_measure_2.get_id()));
+   ASSERT_EQ(&floating_measure_3, FloatingMeasure::find(floating_measure_3.get_id()));
+}
+
+
+
 TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 {
    Measure::Basic basic_measure_1;

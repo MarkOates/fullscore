@@ -27,7 +27,15 @@ private:
    static std::vector<FloatingMeasure *> pool_elements;
 
 public:
+   enum find_option_t
+   {
+      FIND_OPTION_NONE = 0,
+      FIND_OPTION_INCLUDE_NOT_FOUND,
+      FIND_OPTION_RAISE_NOT_FOUND,
+   };
+
    static int get_next_id();
+   static FloatingMeasure *find(int id, find_option_t find_option=FIND_OPTION_NONE);
    static std::vector<FloatingMeasure *> find_at_staff_and_barline(int staff_id, int barline_num);
    static std::vector<FloatingMeasure *> get_pool_elements();
    static bool destroy_all();
