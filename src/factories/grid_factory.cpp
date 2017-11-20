@@ -152,7 +152,7 @@ Grid GridFactory::development()
    FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
 */
 
-   Grid grid;
+   Grid grid(10);
 
 
    grid.append_staff(new Staff::MeasureNumbers);
@@ -186,17 +186,16 @@ Grid GridFactory::development()
       Note(2, Duration(Duration::EIGHTH)),
    };
 
-   /*
-   Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, 3, notes_to_plot);
-   basic_plotter_1.plot();
-   */
+   for (unsigned i=0; i<grid.get_num_barlines(); i++)
+   {
+      Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, i, notes_to_plot);
+      basic_plotter_1.plot();
+   }
 
    auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
 
-   /*
    Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
    basic_plotter_2.plot();
-   */
 
 
    return grid;
