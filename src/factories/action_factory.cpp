@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/action_factory.h>
 
+#include <allegro_flare/framework.h>
 #include <fullscore/actions/transforms/AddDotToNote.h>
 #include <fullscore/actions/transforms/AppendNote.h>
 #include <fullscore/actions/transforms/Ascend.h>
@@ -200,10 +201,10 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::Transform::AddDotToNote(single_note);
    else if (action_identifier == Action::REMOVE_DOT_ACTION_IDENTIFIER)
       action = new Action::Transform::RemoveDot(single_note);
-   else if (action_identifier == Action::SET_COMMAND_MODE_ACTION_IDENTIFIER)
-      action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
-   else if (action_identifier == Action::SET_NORMAL_MODE_ACTION_IDENTIFIER)
-      action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
+   //else if (action_identifier == Action::SET_COMMAND_MODE_ACTION_IDENTIFIER)
+      //action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
+   //else if (action_identifier == Action::SET_NORMAL_MODE_ACTION_IDENTIFIER)
+      //action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
    else if (action_identifier == "split_note")
       action = new Action::Transform::SplitNote(notes);
    else if (action_identifier == "retrograde")

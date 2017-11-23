@@ -2,11 +2,13 @@
 
 
 
+#include <allegro_flare/gui/gui_screen.h>
 #include <allegro_flare/screens/simple_notification_screen.h>
+#include <allegro_flare/config.h>
 #include <allegro_flare/keyboard_command_mapper.h>
 #include <fullscore/actions/base.h>
 #include <fullscore/actions/queue_action.h>
-#include <fullscore/widgets/command_bar.h>
+//#include <fullscore/widgets/command_bar.h>
 #include <fullscore/widgets/follow_camera.h>
 #include <fullscore/widgets/grid_editor.h>
 #include <fullscore/widgets/measure_inspector.h>

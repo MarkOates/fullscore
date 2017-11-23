@@ -3,6 +3,7 @@
 
 #include <fullscore/app_controller.h>
 
+#include <allegro_flare/framework.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/floating_measure.h>
