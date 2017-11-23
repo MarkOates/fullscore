@@ -32,7 +32,7 @@ Staff::Instrument *InstrumentFactory::create_clarinet()
    Staff::Instrument *instrument = new Staff::Instrument("Clarinet");
 
    // lineage
-   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND
+   instrument->attributes.set(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
 
    // roles
    instrument->attributes.set(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
