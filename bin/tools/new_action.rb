@@ -33,11 +33,19 @@ source_code = source_template_file.read
 header_code = header_template_file.read
 
 
+# create our strings for replacing
+
+class_name_camel_case = class_name.camel_case
+class_name_snake_case = class_name.underscore
+class_name_constantized = class_name.underscore.upcase
+
+
 # overwrite the template tokens
-source_code.gsub!(/CLASS_NAME/, class_name.camel_case)
-source_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name.underscore)
-header_code.gsub!(/CLASS_NAME/, class_name.camel_case)
-header_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name.underscore)
+source_code.gsub!(/CLASS_NAME/, class_name_camel_case)
+source_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name_snake_case)
+source_code.gsub!(/CONSTANTIZED_ACTION_NAME/, "#{class_name_constantized}_IDENTIFIER")
+header_code.gsub!(/CLASS_NAME/, class_name_camel_case)
+header_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name_snake_case)
 
 
 # save the file with a new filename
@@ -53,10 +61,10 @@ puts "generated #{header_filename}"
 
 
 # write `git commit -m "Create source files for CLASS_NAME action"`
-`git reset`
-`git add #{source_filename}`
-`git add #{header_filename}`
-`git commit -m "Create source files for #{class_name.camel_case} action"`
+# `git reset`
+# `git add #{source_filename}`
+# `git add #{header_filename}`
+# `git commit -m "Create source files for #{class_name.camel_case} action"`
 
 
 

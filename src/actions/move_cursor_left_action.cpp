@@ -31,7 +31,7 @@ bool Action::MoveCursorLeft::execute()
 
    if (grid_editor->is_measure_target_mode())
    {
-      grid_editor->move_measure_cursor_x(-1);
+      grid_editor->move_grid_cursor_x(-1);
       grid_editor->note_cursor_x = 0;
    }
    else if (grid_editor->is_note_target_mode()) grid_editor->move_note_cursor_x(-1);

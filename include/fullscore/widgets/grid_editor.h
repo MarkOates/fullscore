@@ -4,6 +4,7 @@
 
 #include <allegro_flare/gui/widget.h>
 #include <allegro_flare/placement2d.h>
+#include <fullscore/models/floating_measure_cursor.h>
 #include <fullscore/models/grid.h>
 #include <fullscore/models/playback_control.h>
 #include <fullscore/services/music_engraver.h>
@@ -39,9 +40,10 @@ public:
    Grid grid;
    PlaybackControl playback_control;
 
-   int measure_cursor_x; // should be renamed to grid_cursor_x, grid_cursor_y
-   int measure_cursor_y;
+   int grid_cursor_x;
+   int grid_cursor_y;
    int note_cursor_x;
+   FloatingMeasureCursor floating_measure_cursor;
    edit_mode_target_t edit_mode_target;
    mode_t mode;
    state_t state;
@@ -59,12 +61,12 @@ public:
    Measure::Base *get_measure_at_cursor();
    Note *get_note_at_cursor();
 
-   int move_measure_cursor_x(int delta);
-   int move_measure_cursor_y(int delta);
+   int move_grid_cursor_x(int delta);
+   int move_grid_cursor_y(int delta);
    int move_note_cursor_x(int delta);
 
-   float get_measure_cursor_real_x();
-   float get_measure_cursor_real_y();
+   float get_grid_cursor_real_x();
+   float get_grid_cursor_real_y();
    float get_measure_length_to_note(Measure::Base *measure, int note_index);
    float get_measure_width(Measure::Base *m);
 

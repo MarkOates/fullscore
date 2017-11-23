@@ -19,6 +19,8 @@ namespace Action
    std::string const MOVE_CURSOR_LEFT_ACTION_IDENTIFIER = "move_cursor_left";
    std::string const MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER = "move_cursor_right";
    std::string const MOVE_CURSOR_UP_ACTION_IDENTIFIER = "move_cursor_up";
+   std::string const MOVE_FLOATING_MEASURE_CURSOR_LEFT_IDENTIFIER = "move_floating_measure_cursor_left";
+   std::string const MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER = "move_floating_measure_cursor_right";
    std::string const PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER = "paste_measure_from_buffer";
    std::string const PASTE_MEASURE_FROM_BUFFER_TO_GRID_COORDINATES_ACTION_IDENTIFIER = "paste_measure_from_buffer_to_grid_coordinates";
    std::string const QUEUE_ACTION_IDENTIFIER = "queue";

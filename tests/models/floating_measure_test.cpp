@@ -50,6 +50,19 @@ TEST(FloatingMeasureTest, is_assigned_an_incremented_id_when_created)
 
 
 
+TEST(FloatingMeasureTest, can_find_a_floating_measure_by_id)
+{
+   FloatingMeasure floating_measure_1(GridCoordinate(), 0);
+   FloatingMeasure floating_measure_2(GridCoordinate(), 0);
+   FloatingMeasure floating_measure_3(GridCoordinate(), 0);
+
+   ASSERT_EQ(&floating_measure_1, FloatingMeasure::find(floating_measure_1.get_id()));
+   ASSERT_EQ(&floating_measure_2, FloatingMeasure::find(floating_measure_2.get_id()));
+   ASSERT_EQ(&floating_measure_3, FloatingMeasure::find(floating_measure_3.get_id()));
+}
+
+
+
 TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 {
    Measure::Basic basic_measure_1;
@@ -86,6 +99,69 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
    };
 
    ASSERT_EQ(expected_measures, FloatingMeasure::get_pool_elements());
+}
+
+
+
+TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures_for_a_staff)
+{
+   FloatingMeasure::destroy_all();
+
+   Measure::Basic basic_measure_1;
+   Measure::Basic basic_measure_2;
+   Measure::Basic basic_measure_3;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 1), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 2), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_5(GridCoordinate(7, 9), basic_measure_3.get_id());
+
+   std::vector<FloatingMeasure *> expected_measures_in_staff_3 = {
+      &floating_measure_3,
+      &floating_measure_1
+   };
+
+   std::vector<FloatingMeasure *> expected_measures_in_staff_7 = {
+      &floating_measure_4,
+      &floating_measure_2,
+      &floating_measure_5 // note the sorting order
+   };
+
+   ASSERT_EQ(expected_measures_in_staff_3, FloatingMeasure::in_staff(3));
+   ASSERT_EQ(expected_measures_in_staff_7, FloatingMeasure::in_staff(7));
+}
+
+
+
+TEST(FloatingMeasureTest, returns_a_staffs_floating_measures_horizontally_sorted_by_default)
+{
+   FloatingMeasure::destroy_all();
+
+   FloatingMeasure floating_measure_1(GridCoordinate(0, 3), 0);
+   FloatingMeasure floating_measure_2(GridCoordinate(0, 1), 0);
+   FloatingMeasure floating_measure_3(GridCoordinate(0, {2, {3, 8}}), 0);
+   FloatingMeasure floating_measure_4(GridCoordinate(0, {2, {3, 8}}), 0);
+   FloatingMeasure floating_measure_5(GridCoordinate(0, {3, {2, 4}}), 0);
+   FloatingMeasure floating_measure_6(GridCoordinate(0, {1, {3, 8}}), 0);
+
+   std::vector<FloatingMeasure *> expected_measures_order = {
+      &floating_measure_2,
+      &floating_measure_6,
+      &floating_measure_3,
+      &floating_measure_4,
+      &floating_measure_1,
+      &floating_measure_5
+   };
+
+   ASSERT_EQ(expected_measures_order, FloatingMeasure::in_staff(0));
+}
+
+
+
+TEST(FloatingMeasureTest, DISABLED_returns_a_staffs_floating_measures_with_undefined_sorting)
+{
+   // test not necessary
 }
 
 

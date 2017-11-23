@@ -33,6 +33,13 @@ AppController::AppController(Display *display, Config &config)
    std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
    set_current_grid_editor(create_new_grid_editor(init_template_identifier));
 
+   // TODO: warning! this does not ensure the assigned floating measure cursor is within the current grid
+   if (FloatingMeasure::get_num_pool_elements() != 0)
+   {
+      std::vector<FloatingMeasure *> floating_measures = FloatingMeasure::get_pool_elements();
+      current_grid_editor->floating_measure_cursor.set_floating_measure_id(floating_measures[0]->get_id());
+   }
+
    set_keyboard_input_mappings();
 }
 
@@ -63,6 +70,8 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, "camera_zoom_out");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_W,         false, false, false, Action::MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_B,         true,  false, false, Action::MOVE_FLOATING_MEASURE_CURSOR_LEFT_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, "half_duration");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         false, false, false, "set_time_signature_numerator_3");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, "camera_zoom_in");
