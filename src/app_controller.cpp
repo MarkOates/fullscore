@@ -184,6 +184,8 @@ void AppController::key_char_func()
 
 void AppController::on_message(UIWidget *sender, std::string message)
 {
+   std::cout << "messages sent to AppController have been disabled.  \"" << message << "\" could not be processed\"" << std::endl;
+/*
    std::cout << "message: " << message << std::endl;
 
    if (sender == command_bar && message != "on_submit")
@@ -232,6 +234,7 @@ void AppController::on_message(UIWidget *sender, std::string message)
          delete set_normal_mode_action;
       }
    }
+*/
 }
 
 
