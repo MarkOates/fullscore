@@ -22,7 +22,7 @@ public:
    UIFollowCamera follow_camera;
    UIGridEditor *current_grid_editor;
    std::vector<UIGridEditor *> grid_editors;
-   UICommandBar *command_bar;
+   //UICommandBar *command_bar;
    UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
