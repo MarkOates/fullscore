@@ -42,7 +42,7 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
 
 
 
-MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused)
+MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused, int note_cusor_pos)
    : context(context)
    , measure(measure)
    , music_engraver(music_engraver)
@@ -53,6 +53,7 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
    , staff_height(staff_height)
    , showing_debug_data(showing_debug_data)
    , is_focused(is_focused)
+   , note_cusor_pos(note_cursor_pos)
 {}
 
 
