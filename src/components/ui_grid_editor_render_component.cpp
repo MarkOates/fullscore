@@ -114,13 +114,6 @@ void UIGridEditorRenderComponent::render()
          );
    }
 
-   // left bar (blinking)
-
-   ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
-   al_draw_line(CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y,
-         CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-         cursor_color, 3.0);
-
    // draw a hilight box at the focused note
    if (ui_grid_editor.is_note_target_mode() && note)
    {
@@ -138,6 +131,12 @@ void UIGridEditorRenderComponent::render()
             color::color(color::pink, 0.4)
          );
    }
+
+   // left bar (blinking)
+   ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
+   al_draw_line(CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y,
+         CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+         cursor_color, 3.0);
 
    // draw the playhead
    float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
