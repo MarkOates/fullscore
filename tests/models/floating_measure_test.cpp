@@ -80,6 +80,24 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 
 
 
+TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+   Measure::Basic basic_measure_2;
+   Measure::Basic basic_measure_3;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_2.get_id());
+
+   std::vector<FloatingMeasure *> expected_measures = { &floating_measure_4, &floating_measure_2 };
+
+   ASSERT_EQ(expected_measures, FloatingMeasure::find_in_staff_after_barline(7, 2));
+}
+
+
+
 TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 {
    FloatingMeasure::destroy_all();

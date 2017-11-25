@@ -122,6 +122,23 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
 
 
 
+std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff_after_barline(int staff_id, int barline_num, bool sort)
+{
+   std::vector<FloatingMeasure *> results;
+
+   for (auto &element : pool_elements)
+   {
+      if (element->grid_coordinate.get_staff_id() == staff_id && element->grid_coordinate.get_grid_horizontal_coordinate().get_barline_num() >= barline_num)
+         results.push_back(element);
+   }
+
+   if (sort) std::sort(results.begin(), results.end(), __compare_floating_measure_x_location);
+
+   return results;
+}
+
+
+
 std::vector<FloatingMeasure *> FloatingMeasure::in_staff(int staff_id, bool sort)
 {
    std::vector<FloatingMeasure *> results;
