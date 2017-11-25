@@ -102,22 +102,6 @@ float UIGridEditor::get_grid_cursor_real_y()
 
 
 
-float UIGridEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
-{
-   float sum = 0;
-   std::vector<Note> notes;
-   if (measure) notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
-
-   if (note_index < 0 || note_index >= notes.size()) return 0;
-
-   for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
-   return sum;
-}
-
-
-
-
 float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    if (!m) return 0;

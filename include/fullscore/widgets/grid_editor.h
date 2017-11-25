@@ -67,7 +67,6 @@ public:
 
    float get_grid_cursor_real_x();
    float get_grid_cursor_real_y();
-   float get_measure_length_to_note(Measure::Base *measure, int note_index);
    float get_measure_width(Measure::Base *m);
 
    void toggle_edit_mode_target();

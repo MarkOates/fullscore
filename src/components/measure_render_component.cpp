@@ -24,6 +24,22 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
 
 
 
+float __get_measure_length_to_note(Measure::Base *measure, int note_index)
+{
+   float sum = 0;
+   std::vector<Note> notes;
+   if (measure) notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
+
+   if (note_index < 0 || note_index >= notes.size()) return 0;
+
+   for (int i=0; i<note_index; i++)
+      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
+   return sum;
+}
+
+
+
+
 std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::Base *context, Note *note)
 {
    if (!context && !note) return std::tuple<std::string, std::string>("E", "E");
