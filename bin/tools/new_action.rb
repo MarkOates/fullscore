@@ -43,7 +43,7 @@ class_name_constantized = class_name.underscore.upcase
 # overwrite the template tokens
 source_code.gsub!(/CLASS_NAME/, class_name_camel_case)
 source_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name_snake_case)
-source_code.gsub!(/CONSTANTIZED_ACTION_NAME/, "#{class_name_constantized}_IDENTIFIER")
+source_code.gsub!(/CONSTANTIZED_ACTION_NAME/, "#{class_name_constantized}_ACTION_IDENTIFIER")
 header_code.gsub!(/CLASS_NAME/, class_name_camel_case)
 header_code.gsub!(/SNAKECASE_ACTION_NAME/, class_name_snake_case)
 
