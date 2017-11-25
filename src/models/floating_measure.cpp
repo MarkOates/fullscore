@@ -8,7 +8,7 @@
 
 bool ___basically_equal(float f1, float f2, float threshold=0.00001f)
 {
-   return (std::abs(f1 - f2) > threshold);
+   return (std::abs(f1 - f2) < threshold);
 }
 
 
@@ -21,7 +21,7 @@ static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingM
       float m2_x_offset = m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset();
 
       if (___basically_equal(m1_x_offset, m2_x_offset)) return (m1->get_id() < m2->get_id());
-      return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset());
+      return (m1_x_offset < m2_x_offset);
    }
    return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num());
 }
