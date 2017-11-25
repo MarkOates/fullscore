@@ -9,9 +9,11 @@
 
 
 
-Action::ResetFloatingMeasureCursor::ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor)
+Action::ResetFloatingMeasureCursor::ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor, int staff_id, int barline_num)
    : Base(Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER)
    , floating_measure_cursor(floating_measure_cursor)
+   , staff_id(staff_id)
+   , barline_num(barline_num)
 {}
 
 
@@ -25,11 +27,20 @@ bool Action::ResetFloatingMeasureCursor::execute()
 {
    if (!floating_measure_cursor) throw std::runtime_error("Cannot reset nullptr floating_measure_cursor");
 
-   if (FloatingMeasure::get_num_pool_elements() != 0)
+   FloatingMeasure *found_floating_measure = FloatingMeasure::find_first_in_staff_after_barline(staff_id, barline_num);
+   if (!found_floating_measure)
    {
-      std::vector<FloatingMeasure *> floating_measures = FloatingMeasure::get_pool_elements();
-      floating_measure_cursor->set_floating_measure_id(floating_measures[0]->get_id());
+      std::stringstream error_message;
+      error_message << "Cannot set floating measure cursor because there is not floating measure at (or beyond) the position (staff_id: "
+         << staff_id
+         << ", barline_num: "
+         << barline_num
+         << ")"
+         << std::endl;
+      throw std::runtime_error(error_message.str());
    }
+
+   floating_measure_cursor->set_floating_measure_id(found_floating_measure->get_id());
 
    return true;
 }

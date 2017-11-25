@@ -224,7 +224,12 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == "reset_playback")
       action = new Action::ResetPlayback(current_grid_editor);
    else if (action_identifier == "reset_floating_measure_cursor")
-      action = new Action::ResetFloatingMeasureCursor(&current_grid_editor->floating_measure_cursor);
+   {
+      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->grid_cursor_y);
+      int current_staff_id = current_cursor_staff->get_id();
+      int current_barline_num = current_grid_editor->grid_cursor_x;
+      action = new Action::ResetFloatingMeasureCursor(&current_grid_editor->floating_measure_cursor, current_staff_id, current_barline_num);
+   }
    else if (action_identifier == "save_grid")
       action = new Action::SaveGrid(&current_grid_editor->grid, "score_filename.fs");
    else if (action_identifier == "load_grid")

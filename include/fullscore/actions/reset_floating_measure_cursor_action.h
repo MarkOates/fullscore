@@ -16,9 +16,11 @@ namespace Action
    {
    private:
       FloatingMeasureCursor *floating_measure_cursor;
+      int staff_id;
+      int barline_num;
 
    public:
-      ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor);
+      ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor, int staff_id, int barline_num);
       ~ResetFloatingMeasureCursor();
 
       bool execute() override;
