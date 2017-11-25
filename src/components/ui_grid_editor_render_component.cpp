@@ -73,10 +73,10 @@ void UIGridEditorRenderComponent::render()
    float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
 
    // left bar (blinking)
-   ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
+   ALLEGRO_COLOR cursor_color = color::mix(color::black, color::fuchsia, pow(sin(Framework::time_now*6), 3)*0.5 + 0.5);
    al_draw_line(CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y,
          CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-         cursor_color, 3.0);
+         cursor_color, 5.0);
 
    // draw the playhead
    float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
