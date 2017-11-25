@@ -143,6 +143,19 @@ std::vector<FloatingMeasure *> FloatingMeasure::get_pool_elements()
 
 
 
+bool FloatingMeasure::destroy(int id)
+{
+   for (unsigned i=0; i<pool_elements.size(); i++)
+      if (pool_elements[i]->get_id() == id)
+      {
+         delete pool_elements[i];
+         return true;
+      }
+   return false;
+}
+
+
+
 bool FloatingMeasure::destroy_all()
 {
    for (auto &element : pool_elements) delete element;

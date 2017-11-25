@@ -39,6 +39,7 @@ public:
    static std::vector<FloatingMeasure *> find_at_staff_and_barline(int staff_id, int barline_num);
    static std::vector<FloatingMeasure *> in_staff(int staff_id, bool sort=true);
    static std::vector<FloatingMeasure *> get_pool_elements();
+   static bool destroy(int floating_measure_id);
    static bool destroy_all();
    static int get_num_pool_elements();
 };
