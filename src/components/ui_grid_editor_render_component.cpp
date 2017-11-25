@@ -69,6 +69,8 @@ void UIGridEditorRenderComponent::render()
 
    if (state != UIGridEditor::STATE_ACTIVE) return;
 
+   float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
+   float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
 
    // left bar (blinking)
    ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);

@@ -122,28 +122,42 @@ void MeasureRenderComponent::render()
    ////
 
    // draw a hilight box under the focused measure
-   Measure::Base *measure = ui_grid_editor.get_measure_at_cursor();
+   //x Measure::Base *measure = ui_grid_editor.get_measure_at_cursor();
 
-   Note *note = ui_grid_editor.get_note_at_cursor();
-   float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
-   float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
+   //x Note *note = ui_grid_editor.get_note_at_cursor();
+   std::vector<Note> *notes_in_measure = measure->get_notes_pointer();
+   Note *note = nullptr;
+   if (note_cursor_pos >= notes_in_measure->size() || note_cursor_pos < 0) {}
+   else note = &notes_in_measure->at(note_cursor_pos);
+
+   //x float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
+   //x float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
 
    // draw the measure
 
-   float measure_width = ui_grid_editor.get_measure_width(measure) * FULL_MEASURE_WIDTH;
-   if (measure && measure->get_num_notes() == 0) measure_width = 16;
+   //x float measure_width = ui_grid_editor.get_measure_width(measure) * FULL_MEASURE_WIDTH;
+   //x if (measure && measure->get_num_notes() == 0) measure_width = 16;
 
    // measure box fill
-   al_draw_filled_rounded_rectangle(CACHED_get_grid_cursor_real_x, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-      CACHED_get_grid_cursor_real_x+measure_width, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-      4, 4, color::color(color::aliceblue, 0.2));
+   if (is_focused)
+      al_draw_filled_rounded_rectangle(x_pos-2, row_middle_y-staff_height/2-2,
+            x_pos+measure_width+2, row_middle_y+staff_height/2+2,
+            4, 4, color::color(color::aliceblue, 0.2));
+   //al_draw_filled_rounded_rectangle(CACHED_get_grid_cursor_real_x, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+    //  CACHED_get_grid_cursor_real_x+measure_width, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+     // 4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
-   if (ui_grid_editor.is_measure_target_mode())
+   if (is_focused)
    {
       float thickness = 2.0;
       float h_thickness = thickness * 0.5;
 
+      al_draw_rounded_rectangle(x_pos-h_thickness*2, row_middle_y-staff_height/2-2,
+            x_pos+measure_width+h_thickness*2, row_middle_y+staff_height/2+2,
+            4, 4, color::color(color::black, 0.3), thickness);
+
+      /*
       al_draw_rounded_rectangle(
             CACHED_get_grid_cursor_real_x - h_thickness*2,
             GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness*2,
@@ -154,7 +168,19 @@ void MeasureRenderComponent::render()
             color::color(color::black, 0.3),
             thickness
          );
+      */
 
+      al_draw_rounded_rectangle(
+            x_pos-h_thickness,
+            row_middle_y-staff_height/2-2,
+            x_pos+measure_width+h_thickness,
+            row_middle_y+staff_height/2+2,
+            4, 4, 
+            color::color(color::aliceblue, 0.7),
+            thickness
+         );
+
+/*
       al_draw_rounded_rectangle(
             CACHED_get_grid_cursor_real_x - h_thickness,
             GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness,
@@ -165,20 +191,22 @@ void MeasureRenderComponent::render()
             color::color(color::aliceblue, 0.7),
             thickness
          );
+*/
    }
 
    // draw a hilight box at the focused note
-   if (ui_grid_editor.is_note_target_mode() && note)
+   if (is_focused && note)
    {
-      float note_real_offset_x = ui_grid_editor.get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
+      float note_real_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;
+      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;
 
       // note box fill
       al_draw_filled_rounded_rectangle(
-            CACHED_get_grid_cursor_real_x + note_real_offset_x,
-            CACHED_get_grid_cursor_real_y,
-            CACHED_get_grid_cursor_real_x + note_real_offset_x + real_note_width,
-            CACHED_get_grid_cursor_real_y + GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+            x_pos + note_real_offset_x,
+            y_pos,
+            x_pos + note_real_offset_x + real_note_width,
+            y_pos + staff_height,
+            //0 + GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
             6,
             6,
             color::color(color::pink, 0.4)
