@@ -32,6 +32,7 @@ namespace Action
    std::string const SET_CAMERA_TARGET_ACTION_IDENTIFIER = "set_camera_target";
    std::string const SET_COMMAND_MODE_ACTION_IDENTIFIER = "set_command_mode";
    std::string const SET_CURRENT_GRID_EDITOR_ACTION_IDENTIFIER = "set_current_grid_editor";
+   std::string const SET_FLOATING_MEASURE_CURSOR_AFTER_GRID_CURSOR_ACTION_IDENTIFIER = "set_floating_measure_cursor_after_coordinate";
    std::string const SET_MODE_ACTION_IDENTIFIER = "set_mode";
    std::string const SET_NORMAL_MODE_ACTION_IDENTIFIER = "set_normal_mode";
    std::string const SET_REFERENCE_BY_ID_MEASURE_ACTION_IDENTIFIER = "set_reference_by_id_measure";
