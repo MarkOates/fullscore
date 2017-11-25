@@ -161,10 +161,12 @@ TEST(FloatingMeasureTest, returns_a_staffs_floating_measures_horizontally_sorted
    FloatingMeasure floating_measure_3(GridCoordinate(0, {2, {3, 8}}), 0);
    FloatingMeasure floating_measure_4(GridCoordinate(0, {2, {3, 8}}), 0);
    FloatingMeasure floating_measure_5(GridCoordinate(0, {3, {2, 4}}), 0);
-   FloatingMeasure floating_measure_6(GridCoordinate(0, {1, {3, 8}}), 0);
+   FloatingMeasure floating_measure_6(GridCoordinate(0, {2, {2, 4}}), 0);
+   FloatingMeasure floating_measure_7(GridCoordinate(0, {1, {3, 8}}), 0);
 
    std::vector<FloatingMeasure *> expected_measures_order = {
       &floating_measure_2,
+      &floating_measure_7,
       &floating_measure_6,
       &floating_measure_3,
       &floating_measure_4,
