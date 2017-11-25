@@ -89,6 +89,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false, false, false, "move_camera_down");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false, false, false, "move_camera_right");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false, false, false, "move_camera_left");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_C,         false, false, false, Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER);
 
 
 

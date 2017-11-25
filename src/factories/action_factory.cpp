@@ -37,6 +37,7 @@
 #include <fullscore/actions/move_floating_measure_cursor_left_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/actions/reset_floating_measure_cursor_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_grid_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
@@ -222,6 +223,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::TogglePlayback(&current_grid_editor->playback_control);
    else if (action_identifier == "reset_playback")
       action = new Action::ResetPlayback(current_grid_editor);
+   else if (action_identifier == "reset_floating_measure_cursor")
+      action = new Action::ResetFloatingMeasureCursor(&current_grid_editor->floating_measure_cursor);
    else if (action_identifier == "save_grid")
       action = new Action::SaveGrid(&current_grid_editor->grid, "score_filename.fs");
    else if (action_identifier == "load_grid")
