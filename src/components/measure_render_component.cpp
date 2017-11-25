@@ -58,7 +58,7 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
 
 
 
-MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused, int note_cursor_pos)
+MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused, bool in_edit_mode, int note_cursor_pos)
    : context(context)
    , measure(measure)
    , music_engraver(music_engraver)
@@ -69,6 +69,7 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
    , staff_height(staff_height)
    , showing_debug_data(showing_debug_data)
    , is_focused(is_focused)
+   , in_edit_mode(in_edit_mode)
    , note_cursor_pos(note_cursor_pos)
 {}
 
@@ -148,7 +149,7 @@ void MeasureRenderComponent::render()
      // 4, 4, color::color(color::aliceblue, 0.2));
 
    // measure box outline
-   if (is_focused)
+   if (is_focused && in_edit_mode)
    {
       float thickness = 2.0;
       float h_thickness = thickness * 0.5;
@@ -195,7 +196,7 @@ void MeasureRenderComponent::render()
    }
 
    // draw a hilight box at the focused note
-   if (is_focused && note)
+   if (is_focused && note && in_edit_mode)
    {
       float note_real_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;
       float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;

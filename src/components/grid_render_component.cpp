@@ -154,9 +154,9 @@ void GridRenderComponent::render()
          for (auto &floating_measure : FloatingMeasure::find_at_staff_and_barline(staff->get_id(), x))
          {
             float floating_measure_x_offset = floating_measure->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset() * full_measure_width / 4.0;
-            bool is_focused = (focused_floating_measure_id == floating_measure->get_id() && is_measure_target);
+            bool is_focused = (focused_floating_measure_id == floating_measure->get_id());
             Measure::Base *floating_measure_measure = Measure::find(floating_measure->get_measure_id(), Measure::FIND_OPTION_RAISE_NOT_FOUND);
-            MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data, is_focused, note_cursor_x);
+            MeasureRenderComponent measure_render_component(context_measure, floating_measure_measure, music_engraver, full_measure_width, x_pos + floating_measure_x_offset, y_counter, row_middle_y, this_staff_height, showing_debug_data, is_focused, is_measure_target, note_cursor_x);
             measure_render_component.render();
          }
       }
