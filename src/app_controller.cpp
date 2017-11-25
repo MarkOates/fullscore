@@ -95,7 +95,7 @@ void AppController::set_keyboard_input_mappings()
    // measure mode commands
    normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_F, false, true,  false, "ascend");
    normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_D, false, true,  false, "descend");
-   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "delete_measure");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, Action::DELETE_FLOATING_MEASURE_IDENTIFIER);
 
 
 

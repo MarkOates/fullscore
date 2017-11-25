@@ -9,6 +9,7 @@ namespace Action
    std::string const CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER = "create_floating_measure";
    std::string const CREATE_NEW_GRID_EDITOR_ACTION_IDENTIFIER = "create_new_grid_editor";
    std::string const DELETE_GRID_COLUMN_ACTION_IDENTIFIER = "delete_grid_column";
+   std::string const DELETE_FLOATING_MEASURE_IDENTIFIER = "delete_floating_measure";
    std::string const DELETE_MEASURE_ACTION_IDENTIFIER = "delete_measure";
    std::string const DELETE_STAFF_ACTION_IDENTIFIER = "delete_staff";
    std::string const INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER = "insert_note_after";
