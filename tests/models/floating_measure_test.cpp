@@ -98,6 +98,36 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_after_a_barline
 
 
 
+TEST(FloatingMeasureTest, can_find_first_floating_measure_at_staff_id_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_1.get_id());
+
+   ASSERT_EQ(&floating_measure_4, FloatingMeasure::find_first_in_staff_after_barline(7, 1));
+   ASSERT_EQ(&floating_measure_1, FloatingMeasure::find_first_in_staff_after_barline(3, 0));
+}
+
+
+
+TEST(FloatingMeasureTest, returns_nullptr_when_cannot_find_first_floating_measure_at_staff_id_and_at_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_1.get_id());
+
+   ASSERT_EQ(nullptr, FloatingMeasure::find_first_in_staff_after_barline(7, 4));
+   ASSERT_EQ(nullptr, FloatingMeasure::find_first_in_staff_after_barline(999, 0));
+}
+
+
+
 TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 {
    FloatingMeasure::destroy_all();
