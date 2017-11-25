@@ -13,6 +13,21 @@ bool ___basically_equal(float f1, float f2, float threshold=0.00001f)
 
 
 
+static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingMeasure *m2)
+{
+   if (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() == m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num())
+   {
+      float m1_x_offset = m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset();
+      float m2_x_offset = m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset();
+
+      if (___basically_equal(m1_x_offset, m2_x_offset)) return (m1->get_id() < m2->get_id());
+      return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset());
+   }
+   return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num());
+}
+
+
+
 FloatingMeasure::FloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
    : id(FloatingMeasure::next_id++)
    , grid_coordinate(grid_coordinate)
@@ -103,21 +118,6 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
    }
 
    return results;
-}
-
-
-
-static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingMeasure *m2)
-{
-   if (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() == m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num())
-   {
-      float m1_x_offset = m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset();
-      float m2_x_offset = m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset();
-
-      if (___basically_equal(m1_x_offset, m2_x_offset)) return (m1->get_id() < m2->get_id());
-      return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_beat_coordinate().get_x_offset());
-   }
-   return (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() < m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num());
 }
 
 
