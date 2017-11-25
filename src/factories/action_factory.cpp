@@ -25,6 +25,7 @@
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_floating_measure_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
+#include <fullscore/actions/delete_floating_measure_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_grid_action.h>
@@ -245,6 +246,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveFloatingMeasureCursorLeft(&current_grid_editor->floating_measure_cursor);
    else if (action_identifier == Action::INSERT_STAFF_ACTION_IDENTIFIER)
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
+   else if (action_identifier == Action::DELETE_FLOATING_MEASURE_IDENTIFIER)
+      action = new Action::DeleteFloatingMeasure(current_grid_editor->floating_measure_cursor.get_floating_measure_id());
    else if (action_identifier == Action::DELETE_STAFF_ACTION_IDENTIFIER)
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
    else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)
