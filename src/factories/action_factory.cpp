@@ -283,22 +283,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
    else if (action_identifier == Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER)
       action = new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure);
    else if (action_identifier == "paste_measure_from_buffer")
-   {
-      Measure::Base *measure_at_cursor = current_grid_editor->get_measure_at_cursor();
-      if (measure_at_cursor && measure_at_cursor->get_type() == Measure::TYPE_IDENTIFIER_BASIC)
-      {
-         action = new Action::PasteMeasureFromBuffer(focused_measure, &app_controller->yank_measure_buffer);
-      }
-      else
-      {
-         std::stringstream error_message;
-         error_message
-            << "\""
-            << Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER
-            << "\" action disabled when there is already a measure present at this location";
-         throw std::runtime_error(error_message.str());
-      }
-   }
+      action = new Action::PasteMeasureFromBuffer(current_grid_editor->get_measure_at_cursor(), &app_controller->yank_measure_buffer);
 
    return action;
 }
