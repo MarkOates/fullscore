@@ -37,7 +37,7 @@ public:
    void key_char_func() override;
    void on_message(UIWidget *sender, std::string message) override;
 
-   std::string find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::vector<std::string> find_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
    UIGridEditor *create_new_grid_editor(std::string identifier);
    bool set_current_grid_editor(UIGridEditor *editor);
