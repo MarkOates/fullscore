@@ -180,64 +180,6 @@ void AppController::key_char_func()
 
 
 
-void AppController::on_message(UIWidget *sender, std::string message)
-{
-   std::cout << "messages sent to AppController have been disabled.  \"" << message << "\" could not be processed\"" << std::endl;
-/*
-   std::cout << "message: " << message << std::endl;
-
-   if (sender == command_bar && message != "on_submit")
-   {
-      if (!message.empty())
-      {
-         std::string action_identifier = message;
-
-         Action::Base *action = ActionFactory::create_action(this, action_identifier);
-
-         if (action)
-         {
-            std::string success_message = action->get_action_name();
-
-            if (success_message != action_identifier)
-            {
-               success_message = "Calling non-atomic action: ";
-               success_message += message + " using " + action->get_action_name();
-            }
-
-            simple_notification_screen->spawn_notification(success_message);
-            action->execute();
-            delete action;
-
-            Action::Base *set_normal_mode_action = ActionFactory::create_action(this, "set_normal_mode");
-            if (!set_normal_mode_action) throw std::runtime_error("Cannot return to NORMAL_MODE; \"set_normal_mode\" action not found");
-            set_normal_mode_action->execute();
-            delete set_normal_mode_action;
-         }
-         else
-         {
-            std::string error_message = "Unfound action: ";
-            error_message += action_identifier;
-            simple_notification_screen->spawn_notification(error_message);
-         }
-      }
-      else
-      {
-         std::string error_message = "Unrecognized input: ";
-         error_message += message;
-         simple_notification_screen->spawn_notification(error_message);
-
-         Action::Base *set_normal_mode_action = ActionFactory::create_action(this, "set_normal_mode");
-         if (!set_normal_mode_action) throw std::runtime_error("Cannot return to NORMAL_MODE; \"set_normal_mode\" action not found");
-         set_normal_mode_action->execute();
-         delete set_normal_mode_action;
-      }
-   }
-*/
-}
-
-
-
-
 UIGridEditor *AppController::create_new_grid_editor(std::string name)
 {
    static int new_x = 0;
