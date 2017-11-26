@@ -266,7 +266,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       int current_staff_id = current_cursor_staff->get_id();
       int current_barline_num = current_grid_editor->grid_cursor_x;
       GridCoordinate grid_coordinate(current_staff_id, GridHorizontalCoordinate(current_barline_num, 0));
-      Measure::Base *static_measure = new Measure::Basic({0, 0, 0, 0});
+      Measure::Base *static_measure = new Measure::Basic({0});
 
       action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());
    }
