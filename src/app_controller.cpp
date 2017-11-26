@@ -23,7 +23,7 @@ AppController::AppController(Display *display, Config &config)
    , current_grid_editor(nullptr)
    , grid_editors()
    //, command_bar(new UICommandBar(this))
-   , ui_measure_inspector(new UIMeasureInspector(this))
+   //, ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
    , normal_mode_keyboard_mappings()
    , normal_mode_note_keyboard_mappings()
@@ -106,9 +106,9 @@ void AppController::set_keyboard_input_mappings()
 
 void AppController::primary_timer_func()
 {
-   if (ui_measure_inspector) ui_measure_inspector->set_measure(current_grid_editor->get_measure_at_cursor());
-   ui_measure_inspector->place.position = vec2d(display->width(), 0);
-   ui_measure_inspector->place.size = vec2d(300, display->height());
+   //if (ui_measure_inspector) ui_measure_inspector->set_measure(current_grid_editor->get_measure_at_cursor());
+   //ui_measure_inspector->place.position = vec2d(display->width(), 0);
+   //ui_measure_inspector->place.size = vec2d(300, display->height());
 
    UIScreen::primary_timer_func();
 }

@@ -11,7 +11,7 @@
 //#include <fullscore/widgets/command_bar.h>
 #include <fullscore/widgets/follow_camera.h>
 #include <fullscore/widgets/grid_editor.h>
-#include <fullscore/widgets/measure_inspector.h>
+//#include <fullscore/widgets/measure_inspector.h>
 
 
 
@@ -25,7 +25,7 @@ public:
    UIGridEditor *current_grid_editor;
    std::vector<UIGridEditor *> grid_editors;
    //UICommandBar *command_bar;
-   UIMeasureInspector *ui_measure_inspector;
+   //UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    KeyboardCommandMapper normal_mode_keyboard_mappings;
