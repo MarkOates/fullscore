@@ -74,7 +74,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         true,  false, false, "split_note");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_7,         true,  false, false, "set_reference_by_id_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, "camera_zoom_default");
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         false,  false, false, Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER);
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         false, false, false, Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER);
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, "set_stack_measure");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,  true, false, "create_new_grid_editor");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,  true, false, "set_current_grid_editor");
