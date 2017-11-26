@@ -268,7 +268,13 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       GridCoordinate grid_coordinate(current_staff_id, GridHorizontalCoordinate(current_barline_num, 0));
       Measure::Base *static_measure = new Measure::Basic({0});
 
-      action = new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id());
+      std::string compound_action_name = Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER + " + " + Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER;
+      Action::Queue *action_queue = new Action::Queue(compound_action_name);
+
+      action_queue->add_action(new Action::CreateFloatingMeasure(grid_coordinate, static_measure->get_id()));
+      action_queue->add_action(create_action(app_controller, Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER));
+
+      action = action_queue;
    }
    else if (action_identifier == "toggle_edit_mode_target")
       action = new Action::ToggleEditModeTarget(current_grid_editor);
