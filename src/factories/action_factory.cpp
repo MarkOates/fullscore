@@ -3,6 +3,7 @@
 
 #include <fullscore/factories/action_factory.h>
 
+#include <allegro_flare/framework.h>
 #include <fullscore/actions/transforms/AddDotToNote.h>
 #include <fullscore/actions/transforms/AppendNote.h>
 #include <fullscore/actions/transforms/Ascend.h>
@@ -24,6 +25,7 @@
 #include <fullscore/actions/append_staff_action.h>
 #include <fullscore/actions/create_floating_measure_action.h>
 #include <fullscore/actions/create_new_grid_editor_action.h>
+#include <fullscore/actions/delete_floating_measure_action.h>
 #include <fullscore/actions/delete_staff_action.h>
 #include <fullscore/actions/insert_staff_action.h>
 #include <fullscore/actions/load_grid_action.h>
@@ -35,6 +37,7 @@
 #include <fullscore/actions/move_floating_measure_cursor_left_action.h>
 #include <fullscore/actions/paste_measure_from_buffer_action.h>
 #include <fullscore/actions/queue_action.h>
+#include <fullscore/actions/reset_floating_measure_cursor_action.h>
 #include <fullscore/actions/reset_playback_action.h>
 #include <fullscore/actions/save_grid_action.h>
 #include <fullscore/actions/set_camera_target_action.h>
@@ -200,10 +203,10 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::Transform::AddDotToNote(single_note);
    else if (action_identifier == Action::REMOVE_DOT_ACTION_IDENTIFIER)
       action = new Action::Transform::RemoveDot(single_note);
-   else if (action_identifier == Action::SET_COMMAND_MODE_ACTION_IDENTIFIER)
-      action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
-   else if (action_identifier == Action::SET_NORMAL_MODE_ACTION_IDENTIFIER)
-      action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
+   //else if (action_identifier == Action::SET_COMMAND_MODE_ACTION_IDENTIFIER)
+      //action = new Action::SetCommandMode(current_grid_editor, app_controller->command_bar);
+   //else if (action_identifier == Action::SET_NORMAL_MODE_ACTION_IDENTIFIER)
+      //action = new Action::SetNormalMode(current_grid_editor, app_controller->command_bar);
    else if (action_identifier == "split_note")
       action = new Action::Transform::SplitNote(notes);
    else if (action_identifier == "retrograde")
@@ -220,6 +223,13 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::TogglePlayback(&current_grid_editor->playback_control);
    else if (action_identifier == "reset_playback")
       action = new Action::ResetPlayback(current_grid_editor);
+   else if (action_identifier == "reset_floating_measure_cursor")
+   {
+      Staff::Base *current_cursor_staff = current_grid_editor->grid.get_staff(current_grid_editor->grid_cursor_y);
+      int current_staff_id = current_cursor_staff->get_id();
+      int current_barline_num = current_grid_editor->grid_cursor_x;
+      action = new Action::ResetFloatingMeasureCursor(&current_grid_editor->floating_measure_cursor, current_staff_id, current_barline_num);
+   }
    else if (action_identifier == "save_grid")
       action = new Action::SaveGrid(&current_grid_editor->grid, "score_filename.fs");
    else if (action_identifier == "load_grid")
@@ -244,6 +254,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::MoveFloatingMeasureCursorLeft(&current_grid_editor->floating_measure_cursor);
    else if (action_identifier == Action::INSERT_STAFF_ACTION_IDENTIFIER)
       action = new Action::InsertStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
+   else if (action_identifier == Action::DELETE_FLOATING_MEASURE_IDENTIFIER)
+      action = new Action::DeleteFloatingMeasure(current_grid_editor->floating_measure_cursor.get_floating_measure_id());
    else if (action_identifier == Action::DELETE_STAFF_ACTION_IDENTIFIER)
       action = new Action::DeleteStaff(&current_grid_editor->grid, current_grid_editor->grid_cursor_y);
    else if (action_identifier == Action::APPEND_STAFF_ACTION_IDENTIFIER)

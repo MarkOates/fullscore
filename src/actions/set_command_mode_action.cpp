@@ -34,7 +34,7 @@ bool Action::SetCommandMode::execute()
    if (grid_editor->mode == UIGridEditor::COMMAND_MODE)
       throw std::invalid_argument("Cannot set grid_editor to COMMAND_MODE because it is already in COMMAND_MODE, skipping.");
 
-   command_bar->text_input->set_as_focused();
+   //command_bar->text_input->set_as_focused();
    grid_editor->mode = UIGridEditor::COMMAND_MODE;
 
    return true;

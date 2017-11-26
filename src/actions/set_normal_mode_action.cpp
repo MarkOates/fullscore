@@ -4,6 +4,7 @@
 
 #include <fullscore/actions/set_normal_mode_action.h>
 
+#include <fullscore/widgets/command_bar.h>
 #include <fullscore/app_controller.h>
 
 

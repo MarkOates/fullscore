@@ -3,6 +3,7 @@
 
 #include <fullscore/app_controller.h>
 
+#include <allegro_flare/framework.h>
 #include <fullscore/factories/action_factory.h>
 #include <fullscore/factories/grid_factory.h>
 #include <fullscore/models/floating_measure.h>
@@ -21,7 +22,7 @@ AppController::AppController(Display *display, Config &config)
    , follow_camera(this)
    , current_grid_editor(nullptr)
    , grid_editors()
-   , command_bar(new UICommandBar(this))
+   //, command_bar(new UICommandBar(this))
    , ui_measure_inspector(new UIMeasureInspector(this))
    , yank_measure_buffer()
    , normal_mode_keyboard_mappings()
@@ -32,13 +33,6 @@ AppController::AppController(Display *display, Config &config)
 
    std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
    set_current_grid_editor(create_new_grid_editor(init_template_identifier));
-
-   // TODO: warning! this does not ensure the assigned floating measure cursor is within the current grid
-   if (FloatingMeasure::get_num_pool_elements() != 0)
-   {
-      std::vector<FloatingMeasure *> floating_measures = FloatingMeasure::get_pool_elements();
-      current_grid_editor->floating_measure_cursor.set_floating_measure_id(floating_measures[0]->get_id());
-   }
 
    set_keyboard_input_mappings();
 }
@@ -88,13 +82,14 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false, false, false, "move_camera_down");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false, false, false, "move_camera_right");
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false, false, false, "move_camera_left");
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_C,         false, false, false, Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER);
 
 
 
    // measure mode commands
    normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_F, false, true,  false, "ascend");
    normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_D, false, true,  false, "descend");
-   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, "delete_measure");
+   normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, Action::DELETE_FLOATING_MEASURE_IDENTIFIER);
 
 
 
@@ -184,6 +179,8 @@ void AppController::key_char_func()
 
 void AppController::on_message(UIWidget *sender, std::string message)
 {
+   std::cout << "messages sent to AppController have been disabled.  \"" << message << "\" could not be processed\"" << std::endl;
+/*
    std::cout << "message: " << message << std::endl;
 
    if (sender == command_bar && message != "on_submit")
@@ -232,6 +229,7 @@ void AppController::on_message(UIWidget *sender, std::string message)
          delete set_normal_mode_action;
       }
    }
+*/
 }
 
 

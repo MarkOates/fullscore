@@ -9,6 +9,7 @@
 #include <fullscore/components/time_signature_render_component.h>
 #include <fullscore/components/ui_grid_editor_render_component.h>
 #include <fullscore/components/grid_render_component.h>
+#include <fullscore/models/floating_measure.h>
 #include <fullscore/helpers/duration_helper.h>
 #include <fullscore/helpers/grid_dimensions_helper.h>
 #include <cmath>
@@ -62,10 +63,10 @@ void UIGridEditor::on_timer()
 
 Measure::Base *UIGridEditor::get_measure_at_cursor()
 {
-   // this is the next milestone
-   //throw std::runtime_error("UIGridEditor::get_measure_at_cursor() has been disabled");
-   //std::cout << "UIGridEditor::get_measure_at_cursor() has been disabled";
-   return nullptr;
+   int floating_measure_id = floating_measure_cursor.get_floating_measure_id();
+   FloatingMeasure *floating_measure = FloatingMeasure::find(floating_measure_id);
+   if (!floating_measure) return nullptr;
+   return Measure::find(floating_measure->get_measure_id());
 }
 
 
@@ -96,22 +97,6 @@ float UIGridEditor::get_grid_cursor_real_x()
 float UIGridEditor::get_grid_cursor_real_y()
 {
    return GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y) * STAFF_HEIGHT;
-}
-
-
-
-
-float UIGridEditor::get_measure_length_to_note(Measure::Base *measure, int note_index)
-{
-   float sum = 0;
-   std::vector<Note> notes;
-   if (measure) notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
-
-   if (note_index < 0 || note_index >= notes.size()) return 0;
-
-   for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
-   return sum;
 }
 
 
@@ -151,8 +136,7 @@ int UIGridEditor::move_grid_cursor_y(int delta)
 
 int UIGridEditor::move_note_cursor_x(int delta)
 {
-   throw std::runtime_error("UIGridEditor::move_note_cursor_x has been disabled");
-   Measure::Base *current_measure = nullptr;
+   Measure::Base *current_measure = get_measure_at_cursor();
    if (!current_measure)
    {
       note_cursor_x = 0;

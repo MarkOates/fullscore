@@ -80,6 +80,54 @@ TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_a_barline)
 
 
 
+TEST(FloatingMeasureTest, can_find_measures_given_a_staff_id_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+   Measure::Basic basic_measure_2;
+   Measure::Basic basic_measure_3;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_2.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_3.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_2.get_id());
+
+   std::vector<FloatingMeasure *> expected_measures = { &floating_measure_4, &floating_measure_2 };
+
+   ASSERT_EQ(expected_measures, FloatingMeasure::find_in_staff_after_barline(7, 2));
+}
+
+
+
+TEST(FloatingMeasureTest, can_find_first_floating_measure_at_staff_id_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_1.get_id());
+
+   ASSERT_EQ(&floating_measure_4, FloatingMeasure::find_first_in_staff_after_barline(7, 1));
+   ASSERT_EQ(&floating_measure_1, FloatingMeasure::find_first_in_staff_after_barline(3, 0));
+}
+
+
+
+TEST(FloatingMeasureTest, returns_nullptr_when_cannot_find_first_floating_measure_at_staff_id_and_at_and_after_a_barline)
+{
+   Measure::Basic basic_measure_1;
+
+   FloatingMeasure floating_measure_1(GridCoordinate(3, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_2(GridCoordinate(7, 3), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_3(GridCoordinate(7, 0), basic_measure_1.get_id());
+   FloatingMeasure floating_measure_4(GridCoordinate(7, 2), basic_measure_1.get_id());
+
+   ASSERT_EQ(nullptr, FloatingMeasure::find_first_in_staff_after_barline(7, 4));
+   ASSERT_EQ(nullptr, FloatingMeasure::find_first_in_staff_after_barline(999, 0));
+}
+
+
+
 TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures)
 {
    FloatingMeasure::destroy_all();
@@ -143,10 +191,12 @@ TEST(FloatingMeasureTest, returns_a_staffs_floating_measures_horizontally_sorted
    FloatingMeasure floating_measure_3(GridCoordinate(0, {2, {3, 8}}), 0);
    FloatingMeasure floating_measure_4(GridCoordinate(0, {2, {3, 8}}), 0);
    FloatingMeasure floating_measure_5(GridCoordinate(0, {3, {2, 4}}), 0);
-   FloatingMeasure floating_measure_6(GridCoordinate(0, {1, {3, 8}}), 0);
+   FloatingMeasure floating_measure_6(GridCoordinate(0, {2, {2, 4}}), 0);
+   FloatingMeasure floating_measure_7(GridCoordinate(0, {1, {3, 8}}), 0);
 
    std::vector<FloatingMeasure *> expected_measures_order = {
       &floating_measure_2,
+      &floating_measure_7,
       &floating_measure_6,
       &floating_measure_3,
       &floating_measure_4,

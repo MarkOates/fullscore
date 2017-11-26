@@ -24,6 +24,22 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
 
 
 
+float __get_measure_length_to_note(Measure::Base *measure, int note_index)
+{
+   float sum = 0;
+   std::vector<Note> notes;
+   if (measure) notes = measure->get_notes_copy();  // TODO: ineffecient use of get_notes_copy()
+
+   if (note_index < 0 || note_index >= notes.size()) return 0;
+
+   for (int i=0; i<note_index; i++)
+      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
+   return sum;
+}
+
+
+
+
 std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::Base *context, Note *note)
 {
    if (!context && !note) return std::tuple<std::string, std::string>("E", "E");
@@ -42,7 +58,7 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
 
 
 
-MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused)
+MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::Base *measure, MusicEngraver *music_engraver, float full_measure_width, float x_pos, float y_pos, float row_middle_y, float staff_height, bool showing_debug_data, bool is_focused, bool in_edit_mode, int note_cursor_pos)
    : context(context)
    , measure(measure)
    , music_engraver(music_engraver)
@@ -53,6 +69,8 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
    , staff_height(staff_height)
    , showing_debug_data(showing_debug_data)
    , is_focused(is_focused)
+   , in_edit_mode(in_edit_mode)
+   , note_cursor_pos(note_cursor_pos)
 {}
 
 
@@ -101,6 +119,102 @@ void MeasureRenderComponent::render()
          4, 4, measure_block_color);
 
    music_engraver->draw(measure, x_pos, y_pos + staff_height/2, full_measure_width, notation_color, staff_line_color);
+
+   ////
+
+   // draw a hilight box under the focused measure
+   //x Measure::Base *measure = ui_grid_editor.get_measure_at_cursor();
+
+   //x Note *note = ui_grid_editor.get_note_at_cursor();
+   std::vector<Note> *notes_in_measure = measure->get_notes_pointer();
+   Note *note = nullptr;
+   if (note_cursor_pos >= notes_in_measure->size() || note_cursor_pos < 0) {}
+   else note = &notes_in_measure->at(note_cursor_pos);
+
+   //x float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
+   //x float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
+
+   // draw the measure
+
+   //x float measure_width = ui_grid_editor.get_measure_width(measure) * FULL_MEASURE_WIDTH;
+   //x if (measure && measure->get_num_notes() == 0) measure_width = 16;
+
+   // measure box fill
+   if (is_focused)
+      al_draw_filled_rounded_rectangle(x_pos-2, row_middle_y-staff_height/2-2,
+            x_pos+measure_width+2, row_middle_y+staff_height/2+2,
+            4, 4, color::color(color::aliceblue, 0.2));
+   //al_draw_filled_rounded_rectangle(CACHED_get_grid_cursor_real_x, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+    //  CACHED_get_grid_cursor_real_x+measure_width, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+     // 4, 4, color::color(color::aliceblue, 0.2));
+
+   // measure box outline
+   if (is_focused && in_edit_mode)
+   {
+      float thickness = 2.0;
+      float h_thickness = thickness * 0.5;
+
+      al_draw_rounded_rectangle(x_pos-h_thickness*2, row_middle_y-staff_height/2-2,
+            x_pos+measure_width+h_thickness*2, row_middle_y+staff_height/2+2,
+            4, 4, color::color(color::black, 0.3), thickness);
+
+      /*
+      al_draw_rounded_rectangle(
+            CACHED_get_grid_cursor_real_x - h_thickness*2,
+            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness*2,
+            CACHED_get_grid_cursor_real_x+measure_width + h_thickness*2,
+            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT + h_thickness*2,
+            4,
+            4,
+            color::color(color::black, 0.3),
+            thickness
+         );
+      */
+
+      al_draw_rounded_rectangle(
+            x_pos-h_thickness,
+            row_middle_y-staff_height/2-2,
+            x_pos+measure_width+h_thickness,
+            row_middle_y+staff_height/2+2,
+            4, 4, 
+            color::color(color::aliceblue, 0.7),
+            thickness
+         );
+
+/*
+      al_draw_rounded_rectangle(
+            CACHED_get_grid_cursor_real_x - h_thickness,
+            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness,
+            CACHED_get_grid_cursor_real_x+measure_width + h_thickness,
+            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT + h_thickness,
+            4,
+            4,
+            color::color(color::aliceblue, 0.7),
+            thickness
+         );
+*/
+   }
+
+   // draw a hilight box at the focused note
+   if (is_focused && note && in_edit_mode)
+   {
+      float note_real_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;
+      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;
+
+      // note box fill
+      al_draw_filled_rounded_rectangle(
+            x_pos + note_real_offset_x,
+            y_pos,
+            x_pos + note_real_offset_x + real_note_width,
+            y_pos + staff_height,
+            //0 + GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
+            6,
+            6,
+            color::color(color::pink, 0.4)
+         );
+   }
+
+   ////
 
    // draw debug info on the note
    if (showing_debug_data)

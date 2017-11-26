@@ -9,7 +9,7 @@ namespace Action
    std::string const CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER = "create_floating_measure";
    std::string const CREATE_NEW_GRID_EDITOR_ACTION_IDENTIFIER = "create_new_grid_editor";
    std::string const DELETE_GRID_COLUMN_ACTION_IDENTIFIER = "delete_grid_column";
-   std::string const DELETE_MEASURE_ACTION_IDENTIFIER = "delete_measure";
+   std::string const DELETE_FLOATING_MEASURE_IDENTIFIER = "delete_floating_measure";
    std::string const DELETE_STAFF_ACTION_IDENTIFIER = "delete_staff";
    std::string const INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER = "insert_note_after";
    std::string const INSERT_COLUMN_ACTION_IDENTIFIER = "insert_column";
@@ -25,6 +25,7 @@ namespace Action
    std::string const PASTE_MEASURE_FROM_BUFFER_TO_GRID_COORDINATES_ACTION_IDENTIFIER = "paste_measure_from_buffer_to_grid_coordinates";
    std::string const QUEUE_ACTION_IDENTIFIER = "queue";
    std::string const REMOVE_DOT_ACTION_IDENTIFIER = "remove_dot";
+   std::string const RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER = "reset_floating_measure_cursor";
    std::string const RESET_PLAYBACK_ACTION_IDENTIFIER = "reset_playback";
    std::string const SAVE_GRID_ACTION_IDENTIFIER = "save_grid";
    std::string const SET_BASIC_MEASURE_ACTION_IDENTIFIER = "set_basic_measure";

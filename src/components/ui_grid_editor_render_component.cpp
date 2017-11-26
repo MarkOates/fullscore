@@ -41,6 +41,7 @@ void UIGridEditorRenderComponent::render()
    int &note_cursor_x                = ui_grid_editor.note_cursor_x;
    PlaybackControl &playback_control = ui_grid_editor.playback_control;
    int focused_floating_measure_id   = ui_grid_editor.floating_measure_cursor.get_floating_measure_id();
+   bool is_measure_target            = (ui_grid_editor.edit_mode_target == UIGridEditor::NOTE_TARGET);
 
 
    // get_width_of_score
@@ -62,82 +63,20 @@ void UIGridEditorRenderComponent::render()
    }
 
    // render the measure grid
-   GridRenderComponent grid_render_component(&grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT, focused_floating_measure_id);
+   GridRenderComponent grid_render_component(&grid, &music_engraver, FULL_MEASURE_WIDTH, STAFF_HEIGHT, focused_floating_measure_id, is_measure_target, note_cursor_x);
    grid_render_component.set_showing_debug_data(showing_debug_data);
    grid_render_component.render();
 
    if (state != UIGridEditor::STATE_ACTIVE) return;
 
-   // draw a hilight box under the focused measure
-   Measure::Base *measure = ui_grid_editor.get_measure_at_cursor();
-
-   Note *note = ui_grid_editor.get_note_at_cursor();
    float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
    float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
 
-   // draw the measure
-
-   float measure_width = ui_grid_editor.get_measure_width(measure) * FULL_MEASURE_WIDTH;
-   if (measure && measure->get_num_notes() == 0) measure_width = 16;
-
-   // measure box fill
-   al_draw_filled_rounded_rectangle(CACHED_get_grid_cursor_real_x, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-      CACHED_get_grid_cursor_real_x+measure_width, GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-      4, 4, color::color(color::aliceblue, 0.2));
-
-   // measure box outline
-   if (ui_grid_editor.is_measure_target_mode())
-   {
-      float thickness = 2.0;
-      float h_thickness = thickness * 0.5;
-
-      al_draw_rounded_rectangle(
-            CACHED_get_grid_cursor_real_x - h_thickness*2,
-            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness*2,
-            CACHED_get_grid_cursor_real_x+measure_width + h_thickness*2,
-            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT + h_thickness*2,
-            4,
-            4,
-            color::color(color::black, 0.3),
-            thickness
-         );
-
-      al_draw_rounded_rectangle(
-            CACHED_get_grid_cursor_real_x - h_thickness,
-            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT - h_thickness,
-            CACHED_get_grid_cursor_real_x+measure_width + h_thickness,
-            GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y)*STAFF_HEIGHT+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT + h_thickness,
-            4,
-            4,
-            color::color(color::aliceblue, 0.7),
-            thickness
-         );
-   }
-
    // left bar (blinking)
-
-   ALLEGRO_COLOR cursor_color = color::color(color::white, sin(Framework::time_now*5) + 0.5);
+   ALLEGRO_COLOR cursor_color = color::mix(color::black, color::fuchsia, pow(sin(Framework::time_now*6), 3)*0.5 + 0.5);
    al_draw_line(CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y,
          CACHED_get_grid_cursor_real_x, CACHED_get_grid_cursor_real_y+GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-         cursor_color, 3.0);
-
-   // draw a hilight box at the focused note
-   if (ui_grid_editor.is_note_target_mode() && note)
-   {
-      float note_real_offset_x = ui_grid_editor.get_measure_length_to_note(measure, note_cursor_x) * FULL_MEASURE_WIDTH;
-      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * FULL_MEASURE_WIDTH;
-
-      // note box fill
-      al_draw_filled_rounded_rectangle(
-            CACHED_get_grid_cursor_real_x + note_real_offset_x,
-            CACHED_get_grid_cursor_real_y,
-            CACHED_get_grid_cursor_real_x + note_real_offset_x + real_note_width,
-            CACHED_get_grid_cursor_real_y + GridDimensionsHelper::get_height_of_staff(grid, grid_cursor_y)*STAFF_HEIGHT,
-            6,
-            6,
-            color::color(color::pink, 0.4)
-         );
-   }
+         cursor_color, 5.0);
 
    // draw the playhead
    float playhead_x = playback_control.position * FULL_MEASURE_WIDTH;
