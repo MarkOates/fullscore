@@ -109,18 +109,6 @@ void AppController::set_keyboard_input_mappings()
 
 
 
-void AppController::primary_timer_func()
-{
-   //if (ui_measure_inspector) ui_measure_inspector->set_measure(current_grid_editor->get_measure_at_cursor());
-   //ui_measure_inspector->place.position = vec2d(display->width(), 0);
-   //ui_measure_inspector->place.size = vec2d(300, display->height());
-
-   UIScreen::primary_timer_func();
-}
-
-
-
-
 std::vector<std::string> AppController::find_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
    if (mode == UIGridEditor::NORMAL_MODE)

@@ -33,7 +33,6 @@ public:
    KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
 
    AppController(Display *display, Config &config);
-   void primary_timer_func() override;
    void key_char_func() override;
    void on_message(UIWidget *sender, std::string message) override;
 
