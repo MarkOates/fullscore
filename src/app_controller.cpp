@@ -175,6 +175,12 @@ void AppController::key_char_func()
          }
          delete action;
       }
+      else
+      {
+         std::stringstream error_message;
+         error_message << "Action could not be found with the identifier \"" << identifier << "\"" << std::endl;
+         throw std::runtime_error(error_message.str());
+      }
    }
 }
 
