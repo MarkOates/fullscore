@@ -12,6 +12,7 @@ public:
    ~FloatingMeasureCursor();
 
    bool set_floating_measure_id(int floating_measure_id);
+   void clear_floating_measure_id();
    int get_floating_measure_id();
 };
 
