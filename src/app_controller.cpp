@@ -50,19 +50,19 @@ void AppController::set_keyboard_input_mappings()
                                                                                          ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_J,         false, false, false, {Action::MOVE_CURSOR_DOWN_ACTION_IDENTIFIER
                                                                                          ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SEMICOLON, false, false, false, {"set_command_mode"});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SEMICOLON, false, false, false, {Action::SET_COMMAND_MODE_ACTION_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, {"camera_zoom_out"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, {"camera_zoom_in"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false, false, false, {"move_camera_up"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false, false, false, {"move_camera_down"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false, false, false, {"move_camera_right"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false, false, false, {"move_camera_left"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, {"toggle_edit_mode_target"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F2,        false, false, false, {"toggle_show_debug_data"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SPACE,     false, false, false, {"toggle_playback"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Q,         false, false, false, {"reset_playback"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F7,        false, false, false, {"save_grid"});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, {"load_grid"});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, {Action::TOGGLE_EDIT_MODE_TARGET_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F2,        false, false, false, {Action::TOGGLE_SHOW_DEBUG_DATA_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SPACE,     false, false, false, {Action::TOGGLE_PLAYBACK_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Q,         false, false, false, {Action::RESET_PLAYBACK_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F7,        false, false, false, {Action::SAVE_GRID_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, {Action::LOAD_GRID_ACTION_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, {"set_time_signature_numerator_4"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, {"set_time_signature_numerator_5"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, {Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER});
