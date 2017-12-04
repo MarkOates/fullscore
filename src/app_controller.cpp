@@ -66,7 +66,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, {"set_time_signature_numerator_4"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, {"set_time_signature_numerator_5"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, {Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER});
-   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, {"paste_measure_from_buffer"});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, {Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, {"octatonic_1"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_2,         false, false, false, {"set_time_signature_numerator_2"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, {Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER
