@@ -124,11 +124,15 @@ void MeasureRenderComponent::render()
    {
       std::vector<Note> *notes_in_measure = measure->get_notes_pointer();
       Note *note = nullptr;
+      float real_note_width = 0;
       if (note_cursor_pos >= notes_in_measure->size() || note_cursor_pos < 0) {}
-      else note = &notes_in_measure->at(note_cursor_pos);
+      else
+      {
+         note = &notes_in_measure->at(note_cursor_pos);
+         real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;
+      }
 
       float note_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;
-      float real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;
 
       MeasureSelectionBoxRenderer measure_selection_box_renderer(measure_selection_box_renderer_state, x_pos, y_pos, measure_width, staff_height, note_offset_x, real_note_width);
       measure_selection_box_renderer.render();
