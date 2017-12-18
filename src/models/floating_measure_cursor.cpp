@@ -26,6 +26,13 @@ bool FloatingMeasureCursor::set_floating_measure_id(int floating_measure_id)
 
 
 
+void FloatingMeasureCursor::clear_floating_measure_id()
+{
+   this->floating_measure_id = -1;
+}
+
+
+
 int FloatingMeasureCursor::get_floating_measure_id()
 {
    return floating_measure_id;

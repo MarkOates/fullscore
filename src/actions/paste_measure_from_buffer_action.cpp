@@ -6,12 +6,13 @@
 
 #include <fullscore/models/measures/basic.h>
 #include <fullscore/models/Note.h>
+#include <fullscore/action.h>
 
 
 
 
 Action::PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Base *destination_measure, Measure::Basic *yank_measure_buffer)
-   : Base("paste_measure_from_buffer")
+   : Base(Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER)
    , yank_measure_buffer(yank_measure_buffer)
    , destination_measure(destination_measure)
 {

@@ -11,7 +11,7 @@
 //#include <fullscore/widgets/command_bar.h>
 #include <fullscore/widgets/follow_camera.h>
 #include <fullscore/widgets/grid_editor.h>
-#include <fullscore/widgets/measure_inspector.h>
+//#include <fullscore/widgets/measure_inspector.h>
 
 
 
@@ -25,7 +25,7 @@ public:
    UIGridEditor *current_grid_editor;
    std::vector<UIGridEditor *> grid_editors;
    //UICommandBar *command_bar;
-   UIMeasureInspector *ui_measure_inspector;
+   //UIMeasureInspector *ui_measure_inspector;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    KeyboardCommandMapper normal_mode_keyboard_mappings;
@@ -33,11 +33,9 @@ public:
    KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
 
    AppController(Display *display, Config &config);
-   void primary_timer_func() override;
    void key_char_func() override;
-   void on_message(UIWidget *sender, std::string message) override;
 
-   std::string find_action_identifier(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
+   std::vector<std::string> find_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift=false, bool ctrl=false, bool alt=false);
 
    UIGridEditor *create_new_grid_editor(std::string identifier);
    bool set_current_grid_editor(UIGridEditor *editor);
