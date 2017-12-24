@@ -5,6 +5,7 @@
 
 #include <allegro_flare/enum_iterator.h>
 #include <allegro_flare/useful.h>
+#include <vector>
 
 
 
@@ -12,6 +13,25 @@ Duration::Duration(denominator_t denominator, int dots)
    : denominator(denominator)
    , dots(dots)
 {}
+
+
+
+bool Duration::is_valid_denominator(int value)
+{
+   std::vector<denominator_t> valid_denominators = {
+      WHOLE,
+      HALF,
+      QUARTER,
+      EIGHTH,
+      SIXTEENTH,
+      THIRTYSECOND,
+      SIXTYFOURTH,
+   };
+
+   for (int i=0; i<valid_denominators.size(); i++)
+      if (valid_denominators[i] == (Duration::denominator_t)value) return true;
+   return false;
+}
 
 
 

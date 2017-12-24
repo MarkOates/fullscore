@@ -24,6 +24,7 @@ public:
    int dots;
 
    Duration(denominator_t denominator=QUARTER, int dots=0);
+   static bool is_valid_denominator(int value);
    bool operator==(const Duration &other) const;
    bool operator!=(const Duration &other) const;
 };

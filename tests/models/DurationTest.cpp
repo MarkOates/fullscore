@@ -75,3 +75,23 @@ TEST(DurationTest, when_doubling_WHOLE_returns_WHOLE)
 
 
 
+TEST(DurationTest, returns_true_if_an_integer_is_a_valid_denominator)
+{
+   EXPECT_EQ(true, Duration::is_valid_denominator(Duration::WHOLE));
+   EXPECT_EQ(true, Duration::is_valid_denominator(Duration::EIGHTH));
+   EXPECT_EQ(true, Duration::is_valid_denominator(Duration::SIXTYFOURTH));
+}
+
+
+
+TEST(DurationTest, returns_false_if_an_integer_is_an_invalid_denominator)
+{
+   EXPECT_EQ(false, Duration::is_valid_denominator(-1));
+   EXPECT_EQ(false, Duration::is_valid_denominator(0));
+   EXPECT_EQ(false, Duration::is_valid_denominator(3));
+   EXPECT_EQ(false, Duration::is_valid_denominator(7));
+   EXPECT_EQ(false, Duration::is_valid_denominator(999));
+}
+
+
+
