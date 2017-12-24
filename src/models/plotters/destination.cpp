@@ -1,11 +1,11 @@
 
 
 
-#include <fullscore/models/plotters/destination.h>
+#include <fullscore/models/plotters/Destination.h>
 
-#include <fullscore/models/measures/plotted.h>
-#include <fullscore/models/grid.h>
-#include <fullscore/models/plotter.h>
+#include <fullscore/models/measures/Plotted.h>
+#include <fullscore/models/Grid.h>
+#include <fullscore/models/Plotter.h>
 #include <allegro_flare/useful.h>
 #include <algorithm>
 

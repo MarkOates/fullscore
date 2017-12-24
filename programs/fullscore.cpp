@@ -4,7 +4,7 @@
 
 #include <allegro_flare/allegro_flare.h>
 
-#include <fullscore/app_controller.h>
+#include <fullscore/AppController.h>
 
 
 

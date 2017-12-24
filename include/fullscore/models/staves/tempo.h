@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/Base.h>
 
-#include <fullscore/models/tempo_marking.hpp>
+#include <fullscore/models/TempoMarking.hpp>
 
 
 

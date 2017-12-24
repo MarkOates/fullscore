@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/measures/base.h>
+#include <fullscore/models/measures/Base.h>
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/Measure.h>
 
 
 

@@ -1,14 +1,14 @@
 
 
 
-#include <fullscore/models/plotters/basic.h>
+#include <fullscore/models/plotters/Basic.h>
 
 #include <allegro_flare/useful.h>
-#include <fullscore/models/measures/basic.h>
-#include <fullscore/models/staves/base.h>
-#include <fullscore/models/plotter.h>
-#include <fullscore/models/grid.h>
-#include <fullscore/models/floating_measure.h>
+#include <fullscore/models/measures/Basic.h>
+#include <fullscore/models/staves/Base.h>
+#include <fullscore/models/Plotter.h>
+#include <fullscore/models/Grid.h>
+#include <fullscore/models/FloatingMeasure.h>
 
 
 

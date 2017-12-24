@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/transforms/InsertNote.h>
 
-#include <fullscore/transforms/insert_note_transform.h>
+#include <fullscore/transforms/InsertNoteTransform.h>
 
 
 

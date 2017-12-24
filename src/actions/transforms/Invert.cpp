@@ -5,7 +5,7 @@
 #include <fullscore/actions/transforms/Invert.h>
 
 #include <fullscore/models/Note.h>
-#include <fullscore/transforms/invert_transform.h>
+#include <fullscore/transforms/InvertTransform.h>
 
 
 

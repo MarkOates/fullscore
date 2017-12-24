@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/staves/tempo.h>
+#include <fullscore/models/staves/Tempo.h>
 
-#include <fullscore/models/measures/base.h>
+#include <fullscore/models/measures/Base.h>
 
 
 

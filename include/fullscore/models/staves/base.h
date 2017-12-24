@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/grid_horizontal_coordinate.h>
+#include <fullscore/models/GridHorizontalCoordinate.h>
 #include <string>
 #include <vector>
 

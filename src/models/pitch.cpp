@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/pitch.h>
+#include <fullscore/models/Pitch.h>
 
 
 

@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/plotters/base.h>
+#include <fullscore/models/plotters/Base.h>
 #include <fullscore/models/Note.h>
 #include <vector>
 
