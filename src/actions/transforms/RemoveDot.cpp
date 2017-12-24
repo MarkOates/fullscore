@@ -4,9 +4,9 @@
 
 #include <fullscore/actions/transforms/RemoveDot.h>
 
-#include <fullscore/transforms/remove_dot_transform.h>
+#include <fullscore/transforms/RemoveDotTransform.h>
 #include <fullscore/models/Note.h>
-#include <fullscore/action.h>
+#include <fullscore/Action.h>
 
 
 

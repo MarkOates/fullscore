@@ -4,8 +4,8 @@
 #include <fullscore/actions/transforms/InsertNoteAfter.h>
 
 #include <fullscore/actions/transforms/InsertNote.h>
-#include <fullscore/actions/move_cursor_right_action.h>
-#include <fullscore/action.h>
+#include <fullscore/actions/MoveCursorRightAction.h>
+#include <fullscore/Action.h>
 
 
 

@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/measures/plotted.h>
+#include <fullscore/models/measures/Plotted.h>
 
-#include <fullscore/models/measure.h>
+#include <fullscore/models/Measure.h>
 #include <fullscore/models/Note.h>
 #include <allegro_flare/useful.h>
 

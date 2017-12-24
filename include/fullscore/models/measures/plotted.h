@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/measures/base.h>
+#include <fullscore/models/measures/Base.h>
 
 
 

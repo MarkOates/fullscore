@@ -3,7 +3,7 @@
 
 #include <fullscore/actions/transforms/Descend.h>
 
-#include <fullscore/transforms/descend_transform.h>
+#include <fullscore/transforms/DescendTransform.h>
 #include <fullscore/models/Note.h>
 
 

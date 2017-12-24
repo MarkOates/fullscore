@@ -3,7 +3,7 @@
 
 
 #include <vector>
-#include <fullscore/actions/base.h>
+#include <fullscore/actions/Base.h>
 #include <fullscore/models/Note.h>
 
 

@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/staff.h>
+#include <fullscore/models/Staff.h>
 
-#include <fullscore/models/staves/base.h>
+#include <fullscore/models/staves/Base.h>
 #include <sstream>
 
 

@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/models/grid.h>
+#include <fullscore/models/Grid.h>
 
-#include <fullscore/models/measures/base.h>
-#include <fullscore/models/staves/instrument.h>
+#include <fullscore/models/measures/Base.h>
+#include <fullscore/models/staves/Instrument.h>
 #include <fullscore/models/Note.h>
 #include <iostream>
 

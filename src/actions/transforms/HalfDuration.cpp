@@ -5,7 +5,7 @@
 #include <fullscore/actions/transforms/HalfDuration.h>
 
 #include <fullscore/models/Note.h>
-#include <fullscore/transforms/half_duration_transform.h>
+#include <fullscore/transforms/HalfDurationTransform.h>
 
 
 

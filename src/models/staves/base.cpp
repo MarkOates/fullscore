@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/measures/base.h>
-#include <fullscore/models/staves/base.h>
-#include <fullscore/models/staff.h>
+#include <fullscore/models/measures/Base.h>
+#include <fullscore/models/staves/Base.h>
+#include <fullscore/models/Staff.h>
 
 
 

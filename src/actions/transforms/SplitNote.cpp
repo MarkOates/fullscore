@@ -3,7 +3,7 @@
 
 #include <fullscore/actions/transforms/SplitNote.h>
 
-#include <fullscore/transforms/split_note_transform.h>
+#include <fullscore/transforms/SplitNoteTransform.h>
 #include <fullscore/models/Note.h>
 
 

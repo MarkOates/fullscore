@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/models/plotters/base.h>
-#include <fullscore/models/staves/instrument.h>
-#include <fullscore/models/grid_coordinate.h>
+#include <fullscore/models/plotters/Base.h>
+#include <fullscore/models/staves/Instrument.h>
+#include <fullscore/models/GridCoordinate.h>
 #include <fullscore/models/Note.h>
 
 

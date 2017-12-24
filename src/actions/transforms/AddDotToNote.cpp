@@ -3,7 +3,7 @@
 
 #include <fullscore/actions/transforms/AddDotToNote.h>
 
-#include <fullscore/transforms/add_dot_transform.h>
+#include <fullscore/transforms/AddDotTransform.h>
 #include <fullscore/models/Note.h>
 
 
