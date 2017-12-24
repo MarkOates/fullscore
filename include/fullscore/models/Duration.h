@@ -29,7 +29,6 @@ public:
 };
 
 
-std::istream& operator>> (std::istream& i, Duration::denominator_t &denominator);
 Duration::denominator_t half_duration(Duration::denominator_t denominator);
 Duration::denominator_t double_duration(Duration::denominator_t denominator);
 
