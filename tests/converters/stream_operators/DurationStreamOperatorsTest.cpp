@@ -1,0 +1,67 @@
+
+
+
+#include <gtest/gtest.h>
+
+#include <fullscore/models/Duration.h>
+#include <fullscore/converters/stream_operators/DurationStreamOperators.h>
+
+
+
+TEST(DurationStreamOperatorsTest, outputs_to_a_stream_operator)
+{
+   Duration duration(Duration::QUARTER, 7);
+
+   std::stringstream ss;
+
+   ss << duration;
+
+   ASSERT_EQ("4 7", ss.str());
+}
+
+
+
+TEST(DurationStreamOperatorsTest, inputs_from_a_stream_operator)
+{
+   Duration duration(Duration::QUARTER, 0);
+
+   std::stringstream ss;
+
+   ss << "2 7";
+   ss >> duration;
+
+   ASSERT_EQ(Duration::HALF, duration.denominator);
+   ASSERT_EQ(7, duration.dots);
+}
+
+
+
+TEST(DurationStreamOperatorsTest, stream_operators_are_symmetrical)
+{
+   Duration duration(Duration::QUARTER, 7);
+
+   std::string expected_string = "4 7";
+
+   std::stringstream ss;
+
+   ss << duration;
+   ss >> duration;
+   ss << duration;
+
+   ASSERT_EQ(expected_string, ss.str());
+}
+
+
+
+TEST(DurationStreamOperatorsTest, with_an_invalid_duration_type_raises_an_exception)
+{
+   Duration duration(Duration::QUARTER, 0);
+
+   std::stringstream ss;
+
+   ss << "3 7";
+   ASSERT_THROW(ss >> duration,std::runtime_error);
+}
+
+
+
