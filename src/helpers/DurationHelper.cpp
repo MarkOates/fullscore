@@ -28,7 +28,7 @@ float DurationHelper::get_length(int duration, int dots)
 
 float DurationHelper::get_length(const TimeSignature &time_signature)
 {
-   float denominator_duration_width = get_length(time_signature.get_denominator().denominator, time_signature.get_denominator().dots);
+   float denominator_duration_width = get_length(time_signature.get_denominator().get_denominator(), time_signature.get_denominator().get_dots());
    return denominator_duration_width * time_signature.get_numerator();
 }
 

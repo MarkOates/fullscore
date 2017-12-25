@@ -19,7 +19,7 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
    if (!m) return 0;
    float sum = 0;
    for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
-      sum += DurationHelper::get_length(note.duration.denominator, note.duration.dots);
+      sum += DurationHelper::get_length(note.duration.get_denominator(), note.duration.get_dots());
    return sum;
 }
 
@@ -34,7 +34,7 @@ float __get_measure_length_to_note(Measure::Base *measure, int note_index)
    if (note_index < 0 || note_index >= notes.size()) return 0;
 
    for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots);
+      sum += DurationHelper::get_length(notes[i].duration.get_denominator(), notes[i].duration.get_dots());
    return sum;
 }
 
@@ -129,7 +129,7 @@ void MeasureRenderComponent::render()
       else
       {
          note = &notes_in_measure->at(note_cursor_pos);
-         real_note_width = DurationHelper::get_length(note->duration.denominator, note->duration.dots) * full_measure_width;
+         real_note_width = DurationHelper::get_length(note->duration.get_denominator(), note->duration.get_dots()) * full_measure_width;
       }
 
       float note_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;

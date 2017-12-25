@@ -30,7 +30,7 @@ std::vector<Note> Transform::HalfDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)
-      note.duration.denominator = half_duration(note.duration.denominator);
+      note.duration.set_denominator(half_duration(note.duration.get_denominator()));
    return result;
 }
 
