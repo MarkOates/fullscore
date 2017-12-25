@@ -14,6 +14,66 @@ TEST(DurationTest, can_be_created)
 
 
 
+TEST(DurationTest, can_get_the_dots)
+{
+   Duration duration(Duration::QUARTER, 0);
+   EXPECT_EQ(0, duration.get_dots());
+
+   Duration duration(Duration::QUARTER, 3);
+   EXPECT_EQ(3, duration.get_dots());
+
+   Duration duration(Duration::QUARTER, 99);
+   EXPECT_EQ(99, duration.get_dots());
+}
+
+
+
+TEST(DurationTest, can_set_the_dots)
+{
+   Duration duration();
+
+   duration.set_dots(0);
+   EXPECT_EQ(0, duration.get_dots());
+
+   duration.set_dots(3);
+   EXPECT_EQ(3, duration.get_dots());
+
+   duration.set_dots(99);
+   EXPECT_EQ(99, duration.get_dots());
+}
+
+
+
+TEST(DurationTest, can_get_the_denominator)
+{
+   Duration duration(Duration::HALF, 0);
+   EXPECT_EQ(Duration::HALF, duration.get_denominator());
+
+   Duration duration(Duration::QUARTER, 0);
+   EXPECT_EQ(Duration::QUARTER, duration.get_denominator());
+
+   Duration duration(Duration::SIXTYFOURTH, 0);
+   EXPECT_EQ(Duration::SIXTYFOURTH, duration.get_denominator());
+}
+
+
+
+TEST(DurationTest, can_set_the_denominator)
+{
+   Duration duration(Duration::HALF, 0);
+
+   duration.set_denominator(Duration::QUARTER);
+   EXPECT_EQ(Duration::QUARTER, duration.get_denominator());
+
+   duration.set_denominator(Duration::EIGHTH);
+   EXPECT_EQ(Duration::EIGHTH, duration.get_denominator());
+
+   duration.set_denominator(Duration::SIXTYFOURTH);
+   EXPECT_EQ(Duration::SIXTYFOURTH, duration.get_denominator());
+}
+
+
+
 TEST(DurationTest, equality_operator_returns_true_on_equal_durations)
 {
    EXPECT_EQ(false, Duration(Duration::HALF, 0).operator==(Duration(Duration::HALF, 999)));

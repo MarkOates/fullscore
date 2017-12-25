@@ -16,6 +16,46 @@ Duration::Duration(denominator_t denominator, int dots)
 
 
 
+bool Duration::set_denominator(denominator_t denominator)
+{
+   if (!Duration::is_valid_denominator(denominator))
+   {
+      std::stringstream error_message;
+      error_message << "Cannot set_denominator. \"" << denominator << "\" is not a valid Duration denominator_t" << std::endl;
+      throw std::invalid_argument(error_message.str());
+   }
+
+   this->denominator = denominator;
+   return true;
+}
+
+
+
+
+bool Duration::set_dots(int dots)
+{
+   this->dots = dots;
+}
+
+
+
+
+Duration::denominator_t Duration::get_denominator() const
+{
+   return denominator;
+}
+
+
+
+
+int Duration::get_dots() const
+{
+   return dots;
+}
+
+
+
+
 bool Duration::is_valid_denominator(int value)
 {
    std::vector<denominator_t> valid_denominators = {

@@ -7,7 +7,7 @@
 
 std::ostream & operator<< (std::ostream &out, Duration const &t)
 {
-   out << t.denominator << " " << t.dots;
+   out << t.get_denominator() << " " << t.get_dots();
    return out;
 }
 
@@ -20,7 +20,7 @@ std::istream & operator>> (std::istream &in, Duration &t)
 
    in >> denominator >> dots;
 
-   t.set_denominator(denominator);
+   t.set_denominator((Duration::denominator_t)denominator);
    t.set_dots(dots);
 
    return in;

@@ -20,11 +20,21 @@ public:
       SIXTYFOURTH = 64,
    };
 
+private:
    denominator_t denominator;
    int dots;
 
+public:
    Duration(denominator_t denominator=QUARTER, int dots=0);
+
+   bool set_denominator(denominator_t denominator);
+   bool set_dots(int dots);
+
+   denominator_t get_denominator() const;
+   int get_dots() const;
+
    static bool is_valid_denominator(int value);
+
    bool operator==(const Duration &other) const;
    bool operator!=(const Duration &other) const;
 };
