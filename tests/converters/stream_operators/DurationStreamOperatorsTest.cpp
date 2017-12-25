@@ -30,8 +30,8 @@ TEST(DurationStreamOperatorsTest, inputs_from_a_stream_operator)
    ss << "2 7";
    ss >> duration;
 
-   ASSERT_EQ(Duration::HALF, duration.denominator);
-   ASSERT_EQ(7, duration.dots);
+   ASSERT_EQ(Duration::HALF, duration.get_denominator());
+   ASSERT_EQ(7, duration.get_dots());
 }
 
 

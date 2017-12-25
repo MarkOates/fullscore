@@ -16,21 +16,21 @@ TEST(DurationTest, can_be_created)
 
 TEST(DurationTest, can_get_the_dots)
 {
-   Duration duration(Duration::QUARTER, 0);
-   EXPECT_EQ(0, duration.get_dots());
+   Duration duration_1(Duration::QUARTER, 0);
+   EXPECT_EQ(0, duration_1.get_dots());
 
-   Duration duration(Duration::QUARTER, 3);
-   EXPECT_EQ(3, duration.get_dots());
+   Duration duration_2(Duration::QUARTER, 3);
+   EXPECT_EQ(3, duration_2.get_dots());
 
-   Duration duration(Duration::QUARTER, 99);
-   EXPECT_EQ(99, duration.get_dots());
+   Duration duration_3(Duration::QUARTER, 99);
+   EXPECT_EQ(99, duration_3.get_dots());
 }
 
 
 
 TEST(DurationTest, can_set_the_dots)
 {
-   Duration duration();
+   Duration duration;
 
    duration.set_dots(0);
    EXPECT_EQ(0, duration.get_dots());
@@ -46,14 +46,14 @@ TEST(DurationTest, can_set_the_dots)
 
 TEST(DurationTest, can_get_the_denominator)
 {
-   Duration duration(Duration::HALF, 0);
-   EXPECT_EQ(Duration::HALF, duration.get_denominator());
+   Duration duration_1(Duration::HALF, 0);
+   EXPECT_EQ(Duration::HALF, duration_1.get_denominator());
 
-   Duration duration(Duration::QUARTER, 0);
-   EXPECT_EQ(Duration::QUARTER, duration.get_denominator());
+   Duration duration_2(Duration::QUARTER, 0);
+   EXPECT_EQ(Duration::QUARTER, duration_2.get_denominator());
 
-   Duration duration(Duration::SIXTYFOURTH, 0);
-   EXPECT_EQ(Duration::SIXTYFOURTH, duration.get_denominator());
+   Duration duration_3(Duration::SIXTYFOURTH, 0);
+   EXPECT_EQ(Duration::SIXTYFOURTH, duration_3.get_denominator());
 }
 
 
