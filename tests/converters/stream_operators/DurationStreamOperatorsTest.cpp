@@ -53,15 +53,3 @@ TEST(DurationStreamOperatorsTest, stream_operators_are_symmetrical)
 
 
 
-TEST(DurationStreamOperatorsTest, with_an_invalid_duration_type_raises_an_exception)
-{
-   Duration duration(Duration::QUARTER, 0);
-
-   std::stringstream ss;
-
-   ss << "3 7";
-   ASSERT_THROW(ss >> duration,std::runtime_error);
-}
-
-
-

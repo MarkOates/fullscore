@@ -15,17 +15,13 @@ std::ostream & operator<< (std::ostream &out, Duration const &t)
 
 std::istream & operator>> (std::istream &in, Duration &t)
 {
-   int intermediary_denominator = 0;
-   in >> intermediary_denominator >> t.dots;
+   int denominator = 0;
+   int dots = 0;
 
-   if (!Duration::is_valid_denominator(intermediary_denominator))
-   {
-      std::stringstream error_message;
-      error_message << intermediary_denominator << " is not a valid Duration denominator_t" << std::endl;
-      throw std::runtime_error(error_message.str());
-   }
+   in >> denominator >> dots;
 
-   t.denominator = (Duration::denominator_t)intermediary_denominator;
+   t.set_denominator(denominator);
+   t.set_dots(dots);
 
    return in;
 }
