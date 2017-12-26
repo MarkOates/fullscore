@@ -4,7 +4,7 @@
 
 #include <fullscore/models/staves/Base.h>
 
-#include <fullscore/models/TempoMarking.hpp>
+#include <fullscore/models/TempoMarking.h>
 
 
 

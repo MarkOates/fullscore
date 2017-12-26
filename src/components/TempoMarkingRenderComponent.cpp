@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/components/TempoMarkingRenderComponent.hpp>
+#include <fullscore/components/TempoMarkingRenderComponent.h>
 
 #include <allegro5/allegro_font.h>
 #include <allegro_flare/color.h>

@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/components/TempoMarkingRenderComponent.hpp>
+#include <fullscore/components/TempoMarkingRenderComponent.h>
 
 
 

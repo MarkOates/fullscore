@@ -10,9 +10,9 @@
 #include <fullscore/models/staves/Base.h>
 #include <fullscore/models/staves/HarmonicAnalysis.h>
 #include <fullscore/models/staves/Tempo.h>
-#include <fullscore/components/HarmonicAnalysisSymbolRenderComponent.hpp>
+#include <fullscore/components/HarmonicAnalysisSymbolRenderComponent.h>
 #include <fullscore/components/MeasureRenderComponent.h>
-#include <fullscore/components/TempoMarkingRenderComponent.hpp>
+#include <fullscore/components/TempoMarkingRenderComponent.h>
 #include <fullscore/components/TimeSignatureRenderComponent.h>
 #include <fullscore/helpers/DurationHelper.h>
 #include <fullscore/helpers/GridDimensionsHelper.h>
