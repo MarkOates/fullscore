@@ -158,7 +158,7 @@ FloatingMeasure *FloatingMeasure::find_first_in_staff_after_barline(int staff_id
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::in_staff(int staff_id, bool sort)
+std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff(int staff_id, bool sort)
 {
    std::vector<FloatingMeasure *> results;
 
