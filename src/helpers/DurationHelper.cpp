@@ -35,3 +35,19 @@ float DurationHelper::get_length(const TimeSignature &time_signature)
 
 
 
+Duration::denominator_t DurationHelper::half_duration(Duration::denominator_t denominator)
+{
+   if (denominator >= Duration::SIXTYFOURTH) return Duration::SIXTYFOURTH;
+   return (Duration::denominator_t)((int)denominator * 2);
+}
+
+
+
+Duration::denominator_t DurationHelper::double_duration(Duration::denominator_t denominator)
+{
+   if (denominator <= Duration::WHOLE) return Duration::WHOLE;
+   return (Duration::denominator_t)((int)denominator / 2);
+}
+
+
+

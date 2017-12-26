@@ -37,3 +37,40 @@ TEST(DurationHelperTest, returns_the_length_of_a_time_signature)
 
 
 
+TEST(DurationTest, half_duration__halves_the_duration)
+{
+   EXPECT_EQ(Duration::SIXTYFOURTH, DurationHelper::half_duration(Duration::THIRTYSECOND));
+   EXPECT_EQ(Duration::THIRTYSECOND, DurationHelper::half_duration(Duration::SIXTEENTH));
+   EXPECT_EQ(Duration::SIXTEENTH, DurationHelper::half_duration(Duration::EIGHTH));
+   EXPECT_EQ(Duration::QUARTER, DurationHelper::half_duration(Duration::HALF));
+   EXPECT_EQ(Duration::HALF, DurationHelper::half_duration(Duration::WHOLE));
+}
+
+
+
+TEST(DurationTest, double_duration__doubles_the_duration)
+{
+   EXPECT_EQ(Duration::THIRTYSECOND, DurationHelper::double_duration(Duration::SIXTYFOURTH));
+   EXPECT_EQ(Duration::SIXTEENTH, DurationHelper::double_duration(Duration::THIRTYSECOND));
+   EXPECT_EQ(Duration::EIGHTH, DurationHelper::double_duration(Duration::SIXTEENTH));
+   EXPECT_EQ(Duration::QUARTER, DurationHelper::double_duration(Duration::EIGHTH));
+   EXPECT_EQ(Duration::HALF, DurationHelper::double_duration(Duration::QUARTER));
+   EXPECT_EQ(Duration::WHOLE, DurationHelper::double_duration(Duration::HALF));
+}
+
+
+
+TEST(DurationTest, half_duration__when_halving_SIXTYFOURTH_returns_SIXTYFOURTH)
+{
+   EXPECT_EQ(Duration::SIXTYFOURTH, DurationHelper::half_duration(Duration::SIXTYFOURTH));
+}
+
+
+
+TEST(DurationTest, double_duration__when_doubling_WHOLE_returns_WHOLE)
+{
+   EXPECT_EQ(Duration::WHOLE, DurationHelper::double_duration(Duration::WHOLE));
+}
+
+
+
