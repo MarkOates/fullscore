@@ -8,7 +8,7 @@
 Note::Note(int _scale_degree, Duration duration)
    : pitch(Pitch(_scale_degree, 0))
    , duration(duration)
-   , is_rest(false)
+   , rest(false)
 {}
 
 
@@ -36,7 +36,7 @@ bool Note::set_duration(Duration duration)
 
 bool Note::set_rest(bool rest)
 {
-   this->is_rest = rest;
+   this->rest = rest;
    return true;
 }
 
@@ -58,7 +58,7 @@ Duration Note::get_duration() const
 
 bool Note::get_rest() const
 {
-   return is_rest;
+   return rest;
 }
 
 
@@ -67,7 +67,7 @@ bool Note::operator==(const Note &other) const
 {
    return (pitch == other.pitch
          && duration == other.duration
-         && is_rest == other.is_rest);
+         && rest == other.rest);
 }
 
 
