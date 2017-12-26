@@ -19,7 +19,7 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
    if (!m) return 0;
    float sum = 0;
    for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
-      sum += DurationHelper::get_length(note.duration);
+      sum += DurationHelper::get_length(note.get_duration());
    return sum;
 }
 
@@ -34,7 +34,7 @@ float __get_measure_length_to_note(Measure::Base *measure, int note_index)
    if (note_index < 0 || note_index >= notes.size()) return 0;
 
    for (int i=0; i<note_index; i++)
-      sum += DurationHelper::get_length(notes[i].duration);
+      sum += DurationHelper::get_length(notes[i].get_duration());
    return sum;
 }
 
@@ -49,10 +49,10 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
    if (notes.empty()) return std::tuple<std::string, std::string>("=", "=");
 
    int offset = 128;
-   int scale_degree = note->pitch.get_scale_degree();
+   int scale_degree = note->get_pitch().get_scale_degree();
 
-   int context_pitch = notes[(scale_degree+offset*(int)notes.size()) % (int)notes.size()].pitch.get_scale_degree();
-   int context_extension = ((int)note->pitch.get_scale_degree() + offset * (int)notes.size()) / (int)notes.size() - offset;
+   int context_pitch = notes[(scale_degree+offset*(int)notes.size()) % (int)notes.size()].get_pitch().get_scale_degree();
+   int context_extension = ((int)note->get_pitch().get_scale_degree() + offset * (int)notes.size()) / (int)notes.size() - offset;
 
    return std::tuple<std::string, std::string>(tostring(context_pitch), tostring(context_extension));
 }
@@ -129,7 +129,7 @@ void MeasureRenderComponent::render()
       else
       {
          note = &notes_in_measure->at(note_cursor_pos);
-         real_note_width = DurationHelper::get_length(note->duration) * full_measure_width;
+         real_note_width = DurationHelper::get_length(note->get_duration()) * full_measure_width;
       }
 
       float note_offset_x = __get_measure_length_to_note(measure, note_cursor_pos) * full_measure_width;

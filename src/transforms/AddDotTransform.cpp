@@ -25,7 +25,11 @@ Transform::AddDot::~AddDot()
 std::vector<Note> Transform::AddDot::transform(std::vector<Note> n)
 {
    for (auto &note : n)
-      note.duration.set_dots(std::min(2, note.duration.get_dots()+1));
+   {
+      Duration duration = note.get_duration();
+      duration.set_dots(std::min(2, duration.get_dots()+1));
+      note.set_duration(duration);
+   }
 
    return n;
 }
