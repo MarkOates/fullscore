@@ -49,10 +49,10 @@ std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::
    if (notes.empty()) return std::tuple<std::string, std::string>("=", "=");
 
    int offset = 128;
-   int scale_degree = note->pitch.scale_degree;
+   int scale_degree = note->pitch.get_scale_degree();
 
-   int context_pitch = notes[(scale_degree+offset*(int)notes.size()) % (int)notes.size()].pitch.scale_degree;
-   int context_extension = ((int)note->pitch.scale_degree + offset * (int)notes.size()) / (int)notes.size() - offset;
+   int context_pitch = notes[(scale_degree+offset*(int)notes.size()) % (int)notes.size()].pitch.get_scale_degree();
+   int context_extension = ((int)note->pitch.get_scale_degree() + offset * (int)notes.size()) / (int)notes.size() - offset;
 
    return std::tuple<std::string, std::string>(tostring(context_pitch), tostring(context_extension));
 }

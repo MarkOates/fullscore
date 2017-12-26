@@ -21,6 +21,7 @@ Pitch::~Pitch()
 bool Pitch::set_scale_degree(int scale_degree)
 {
    this->scale_degree = scale_degree;
+   return true;
 }
 
 
@@ -28,6 +29,7 @@ bool Pitch::set_scale_degree(int scale_degree)
 bool Pitch::set_accidental(int accidental)
 {
    this->accidental = accidental;
+   return true;
 }
 
 

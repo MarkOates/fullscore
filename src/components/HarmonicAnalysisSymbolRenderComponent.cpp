@@ -24,8 +24,8 @@ void HarmonicAnalysisSymbolRenderComponent::render()
    if (!large_font) throw std::invalid_argument("Cannot render HarmonicAnalysisSymbol with a nullptr large_font");
    if (!small_font) throw std::invalid_argument("Cannot render HarmonicAnalysisSymbol with a nullptr small_font");
 
-   std::string roman_numeral_string = HarmonicAnalysisSymbol::get_roman_numeral_string(symbol.fundamental.scale_degree, symbol.chord_quality);
-   std::string accidental = HarmonicAnalysisSymbol::get_accidental_string(symbol.fundamental.accidental);
+   std::string roman_numeral_string = HarmonicAnalysisSymbol::get_roman_numeral_string(symbol.fundamental.get_scale_degree(), symbol.chord_quality);
+   std::string accidental = HarmonicAnalysisSymbol::get_accidental_string(symbol.fundamental.get_accidental());
    std::string extensions_string = HarmonicAnalysisSymbol::get_extensions_string(symbol.extensions);
    std::string quality_symbol = HarmonicAnalysisSymbol::get_chord_quality_symbol_string(symbol.chord_quality);
 
