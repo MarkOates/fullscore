@@ -23,9 +23,9 @@ public:
    bool set_duration(Duration duration);
    bool set_rest(bool rest);
 
-   Pitch get_pitch();
-   Duration get_duration();
-   bool get_rest();
+   Pitch get_pitch() const;
+   Duration get_duration() const;
+   bool get_rest() const;
 
    bool operator==(const Note &other) const;
 };

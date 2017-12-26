@@ -42,21 +42,21 @@ bool Note::set_rest(bool rest)
 
 
 
-Pitch Note::get_pitch()
+Pitch Note::get_pitch() const
 {
    return pitch;
 }
 
 
 
-Duration Note::get_duration()
+Duration Note::get_duration() const
 {
    return duration;
 }
 
 
 
-bool Note::get_rest()
+bool Note::get_rest() const
 {
    return is_rest;
 }
