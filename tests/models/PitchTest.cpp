@@ -14,9 +14,17 @@ TEST(PitchTest, can_be_created)
 
 
 
+TEST(PitchTest, when_initialized_without_arguments_scale_degree_is_set_to_0)
+{
+   Pitch pitch;
+   EXPECT_EQ(0, pitch.get_scale_degree());
+}
+
+
+
 TEST(PitchTest, when_initialized_without_arguments_accidental_is_set_to_0)
 {
-   Pitch pitch(0);
+   Pitch pitch;
    EXPECT_EQ(0, pitch.get_accidental());
 }
 
@@ -24,7 +32,7 @@ TEST(PitchTest, when_initialized_without_arguments_accidental_is_set_to_0)
 
 TEST(PitchTest, can_get_and_set_scale_degree)
 {
-   Pitch pitch(0);
+   Pitch pitch;
 
    EXPECT_EQ(true, pitch.set_scale_degree(-4));
    EXPECT_EQ(-4, pitch.get_scale_degree());
@@ -43,7 +51,7 @@ TEST(PitchTest, can_get_and_set_scale_degree)
 
 TEST(PitchTest, can_get_and_set_accidental)
 {
-   Pitch pitch(0);
+   Pitch pitch;
 
    EXPECT_EQ(true, pitch.set_accidental(-4));
    EXPECT_EQ(-4, pitch.get_accidental());

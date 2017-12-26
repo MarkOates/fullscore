@@ -7,21 +7,21 @@
 
 
 
-TEST(NoteStringConverterTest, can_be_created)
+TEST(ScientificPitchNotationToPitchConverterTest, can_be_created)
 {
    ScientificPitchNotationToPitchConverter converter('C', 0);
 }
 
 
 
-TEST(NoteStringConverterTest, with_no_accidental_assumes_0)
+TEST(ScientificPitchNotationToPitchConverterTest, with_no_accidental_assumes_0)
 {
    ASSERT_EQ(0, ScientificPitchNotationToPitchConverter('C', 4).convert());
 }
 
 
 
-TEST(NoteStringConverterTest, converts_from_note_names_a_pitch_with_the_expected_values)
+TEST(ScientificPitchNotationToPitchConverterTest, converts_from_note_names_a_pitch_with_the_expected_values)
 {
    ASSERT_EQ(0,  ScientificPitchNotationToPitchConverter('C', 4, 0).convert());
    ASSERT_EQ(2,  ScientificPitchNotationToPitchConverter('D', 4, 0).convert());
@@ -34,7 +34,7 @@ TEST(NoteStringConverterTest, converts_from_note_names_a_pitch_with_the_expected
 
 
 
-TEST(NoteStringConverterTest, converts_octaves_with_the_expected_values)
+TEST(ScientificPitchNotationToPitchConverterTest, converts_octaves_with_the_expected_values)
 {
    for (int octave=-5; octave<=5; octave++)
    {
@@ -51,7 +51,7 @@ TEST(NoteStringConverterTest, converts_octaves_with_the_expected_values)
 
 
 
-TEST(NoteStringConverterTest, converts_accidentals_with_the_expected_values)
+TEST(ScientificPitchNotationToPitchConverterTest, converts_accidentals_with_the_expected_values)
 {
    for (int accidental=-5; accidental<=5; accidental++)
    {
@@ -71,7 +71,7 @@ TEST(NoteStringConverterTest, converts_accidentals_with_the_expected_values)
 
 
 
-TEST(NoteStringConverterTest, with_an_invalid_note_name_throws_an_exception)
+TEST(ScientificPitchNotationToPitchConverterTest, with_an_invalid_note_name_throws_an_exception)
 {
    ASSERT_THROW(ScientificPitchNotationToPitchConverter('X', 4).convert(), std::runtime_error);
 }

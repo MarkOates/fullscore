@@ -10,13 +10,22 @@
 
 class Note
 {
-public:
+private:
    Pitch pitch;
    Duration duration;
-   int is_rest;
+   int rest;
 
+public:
    Note(int _scale_degree=0, Duration duration=Duration());
    ~Note();
+
+   bool set_pitch(Pitch pitch);
+   bool set_duration(Duration duration);
+   bool set_rest(bool rest);
+
+   Pitch get_pitch() const;
+   Duration get_duration() const;
+   bool get_rest() const;
 
    bool operator==(const Note &other) const;
 };

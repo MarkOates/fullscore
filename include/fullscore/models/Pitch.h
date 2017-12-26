@@ -9,7 +9,7 @@ private:
    int accidental;
 
 public:
-   Pitch(int scale_degree, int accidental=0);
+   Pitch(int scale_degree=0, int accidental=0);
    ~Pitch();
 
    bool set_scale_degree(int scale_degree);

@@ -25,7 +25,7 @@ Transform::ToggleRest::~ToggleRest()
 std::vector<Note> Transform::ToggleRest::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = source;
-   for (auto &note : notes) note.is_rest = !note.is_rest;
+   for (auto &note : notes) note.set_rest(!note.get_rest());
    return notes;
 }
 

@@ -30,7 +30,11 @@ std::vector<Note> Transform::DoubleDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)
-      note.duration.set_denominator(DurationHelper::double_duration(note.duration.get_denominator()));
+   {
+      Duration duration = note.get_duration();
+      duration.set_denominator(DurationHelper::double_duration(duration.get_denominator()));
+      note.set_duration(duration);
+   }
    return result;
 }
 

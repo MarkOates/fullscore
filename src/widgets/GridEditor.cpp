@@ -107,7 +107,7 @@ float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probabl
    if (!m) return 0;
    float sum = 0;
    for (auto &note : m->get_notes_copy())  // TODO: ineffecient use of get_notes_copy()
-      sum += DurationHelper::get_length(note.duration);
+      sum += DurationHelper::get_length(note.get_duration());
    return sum;
 }
 
