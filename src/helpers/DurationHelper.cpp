@@ -9,6 +9,14 @@
 
 
 
+float DurationHelper::get_length(Duration duration)
+{
+   return get_length(duration.get_denominator(), duration.get_dots());
+}
+
+
+
+
 float DurationHelper::get_length(int duration, int dots)
 {
    float width = 1.0f / duration;

@@ -10,6 +10,27 @@
 
 
 
+TEST(DurationHelperTest, returns_the_length_of_a_duration)
+{
+   Duration duration_a(Duration::QUARTER, 0);
+   EXPECT_EQ(0.25, DurationHelper::get_length(duration_a));
+
+   Duration duration_b(Duration::WHOLE, 0);
+   EXPECT_EQ(1.0, DurationHelper::get_length(duration_b));
+
+   Duration duration_c(Duration::HALF, 2);
+   EXPECT_EQ(0.875, DurationHelper::get_length(duration_c));
+
+   Duration duration_d(Duration::QUARTER, 1);
+   EXPECT_EQ(0.375, DurationHelper::get_length(duration_d));
+
+   Duration duration_e(Duration::SIXTEENTH, 0);
+   EXPECT_EQ(0.0625, DurationHelper::get_length(duration_e));
+}
+
+
+
+
 TEST(DurationHelperTest, returns_the_length_of_a_time_signature)
 {
    TimeSignature time_signature_a(4, Duration(Duration::QUARTER, 0));
