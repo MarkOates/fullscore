@@ -69,7 +69,7 @@ void MusicEngraver::draw(Measure::Base *measure, float x, float y, const float w
          notes_as_string = std::string("{staff_color=") + color_as_name + "}" + notes_as_string;
       }
 		music_notation.draw(x + cursor_x, y, notes_as_string);
-		cursor_x += DurationHelper::get_length(notes[i].duration.get_denominator(), notes[i].duration.get_dots()) * whole_note_width;
+		cursor_x += DurationHelper::get_length(notes[i].duration) * whole_note_width;
 	}
 }
 
