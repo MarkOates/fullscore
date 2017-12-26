@@ -42,7 +42,7 @@ void TimeSignatureRenderComponent::render(float x, float y)
    float ascent = al_get_font_ascent(bravura);
 
    draw_unicode_char(bravura, color::black, __number_to_unicode(time_signature->get_numerator()), ALLEGRO_ALIGN_CENTER, x, y-ascent - 10);
-   draw_unicode_char(bravura, color::black, __number_to_unicode(time_signature->get_denominator().denominator), ALLEGRO_ALIGN_CENTER, x, y-ascent + 10);
+   draw_unicode_char(bravura, color::black, __number_to_unicode(time_signature->get_denominator().get_denominator()), ALLEGRO_ALIGN_CENTER, x, y-ascent + 10);
 }
 
 

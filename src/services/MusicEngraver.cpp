@@ -36,7 +36,7 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 	int octave_offset = (note.pitch.scale_degree < 0) ? 1 : 0;
 
 	// write the duration
-	result += music_notation.duration_denominator_to_char(note.duration.denominator);
+	result += music_notation.duration_denominator_to_char(note.duration.get_denominator());
 
 	// write the pitch (or rest)
 	std::string accidental = (note.pitch.accidental == -1) ? "-" : (note.pitch.accidental == 1) ? "+" : "";
@@ -44,7 +44,7 @@ std::string MusicEngraver::translate_note_to_str(const Note &note)
 	else result += std::string((num_octaves+octave_offset), octave_char) + accidental + tostring(local_degree);
 
 	// write the dots
-	if (note.duration.dots != 0) result += std::string(note.duration.dots, '.');
+	if (note.duration.get_dots() != 0) result += std::string(note.duration.get_dots(), '.');
 
 	return result;
 }
@@ -69,7 +69,7 @@ void MusicEngraver::draw(Measure::Base *measure, float x, float y, const float w
          notes_as_string = std::string("{staff_color=") + color_as_name + "}" + notes_as_string;
       }
 		music_notation.draw(x + cursor_x, y, notes_as_string);
-		cursor_x += DurationHelper::get_length(notes[i].duration.denominator, notes[i].duration.dots) * whole_note_width;
+		cursor_x += DurationHelper::get_length(notes[i].duration.get_denominator(), notes[i].duration.get_dots()) * whole_note_width;
 	}
 }
 

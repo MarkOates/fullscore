@@ -28,8 +28,8 @@ void TempoMarkingRenderComponent::render()
 {
    std::stringstream tempo_string;
 
-   tempo_string << tempo_marking.duration.denominator;
-   for (unsigned i=0; i<tempo_marking.duration.dots; i++)
+   tempo_string << tempo_marking.duration.get_denominator();
+   for (unsigned i=0; i<tempo_marking.duration.get_dots(); i++)
       tempo_string << ".";
    tempo_string << " = " << tempo_marking.bpm;
 

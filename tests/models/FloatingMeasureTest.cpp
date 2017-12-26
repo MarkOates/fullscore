@@ -176,8 +176,8 @@ TEST(FloatingMeasureTest, can_get_a_list_of_floating_measures_for_a_staff)
       &floating_measure_5 // note the sorting order
    };
 
-   ASSERT_EQ(expected_measures_in_staff_3, FloatingMeasure::in_staff(3));
-   ASSERT_EQ(expected_measures_in_staff_7, FloatingMeasure::in_staff(7));
+   ASSERT_EQ(expected_measures_in_staff_3, FloatingMeasure::find_in_staff(3));
+   ASSERT_EQ(expected_measures_in_staff_7, FloatingMeasure::find_in_staff(7));
 }
 
 
@@ -204,7 +204,7 @@ TEST(FloatingMeasureTest, returns_a_staffs_floating_measures_horizontally_sorted
       &floating_measure_5
    };
 
-   ASSERT_EQ(expected_measures_order, FloatingMeasure::in_staff(0));
+   ASSERT_EQ(expected_measures_order, FloatingMeasure::find_in_staff(0));
 }
 
 

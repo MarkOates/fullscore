@@ -33,7 +33,7 @@ bool Action::MoveFloatingMeasureCursorRight::execute()
    int current_floating_measure_id = current_floating_measure->get_id();
 
    // get a (sorted) list of the floating_measures in the current staff
-   std::vector<FloatingMeasure *> staff_floating_measures = FloatingMeasure::in_staff(current_floating_measure->get_grid_coordinate().get_staff_id());
+   std::vector<FloatingMeasure *> staff_floating_measures = FloatingMeasure::find_in_staff(current_floating_measure->get_grid_coordinate().get_staff_id());
 
    // get the current_floating_measure's index position in the list
    int current_floating_measure_position = -1;
