@@ -12,6 +12,12 @@ Pitch::Pitch(int scale_degree, int accidental)
 
 
 
+Pitch::~Pitch()
+{
+}
+
+
+
 bool Pitch::operator==(const Pitch &other) const
 {
    return (scale_degree == other.scale_degree && accidental == other.accidental);
