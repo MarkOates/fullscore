@@ -11,18 +11,10 @@
 
 float DurationHelper::get_length(Duration duration)
 {
-   return get_length(duration.get_denominator(), duration.get_dots());
-}
-
-
-
-
-float DurationHelper::get_length(int duration, int dots)
-{
-   float width = 1.0f / duration;
+   float width = 1.0f / duration.get_denominator();
    float dots_percentage = 0.0f;
    float previous_ammount = 1.0f;
-   for (int i=0; i<dots; i++)
+   for (int i=0; i<duration.get_dots(); i++)
    {
       previous_ammount *= 0.5f;
       dots_percentage += previous_ammount;
@@ -36,7 +28,7 @@ float DurationHelper::get_length(int duration, int dots)
 
 float DurationHelper::get_length(const TimeSignature &time_signature)
 {
-   float denominator_duration_width = get_length(time_signature.get_denominator().get_denominator(), time_signature.get_denominator().get_dots());
+   float denominator_duration_width = get_length(time_signature.get_denominator());
    return denominator_duration_width * time_signature.get_numerator();
 }
 
