@@ -14,6 +14,52 @@ TEST(PitchTest, can_be_created)
 
 
 
+TEST(PitchTest, when_initialized_without_arguments_accidental_is_set_to_0)
+{
+   Pitch pitch(0);
+   EXPECT_EQ(0, pitch.get_accidental());
+}
+
+
+
+TEST(PitchTest, can_get_and_set_scale_degree)
+{
+   Pitch pitch(0);
+
+   EXPECT_EQ(true, pitch.set_scale_degree(-4));
+   EXPECT_EQ(-4, pitch.get_scale_degree());
+
+   EXPECT_EQ(true, pitch.set_scale_degree(9));
+   EXPECT_EQ(9, pitch.get_scale_degree());
+
+   EXPECT_EQ(true, pitch.set_scale_degree(999));
+   EXPECT_EQ(999, pitch.get_scale_degree());
+
+   EXPECT_EQ(true, pitch.set_scale_degree(0));
+   EXPECT_EQ(0, pitch.get_scale_degree());
+}
+
+
+
+TEST(PitchTest, can_get_and_set_accidental)
+{
+   Pitch pitch(0);
+
+   EXPECT_EQ(true, pitch.set_accidental(-4));
+   EXPECT_EQ(-4, pitch.get_accidental());
+
+   EXPECT_EQ(true, pitch.set_accidental(9));
+   EXPECT_EQ(9, pitch.get_accidental());
+
+   EXPECT_EQ(true, pitch.set_accidental(999));
+   EXPECT_EQ(999, pitch.get_accidental());
+
+   EXPECT_EQ(true, pitch.set_accidental(0));
+   EXPECT_EQ(0, pitch.get_accidental());
+}
+
+
+
 TEST(PitchTest, equality_operator_returns_true_on_equal_pitch)
 {
    EXPECT_EQ(true, Pitch(0, 0).operator==(Pitch(0, 0)));
