@@ -98,43 +98,6 @@ TEST(DurationTest, equality_operator_returns_false_on_unequal_durations)
 
 
 
-TEST(DurationTest, halves_the_duration)
-{
-   EXPECT_EQ(Duration::SIXTYFOURTH, half_duration(Duration::THIRTYSECOND));
-   EXPECT_EQ(Duration::THIRTYSECOND, half_duration(Duration::SIXTEENTH));
-   EXPECT_EQ(Duration::SIXTEENTH, half_duration(Duration::EIGHTH));
-   EXPECT_EQ(Duration::QUARTER, half_duration(Duration::HALF));
-   EXPECT_EQ(Duration::HALF, half_duration(Duration::WHOLE));
-}
-
-
-
-TEST(DurationTest, doubles_the_duration)
-{
-   EXPECT_EQ(Duration::THIRTYSECOND, double_duration(Duration::SIXTYFOURTH));
-   EXPECT_EQ(Duration::SIXTEENTH, double_duration(Duration::THIRTYSECOND));
-   EXPECT_EQ(Duration::EIGHTH, double_duration(Duration::SIXTEENTH));
-   EXPECT_EQ(Duration::QUARTER, double_duration(Duration::EIGHTH));
-   EXPECT_EQ(Duration::HALF, double_duration(Duration::QUARTER));
-   EXPECT_EQ(Duration::WHOLE, double_duration(Duration::HALF));
-}
-
-
-
-TEST(DurationTest, when_halving_SIXTYFOURTH_returns_SIXTYFOURTH)
-{
-   EXPECT_EQ(Duration::SIXTYFOURTH, half_duration(Duration::SIXTYFOURTH));
-}
-
-
-
-TEST(DurationTest, when_doubling_WHOLE_returns_WHOLE)
-{
-   EXPECT_EQ(Duration::WHOLE, double_duration(Duration::WHOLE));
-}
-
-
-
 TEST(DurationTest, returns_true_if_an_integer_is_a_valid_denominator)
 {
    EXPECT_EQ(true, Duration::is_valid_denominator(Duration::WHOLE));
