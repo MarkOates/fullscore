@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/HalfDurationTransform.h>
 
-#include <fullscore/models/Duration.h>
+#include <fullscore/helpers/DurationHelper.h>
 #include <algorithm>
 
 
@@ -30,7 +30,7 @@ std::vector<Note> Transform::HalfDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)
-      note.duration.set_denominator(half_duration(note.duration.get_denominator()));
+      note.duration.set_denominator(DurationHelper::half_duration(note.duration.get_denominator()));
    return result;
 }
 
