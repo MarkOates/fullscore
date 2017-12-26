@@ -3,6 +3,7 @@
 
 
 #include <fullscore/converters/stream_operators/DurationStreamOperators.h>
+#include <fullscore/converters/stream_operators/PitchStreamOperators.h>
 #include <fullscore/converters/NoteStringConverter.h>
 
 #include <sstream>
@@ -42,7 +43,7 @@ std::string NoteStringConverter::write()
    if (!note) return "";
 
    std::stringstream ss;
-   ss << note->pitch.get_scale_degree() << " " << note->pitch.get_accidental() << " " << note->duration << " " << note->is_rest;
+   ss << note->pitch << " " << note->duration << " " << note->is_rest;
 
    return ss.str();
 }
