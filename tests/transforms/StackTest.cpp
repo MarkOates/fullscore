@@ -8,6 +8,7 @@
 #include <fullscore/transforms/InsertNoteTransform.h>
 #include <fullscore/transforms/RetrogradeTransform.h>
 #include <fullscore/transforms/ToggleRestTransform.h>
+#include <fullscore/Transform.h>
 
 
 
@@ -21,7 +22,7 @@ TEST(TransformStackTest, can_be_created)
 TEST(TransformStackTest, has_an_identifier_of_stack)
 {
    Transform::Stack transform_stack;
-   EXPECT_EQ("stack", transform_stack.get_identifier());
+   EXPECT_EQ(Transform::STACK_TRANSFORM_IDENTIFIER, transform_stack.get_identifier());
 }
 
 
@@ -59,9 +60,9 @@ TEST(TransformStackTest, returns_a_list_of_transforms)
    std::vector<Transform::Base *> transforms = transform_stack.get_transformations();
 
    EXPECT_EQ(3, transforms.size());
-   EXPECT_EQ("insert_note", transforms[0]->get_identifier());
-   EXPECT_EQ("toggle_rest", transforms[1]->get_identifier());
-   EXPECT_EQ("retrograde", transforms[2]->get_identifier());
+   EXPECT_EQ(Transform::INSERT_NOTE_TRANSFORM_IDENTIFIER, transforms[0]->get_identifier());
+   EXPECT_EQ(Transform::TOGGLE_REST_TRANSFORM_IDENTIFIER, transforms[1]->get_identifier());
+   EXPECT_EQ(Transform::RETROGRADE_TRANSFORM_IDENTIFIER, transforms[2]->get_identifier());
 }
 
 
