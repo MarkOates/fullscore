@@ -4,13 +4,14 @@
 
 #include <fullscore/transforms/InsertNoteTransform.h>
 
+#include <fullscore/Transform.h>
 #include <allegro_flare/useful.h>
 
 
 
 
 Transform::InsertNote::InsertNote(int position, Note note)
-   : Base("insert_note")
+   : Base(Transform::INSERT_NOTE_TRANSFORM_IDENTIFIER)
    , position(position)
    , note(note)
 {

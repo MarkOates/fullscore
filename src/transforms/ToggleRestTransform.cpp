@@ -4,11 +4,12 @@
 
 #include <fullscore/transforms/ToggleRestTransform.h>
 
+#include <fullscore/Transform.h>
 
 
 
 Transform::ToggleRest::ToggleRest()
-   : Base("toggle_rest")
+   : Base(Transform::TOGGLE_REST_TRANSFORM_IDENTIFIER)
 {
 }
 

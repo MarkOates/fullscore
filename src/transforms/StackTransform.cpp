@@ -3,10 +3,12 @@
 
 #include <fullscore/transforms/StackTransform.h>
 
+#include <fullscore/Transform.h>
+
 
 
 Transform::Stack::Stack(std::vector<Transform::Base *> transformations)
-   : Base("stack")
+   : Base(Transform::STACK_TRANSFORM_IDENTIFIER)
    , transformations(transformations)
 {}
 

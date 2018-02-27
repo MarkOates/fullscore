@@ -3,10 +3,12 @@
 
 #include <fullscore/transforms/Octatonic1Transform.h>
 
+#include <fullscore/Transform.h>
+
 
 
 Transform::Octatonic1::Octatonic1()
-   : Base("ocatatonic_1")
+   : Base(Transform::OCTATONIC_1_TRANSFORM_IDENTIFIER)
 {}
 
 

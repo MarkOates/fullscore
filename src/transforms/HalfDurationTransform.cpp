@@ -5,13 +5,14 @@
 #include <fullscore/transforms/HalfDurationTransform.h>
 
 #include <fullscore/helpers/DurationHelper.h>
+#include <fullscore/Transform.h>
 #include <algorithm>
 
 
 
 
 Transform::HalfDuration::HalfDuration()
-   : Base("half_duration")
+   : Base(Transform::HALF_DURATION_TRANSFORM_IDENTIFIER)
    , minimum_duration(Duration::THIRTYSECOND)
 {
 }

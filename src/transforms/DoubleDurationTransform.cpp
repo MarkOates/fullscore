@@ -5,13 +5,14 @@
 #include <fullscore/transforms/DoubleDurationTransform.h>
 
 #include <fullscore/helpers/DurationHelper.h>
+#include <fullscore/Transform.h>
 #include <algorithm>
 
 
 
 
 Transform::DoubleDuration::DoubleDuration()
-   : Base("double_duration")
+   : Base(Transform::DOUBLE_DURATION_TRANSFORM_IDENTIFIER)
    , maximum_duration(Duration::WHOLE)
 {
 }

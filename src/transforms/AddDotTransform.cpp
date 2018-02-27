@@ -4,11 +4,13 @@
 
 #include <fullscore/transforms/AddDotTransform.h>
 
+#include <fullscore/Transform.h>
+
 
 
 
 Transform::AddDot::AddDot()
-   : Base("add_dot")
+   : Base(Transform::ADD_DOT_TRANSFORM_IDENTIFIER)
 {
 }
 

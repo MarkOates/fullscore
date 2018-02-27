@@ -4,11 +4,12 @@
 
 #include <fullscore/transforms/InvertTransform.h>
 
+#include <fullscore/Transform.h>
 
 
 
 Transform::Invert::Invert(int axis)
-   : Base("invert")
+   : Base(Transform::INVERT_TRANSFORM_IDENTIFIER)
    , axis(axis)
 {
 }

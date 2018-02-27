@@ -4,13 +4,14 @@
 
 #include <fullscore/transforms/EraseNoteTransform.h>
 
+#include <fullscore/Transform.h>
 #include <algorithm>
 
 
 
 
 Transform::EraseNote::EraseNote(int index_num)
-   : Base("erase_note")
+   : Base(Transform::ERASE_NOTE_TRANSFORM_IDENTIFIER)
    , index_num(index_num)
 {
 }

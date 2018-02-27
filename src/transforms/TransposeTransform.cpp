@@ -4,11 +4,12 @@
 
 #include <fullscore/transforms/TransposeTransform.h>
 
+#include <fullscore/Transform.h>
 
 
 
 Transform::Transpose::Transpose(int transposition)
-   : Base("transpose")
+   : Base(Transform::TRANSPOSE_TRANSFORM_IDENTIFIER)
    , transposition(transposition)
 {
 }
