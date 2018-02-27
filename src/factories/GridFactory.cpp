@@ -2,15 +2,19 @@
 
 
 #include <fullscore/factories/GridFactory.h>
+#include <fullscore/factories/InstrumentFactory.h>
 #include <fullscore/models/measures/Basic.h>
 #include <fullscore/models/plotters/Basic.h>
+#include <fullscore/models/plotters/Staff.hpp>
 #include <fullscore/models/staves/HarmonicAnalysis.h>
 #include <fullscore/models/staves/MeasureNumbers.h>
 #include <fullscore/models/staves/Instrument.h>
 #include <fullscore/models/staves/Spacer.h>
 #include <fullscore/models/staves/Tempo.h>
 #include <fullscore/models/Note.h>
+#include <fullscore/selectors/InstrumentSelector.hpp>
 #include <fullscore/transforms/RetrogradeTransform.h>
+#include <fullscore/InstrumentAttributes.h>
 #include <allegro_flare/useful.h>
 #include <iostream>
 
@@ -46,7 +50,53 @@ Grid GridFactory::string_quartet()
 
 Grid GridFactory::full_score()
 {
-   throw std::runtime_error("GridFactory::full_score() has been disabled");
+   Grid grid(10);
+
+
+   grid.append_staff(new Staff::MeasureNumbers);
+   grid.append_staff(new Staff::Tempo);
+   grid.append_staff(new Staff::Instrument("Flute I"));
+   grid.append_staff(new Staff::Instrument("Flute II"));
+   grid.append_staff(new Staff::Instrument("Oboe"));
+   grid.append_staff(new Staff::Instrument("Bassoon"));
+   grid.append_staff(new Staff::Instrument("Clarinet I"));
+   grid.append_staff(new Staff::Instrument("Clarinet II"));
+   grid.append_staff(new Staff::Spacer());
+   grid.append_staff(new Staff::Instrument("Trumpet I"));
+   grid.append_staff(new Staff::Instrument("Trumpet II"));
+   grid.append_staff(new Staff::Instrument("F Horn I"));
+   grid.append_staff(new Staff::Instrument("F Horn II"));
+   grid.append_staff(new Staff::Instrument("Trombone I"));
+   grid.append_staff(new Staff::Instrument("Trombone II"));
+   grid.append_staff(new Staff::Instrument("Tuba"));
+   grid.append_staff(new Staff::Spacer());
+   grid.append_staff(new Staff::Instrument("Violin I"));
+   grid.append_staff(new Staff::Instrument("Violin II"));
+   grid.append_staff(new Staff::Instrument("Viola"));
+   grid.append_staff(new Staff::Instrument("Cello"));
+   grid.append_staff(new Staff::Instrument("Bass"));
+
+
+   std::vector<Note> notes_to_plot = {
+      Note(-1, Duration(Duration::QUARTER, 1)),
+      Note(0, Duration(Duration::QUARTER, 1)),
+      Note(1, Duration(Duration::EIGHTH)),
+      Note(2, Duration(Duration::EIGHTH)),
+   };
+
+   for (unsigned i=0; i<grid.get_num_barlines(); i++)
+   {
+      Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, i, notes_to_plot);
+      basic_plotter_1.plot();
+   }
+
+   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+
+   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
+   basic_plotter_2.plot();
+
+
+   return grid;
 }
 
 
@@ -152,50 +202,74 @@ Grid GridFactory::development()
    FloatingMeasure *floating_measure = new FloatingMeasure(GridCoordinate(&current_grid_editor->grid, staff_to_put_measure->get_id(), 2), basic_measure->get_id());
 */
 
-   Grid grid(10);
+   Grid grid(12);
+
+
+   InstrumentFactory instrument_factory;
 
 
    grid.append_staff(new Staff::MeasureNumbers);
    grid.append_staff(new Staff::Tempo);
-   grid.append_staff(new Staff::Instrument("Flute I"));
-   grid.append_staff(new Staff::Instrument("Flute II"));
-   grid.append_staff(new Staff::Instrument("Oboe"));
-   grid.append_staff(new Staff::Instrument("Bassoon"));
-   grid.append_staff(new Staff::Instrument("Clarinet I"));
-   grid.append_staff(new Staff::Instrument("Clarinet II"));
+   grid.append_staff(instrument_factory.create_flute());
+   grid.append_staff(instrument_factory.create_clarinet());
+   grid.append_staff(instrument_factory.create_oboe());
+   grid.append_staff(instrument_factory.create_bassoon());
    grid.append_staff(new Staff::Spacer());
-   grid.append_staff(new Staff::Instrument("Trumpet I"));
-   grid.append_staff(new Staff::Instrument("Trumpet II"));
-   grid.append_staff(new Staff::Instrument("F Horn I"));
-   grid.append_staff(new Staff::Instrument("F Horn II"));
-   grid.append_staff(new Staff::Instrument("Trombone I"));
-   grid.append_staff(new Staff::Instrument("Trombone II"));
-   grid.append_staff(new Staff::Instrument("Tuba"));
-   grid.append_staff(new Staff::Spacer());
-   grid.append_staff(new Staff::Instrument("Violin I"));
-   grid.append_staff(new Staff::Instrument("Violin II"));
-   grid.append_staff(new Staff::Instrument("Viola"));
-   grid.append_staff(new Staff::Instrument("Cello"));
-   grid.append_staff(new Staff::Instrument("Bass"));
+   grid.append_staff(instrument_factory.create_trumpet());
+   grid.append_staff(instrument_factory.create_french_horn());
+   grid.append_staff(instrument_factory.create_trombone());
+   grid.append_staff(instrument_factory.create_tuba());
 
+   Note rest_note = Note(0, Duration(Duration::QUARTER));
+   rest_note.set_rest(true);
 
    std::vector<Note> notes_to_plot = {
-      Note(-1, Duration(Duration::QUARTER, 1)),
-      Note(0, Duration(Duration::QUARTER, 1)),
+      Note(-1, Duration(Duration::QUARTER)),
+      Note(0, Duration(Duration::QUARTER)),
       Note(1, Duration(Duration::EIGHTH)),
       Note(2, Duration(Duration::EIGHTH)),
+      rest_note,
    };
-
-   for (unsigned i=0; i<grid.get_num_barlines(); i++)
-   {
-      Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, i, notes_to_plot);
-      basic_plotter_1.plot();
-   }
 
    auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
 
-   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
-   basic_plotter_2.plot();
+
+   InstrumentSelector instrument_selector;
+
+   std::vector<Staff::Instrument *> soprano_instruments = instrument_selector.soprano_voices();
+   std::vector<Staff::Instrument *> alto_instruments = instrument_selector.alto_voices();
+   std::vector<Staff::Instrument *> tenor_instruments = instrument_selector.tenor_voices();
+   std::vector<Staff::Instrument *> bass_instruments = instrument_selector.bass_voices();
+
+   std::vector<int> soprano_staff_ids = instrument_selector.ids(soprano_instruments);
+   std::vector<int> alto_staff_ids = instrument_selector.ids(alto_instruments);
+   std::vector<int> tenor_staff_ids = instrument_selector.ids(tenor_instruments);
+   std::vector<int> bass_staff_ids = instrument_selector.ids(bass_instruments);
+
+
+   for (unsigned barline_num=0; barline_num<3; barline_num++)
+   {
+      Plotter::Staff staff_plotter = Plotter::Staff(soprano_staff_ids, barline_num, notes_to_plot);
+      staff_plotter.plot();
+   }
+
+   for (unsigned barline_num=3; barline_num<6; barline_num++)
+   {
+      Plotter::Staff staff_plotter = Plotter::Staff(alto_staff_ids, barline_num, notes_retrograde);
+      staff_plotter.plot();
+   }
+
+   for (unsigned barline_num=6; barline_num<9; barline_num++)
+   {
+      Plotter::Staff staff_plotter = Plotter::Staff(tenor_staff_ids, barline_num, notes_to_plot);
+      staff_plotter.plot();
+   }
+
+   for (unsigned barline_num=9; barline_num<grid.get_num_barlines(); barline_num++)
+   {
+      Plotter::Staff staff_plotter = Plotter::Staff(bass_staff_ids, barline_num, notes_retrograde);
+      staff_plotter.plot();
+   }
 
 
    return grid;
