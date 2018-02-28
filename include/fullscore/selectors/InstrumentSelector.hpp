@@ -27,8 +27,9 @@ public:
    std::vector<Staff::Instrument *> brass();
    std::vector<Staff::Instrument *> strings();
 
-   std::vector<Staff::Instrument *> join(std::vector<std::vector<Staff::Instrument *>> instruments);
+   std::vector<Staff::Instrument *> within_basic_range(int pitch);
 
+   std::vector<Staff::Instrument *> join(std::vector<std::vector<Staff::Instrument *>> instruments);
    std::vector<int> ids(std::vector<Staff::Instrument *> &instruments);
 };
 

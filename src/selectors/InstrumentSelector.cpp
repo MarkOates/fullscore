@@ -3,6 +3,7 @@
 #include <fullscore/selectors/InstrumentSelector.hpp>
 
 #include <fullscore/InstrumentAttributes.h>
+#include <sstream>
 
 
 InstrumentSelector::InstrumentSelector(std::vector<Staff::Base *> &pool)
@@ -87,6 +88,34 @@ std::vector<Staff::Instrument *> InstrumentSelector::brass()
 std::vector<Staff::Instrument *> InstrumentSelector::strings()
 {
    return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::STRING);
+}
+
+
+std::vector<Staff::Instrument *> InstrumentSelector::within_basic_range(int pitch)
+{
+   std::vector<Staff::Instrument *> results;
+   std::vector<std::string> warnings;
+
+   for (auto &element : pool)
+      if (element->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
+      {
+         Staff::Instrument *instrument = static_cast<Staff::Instrument *>(element);
+         if (instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN) && instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN))
+         {
+            int range_min = instrument->attributes.get_as_int(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN);
+            int range_max = instrument->attributes.get_as_int(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX);
+
+            if (pitch >= range_min && pitch <= range_max) results.push_back(instrument);
+         }
+         else
+         {
+            std::stringstream warning_message;
+            warning_message << "Instrument does not have expected range data: " << instrument->get_id();
+            warnings.push_back(warning_message.str());
+         }
+      }
+
+   return results;
 }
 
 
