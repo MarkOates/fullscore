@@ -12,7 +12,7 @@
 #include <fullscore/models/staves/Spacer.h>
 #include <fullscore/models/staves/Tempo.h>
 #include <fullscore/models/Note.h>
-#include <fullscore/selectors/InstrumentSelector.hpp>
+#include <fullscore/selectors/InstrumentSelectorFactory.hpp>
 #include <fullscore/transforms/HalfDurationTransform.h>
 #include <fullscore/transforms/Octatonic1Transform.h>
 #include <fullscore/transforms/RetrogradeTransform.h>
@@ -161,7 +161,7 @@ Grid GridFactory::development()
    auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
 
 
-   InstrumentSelector instrument_selector;
+   InstrumentSelectorFactory instrument_selector;
 
    std::vector<Staff::Instrument *> soprano_instruments = instrument_selector.soprano_voices();
    std::vector<Staff::Instrument *> alto_instruments = instrument_selector.alto_voices();

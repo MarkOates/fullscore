@@ -5,14 +5,14 @@
 #include <fullscore/models/staves/Instrument.h>
 
 
-class InstrumentSelector
+class InstrumentSelectorFactory
 {
 private:
    std::vector<Staff::Base *> &pool;
 
 public:
-   InstrumentSelector(std::vector<Staff::Base *> &pool=Staff::pool);
-   ~InstrumentSelector();
+   InstrumentSelectorFactory(std::vector<Staff::Base *> &pool=Staff::pool);
+   ~InstrumentSelectorFactory();
 
    std::vector<Staff::Instrument *> instruments();
    std::vector<Staff::Instrument *> matches(std::string attribute, std::string property);

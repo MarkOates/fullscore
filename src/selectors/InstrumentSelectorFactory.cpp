@@ -1,23 +1,23 @@
 
 
-#include <fullscore/selectors/InstrumentSelector.hpp>
+#include <fullscore/selectors/InstrumentSelectorFactory.hpp>
 
 #include <fullscore/InstrumentAttributes.h>
 #include <sstream>
 
 
-InstrumentSelector::InstrumentSelector(std::vector<Staff::Base *> &pool)
+InstrumentSelectorFactory::InstrumentSelectorFactory(std::vector<Staff::Base *> &pool)
    : pool(pool)
 {
 }
 
 
-InstrumentSelector::~InstrumentSelector()
+InstrumentSelectorFactory::~InstrumentSelectorFactory()
 {
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::instruments()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::instruments()
 {
    std::vector<Staff::Instrument *> results;
 
@@ -29,7 +29,7 @@ std::vector<Staff::Instrument *> InstrumentSelector::instruments()
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::matches(std::string attribute, std::string property)
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::matches(std::string attribute, std::string property)
 {
    std::vector<Staff::Instrument *> results;
 
@@ -43,55 +43,55 @@ std::vector<Staff::Instrument *> InstrumentSelector::matches(std::string attribu
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::soprano_voices()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::soprano_voices()
 {
    return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::alto_voices()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::alto_voices()
 {
    return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::tenor_voices()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::tenor_voices()
 {
    return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::baritone_voices()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::baritone_voices()
 {
    return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BARITONE);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::bass_voices()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::bass_voices()
 {
    return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::woodwinds()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::woodwinds()
 {
    return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::brass()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::brass()
 {
    return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::strings()
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::strings()
 {
    return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::STRING);
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::within_basic_range(int pitch)
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::within_basic_range(int pitch)
 {
    std::vector<Staff::Instrument *> results;
    std::vector<std::string> warnings;
@@ -119,7 +119,7 @@ std::vector<Staff::Instrument *> InstrumentSelector::within_basic_range(int pitc
 }
 
 
-std::vector<Staff::Instrument *> InstrumentSelector::join(std::vector<std::vector<Staff::Instrument *>> instruments)
+std::vector<Staff::Instrument *> InstrumentSelectorFactory::join(std::vector<std::vector<Staff::Instrument *>> instruments)
 {
    std::vector<Staff::Instrument *> results;
    for (auto &instrs : instruments)
@@ -132,7 +132,7 @@ std::vector<Staff::Instrument *> InstrumentSelector::join(std::vector<std::vecto
 }
 
 
-std::vector<int> InstrumentSelector::ids(std::vector<Staff::Instrument *> &instruments)
+std::vector<int> InstrumentSelectorFactory::ids(std::vector<Staff::Instrument *> &instruments)
 {
    std::vector<int> result_staff_ids;
    for (auto &instrument : instruments) result_staff_ids.push_back(instrument->get_id());
