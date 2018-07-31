@@ -62,7 +62,7 @@ AppController::AppController(Display *display, Config &config)
    //, command_bar(new UICommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
    , plotter_list(new PlotterList)
-   , plotter_list_widget(new PlotterListWidget(this))
+   , plotter_list_widget(new PlotterListWidget(this, plotter_list, 300))
    , yank_measure_buffer()
    , normal_mode_keyboard_mappings()
    , normal_mode_note_keyboard_mappings()
@@ -72,6 +72,7 @@ AppController::AppController(Display *display, Config &config)
    set_keyboard_input_mappings();
 
    init_app_based_on_setup_config(this);
+   plotter_list_widget->bring_to_front();
 }
 
 

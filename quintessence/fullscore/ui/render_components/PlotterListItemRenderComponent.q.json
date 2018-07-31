@@ -23,6 +23,15 @@
       "setter": false
     },
     {
+      "type": "ALLEGRO_FONT*",
+      "name": "font",
+      "init_with": "nullptr",
+      "constructor_arg" : true,
+      "static": false,
+      "getter": true,
+      "setter": true
+    },
+    {
       "type": "ALLEGRO_COLOR",
       "name": "color",
       "init_with": "al_color_name(\"gray\")",
@@ -55,7 +64,7 @@
       "name" : "render",
       "type" : "void",
       "parameters" : [],
-      "body" : "al_draw_filled_rectangle(0, 0, 10, height, color);\nal_draw_rectangle(0, 0, width, height, al_color_name(\"white\"), 2.0);"
+      "body" : "if (!font) throw std::runtime_error(\"missing font in PlotterListItemRenderComponent\");\nal_draw_text(font, al_color_name(\"black\"), 20, 15, ALLEGRO_ALIGN_LEFT, \"Basic\");\nal_draw_filled_rectangle(0, 0, 10, height, color);\nal_draw_rectangle(0, 0, width, height, al_color_name(\"white\"), 2.0);"
     },
     {
       "name" : "set_state_normal",
@@ -84,6 +93,12 @@
     {
       "symbol" : "ALLEGRO_COLOR",
       "headers" : [ "allegro5/allegro_color.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "ALLEGRO_FONT*",
+      "headers" : [ "allegro5/allegro_font.h" ],
       "include_directories" : [ ],
       "linked_libraries" : [ ]
     },
