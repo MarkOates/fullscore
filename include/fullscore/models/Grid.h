@@ -10,7 +10,6 @@
 
 namespace Measure { class Base; }
 namespace Staff { class Base; }
-namespace Plotter { class Base; }
 
 
 
@@ -22,7 +21,6 @@ private:
 
    std::vector<Staff::Base *> voices;
    std::vector<TimeSignature> time_signatures;
-   std::vector<Plotter::Base *> plotters;
 
 public:
    Grid(int num_barlines=5);
@@ -30,20 +28,12 @@ public:
 
    int get_num_barlines() const;
    int get_num_staves() const;
-   int get_num_plotters() const;
 
    Staff::Base *get_staff(int y_staff);
    std::vector<Staff::Base *> get_staves();
    bool insert_staff(Staff::Base *staff, int index);
    bool delete_staff(int index);
    bool append_staff(Staff::Base *staff);
-
-   Plotter::Base *get_plotter(int index);
-   std::vector<Plotter::Base *> get_plotters();
-   std::vector<Plotter::Base *> &get_plotters_ref();
-   bool insert_plotter(Plotter::Base *plotter, int index);
-   bool delete_plotter(int index);
-   bool append_plotter(Plotter::Base *plotter);
 
    bool set_voice_name(int row_number, std::string name);
    std::string get_voice_name(int row_number);

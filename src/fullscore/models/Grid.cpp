@@ -42,13 +42,6 @@ int Grid::get_num_staves() const
 
 
 
-int Grid::get_num_plotters() const
-{
-   return voices.size();
-}
-
-
-
 bool Grid::insert_staff(Staff::Base *staff, int index)
 {
    if (!staff) return false;
@@ -77,64 +70,6 @@ bool Grid::append_staff(Staff::Base *staff)
 {
    if (!staff) return false;
    voices.push_back(staff);
-   return true;
-}
-
-
-
-Plotter::Base *Grid::get_plotter(int index)
-{
-   if (index < 0 || index >= voices.size()) return nullptr;
-
-   Plotter::Base *plotter = plotters[index];
-   if (!plotter) return nullptr;
-   return plotter;
-}
-
-
-
-std::vector<Plotter::Base *> Grid::get_plotters()
-{
-   return plotters;
-}
-
-
-
-std::vector<Plotter::Base *> &Grid::get_plotters_ref()
-{
-   return plotters;
-}
-
-
-
-bool Grid::insert_plotter(Plotter::Base *plotter, int index)
-{
-   if (!plotter) return false;
-
-   if (index < 0) index = 0;
-
-   if (index >= (int)plotters.size()) return append_plotter(plotter);
-   else plotters.insert(plotters.begin() + index, plotter);
-
-   return true;
-}
-
-
-
-bool Grid::delete_plotter(int index)
-{
-   if (index < 0 || index >= (int)plotters.size()) return false;
-   // TODO: Thinking a delete voice[index] should happen here
-   plotters.erase(plotters.begin() + index);
-   return true;
-}
-
-
-
-bool Grid::append_plotter(Plotter::Base *plotter)
-{
-   if (!plotter) return false;
-   plotters.push_back(plotter);
    return true;
 }
 
