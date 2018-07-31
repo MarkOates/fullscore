@@ -64,7 +64,6 @@ Grid GridFactory::full_score()
 {
    Grid grid(10);
 
-
    grid.append_staff(new Staff::MeasureNumbers);
    grid.append_staff(new Staff::Tempo);
    grid.append_staff(new Staff::Instrument("Flute I"));
@@ -87,26 +86,6 @@ Grid GridFactory::full_score()
    grid.append_staff(new Staff::Instrument("Viola"));
    grid.append_staff(new Staff::Instrument("Cello"));
    grid.append_staff(new Staff::Instrument("Bass"));
-
-
-   std::vector<Note> notes_to_plot = {
-      Note(-1, Duration(Duration::QUARTER, 1)),
-      Note(0, Duration(Duration::QUARTER, 1)),
-      Note(1, Duration(Duration::EIGHTH)),
-      Note(2, Duration(Duration::EIGHTH)),
-   };
-
-   for (unsigned i=0; i<grid.get_num_barlines(); i++)
-   {
-      Plotter::Basic basic_plotter_1 = Plotter::Basic(&grid, i, notes_to_plot);
-      basic_plotter_1.plot();
-   }
-
-   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
-
-   Plotter::Basic basic_plotter_2 = Plotter::Basic(&grid, 5, notes_retrograde);
-   basic_plotter_2.plot();
-
 
    return grid;
 }

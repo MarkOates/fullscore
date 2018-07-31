@@ -6,11 +6,13 @@
 #include <allegro_flare/screens/simple_notification_screen.h>
 #include <allegro_flare/config.h>
 #include <allegro_flare/keyboard_command_mapper.h>
+#include <fullscore/models/lists/PlotterList.hpp>
 #include <fullscore/actions/Base.h>
 #include <fullscore/actions/QueueAction.h>
 //#include <fullscore/widgets/CommandBar.h>
 #include <fullscore/widgets/FollowCamera.h>
 #include <fullscore/widgets/GridEditor.h>
+#include <fullscore/widgets/PlotterListWidget.hpp>
 //#include <fullscore/widgets/MeasureInspector.h>
 
 
@@ -26,6 +28,8 @@ public:
    std::vector<UIGridEditor *> grid_editors;
    //UICommandBar *command_bar;
    //UIMeasureInspector *ui_measure_inspector;
+   PlotterList *plotter_list;
+   PlotterListWidget *plotter_list_widget;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    KeyboardCommandMapper normal_mode_keyboard_mappings;

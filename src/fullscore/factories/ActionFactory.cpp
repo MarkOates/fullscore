@@ -36,6 +36,7 @@
 #include <fullscore/actions/MoveFloatingMeasureCursorRightAction.h>
 #include <fullscore/actions/MoveFloatingMeasureCursorLeftAction.h>
 #include <fullscore/actions/PasteMeasureFromBufferAction.h>
+#include <fullscore/actions/PlotPlotterListAction.hpp>
 #include <fullscore/actions/QueueAction.h>
 #include <fullscore/actions/ResetFloatingMeasureCursorAction.h>
 #include <fullscore/actions/ResetPlaybackAction.h>
@@ -284,6 +285,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, std::s
       action = new Action::YankGridMeasureToBuffer(&app_controller->yank_measure_buffer, focused_measure);
    else if (action_identifier == "paste_measure_from_buffer")
       action = new Action::PasteMeasureFromBuffer(current_grid_editor->get_measure_at_cursor(), &app_controller->yank_measure_buffer);
+   else if (action_identifier == Action::PLOT_PLOTTER_LIST_ACTION_IDENTIFIER)
+      action = new Action::PlotPlotterList(app_controller->plotter_list);
 
    return action;
 }

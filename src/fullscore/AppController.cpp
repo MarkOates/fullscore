@@ -14,6 +14,43 @@
 
 
 
+
+#include <fullscore/transforms/RetrogradeTransform.h>
+#include <fullscore/models/plotters/Basic.h>
+
+static void init_app_based_on_setup_config(AppController *app)
+{
+   if (!app) throw std::runtime_error("nullptr app!");
+
+
+   // usually:
+   // std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
+
+
+   // init grid
+   app->set_current_grid_editor(app->create_new_grid_editor("full_score"));
+   
+
+   // init plotter list
+
+   std::vector<Note> notes_to_plot = {
+      Note(-1, Duration(Duration::QUARTER, 1)),
+      Note(0, Duration(Duration::QUARTER, 1)),
+      Note(1, Duration(Duration::EIGHTH)),
+      Note(2, Duration(Duration::EIGHTH)),
+   };
+
+   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+
+   Grid &grid = app->current_grid_editor->grid;
+
+   app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
+   app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
+}
+
+
+
+
 AppController::AppController(Display *display, Config &config)
    : UIScreen(display)
    , config(config)
@@ -24,17 +61,17 @@ AppController::AppController(Display *display, Config &config)
    , grid_editors()
    //, command_bar(new UICommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
+   , plotter_list(new PlotterList)
+   , plotter_list_widget(new PlotterListWidget(this))
    , yank_measure_buffer()
    , normal_mode_keyboard_mappings()
    , normal_mode_note_keyboard_mappings()
    , normal_mode_measure_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
-
-   std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
-   set_current_grid_editor(create_new_grid_editor(init_template_identifier));
-
    set_keyboard_input_mappings();
+
+   init_app_based_on_setup_config(this);
 }
 
 
@@ -67,6 +104,7 @@ void AppController::set_keyboard_input_mappings()
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, {"set_time_signature_numerator_5"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, {Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, {Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER});
+   normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         true,  false, false, {Action::PLOT_PLOTTER_LIST_ACTION_IDENTIFIER});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, {"octatonic_1"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_2,         false, false, false, {"set_time_signature_numerator_2"});
    normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, {Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER
@@ -171,7 +209,7 @@ void AppController::key_char_func()
       else
       {
          std::stringstream error_message;
-         error_message << "Action could not be found with the identifier \"" << identifier << "\"" << std::endl;
+         error_message << "Action could not be found with the identifier \"" << identifier << "\". It should be creatable in the ActionFactory." << std::endl;
          throw std::runtime_error(error_message.str());
       }
    }
