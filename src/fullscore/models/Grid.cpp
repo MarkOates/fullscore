@@ -100,6 +100,13 @@ std::vector<Plotter::Base *> Grid::get_plotters()
 
 
 
+std::vector<Plotter::Base *> &Grid::get_plotters_ref()
+{
+   return plotters;
+}
+
+
+
 bool Grid::insert_plotter(Plotter::Base *plotter, int index)
 {
    if (!plotter) return false;

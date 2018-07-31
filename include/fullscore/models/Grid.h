@@ -40,6 +40,7 @@ public:
 
    Plotter::Base *get_plotter(int index);
    std::vector<Plotter::Base *> get_plotters();
+   std::vector<Plotter::Base *> &get_plotters_ref();
    bool insert_plotter(Plotter::Base *plotter, int index);
    bool delete_plotter(int index);
    bool append_plotter(Plotter::Base *plotter);
