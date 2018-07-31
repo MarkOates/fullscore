@@ -16,3 +16,10 @@ Plotter::Base::~Base()
 
 
 
+std::string Plotter::Base::get_type()
+{
+   return type;
+}
+
+
+
