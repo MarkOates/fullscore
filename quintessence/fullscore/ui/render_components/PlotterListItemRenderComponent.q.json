@@ -1,5 +1,5 @@
 {
-  "class": "PlotterListRenderComponent",
+  "class": "PlotterListItemRenderComponent",
   "format": "verbose",
   "parent_classes": [],
   "namespaces": [ "fullscore", "ui" ],

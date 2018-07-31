@@ -10,7 +10,7 @@ namespace fullscore
 {
    namespace ui
    {
-      class PlotterListRenderComponent
+      class PlotterListItemRenderComponent
       {
       private:
          Plotter::Base* plotter;
@@ -20,8 +20,8 @@ namespace fullscore
          float height;
 
       public:
-         PlotterListRenderComponent(Plotter::Base* plotter=nullptr, ALLEGRO_COLOR color=al_color_name("gray"), float width=300, float height=60);
-         ~PlotterListRenderComponent();
+         PlotterListItemRenderComponent(Plotter::Base* plotter=nullptr, ALLEGRO_COLOR color=al_color_name("gray"), float width=300, float height=60);
+         ~PlotterListItemRenderComponent();
 
          void set_color(ALLEGRO_COLOR color);
          void set_width(float width);
