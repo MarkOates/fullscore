@@ -110,15 +110,18 @@ void PlotterListWidget::on_draw()
 
    placement.position += vec2d(0, 50);
 
+   int item_num = 0;
    for (auto &plotter : plotter_list->get_list_ref())
    {
       fullscore::ui::PlotterListItemRenderComponent plotter_list_item_render_component(plotter, text_font, al_color_name("gray"), width);
+      if (item_num == cursor_pos) plotter_list_item_render_component.set_state_hilighted();
 
       placement.start_transform();
       plotter_list_item_render_component.render();
 
       placement.restore_transform();
       placement.position += vec2d(0, plotter_list_item_render_component.get_height());
+      item_num++;
    }
 }
 

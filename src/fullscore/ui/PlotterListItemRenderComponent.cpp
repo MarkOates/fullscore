@@ -93,7 +93,7 @@ void PlotterListItemRenderComponent::render()
 if (!font) throw std::runtime_error("missing font in PlotterListItemRenderComponent");
 al_draw_text(font, al_color_name("black"), 20, 15, ALLEGRO_ALIGN_LEFT, "Basic");
 al_draw_filled_rectangle(0, 0, 10, height, color);
-al_draw_rectangle(0, 0, width, height, al_color_name("white"), 2.0);
+al_draw_rectangle(0, 0, width, height, al_color_name(state == "hilighted" ? "white" : "gray"), 2.0);
 }
 
 void PlotterListItemRenderComponent::set_state_normal()

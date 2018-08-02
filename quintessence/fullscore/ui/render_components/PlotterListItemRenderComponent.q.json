@@ -64,7 +64,7 @@
       "name" : "render",
       "type" : "void",
       "parameters" : [],
-      "body" : "if (!font) throw std::runtime_error(\"missing font in PlotterListItemRenderComponent\");\nal_draw_text(font, al_color_name(\"black\"), 20, 15, ALLEGRO_ALIGN_LEFT, \"Basic\");\nal_draw_filled_rectangle(0, 0, 10, height, color);\nal_draw_rectangle(0, 0, width, height, al_color_name(\"white\"), 2.0);"
+      "body" : "if (!font) throw std::runtime_error(\"missing font in PlotterListItemRenderComponent\");\nal_draw_text(font, al_color_name(\"black\"), 20, 15, ALLEGRO_ALIGN_LEFT, \"Basic\");\nal_draw_filled_rectangle(0, 0, 10, height, color);\nal_draw_rectangle(0, 0, width, height, al_color_name(state == \"hilighted\" ? \"white\" : \"gray\"), 2.0);"
     },
     {
       "name" : "set_state_normal",
