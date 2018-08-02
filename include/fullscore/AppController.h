@@ -32,9 +32,9 @@ public:
    PlotterListWidget *plotter_list_widget;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
-   KeyboardCommandMapper normal_mode_keyboard_mappings;
-   KeyboardCommandMapper normal_mode_note_keyboard_mappings;
-   KeyboardCommandMapper normal_mode_measure_keyboard_mappings;
+   KeyboardCommandMapper grid_editor_normal_mode_keyboard_mappings;
+   KeyboardCommandMapper grid_editor_normal_mode_note_keyboard_mappings;
+   KeyboardCommandMapper grid_editor_normal_mode_measure_keyboard_mappings;
 
    AppController(Display *display, Config &config);
    void key_char_func() override;
@@ -45,7 +45,7 @@ public:
    bool set_current_grid_editor(UIGridEditor *editor);
    UIGridEditor *get_next_grid_editor();
 
-   void set_keyboard_input_mappings();
+   void set_keyboard_grid_editor_input_mappings();
 };
 
 
