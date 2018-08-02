@@ -10,10 +10,10 @@
 #include <fullscore/actions/Base.h>
 #include <fullscore/actions/QueueAction.h>
 //#include <fullscore/widgets/CommandBar.h>
-#include <fullscore/UI/CommandBar/CommandBar.hpp>
+#include <fullscore/widgets/CommandBar.h>
 #include <fullscore/widgets/FollowCamera.h>
 #include <fullscore/widgets/GridEditor.h>
-#include <fullscore/widgets/PlotterListWidget.hpp>
+#include <fullscore/UI/PlotterList/Widget.hpp>
 //#include <fullscore/widgets/MeasureInspector.h>
 
 
@@ -27,10 +27,10 @@ public:
    UIFollowCamera follow_camera;
    UIGridEditor *current_grid_editor;
    std::vector<UIGridEditor *> grid_editors;
-   UI::CommandBar::CommandBar *command_bar_widget;
+   UICommandBar *command_bar;
    //UIMeasureInspector *ui_measure_inspector;
    PlotterList *plotter_list;
-   PlotterListWidget *plotter_list_widget;
+   UI::PlotterList::Widget *plotter_list_widget;
    Measure::Basic yank_measure_buffer;
    bool showing_help_menu;
    KeyboardCommandMapper grid_editor_normal_mode_keyboard_mappings;

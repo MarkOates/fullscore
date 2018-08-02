@@ -5,7 +5,7 @@
 #include <fullscore/actions/CreateNewGridEditorAction.h>
 
 #include <fullscore/factories/GridFactory.h>
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 
 
 

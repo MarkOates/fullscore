@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/SetCommandModeAction.h>
 
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 
 
 

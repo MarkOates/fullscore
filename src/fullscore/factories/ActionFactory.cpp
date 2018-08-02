@@ -55,7 +55,7 @@
 #include <fullscore/actions/YankGridMeasureToBufferAction.h>
 #include <fullscore/models/Measure.h>
 #include <fullscore/Action.h>
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 
 // these next 3 includes are added to temporarily construct arguments for CreateFloatingMeasureAction
 #include <fullscore/models/staves/Instrument.h>

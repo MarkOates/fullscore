@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/SetCurrentGridEditorAction.h>
 
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 #include <fullscore/widgets/GridEditor.h>
 
 

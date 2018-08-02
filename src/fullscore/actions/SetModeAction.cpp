@@ -5,7 +5,7 @@
 #include <fullscore/actions/SetModeAction.h>
 
 #include <fullscore/widgets/CommandBar.h>
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 
 
 

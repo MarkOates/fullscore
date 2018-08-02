@@ -7,6 +7,7 @@
 #include <fullscore/factories/ActionFactory.h>
 #include <fullscore/factories/GridFactory.h>
 #include <fullscore/factories/PlotterListWidgetActionFactory.hpp>
+#include <fullscore/UI/PlotterList/ActionFactory.hpp>
 #include <fullscore/models/FloatingMeasure.h>
 #include <fullscore/models/GridCoordinate.h>
 #include <fullscore/models/Measure.h>
@@ -60,10 +61,10 @@ AppController::AppController(Display *display, Config &config)
    , follow_camera(this)
    , current_grid_editor(nullptr)
    , grid_editors()
-   , command_bar_widget(new UI::CommandBar::CommandBar(this))
+   , command_bar(new UICommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
    , plotter_list(new PlotterList)
-   , plotter_list_widget(new PlotterListWidget(this, plotter_list, 300))
+   , plotter_list_widget(new UI::PlotterList::Widget(this, plotter_list, 300))
    , yank_measure_buffer()
    , grid_editor_normal_mode_keyboard_mappings()
    , grid_editor_normal_mode_note_keyboard_mappings()
@@ -201,7 +202,7 @@ void AppController::key_char_func()
       Action::Base *action = nullptr;
 
       if (plotter_list_widget && plotter_list_widget->is_focused())
-         action = PlotterListWidgetActionFactory::create_action(plotter_list_widget, identifier);
+         action = UI::PlotterList::ActionFactory::create_action(plotter_list_widget, identifier);
       else if (current_grid_editor && current_grid_editor->is_focused())
          action = ActionFactory::create_action(this, identifier);
 
