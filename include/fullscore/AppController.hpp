@@ -10,6 +10,7 @@
 #include <fullscore/actions/Base.h>
 #include <fullscore/actions/QueueAction.h>
 //#include <fullscore/widgets/CommandBar.h>
+#include <fullscore/UI/CommandBar/CommandBar.hpp>
 #include <fullscore/widgets/FollowCamera.h>
 #include <fullscore/widgets/GridEditor.h>
 #include <fullscore/widgets/PlotterListWidget.hpp>
@@ -26,7 +27,7 @@ public:
    UIFollowCamera follow_camera;
    UIGridEditor *current_grid_editor;
    std::vector<UIGridEditor *> grid_editors;
-   //UICommandBar *command_bar;
+   UI::CommandBar::CommandBar *command_bar_widget;
    //UIMeasureInspector *ui_measure_inspector;
    PlotterList *plotter_list;
    PlotterListWidget *plotter_list_widget;

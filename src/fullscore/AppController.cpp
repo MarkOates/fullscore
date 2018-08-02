@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/AppController.h>
+#include <fullscore/AppController.hpp>
 
 #include <allegro_flare/framework.h>
 #include <fullscore/factories/ActionFactory.h>
@@ -60,7 +60,7 @@ AppController::AppController(Display *display, Config &config)
    , follow_camera(this)
    , current_grid_editor(nullptr)
    , grid_editors()
-   //, command_bar(new UICommandBar(this))
+   , command_bar_widget(new UI::CommandBar::CommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
    , plotter_list(new PlotterList)
    , plotter_list_widget(new PlotterListWidget(this, plotter_list, 300))
