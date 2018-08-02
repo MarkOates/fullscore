@@ -6,6 +6,7 @@
 #include <allegro_flare/framework.h>
 #include <fullscore/factories/ActionFactory.h>
 #include <fullscore/factories/GridFactory.h>
+#include <fullscore/factories/PlotterListWidgetActionFactory.hpp>
 #include <fullscore/models/FloatingMeasure.h>
 #include <fullscore/models/GridCoordinate.h>
 #include <fullscore/models/Measure.h>
@@ -152,26 +153,23 @@ void AppController::set_keyboard_grid_editor_input_mappings()
 
 
 
-std::vector<std::string> AppController::find_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
+std::vector<std::string> AppController::find_grid_editor_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
-   if (current_grid_editor && current_grid_editor->is_focused())
+   if (mode == UIGridEditor::NORMAL_MODE)
    {
-      if (mode == UIGridEditor::NORMAL_MODE)
+      if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET)
       {
-         if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET)
-         {
-            std::vector<std::string> found_mapping = grid_editor_normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
-            if (!found_mapping.empty()) return found_mapping;
-         }
-         else if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
-         {
-            std::vector<std::string> found_mapping = grid_editor_normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
-            if (!found_mapping.empty()) return found_mapping;
-         }
-
-         std::vector<std::string> found_mapping = grid_editor_normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         std::vector<std::string> found_mapping = grid_editor_normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
       }
+      else if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
+      {
+         std::vector<std::string> found_mapping = grid_editor_normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+
+      std::vector<std::string> found_mapping = grid_editor_normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+      if (!found_mapping.empty()) return found_mapping;
    }
 
    return {};
@@ -191,11 +189,21 @@ void AppController::key_char_func()
    auto alt_pressed   = Framework::key_alt;
    auto ctrl_pressed  = Framework::key_ctrl;
 
-   std::vector<std::string> identifiers = find_action_mapping(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
+   std::vector<std::string> identifiers;
+
+   if (plotter_list_widget && plotter_list_widget->is_focused())
+      identifiers = plotter_list_widget->get_keyboard_action_mapping(keycode, shift_pressed, ctrl_pressed, alt_pressed);
+   else if (current_grid_editor && current_grid_editor->is_focused())
+      identifiers = find_grid_editor_action_mapping(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
 
    for (auto &identifier : identifiers)
    {
-      Action::Base *action = ActionFactory::create_action(this, identifier);
+      Action::Base *action = nullptr;
+
+      if (plotter_list_widget && plotter_list_widget->is_focused())
+         action = PlotterListWidgetActionFactory::create_action(plotter_list_widget, identifier);
+      else if (current_grid_editor && current_grid_editor->is_focused())
+         action = ActionFactory::create_action(this, identifier);
 
       if (action)
       {
