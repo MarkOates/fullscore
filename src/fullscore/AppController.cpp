@@ -19,6 +19,7 @@
 
 #include <fullscore/transforms/RetrogradeTransform.h>
 #include <fullscore/models/plotters/Basic.h>
+#include <fullscore/models/plotters/Destination.h>
 
 static void init_app_based_on_setup_config(AppController *app)
 {
@@ -48,6 +49,7 @@ static void init_app_based_on_setup_config(AppController *app)
 
    app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
    app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
+   app->plotter_list->append(new Plotter::Destination({ 5, 6, 8 }));
 }
 
 
