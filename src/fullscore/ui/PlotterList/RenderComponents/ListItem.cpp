@@ -93,9 +93,10 @@ void ListItem::render()
 {
 if (!font) throw std::runtime_error("missing font in PlotterListItemRenderComponent");
 
+float outline_thickness = 2.0;
 al_draw_text(font, al_color_name("black"), 20, 15, ALLEGRO_ALIGN_LEFT, plotter->get_type().c_str());
 al_draw_filled_rectangle(0, 0, 10, height, al_color_name(state == STATE_SELECTED ? "gray" : "darkgray"));
-al_draw_rectangle(0, 0, width, height, al_color_name(state == STATE_FOCUSED ? "white" : "gray"), 2.0);
+al_draw_rectangle(outline_thickness/2, outline_thickness/2, width-outline_thickness/2, height-outline_thickness/2, al_color_name(state == STATE_FOCUSED ? "white" : "gray"), outline_thickness);
 }
 
 void ListItem::set_state_normal()
