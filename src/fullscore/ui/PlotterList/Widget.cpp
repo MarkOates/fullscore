@@ -8,6 +8,7 @@
 #include <allegro_flare/framework.h>
 #include <fullscore/UI/PlotterList/RenderComponents/ListItem.hpp>
 #include <allegro5/allegro_primitives.h>
+#include <algorithm>
 
 
 namespace UI::PlotterList
@@ -115,7 +116,11 @@ void Widget::on_draw()
    placement.position += vec2d(0, 50);
 
    int item_num = 0;
-   for (auto &plotter : plotter_list->get_list_ref())
+
+   std::vector<Plotter::Base *> ref = plotter_list->get_list_ref();
+   std::vector<Plotter::Base *> reversed_list = std::vector<Plotter::Base *>(ref.rbegin(), ref.rend());
+
+   for (auto &plotter : reversed_list)
    {
       fullscore::UI::PlotterList::RenderComponents::ListItem list_item(plotter, text_font, width);
       if (item_num == cursor_pos) list_item.set_state_focused();
