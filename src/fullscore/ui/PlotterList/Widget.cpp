@@ -22,7 +22,6 @@ Widget::Widget(UIWidget *parent, ::PlotterList *plotter_list, float width, float
    , keyboard_command_mapper()
 {
    place.align = vec2d(0, 0);
-   place.position = vec2d(1600, 100);
    _set_keyboard_mappings();
 }
 
