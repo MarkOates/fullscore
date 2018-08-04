@@ -117,8 +117,8 @@ void Widget::on_draw()
    int item_num = 0;
    for (auto &plotter : plotter_list->get_list_ref())
    {
-      fullscore::UI::PlotterList::RenderComponents::ListItem list_item(plotter, text_font, al_color_name("gray"), width);
-      if (item_num == cursor_pos) list_item.set_state_hilighted();
+      fullscore::UI::PlotterList::RenderComponents::ListItem list_item(plotter, text_font, width);
+      if (item_num == cursor_pos) list_item.set_state_focused();
 
       placement.start_transform();
       list_item.render();
