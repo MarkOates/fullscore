@@ -11,9 +11,10 @@
 
 
 
-Plotter::Destination::Destination()
+Plotter::Destination::Destination(std::vector<GridCoordinate> destinations, std::vector<Note> notes)
    : Base(Plotter::TYPE_IDENTIFIER_DESTINATION)
-   , destinations()
+   , destinations(destinations)
+   , notes(notes)
 {}
 
 
@@ -66,8 +67,7 @@ std::vector<GridCoordinate> Plotter::Destination::get_destinations()
 
 std::vector<Note> Plotter::Destination::get_notes_for(GridCoordinate destination)
 {
-   // TODO: replace temp code below
-   return { Note(-7), Note(0), Note(2), Note(4) };
+   return notes;
 }
 
 
