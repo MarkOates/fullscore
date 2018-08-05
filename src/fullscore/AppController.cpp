@@ -48,8 +48,8 @@ static void init_app_based_on_setup_config(AppController *app)
 
    Grid &grid = app->current_grid_editor_widget->grid;
 
-   //app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
-   //app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
+   app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
+   app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
 
    app->plotter_list->append(
       new Plotter::Destination(
@@ -83,7 +83,7 @@ AppController::AppController(Display *display, Config &config)
    , grid_editor_normal_mode_measure_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
-   set_keyboard_grid_editor_input_mappings();
+   //set_keyboard_grid_editor_input_mappings();
 
    init_app_based_on_setup_config(this);
    plotter_list_widget->bring_to_front();
@@ -168,20 +168,22 @@ void AppController::set_keyboard_grid_editor_input_mappings()
 
 std::vector<std::string> AppController::find_grid_editor_action_mapping(UI::GridEditor::Widget::mode_t mode, UI::GridEditor::Widget::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
+
    if (mode == UI::GridEditor::Widget::NORMAL_MODE)
    {
       if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::MEASURE_TARGET)
       {
-         std::vector<std::string> found_mapping = grid_editor_normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+
+         std::vector<std::string> found_mapping = current_grid_editor_widget->measure_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
       }
       else if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::NOTE_TARGET)
       {
-         std::vector<std::string> found_mapping = grid_editor_normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+         std::vector<std::string> found_mapping = current_grid_editor_widget->note_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
       }
 
-      std::vector<std::string> found_mapping = grid_editor_normal_mode_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
+      std::vector<std::string> found_mapping = current_grid_editor_widget->normal_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
       if (!found_mapping.empty()) return found_mapping;
    }
 
