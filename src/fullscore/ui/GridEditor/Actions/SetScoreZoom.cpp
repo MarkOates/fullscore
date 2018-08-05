@@ -8,8 +8,11 @@
 #include <allegro_flare/motion.h>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetScoreZoom::SetScoreZoom(UIGridEditor *grid_editor, Motion *motion, float destination, float duration)
+
+SetScoreZoom::SetScoreZoom(UIGridEditor *grid_editor, Motion *motion, float destination, float duration)
    : ::Action::Base("set_score_zoom")
    , grid_editor(grid_editor)
    , motion(motion)
@@ -20,13 +23,13 @@ Action::SetScoreZoom::SetScoreZoom(UIGridEditor *grid_editor, Motion *motion, fl
 
 
 
-Action::SetScoreZoom::~SetScoreZoom()
+SetScoreZoom::~SetScoreZoom()
 {}
 
 
 
 
-bool Action::SetScoreZoom::execute()
+bool SetScoreZoom::execute()
 {
    if (!grid_editor || !motion) return false;
 
@@ -37,5 +40,6 @@ bool Action::SetScoreZoom::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

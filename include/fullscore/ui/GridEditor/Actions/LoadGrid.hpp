@@ -11,7 +11,7 @@ class Grid;
 
 namespace UI::GridEditor::Actions
 {
-   class LoadGrid : public Base
+   class LoadGrid : public Action::Base
    {
    private:
       Grid *grid;

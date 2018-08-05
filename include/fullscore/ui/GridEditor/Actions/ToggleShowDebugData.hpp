@@ -10,7 +10,7 @@ class UIGridEditor;
 
 namespace UI::GridEditor::Actions
 {
-   class ToggleShowDebugData : public Base
+   class ToggleShowDebugData : public ::Action::Base
    {
    private:
       UIGridEditor *grid_editor;

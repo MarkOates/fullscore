@@ -10,7 +10,7 @@ class AppController;
 
 namespace UI::GridEditor::Actions
 {
-   class CreateNewScoreEditor : public Base
+   class CreateNewScoreEditor : public Action::Base
    {
    private:
       AppController *app_controller;

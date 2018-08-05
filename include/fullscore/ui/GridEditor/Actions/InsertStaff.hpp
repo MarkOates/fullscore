@@ -10,7 +10,7 @@ class Grid;
 
 namespace UI::GridEditor::Actions
 {
-   class InsertStaff : public Base
+   class InsertStaff : public Action::Base
    {
    private:
       Grid *grid;

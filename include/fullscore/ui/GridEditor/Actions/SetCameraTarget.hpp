@@ -10,7 +10,7 @@ class UIFollowCamera;
 
 namespace UI::GridEditor::Actions
 {
-   class SetCameraTarget : public Base
+   class SetCameraTarget : public Action::Base
    {
    private:
       UIFollowCamera *camera;

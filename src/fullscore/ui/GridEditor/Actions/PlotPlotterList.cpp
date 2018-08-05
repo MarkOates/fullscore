@@ -7,23 +7,27 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
-Action::PlotPlotterList::PlotPlotterList(PlotterList *plotter_list)
-   : ::Action::Base(Action::PLOT_PLOTTER_LIST_ACTION_IDENTIFIER)
+namespace UI::GridEditor::Actions
+{
+
+PlotPlotterList::PlotPlotterList(PlotterList *plotter_list)
+   : ::Action::Base(PLOT_PLOTTER_LIST_ACTION_IDENTIFIER)
    , plotter_list(plotter_list)
 {
 }
 
 
-Action::PlotPlotterList::~PlotPlotterList()
+PlotPlotterList::~PlotPlotterList()
 {
 }
 
 
-bool Action::PlotPlotterList::execute()
+bool PlotPlotterList::execute()
 {
    PlotterListPlotter plotter_list_plotter(plotter_list);
    plotter_list_plotter.plot();
    return true;
 }
 
+} // namespace UI::GridEditor::Actions
 

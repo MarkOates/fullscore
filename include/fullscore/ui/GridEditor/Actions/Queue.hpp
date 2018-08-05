@@ -7,7 +7,7 @@
 
 namespace UI::GridEditor::Actions
 {
-   class Queue : public Base
+   class Queue : public Action::Base
    {
    private:
       std::vector<Action::Base *> actions;

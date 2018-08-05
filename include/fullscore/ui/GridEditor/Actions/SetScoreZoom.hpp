@@ -11,7 +11,7 @@ class Motion;
 
 namespace UI::GridEditor::Actions
 {
-   class SetScoreZoom : public Base
+   class SetScoreZoom : public ::Action::Base
    {
    private:
       UIGridEditor *grid_editor;

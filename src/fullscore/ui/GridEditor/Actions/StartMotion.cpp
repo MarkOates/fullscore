@@ -9,9 +9,12 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::StartMotion::StartMotion(Motion *motion, float *value, float destination, float duration)
-   : ::Action::Base(Action::START_MOTION_ACTION_IDENTIFIER)
+
+StartMotion::StartMotion(Motion *motion, float *value, float destination, float duration)
+   : ::Action::Base(START_MOTION_ACTION_IDENTIFIER)
    , motion(motion)
    , value(value)
    , destination(destination)
@@ -21,13 +24,13 @@ Action::StartMotion::StartMotion(Motion *motion, float *value, float destination
 
 
 
-Action::StartMotion::~StartMotion()
+StartMotion::~StartMotion()
 {}
 
 
 
 
-bool Action::StartMotion::execute()
+bool StartMotion::execute()
 {
    if (!motion || !value) return false;
 
@@ -37,5 +40,6 @@ bool Action::StartMotion::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

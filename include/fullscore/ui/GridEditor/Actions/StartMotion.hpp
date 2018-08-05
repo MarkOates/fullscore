@@ -10,7 +10,7 @@ class Motion;
 
 namespace UI::GridEditor::Actions
 {
-   class StartMotion : public Base
+   class StartMotion : public ::Action::Base
    {
    private:
       Motion *motion;

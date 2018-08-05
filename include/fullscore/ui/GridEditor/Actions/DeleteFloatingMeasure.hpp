@@ -8,7 +8,7 @@
 
 namespace UI::GridEditor::Actions
 {
-   class DeleteFloatingMeasure : public Base
+   class DeleteFloatingMeasure : public Action::Base
    {
    private:
       int floating_measure_id;

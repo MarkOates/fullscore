@@ -9,7 +9,7 @@
 
 namespace UI::GridEditor::Actions
 {
-   class CreateFloatingMeasure : public Base
+   class CreateFloatingMeasure : public Action::Base
    {
    private:
       GridCoordinate grid_coordinate;

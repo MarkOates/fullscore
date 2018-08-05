@@ -10,7 +10,7 @@ class PlotterList;
 
 namespace UI::GridEditor::Actions
 {
-   class PlotPlotterList : public Base
+   class PlotPlotterList : public Action::Base
    {
    private:
       PlotterList *plotter_list;

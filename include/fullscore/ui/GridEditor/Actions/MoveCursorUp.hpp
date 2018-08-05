@@ -10,7 +10,7 @@ class UIGridEditor;
 
 namespace UI::GridEditor::Actions
 {
-   class MoveCursorUp : public Base
+   class MoveCursorUp : public Action::Base
    {
    private:
       UIGridEditor *grid_editor;

@@ -11,7 +11,7 @@ class UIGridEditor;
 
 namespace UI::GridEditor::Actions
 {
-   class SetCurrentUIGridEditor : public Base
+   class SetCurrentUIGridEditor : public Action::Base
    {
    private:
       AppController *app_controller;

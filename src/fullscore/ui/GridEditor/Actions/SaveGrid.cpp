@@ -8,8 +8,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SaveGrid::SaveGrid(Grid *grid, std::string filename)
+
+SaveGrid::SaveGrid(Grid *grid, std::string filename)
    : ::Action::Base("save_grid")
    , grid(grid)
    , filename(filename)
@@ -19,19 +22,20 @@ Action::SaveGrid::SaveGrid(Grid *grid, std::string filename)
 
 
 
-Action::SaveGrid::~SaveGrid()
+SaveGrid::~SaveGrid()
 {
 }
 
 
 
 
-bool Action::SaveGrid::execute()
+bool SaveGrid::execute()
 {
    GridFileConverter grid_file_converter(grid, filename);
    return grid_file_converter.save();
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

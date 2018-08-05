@@ -10,7 +10,7 @@ class UIGridEditor;
 
 namespace UI::GridEditor::Actions
 {
-   class ToggleEditModeTarget : public Base
+   class ToggleEditModeTarget : public ::Action::Base
    {
    private:
       UIGridEditor *grid_editor;

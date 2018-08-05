@@ -10,9 +10,12 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Base *destination_measure, Measure::Basic *yank_measure_buffer)
-   : ::Action::Base(Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER)
+
+PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Base *destination_measure, Measure::Basic *yank_measure_buffer)
+   : ::Action::Base(PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER)
    , yank_measure_buffer(yank_measure_buffer)
    , destination_measure(destination_measure)
 {
@@ -21,14 +24,14 @@ Action::PasteMeasureFromBuffer::PasteMeasureFromBuffer(Measure::Base *destinatio
 
 
 
-Action::PasteMeasureFromBuffer::~PasteMeasureFromBuffer()
+PasteMeasureFromBuffer::~PasteMeasureFromBuffer()
 {
 }
 
 
 
 
-bool Action::PasteMeasureFromBuffer::execute()
+bool PasteMeasureFromBuffer::execute()
 {
    if (!yank_measure_buffer) throw std::runtime_error("Cannot paste from a nullptr yank_measure_buffer");
    if (!destination_measure) throw std::runtime_error("Cannot paste to a nullptr destination_measure");
@@ -38,5 +41,6 @@ bool Action::PasteMeasureFromBuffer::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

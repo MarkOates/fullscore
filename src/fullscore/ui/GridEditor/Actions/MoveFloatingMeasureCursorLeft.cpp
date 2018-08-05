@@ -7,20 +7,23 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::MoveFloatingMeasureCursorLeft::MoveFloatingMeasureCursorLeft(FloatingMeasureCursor *floating_measure_cursor)
-   : ::Action::Base(Action::MOVE_FLOATING_MEASURE_CURSOR_LEFT_IDENTIFIER)
+
+MoveFloatingMeasureCursorLeft::MoveFloatingMeasureCursorLeft(FloatingMeasureCursor *floating_measure_cursor)
+   : ::Action::Base(MOVE_FLOATING_MEASURE_CURSOR_LEFT_IDENTIFIER)
    , floating_measure_cursor(floating_measure_cursor)
 {}
 
 
 
-Action::MoveFloatingMeasureCursorLeft::~MoveFloatingMeasureCursorLeft()
+MoveFloatingMeasureCursorLeft::~MoveFloatingMeasureCursorLeft()
 {}
 
 
 
-bool Action::MoveFloatingMeasureCursorLeft::execute()
+bool MoveFloatingMeasureCursorLeft::execute()
 {
    if (!floating_measure_cursor) throw std::runtime_error("Cannot move the floating_measure_cursor left because it does not exist");
 
@@ -54,4 +57,5 @@ bool Action::MoveFloatingMeasureCursorLeft::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 

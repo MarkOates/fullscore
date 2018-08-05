@@ -7,8 +7,11 @@
 #include <fullscore/AppController.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetCommandMode::SetCommandMode(UIGridEditor *grid_editor, UICommandBar *command_bar)
+
+SetCommandMode::SetCommandMode(UIGridEditor *grid_editor, UICommandBar *command_bar)
    : ::Action::Base("set_command_mode")
    , grid_editor(grid_editor)
    , command_bar(command_bar)
@@ -18,14 +21,14 @@ Action::SetCommandMode::SetCommandMode(UIGridEditor *grid_editor, UICommandBar *
 
 
 
-Action::SetCommandMode::~SetCommandMode()
+SetCommandMode::~SetCommandMode()
 {
 }
 
 
 
 
-bool Action::SetCommandMode::execute()
+bool SetCommandMode::execute()
 {
    if (!grid_editor)
       throw std::invalid_argument("Cannot set grid_editor to COMMAND_MODE because the grid_editor is a nullptr");
@@ -41,5 +44,6 @@ bool Action::SetCommandMode::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

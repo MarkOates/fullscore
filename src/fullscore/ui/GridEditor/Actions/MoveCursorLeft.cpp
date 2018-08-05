@@ -8,8 +8,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::MoveCursorLeft::MoveCursorLeft(UIGridEditor *grid_editor)
+
+MoveCursorLeft::MoveCursorLeft(UIGridEditor *grid_editor)
    : ::Action::Base("move_cursor_left")
    , grid_editor(grid_editor)
 {
@@ -18,14 +21,14 @@ Action::MoveCursorLeft::MoveCursorLeft(UIGridEditor *grid_editor)
 
 
 
-Action::MoveCursorLeft::~MoveCursorLeft()
+MoveCursorLeft::~MoveCursorLeft()
 {
 }
 
 
 
 
-bool Action::MoveCursorLeft::execute()
+bool MoveCursorLeft::execute()
 {
    if (!grid_editor) return false;
 
@@ -40,5 +43,6 @@ bool Action::MoveCursorLeft::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

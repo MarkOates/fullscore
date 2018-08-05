@@ -8,9 +8,12 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::DeleteStaff::DeleteStaff(Grid *grid, int at_index)
-   : ::Action::Base(Action::DELETE_STAFF_ACTION_IDENTIFIER)
+
+DeleteStaff::DeleteStaff(Grid *grid, int at_index)
+   : ::Action::Base(DELETE_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
    , at_index(at_index)
 {}
@@ -18,13 +21,13 @@ Action::DeleteStaff::DeleteStaff(Grid *grid, int at_index)
 
 
 
-Action::DeleteStaff::~DeleteStaff()
+DeleteStaff::~DeleteStaff()
 {}
 
 
 
 
-bool Action::DeleteStaff::execute()
+bool DeleteStaff::execute()
 {
    if (!grid) return false;
    if (at_index < 0 || at_index >= grid->get_num_staves()) return false;
@@ -35,5 +38,6 @@ bool Action::DeleteStaff::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

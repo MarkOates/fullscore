@@ -9,9 +9,12 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
-   : ::Action::Base(Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER)
+
+MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
+   : ::Action::Base(MOVE_CURSOR_UP_ACTION_IDENTIFIER)
    , grid_editor(grid_editor)
 {
 }
@@ -19,14 +22,14 @@ Action::MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
 
 
 
-Action::MoveCursorUp::~MoveCursorUp()
+MoveCursorUp::~MoveCursorUp()
 {
 }
 
 
 
 
-bool Action::MoveCursorUp::execute()
+bool MoveCursorUp::execute()
 {
    if (!grid_editor) return false;
 
@@ -36,5 +39,6 @@ bool Action::MoveCursorUp::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

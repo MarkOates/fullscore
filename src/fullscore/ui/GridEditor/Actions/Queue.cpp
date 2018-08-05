@@ -6,8 +6,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::Queue::Queue(std::string name, std::vector<Action::Base *> actions)
+
+Queue::Queue(std::string name, std::vector<Action::Base *> actions)
    : ::Action::Base(std::string("queue: (") + name + ")")
    , actions(actions)
 {
@@ -16,7 +19,7 @@ Action::Queue::Queue(std::string name, std::vector<Action::Base *> actions)
 
 
 
-Action::Queue::~Queue()
+Queue::~Queue()
 {
    clear();
 }
@@ -24,7 +27,7 @@ Action::Queue::~Queue()
 
 
 
-bool Action::Queue::add_action(::Action::Base *action)
+bool Queue::add_action(::Action::Base *action)
 {
    actions.push_back(action);
    return true;
@@ -33,7 +36,7 @@ bool Action::Queue::add_action(::Action::Base *action)
 
 
 
-bool Action::Queue::execute()
+bool Queue::execute()
 {
    bool status = true;
    for (auto &action : actions)
@@ -44,7 +47,7 @@ bool Action::Queue::execute()
 
 
 
-bool Action::Queue::clear()
+bool Queue::clear()
 {
    for (auto &action : actions) delete action;
    actions.clear();
@@ -52,5 +55,6 @@ bool Action::Queue::clear()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

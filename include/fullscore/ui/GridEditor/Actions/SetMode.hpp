@@ -12,7 +12,7 @@ class UICommandBar;
 
 namespace UI::GridEditor::Actions
 {
-   class SetMode : public Base
+   class SetMode : public Action::Base
    {
    private:
       UIGridEditor *grid_editor;

@@ -10,7 +10,7 @@ namespace Measure { class Basic; class Base; }
 
 namespace UI::GridEditor::Actions
 {
-   class PasteMeasureFromBuffer : public Base
+   class PasteMeasureFromBuffer : public Action::Base
    {
    private:
       Measure::Basic *yank_measure_buffer;

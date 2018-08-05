@@ -8,8 +8,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::ResetPlayback::ResetPlayback(UIGridEditor *grid_editor)
+
+ResetPlayback::ResetPlayback(UIGridEditor *grid_editor)
    : ::Action::Base("reset_playback")
    , grid_editor(grid_editor)
 {
@@ -18,14 +21,14 @@ Action::ResetPlayback::ResetPlayback(UIGridEditor *grid_editor)
 
 
 
-Action::ResetPlayback::~ResetPlayback()
+ResetPlayback::~ResetPlayback()
 {
 }
 
 
 
 
-bool Action::ResetPlayback::execute()
+bool ResetPlayback::execute()
 {
    if (!grid_editor) return false;
 
@@ -35,6 +38,7 @@ bool Action::ResetPlayback::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 
 

@@ -8,8 +8,11 @@
 #include <fullscore/widgets/GridEditor.h>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetCurrentUIGridEditor::SetCurrentUIGridEditor(AppController *app_controller, UIGridEditor *grid_editor)
+
+SetCurrentUIGridEditor::SetCurrentUIGridEditor(AppController *app_controller, UIGridEditor *grid_editor)
    : ::Action::Base("set_current_grid_editor")
    , app_controller(app_controller)
    , grid_editor(grid_editor)
@@ -18,13 +21,13 @@ Action::SetCurrentUIGridEditor::SetCurrentUIGridEditor(AppController *app_contro
 
 
 
-Action::SetCurrentUIGridEditor::~SetCurrentUIGridEditor()
+SetCurrentUIGridEditor::~SetCurrentUIGridEditor()
 {}
 
 
 
 
-bool Action::SetCurrentUIGridEditor::execute()
+bool SetCurrentUIGridEditor::execute()
 {
    if (!app_controller || !grid_editor) return false;
 
@@ -32,5 +35,6 @@ bool Action::SetCurrentUIGridEditor::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

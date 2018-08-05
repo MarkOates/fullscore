@@ -9,9 +9,11 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
 
-Action::YankGridMeasureToBuffer::YankGridMeasureToBuffer(Measure::Basic *yank_measure_buffer, Measure::Base *source_measure)
+YankGridMeasureToBuffer::YankGridMeasureToBuffer(Measure::Basic *yank_measure_buffer, Measure::Base *source_measure)
    : ::Action::Base(YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER)
    , yank_measure_buffer(yank_measure_buffer)
    , source_measure(source_measure)
@@ -21,14 +23,14 @@ Action::YankGridMeasureToBuffer::YankGridMeasureToBuffer(Measure::Basic *yank_me
 
 
 
-Action::YankGridMeasureToBuffer::~YankGridMeasureToBuffer()
+YankGridMeasureToBuffer::~YankGridMeasureToBuffer()
 {
 }
 
 
 
 
-bool Action::YankGridMeasureToBuffer::execute()
+bool YankGridMeasureToBuffer::execute()
 {
    if (!yank_measure_buffer) throw std::runtime_error("Cannot yank to a nullptr yank_grid_measure_buffer");
    if (!source_measure) throw std::runtime_error("Cannot yank from a nullptr source_measure");
@@ -38,5 +40,6 @@ bool Action::YankGridMeasureToBuffer::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

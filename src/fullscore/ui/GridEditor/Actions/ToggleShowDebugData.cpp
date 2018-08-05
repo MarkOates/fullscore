@@ -7,8 +7,11 @@
 #include <fullscore/widgets/GridEditor.h>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::ToggleShowDebugData::ToggleShowDebugData(UIGridEditor *grid_editor)
+
+ToggleShowDebugData::ToggleShowDebugData(UIGridEditor *grid_editor)
    : ::Action::Base("toggle_show_debug_data")
    , grid_editor(grid_editor)
 {}
@@ -16,13 +19,13 @@ Action::ToggleShowDebugData::ToggleShowDebugData(UIGridEditor *grid_editor)
 
 
 
-Action::ToggleShowDebugData::~ToggleShowDebugData()
+ToggleShowDebugData::~ToggleShowDebugData()
 {}
 
 
 
 
-bool Action::ToggleShowDebugData::execute()
+bool ToggleShowDebugData::execute()
 {
    if (!grid_editor) return false;
 
@@ -31,6 +34,7 @@ bool Action::ToggleShowDebugData::execute()
    return true;
 }
 
+} // namespace UI::GridEditor::Actions
 
 
 

@@ -10,7 +10,7 @@ class UIGridEditor;
 
 namespace UI::GridEditor::Actions
 {
-   class ResetPlayback : public Base
+   class ResetPlayback : public Action::Base
    {
    private:
       UIGridEditor *grid_editor;

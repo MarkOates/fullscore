@@ -7,9 +7,12 @@
 #include <fullscore/widgets/FollowCamera.h>
 
 
+namespace UI::GridEditor::Actions
+{
 
 
-Action::SetCameraTarget::SetCameraTarget(UIFollowCamera *camera, float x, float y)
+
+SetCameraTarget::SetCameraTarget(UIFollowCamera *camera, float x, float y)
    : ::Action::Base("set_camera_target")
    , camera(camera)
    , x(x)
@@ -19,13 +22,13 @@ Action::SetCameraTarget::SetCameraTarget(UIFollowCamera *camera, float x, float 
 
 
 
-Action::SetCameraTarget::~SetCameraTarget()
+SetCameraTarget::~SetCameraTarget()
 {}
 
 
 
 
-bool Action::SetCameraTarget::execute()
+bool SetCameraTarget::execute()
 {
    if (!camera) return false;
 
@@ -36,5 +39,6 @@ bool Action::SetCameraTarget::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

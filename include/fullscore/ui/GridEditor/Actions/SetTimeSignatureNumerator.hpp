@@ -12,7 +12,7 @@ class TimeSignature;
 
 namespace UI::GridEditor::Actions
 {
-   class SetTimeSignatureNumerator : public Base
+   class SetTimeSignatureNumerator : public ::Action::Base
    {
    private:
       TimeSignature *time_signature;

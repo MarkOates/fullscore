@@ -10,7 +10,7 @@ class PlaybackControl;
 
 namespace UI::GridEditor::Actions
 {
-   class TogglePlayback : public Base
+   class TogglePlayback : public ::Action::Base
    {
    private:
       PlaybackControl *playback_control;

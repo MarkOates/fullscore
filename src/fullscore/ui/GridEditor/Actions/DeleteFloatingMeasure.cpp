@@ -7,23 +7,27 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::DeleteFloatingMeasure::DeleteFloatingMeasure(int floating_measure_id)
-   : ::Action::Base(Action::DELETE_FLOATING_MEASURE_IDENTIFIER)
+
+DeleteFloatingMeasure::DeleteFloatingMeasure(int floating_measure_id)
+   : ::Action::Base(DELETE_FLOATING_MEASURE_IDENTIFIER)
    , floating_measure_id(floating_measure_id)
 {}
 
 
 
-Action::DeleteFloatingMeasure::~DeleteFloatingMeasure()
+DeleteFloatingMeasure::~DeleteFloatingMeasure()
 {}
 
 
 
-bool Action::DeleteFloatingMeasure::execute()
+bool DeleteFloatingMeasure::execute()
 {
    return FloatingMeasure::destroy(floating_measure_id);
 }
 
 
+} // namespace UI::GridEditor::Actions
 

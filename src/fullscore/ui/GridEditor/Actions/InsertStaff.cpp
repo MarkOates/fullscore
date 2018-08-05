@@ -10,9 +10,12 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::InsertStaff::InsertStaff(Grid *grid, int at_index)
-   : ::Action::Base(Action::INSERT_STAFF_ACTION_IDENTIFIER)
+
+InsertStaff::InsertStaff(Grid *grid, int at_index)
+   : ::Action::Base(INSERT_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
    , at_index(at_index)
 {}
@@ -20,13 +23,13 @@ Action::InsertStaff::InsertStaff(Grid *grid, int at_index)
 
 
 
-Action::InsertStaff::~InsertStaff()
+InsertStaff::~InsertStaff()
 {}
 
 
 
 
-bool Action::InsertStaff::execute()
+bool InsertStaff::execute()
 {
    if (!grid) return false;
    if (at_index < 0 || at_index >= grid->get_num_staves()) return false;
@@ -37,5 +40,6 @@ bool Action::InsertStaff::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

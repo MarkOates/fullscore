@@ -8,8 +8,11 @@
 #include <fullscore/AppController.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetMode::SetMode(UIGridEditor *grid_editor, UICommandBar *command_bar, UIGridEditor::mode_t mode)
+
+SetMode::SetMode(UIGridEditor *grid_editor, UICommandBar *command_bar, UIGridEditor::mode_t mode)
    : ::Action::Base("set_mode")
    , grid_editor(grid_editor)
    , command_bar(command_bar)
@@ -20,14 +23,14 @@ Action::SetMode::SetMode(UIGridEditor *grid_editor, UICommandBar *command_bar, U
 
 
 
-Action::SetMode::~SetMode()
+SetMode::~SetMode()
 {
 }
 
 
 
 
-bool Action::SetMode::execute()
+bool SetMode::execute()
 {
    if (!grid_editor || !command_bar) return false;
    if (mode == grid_editor->mode) return false;
@@ -51,5 +54,6 @@ bool Action::SetMode::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

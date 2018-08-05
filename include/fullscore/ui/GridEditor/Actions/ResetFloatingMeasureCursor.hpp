@@ -12,7 +12,7 @@ class FloatingMeasureCursor;
 
 namespace UI::GridEditor::Actions
 {
-   class ResetFloatingMeasureCursor : public Base
+   class ResetFloatingMeasureCursor : public Action::Base
    {
    private:
       FloatingMeasureCursor *floating_measure_cursor;

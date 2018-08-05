@@ -6,8 +6,11 @@
 #include <fullscore/models/TimeSignature.h>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetTimeSignatureNumerator::SetTimeSignatureNumerator(TimeSignature *time_signature, int numerator)
+
+SetTimeSignatureNumerator::SetTimeSignatureNumerator(TimeSignature *time_signature, int numerator)
    : ::Action::Base("set_time_signature_numerator")
    , time_signature(time_signature)
    , numerator(numerator)
@@ -15,12 +18,12 @@ Action::SetTimeSignatureNumerator::SetTimeSignatureNumerator(TimeSignature *time
 
 
 
-Action::SetTimeSignatureNumerator::~SetTimeSignatureNumerator()
+SetTimeSignatureNumerator::~SetTimeSignatureNumerator()
 {}
 
 
 
-bool Action::SetTimeSignatureNumerator::execute()
+bool SetTimeSignatureNumerator::execute()
 {
    if (!time_signature) throw std::invalid_argument("Cannot set time signature's numerator on a nullptr time_signature");
    if (numerator <= 0) throw std::invalid_argument("Cannot set a time signature's numerator to <= 0");
@@ -35,4 +38,5 @@ bool Action::SetTimeSignatureNumerator::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 

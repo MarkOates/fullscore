@@ -7,9 +7,12 @@
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::CreateFloatingMeasure::CreateFloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
-   : ::Action::Base(Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER)
+
+CreateFloatingMeasure::CreateFloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
+   : ::Action::Base(CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER)
    , grid_coordinate(grid_coordinate)
    , measure_id(measure_id)
    , created_floating_measure_id(-1)
@@ -18,13 +21,13 @@ Action::CreateFloatingMeasure::CreateFloatingMeasure(GridCoordinate grid_coordin
 
 
 
-Action::CreateFloatingMeasure::~CreateFloatingMeasure()
+CreateFloatingMeasure::~CreateFloatingMeasure()
 {
 }
 
 
 
-bool Action::CreateFloatingMeasure::execute()
+bool CreateFloatingMeasure::execute()
 {
    FloatingMeasure *floating_measure = new FloatingMeasure(grid_coordinate, measure_id);
    created_floating_measure_id = floating_measure->get_id();
@@ -34,10 +37,11 @@ bool Action::CreateFloatingMeasure::execute()
 
 
 
-int Action::CreateFloatingMeasure::get_created_floating_measure_id()
+int CreateFloatingMeasure::get_created_floating_measure_id()
 {
    return created_floating_measure_id;
 }
 
+} // namespace UI::GridEditor::Actions
 
 

@@ -8,8 +8,11 @@
 #include <fullscore/AppController.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::SetNormalMode::SetNormalMode(UIGridEditor *grid_editor, UICommandBar *command_bar)
+
+SetNormalMode::SetNormalMode(UIGridEditor *grid_editor, UICommandBar *command_bar)
    : ::Action::Base("set_normal_mode")
    , grid_editor(grid_editor)
    , command_bar(command_bar)
@@ -19,14 +22,14 @@ Action::SetNormalMode::SetNormalMode(UIGridEditor *grid_editor, UICommandBar *co
 
 
 
-Action::SetNormalMode::~SetNormalMode()
+SetNormalMode::~SetNormalMode()
 {
 }
 
 
 
 
-bool Action::SetNormalMode::execute()
+bool SetNormalMode::execute()
 {
    if (!grid_editor)
       throw std::invalid_argument("Cannot set grid_editor to NORMAL_MODE because the grid_editor is a nullptr");
@@ -42,5 +45,6 @@ bool Action::SetNormalMode::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

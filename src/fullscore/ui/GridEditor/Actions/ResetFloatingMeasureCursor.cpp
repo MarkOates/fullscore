@@ -9,8 +9,11 @@
 
 
 
-Action::ResetFloatingMeasureCursor::ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor, int staff_id, int barline_num)
-   : ::Action::Base(Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER)
+namespace UI::GridEditor::Actions
+{
+
+ResetFloatingMeasureCursor::ResetFloatingMeasureCursor(FloatingMeasureCursor *floating_measure_cursor, int staff_id, int barline_num)
+   : ::Action::Base(RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER)
    , floating_measure_cursor(floating_measure_cursor)
    , staff_id(staff_id)
    , barline_num(barline_num)
@@ -18,12 +21,12 @@ Action::ResetFloatingMeasureCursor::ResetFloatingMeasureCursor(FloatingMeasureCu
 
 
 
-Action::ResetFloatingMeasureCursor::~ResetFloatingMeasureCursor()
+ResetFloatingMeasureCursor::~ResetFloatingMeasureCursor()
 {}
 
 
 
-bool Action::ResetFloatingMeasureCursor::execute()
+bool ResetFloatingMeasureCursor::execute()
 {
    if (!floating_measure_cursor) throw std::runtime_error("Cannot reset nullptr floating_measure_cursor");
 
@@ -36,4 +39,5 @@ bool Action::ResetFloatingMeasureCursor::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 

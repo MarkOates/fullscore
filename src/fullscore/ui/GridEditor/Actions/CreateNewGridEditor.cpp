@@ -8,9 +8,12 @@
 #include <fullscore/AppController.hpp>
 
 
+namespace UI::GridEditor::Actions
+{
 
 
-Action::CreateNewScoreEditor::CreateNewScoreEditor(AppController *app_controller)
+
+CreateNewScoreEditor::CreateNewScoreEditor(AppController *app_controller)
    : ::Action::Base("create_new_grid_editor")
    , app_controller(app_controller)
 {}
@@ -18,13 +21,13 @@ Action::CreateNewScoreEditor::CreateNewScoreEditor(AppController *app_controller
 
 
 
-Action::CreateNewScoreEditor::~CreateNewScoreEditor()
+CreateNewScoreEditor::~CreateNewScoreEditor()
 {}
 
 
 
 
-bool Action::CreateNewScoreEditor::execute()
+bool CreateNewScoreEditor::execute()
 {
    if (!app_controller) return false;
 
@@ -34,5 +37,6 @@ bool Action::CreateNewScoreEditor::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

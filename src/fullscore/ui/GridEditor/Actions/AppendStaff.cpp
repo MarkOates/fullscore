@@ -10,22 +10,25 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::AppendStaff::AppendStaff(Grid *grid)
-   : ::Action::Base(Action::APPEND_STAFF_ACTION_IDENTIFIER)
+
+AppendStaff::AppendStaff(Grid *grid)
+   : ::Action::Base(APPEND_STAFF_ACTION_IDENTIFIER)
    , grid(grid)
 {}
 
 
 
 
-Action::AppendStaff::~AppendStaff()
+AppendStaff::~AppendStaff()
 {}
 
 
 
 
-bool Action::AppendStaff::execute()
+bool AppendStaff::execute()
 {
    if (!grid) return false;
 
@@ -35,5 +38,6 @@ bool Action::AppendStaff::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

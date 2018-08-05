@@ -8,8 +8,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::ToggleEditModeTarget::ToggleEditModeTarget(UIGridEditor *grid_editor)
+
+ToggleEditModeTarget::ToggleEditModeTarget(UIGridEditor *grid_editor)
    : ::Action::Base("toggle_edit_mode_target")
    , grid_editor(grid_editor)
 {}
@@ -17,13 +20,13 @@ Action::ToggleEditModeTarget::ToggleEditModeTarget(UIGridEditor *grid_editor)
 
 
 
-Action::ToggleEditModeTarget::~ToggleEditModeTarget()
+ToggleEditModeTarget::~ToggleEditModeTarget()
 {}
 
 
 
 
-bool Action::ToggleEditModeTarget::execute()
+bool ToggleEditModeTarget::execute()
 {
    if (!grid_editor) return false;
 
@@ -33,5 +36,6 @@ bool Action::ToggleEditModeTarget::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 

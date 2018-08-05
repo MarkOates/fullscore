@@ -9,7 +9,7 @@
 
 namespace UI::GridEditor::Actions
 {
-   class MoveFloatingMeasureCursorRight : public Base
+   class MoveFloatingMeasureCursorRight : public Action::Base
    {
    private:
       FloatingMeasureCursor *floating_measure_cursor;

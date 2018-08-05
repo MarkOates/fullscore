@@ -8,8 +8,11 @@
 
 
 
+namespace UI::GridEditor::Actions
+{
 
-Action::TogglePlayback::TogglePlayback(PlaybackControl *playback_control)
+
+TogglePlayback::TogglePlayback(PlaybackControl *playback_control)
    : ::Action::Base("toggle_playback")
    , playback_control(playback_control)
 {
@@ -18,14 +21,14 @@ Action::TogglePlayback::TogglePlayback(PlaybackControl *playback_control)
 
 
 
-Action::TogglePlayback::~TogglePlayback()
+TogglePlayback::~TogglePlayback()
 {
 }
 
 
 
 
-bool Action::TogglePlayback::execute()
+bool TogglePlayback::execute()
 {
    if (!playback_control) return false;
 
@@ -36,5 +39,6 @@ bool Action::TogglePlayback::execute()
 }
 
 
+} // namespace UI::GridEditor::Actions
 
 
