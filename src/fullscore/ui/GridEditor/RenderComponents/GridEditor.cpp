@@ -17,31 +17,31 @@ namespace UI::GridEditor::RenderComponents
 {
 
 
-UIGridEditorRenderComponent::UIGridEditorRenderComponent(::UI::GridEditor::Widget &ui_grid_editor)
-   : ui_grid_editor(ui_grid_editor)
+GridEditor::GridEditor(::UI::GridEditor::Widget &grid_editor)
+   : grid_editor(grid_editor)
 {
 }
 
 
-UIGridEditorRenderComponent::~UIGridEditorRenderComponent()
+GridEditor::~GridEditor()
 {
 }
 
 
-void UIGridEditorRenderComponent::render()
+void GridEditor::render()
 {
-   Grid &grid                        = ui_grid_editor.grid;
-   MusicEngraver &music_engraver     = ui_grid_editor.music_engraver;
-   float &FULL_MEASURE_WIDTH         = ui_grid_editor.FULL_MEASURE_WIDTH;
-   float &STAFF_HEIGHT               = ui_grid_editor.STAFF_HEIGHT;
-   Widget::state_t &state            = ui_grid_editor.state;
-   UISurfaceAreaBase *&surface_area  = ui_grid_editor.surface_area;
-   bool &showing_debug_data          = ui_grid_editor.showing_debug_data;
-   int &grid_cursor_y                = ui_grid_editor.grid_cursor_y;
-   int &note_cursor_x                = ui_grid_editor.note_cursor_x;
-   PlaybackControl &playback_control = ui_grid_editor.playback_control;
-   int focused_floating_measure_id   = ui_grid_editor.floating_measure_cursor.get_floating_measure_id();
-   bool is_measure_target            = (ui_grid_editor.edit_mode_target == Widget::NOTE_TARGET);
+   Grid &grid                        = grid_editor.grid;
+   MusicEngraver &music_engraver     = grid_editor.music_engraver;
+   float &FULL_MEASURE_WIDTH         = grid_editor.FULL_MEASURE_WIDTH;
+   float &STAFF_HEIGHT               = grid_editor.STAFF_HEIGHT;
+   Widget::state_t &state            = grid_editor.state;
+   UISurfaceAreaBase *&surface_area  = grid_editor.surface_area;
+   bool &showing_debug_data          = grid_editor.showing_debug_data;
+   int &grid_cursor_y                = grid_editor.grid_cursor_y;
+   int &note_cursor_x                = grid_editor.note_cursor_x;
+   PlaybackControl &playback_control = grid_editor.playback_control;
+   int focused_floating_measure_id   = grid_editor.floating_measure_cursor.get_floating_measure_id();
+   bool is_measure_target            = (grid_editor.edit_mode_target == Widget::NOTE_TARGET);
 
 
    // get_width_of_score
@@ -69,8 +69,8 @@ void UIGridEditorRenderComponent::render()
 
    if (state != Widget::STATE_ACTIVE) return;
 
-   float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
-   float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();
+   float CACHED_get_grid_cursor_real_x = grid_editor.get_grid_cursor_real_x();
+   float CACHED_get_grid_cursor_real_y = grid_editor.get_grid_cursor_real_y();
 
    // left bar (blinking)
    ALLEGRO_COLOR cursor_color = color::mix(color::black, color::fuchsia, pow(sin(Framework::time_now*6), 3)*0.5 + 0.5);

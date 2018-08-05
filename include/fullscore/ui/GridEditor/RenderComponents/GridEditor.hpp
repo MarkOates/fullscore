@@ -6,14 +6,14 @@
 
 namespace UI::GridEditor::RenderComponents
 {
-   class UIGridEditorRenderComponent
+   class GridEditor
    {
    private:
-      ::UI::GridEditor::Widget &ui_grid_editor;
+      ::UI::GridEditor::Widget &grid_editor;
 
    public:
-      UIGridEditorRenderComponent(::UI::GridEditor::Widget &ui_grid_editor);
-      ~UIGridEditorRenderComponent();
+      GridEditor(::UI::GridEditor::Widget &grid_editor);
+      ~GridEditor();
 
       void render();
    };
