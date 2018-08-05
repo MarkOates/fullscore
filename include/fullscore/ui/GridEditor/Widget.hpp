@@ -14,7 +14,7 @@ namespace UI::GridEditor::RenderComponents { class UIGridEditorRenderComponent; 
 
 namespace UI::GridEditor
 {
-   class UIGridEditor : public UIWidget
+   class Widget : public UIWidget
    {
    public:
       friend class ::UI::GridEditor::RenderComponents::UIGridEditorRenderComponent;
@@ -58,7 +58,7 @@ namespace UI::GridEditor
       float STAFF_HEIGHT;
       float FULL_MEASURE_WIDTH;
 
-      UIGridEditor(UIWidget *parent);
+      Widget(UIWidget *parent);
       void on_draw() override;
       void on_timer() override;
       Measure::Base *get_measure_at_cursor();

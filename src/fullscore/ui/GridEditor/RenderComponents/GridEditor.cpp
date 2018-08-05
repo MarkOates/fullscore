@@ -17,7 +17,7 @@ namespace UI::GridEditor::RenderComponents
 {
 
 
-UIGridEditorRenderComponent::UIGridEditorRenderComponent(::UI::GridEditor::UIGridEditor &ui_grid_editor)
+UIGridEditorRenderComponent::UIGridEditorRenderComponent(::UI::GridEditor::Widget &ui_grid_editor)
    : ui_grid_editor(ui_grid_editor)
 {
 }
@@ -34,14 +34,14 @@ void UIGridEditorRenderComponent::render()
    MusicEngraver &music_engraver     = ui_grid_editor.music_engraver;
    float &FULL_MEASURE_WIDTH         = ui_grid_editor.FULL_MEASURE_WIDTH;
    float &STAFF_HEIGHT               = ui_grid_editor.STAFF_HEIGHT;
-   UIGridEditor::state_t &state      = ui_grid_editor.state;
+   Widget::state_t &state            = ui_grid_editor.state;
    UISurfaceAreaBase *&surface_area  = ui_grid_editor.surface_area;
    bool &showing_debug_data          = ui_grid_editor.showing_debug_data;
    int &grid_cursor_y                = ui_grid_editor.grid_cursor_y;
    int &note_cursor_x                = ui_grid_editor.note_cursor_x;
    PlaybackControl &playback_control = ui_grid_editor.playback_control;
    int focused_floating_measure_id   = ui_grid_editor.floating_measure_cursor.get_floating_measure_id();
-   bool is_measure_target            = (ui_grid_editor.edit_mode_target == UIGridEditor::NOTE_TARGET);
+   bool is_measure_target            = (ui_grid_editor.edit_mode_target == Widget::NOTE_TARGET);
 
 
    // get_width_of_score
@@ -53,7 +53,7 @@ void UIGridEditorRenderComponent::render()
    UISurfaceAreaBoxPadded *sa = static_cast<UISurfaceAreaBoxPadded *>(surface_area);
    sa->get_padding(&pt, &pr, &pb, &pl);
 
-   if (state == UIGridEditor::STATE_ACTIVE)
+   if (state == Widget::STATE_ACTIVE)
    {
       // draw a background for the score
       float padding = 30;
@@ -67,7 +67,7 @@ void UIGridEditorRenderComponent::render()
    grid_render_component.set_showing_debug_data(showing_debug_data);
    grid_render_component.render();
 
-   if (state != UIGridEditor::STATE_ACTIVE) return;
+   if (state != Widget::STATE_ACTIVE) return;
 
    float CACHED_get_grid_cursor_real_x = ui_grid_editor.get_grid_cursor_real_x();
    float CACHED_get_grid_cursor_real_y = ui_grid_editor.get_grid_cursor_real_y();

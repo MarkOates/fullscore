@@ -17,9 +17,9 @@ namespace UI::GridEditor
 {
 
 
-UIGridEditor::UIGridEditor(UIWidget *parent)
+Widget::Widget(UIWidget *parent)
    // the widget is placed in the center of the screen with a padding of 10 pixels to the x and y edges
-   : UIWidget(parent, "UIGridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
+   : UIWidget(parent, "GridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , grid()
    , playback_control()
    , grid_cursor_x(0)
@@ -36,14 +36,14 @@ UIGridEditor::UIGridEditor(UIWidget *parent)
 {}
 
 
-void UIGridEditor::on_draw()
+void Widget::on_draw()
 {
    RenderComponents::UIGridEditorRenderComponent ui_grid_editor_render_component(*this);
    ui_grid_editor_render_component.render();
 }
 
 
-void UIGridEditor::on_timer()
+void Widget::on_timer()
 {
    playback_control.update(Framework::time_now);
 
@@ -55,7 +55,7 @@ void UIGridEditor::on_timer()
 }
 
 
-Measure::Base *UIGridEditor::get_measure_at_cursor()
+Measure::Base *Widget::get_measure_at_cursor()
 {
    int floating_measure_id = floating_measure_cursor.get_floating_measure_id();
    FloatingMeasure *floating_measure = FloatingMeasure::find(floating_measure_id);
@@ -64,7 +64,7 @@ Measure::Base *UIGridEditor::get_measure_at_cursor()
 }
 
 
-Note *UIGridEditor::get_note_at_cursor()
+Note *Widget::get_note_at_cursor()
 {
    Measure::Base *focused_measure = get_measure_at_cursor();
    if (!focused_measure) return NULL;
@@ -76,20 +76,20 @@ Note *UIGridEditor::get_note_at_cursor()
 }
 
 
-float UIGridEditor::get_grid_cursor_real_x()
+float Widget::get_grid_cursor_real_x()
 {
    return GridDimensionsHelper::get_length_to_measure(grid, grid_cursor_x) * FULL_MEASURE_WIDTH;
 }
 
 
 
-float UIGridEditor::get_grid_cursor_real_y()
+float Widget::get_grid_cursor_real_y()
 {
    return GridDimensionsHelper::get_height_to_staff(grid, grid_cursor_y) * STAFF_HEIGHT;
 }
 
 
-float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
+float Widget::get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    if (!m) return 0;
    float sum = 0;
@@ -99,7 +99,7 @@ float UIGridEditor::get_measure_width(Measure::Base *m)  // TODO: should probabl
 }
 
 
-int UIGridEditor::move_grid_cursor_x(int delta)
+int Widget::move_grid_cursor_x(int delta)
 {
    int num_barlines = grid.get_num_barlines();
    grid_cursor_x = limit<int>(0, num_barlines-1, grid_cursor_x + delta);
@@ -107,7 +107,7 @@ int UIGridEditor::move_grid_cursor_x(int delta)
 }
 
 
-int UIGridEditor::move_grid_cursor_y(int delta)
+int Widget::move_grid_cursor_y(int delta)
 {
    int num_staves = grid.get_num_staves();
    grid_cursor_y = limit<int>(0, num_staves-1, grid_cursor_y + delta);
@@ -115,7 +115,7 @@ int UIGridEditor::move_grid_cursor_y(int delta)
 }
 
 
-int UIGridEditor::move_note_cursor_x(int delta)
+int Widget::move_note_cursor_x(int delta)
 {
    Measure::Base *current_measure = get_measure_at_cursor();
    if (!current_measure)
@@ -130,26 +130,26 @@ int UIGridEditor::move_note_cursor_x(int delta)
    return note_cursor_x;
 }
 
-void UIGridEditor::toggle_edit_mode_target()
+void Widget::toggle_edit_mode_target()
 {
    if (edit_mode_target == NOTE_TARGET) edit_mode_target = MEASURE_TARGET;
    else if (edit_mode_target == MEASURE_TARGET) edit_mode_target = NOTE_TARGET;
 }
 
 
-bool UIGridEditor::is_measure_target_mode()
+bool Widget::is_measure_target_mode()
 {
    return edit_mode_target == MEASURE_TARGET;
 }
 
 
-bool UIGridEditor::is_note_target_mode()
+bool Widget::is_note_target_mode()
 {
    return edit_mode_target == NOTE_TARGET;
 }
 
 
-void UIGridEditor::set_state(state_t new_state)
+void Widget::set_state(state_t new_state)
 {
    if (new_state == state) return;
 
