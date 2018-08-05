@@ -4,7 +4,6 @@
 
 #include <allegro_flare/framework.h>
 #include <fullscore/factories/GridFactory.h>
-#include <fullscore/factories/PlotterListWidgetActionFactory.hpp>
 #include <fullscore/UI/GridEditor/ActionFactory.hpp>
 #include <fullscore/UI/PlotterList/ActionFactory.hpp>
 #include <fullscore/models/FloatingMeasure.h>
