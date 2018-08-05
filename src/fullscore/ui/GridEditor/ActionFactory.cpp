@@ -3,6 +3,7 @@
 #include <fullscore/UI/GridEditor/ActionFactory.hpp>
 
 #include <fullscore/UI/GridEditor/Actions.hpp>
+#include <fullscore/actions/QueueAction.h>
 
 #include <allegro_flare/framework.h>
 #include <fullscore/actions/transforms/AddDotToNote.h>
@@ -40,7 +41,6 @@
 #include <fullscore/UI/GridEditor/Actions/MoveFloatingMeasureCursorLeft.hpp>
 #include <fullscore/UI/GridEditor/Actions/PasteMeasureFromBuffer.hpp>
 #include <fullscore/UI/GridEditor/Actions/PlotPlotterList.hpp>
-#include <fullscore/UI/GridEditor/Actions/Queue.hpp>
 #include <fullscore/UI/GridEditor/Actions/ResetFloatingMeasureCursor.hpp>
 #include <fullscore/UI/GridEditor/Actions/ResetPlayback.hpp>
 #include <fullscore/UI/GridEditor/Actions/SaveGrid.hpp>
@@ -124,7 +124,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
    {
       if (current_grid_editor_widget->is_note_target_mode())
       {
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
             action_queue->add_action(new Action::Transform::TransposeUp(single_note));
          return action_queue;
@@ -132,7 +132,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot transpose_up on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
                action_queue->add_action(new Action::Transform::TransposeUp(&note));
@@ -143,7 +143,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
    {
       if (current_grid_editor_widget->is_note_target_mode())
       {
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
             action_queue->add_action(new Action::Transform::TransposeDown(single_note));
          return action_queue;
@@ -151,7 +151,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot transpose_down on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes)
             for (unsigned i=0; i<(Framework::key_shift ? 7 : 1); i++)
                action_queue->add_action(new Action::Transform::TransposeDown(&note));
@@ -164,7 +164,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot half_duration on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::HalfDuration(&note));
          return action_queue;
       }
@@ -175,7 +175,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot double_duration on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::DoubleDuration(&note));
          return action_queue;
       }
@@ -186,7 +186,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot toggle_rest on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::ToggleRest(&note));
          return action_queue;
       }
@@ -197,7 +197,7 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       else
       {
          if (!notes) { std::cout << "cannot invert_note on nullptr notes" << std::endl; return nullptr; }
-         Actions::Queue *action_queue = new Actions::Queue(action_name);
+         Action::Queue *action_queue = new Action::Queue(action_name);
          for (auto &note : *notes) action_queue->add_action(new Action::Transform::Invert(&note));
          return action_queue;
       }
