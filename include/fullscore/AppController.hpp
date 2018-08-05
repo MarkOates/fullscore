@@ -12,7 +12,8 @@
 //#include <fullscore/widgets/CommandBar.h>
 #include <fullscore/widgets/CommandBar.h>
 #include <fullscore/widgets/FollowCamera.h>
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 #include <fullscore/UI/PlotterList/Widget.hpp>
 //#include <fullscore/widgets/MeasureInspector.h>
 
@@ -25,7 +26,8 @@ public:
    SimpleNotificationScreen *simple_notification_screen;
    Action::Queue action_queue;
    UIFollowCamera follow_camera;
-   UIGridEditor *current_grid_editor;
+   //UIGridEditor *current_grid_editor;
+   UI::GridEditor::Widget *current_grid_editor_widget;
    std::vector<UIGridEditor *> grid_editors;
    UICommandBar *command_bar;
    //UIMeasureInspector *ui_measure_inspector;

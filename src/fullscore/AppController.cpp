@@ -31,7 +31,7 @@ static void init_app_based_on_setup_config(AppController *app)
 
 
    // init grid
-   app->set_current_grid_editor(app->create_new_grid_editor("full_score"));
+   app->set_current_grid_editor_widget(app->create_new_grid_editor("full_score"));
    
 
    // init plotter list
@@ -45,7 +45,7 @@ static void init_app_based_on_setup_config(AppController *app)
 
    auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
 
-   Grid &grid = app->current_grid_editor->grid;
+   Grid &grid = app->current_grid_editor_widget->grid;
 
    //app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
    //app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
@@ -68,7 +68,8 @@ AppController::AppController(Display *display, Config &config)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
-   , current_grid_editor(nullptr)
+   //, current_grid_editor(nullptr)
+   , current_grid_editor_widget(nullptr)
    , grid_editors()
    , command_bar(new UICommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
@@ -192,8 +193,8 @@ void AppController::key_char_func()
 {
    UIScreen::key_char_func();
 
-   auto mode          = current_grid_editor ? current_grid_editor->mode : UIGridEditor::mode_t::NONE;
-   auto target        = current_grid_editor ? current_grid_editor->edit_mode_target : UIGridEditor::edit_mode_target_t::NONE_TARGET;
+   auto mode          = current_grid_editor_widget ? current_grid_editor_widget->mode : UIGridEditor::mode_t::NONE;
+   auto target        = current_grid_editor_widget ? current_grid_editor_widget->edit_mode_target : UIGridEditor::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -203,7 +204,7 @@ void AppController::key_char_func()
 
    if (plotter_list_widget && plotter_list_widget->is_focused())
       identifiers = plotter_list_widget->get_keyboard_action_mapping(keycode, shift_pressed, ctrl_pressed, alt_pressed);
-   else if (current_grid_editor && current_grid_editor->is_focused())
+   else if (current_grid_editor_widget && current_grid_editor_widget->is_focused())
       identifiers = find_grid_editor_action_mapping(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
 
    for (auto &identifier : identifiers)
@@ -212,7 +213,7 @@ void AppController::key_char_func()
 
       if (plotter_list_widget && plotter_list_widget->is_focused())
          action = UI::PlotterList::ActionFactory::create_action(plotter_list_widget, identifier);
-      else if (current_grid_editor && current_grid_editor->is_focused())
+      else if (current_grid_editor_widget && current_grid_editor_widget->is_focused())
          action = ActionFactory::create_action(this, identifier);
 
       if (action)
@@ -265,17 +266,33 @@ UIGridEditor *AppController::create_new_grid_editor(std::string name)
 
 
 
-bool AppController::set_current_grid_editor(UIGridEditor *editor)
+//bool AppController::set_current_grid_editor(UIGridEditor *editor)
+//{
+   //if (std::find(grid_editors.begin(), grid_editors.end(), editor) == grid_editors.end()) return false;
+
+   //for (auto &e : grid_editors)
+      //e->set_state(e == editor ? UIGridEditor::STATE_ACTIVE : UIGridEditor::STATE_INACTIVE);
+
+   //current_grid_editor = editor;
+
+   //// move the camera to the new current_grid_editor
+   //follow_camera.target.position = -current_grid_editor->place.position + vec2d(200, 200);
+
+   //return true;
+//}
+
+
+bool AppController::set_current_grid_editor_widget(UIGridEditor *editor)
 {
    if (std::find(grid_editors.begin(), grid_editors.end(), editor) == grid_editors.end()) return false;
 
    for (auto &e : grid_editors)
       e->set_state(e == editor ? UIGridEditor::STATE_ACTIVE : UIGridEditor::STATE_INACTIVE);
 
-   current_grid_editor = editor;
+   current_grid_editor_widget = editor;
 
-   // move the camera to the new current_grid_editor
-   follow_camera.target.position = -current_grid_editor->place.position + vec2d(200, 200);
+   // move the camera to the new current_grid_editor_widget
+   follow_camera.target.position = -current_grid_editor_widget->place.position + vec2d(200, 200);
 
    return true;
 }
@@ -285,9 +302,9 @@ bool AppController::set_current_grid_editor(UIGridEditor *editor)
 
 UIGridEditor *AppController::get_next_grid_editor()
 {
-   if (!current_grid_editor || grid_editors.size() <= 1) return nullptr;
+   if (!current_grid_editor_widget || grid_editors.size() <= 1) return nullptr;
 
-   std::vector<UIGridEditor *>::iterator it = std::find(grid_editors.begin(), grid_editors.end(), current_grid_editor);
+   std::vector<UIGridEditor *>::iterator it = std::find(grid_editors.begin(), grid_editors.end(), current_grid_editor_widget);
 
    if (it == grid_editors.end()) return nullptr; // does not exist in list
    if (it == grid_editors.end()-1) return grid_editors.front(); // loop back to first element
