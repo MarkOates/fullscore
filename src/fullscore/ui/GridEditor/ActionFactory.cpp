@@ -25,10 +25,19 @@
 #include <fullscore/actions/transforms/TransposeUp.h>
 #include <fullscore/actions/transforms/TransposeDown.h>
 
+#include <fullscore/UI/GridEditor/Actions/SetTimeSignatureNumerator.hpp>
+
+#include <fullscore/UI/GridEditor/Actions/CreateNewGridEditor.hpp>
+#include <fullscore/UI/GridEditor/Actions/PasteMeasureFromBuffer.hpp>
+#include <fullscore/UI/GridEditor/Actions/PlotPlotterList.hpp>
+#include <fullscore/UI/GridEditor/Actions/ResetPlayback.hpp>
+#include <fullscore/UI/GridEditor/Actions/SetCurrentGridEditor.hpp>
+#include <fullscore/UI/GridEditor/Actions/StartMotion.hpp>
+#include <fullscore/UI/GridEditor/Actions/TogglePlayback.hpp>
+#include <fullscore/UI/GridEditor/Actions/YankGridMeasureToBuffer.hpp>
 
 #include <fullscore/UI/GridEditor/Actions/AppendStaff.hpp>
 #include <fullscore/UI/GridEditor/Actions/CreateFloatingMeasure.hpp>
-#include <fullscore/UI/GridEditor/Actions/CreateNewGridEditor.hpp>
 #include <fullscore/UI/GridEditor/Actions/DeleteFloatingMeasure.hpp>
 #include <fullscore/UI/GridEditor/Actions/DeleteStaff.hpp>
 #include <fullscore/UI/GridEditor/Actions/InsertStaff.hpp>
@@ -39,23 +48,15 @@
 #include <fullscore/UI/GridEditor/Actions/MoveCursorUp.hpp>
 #include <fullscore/UI/GridEditor/Actions/MoveFloatingMeasureCursorRight.hpp>
 #include <fullscore/UI/GridEditor/Actions/MoveFloatingMeasureCursorLeft.hpp>
-#include <fullscore/UI/GridEditor/Actions/PasteMeasureFromBuffer.hpp>
-#include <fullscore/UI/GridEditor/Actions/PlotPlotterList.hpp>
 #include <fullscore/UI/GridEditor/Actions/ResetFloatingMeasureCursor.hpp>
-#include <fullscore/UI/GridEditor/Actions/ResetPlayback.hpp>
 #include <fullscore/UI/GridEditor/Actions/SaveGrid.hpp>
 #include <fullscore/UI/GridEditor/Actions/SetCameraTarget.hpp>
 #include <fullscore/UI/GridEditor/Actions/SetCommandMode.hpp>
-#include <fullscore/UI/GridEditor/Actions/SetCurrentGridEditor.hpp>
 #include <fullscore/UI/GridEditor/Actions/SetMode.hpp>
 #include <fullscore/UI/GridEditor/Actions/SetNormalMode.hpp>
 #include <fullscore/UI/GridEditor/Actions/SetScoreZoom.hpp>
-#include <fullscore/UI/GridEditor/Actions/SetTimeSignatureNumerator.hpp>
-#include <fullscore/UI/GridEditor/Actions/StartMotion.hpp>
 #include <fullscore/UI/GridEditor/Actions/ToggleEditModeTarget.hpp>
-#include <fullscore/UI/GridEditor/Actions/TogglePlayback.hpp>
 #include <fullscore/UI/GridEditor/Actions/ToggleShowDebugData.hpp>
-#include <fullscore/UI/GridEditor/Actions/YankGridMeasureToBuffer.hpp>
 
 #include <fullscore/models/Measure.h>
 #include <fullscore/Action.h>
@@ -85,7 +86,14 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
       action = new Actions::CreateNewScoreEditor(app_controller);
    else if (action_name == "set_current_grid_editor")
       action = new Actions::SetCurrentUIGridEditor(app_controller, app_controller->get_next_grid_editor_widget());
-   else if (action_name == "move_camera_up")
+
+   if (action) return action;
+
+
+   //
+   // SCORE EDITING COMMANDS
+   //
+   if (action_name == "move_camera_up")
       action = new Actions::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x, app_controller->follow_camera.target.position.y + 100);
    else if (action_name == "move_camera_down")
       action = new Actions::SetCameraTarget(&app_controller->follow_camera, app_controller->follow_camera.target.position.x, app_controller->follow_camera.target.position.y - 100);
@@ -96,10 +104,6 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
 
    if (action) return action;
 
-
-   //
-   // SCORE EDITING COMMANDS
-   //
    UI::GridEditor::Widget *current_grid_editor_widget = app_controller->current_grid_editor_widget;
 
    if (!current_grid_editor_widget) return nullptr;
