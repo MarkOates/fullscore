@@ -4,9 +4,10 @@
 #include <fullscore/AppController.hpp>
 
 #include <allegro_flare/framework.h>
-#include <fullscore/factories/ActionFactory.h>
+//#include <fullscore/factories/ActionFactory.h>
 #include <fullscore/factories/GridFactory.h>
 #include <fullscore/factories/PlotterListWidgetActionFactory.hpp>
+#include <fullscore/UI/GridEditor/ActionFactory.hpp>
 #include <fullscore/UI/PlotterList/ActionFactory.hpp>
 #include <fullscore/models/FloatingMeasure.h>
 #include <fullscore/models/GridCoordinate.h>
@@ -215,7 +216,7 @@ void AppController::key_char_func()
       if (plotter_list_widget && plotter_list_widget->is_focused())
          action = UI::PlotterList::ActionFactory::create_action(plotter_list_widget, identifier);
       else if (current_grid_editor_widget && current_grid_editor_widget->is_focused())
-         action = ActionFactory::create_action(this, identifier);
+         action = UI::GridEditor::ActionFactory::create_action(this, current_grid_editor_widget, identifier);
 
       if (action)
       {
