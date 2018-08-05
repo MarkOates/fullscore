@@ -47,9 +47,16 @@ static void init_app_based_on_setup_config(AppController *app)
 
    Grid &grid = app->current_grid_editor->grid;
 
-   app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
-   app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
-   app->plotter_list->append(new Plotter::Destination({ 5, 6, 8 }));
+   //app->plotter_list->append(new Plotter::Basic(&grid, 3, notes_to_plot));
+   //app->plotter_list->append(new Plotter::Basic(&grid, 5, notes_retrograde));
+
+   app->plotter_list->append(
+      new Plotter::Destination(
+         { { 2, 4 }, { 5, 7 }, { 8, 4 }, }, {
+         5, 6, 8
+         }
+      )
+   );
 }
 
 

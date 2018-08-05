@@ -60,14 +60,14 @@ static void __move_cursor(int &cursor_pos, int delta, int list_size)
 void Widget::move_cursor_up()
 {
    if (!plotter_list || plotter_list->count() == 0) return;
-   __move_cursor(cursor_pos, -1, plotter_list->count());
+   __move_cursor(cursor_pos, 1, plotter_list->count());
 }
 
 
 void Widget::move_cursor_down()
 {
    if (!plotter_list || plotter_list->count() == 0) return;
-   __move_cursor(cursor_pos, 1, plotter_list->count());
+   __move_cursor(cursor_pos, -1, plotter_list->count());
 }
 
 

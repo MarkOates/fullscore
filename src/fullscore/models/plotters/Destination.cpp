@@ -3,6 +3,7 @@
 
 #include <fullscore/models/plotters/Destination.h>
 
+#include <fullscore/models/FloatingMeasure.h>
 #include <fullscore/models/measures/Plotted.h>
 #include <fullscore/models/Grid.h>
 #include <fullscore/models/Plotter.h>
@@ -74,7 +75,17 @@ std::vector<Note> Plotter::Destination::get_notes_for(GridCoordinate destination
 
 bool Plotter::Destination::plot()
 {
-   throw std::runtime_error("Plotter::Destination has been disabled");
+   //throw std::runtime_error("Plotter::Destination has been disabled");
+
+   // 1) destroy any measures that exist on this plotter
+   // 2) create measures from this plotter
+
+   Measure::Base *m = new Measure::Plotted(notes);
+
+   for (auto &destination : destinations)
+   {
+      new FloatingMeasure(destination, m->get_id());
+   }
 
    return true;
 }
