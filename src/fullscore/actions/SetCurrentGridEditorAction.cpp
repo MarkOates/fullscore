@@ -28,7 +28,9 @@ bool Action::SetCurrentUIGridEditor::execute()
 {
    if (!app_controller || !grid_editor) return false;
 
-   return app_controller->set_current_grid_editor(grid_editor);
+   throw std::runtime_error("Action::SetCurrentUIGridEditor no longer using 'grid_editor'");
+   //return app_controller->set_current_grid_editor(grid_editor);
+   return false;
 }
 
 

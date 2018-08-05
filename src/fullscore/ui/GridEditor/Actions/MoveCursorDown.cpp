@@ -4,7 +4,8 @@
 
 #include <fullscore/UI/GridEditor/Actions/MoveCursorDown.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 
 
 
@@ -12,7 +13,7 @@ namespace UI::GridEditor::Actions
 {
 
 
-MoveCursorDown::MoveCursorDown(UIGridEditor *grid_editor)
+MoveCursorDown::MoveCursorDown(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base("move_cursor_down")
    , grid_editor(grid_editor)
 {

@@ -6,17 +6,17 @@
 
 
 
-class UIGridEditor;
+namespace UI::GridEditor { class Widget; }
 
 namespace UI::GridEditor::Actions
 {
    class ToggleShowDebugData : public ::Action::Base
    {
    private:
-      UIGridEditor *grid_editor;
+      UI::GridEditor::Widget *grid_editor;
 
    public:
-      ToggleShowDebugData(UIGridEditor *grid_editor);
+      ToggleShowDebugData(UI::GridEditor::Widget *grid_editor);
       ~ToggleShowDebugData();
 
       bool execute() override;

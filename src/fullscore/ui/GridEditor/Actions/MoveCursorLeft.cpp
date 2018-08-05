@@ -4,7 +4,8 @@
 
 #include <fullscore/UI/GridEditor/Actions/MoveCursorLeft.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 
 
 
@@ -12,7 +13,7 @@ namespace UI::GridEditor::Actions
 {
 
 
-MoveCursorLeft::MoveCursorLeft(UIGridEditor *grid_editor)
+MoveCursorLeft::MoveCursorLeft(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base("move_cursor_left")
    , grid_editor(grid_editor)
 {

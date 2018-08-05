@@ -301,7 +301,7 @@ bool AppController::set_current_grid_editor_widget(UI::GridEditor::Widget *edito
 
 
 
-UI::GridEditor::Widget *AppController::get_next_grid_editor()
+UI::GridEditor::Widget *AppController::get_next_grid_editor_widget()
 {
    if (!current_grid_editor_widget || grid_editor_widgets.size() <= 1) return nullptr;
 

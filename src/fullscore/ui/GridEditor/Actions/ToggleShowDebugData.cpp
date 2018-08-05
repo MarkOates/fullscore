@@ -4,14 +4,15 @@
 
 #include <fullscore/UI/GridEditor/Actions/ToggleShowDebugData.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 
 
 namespace UI::GridEditor::Actions
 {
 
 
-ToggleShowDebugData::ToggleShowDebugData(UIGridEditor *grid_editor)
+ToggleShowDebugData::ToggleShowDebugData(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base("toggle_show_debug_data")
    , grid_editor(grid_editor)
 {}

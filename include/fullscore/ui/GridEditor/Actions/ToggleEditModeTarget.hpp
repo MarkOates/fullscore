@@ -6,17 +6,17 @@
 
 
 
-class UIGridEditor;
+namespace UI::GridEditor { class Widget; }
 
 namespace UI::GridEditor::Actions
 {
    class ToggleEditModeTarget : public ::Action::Base
    {
    private:
-      UIGridEditor *grid_editor;
+      UI::GridEditor::Widget *grid_editor;
 
    public:
-      ToggleEditModeTarget(UIGridEditor *grid_editor);
+      ToggleEditModeTarget(UI::GridEditor::Widget *grid_editor);
       ~ToggleEditModeTarget();
 
       bool execute() override;

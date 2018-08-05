@@ -4,7 +4,8 @@
 
 #include <fullscore/UI/GridEditor/Actions/ResetPlayback.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 
 
 
@@ -12,7 +13,7 @@ namespace UI::GridEditor::Actions
 {
 
 
-ResetPlayback::ResetPlayback(UIGridEditor *grid_editor)
+ResetPlayback::ResetPlayback(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base("reset_playback")
    , grid_editor(grid_editor)
 {

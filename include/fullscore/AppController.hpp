@@ -48,7 +48,7 @@ public:
    UI::GridEditor::Widget *create_new_grid_editor(std::string identifier);
    //bool set_current_grid_editor(UIGridEditor *editor);
    bool set_current_grid_editor_widget(UI::GridEditor::Widget *editor);
-   UI::GridEditor::Widget *get_next_grid_editor();
+   UI::GridEditor::Widget *get_next_grid_editor_widget();
 
    void set_keyboard_grid_editor_input_mappings();
 };

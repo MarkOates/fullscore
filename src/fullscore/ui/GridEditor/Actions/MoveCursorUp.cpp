@@ -4,7 +4,7 @@
 
 #include <fullscore/UI/GridEditor/Actions/MoveCursorUp.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 #include <fullscore/UI/GridEditor/Actions.hpp>
 
 
@@ -13,7 +13,7 @@ namespace UI::GridEditor::Actions
 {
 
 
-MoveCursorUp::MoveCursorUp(UIGridEditor *grid_editor)
+MoveCursorUp::MoveCursorUp(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base(MOVE_CURSOR_UP_ACTION_IDENTIFIER)
    , grid_editor(grid_editor)
 {

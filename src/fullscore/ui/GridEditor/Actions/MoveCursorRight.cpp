@@ -4,7 +4,8 @@
 
 #include <fullscore/UI/GridEditor/Actions/MoveCursorRight.hpp>
 
-#include <fullscore/widgets/GridEditor.h>
+//#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/UI/GridEditor/Widget.hpp>
 
 
 
@@ -12,7 +13,7 @@ namespace UI::GridEditor::Actions
 {
 
 
-MoveCursorRight::MoveCursorRight(UIGridEditor *grid_editor)
+MoveCursorRight::MoveCursorRight(UI::GridEditor::Widget *grid_editor)
    : ::Action::Base("move_cursor_right")
    , grid_editor(grid_editor)
 {

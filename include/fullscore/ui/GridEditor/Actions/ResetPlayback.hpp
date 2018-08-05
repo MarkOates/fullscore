@@ -6,17 +6,17 @@
 
 
 
-class UIGridEditor;
+namespace UI::GridEditor { class Widget; }
 
 namespace UI::GridEditor::Actions
 {
    class ResetPlayback : public Action::Base
    {
    private:
-      UIGridEditor *grid_editor;
+      UI::GridEditor::Widget *grid_editor;
 
    public:
-      ResetPlayback(UIGridEditor *grid_editor);
+      ResetPlayback(UI::GridEditor::Widget *grid_editor);
       ~ResetPlayback();
 
       bool execute() override;

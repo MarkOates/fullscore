@@ -7,7 +7,7 @@
 
 
 class AppController;
-class UIGridEditor;
+namespace UI::GridEditor { class Widget; }
 
 namespace UI::GridEditor::Actions
 {
@@ -15,10 +15,10 @@ namespace UI::GridEditor::Actions
    {
    private:
       AppController *app_controller;
-      UIGridEditor *grid_editor;
+      UI::GridEditor::Widget *grid_editor;
 
    public:
-      SetCurrentUIGridEditor(AppController *app_controller, UIGridEditor *grid_editor);
+      SetCurrentUIGridEditor(AppController *app_controller, UI::GridEditor::Widget *grid_editor);
       ~SetCurrentUIGridEditor();
 
       bool execute() override;

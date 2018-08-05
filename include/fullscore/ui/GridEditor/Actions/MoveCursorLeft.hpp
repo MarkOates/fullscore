@@ -6,17 +6,17 @@
 
 
 
-class UIGridEditor;
+namespace UI::GridEditor { class Widget; }
 
 namespace UI::GridEditor::Actions
 {
    class MoveCursorLeft : public Action::Base
    {
    private:
-      UIGridEditor *grid_editor;
+      UI::GridEditor::Widget *grid_editor;
 
    public:
-      MoveCursorLeft(UIGridEditor *grid_editor);
+      MoveCursorLeft(UI::GridEditor::Widget *grid_editor);
       ~MoveCursorLeft();
 
       bool execute() override;
