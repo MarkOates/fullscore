@@ -70,7 +70,8 @@ AppController::AppController(Display *display, Config &config)
    , follow_camera(this)
    //, current_grid_editor(nullptr)
    , current_grid_editor_widget(nullptr)
-   , grid_editors()
+   //, grid_editors()
+   , grid_editor_widgets()
    , command_bar(new UICommandBar(this))
    //, ui_measure_inspector(new UIMeasureInspector(this))
    , plotter_list(new PlotterList)
@@ -164,16 +165,16 @@ void AppController::set_keyboard_grid_editor_input_mappings()
 
 
 
-std::vector<std::string> AppController::find_grid_editor_action_mapping(UIGridEditor::mode_t mode, UIGridEditor::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
+std::vector<std::string> AppController::find_grid_editor_action_mapping(UI::GridEditor::Widget::mode_t mode, UI::GridEditor::Widget::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
 {
-   if (mode == UIGridEditor::NORMAL_MODE)
+   if (mode == UI::GridEditor::Widget::NORMAL_MODE)
    {
-      if (edit_mode_target == UIGridEditor::edit_mode_target_t::MEASURE_TARGET)
+      if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::MEASURE_TARGET)
       {
          std::vector<std::string> found_mapping = grid_editor_normal_mode_measure_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
       }
-      else if (edit_mode_target == UIGridEditor::edit_mode_target_t::NOTE_TARGET)
+      else if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::NOTE_TARGET)
       {
          std::vector<std::string> found_mapping = grid_editor_normal_mode_note_keyboard_mappings.get_mapping(al_keycode, shift, ctrl, alt);
          if (!found_mapping.empty()) return found_mapping;
@@ -193,8 +194,8 @@ void AppController::key_char_func()
 {
    UIScreen::key_char_func();
 
-   auto mode          = current_grid_editor_widget ? current_grid_editor_widget->mode : UIGridEditor::mode_t::NONE;
-   auto target        = current_grid_editor_widget ? current_grid_editor_widget->edit_mode_target : UIGridEditor::edit_mode_target_t::NONE_TARGET;
+   auto mode          = current_grid_editor_widget ? current_grid_editor_widget->mode : UI::GridEditor::Widget::mode_t::NONE;
+   auto target        = current_grid_editor_widget ? current_grid_editor_widget->edit_mode_target : UI::GridEditor::Widget::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -245,18 +246,18 @@ void AppController::key_char_func()
 
 
 
-UIGridEditor *AppController::create_new_grid_editor(std::string name)
+UI::GridEditor::Widget *AppController::create_new_grid_editor(std::string name)
 {
    static int new_x = 0;
    static int new_y = 0;
 
-   UIGridEditor *new_grid_editor = new UIGridEditor(&follow_camera);
+   UI::GridEditor::Widget *new_grid_editor = new UI::GridEditor::Widget(&follow_camera);
    new_grid_editor->grid = GridFactory::create(name);
 
    new_grid_editor->place.position = vec2d(new_x, new_y);
    new_grid_editor->place.align = vec2d(0.0, 0.0);
 
-   grid_editors.push_back(new_grid_editor);
+   grid_editor_widgets.push_back(new_grid_editor);
 
    new_y += 300;
 
@@ -282,12 +283,12 @@ UIGridEditor *AppController::create_new_grid_editor(std::string name)
 //}
 
 
-bool AppController::set_current_grid_editor_widget(UIGridEditor *editor)
+bool AppController::set_current_grid_editor_widget(UI::GridEditor::Widget *editor)
 {
-   if (std::find(grid_editors.begin(), grid_editors.end(), editor) == grid_editors.end()) return false;
+   if (std::find(grid_editor_widgets.begin(), grid_editor_widgets.end(), editor) == grid_editor_widgets.end()) return false;
 
-   for (auto &e : grid_editors)
-      e->set_state(e == editor ? UIGridEditor::STATE_ACTIVE : UIGridEditor::STATE_INACTIVE);
+   for (auto &e : grid_editor_widgets)
+      e->set_state(e == editor ? UI::GridEditor::Widget::STATE_ACTIVE : UI::GridEditor::Widget::STATE_INACTIVE);
 
    current_grid_editor_widget = editor;
 
@@ -300,14 +301,14 @@ bool AppController::set_current_grid_editor_widget(UIGridEditor *editor)
 
 
 
-UIGridEditor *AppController::get_next_grid_editor()
+UI::GridEditor::Widget *AppController::get_next_grid_editor()
 {
-   if (!current_grid_editor_widget || grid_editors.size() <= 1) return nullptr;
+   if (!current_grid_editor_widget || grid_editor_widgets.size() <= 1) return nullptr;
 
-   std::vector<UIGridEditor *>::iterator it = std::find(grid_editors.begin(), grid_editors.end(), current_grid_editor_widget);
+   std::vector<UI::GridEditor::Widget *>::iterator it = std::find(grid_editor_widgets.begin(), grid_editor_widgets.end(), current_grid_editor_widget);
 
-   if (it == grid_editors.end()) return nullptr; // does not exist in list
-   if (it == grid_editors.end()-1) return grid_editors.front(); // loop back to first element
+   if (it == grid_editor_widgets.end()) return nullptr; // does not exist in list
+   if (it == grid_editor_widgets.end()-1) return grid_editor_widgets.front(); // loop back to first element
    ++it;
    return *it;
 }
