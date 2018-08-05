@@ -17,18 +17,18 @@ namespace UI::GridEditor::RenderComponents
 {
 
 
-GridEditor::GridEditor(::UI::GridEditor::Widget &grid_editor)
-   : grid_editor(grid_editor)
+UIGridEditorRenderComponent::UIGridEditorRenderComponent(::UI::GridEditor::Widget &grid_editor)
+   :grid_editor(grid_editor)
 {
 }
 
 
-GridEditor::~GridEditor()
+UIGridEditorRenderComponent::~UIGridEditorRenderComponent()
 {
 }
 
 
-void GridEditor::render()
+void UIGridEditorRenderComponent::render()
 {
    Grid &grid                        = grid_editor.grid;
    MusicEngraver &music_engraver     = grid_editor.music_engraver;
@@ -69,8 +69,8 @@ void GridEditor::render()
 
    if (state != Widget::STATE_ACTIVE) return;
 
-   float CACHED_get_grid_cursor_real_x = grid_editor.get_grid_cursor_real_x();
-   float CACHED_get_grid_cursor_real_y = grid_editor.get_grid_cursor_real_y();
+   float CACHED_get_grid_cursor_real_x =grid_editor.get_grid_cursor_real_x();
+   float CACHED_get_grid_cursor_real_y =grid_editor.get_grid_cursor_real_y();
 
    // left bar (blinking)
    ALLEGRO_COLOR cursor_color = color::mix(color::black, color::fuchsia, pow(sin(Framework::time_now*6), 3)*0.5 + 0.5);
