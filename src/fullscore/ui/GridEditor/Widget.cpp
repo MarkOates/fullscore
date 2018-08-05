@@ -170,6 +170,30 @@ void Widget::set_state(state_t new_state)
 }
 
 
+std::vector<std::string> Widget::get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt)
+{
+   if (mode == NORMAL_MODE)
+   {
+      if (edit_mode_target == edit_mode_target_t::MEASURE_TARGET)
+      {
+
+         std::vector<std::string> found_mapping = measure_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+      else if (edit_mode_target == edit_mode_target_t::NOTE_TARGET)
+      {
+         std::vector<std::string> found_mapping = note_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
+         if (!found_mapping.empty()) return found_mapping;
+      }
+
+      std::vector<std::string> found_mapping = normal_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
+      if (!found_mapping.empty()) return found_mapping;
+   }
+
+   return {};
+}
+
+
 } // namespace UI::GridEditor
 
 

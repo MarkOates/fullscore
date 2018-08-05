@@ -1,10 +1,8 @@
 
 
-
 #include <fullscore/AppController.hpp>
 
 #include <allegro_flare/framework.h>
-//#include <fullscore/factories/ActionFactory.h>
 #include <fullscore/factories/GridFactory.h>
 #include <fullscore/factories/PlotterListWidgetActionFactory.hpp>
 #include <fullscore/UI/GridEditor/ActionFactory.hpp>
@@ -14,8 +12,6 @@
 #include <fullscore/models/Measure.h>
 #include <fullscore/models/Staff.h>
 #include <fullscore/Action.h>
-
-
 
 
 #include <fullscore/transforms/RetrogradeTransform.h>
@@ -61,144 +57,30 @@ static void init_app_based_on_setup_config(AppController *app)
 }
 
 
-
-
 AppController::AppController(Display *display, Config &config)
    : UIScreen(display)
    , config(config)
    , simple_notification_screen(new SimpleNotificationScreen(display, Framework::font("DroidSans.ttf 20")))
    , action_queue("master_queue")
    , follow_camera(this)
-   //, current_grid_editor(nullptr)
    , current_grid_editor_widget(nullptr)
-   //, grid_editors()
    , grid_editor_widgets()
    , command_bar(new UICommandBar(this))
-   //, ui_measure_inspector(new UIMeasureInspector(this))
    , plotter_list(new PlotterList)
    , plotter_list_widget(new UI::PlotterList::Widget(this, plotter_list, 300))
    , yank_measure_buffer()
-   , grid_editor_normal_mode_keyboard_mappings()
-   , grid_editor_normal_mode_note_keyboard_mappings()
-   , grid_editor_normal_mode_measure_keyboard_mappings()
 {
    UIScreen::draw_focused_outline = false;
-   //set_keyboard_grid_editor_input_mappings();
 
    init_app_based_on_setup_config(this);
    plotter_list_widget->bring_to_front();
 }
 
 
-
-void AppController::set_keyboard_grid_editor_input_mappings()
-{
-   //                                        keycode,               shift, ctrl,  alt,   identifier
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_G,         false, false, false, {"double_duration"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_R,         false, false, false, {"toggle_rest"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false, false, false, {"invert"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Z,         false, false, false, {"retrograde"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_H,         false, false, false, {Action::MOVE_CURSOR_LEFT_ACTION_IDENTIFIER
-                                                                                         ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_J,         false, false, false, {Action::MOVE_CURSOR_DOWN_ACTION_IDENTIFIER
-                                                                                         ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SEMICOLON, false, false, false, {Action::SET_COMMAND_MODE_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_MINUS,     false, false, false, {"camera_zoom_out"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    false, false, false, {"camera_zoom_in"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_UP,        false, false, false, {"move_camera_up"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_DOWN,      false, false, false, {"move_camera_down"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_RIGHT,     false, false, false, {"move_camera_right"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_LEFT,      false, false, false, {"move_camera_left"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_TAB,       false, false, false, {Action::TOGGLE_EDIT_MODE_TARGET_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F2,        false, false, false, {Action::TOGGLE_SHOW_DEBUG_DATA_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_SPACE,     false, false, false, {Action::TOGGLE_PLAYBACK_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_4,         false, false, false, {"set_time_signature_numerator_4"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_5,         false, false, false, {"set_time_signature_numerator_5"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Y,         false, false, false, {Action::YANK_GRID_MEASURE_TO_BUFFER_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         false, false, false, {Action::PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_O,         false, false, false, {"octatonic_1"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_2,         false, false, false, {"set_time_signature_numerator_2"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_K,         false, false, false, {Action::MOVE_CURSOR_UP_ACTION_IDENTIFIER
-                                                                                         ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_L,         false, false, false, {Action::MOVE_CURSOR_RIGHT_ACTION_IDENTIFIER
-                                                                                         ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_W,         false, false, false, {Action::MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_B,         true,  false, false, {Action::MOVE_FLOATING_MEASURE_CURSOR_LEFT_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false, false, false, {"half_duration"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         false, false, false, {"set_time_signature_numerator_3"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F,         false, false, false, {"transpose_up"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_D,         false, false, false, {"transpose_down"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_S,         false,  true, false, {"split_note"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_7,         true,  false, false, {"set_reference_by_id_measure"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_EQUALS,    true,  false, false, {"camera_zoom_default"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_M,         false, false, false, {Action::CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER
-                                                                                         ,Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_3,         true,  false, false, {"set_stack_measure"});
-
-
-
-   // measure mode commands
-   grid_editor_normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_F, false, true,  false, {"ascend"});
-   grid_editor_normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_D, false, true,  false, {"descend"});
-   grid_editor_normal_mode_measure_keyboard_mappings.set_mapping(ALLEGRO_KEY_X, false, false, false, {Action::DELETE_FLOATING_MEASURE_IDENTIFIER});
-
-
-
-   // note mode commands
-   grid_editor_normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_A,        false, false, false, {"insert_note_after"});
-   grid_editor_normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,        false, false, false, {"erase_note"});
-   grid_editor_normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_I,        false, false, false, {"insert_note"});
-   grid_editor_normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_COMMA,    false, false, false, {"remove_dot"});
-   grid_editor_normal_mode_note_keyboard_mappings.set_mapping(ALLEGRO_KEY_FULLSTOP, false, false, false, {"add_dot_to_note"});
-
-
-
-   // likely to be non-grid_editor actions
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_Q,         false, false, false, {Action::RESET_PLAYBACK_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F7,        false, false, false, {Action::SAVE_GRID_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_F8,        false, false, false, {Action::LOAD_GRID_ACTION_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_N,         false,  true, false, {"create_new_grid_editor"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_X,         false,  true, false, {"set_current_grid_editor"});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_C,         false, false, false, {Action::RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER});
-   grid_editor_normal_mode_keyboard_mappings.set_mapping(ALLEGRO_KEY_P,         true,  false, false, {Action::PLOT_PLOTTER_LIST_ACTION_IDENTIFIER});
-}
-
-
-
-
-std::vector<std::string> AppController::find_grid_editor_action_mapping(UI::GridEditor::Widget::mode_t mode, UI::GridEditor::Widget::edit_mode_target_t edit_mode_target, int al_keycode, bool shift, bool ctrl, bool alt)
-{
-
-   if (mode == UI::GridEditor::Widget::NORMAL_MODE)
-   {
-      if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::MEASURE_TARGET)
-      {
-
-         std::vector<std::string> found_mapping = current_grid_editor_widget->measure_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
-         if (!found_mapping.empty()) return found_mapping;
-      }
-      else if (edit_mode_target == UI::GridEditor::Widget::edit_mode_target_t::NOTE_TARGET)
-      {
-         std::vector<std::string> found_mapping = current_grid_editor_widget->note_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
-         if (!found_mapping.empty()) return found_mapping;
-      }
-
-      std::vector<std::string> found_mapping = current_grid_editor_widget->normal_mode_keyboard_commands.get_mapping(al_keycode, shift, ctrl, alt);
-      if (!found_mapping.empty()) return found_mapping;
-   }
-
-   return {};
-}
-
-
-
-
 void AppController::key_char_func()
 {
    UIScreen::key_char_func();
 
-   auto mode          = current_grid_editor_widget ? current_grid_editor_widget->mode : UI::GridEditor::Widget::mode_t::NONE;
-   auto target        = current_grid_editor_widget ? current_grid_editor_widget->edit_mode_target : UI::GridEditor::Widget::edit_mode_target_t::NONE_TARGET;
    auto keycode       = Framework::current_event->keyboard.keycode;
    auto shift_pressed = Framework::key_shift;
    auto alt_pressed   = Framework::key_alt;
@@ -209,7 +91,7 @@ void AppController::key_char_func()
    if (plotter_list_widget && plotter_list_widget->is_focused())
       identifiers = plotter_list_widget->get_keyboard_action_mapping(keycode, shift_pressed, ctrl_pressed, alt_pressed);
    else if (current_grid_editor_widget && current_grid_editor_widget->is_focused())
-      identifiers = find_grid_editor_action_mapping(mode, target, keycode, shift_pressed, ctrl_pressed, alt_pressed);
+      identifiers = current_grid_editor_widget->get_keyboard_action_mapping(keycode, shift_pressed, ctrl_pressed, alt_pressed);
 
    for (auto &identifier : identifiers)
    {
@@ -247,8 +129,6 @@ void AppController::key_char_func()
 }
 
 
-
-
 UI::GridEditor::Widget *AppController::create_new_grid_editor(std::string name)
 {
    static int new_x = 0;
@@ -268,24 +148,6 @@ UI::GridEditor::Widget *AppController::create_new_grid_editor(std::string name)
 }
 
 
-
-
-//bool AppController::set_current_grid_editor(UIGridEditor *editor)
-//{
-   //if (std::find(grid_editors.begin(), grid_editors.end(), editor) == grid_editors.end()) return false;
-
-   //for (auto &e : grid_editors)
-      //e->set_state(e == editor ? UIGridEditor::STATE_ACTIVE : UIGridEditor::STATE_INACTIVE);
-
-   //current_grid_editor = editor;
-
-   //// move the camera to the new current_grid_editor
-   //follow_camera.target.position = -current_grid_editor->place.position + vec2d(200, 200);
-
-   //return true;
-//}
-
-
 bool AppController::set_current_grid_editor_widget(UI::GridEditor::Widget *editor)
 {
    if (std::find(grid_editor_widgets.begin(), grid_editor_widgets.end(), editor) == grid_editor_widgets.end()) return false;
@@ -302,8 +164,6 @@ bool AppController::set_current_grid_editor_widget(UI::GridEditor::Widget *edito
 }
 
 
-
-
 UI::GridEditor::Widget *AppController::get_next_grid_editor_widget()
 {
    if (!current_grid_editor_widget || grid_editor_widgets.size() <= 1) return nullptr;
@@ -315,7 +175,5 @@ UI::GridEditor::Widget *AppController::get_next_grid_editor_widget()
    ++it;
    return *it;
 }
-
-
 
 

@@ -83,6 +83,7 @@ namespace UI::GridEditor
       bool is_note_target_mode();
 
       void set_state(state_t new_state);
+      std::vector<std::string> get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt);
    };
 }
 
