@@ -7,6 +7,7 @@
 #include <fullscore/models/Grid.h>
 #include <fullscore/models/PlaybackControl.h>
 #include <fullscore/services/MusicEngraver.h>
+#include <fullscore/UI/GridEditor/KeyboardCommands.hpp>
 
 
 namespace UI::GridEditor::RenderComponents { class UIGridEditorRenderComponent; }
@@ -42,6 +43,11 @@ namespace UI::GridEditor
 
       Grid grid;
       PlaybackControl playback_control;
+
+      NormalModeKeyboardCommands normal_mode_keyboard_commands;
+      NoteModeKeyboardCommands note_mode_keyboard_commands;
+      MeasureModeKeyboardCommands measure_mode_keyboard_commands;
+      void _set_keyboard_mappings();
 
       int grid_cursor_x;
       int grid_cursor_y;

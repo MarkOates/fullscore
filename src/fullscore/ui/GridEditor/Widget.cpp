@@ -22,6 +22,9 @@ Widget::Widget(UIWidget *parent)
    : UIWidget(parent, "GridEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
    , grid()
    , playback_control()
+   , normal_mode_keyboard_commands()
+   , note_mode_keyboard_commands()
+   , measure_mode_keyboard_commands()
    , grid_cursor_x(0)
    , grid_cursor_y(0)
    , note_cursor_x(0)
@@ -33,7 +36,17 @@ Widget::Widget(UIWidget *parent)
    , showing_debug_data(false)
    , STAFF_HEIGHT(80)
    , FULL_MEASURE_WIDTH(music_engraver.music_notation.get_quarter_note_spacing()*4)
-{}
+{
+   _set_keyboard_mappings();
+}
+
+
+void Widget::_set_keyboard_mappings()
+{
+   normal_mode_keyboard_commands.set_keyboard_commands();
+   note_mode_keyboard_commands.set_keyboard_commands();
+   measure_mode_keyboard_commands.set_keyboard_commands();
+}
 
 
 void Widget::on_draw()
