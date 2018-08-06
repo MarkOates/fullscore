@@ -14,7 +14,7 @@
 
 
 
-float __get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
+static float __get_measure_width(Measure::Base *m)  // TODO: should probably use a helper
 {
    if (!m) return 0;
    float sum = 0;
@@ -25,7 +25,7 @@ float __get_measure_width(Measure::Base *m)  // TODO: should probably use a help
 
 
 
-float __get_measure_length_to_note(Measure::Base *measure, int note_index)
+static float __get_measure_length_to_note(Measure::Base *measure, int note_index)
 {
    float sum = 0;
    std::vector<Note> notes;
@@ -41,7 +41,7 @@ float __get_measure_length_to_note(Measure::Base *measure, int note_index)
 
 
 
-std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::Base *context, Note *note)
+static std::tuple<std::string, std::string> __get_context_pitch_and_extension(Measure::Base *context, Note *note)
 {
    if (!context && !note) return std::tuple<std::string, std::string>("E", "E");
 
