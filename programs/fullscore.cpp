@@ -1,11 +1,9 @@
 
 
 
-
 #include <allegro_flare/allegro_flare.h>
 
-#include <fullscore/AppController.h>
-
+#include <fullscore/AppController.hpp>
 
 
 int main(int argc, char *argv[])

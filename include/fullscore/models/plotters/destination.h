@@ -6,6 +6,7 @@
 #include <fullscore/models/staves/Instrument.h>
 #include <fullscore/models/GridCoordinate.h>
 #include <fullscore/models/Note.h>
+#include <vector>
 
 
 
@@ -15,9 +16,10 @@ namespace Plotter
    {
    private:
       std::vector<GridCoordinate> destinations;
+      std::vector<Note> notes;
 
    public:
-      Destination();
+      Destination(std::vector<GridCoordinate> destinations={}, std::vector<Note> notes={});
       virtual ~Destination();
 
       bool add_destination(GridCoordinate destination);

@@ -23,6 +23,7 @@ namespace Action
    std::string const MOVE_FLOATING_MEASURE_CURSOR_RIGHT_IDENTIFIER = "move_floating_measure_cursor_right";
    std::string const PASTE_MEASURE_FROM_BUFFER_ACTION_IDENTIFIER = "paste_measure_from_buffer";
    std::string const PASTE_MEASURE_FROM_BUFFER_TO_GRID_COORDINATES_ACTION_IDENTIFIER = "paste_measure_from_buffer_to_grid_coordinates";
+   std::string const PLOT_PLOTTER_LIST_ACTION_IDENTIFIER = "plot_plotter_list";
    std::string const QUEUE_ACTION_IDENTIFIER = "queue";
    std::string const REMOVE_DOT_ACTION_IDENTIFIER = "remove_dot";
    std::string const RESET_FLOATING_MEASURE_CURSOR_IDENTIFIER = "reset_floating_measure_cursor";

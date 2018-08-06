@@ -1,0 +1,167 @@
+{
+  "class": "ListItem",
+  "format": "verbose",
+  "parent_classes": [],
+  "namespaces": [ "fullscore", "UI", "PlotterList", "RenderComponents" ],
+  "properties" : [
+    {
+      "type": "std::string",
+      "name": "STATE_NORMAL",
+      "init_with": "\"normal\"",
+      "constructor_arg" : false,
+      "static": true,
+      "getter": false,
+      "setter": false
+    },
+    {
+      "type": "std::string",
+      "name": "STATE_FOCUSED",
+      "init_with": "\"focused\"",
+      "constructor_arg" : false,
+      "static": true,
+      "getter": false,
+      "setter": false
+    },
+    {
+      "type": "std::string",
+      "name": "STATE_SELECTED",
+      "init_with": "\"selected\"",
+      "constructor_arg" : false,
+      "static": true,
+      "getter": false,
+      "setter": false
+    },
+    {
+      "type": "Plotter::Base*",
+      "name": "plotter",
+      "init_with": "nullptr",
+      "constructor_arg" : true,
+      "static": false,
+      "getter": true,
+      "setter": false
+    },
+    {
+      "type": "std::string",
+      "name": "state",
+      "init_with": "STATE_NORMAL",
+      "constructor_arg" :false,
+      "static": false,
+      "getter": true,
+      "setter": false
+    },
+    {
+      "type": "ALLEGRO_FONT*",
+      "name": "font",
+      "init_with": "nullptr",
+      "constructor_arg" : true,
+      "static": false,
+      "getter": true,
+      "setter": true
+    },
+    {
+      "type": "float",
+      "name": "width",
+      "init_with": "300",
+      "constructor_arg" : true,
+      "static": false,
+      "getter": true,
+      "setter": true
+    },
+    {
+      "type": "float",
+      "name": "height",
+      "init_with": "60",
+      "constructor_arg" : true,
+      "static": false,
+      "getter": true,
+      "setter": true
+    }
+  ],
+  "functions" : [
+    {
+      "name" : "render",
+      "type" : "void",
+      "parameters" : [],
+      "body" : "if (!font) throw std::runtime_error(\"missing font in PlotterListItemRenderComponent\");\n\nfloat outline_thickness = 2.0;\nal_draw_text(font, al_color_name(\"black\"), 20, 15, ALLEGRO_ALIGN_LEFT, plotter->get_type().c_str());\nal_draw_filled_rectangle(0, 0, 10, height, al_color_name(state == STATE_SELECTED ? \"gray\" : \"darkgray\"));\nal_draw_rectangle(outline_thickness/2, outline_thickness/2, width-outline_thickness/2, height-outline_thickness/2, al_color_name(state == STATE_FOCUSED ? \"white\" : \"gray\"), outline_thickness);"
+    },
+    {
+      "name" : "set_state_normal",
+      "type" : "void",
+      "parameters" : [],
+      "body" : "state = STATE_NORMAL;"
+    },
+    {
+      "name" : "set_state_focused",
+      "type" : "void",
+      "parameters" : [],
+      "body" : "state = STATE_FOCUSED;"
+    },
+    {
+      "name" : "set_state_selected",
+      "type" : "void",
+      "parameters" : [],
+      "body" : "state = STATE_SELECTED;"
+    }
+  ],
+  "function_body_symbol_dependencies": [
+    "al_draw_filled_rectangle",
+    "al_draw_rectangle",
+    "al_color_name"
+  ],
+  "dependencies" : [
+    {
+      "symbol" : "al_draw_filled_rectangle",
+      "headers" : [ "allegro5/allegro_primitives.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "al_draw_rectangle",
+      "headers" : [ "allegro5/allegro_primitives.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "ALLEGRO_COLOR",
+      "headers" : [ "allegro5/allegro_color.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "ALLEGRO_FONT*",
+      "headers" : [ "allegro5/allegro_font.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "al_color_name",
+      "headers" : [ "allegro5/allegro_color.h" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "void",
+      "headers" : [ ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "float",
+      "headers" : [ ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "std::string",
+      "headers" : [ "string" ],
+      "include_directories" : [ ],
+      "linked_libraries" : [ ]
+    },
+    {
+      "symbol" : "Plotter::Base*",
+      "headers" : [ "fullscore/models/plotters/Base.h" ],
+      "include_directories" : [ "fullscore" ],
+      "linked_libraries" : [ ]
+    }
+  ]
+}
