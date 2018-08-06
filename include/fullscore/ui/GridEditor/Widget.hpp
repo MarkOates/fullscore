@@ -45,42 +45,42 @@ namespace UI::GridEditor
       PlaybackControl playback_control;
 
       NormalModeKeyboardCommands normal_mode_keyboard_commands;
-      NoteModeKeyboardCommands note_mode_keyboard_commands;
-      MeasureModeKeyboardCommands measure_mode_keyboard_commands;
+      NoteModeKeyboardCommands note_mode_keyboard_commands; // XXXXX
+      MeasureModeKeyboardCommands measure_mode_keyboard_commands; // XXXXX
       void _set_keyboard_mappings();
 
       int grid_cursor_x;
       int grid_cursor_y;
-      int note_cursor_x;
+      int note_cursor_x; // XXXXX
       FloatingMeasureCursor floating_measure_cursor;
-      edit_mode_target_t edit_mode_target;
-      mode_t mode;
+      edit_mode_target_t edit_mode_target; // XXXXX
+      mode_t mode; // XXXXX
       state_t state;
 
-      MusicEngraver music_engraver;
+      MusicEngraver music_engraver; // XXXXX
 
       bool showing_debug_data;
 
-      float STAFF_HEIGHT;
-      float FULL_MEASURE_WIDTH;
+      float STAFF_HEIGHT; // XXXXX
+      float FULL_MEASURE_WIDTH; // XXXXX
 
       Widget(UIWidget *parent);
       void on_draw() override;
       void on_timer() override;
       Measure::Base *get_measure_at_cursor();
-      Note *get_note_at_cursor();
+      Note *get_note_at_cursor(); // XXXXX
 
       int move_grid_cursor_x(int delta);
       int move_grid_cursor_y(int delta);
-      int move_note_cursor_x(int delta);
+      int move_note_cursor_x(int delta); // XXXXX
 
       float get_grid_cursor_real_x();
       float get_grid_cursor_real_y();
       float get_measure_width(Measure::Base *m);
 
-      void toggle_edit_mode_target();
-      bool is_measure_target_mode();
-      bool is_note_target_mode();
+      void toggle_edit_mode_target(); // XXXXX
+      bool is_measure_target_mode(); // XXXXX
+      bool is_note_target_mode(); // XXXXX
 
       void set_state(state_t new_state);
       std::vector<std::string> get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt);
