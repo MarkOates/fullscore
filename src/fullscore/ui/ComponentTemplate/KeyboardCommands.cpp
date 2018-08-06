@@ -21,6 +21,7 @@ KeyboardCommands::~KeyboardCommands()
 
 void KeyboardCommands::set_keyboard_commands()
 {
+   set_mapping(ALLEGRO_KEY_H, false, false, false, {Actions::SAY_HELLO_ACTION_IDENTIFIER});
 }
 
 
