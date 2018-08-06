@@ -22,6 +22,8 @@ static void init_app_based_on_setup_config(AppController *app)
    if (!app) throw std::runtime_error("nullptr app!");
 
 
+   app->plotter_list_widget->place.position = vec2d(1800, 200);
+
    // usually:
    // std::string init_template_identifier = config.get_or_default_str("FULLSCORE_SETTINGS", "init_template", "string_quartet");
 
