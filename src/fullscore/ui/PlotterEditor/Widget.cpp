@@ -3,6 +3,8 @@
 #include <fullscore/UI/PlotterEditor/Widget.hpp>
 
 #include <fullscore/UI/PlotterEditor/Actions.hpp>
+#include <fullscore/UI/PlotterEditor/RenderComponents/Widget.hpp>
+#include <fullscore/models/plotters/base.h>
 #include <allegro_flare/allegro_flare.h>
 
 
@@ -10,22 +12,27 @@ namespace UI::PlotterEditor
 {
 
 
-Widget::Widget(UIWidget *parent)
+Widget::Widget(UIWidget *parent, Plotter::Base *plotter)
    : UIWidget(parent, "PlotterEditor", new UISurfaceAreaBoxPadded(0, 0, 300, 200, 30, 30, 30, 30))
+   , plotter(plotter)
 {
-   _set_keyboard_mappings();
 }
 
 
-void Widget::_set_keyboard_mappings()
+Widget::~Widget()
 {
-   keyboard_commands.set_mapping(ALLEGRO_KEY_H, false, false, false, {Actions::SAY_HELLO_ACTION_IDENTIFIER});
 }
 
 
 std::vector<std::string> Widget::get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt)
 {
-   return {};
+   return keyboard_command_mapper.get_mapping(al_keycode, shift, ctrl, alt);
+}
+
+
+void Widget::on_draw()
+{
+   RenderComponents::Widget(this).render();
 }
 
 

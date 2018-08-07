@@ -17,6 +17,11 @@ Widget::Widget(UI::PlotterEditor::Widget *widget)
 {}
 
 
+Widget::~Widget()
+{
+}
+
+
 void Widget::render()
 {
    if (!widget) throw std::runtime_error("Cannot render PlotterEditor::RenderComponent::Widget with nullptr widget");
