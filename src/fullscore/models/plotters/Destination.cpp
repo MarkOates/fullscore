@@ -25,6 +25,13 @@ Plotter::Destination::~Destination()
 
 
 
+void Plotter::Destination::set_destinations(std::vector<GridCoordinate> destinations)
+{
+   this->destinations = destinations;
+}
+
+
+
 bool Plotter::Destination::add_destination(GridCoordinate destination)
 {
    if (has_destination(destination)) return false;
