@@ -25,6 +25,13 @@ Plotter::Destination::~Destination()
 
 
 
+void Plotter::Destination::set_notes(std::vector<Note> notes)
+{
+   this->notes = notes;
+}
+
+
+
 void Plotter::Destination::set_destinations(std::vector<GridCoordinate> destinations)
 {
    this->destinations = destinations;

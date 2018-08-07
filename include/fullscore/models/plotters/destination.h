@@ -22,6 +22,7 @@ namespace Plotter
       Destination(std::vector<GridCoordinate> destinations={}, std::vector<Note> notes={});
       virtual ~Destination();
 
+      void set_notes(std::vector<Note> notes={});
       void set_destinations(std::vector<GridCoordinate> destinations={});
 
       bool add_destination(GridCoordinate destination);
