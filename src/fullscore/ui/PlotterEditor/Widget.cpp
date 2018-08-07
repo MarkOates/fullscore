@@ -24,6 +24,12 @@ Widget::~Widget()
 }
 
 
+Plotter::Base *Widget::get_plotter()
+{
+   return plotter;
+}
+
+
 std::vector<std::string> Widget::get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt)
 {
    return keyboard_command_mapper.get_mapping(al_keycode, shift, ctrl, alt);

@@ -22,6 +22,7 @@ namespace UI::PlotterEditor
       Widget(UIWidget *parent, Plotter::Base *plotter);
       ~Widget();
 
+      Plotter::Base *get_plotter();
       std::vector<std::string> get_keyboard_action_mapping(int al_keycode, bool shift, bool ctrl, bool alt);
 
       virtual void on_draw() override;
