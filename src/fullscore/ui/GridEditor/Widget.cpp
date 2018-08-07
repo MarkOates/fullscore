@@ -5,6 +5,7 @@
 #include <allegro_flare/allegro_flare.h>
 
 #include <fullscore/components/TimeSignatureRenderComponent.h>
+#include <fullscore/components/MeasureRenderComponent.h>
 #include <fullscore/UI/GridEditor/RenderComponents/GridEditor.hpp>
 #include <fullscore/components/GridRenderComponent.h>
 #include <fullscore/models/FloatingMeasure.h>
