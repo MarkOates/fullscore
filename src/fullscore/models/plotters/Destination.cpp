@@ -80,6 +80,13 @@ std::vector<GridCoordinate> Plotter::Destination::get_destinations()
 
 
 
+std::vector<Note> Plotter::Destination::get_notes()
+{
+   return notes;
+}
+
+
+
 std::vector<Note> Plotter::Destination::get_notes_for(GridCoordinate destination)
 {
    return notes;

@@ -32,6 +32,7 @@ namespace Plotter
 
       std::vector<GridCoordinate> get_destinations();
 
+      std::vector<Note> get_notes();
       std::vector<Note> get_notes_for(GridCoordinate destination);
 
       bool plot() override;

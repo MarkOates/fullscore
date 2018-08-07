@@ -19,7 +19,9 @@ Action::Base *ActionFactory::create_action(Widget *widget, std::string action_na
    else if (action_name == UI::PlotterList::Actions::MOVE_CURSOR_DOWN_ACTION_IDENTIFIER)
       return new UI::PlotterList::Actions::MoveCursorDown(widget);
    else if (action_name == UI::PlotterList::Actions::SELECT_PLOTTER_ACTION_IDENTIFIER)
-      throw std::runtime_error("SELECT_PLOTTER_ACTION_IDENTIFIER not implemented");
+      return new UI::PlotterList::Actions::SelectPlotter(widget);
+
+   throw std::runtime_error("Unrecognized action name in PlotterList::ActionFactory");
 }
 
 

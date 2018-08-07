@@ -14,11 +14,9 @@ namespace UI::PlotterEditor
    {
    private:
       Plotter::Base *plotter;
+      KeyboardCommandMapper keyboard_command_mapper;
 
    public:
-      KeyboardCommandMapper keyboard_command_mapper;
-      void _set_keyboard_mappings();
-
       Widget(UIWidget *parent, Plotter::Base *plotter);
       ~Widget();
 

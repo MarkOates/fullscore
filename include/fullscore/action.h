@@ -4,6 +4,8 @@
 
 namespace Action
 {
+   std::string const CREATE_NEW_PLOTTER_EDITOR_ACTION_IDENTIFIER = "create_new_plotter_editor";
+
    std::string const APPEND_COLUMN_TO_GRID_ACTION_IDENTIFIER = "append_column_to_grid";
    std::string const APPEND_STAFF_ACTION_IDENTIFIER = "append_staff";
    std::string const CREATE_FLOATING_MEASURE_ACTION_IDENTIFIER = "create_floating_measure";

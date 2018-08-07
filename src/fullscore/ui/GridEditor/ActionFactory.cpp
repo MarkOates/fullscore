@@ -82,6 +82,8 @@ Action::Base *ActionFactory::create_action(AppController *app_controller, Widget
 
    Action::Base *action = nullptr;
 
+   //if (action_name == "create_new_plotter_editor")
+      //action = new Actions::CreateNewPlotterEditor(app_controller);
    if (action_name == "create_new_grid_editor")
       action = new Actions::CreateNewScoreEditor(app_controller);
    else if (action_name == "set_current_grid_editor")
