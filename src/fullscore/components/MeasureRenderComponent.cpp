@@ -78,7 +78,6 @@ MeasureRenderComponent::MeasureRenderComponent(Measure::Base *context, Measure::
 
 void MeasureRenderComponent::render()
 {
-   ALLEGRO_COLOR measure_block_color = color::color(color::white, 0.2);
    ALLEGRO_COLOR notation_color = color::null_color;
    ALLEGRO_COLOR staff_line_color = color::null_color;
 
@@ -89,23 +88,22 @@ void MeasureRenderComponent::render()
 
    if (measure->is_type(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID))
    {
-      measure_block_color = color::color(color::orange, 0.1);
+      // left blank for now
    }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STACK))
    {
-      measure_block_color = color::color(color::red, 0.1);
+      // left blank for now
    }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_STATIC))
    {
-      measure_block_color = color::color(color::dodgerblue, 0.1);
+      // left blank for now
    }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_BASIC))
    {
-      measure_block_color = color::color(color::white, 0.075);
+      // left blank for now
    }
    else if (measure->is_type(Measure::TYPE_IDENTIFIER_PLOTTED))
    {
-      measure_block_color = color::color(color::aliceblue, 0.5);
       notation_color = color::blue;
       staff_line_color = color::blue;
    }
