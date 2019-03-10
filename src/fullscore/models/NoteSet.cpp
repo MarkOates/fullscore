@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/NoteSet.hpp>
+#include <fullscore/models/NoteSet.h>
 
 
 
