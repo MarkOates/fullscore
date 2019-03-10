@@ -20,7 +20,8 @@ copy.  In some past cases, a measure may have been referenced by its coordinates
 of notes, these
 - Static - A static measure is a type of "constant" measure.  There are a few
   preset static measures, like certain types of scales, for example.  They're usually used as source material for
-  building and crafting other material.
+  building and crafting other material.  The defining characteristic of a Static
+  measure is that it can't be modified.
 
 ## Plotters
 
