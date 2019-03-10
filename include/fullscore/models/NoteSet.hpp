@@ -15,8 +15,8 @@ public:
 
    NoteSet(std::vector<Note> notes);
 
-   std::vector<Note> NoteSet::get_notes();
-   std::vector<Note> &NoteSet::get_notes_ref();
+   std::vector<Note> get_notes();
+   std::vector<Note> &get_notes_ref();
 
    bool operator==(const NoteSet &other) const;
 };
