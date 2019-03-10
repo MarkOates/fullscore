@@ -38,11 +38,9 @@ OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
 TEST_SOURCES := $(shell find tests -name '*.cpp')
 TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
-PROGRAM_EXECUTABLE_NAMES := $(shell find src -name 'bin/*')
 
 
-
-bin/%: programs/%.cpp $(OBJECTS)
+bin/$(PROJECT_NAME_SNAKE_CASE): programs/$(PROJECT_NAME_SNAKE_CASE).cpp $(OBJECTS)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
 	@g++ -std=c++17 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
