@@ -2,6 +2,8 @@
 LIBS_ROOT=/Users/markoates/Repos
 ALLEGRO_INCLUDE_DIR=$(LIBS_ROOT)/allegro5/build/include
 ALLEGRO_LIB_DIR=$(LIBS_ROOT)/allegro5/build/lib
+ALLEGRO_FLARE_DIR=$(LIBS_ROOT)/allegro_flare
+ALLEGRO_FLARE_INCLUDE_DIR=$(ALLEGRO_FLARE_DIR)/include
 GOOGLE_TEST_DIR=$(LIBS_ROOT)/googletest
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
@@ -14,6 +16,7 @@ PROJECT_BINARY_NAME=TestProject
 
 
 GOOGLE_TEST_LIBS=gtest
+ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
 ALLEGRO_LIBS=allegro_color allegro_font allegro_ttf allegro_dialog allegro_audio allegro_acodec allegro_primitives allegro_image allegro
 ALLEGRO_LIBS_MAIN=$(ALLEGRO_LIBS) allegro_main
 
@@ -81,7 +84,7 @@ run_tests: tests
 obj/%.o: src/%.cpp
 	@mkdir -p $(@D)
 	@printf "compiling object for \e[1m\e[34m$<\033[0m...\n"
-	@g++ -c -std=gnu++11 -Wall -Wuninitialized -Weffc++ $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR)
+	@g++ -c -std=gnu++11 -Wall -Wuninitialized -Weffc++ $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGRO_FLARE_INCLUDE_DIR)
 	@echo "done. object at \033[1m\033[32m$@\033[0m"
 
 
