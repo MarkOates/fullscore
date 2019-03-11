@@ -16,7 +16,7 @@ private:
    int rest;
 
 public:
-   Note(int _scale_degree=0, Duration duration=Duration());
+   Note(int _scale_degree=0, Duration duration=Duration(), bool rest=false);
    ~Note();
 
    bool set_pitch(Pitch pitch);
