@@ -4,6 +4,7 @@ ALLEGRO_INCLUDE_DIR=$(LIBS_ROOT)/allegro5/build/include
 ALLEGRO_LIB_DIR=$(LIBS_ROOT)/allegro5/build/lib
 ALLEGRO_FLARE_DIR=$(LIBS_ROOT)/allegro_flare
 ALLEGRO_FLARE_INCLUDE_DIR=$(ALLEGRO_FLARE_DIR)/include
+ALLEGRO_FLARE_LIB_DIR=$(ALLEGRO_FLARE_DIR)/lib
 GOOGLE_TEST_DIR=$(LIBS_ROOT)/googletest
 GOOGLE_TEST_LIB_DIR=$(GOOGLE_TEST_DIR)/build/googlemock/gtest
 GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
@@ -37,6 +38,7 @@ TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
 ALLEGRO_LIBS_LINK_ARGS := $(ALLEGRO_LIBS:%=-l%)
 ALLEGRO_LIBS_LINK_MAIN_ARGS := $(ALLEGRO_LIBS_MAIN:%=-l%)
+ALLEGRO_FLARE_LINK_ARGS := $(ALLEGRO_FLARE_LIB:%=-l%)
 
 
 
@@ -51,7 +53,7 @@ examples: $(EXAMPLES)
 bin/programs/%: programs/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
-	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS)
+	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
 
