@@ -31,11 +31,12 @@ public:
       ALLEGRO_BITMAP *bitmap = al_create_bitmap(800, 600);
 
       al_set_target_bitmap(bitmap);
-      al_clear_to_color(color::aliceblue);
-      al_draw_line(0, 0, 500, 500, color::red, 4.0);
+      al_clear_to_color(color::white);
 
       MusicEngraver engraver;
       Measure::Basic measure(note_set.get_notes_ref());
+
+      engraver.draw(&measure, 100, 100, 140);
 
       std::cout << "Saving file \"" << output_filename << "\"...";
       al_save_bitmap(output_filename.c_str(), bitmap);
@@ -47,7 +48,7 @@ public:
 
 int main(int argv, char **argc)
 {
-   NoteSet note_set({ { 0 }, { 1 } });
+   NoteSet note_set({ { -2 }, { 0 }, { 1, Duration::QUARTER, true }, { 3, Duration::HALF }, { -3, Duration::EIGHTH }, { -2, Duration::EIGHTH } });
    NoteSet result_notes_set{{}};
 
    result_notes_set.get_notes_ref() = Transform::AddDot().transform(note_set.get_notes());
