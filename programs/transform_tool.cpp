@@ -6,6 +6,7 @@
 #include <fullscore/models/measures/basic.h>
 #include <fullscore/converters/stream_operators/NoteStreamOperators.h>
 #include <fullscore/models/NoteSet.h>
+#include <fullscore/services/MusicEngraver.h>
 #include <fullscore/transforms/AddDotTransform.h>
 
 
@@ -32,6 +33,9 @@ public:
       al_set_target_bitmap(bitmap);
       al_clear_to_color(color::aliceblue);
       al_draw_line(0, 0, 500, 500, color::red, 4.0);
+
+      MusicEngraver engraver;
+      Measure::Basic measure(note_set.get_notes_ref());
 
       std::cout << "Saving file \"" << output_filename << "\"...";
       al_save_bitmap(output_filename.c_str(), bitmap);
