@@ -35,13 +35,20 @@ GOOGLE_TEST_LIBS=-lgtest
 
 SOURCES := $(shell find src -name '*.cpp')
 OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
+PROGRAM_SOURCES := $(shell find programs -name '*.cpp')
+PROGRAMS := $(PROGRAM_SOURCES:programs/%.cpp=bin/programs/%)
 TEST_SOURCES := $(shell find tests -name '*.cpp')
 TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
 
 
-bin/$(PROJECT_NAME_SNAKE_CASE): programs/$(PROJECT_NAME_SNAKE_CASE).cpp $(OBJECTS)
-	@printf "compiling program \e[1m\e[36m$<\033[0m..."
+
+programs: $(PROGRAMS)
+
+
+
+bin/programs/%: programs/%.cpp $(OBJECTS)
+	@printf "compiling program \e[1m\e[36m$R\033[0m..."
 	@g++ -std=c++17 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
