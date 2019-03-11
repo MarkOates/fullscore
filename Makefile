@@ -43,11 +43,7 @@ INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
 
 
 
-programs: $(PROGRAMS)
-
-
-
-bin/%: programs/%.cpp $(OBJECTS)
+bin/$(PROJECT_NAME_SNAKE_CASE): programs/$(PROJECT_NAME_SNAKE_CASE).cpp $(OBJECTS)
 	@printf "compiling program \e[1m\e[36m$R\033[0m..."
 	@g++ -std=c++17 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib $(OPENGL_LIB) -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
