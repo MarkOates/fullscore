@@ -27,11 +27,15 @@ public:
 
    void render()
    {
-      RenderCache render_cache;
-      //render_cache
-      //setup_surface(int w, int h, int multisamples=0, int depth=0);
-      //finish_surface();
-      al_save_bitmap(output_filename.c_str(), render_cache.get_surface_bitmap());
+      ALLEGRO_BITMAP *bitmap = al_create_bitmap(800, 600);
+
+      al_set_target_bitmap(bitmap);
+      al_clear_to_color(color::aliceblue);
+      al_draw_line(0, 0, 500, 500, color::red, 4.0);
+
+      std::cout << "Saving file \"" << output_filename << "\"...";
+      al_save_bitmap(output_filename.c_str(), bitmap);
+      std::cout << "saved." << std::endl;
    }
 };
 
@@ -47,8 +51,16 @@ int main(int argv, char **argc)
    Measure::Basic measure_before_transform(note_set.get_notes());
    Measure::Basic measure_after_transform(result_notes_set.get_notes());
 
-   NoteSetRenderer(note_set, "notes-before.png");
-   NoteSetRenderer(result_notes_set, "notes-after.png");
+   al_init();
+   if (!al_init_primitives_addon()) std::cerr << "al_init_primitives_addon() failed" << std::endl;
+   if (!al_init_image_addon()) std::cerr << "al_init_image_addon() failed" << std::endl;
+   if (!al_init_font_addon()) std::cerr << "al_init_font_addon() failed" << std::endl;
+   if (!al_init_ttf_addon()) std::cerr << "al_init_ttf_addon() failed" << std::endl;
+   al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
+   al_create_display(800, 600);
+
+   NoteSetRenderer(note_set, "notes-before.bmp").render();
+   NoteSetRenderer(result_notes_set, "notes-after.bmp").render();
 }
 
 
