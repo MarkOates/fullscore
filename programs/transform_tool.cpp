@@ -7,7 +7,11 @@
 #include <fullscore/converters/stream_operators/NoteStreamOperators.h>
 #include <fullscore/models/NoteSet.h>
 #include <fullscore/services/MusicEngraver.h>
+
 #include <fullscore/transforms/AddDotTransform.h>
+#include <fullscore/transforms/AppendNoteTransform.h>
+#include <fullscore/transforms/TransposeTransform.h>
+#include <fullscore/transforms/DoubleDurationTransform.h>
 
 
 #include <allegro_flare/render_cache.h>
@@ -46,16 +50,47 @@ public:
 
 
 
-int main(int argv, char **argc)
+void render_note_set_transformed(NoteSet &note_set, Transform::Base *transform)
+{
+   std::stringstream filename;
+   filename << transform->get_identifier() << ".bmp";
+
+   NoteSet result_notes_set{{}};
+   result_notes_set.get_notes_ref() = transform->transform(note_set.get_notes());
+
+   NoteSetRenderer(result_notes_set, filename.str()).render();
+}
+
+
+
+void process()
 {
    NoteSet note_set({ { -2 }, { 0 }, { 1, Duration::QUARTER, true }, { 3, Duration::HALF }, { -3, Duration::EIGHTH }, { -2, Duration::EIGHTH } });
    NoteSet result_notes_set{{}};
 
-   result_notes_set.get_notes_ref() = Transform::AddDot().transform(note_set.get_notes());
+   Transform::Base *transform = nullptr;
 
-   Measure::Basic measure_before_transform(note_set.get_notes());
-   Measure::Basic measure_after_transform(result_notes_set.get_notes());
+   transform = new Transform::AddDot();
+   render_note_set_transformed(note_set, transform);
+   delete transform;
 
+   transform = new Transform::Transpose(3);
+   render_note_set_transformed(note_set, transform);
+   delete transform;
+
+   transform = new Transform::AppendNote(Note( { 0, Duration::HALF, false } ));
+   render_note_set_transformed(note_set, transform);
+   delete transform;
+
+   transform = new Transform::DoubleDuration();
+   render_note_set_transformed(note_set, transform);
+   delete transform;
+}
+
+
+
+int main(int argv, char **argc)
+{
    al_init();
    if (!al_init_primitives_addon()) std::cerr << "al_init_primitives_addon() failed" << std::endl;
    if (!al_init_image_addon()) std::cerr << "al_init_image_addon() failed" << std::endl;
@@ -64,8 +99,7 @@ int main(int argv, char **argc)
    al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
    al_create_display(800, 600);
 
-   NoteSetRenderer(note_set, "notes-before.bmp").render();
-   NoteSetRenderer(result_notes_set, "notes-after.bmp").render();
+   process();
 }
 
 
