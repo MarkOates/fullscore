@@ -1,5 +1,14 @@
+I = 'I'
+IV = 'IV'
+V = 'V'
+vi = 'vi'
+
 class ChordNotes
   attr_reader :chord
+
+  def self.progression(chords)
+    chords.map { |chord| ChordNotes.new(chord).notes }
+  end
 
   def initialize(chord)
     @chord = chord
