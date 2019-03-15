@@ -52,4 +52,9 @@ class ChordNotesTest < Minitest::Test
     expected_notes = ['vi', V6, I]
     assert_equal expected_notes, ChordNotes.new.chords('ascending_bass')
   end
+
+  def test_integraion_works_in_combination
+    expected = [[6, 8, 10], [7, 9, 12], [1, 3, 5]]
+    assert_equal expected, ChordNotes.notes_for(progression: 'ascending_bass')
+  end
 end

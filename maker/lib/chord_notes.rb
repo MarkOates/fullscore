@@ -6,6 +6,11 @@ V6 = 'V6'
 vi = 'vi'
 
 class ChordNotes
+  def self.notes_for(progression:)
+    chords = ChordNotes.new.chords(progression)
+    self.progression(chords)
+  end
+
   def self.progression(chords)
     chords.map { |chord| ChordNotes.new.chord_notes(chord) }
   end
