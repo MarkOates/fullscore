@@ -5,13 +5,13 @@ require_relative '../lib/chord_notes'
 class ChordNotesTest < Minitest::Test
   def test_plots_notes_in_a_chord
     expcected = [1, 3, 5]
-    actual = ChordNotes.new.chord_notes(I)
+    actual = ChordNotes.new.chord_notes('I')
     assert_equal expcected, actual
   end
 
   def test_plots_notes_a_V_chord
     expcected = [5, 7, 9]
-    actual = ChordNotes.new.chord_notes(V)
+    actual = ChordNotes.new.chord_notes('V')
     assert_equal expcected, actual
   end
 
@@ -29,7 +29,7 @@ class ChordNotesTest < Minitest::Test
 
   def test_plots_notes_a_IV_chord
     expcected = [4, 6, 8]
-    actual = ChordNotes.new.chord_notes(IV)
+    actual = ChordNotes.new.chord_notes('IV')
     assert_equal expcected, actual
   end
 
@@ -40,7 +40,7 @@ class ChordNotesTest < Minitest::Test
   end
 
   def test_returns_a_chord_progression
-    progression = ['vi', I, V, I]
+    progression = ['vi', 'I', 'V', 'I']
     expcected = [[6, 8, 10], [1, 3, 5], [5, 7, 9], [1, 3, 5]]
     actual = ChordNotes.progression(progression)
     assert_equal expcected, actual
@@ -51,11 +51,11 @@ class ChordNotesTest < Minitest::Test
     chord_I_expected = [3, 5, 8]
 
     assert_equal chord_vi_expected, ChordNotes.new.invert('vi')
-    assert_equal chord_I_expected, ChordNotes.new.invert(I)
+    assert_equal chord_I_expected, ChordNotes.new.invert('I')
   end
 
   def test_adapter_doo
-    expected_notes = ['vi', V6, I]
+    expected_notes = ['vi', 'V6', 'I']
     assert_equal expected_notes, ChordNotes.new.chords('ascending_bass')
   end
 

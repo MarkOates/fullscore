@@ -1,11 +1,3 @@
-I = 'I'
-ii = 'ii'
-iii = 'iii'
-IV = 'IV'
-V = 'V'
-V6 = 'V6'
-vi = 'vi'
-
 class ChordNotes
   def self.notes_for(progression:)
     chords = ChordNotes.new.chords(progression)
@@ -19,9 +11,9 @@ class ChordNotes
   def chords(progression)
     case progression
     when 'circle_of_5ths'
-      [I, IV, 'viio', 'iii', 'vi', 'ii', V]
+      ['I', 'IV', 'viio', 'iii', 'vi', 'ii', 'V']
     when 'ascending_bass'
-      ['vi', V6, I]
+      ['vi', 'V6', 'I']
     end
   end
 
