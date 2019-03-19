@@ -61,11 +61,11 @@ class ChordNotesTest < Minitest::Test
 
   def test_integraion_works_in_combination
     expected = [[6, 8, 10], [7, 9, 12], [1, 3, 5]]
-    assert_equal expected, ChordNotes.notes_for(progression: 'ascending_bass')
+    assert_equal expected, ChordNotes.notes_for('ascending_bass')
   end
 
   def test_circle_of_5ths
     expected = [[1, 3, 5], [4, 6, 8], [7, 9, 11], [3, 5, 7], [6, 8, 10], [2, 4, 6], [5, 7, 9]]
-    assert_equal expected, ChordNotes.notes_for(progression: 'circle_of_5ths')
+    assert_equal expected, ChordNotes.notes_for('circle_of_5ths')
   end
 end

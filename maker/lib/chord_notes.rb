@@ -1,5 +1,5 @@
 class ChordNotes
-  def self.notes_for(progression:)
+  def self.notes_for(progression)
     chords = ChordNotes.new.chords(progression)
     self.progression(chords)
   end
