@@ -1,0 +1,2 @@
+#!/bin/bash
+exec ~/Repos/LilyPond.app/Contents/Resources/bin/lilypond "$@"
