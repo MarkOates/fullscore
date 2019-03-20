@@ -62,6 +62,19 @@ class ChordNotes
     notes
   end
 
+  def note_name(notes)
+    note_names = {
+      1 => 'c',
+      2 => 'd',
+      3 => 'e',
+      4 => 'f',
+      5 => 'g',
+      6 => 'a',
+      7 => 'b',
+    }
+    notes.map { |note| note_names[note] }
+  end
+
   def chord_notes(chord)
     case chord
     when 'I'

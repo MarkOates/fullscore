@@ -76,4 +76,10 @@ class ChordNotesTest < Minitest::Test
     expected = [[1, 3, 5], [4, 6, 8], [7, 9, 11], [3, 5, 7], [6, 8, 10], [2, 4, 6], [5, 7, 9]]
     assert_equal expected, ChordNotes.notes_for('circle_of_5ths')
   end
+
+  def test_note_name_returns_the_name_of_the_note
+    notes = [1, 2, 3, 4, 5, 6, 7]
+    expected = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+    assert_equal expected, ChordNotes.new.note_name(notes)
+  end
 end
