@@ -1,0 +1,2 @@
+class Voicer
+end
