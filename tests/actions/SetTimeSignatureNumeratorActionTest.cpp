@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/actions/SetTimeSignatureNumeratorAction.h>
+#include <fullscore/ui/GridEditor/Actions/SetTimeSignatureNumerator.hpp>
 #include <fullscore/models/TimeSignature.h>
 
 
@@ -14,7 +14,7 @@ TEST(SetTimeSignatureNumeratorActionTest, sets_the_time_signatures_numerator)
 
    EXPECT_EQ(4, time_signature.get_numerator());
 
-   Action::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, 3);
+   UI::GridEditor::Actions::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, 3);
    set_time_signature_numerator_action.execute();
 
    EXPECT_EQ(3, time_signature.get_numerator());
@@ -26,7 +26,7 @@ TEST(SetTimeSignatureNumeratorActionTest, with_an_invalid_time_signature_raises_
 {
    try
    {
-      Action::SetTimeSignatureNumerator set_time_signature_numerator_action(nullptr, 3);
+      UI::GridEditor::Actions::SetTimeSignatureNumerator set_time_signature_numerator_action(nullptr, 3);
       set_time_signature_numerator_action.execute();
    }
    catch (std::invalid_argument const &e)
@@ -46,7 +46,7 @@ TEST(SetTimeSignatureNumeratorActionTest, with_an_numerator_that_is_greater_than
    try
    {
       TimeSignature time_signature(4, Duration());
-      Action::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, TimeSignature::NUMERATOR_MAX+1);
+      UI::GridEditor::Actions::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, TimeSignature::NUMERATOR_MAX+1);
       set_time_signature_numerator_action.execute();
    }
    catch (std::invalid_argument const &e)
@@ -66,7 +66,7 @@ TEST(SetTimeSignatureNumeratorActionTest, with_an_numerator_that_is_less_than_al
    try
    {
       TimeSignature time_signature(4, Duration());
-      Action::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, 0);
+      UI::GridEditor::Actions::SetTimeSignatureNumerator set_time_signature_numerator_action(&time_signature, 0);
       set_time_signature_numerator_action.execute();
    }
    catch (std::invalid_argument const &e)

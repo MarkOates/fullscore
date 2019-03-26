@@ -5,10 +5,10 @@
 
 
 
-Note::Note(int _scale_degree, Duration duration)
+Note::Note(int _scale_degree, Duration duration, bool rest)
    : pitch(Pitch(_scale_degree, 0))
    , duration(duration)
-   , rest(false)
+   , rest(rest)
 {}
 
 
