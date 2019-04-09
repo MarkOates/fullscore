@@ -1,6 +1,9 @@
 class LilyConverter
   class UnknownNote < StandardError; end
 
+  SHARP = 'is'
+  FLAT = 'es'
+
   attr_reader :notes
 
   def initialize(notes:)
@@ -31,7 +34,10 @@ class LilyConverter
   def convert_note_name(note:)
     relative_to_0 = note % 12
 
-    case note
+    puts relative_to_0
+    puts relative_to_0
+
+    case relative_to_0
     when 0
       "c"
     when 2
@@ -42,12 +48,14 @@ class LilyConverter
       "f"
     when 7
       "g"
+    when 8
+      "a#{FLAT}"
     when 9
       "a"
     when 11
       "b"
     else
-      raise UnknownNote, "note"
+      raise UnknownNote.new("Note number #{relative_to_0} is not parsable")
     end
   end
 end

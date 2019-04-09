@@ -1,9 +1,15 @@
 TEMPLATE_FILE = 'templates/lilypond-template.ly'
 
+require_relative '../../maker/lib/lily_converter'
+require_relative '../../maker/lib/voicer'
+
 # todo, ellaborate this class
 class NoteBuilder
   def ly_notes
-    "<c' d' e' f'> <c' e' a>"
+    notes = [0, 2, 4, 5, 8, 11, 0]
+    notes = Voicer.new(notes).high_range
+    LilyConverter.new(notes: notes).convert
+    #"<c' d' e' f'> <c' e' a>"
   end
 end
 
