@@ -8,7 +8,9 @@ class LilyConverter
   end
 
   def convert
-    convert_note(note: notes[0])
+    notes.map do |note|
+      convert_note(note: note)
+    end.join(' ')
   end
 
   private
@@ -33,17 +35,17 @@ class LilyConverter
     when 0
       "c"
     when 2
-      "c"
+      "d"
     when 4
-      "c"
+      "e"
     when 5
-      "c"
+      "f"
     when 7
-      "c"
+      "g"
     when 9
-      "c"
+      "a"
     when 11
-      "c"
+      "b"
     else
       raise UnknownNote, "note"
     end
