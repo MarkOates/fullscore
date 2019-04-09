@@ -13,3 +13,5 @@ allegro.log
 
 .DS_Store
 
+output-lily.ly
+output-lily.pdf
