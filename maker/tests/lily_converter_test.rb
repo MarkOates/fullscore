@@ -22,4 +22,11 @@ class LilyConverterTest < Minitest::Test
     converter = LilyConverter.new(notes: notes)
     expected_output = "c' d' e' f' g' a'"
   end
+
+  def test_with_an_unknown_note_number_raises_an_exception
+    notes = ['n']
+    assert_raises LilyConverter::UnknownNote do
+      LilyConverter.new(notes: notes).convert
+    end
+  end
 end

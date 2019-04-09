@@ -34,9 +34,6 @@ class LilyConverter
   def convert_note_name(note:)
     relative_to_0 = note % 12
 
-    puts relative_to_0
-    puts relative_to_0
-
     case relative_to_0
     when 0
       "c"
