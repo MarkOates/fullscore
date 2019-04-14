@@ -16,7 +16,7 @@ class LilyConverter
       if fragment.is_a?(Integer)
         convert_note(note: fragment)
       elsif fragment.is_a?(Array)
-        [ 11 ]
+        convert_chord(chord: fragment)
       else
         raise UnknownFramentType.new("Fragment type #{fragment.class}")
       end
@@ -24,6 +24,14 @@ class LilyConverter
   end
 
   private
+
+  def convert_chord(chord:)
+    lily_notes = chord.map do |note|
+      convert_note(note: note)
+    end.join(' ')
+
+    "<#{lily_notes}>"
+  end
 
   def convert_note(note:)
     convert_note_name(note: note) + convert_octaves(note: note)
