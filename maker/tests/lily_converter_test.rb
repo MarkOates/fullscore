@@ -25,7 +25,7 @@ class LilyConverterTest < Minitest::Test
 
   def test_with_an_unknown_note_number_raises_an_exception
     notes = ['n']
-    assert_raises LilyConverter::UnknownNote do
+    assert_raises LilyConverter::UnknownFramentType do
       LilyConverter.new(notes: notes).convert
     end
   end

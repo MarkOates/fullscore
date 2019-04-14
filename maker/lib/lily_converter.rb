@@ -1,5 +1,6 @@
 class LilyConverter
   class UnknownNote < StandardError; end
+  class UnknownFramentType < StandardError; end
 
   SHARP = 'is'
   FLAT = 'es'
@@ -11,8 +12,14 @@ class LilyConverter
   end
 
   def convert
-    notes.map do |note|
-      convert_note(note: note)
+    notes.map do |fragment|
+      if fragment.is_a?(Integer)
+        convert_note(note: fragment)
+      elsif fragment.is_a?(Array)
+        [ 11 ]
+      else
+        raise UnknownFramentType.new("Fragment type #{fragment.class}")
+      end
     end.join(' ')
   end
 
