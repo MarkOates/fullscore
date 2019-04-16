@@ -11,7 +11,7 @@ class StafferTest < Minitest::Test
         notes: [0, 7],
       },
       staff_2: {
-        notes: [0, 7],
+        notes: [4],
       },
     }
 
