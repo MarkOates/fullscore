@@ -1,7 +1,8 @@
 TEMPLATE_FILE = 'templates/lilypond-template.ly'
 
-require_relative '../../maker/lib/lily_converter'
-require_relative '../../maker/lib/voicer'
+require_relative '../lib/lily_converter'
+require_relative '../lib/voicer'
+
 
 # todo, ellaborate this class
 class NoteBuilder
@@ -18,4 +19,6 @@ ly_notes_to_write = NoteBuilder.new.ly_notes
 template = IO.read(TEMPLATE_FILE)
 template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', ly_notes_to_write)
 
-File.write('../../output-lily.ly', template)
+File.open('output-lily.ly', 'w') do |f|
+  f.write(template)
+end
