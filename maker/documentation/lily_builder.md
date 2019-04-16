@@ -4,7 +4,18 @@ The Lily Builder can be used to automatically assemble musical notation output f
 
 ## Setup
 
-### Step 1) Have Rerun running to compile lilypoind output to PDF
+### Step 1) Generate new notes with your composer
+
+Have another rerun running in a separate terminal instance with the following command:
+
+```
+rerun ruby app/lily_builder.rb -p "app/lily_builder.rb" -c
+```
+
+This will cause `ruby lily_builder.rb` to be rerun anytime it's modified, which should be generating the `output-lily.ly` file, that gets picked up by the next command.
+
+
+### Step 2) Have Rerun running to compile lilypoind output to PDF
 
 Have rerun running in a separate terminal instance with the following command:
 
@@ -13,14 +24,3 @@ rerun bin/scripts/lilypond output-lily.ly -p "*.ly" -c
 ```
 
 This will cause `rerun` to watch in the background for any changes to the `output-lily.ly` file, that will cause the `lilypond` script to convert the `output-lily.ly` file to a PDF.  This PDF can be viewed in MacOS preview (through Finder), and will automaticaly refresh on the changes.
-
-### Step 2) Generate new notes with your composer
-
-Have another rerun running in a separate terminal instance with the following command:
-
-```
-rerun ruby app/lily_builder.rb -p "app/lily_builder.rb" -c
-```
-
-This will cause `ruby lily_builder.rb` to be rerun anytime it's modified, which should be generating the `output-lily.ly` file, that gets picked up by the previous command.
-
