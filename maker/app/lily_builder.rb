@@ -6,8 +6,14 @@ class LilyBuilder
   TEMPLATE_FILE = 'templates/lilypond-template.ly'
   OUTPUT_FILE = 'output-lily.ly'
 
+  attr_reader :composer
+
+  def initialize(composer:)
+    @composer = composer
+  end
+
   def build
-    composition = Chromatic::Composer.new.composition
+    composition = composer.composition
     first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: composition[:staves].first[:notes]).convert
 
     staves_notes = composition[:staves].drop(1).map do |staff|
@@ -26,4 +32,4 @@ class LilyBuilder
   end
 end
 
-LilyBuilder.new.build
+LilyBuilder.new(composer: Chromatic::Composer.new).build
