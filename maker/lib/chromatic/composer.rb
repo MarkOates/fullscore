@@ -19,9 +19,6 @@ module Chromatic
             notes: melody,
           },
           {
-            notes: projections.map { |projection| projection.last + 12 },
-          },
-          {
             notes: projections.map { |projection| Voicer.new(projection).open },
           },
           {
