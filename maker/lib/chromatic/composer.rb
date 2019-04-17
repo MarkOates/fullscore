@@ -12,7 +12,7 @@ module Chromatic
             notes: projections.map { |projection| projection.last },
           },
           {
-            notes: projections,
+            notes: projections.map { |projection| Voicer.new(projection).open },
           },
           {
             notes: projections.map { |projection| projection.first },

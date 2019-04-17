@@ -25,5 +25,9 @@ module Chromatic
     def ultra_high_range
       notes.map { |note| note + 24 }
     end
+
+    def open # untested
+      notes.each_with_index.map { |note, index| index.even? ? note : note + 12 }
+    end
   end
 end
