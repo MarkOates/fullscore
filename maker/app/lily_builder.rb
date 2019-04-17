@@ -36,9 +36,7 @@ class LilyBuilder
     template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', first_staff_notes_to_write)
     template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
 
-    File.open(OUTPUT_FILE, 'w') do |f|
-      f.write(template)
-    end
+    File.open(OUTPUT_FILE, 'w') { |file| file.write(template) }
   end
 end
 
