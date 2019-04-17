@@ -19,7 +19,7 @@ class LilyBuilder
     template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
 
     template = IO.read(TEMPLATE_FILE)
-    template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', first_staff_notes_to_write)
+    template.sub!('%%%INSERT_STAFF_CONTENTS_HERE%%%', first_staff_notes_to_write)
     template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
 
     File.open(OUTPUT_FILE, 'w') { |file| file.write(template) }

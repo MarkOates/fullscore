@@ -13,7 +13,7 @@
   \applyContext #(override-color-for-all-grobs (x11-color 'white))
   \new Staff
   {
-    %%%INSERT_NOTE_CONTENTS_HERE%%%
+    %%%INSERT_STAFF_CONTENTS_HERE%%%
 
     % This section sets the background to near-black, by drawing a large box
     % over the score.  This technique was taken from:

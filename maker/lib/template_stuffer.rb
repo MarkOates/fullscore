@@ -2,7 +2,7 @@ class TemplateStuffer
   STAFF_PARTIAL = <<-CONTENT
     \\new Staff %%%INSERT_THE_WITH_META_INFO_HERE%%%
     {
-      %%%INSERT_NOTE_CONTENTS_HERE%%%
+      %%%INSERT_STAFF_CONTENTS_HERE%%%
     }
   CONTENT
 
@@ -30,7 +30,7 @@ class TemplateStuffer
 
   def _staff_partial
     partial = STAFF_PARTIAL
-    partial = partial.gsub('%%%INSERT_NOTE_CONTENTS_HERE%%%', staff_notes)
+    partial = partial.gsub('%%%INSERT_STAFF_CONTENTS_HERE%%%', staff_notes)
     partial = partial.gsub('%%%INSERT_THE_WITH_META_INFO_HERE%%%', get_instrument_name_fragment)
     partial
   end
