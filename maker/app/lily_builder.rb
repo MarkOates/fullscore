@@ -24,7 +24,7 @@ class LilyBuilder
     first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: staves.first[:notes]).convert
 
     staves_notes = staves.drop(1).map do |staff|
-      ly_notes_to_write = Chromatic::LilyConverter.new(notes: staff[:notes]).convert
+      Chromatic::LilyConverter.new(notes: staff[:notes]).convert
     end
 
     template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
