@@ -8,16 +8,15 @@ class TemplateStufferTest < Minitest::Test
   end
 
   def test_creates_a_partial
-    skip
     template_stuffer = TemplateStuffer.new(staff_notes: staff_notes)
     expected_staff_partial = <<-CONTENT
-    \\new Staff
+    \\new Staff \\with {}
     {
       c' d' e' ges''
     }
     CONTENT
 
-    assert_equal expected_staff_partial, template_stuffer.get_staff_partial
+    assert_equal expected_staff_partial, template_stuffer.staff_partial
   end
 
   def test_creates_an_array_of_partials
@@ -27,11 +26,11 @@ class TemplateStufferTest < Minitest::Test
     ]
 
     expected_staff_partial = <<-CONTENT
-    \\new Staff
+    \\new Staff \\with {}
     {
       c' d' e' ges''
     }
-    \\new Staff
+    \\new Staff \\with {}
     {
       g'' a' c' d''
     }
