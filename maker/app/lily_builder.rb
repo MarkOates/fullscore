@@ -1,29 +1,29 @@
-TEMPLATE_FILE = 'templates/lilypond-template.ly'
-OUTPUT_FILE = 'output-lily.ly'
-
 require_relative '../lib/chromatic/lily_converter'
 require_relative '../lib/template_stuffer'
-require_relative '../lib/chromatic/voicer'
 require_relative '../lib/chromatic/composer'
 
+class LilyBuilder
+  TEMPLATE_FILE = 'templates/lilypond-template.ly'
+  OUTPUT_FILE = 'output-lily.ly'
 
-composition = Chromatic::Composer.new.composition
-first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: composition[:staves].first[:notes]).convert
-#staves_notes = {}
+  def build
+    composition = Chromatic::Composer.new.composition
+    first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: composition[:staves].first[:notes]).convert
 
-staves_notes = composition[:staves].drop(1).map do |staff|
-  ly_notes_to_write = Chromatic::LilyConverter.new(notes: staff[:notes]).convert
+    staves_notes = composition[:staves].drop(1).map do |staff|
+      ly_notes_to_write = Chromatic::LilyConverter.new(notes: staff[:notes]).convert
+    end
+
+    template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
+
+    template = IO.read(TEMPLATE_FILE)
+    template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', first_staff_notes_to_write)
+    template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
+
+    File.open(OUTPUT_FILE, 'w') do |f|
+      f.write(template)
+    end
+  end
 end
 
-
-#ly_notes_to_write = Chromatic::LilyConverter.new(notes: notes).convert
-template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
-
-template = IO.read(TEMPLATE_FILE)
-#first_staff_notes_to_write = "c' d''"
-template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', first_staff_notes_to_write)
-template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
-
-File.open(OUTPUT_FILE, 'w') do |f|
-  f.write(template)
-end
+LilyBuilder.new.build
