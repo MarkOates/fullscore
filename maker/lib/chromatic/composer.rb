@@ -1,4 +1,5 @@
 require_relative 'chord_notes'
+require_relative 'voicer'
 
 module Chromatic
   class Composer
@@ -8,10 +9,13 @@ module Chromatic
       result = {
         staves: [
           {
-            notes: projections,
+            notes: projections.map { |projection| projection.last },
           },
           {
             notes: projections,
+          },
+          {
+            notes: projections.map { |projection| projection.first },
           }
         ]
       }

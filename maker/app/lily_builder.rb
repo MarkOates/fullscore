@@ -8,10 +8,10 @@ require_relative '../lib/chromatic/composer'
 
 
 composition = Chromatic::Composer.new.composition
-#notes = composition[:staves].first[:notes]
+first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: composition[:staves].first[:notes]).convert
 #staves_notes = {}
 
-staves_notes = composition[:staves].map do |staff|
+staves_notes = composition[:staves].drop(1).map do |staff|
   ly_notes_to_write = Chromatic::LilyConverter.new(notes: staff[:notes]).convert
 end
 
@@ -20,8 +20,8 @@ end
 template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
 
 template = IO.read(TEMPLATE_FILE)
-ly_notes_to_write = "c' d''"
-template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', ly_notes_to_write)
+#first_staff_notes_to_write = "c' d''"
+template.sub!('%%%INSERT_NOTE_CONTENTS_HERE%%%', first_staff_notes_to_write)
 template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
 
 File.open(OUTPUT_FILE, 'w') do |f|
