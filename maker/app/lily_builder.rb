@@ -20,12 +20,15 @@ class LilyBuilder
     @composition ||= composer.composition
   end
 
-  def build
-    first_staff_notes_to_write = Chromatic::LilyConverter.new(notes: staves.first[:notes]).convert
-
-    staves_notes = staves.drop(1).map do |staff|
+  def staves_ly_notes
+    @staves_ly_notes ||= staves.map do |staff|
       Chromatic::LilyConverter.new(notes: staff[:notes]).convert
     end
+  end
+
+  def build
+    first_staff_notes_to_write = staves_ly_notes.first
+    staves_notes = staves_ly_notes.drop(1)
 
     template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
 
