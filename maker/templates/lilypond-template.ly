@@ -27,6 +27,7 @@
       \filled-box #'(-1000 . 1000) #'(-1000 . 4000) #0
     }
   }
+  %%%INSERT_ADDITIONAL_STAVES_HERE%%%
 >>
 
 \version "2.18.2"  % necessary for upgrading to future LilyPond versions.
