@@ -1,4 +1,4 @@
-class LilyConverter
+class LilyChromaticConverter
   class UnknownNote < StandardError; end
   class UnknownFramentType < StandardError; end
 
