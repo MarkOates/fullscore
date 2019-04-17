@@ -1,5 +1,5 @@
 module Chromatic
-  class LilyChromaticConverter
+  class LilyConverter
     class UnknownNote < StandardError; end
     class UnknownFramentType < StandardError; end
 
