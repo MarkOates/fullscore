@@ -1,29 +1,24 @@
 class TemplateStuffer
-  TEMPLATE_FILENAME = 'lilypond-template.ly'
-  STAFF_PARTIAL = <<~CONTENT
-    \new Staff
+  STAFF_PARTIAL = <<-CONTENT
+    \\new Staff
     {
       %%%INSERT_NOTE_CONTENTS_HERE%%%
     }
   CONTENT
 
-  attr_reader :staves, :converter
+  attr_reader :staff_notes
 
-  def initialize(staves:, converter:)
-    @staves = staves
-    @converter = converter
+  def self.stuff(staves_notes:)
+    staves_notes.map do |staff_notes|
+      TemplateStuffer.new(staff_notes: staff_notes).get_staff_partial
+    end.join("")
   end
 
-  def stuffed
-    staves.map do |staff|
-      #converter.new(notes: staff[:notes])
-      staff_partial(body: staff[:notes])
-    end
+  def initialize(staff_notes:)
+    @staff_notes = staff_notes
   end
 
-  private
-
-  def staff_partial(body:)
-    STAFF_PARTIAL.gsub('INSERT_NOTE_CONTENTS_HERE', body)
+  def get_staff_partial
+    STAFF_PARTIAL.gsub('%%%INSERT_NOTE_CONTENTS_HERE%%%', staff_notes)
   end
 end
