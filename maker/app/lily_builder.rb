@@ -42,4 +42,6 @@ class LilyBuilder
   end
 end
 
-LilyBuilder.new(composer: Chromatic::Composer.new).build
+require_relative 'composers/second_suite'
+
+LilyBuilder.new(composer: SecondSuite.new).build
