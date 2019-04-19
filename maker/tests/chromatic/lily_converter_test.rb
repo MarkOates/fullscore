@@ -26,8 +26,15 @@ module Chromatic
     end
 
     def test_with_an_unknown_note_number_raises_an_exception
-      notes = ['n']
+      notes = [ TrueClass ]
       assert_raises LilyConverter::UnknownFramentType do
+        LilyConverter.new(notes: notes).convert
+      end
+    end
+
+    def test_with_an_unknown_note_number_raises_an_exception
+      notes = ['x']
+      assert_raises LilyConverter::UnknownStringFragmentType do
         LilyConverter.new(notes: notes).convert
       end
     end

@@ -2,6 +2,7 @@ module Chromatic
   class LilyConverter
     class UnknownNote < StandardError; end
     class UnknownFramentType < StandardError; end
+    class UnknownStringFragmentType < StandardError; end
 
     SHARP = 'is'
     FLAT = 'es'
@@ -18,8 +19,12 @@ module Chromatic
           convert_note(note: fragment)
         elsif fragment.is_a?(Array)
           convert_chord(chord: fragment)
-        elsif fragment.is_a?(String) && fragment == 'r'
-          'r'
+        elsif fragment.is_a?(String)
+          if fragment == 'r'
+            'r'
+          else
+            raise UnknownStringFragmentType.new("String fragment \"#{fragment}\" not known")
+          end
         else
           raise UnknownFramentType.new("Fragment type #{fragment.class}")
         end
