@@ -24,3 +24,9 @@ rerun "bin/scripts/lilypond -dbackend=svg output-lily.ly" -p "*.ly" -c
 ```
 
 This will cause `rerun` to watch in the background for any changes to the `output-lily.ly` file, that will cause the `lilypond` script to convert the `output-lily.ly` file to a PDF.  This PDF can be viewed in MacOS preview (through Finder), and will automaticaly refresh on the changes.
+
+### Step 3) Copy the newly output file to HomeServer
+
+```
+rerun "cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg" -p "output-lily.svg" -c
+```
