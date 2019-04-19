@@ -6,7 +6,7 @@ class TemplateStuffer
     }
   CONTENT
 
-  attr_reader :staff_notes
+  attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
 
   def self.stuff(staves_notes:)
     staves_notes.map do |staff_notes|
@@ -14,18 +14,34 @@ class TemplateStuffer
     end.join("")
   end
 
-  def initialize(staff_notes:)
+  def initialize(staff_notes:, instrument_name_full: nil, instrument_name_abbreviated: nil)
     @staff_notes = staff_notes
+    @instrument_name_full = instrument_name_full
+    @instrument_name_abbreviated = instrument_name_abbreviated
   end
 
   def staff_partial
     @staff_partial ||= _staff_partial
   end
 
+  def instrument_name_partial
+    @instrument_name_partial ||= _instrument_name_partial
+  end
+
   private
 
+  def _instrument_name_partial
+    [
+      instrument_name_full ? 'instrumentName = #"TOK"'.gsub('TOK', instrument_name_full) : nil,
+      instrument_name_abbreviated ? 'shortInstrumentName = #"TOK"'.gsub('TOK', instrument_name_abbreviated) : nil,
+    ].compact.join("\n")
+    #shortInstrumentName = #"Vln. "
+  end
+
   def get_instrument_name_fragment
-    '\with {}'
+    '\with {
+      TOK
+    }'.gsub('TOK', instrument_name_partial)
   end
 
   def get_extra_staff_sections_postfix

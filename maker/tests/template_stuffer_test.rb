@@ -10,7 +10,9 @@ class TemplateStufferTest < Minitest::Test
   def test_creates_a_partial
     template_stuffer = TemplateStuffer.new(staff_notes: staff_notes)
     expected_staff_partial = <<-CONTENT
-    \\new Staff \\with {}
+    \\new Staff \\with {
+      
+    }
     {
       c' d' e' ges''
     }
@@ -26,11 +28,15 @@ class TemplateStufferTest < Minitest::Test
     ]
 
     expected_staff_partial = <<-CONTENT
-    \\new Staff \\with {}
+    \\new Staff \\with {
+      
+    }
     {
       c' d' e' ges''
     }
-    \\new Staff \\with {}
+    \\new Staff \\with {
+      
+    }
     {
       g'' a' c' d''
     }
