@@ -38,5 +38,12 @@ module Chromatic
       expected_output = "<c' e' g'> <f' a' d'>"
       assert_equal expected_output, converter.convert
     end
+
+    def test_supports_notes_with_negative_values
+      notes = [-12, [-24, -5]]
+      converter = LilyConverter.new(notes: notes)
+      expected_output = "c <c, g>"
+      assert_equal expected_output, converter.convert
+    end
   end
 end

@@ -44,6 +44,8 @@ module Chromatic
         "'" * octaves
       elsif octaves < 0
         "," * (-octaves)
+      else
+        ''
       end
     end
 
