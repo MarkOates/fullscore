@@ -18,6 +18,8 @@ module Chromatic
           convert_note(note: fragment)
         elsif fragment.is_a?(Array)
           convert_chord(chord: fragment)
+        elsif fragment.is_a?(String) && fragment == 'r'
+          'r'
         else
           raise UnknownFramentType.new("Fragment type #{fragment.class}")
         end

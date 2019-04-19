@@ -32,6 +32,18 @@ module Chromatic
       end
     end
 
+    def test_with_a_rest_returns_a_rest
+      notes = ['r']
+      expected_output = 'r'
+      assert_equal expected_output, LilyConverter.new(notes: notes).convert
+    end
+
+    def test_with_notes_including_a_rest
+      notes = ['r', 12, 'r', 7]
+      expected_output = "r c'' r g'"
+      assert_equal expected_output, LilyConverter.new(notes: notes).convert
+    end
+
     def test_converts_a_chord
       notes = [[0, 4, 7], [5, 9, 2]]
       converter = LilyConverter.new(notes: notes)
