@@ -15,19 +15,22 @@ module Chromatic
 
     def convert
       notes.map do |fragment|
-        if fragment.is_a?(Integer)
+        fragment_component = fragment
+        fragment_duration = fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
+
+        if fragment_component.is_a?(Integer)
           convert_note(note: fragment)
-        elsif fragment.is_a?(Array)
+        elsif fragment_component.is_a?(Array)
           convert_chord(chord: fragment)
-        elsif fragment.is_a?(String)
-          if fragment == 'r'
+        elsif fragment_component.is_a?(String)
+          if fragment_component == 'r'
             'r'
           else
             raise UnknownStringFragmentType.new("String fragment \"#{fragment}\" not known")
           end
         else
           raise UnknownFramentType.new("Fragment type #{fragment.class}")
-        end
+        end + fragment_duration.to_s
       end.join(' ')
     end
 
@@ -43,6 +46,10 @@ module Chromatic
 
     def convert_note(note:)
       convert_note_name(note: note) + convert_octaves(note: note)
+    end
+
+    def convert_duration(duration:)
+      return 8.to_s
     end
 
     def convert_octaves(note:)
