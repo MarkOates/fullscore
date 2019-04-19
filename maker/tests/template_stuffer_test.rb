@@ -45,4 +45,29 @@ class TemplateStufferTest < Minitest::Test
 
     assert_equal expected_staff_partial, stuffed_template
   end
+
+  def test_includes_staff_names
+    staves_notes = [
+      "c' d' e' ges''",
+      "g'' a' c' d''",
+    ]
+
+    expected_staff_partial = <<-CONTENT
+    \\new Staff \\with {
+      
+    }
+    {
+      c' d' e' ges''
+    }
+    \\new Staff \\with {
+      
+    }
+    {
+      g'' a' c' d''
+    }
+    CONTENT
+    stuffed_template = TemplateStuffer.stuff(staves_notes: staves_notes)
+
+    assert_equal expected_staff_partial, stuffed_template
+  end
 end
