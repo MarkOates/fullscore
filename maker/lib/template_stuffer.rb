@@ -5,33 +5,29 @@ class TemplateStuffer
       %%%INSERT_STAFF_CONTENTS_HERE%%%
     }
   CONTENT
+  BLACK_BACKGROUND_PARTIAL = <<-CONTENT
+      % This section sets the background to near-black, by drawing a large box
+      % over the score.  This technique was taken from:
+      % http://lsr.di.unimi.it/LSR/Snippet?id=699
+      -\\tweak layer #-1
+      -\\markup {
+        \\with-dimensions #'(0 . 0) #'(0 . 0)
+        % specify color
+        \\with-color #(rgb-color 0.05 0.05 0.05)
+        % specify size
+        \\filled-box #'(-1000 . 1000) #'(-1000 . 4000) #0
+      }
+  CONTENT
 
   attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
 
-  def self.staves_content_temp_default_arg
-    [
-      {
-        instrument: {
-          name: {
-            full: 'Flute',
-            abbreviated: 'Fl.',
-          }
-        },
-        notes: "c' d'' e'",
-      },
-      {
-        notes: "c' d'' e'".split(' ').reverse.join(' '),
-      }
-    ]
-  end
-
-  def self.stuff(staves_notes:, staves_contents: staves_content_temp_default_arg)
-    staves_contents.map do |staff_contents|
+  def self.stuff(staves_notes:, staves_contents:, use_black_background: true)
+    staves_contents.each_with_index.map do |staff_contents, i|
       TemplateStuffer.new(
         staff_notes: staff_contents[:notes],
         instrument_name_full: staff_contents.dig(:instrument, :name, :full),
         instrument_name_abbreviated: staff_contents.dig(:instrument, :name, :abbreviated),
-      ).staff_partial
+      ).staff_partial(include_black_background_postfix: i == 0 && use_black_background)
     end.join("")
   end
 
@@ -41,8 +37,8 @@ class TemplateStuffer
     @instrument_name_abbreviated = instrument_name_abbreviated
   end
 
-  def staff_partial
-    @staff_partial ||= _staff_partial
+  def staff_partial(include_black_background_postfix:)
+    @staff_partial ||= _staff_partial(include_black_background_postfix: include_black_background_postfix)
   end
 
   def instrument_name_partial
@@ -66,19 +62,19 @@ class TemplateStuffer
   end
 
   def get_extra_staff_sections_postfix
-    nil
+    BLACK_BACKGROUND_PARTIAL
   end
 
-  def staff_contents
+  def staff_contents(include_black_background_postfix:)
     [
       staff_notes,
-      get_extra_staff_sections_postfix,
+      include_black_background_postfix ? get_extra_staff_sections_postfix : nil,
     ].compact.join("\n")
   end
 
-  def _staff_partial
+  def _staff_partial(include_black_background_postfix:)
     partial = STAFF_PARTIAL
-    partial = partial.gsub('%%%INSERT_STAFF_CONTENTS_HERE%%%', staff_contents)
+    partial = partial.gsub('%%%INSERT_STAFF_CONTENTS_HERE%%%', staff_contents(include_black_background_postfix: include_black_background_postfix))
     partial = partial.gsub('%%%INSERT_THE_WITH_META_INFO_HERE%%%', get_instrument_name_fragment)
     partial
   end

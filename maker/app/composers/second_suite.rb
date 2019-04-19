@@ -13,6 +13,12 @@ class SecondSuite < ComposerBase
     result = {
       staves: [
         {
+          instrument: {
+            name: {
+              full: 'Flute',
+              abbreviated: 'Fl.',
+            }
+          },
           notes: melody,
         },
         {

@@ -16,7 +16,10 @@ class LilyBuilder
     first_staff_notes_to_write = staves_ly_notes.first
     staves_notes = staves_ly_notes.drop(1)
 
-    template_stuffs_to_stuff = TemplateStuffer.stuff(staves_notes: staves_notes)
+    template_stuffs_to_stuff = TemplateStuffer.stuff(
+      staves_notes: staves_notes,
+      staves_contents: staves_contents,
+    )
 
     template = IO.read(TEMPLATE_FILE)
     template.sub!('%%%INSERT_STAFF_CONTENTS_HERE%%%', first_staff_notes_to_write)
@@ -26,6 +29,15 @@ class LilyBuilder
   end
 
   private
+
+  def staves_contents
+    @staves_contents ||= staves.map do |staff|
+      {
+        instrument: staff[:instrument],
+        notes: Chromatic::LilyConverter.new(notes: staff[:notes]).convert,
+      }
+    end
+  end
 
   def staves
     @staves ||= composition[:staves]
