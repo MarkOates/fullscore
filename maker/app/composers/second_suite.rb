@@ -19,7 +19,8 @@ class SecondSuite < ComposerBase
         },
         {
           instrument: { name: { full: 'Oboe', abbreviated: 'Ob.', } },
-          notes: melody,
+          notes: melody.each_with_index.map { |projection, index| index.even? ? 'r' : projection },
+          #notes: melody,
         },
         {
           instrument: { name: { full: 'Clarinet in Bb', abbreviated: 'Cl.', } },

@@ -6,23 +6,20 @@ module Chromatic
   class Composer
     def composition
       projections = ChordNotes.notes_for('circle_of_5ths')
-      projections << ChordNotes.new.chord_notes('I')
+      #projections << ChordNotes.new.chord_notes('I')
 
 
-      melody = MelodyExtractor.random(projections: projections)
-      melody.pop
-      melody << 12  # make sure it ends on tonic
+      #melody = MelodyExtractor.random(projections: projections)
+      #melody.pop
+      #melody << 12  # make sure it ends on tonic
 
       result = {
         staves: [
           {
-            notes: melody,
+            notes: projections,
           },
           {
-            notes: projections.map { |projection| Voicer.new(projection).open },
-          },
-          {
-            notes: projections.map { |projection| projection.first },
+            notes: projections.each_with_index.map { |projection, index| index.even? ? 'r' : projection },
           },
         ]
       }
