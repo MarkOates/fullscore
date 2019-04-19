@@ -5,10 +5,6 @@ require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 class TemplateStufferTest < Minitest::Test
-  def staff_notes
-    "c' d' e' ges''"
-  end
-
   def staves_content_temp_default_arg
     [
       {
@@ -28,7 +24,7 @@ class TemplateStufferTest < Minitest::Test
 
   def test_creates_a_partial
     template_stuffer = TemplateStuffer.new(
-      staff_notes: staff_notes,
+      staff_notes: "c' d' e' ges''",
     )
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
@@ -43,11 +39,6 @@ class TemplateStufferTest < Minitest::Test
   end
 
   def test_creates_an_array_of_partials
-    staves_notes = [
-      "c' d' e' ges''",
-      "g'' a' c' d''",
-    ]
-
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
       instrumentName = #"Trombone"
@@ -63,17 +54,12 @@ shortInstrumentName = #"Tbn."
       e' d'' c'
     }
     CONTENT
-    stuffed_template = TemplateStuffer.stuff(staves_notes: staves_notes, staves_contents: staves_content_temp_default_arg, use_black_background: false)
+    stuffed_template = TemplateStuffer.stuff(staves_contents: staves_content_temp_default_arg, use_black_background: false)
 
     assert_equal expected_staff_partial, stuffed_template
   end
 
   def test_includes_staff_names
-    staves_notes = [
-      "c' d' e' ges''",
-      "g'' a' c' d''",
-    ]
-
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
       instrumentName = #"Trombone"
@@ -89,7 +75,7 @@ shortInstrumentName = #"Tbn."
       e' d'' c'
     }
     CONTENT
-    stuffed_template = TemplateStuffer.stuff(staves_notes: staves_notes, staves_contents: staves_content_temp_default_arg, use_black_background: false)
+    stuffed_template = TemplateStuffer.stuff(staves_contents: staves_content_temp_default_arg, use_black_background: false)
 
     assert_equal expected_staff_partial, stuffed_template
   end

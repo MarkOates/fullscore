@@ -19,9 +19,7 @@ class TemplateStuffer
       }
   CONTENT
 
-  attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
-
-  def self.stuff(staves_notes:, staves_contents:, use_black_background: true)
+  def self.stuff(staves_contents:, use_black_background: true)
     staves_contents.each_with_index.map do |staff_contents, i|
       TemplateStuffer.new(
         staff_notes: staff_contents[:notes],
@@ -30,6 +28,8 @@ class TemplateStuffer
       ).staff_partial(include_black_background_postfix: i == 0 && use_black_background)
     end.join("")
   end
+
+  attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
 
   def initialize(staff_notes:, instrument_name_full: nil, instrument_name_abbreviated: nil)
     @staff_notes = staff_notes
