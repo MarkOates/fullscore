@@ -31,16 +31,17 @@ class TemplateStufferTest < Minitest::Test
 
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
-      
+      instrumentName = #"Flute"
+shortInstrumentName = #"Fl."
     }
     {
-      c' d' e' ges''
+      c' d'' e'
     }
     \\new Staff \\with {
       
     }
     {
-      g'' a' c' d''
+      e' d'' c'
     }
     CONTENT
     stuffed_template = TemplateStuffer.stuff(staves_notes: staves_notes)
@@ -56,16 +57,17 @@ class TemplateStufferTest < Minitest::Test
 
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
-      
+      instrumentName = #"Flute"
+shortInstrumentName = #"Fl."
     }
     {
-      c' d' e' ges''
+      c' d'' e'
     }
     \\new Staff \\with {
       
     }
     {
-      g'' a' c' d''
+      e' d'' c'
     }
     CONTENT
     stuffed_template = TemplateStuffer.stuff(staves_notes: staves_notes)

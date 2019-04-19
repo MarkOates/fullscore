@@ -8,9 +8,30 @@ class TemplateStuffer
 
   attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
 
-  def self.stuff(staves_notes:)
-    staves_notes.map do |staff_notes|
-      TemplateStuffer.new(staff_notes: staff_notes).staff_partial
+  def self.staves_content_temp_default_arg
+    [
+      {
+        instrument: {
+          name: {
+            full: 'Flute',
+            abbreviated: 'Fl.',
+          }
+        },
+        notes: "c' d'' e'",
+      },
+      {
+        notes: "c' d'' e'".split(' ').reverse.join(' '),
+      }
+    ]
+  end
+
+  def self.stuff(staves_notes:, staves_contents: staves_content_temp_default_arg)
+    staves_contents.map do |staff_contents|
+      TemplateStuffer.new(
+        staff_notes: staff_contents[:notes],
+        instrument_name_full: staff_contents.dig(:instrument, :name, :full),
+        instrument_name_abbreviated: staff_contents.dig(:instrument, :name, :abbreviated),
+      ).staff_partial
     end.join("")
   end
 
