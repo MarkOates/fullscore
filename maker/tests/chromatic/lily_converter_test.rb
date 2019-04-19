@@ -45,5 +45,12 @@ module Chromatic
       expected_output = "c <c, g>"
       assert_equal expected_output, converter.convert
     end
+
+    def test_supports_notes_extending_beyond_the_12_note_octave
+      notes = [14, [24, 19]]
+      converter = LilyConverter.new(notes: notes)
+      expected_output = "d'' <c''' g''>"
+      assert_equal expected_output, converter.convert
+    end
   end
 end
