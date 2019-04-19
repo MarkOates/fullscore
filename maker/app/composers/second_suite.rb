@@ -3,6 +3,7 @@ require_relative '../composer_base'
 class SecondSuite < ComposerBase
   def composition
     projections = Chromatic::ChordNotes.notes_for('circle_of_5ths')
+    projections.concat(Chromatic::ChordNotes.notes_for('ascending_bass'))
     projections << Chromatic::ChordNotes.new.chord_notes('I')
 
 
@@ -14,6 +15,10 @@ class SecondSuite < ComposerBase
       staves: [
         {
           instrument: { name: { full: 'Flute', abbreviated: 'Fl.', } },
+          notes: melody.map { |value| value + 12 },
+        },
+        {
+          instrument: { name: { full: 'Oboe', abbreviated: 'Ob.', } },
           notes: melody,
         },
         {
@@ -21,16 +26,12 @@ class SecondSuite < ComposerBase
           notes: projections.map { |projection| Chromatic::Voicer.new(projection).open },
         },
         {
-          instrument: { name: { full: 'Oboe', abbreviated: 'Ob.', } },
-          notes: projections.map { |projection| projection.first },
-        },
-        {
           instrument: { name: { full: 'Horn in F', abbreviated: 'F Hn.', } },
           notes: projections.map { |projection| projection.first },
         },
         {
           instrument: { name: { full: 'Bassoon', abbreviated: 'Bsn.', }, clef: 'bass', },
-          notes: projections.map { |projection| projection.first },
+          notes: projections.map { |projection| projection.first - 12 },
         },
       ]
     }
