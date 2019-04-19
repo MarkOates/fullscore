@@ -13,24 +13,23 @@ class SecondSuite < ComposerBase
     result = {
       staves: [
         {
-          instrument: {
-            name: {
-              full: 'Flute',
-              abbreviated: 'Fl.',
-            }
-          },
+          instrument: { name: { full: 'Flute', abbreviated: 'Fl.', } },
           notes: melody,
         },
         {
+          instrument: { name: { full: 'Clarinet in Bb', abbreviated: 'Cl.', } },
           notes: projections.map { |projection| Chromatic::Voicer.new(projection).open },
         },
         {
+          instrument: { name: { full: 'Oboe', abbreviated: 'Ob.', } },
           notes: projections.map { |projection| projection.first },
         },
         {
+          instrument: { name: { full: 'Horn in F', abbreviated: 'F Hn.', } },
           notes: projections.map { |projection| projection.first },
         },
         {
+          instrument: { name: { full: 'Bassoon', abbreviated: 'Bsn.', }, clef: 'bass', },
           notes: projections.map { |projection| projection.first },
         },
       ]
