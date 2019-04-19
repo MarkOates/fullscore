@@ -28,9 +28,20 @@ class TemplateStuffer
     '\with {}'
   end
 
+  def get_extra_staff_sections_postfix
+    nil
+  end
+
+  def staff_contents
+    [
+      staff_notes,
+      get_extra_staff_sections_postfix,
+    ].compact.join("\n")
+  end
+
   def _staff_partial
     partial = STAFF_PARTIAL
-    partial = partial.gsub('%%%INSERT_STAFF_CONTENTS_HERE%%%', staff_notes)
+    partial = partial.gsub('%%%INSERT_STAFF_CONTENTS_HERE%%%', staff_contents)
     partial = partial.gsub('%%%INSERT_THE_WITH_META_INFO_HERE%%%', get_instrument_name_fragment)
     partial
   end
