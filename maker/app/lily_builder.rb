@@ -13,16 +13,11 @@ class LilyBuilder
   end
 
   def build
-    first_staff_notes_to_write = staves_ly_notes.first
-    staves_notes = staves_ly_notes.drop(1)
-
     template_stuffs_to_stuff = TemplateStuffer.stuff(
-      staves_notes: staves_notes,
       staves_contents: staves_contents,
     )
 
     template = IO.read(TEMPLATE_FILE)
-    template.sub!('%%%INSERT_STAFF_CONTENTS_HERE%%%', first_staff_notes_to_write)
     template.sub!('%%%INSERT_ADDITIONAL_STAVES_HERE%%%', template_stuffs_to_stuff)
 
     File.open(OUTPUT_FILE, 'w') { |file| file.write(template) }
@@ -45,12 +40,6 @@ class LilyBuilder
 
   def composition
     @composition ||= composer.composition
-  end
-
-  def staves_ly_notes
-    @staves_ly_notes ||= staves.map do |staff|
-      Chromatic::LilyConverter.new(notes: staff[:notes]).convert
-    end
   end
 end
 
