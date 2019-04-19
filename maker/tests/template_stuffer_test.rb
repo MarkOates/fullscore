@@ -1,6 +1,8 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
 require_relative '../lib/template_stuffer'
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 class TemplateStufferTest < Minitest::Test
   def staff_notes
