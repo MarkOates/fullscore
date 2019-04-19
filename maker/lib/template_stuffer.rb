@@ -25,13 +25,15 @@ class TemplateStuffer
         staff_notes: staff_contents[:notes],
         instrument_name_full: staff_contents.dig(:instrument, :name, :full),
         instrument_name_abbreviated: staff_contents.dig(:instrument, :name, :abbreviated),
+        clef: staff_contents.dig(:instrument, :clef),
       ).staff_partial(include_black_background_postfix: i == 0 && use_black_background)
     end.join("")
   end
 
-  attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated
+  attr_reader :staff_notes, :instrument_name_full, :instrument_name_abbreviated, :clef
 
-  def initialize(staff_notes:, instrument_name_full: nil, instrument_name_abbreviated: nil)
+  def initialize(staff_notes:, instrument_name_full: nil, instrument_name_abbreviated: nil, clef: 'treble')
+    @clef = clef
     @staff_notes = staff_notes
     @instrument_name_full = instrument_name_full
     @instrument_name_abbreviated = instrument_name_abbreviated
@@ -61,12 +63,17 @@ class TemplateStuffer
     }'.gsub('TOK', instrument_name_partial)
   end
 
+  def clef_definition
+    '\clef "TOK"'.gsub('TOK', clef) if clef && clef != 'treble'
+  end
+
   def get_extra_staff_sections_postfix
     BLACK_BACKGROUND_PARTIAL
   end
 
   def staff_contents(include_black_background_postfix:)
     [
+      clef_definition,
       staff_notes,
       include_black_background_postfix ? get_extra_staff_sections_postfix : nil,
     ].compact.join("\n")

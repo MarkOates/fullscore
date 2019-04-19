@@ -12,7 +12,7 @@ class TemplateStufferTest < Minitest::Test
           name: {
             full: 'Trombone',
             abbreviated: 'Tbn.',
-          }
+          },
         },
         notes: "c' d'' e'",
       },
@@ -25,6 +25,41 @@ class TemplateStufferTest < Minitest::Test
   def test_creates_a_partial
     template_stuffer = TemplateStuffer.new(
       staff_notes: "c' d' e' ges''",
+    )
+    expected_staff_partial = <<-CONTENT
+    \\new Staff \\with {
+      
+    }
+    {
+      c' d' e' ges''
+    }
+    CONTENT
+
+    assert_equal expected_staff_partial, template_stuffer.staff_partial(include_black_background_postfix: false)
+  end
+
+  def test_with_a_clef_includes_the_clef
+    template_stuffer = TemplateStuffer.new(
+      staff_notes: "c' d' e' ges''",
+      clef: 'bass',
+    )
+    expected_staff_partial = <<-CONTENT
+    \\new Staff \\with {
+      
+    }
+    {
+      \\clef "bass"
+c' d' e' ges''
+    }
+    CONTENT
+
+    assert_equal expected_staff_partial, template_stuffer.staff_partial(include_black_background_postfix: false)
+  end
+
+  def test_with_a_treble_cleff_does_not_include_the_clef
+    template_stuffer = TemplateStuffer.new(
+      staff_notes: "c' d' e' ges''",
+      clef: 'treble',
     )
     expected_staff_partial = <<-CONTENT
     \\new Staff \\with {
