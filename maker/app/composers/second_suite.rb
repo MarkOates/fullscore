@@ -6,7 +6,6 @@ class SecondSuite < ComposerBase
     projections.concat(Chromatic::ChordNotes.notes_for('ascending_bass'))
     projections << Chromatic::ChordNotes.new.chord_notes('I')
 
-
     melody = Chromatic::MelodyExtractor.random(projections: projections)
     melody.pop
     melody << 12  # make sure it ends on tonic
