@@ -43,6 +43,6 @@ class LilyBuilder
   end
 end
 
-require_relative 'composers/voicing_suite'
+require_relative 'composers/melody_shaper'
 
-LilyBuilder.new(composer: VoicingSuite.new).build
+LilyBuilder.new(composer: MelodyShaper.new).build
