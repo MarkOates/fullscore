@@ -30,6 +30,40 @@ class SecondSuite < ComposerBase
     end.flatten
   end
 
+  def octave_transpose(cell)
+    cell.map do |value|
+      if value == 'r'
+        'r'
+      else
+        value + 12
+      end
+    end
+  end
+
+  def octave_transpose_down(cell)
+    cell.map do |value|
+      if value == 'r'
+        'r'
+      else
+        value - 12
+      end
+    end
+  end
+
+  def first_chord_note(cell)
+    cell.map do |value|
+      if value == 'r'
+        'r'
+      else
+        value.first
+      end
+    end
+  end
+
+  def append_rest(cell:)
+    cell << 'r'
+  end
+
   def harmonize_in_3rds(cell:)
     cell.each_with_index.map do |value, index|
       if value == 'r'
@@ -47,6 +81,7 @@ class SecondSuite < ComposerBase
     projections = Chromatic::ChordNotes.notes_for('circle_of_5ths')
     projections.concat(Chromatic::ChordNotes.notes_for('ascending_bass'))
     projections << Chromatic::ChordNotes.new.chord_notes('I')
+    projections << 'r'
 
     melody = Chromatic::MelodyExtractor.random(projections: projections)
     melody.pop
@@ -58,7 +93,7 @@ class SecondSuite < ComposerBase
       staves: [
         {
           instrument: { name: { full: 'Flute', abbreviated: 'Fl.', } },
-          notes: melody.map { |value| value + 12 },
+          notes: octave_transpose(melody),
         },
         {
           instrument: { name: { full: 'Oboe', abbreviated: 'Ob.', } },
@@ -73,11 +108,11 @@ class SecondSuite < ComposerBase
         },
         {
           instrument: { name: { full: 'Horn in F', abbreviated: 'F Hn.', } },
-          notes: projections.map { |projection| projection.first },
+          notes: first_chord_note(projections),
         },
         {
           instrument: { name: { full: 'Bassoon', abbreviated: 'Bsn.', }, clef: 'bass', },
-          notes: projections.map { |projection| projection.first - 12 },
+          notes: octave_transpose_down(first_chord_note(projections)),
         },
         {
           instrument: { name: { full: 'Piano (R.H.)', abbreviated: 'Pf-R.', }, },

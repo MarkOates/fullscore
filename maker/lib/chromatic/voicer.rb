@@ -27,7 +27,13 @@ module Chromatic
     end
 
     def open # untested
-      notes.each_with_index.map { |note, index| index.even? ? note : note + 12 }
+      if notes == 'r'
+        'r'
+      else
+        notes.each_with_index.map do |value, index|
+          index.even? ? value : value + 12
+        end
+      end
     end
   end
 end

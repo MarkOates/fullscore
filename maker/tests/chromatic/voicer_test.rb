@@ -33,5 +33,17 @@ module Chromatic
       expected_notes = [-24, 4-24, 7-24]
       assert_equal expected_notes, Voicer.new(notes).ultra_low_range
     end
+
+    def test_open_open_spaces_the_chord
+      notes = [0, 4, 7]
+      expected_notes = [0, 16, 7]
+      assert_equal expected_notes, Voicer.new(notes).open
+    end
+
+    def test_properly_handles_rests
+      notes = 'r'
+      expected_notes = 'r'
+      assert_equal expected_notes, Voicer.new(notes).open
+    end
   end
 end
