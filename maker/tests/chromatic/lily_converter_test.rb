@@ -1,6 +1,8 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
 require_relative '../../lib/chromatic/lily_converter'
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 module Chromatic
   class LilyConverterTest < Minitest::Test

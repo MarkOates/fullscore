@@ -15,7 +15,7 @@ module Chromatic
 
     def convert
       notes.map do |fragment|
-        fragment_component = fragment
+        fragment_component = fragment.respond_to?(:pitches) ? fragment.pitches : fragment
         fragment_duration = fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
 
         if fragment_component.is_a?(Integer)

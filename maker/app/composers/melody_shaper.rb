@@ -11,6 +11,23 @@ class Flute
   end
 end
 
+class Note
+  attr_reader :duration, :pitches
+
+  def initialize(duration:, pitches:)
+    @duration = duration
+    @pitches = pitches
+  end
+
+  def /(divisor)
+    pitches / divisor
+  end
+
+  def %(divisor)
+    pitches % divisor
+  end
+end
+
 class MelodyShaper < ComposerBase
   def rest
     'r'
@@ -23,7 +40,7 @@ class MelodyShaper < ComposerBase
   end
 
   def staves
-    base = [0, 2, 7]
+    base = [0, Note.new(duration: 2, pitches: 2), 7]
 
     [
       {
