@@ -1,19 +1,6 @@
 require_relative '../composer_base'
 
-class Note
-  attr_reader :pitches, :duration
-
-  def initialize(pitches:, duration:)
-    @pitches = pitches
-    @duration = duration
-  end
-
-  def call
-    7
-  end
-end
-
-class SecondSuite < ComposerBase
+class VoicingSuite < ComposerBase
   DIATONIC = [0, 2, 4, 5, 7, 9, 11]
 
   def next_diatonic(chromatic:, interval: 1)

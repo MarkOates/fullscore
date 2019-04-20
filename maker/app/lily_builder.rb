@@ -43,6 +43,6 @@ class LilyBuilder
   end
 end
 
-require_relative 'composers/second_suite'
+require_relative 'composers/voicing_suite'
 
-LilyBuilder.new(composer: SecondSuite.new).build
+LilyBuilder.new(composer: VoicingSuite.new).build
