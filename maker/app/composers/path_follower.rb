@@ -54,17 +54,20 @@ class PathFollower < ComposerBase
   end
 
   def staves
-    root_notes = perfect_major_circle_of_5ths.reverse.map { |note| note.first }
+    progression = perfect_major_circle_of_5ths.reverse
+    root_notes = progression.map { |note| note.first }
+    top_notes = normalize_within_octave(notes: progression.map { |note| note.sample })
 
     [
       {
-        notes: floodfill(noteses: perfect_major_circle_of_5ths.reverse),
+        instrument: { name: { full: 'Extracted Melody' }, },
+        notes: top_notes,
       },
       {
-        instrument:
-        {
-          clef: 'bass',
-        },
+        notes: floodfill(noteses: progression),
+      },
+      {
+        instrument: { name: { full: 'Root Notes' }, clef: 'bass' },
         notes: transpose_down_octave(notes: normalize_within_octave(notes: root_notes)),
       }
     ]
