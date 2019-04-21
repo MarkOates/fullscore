@@ -37,7 +37,10 @@ module Chromatic
     private
 
     def get_fragment_duration(fragment:)
-      fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
+      duration = fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
+      duration_dots = fragment.respond_to?(:duration_dots) ? fragment.duration_dots : 0
+
+      "#{duration}#{'.' * duration_dots}"
     end
 
     def convert_chord(chord:)

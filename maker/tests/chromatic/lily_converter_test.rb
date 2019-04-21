@@ -87,5 +87,18 @@ module Chromatic
 
       assert_equal expected_output, converter.convert
     end
+
+    def test_with_a_fragment_that_recieves_duration_dots_will_include_it
+      fragment = OpenStruct.new({
+        pitches:       [0, 2, 4],
+        duration:      2,
+        duration_dots: 2,
+      })
+
+      converter = LilyConverter.new(notes: [fragment])
+      expected_output = "<c' d' e'>2.."
+
+      assert_equal expected_output, converter.convert
+    end
   end
 end
