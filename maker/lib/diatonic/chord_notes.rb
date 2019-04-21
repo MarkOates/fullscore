@@ -12,7 +12,7 @@ module Diatonic
     def chords(progression)
       case progression
       when 'circle_of_5ths'
-        ['I', 'IV', 'viio', 'iii', 'vi', 'ii', 'V']
+        ['I', 'IV', 'viio', 'iii', 'vi', 'ii', 'V', 'I']
       when 'ascending_bass'
         ['vi', 'V6', 'I']
       end

@@ -80,7 +80,7 @@ module Chromatic
     end
 
     def test_circle_of_5ths
-      expected = [[0, 4, 7], [5, 9, 12], [11, 14, 17], [4, 7, 11], [9, 12, 16], [2, 5, 9], [7, 11, 14]]
+      expected = [[0, 4, 7], [5, 9, 12], [11, 14, 17], [4, 7, 11], [9, 12, 16], [2, 5, 9], [7, 11, 14], [0, 4, 7]]
       assert_equal expected, ChordNotes.notes_for('circle_of_5ths')
     end
 
