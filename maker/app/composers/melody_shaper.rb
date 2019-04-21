@@ -36,7 +36,7 @@ class DurationSubtractor
 end
 
 class Note
-  attr_reader :duration, :duration_dots, :pitches
+  attr_accessor :duration, :duration_dots, :pitches
 
   def initialize(duration:, duration_dots: 0, pitches:)
     @duration = duration
@@ -65,6 +65,8 @@ class MelodyShaper < ComposerBase
   def join_with_jumper_notes(notes:)
     notes.each.map do |fragment|
       p = pitch(fragment)
+      #d = duration(fragment)
+      #dd = duration_dots(fragment)
       first_jumper_note = jumper[jumper.find_index(p) - 2]
       second_jumper_note = jumper[jumper.find_index(p) - 1]
 
@@ -72,7 +74,7 @@ class MelodyShaper < ComposerBase
       [
         Note.new(pitches: first_jumper_note, duration: 16),
         Note.new(pitches: second_jumper_note, duration: 16),
-        Note.new(pitches: p, duration: 2),
+        Note.new(pitches: p, duration: 4, duration_dots: 1),
       ]
     end.flatten
   end
@@ -81,12 +83,26 @@ class MelodyShaper < ComposerBase
     DurationSubtractor.new(duration1: duration1, duration2: duration2).result
   end
 
+  def add_duration(duration1:, duration2:)
+    pair = [duration1, duration2]
+    case pair
+    when [16, 16]
+      8
+    else
+      raise UnknownSubtraction.new("Unknown subtraction for pair #{pair}")
+    end
+  end
+
   def pitch(fragment)
     fragment.respond_to?(:pitches) ? fragment.pitches : fragment
   end
 
   def duration(fragment)
-    fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
+    fragment.respond_to?(:duration) ? fragment.duration : 4
+  end
+
+  def duration_dots(fragment)
+    fragment.respond_to?(:duration_dots) ? fragment.duration_dots : 0
   end
 
   def set_to_half_notes(notes:)
@@ -96,15 +112,28 @@ class MelodyShaper < ComposerBase
     end
   end
 
-  def staves
+  def melody
     base = [0, 2, 7]
     base = set_to_half_notes(notes: base)
-    base = [base[0]].concat(join_with_jumper_notes(notes: base.drop(1)))
+    shorter_duration = subtract_duration(duration1: base[0].duration, duration2: 8)
+    base[0].duration = shorter_duration.duration
+    base[0].duration_dots = shorter_duration.duration_dots
 
+    melody = [base[0]].concat(join_with_jumper_notes(notes: base.drop(1)))
+    melody.last.duration = 2
+    melody.last.duration_dots = 0
+    melody << Note.new(pitches: 'r', duration: 4)
+    melody << Note.new(pitches: 12, duration: 8)
+    melody << Note.new(pitches: 11, duration: 8)
+
+    melody
+  end
+
+  def staves
     [
       {
         instrument: Flute.as_json,
-        notes: base,
+        notes: melody,
       }
     ]
   end
