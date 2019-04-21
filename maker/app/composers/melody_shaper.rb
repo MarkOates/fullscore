@@ -11,6 +11,27 @@ class Flute
   end
 end
 
+class DurationSubtractor
+  class UnknownSubtraction < StandardError; end
+
+  attr_reader :duration1, :duration2
+
+  def initialize(duration1:, duration2:)
+    @duration1 = duration1
+    @duration2 = duration2
+  end
+
+  def result
+    pair = [duration1, duration2]
+    case pair
+    when [1, 2]
+      2
+    else
+      raise UnknownSubtraction.new("Unknown subtraction for pair #{pair}")
+    end
+  end
+end
+
 class Note
   attr_reader :duration, :duration_dots, :pitches
 
@@ -51,6 +72,10 @@ class MelodyShaper < ComposerBase
         Note.new(pitches: p, duration: 2),
       ]
     end.flatten
+  end
+
+  def subtract_duration(duration1:, duration2:)
+    DurationSubtractor.new(duration1: duration1, duration2: duration2).result
   end
 
   def pitch(fragment)
