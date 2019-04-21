@@ -5,8 +5,10 @@ require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 class MelodyShaperTest < Minitest::Test
-  def test_works
-    assert true
+  def test_staves_returns_the_expected_hash
+    melody_shaper = MelodyShaper.new
+
+    assert melody_shaper.staves
   end
 end
 

@@ -150,12 +150,29 @@ class MelodyShaper < ComposerBase
     melody
   end
 
-  def staves
+  def flute
     [
       {
         instrument: Flute.as_json,
         notes: melody,
       }
     ]
+  end
+
+  def piano_harmonization
+    [
+      {
+        instrument: Piano.rh_as_json,
+        notes: [Note.new(duration: 1, pitches: 'R')] * 2,
+      },
+      {
+        instrument: Piano.lh_as_json,
+        notes: [Note.new(duration: 1, pitches: 'R')] * 2,
+      }
+    ]
+  end
+
+  def staves
+    flute.concat(piano_harmonization)
   end
 end
