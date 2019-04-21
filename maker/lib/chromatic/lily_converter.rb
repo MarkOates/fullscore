@@ -19,14 +19,14 @@ module Chromatic
         fragment_duration = fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
 
         if fragment_component.is_a?(Integer)
-          convert_note(note: fragment)
+          convert_note(note: fragment_component)
         elsif fragment_component.is_a?(Array)
-          convert_chord(chord: fragment)
+          convert_chord(chord: fragment_component)
         elsif fragment_component.is_a?(String)
           if fragment_component == 'r'
             'r'
           else
-            raise UnknownStringFragmentType.new("String fragment \"#{fragment}\" not known")
+            raise UnknownStringFragmentType.new("String fragment \"#{fragment_component}\" not known")
           end
         else
           raise UnknownFramentType.new("Fragment type #{fragment.class}")
@@ -35,6 +35,10 @@ module Chromatic
     end
 
     private
+
+    def get_fragment_duration(fragment:)
+      fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
+    end
 
     def convert_chord(chord:)
       lily_notes = chord.map do |note|
@@ -49,7 +53,7 @@ module Chromatic
     end
 
     def convert_duration(duration:)
-      return 8.to_s
+      duration
     end
 
     def convert_octaves(note:)

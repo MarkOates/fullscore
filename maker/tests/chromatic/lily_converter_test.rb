@@ -4,6 +4,8 @@ require_relative '../../lib/chromatic/lily_converter'
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
+require 'ostruct'
+
 module Chromatic
   class LilyConverterTest < Minitest::Test
     def test_parses_middle_c
@@ -71,6 +73,18 @@ module Chromatic
       notes = [14, [24, 19]]
       converter = LilyConverter.new(notes: notes)
       expected_output = "d''4 <c''' g''>4"
+      assert_equal expected_output, converter.convert
+    end
+
+    def test_with_a_fragment_that_recieves_duration_uses_it_for_duration
+      fragment = OpenStruct.new({
+        pitches:       [0, 2, 4],
+        duration:      8,
+      })
+
+      converter = LilyConverter.new(notes: [fragment])
+      expected_output = "<c' d' e'>8"
+
       assert_equal expected_output, converter.convert
     end
   end
