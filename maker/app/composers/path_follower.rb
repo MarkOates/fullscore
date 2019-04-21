@@ -10,6 +10,10 @@ class PathFollower < ComposerBase
     Chromatic::ChordNotes.notes_for('circle_of_5ths')
   end
 
+  def perfect_major_circle_of_5ths
+    Chromatic::ChordNotes.new.perfect_major_circle_of_5ths(iterations: 4)
+  end
+
   def transpose_up_octave(notes:, num_octaves: 1)
     notes.map { |note| note + 12*num_octaves }
   end

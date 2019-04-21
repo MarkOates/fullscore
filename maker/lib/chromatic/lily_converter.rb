@@ -76,12 +76,16 @@ module Chromatic
       case relative_to_0
       when 0
         "c"
+      when 1
+        "c#{SHARP}"
       when 2
         "d"
       when 4
         "e"
       when 5
         "f"
+      when 6
+        "f#{SHARP}"
       when 7
         "g"
       when 8
