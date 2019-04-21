@@ -1,4 +1,5 @@
 require_relative '../composer_base'
+require 'ostruct'
 
 class Flute
   def self.as_json
@@ -26,6 +27,8 @@ class DurationSubtractor
     case pair
     when [1, 2]
       2
+    when [2, 8]
+      OpenStruct.new(duration: 4, duration_dots: 1)
     else
       raise UnknownSubtraction.new("Unknown subtraction for pair #{pair}")
     end
