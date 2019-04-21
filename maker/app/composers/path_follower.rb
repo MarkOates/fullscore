@@ -40,6 +40,19 @@ class PathFollower < ComposerBase
     end
   end
 
+  class UnresolvableMelody < StandardError; end
+
+  def resolve_melody(progression:, destination:)
+    ## validate that destination is in the final chord of the progression,
+    ## otherwise it is an invalid resolver
+
+    unless progression&.last&.include?(destination)
+      error_message = "The destinaion note #{destination} must be present in the " \
+        "final chord of the progression #{progression}"
+      raise UnresolvableMelody.new(error_message)
+    end
+  end
+
   def staves
     root_notes = perfect_major_circle_of_5ths.reverse.map { |note| note.first }
 
