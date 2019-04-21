@@ -49,6 +49,12 @@ module Chromatic
       assert_equal expected_output, LilyConverter.new(notes: notes).convert
     end
 
+    def test_supports_full_measure_rests
+      notes = ['R']
+      expected_output = 'R4'
+      assert_equal expected_output, LilyConverter.new(notes: notes).convert
+    end
+
     def test_with_notes_including_a_rest
       notes = ['r', 12, 'r', 7]
       expected_output = "r4 c''4 r4 g'4"

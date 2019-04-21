@@ -23,8 +23,8 @@ module Chromatic
         elsif fragment_component.is_a?(Array)
           convert_chord(chord: fragment_component)
         elsif fragment_component.is_a?(String)
-          if fragment_component == 'r'
-            'r'
+          if fragment_component.downcase == 'r'
+            fragment_component
           else
             raise UnknownStringFragmentType.new("String fragment \"#{fragment_component}\" not known")
           end

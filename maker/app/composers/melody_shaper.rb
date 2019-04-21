@@ -12,6 +12,27 @@ class Flute
   end
 end
 
+class Piano
+  def self.rh_as_json
+    {
+      name: {
+        full: 'Piano (R.H.)',
+        abbreviated: 'Pf (R.H.)',
+      },
+    }
+  end
+
+  def self.lh_as_json
+    {
+      name: {
+        full: 'Piano (L.H.)',
+        abbreviated: 'Pf (L.H.)',
+      },
+      clef: 'bass',
+    }
+  end
+end
+
 class DurationSubtractor
   class UnknownSubtraction < StandardError; end
 
