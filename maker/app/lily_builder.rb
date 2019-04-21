@@ -43,6 +43,6 @@ class LilyBuilder
   end
 end
 
-require_relative 'composers/melody_shaper'
+require_relative 'composers/path_follower'
 
-LilyBuilder.new(composer: MelodyShaper.new).build
+LilyBuilder.new(composer: PathFollower.new).build
