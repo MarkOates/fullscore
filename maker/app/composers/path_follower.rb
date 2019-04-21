@@ -1,17 +1,6 @@
 require_relative '../composer_base'
 require_relative '../../lib/chromatic/chord_notes'
 
-class Flute
-  def self.as_json
-    {
-      name: {
-        full: 'Flute',
-        abbreviated: 'Fl.',
-      },
-    }
-  end
-end
-
 class PathFollower < ComposerBase
   def n(pitches, duration, dots = 0)
     Note.new(duration: duration, duration_dots: 0, pitches: pitches)
@@ -50,8 +39,7 @@ class PathFollower < ComposerBase
   def staves
     [
       {
-        instrument: Flute.as_json,
-        notes: floodfill(noteses: circle_of_5ths),
+        notes: floodfill(noteses: perfect_major_circle_of_5ths.reverse),
       }
     ]
   end
