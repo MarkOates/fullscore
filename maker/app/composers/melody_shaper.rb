@@ -75,8 +75,8 @@ class Note
 end
 
 class MelodyShaper < ComposerBase
-  def n(pitches, duration)
-    Note.new(duration: duration, pitches: pitches)
+  def n(pitches, duration, dots = 0)
+    Note.new(duration: duration, duration_dots: 0, pitches: pitches)
   end
 
   def jumper
