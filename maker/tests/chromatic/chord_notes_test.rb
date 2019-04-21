@@ -1,6 +1,8 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
 require_relative '../../lib/chromatic/chord_notes'
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 module Chromatic
   class ChordNotesTest < Minitest::Test
@@ -50,6 +52,18 @@ module Chromatic
       progression = ['vi', 'I', 'V', 'I']
       expected = [[9, 12, 16], [0, 4, 7], [7, 11, 14], [0, 4, 7]]
       actual = ChordNotes.progression(progression)
+      assert_equal expected, actual
+    end
+
+    def test_perfect_major_circle_of_5ths_returns_the_expected_progression
+      expected = [[0, 4, 7], [7, 11, 14], [14, 18, 21]]
+      actual = ChordNotes.new.perfect_major_circle_of_5ths
+      assert_equal expected, actual
+    end
+
+    def test_perfect_major_circle_of_5ths_returns_the_expected_iterations_of_the_progression
+      expected = [[0, 4, 7], [7, 11, 14], [14, 18, 21], [21, 25, 28], [28, 32, 35], [35, 39, 42]]
+      actual = ChordNotes.new.perfect_major_circle_of_5ths(iterations: 6)
       assert_equal expected, actual
     end
 

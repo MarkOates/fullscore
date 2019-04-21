@@ -20,6 +20,13 @@ module Chromatic
       end
     end
 
+    def perfect_major_circle_of_5ths(iterations: 3)
+      major_chord = major_projection(root: 0)
+      iterations.times.map do |i|
+        major_chord.map { |note| note + 7 * i }
+      end
+    end
+
     def note_name(notes)
       notes.map do |note|
         case note
