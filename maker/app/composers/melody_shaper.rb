@@ -114,6 +114,16 @@ class MelodyShaper < ComposerBase
     end
   end
 
+  def transpose(notes:, transposition:)
+    notes.each.map do |note|
+      if note.pitches != 'r'
+        note.pitches += transposition
+      end
+
+      note
+    end
+  end
+
   def pitch(fragment)
     fragment.respond_to?(:pitches) ? fragment.pitches : fragment
   end
