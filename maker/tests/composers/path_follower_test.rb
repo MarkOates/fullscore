@@ -42,4 +42,18 @@ class PathFollowerTest < Minitest::Test
     actual = PathFollower.new.normalize_within_octave(notes: initial_notes)
     assert_equal expected, actual
   end
+
+  def test_project_many_octaves
+    initial_notes = [0, 4, 7]
+    expected = [
+      -24, -20, -17,
+      -12, -8, -5,
+      0, 4, 7,
+      12, 16, 19,
+      24, 28, 31
+    ]
+
+    actual = PathFollower.new.project_many_octaves(notes: initial_notes)
+    assert_equal expected, actual
+  end
 end

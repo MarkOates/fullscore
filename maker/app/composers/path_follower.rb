@@ -21,23 +21,37 @@ class PathFollower < ComposerBase
     Chromatic::ChordNotes.notes_for('circle_of_5ths')
   end
 
-  def transpose_up_octave(notes:)
-    notes.map { |note| note + 12 }
+  def transpose_up_octave(notes:, num_octaves: 1)
+    notes.map { |note| note + 12*num_octaves }
   end
 
-  def transpose_down_octave(notes:)
-    notes.map { |note| note - 12 }
+  def transpose_down_octave(notes:, num_octaves: 1)
+    notes.map { |note| note - 12*num_octaves }
   end
 
   def normalize_within_octave(notes:)
     notes.map { |note| note % 12 }.uniq
   end
 
+  def project_many_octaves(notes:)
+    source_notes = normalize_within_octave(notes: notes)
+    source_notes = transpose_down_octave(notes: source_notes, num_octaves: 2)
+    5.times.map do |i|
+      transpose_up_octave(notes: source_notes, num_octaves: i)
+    end.flatten
+  end
+
+  def floodfill(noteses:)
+    noteses.map do |notes|
+      project_many_octaves(notes: notes)
+    end
+  end
+
   def staves
     [
       {
         instrument: Flute.as_json,
-        notes: circle_of_5ths,
+        notes: floodfill(noteses: circle_of_5ths),
       }
     ]
   end
