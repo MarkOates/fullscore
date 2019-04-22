@@ -124,4 +124,13 @@ class PathFollowerTest < Minitest::Test
 
     assert_equal start_note, expected_first_note
   end
+
+  def test_middle_note_returns_the_middle_note_of_a_chord
+    path_follower = PathFollower.new
+    chord = [0, 2, 4, 7, 9]
+    expected_middle_note = 4
+    actual_note = path_follower.middle_note(notes: chord)
+
+    assert_equal expected_middle_note, actual_note
+  end
 end
