@@ -42,7 +42,7 @@ class PathFollower < ComposerBase
     end
   end
 
-  def resolve_pitch(chord:, note:, preference: [:matching, :lower, :upper]) # has preference for
+  def resolve_pitch(chord:, note:, preference: [:matching, :lower, :upper])
     sort_hash = chord.sort.group_by { |chord_note| chord_note <=> note }
 
     case preference
