@@ -80,6 +80,8 @@ module Chromatic
         "c#{SHARP}"
       when 2
         "d"
+      when 3
+        "e#{FLAT}"
       when 4
         "e"
       when 5
@@ -92,6 +94,8 @@ module Chromatic
         "a#{FLAT}"
       when 9
         "a"
+      when 10
+        "b#{FLAT}"
       when 11
         "b"
       else
