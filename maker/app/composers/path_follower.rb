@@ -81,13 +81,17 @@ class PathFollower < ComposerBase
     sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample })
     fill = floodfill(noteses: progression)
 
-    melody_start_note = middle_note(notes: fill.first)
-    calculated_melody = resolve_melody(progression: fill, start_note: melody_start_note)
+    calculated_melody_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
+    calculated_melody_2 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 1))
 
     [
       {
-        instrument: { name: { full: 'Calculated' }, },
-        notes: transpose_up_octave(notes: calculated_melody),
+        instrument: { name: { full: "Resolve Melody 1" }, },
+        notes: transpose_up_octave(notes: calculated_melody_1),
+      },
+      {
+        instrument: { name: { full: "Resolve Melody 2" }, },
+        notes: transpose_up_octave(notes: calculated_melody_2),
       },
       {
         instrument: { name: { full: 'Top Notes' }, },
