@@ -22,12 +22,14 @@ class PathFollower < ComposerBase
     notes.map { |note| note - 12*num_octaves }
   end
 
-  def normalize_within_octave(notes:)
-    notes.map { |note| note % 12 }.uniq
+  def normalize_within_octave(notes:, uniq: true)
+    result = notes.map { |note| note % 12 }
+    result.uniq! if uniq == true
+    result
   end
 
   def project_many_octaves(notes:)
-    source_notes = normalize_within_octave(notes: notes)
+    source_notes = normalize_within_octave(notes: notes, uniq: true)
     source_notes = transpose_down_octave(notes: source_notes, num_octaves: 2)
     5.times.map do |i|
       transpose_up_octave(notes: source_notes, num_octaves: i)
@@ -77,8 +79,8 @@ class PathFollower < ComposerBase
   def staves
     progression = perfect_major_circle_of_5ths.reverse
     root_notes = progression.map { |note| note.first }
-    top_notes = normalize_within_octave(notes: progression.map { |note| note.last })
-    sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample })
+    top_notes = normalize_within_octave(notes: progression.map { |note| note.last }, uniq: false)
+    sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
     fill = floodfill(noteses: progression)
 
     calculated_melody_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
@@ -107,7 +109,7 @@ class PathFollower < ComposerBase
       },
       {
         instrument: { name: { full: 'Root Notes' }, clef: 'bass' },
-        notes: transpose_down_octave(notes: normalize_within_octave(notes: root_notes)),
+        notes: transpose_down_octave(notes: normalize_within_octave(notes: root_notes, uniq: false)),
       }
     ]
   end
