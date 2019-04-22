@@ -76,8 +76,15 @@ class PathFollower < ComposerBase
     end
   end
 
+  def reverse_resolve_melody(progression:, end_note:)
+    progression.reverse
+
+    result_melody = resolve_melody(progression: progression.reverse, start_note: end_note)
+    result_melody.reverse
+  end
+
   def staves
-    progression = Chromatic::ChordNotes.progression(['I', 'IV', 'vi', 'V', 'I']).reverse
+    progression = Chromatic::ChordNotes.progression(['I', 'vi', 'ii', 'V', 'I', 'vi', 'ii', 'V', 'I'])
     root_notes = progression.map { |note| note.first }
     top_notes = normalize_within_octave(notes: progression.map { |note| note.last }, uniq: false)
     sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
@@ -85,7 +92,7 @@ class PathFollower < ComposerBase
 
     calculated_melody_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
     calculated_melody_2 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 1))
-    calculated_melody_3 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: -1))
+    calculated_melody_3 = reverse_resolve_melody(progression: fill, end_note: 7)
 
     [
       {
@@ -97,7 +104,7 @@ class PathFollower < ComposerBase
         notes: transpose_up_octave(notes: calculated_melody_2),
       },
       {
-        instrument: { name: { full: "Resolve Melody 3" }, },
+        instrument: { name: { full: "Reverse Resolve" }, },
         notes: transpose_up_octave(notes: calculated_melody_3),
       },
       {
