@@ -99,4 +99,17 @@ class PathFollowerTest < Minitest::Test
 
     assert_equal expected_resolved_pitch, resolved_pitch
   end
+
+  def test_resovle_pitch_returns_a_preferred_note_to_resolve_with_preference_into_a_chord
+    path_follower = PathFollower.new
+
+    note = 3
+    chord = [0, 4, 7, 9, 11]
+    preference = [:matching, :upper, :lower]
+
+    expected_resolved_pitch = 4
+    resolved_pitch = path_follower.resolve_pitch(note: note, chord: chord, preference: preference)
+
+    assert_equal expected_resolved_pitch, resolved_pitch
+  end
 end
