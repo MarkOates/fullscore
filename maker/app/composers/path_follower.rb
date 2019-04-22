@@ -62,6 +62,8 @@ class PathFollower < ComposerBase
         "first chord of the progression #{progression}"
       raise UnresolvableMelody.new(error_message)
     end
+
+    result_melody = [start_note]
   end
 
   def staves
