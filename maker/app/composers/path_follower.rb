@@ -67,7 +67,11 @@ class PathFollower < ComposerBase
       raise UnresolvableMelody.new(error_message)
     end
 
-    result_melody = [start_note]
+    current_melody_note = start_note
+    progression.each.map do |chord|
+      resolved_pitch = resolve_pitch(chord: chord, note: current_melody_note)
+      current_melody_note = resolved_pitch
+    end
   end
 
   def staves
@@ -75,8 +79,16 @@ class PathFollower < ComposerBase
     root_notes = progression.map { |note| note.first }
     top_notes = normalize_within_octave(notes: progression.map { |note| note.last })
     sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample })
+    fill = floodfill(noteses: progression)
+
+    melody_start_note = middle_note(notes: fill.first)
+    calculated_melody = resolve_melody(progression: fill, start_note: melody_start_note)
 
     [
+      {
+        instrument: { name: { full: 'Calculated' }, },
+        notes: transpose_up_octave(notes: calculated_melody),
+      },
       {
         instrument: { name: { full: 'Top Notes' }, },
         notes: top_notes,
@@ -87,7 +99,7 @@ class PathFollower < ComposerBase
       },
       {
         instrument: { name: { full: 'Floodfill'}, },
-        notes: floodfill(noteses: progression),
+        notes: fill,
       },
       {
         instrument: { name: { full: 'Root Notes' }, clef: 'bass' },

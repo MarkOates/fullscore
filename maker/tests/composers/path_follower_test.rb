@@ -113,7 +113,7 @@ class PathFollowerTest < Minitest::Test
     assert_equal expected_resolved_pitch, resolved_pitch
   end
 
-  def test_resovle_melody_starts_the_melody_with_the_first_pitch
+  def test_resovle_melody_starts_the_melody_with_the_first_pitch__sanity_check
     path_follower = PathFollower.new
 
     progression = [[7, 11, 14], [0, 4, 7]]
