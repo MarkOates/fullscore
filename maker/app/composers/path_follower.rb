@@ -77,7 +77,7 @@ class PathFollower < ComposerBase
   end
 
   def staves
-    progression = perfect_major_circle_of_5ths.reverse
+    progression = Chromatic::ChordNotes.progression(['I', 'IV', 'vi', 'V', 'I']).reverse
     root_notes = progression.map { |note| note.first }
     top_notes = normalize_within_octave(notes: progression.map { |note| note.last }, uniq: false)
     sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
@@ -85,6 +85,7 @@ class PathFollower < ComposerBase
 
     calculated_melody_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
     calculated_melody_2 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 1))
+    calculated_melody_3 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: -1))
 
     [
       {
@@ -94,6 +95,10 @@ class PathFollower < ComposerBase
       {
         instrument: { name: { full: "Resolve Melody 2" }, },
         notes: transpose_up_octave(notes: calculated_melody_2),
+      },
+      {
+        instrument: { name: { full: "Resolve Melody 3" }, },
+        notes: transpose_up_octave(notes: calculated_melody_3),
       },
       {
         instrument: { name: { full: 'Top Notes' }, },
