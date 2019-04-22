@@ -57,18 +57,18 @@ class PathFollowerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_resolve_melody_with_an_invalid_progression_and_destination_raises
+  def test_resolve_melody_with_an_invalid_progression_and_start_note_raises
     path_follower = PathFollower.new
 
     raised_error = assert_raises PathFollower::UnresolvableMelody do
       path_follower.resolve_melody(
         progression: [[7, 11, 14, 17], [0, 4, 7]],
-        destination: 2,
+        start_note: 2,
       )
     end
 
-    expected_error_message = "The destinaion note #{2} must be present in the " \
-      "final chord of the progression #{[[7, 11, 14, 17], [0, 4, 7]]}"
+    expected_error_message = "The start_note note #{2} must be present in the " \
+      "first chord of the progression #{[[7, 11, 14, 17], [0, 4, 7]]}"
 
     assert_equal expected_error_message, raised_error.message
   end

@@ -53,13 +53,13 @@ class PathFollower < ComposerBase
 
   class UnresolvableMelody < StandardError; end
 
-  def resolve_melody(progression:, destination:)
-    ## validate that destination is in the final chord of the progression,
+  def resolve_melody(progression:, start_note:)
+    ## validate that start_note is in the first chord of the progression,
     ## otherwise it is an invalid resolver
 
-    unless progression&.last&.include?(destination)
-      error_message = "The destinaion note #{destination} must be present in the " \
-        "final chord of the progression #{progression}"
+    unless progression&.first&.include?(start_note)
+      error_message = "The start_note note #{start_note} must be present in the " \
+        "first chord of the progression #{progression}"
       raise UnresolvableMelody.new(error_message)
     end
   end
