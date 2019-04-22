@@ -72,4 +72,31 @@ class PathFollowerTest < Minitest::Test
 
     assert_equal expected_error_message, raised_error.message
   end
+
+  def test_resovle_pitch_returns_the_preferred_note_if_it_exists_in_the_chord
+    path_follower = PathFollower.new
+
+    expected_resolved_pitch = 4
+    resolved_pitch = path_follower.resolve_pitch(chord: [0, 4, 7], note: 4)
+
+    assert_equal expected_resolved_pitch, resolved_pitch
+  end
+
+  def test_resovle_pitch_returns_a_preferred_note_to_resolve_into_a_chord
+    path_follower = PathFollower.new
+
+    expected_resolved_pitch = 0
+    resolved_pitch = path_follower.resolve_pitch(chord: [0, 4, 7], note: 2)
+
+    assert_equal expected_resolved_pitch, resolved_pitch
+  end
+
+  def test_resovle_pitch_returns_a_preferred_note_to_resolve_into_a_chord_2
+    path_follower = PathFollower.new
+
+    expected_resolved_pitch = 2
+    resolved_pitch = path_follower.resolve_pitch(chord: [0, 2, 4, 7, 9, 11], note: 3)
+
+    assert_equal expected_resolved_pitch, resolved_pitch
+  end
 end

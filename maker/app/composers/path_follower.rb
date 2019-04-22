@@ -40,6 +40,13 @@ class PathFollower < ComposerBase
     end
   end
 
+  def resolve_pitch(chord:, note:) # has preference for
+    sort_hash = chord.sort.group_by { |chord_note| chord_note <=> note }
+
+    # preference: matching, lower, upper
+    sort_hash[0]&.first || sort_hash[-1]&.last || sort_hash[1]&.first # => 8
+  end
+
   class UnresolvableMelody < StandardError; end
 
   def resolve_melody(progression:, destination:)
