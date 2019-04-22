@@ -82,6 +82,7 @@ class PathFollower < ComposerBase
         notes: sampled_notes,
       },
       {
+        instrument: { name: { full: 'Floodfill'}, },
         notes: floodfill(noteses: progression),
       },
       {
