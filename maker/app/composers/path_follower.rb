@@ -51,8 +51,8 @@ class PathFollower < ComposerBase
     end
   end
 
-  def middle_note(notes:)
-    notes[notes.size / 2]
+  def middle_note(notes:, offset: 0)
+    notes[notes.size / 2 + offset]
   end
 
   class UnresolvableMelody < StandardError; end
