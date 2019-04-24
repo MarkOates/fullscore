@@ -9,7 +9,7 @@ The Lily Builder can be used to automatically assemble musical notation output f
 Have another rerun running in a separate terminal instance with the following command:
 
 ```
-rerun ruby app/lily_builder.rb -p "app/lily_builder.rb" -c
+rerun "ruby app/lily_builder.rb" -p "{app/lily_builder.rb,templates/lilypond-template.ly}" -c
 ```
 
 This will cause `ruby lily_builder.rb` to be rerun anytime it's modified, which should be generating the `output-lily.ly` file, that gets picked up by the next command.
