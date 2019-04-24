@@ -6,13 +6,15 @@
       (ly:context-pushpop-property context grob-name 'color color)
       (loop (cdr x)))))))
 
-<<
-  % This section adds an \applyContext to set the grob color to white, and
-  % includes teh code snippet at the top of the file.  This technique was
-  % taken from http://lsr.di.unimi.it/LSR/Snippet?id=443
-  \applyContext #(override-color-for-all-grobs (x11-color 'white))
-  %%%INSERT_ADDITIONAL_STAVES_HERE%%%
->>
+\score {
+  <<
+    % This section adds an \applyContext to set the grob color to white, and
+    % includes teh code snippet at the top of the file.  This technique was
+    % taken from http://lsr.di.unimi.it/LSR/Snippet?id=443
+    \applyContext #(override-color-for-all-grobs (x11-color 'white))
+    %%%INSERT_ADDITIONAL_STAVES_HERE%%%
+  >>
+}
 
 \version "2.18.2"  % necessary for upgrading to future LilyPond versions.
 
