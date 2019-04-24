@@ -1,5 +1,6 @@
 require_relative '../composer_base'
 require_relative '../../lib/chromatic/chord_notes'
+require_relative '../../lib/chromatic/lily_converter'
 
 class PathFollower < ComposerBase
   def n(pitches, duration, dots = 0)
@@ -59,7 +60,7 @@ class PathFollower < ComposerBase
 
   class UnresolvableMelody < StandardError; end
 
-  def resolve_melody(progression:, start_note:)
+  def resolve_melody(progression:, start_note:, preference: [:matching, :downward, :upward])
     ## validate that start_note is in the first chord of the progression,
     ## otherwise it is an invalid resolver
 
@@ -71,7 +72,7 @@ class PathFollower < ComposerBase
 
     current_melody_note = start_note
     progression.each.map do |chord|
-      resolved_pitch = resolve_pitch(chord: chord, note: current_melody_note)
+      resolved_pitch = resolve_pitch(chord: chord, note: current_melody_note, preference: preference)
       current_melody_note = resolved_pitch
     end
   end
@@ -79,7 +80,8 @@ class PathFollower < ComposerBase
   def reverse_resolve_melody(progression:, end_note:)
     progression.reverse
 
-    result_melody = resolve_melody(progression: progression.reverse, start_note: end_note)
+    preference = [:matching, :upward, :downward]
+    result_melody = resolve_melody(progression: progression.reverse, start_note: end_note, preference: preference)
     result_melody.reverse
   end
 
@@ -90,30 +92,30 @@ class PathFollower < ComposerBase
     sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
     fill = floodfill(noteses: progression)
 
-    calculated_melody_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
-    calculated_melody_2 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 1))
-    calculated_melody_3 = reverse_resolve_melody(progression: fill, end_note: 7)
+    resolve_forward_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
+    resolve_forward_2 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 1))
+    resolve_forward_3 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first, offset: 2))
+
+    reverse_resolve_end_note = 0
+    reverse_resolve = reverse_resolve_melody(progression: fill, end_note: reverse_resolve_end_note)
+    reverse_resolve_end_note_ly = Chromatic::LilyConverter.new(notes: [reverse_resolve_end_note]).convert
 
     [
       {
-        instrument: { name: { full: "Resolve Melody 1" }, },
-        notes: transpose_up_octave(notes: calculated_melody_1),
+        instrument: { name: { full: "Resolve Forward #3" }, },
+        notes: transpose_up_octave(notes: resolve_forward_3),
       },
       {
-        instrument: { name: { full: "Resolve Melody 2" }, },
-        notes: transpose_up_octave(notes: calculated_melody_2),
+        instrument: { name: { full: "Resolve Forward #2" }, },
+        notes: transpose_up_octave(notes: resolve_forward_2),
       },
       {
-        instrument: { name: { full: "Reverse Resolve" }, },
-        notes: transpose_up_octave(notes: calculated_melody_3),
+        instrument: { name: { full: "Resolve Forward #1" }, },
+        notes: transpose_up_octave(notes: resolve_forward_1),
       },
       {
-        instrument: { name: { full: 'Top Notes' }, },
-        notes: top_notes,
-      },
-      {
-        instrument: { name: { full: 'Random'}, },
-        notes: sampled_notes,
+        instrument: { name: { full: "Reverse (End on #{reverse_resolve_end_note_ly})" }, },
+        notes: transpose_up_octave(notes: reverse_resolve),
       },
       {
         instrument: { name: { full: 'Floodfill'}, },
