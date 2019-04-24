@@ -15,6 +15,7 @@
     %%%INSERT_ADDITIONAL_STAVES_HERE%%%
   >>
   \layout {
+    indent = #35  % <= unsure what unit of measure this 35 is, but it gives nice spacing
     \context {
       \Score
       \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/16)
