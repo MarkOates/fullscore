@@ -105,7 +105,7 @@ class PathFollowerTest < Minitest::Test
 
     note = 3
     chord = [0, 4, 7, 9, 11]
-    preference = [:matching, :upper, :downward]
+    preference = [:matching, :upward, :downward]
 
     expected_resolved_pitch = 4
     resolved_pitch = path_follower.resolve_pitch(note: note, chord: chord, preference: preference)

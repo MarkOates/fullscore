@@ -42,13 +42,13 @@ class PathFollower < ComposerBase
     end
   end
 
-  def resolve_pitch(chord:, note:, preference: [:matching, :downward, :upper])
+  def resolve_pitch(chord:, note:, preference: [:matching, :downward, :upward])
     sort_hash = chord.sort.group_by { |chord_note| chord_note <=> note }
 
     case preference
-    when [:matching, :downward, :upper]
+    when [:matching, :downward, :upward]
       sort_hash[0]&.first || sort_hash[-1]&.last || sort_hash[1]&.first
-    when [:matching, :upper, :downward]
+    when [:matching, :upward, :downward]
       sort_hash[0]&.first || sort_hash[1]&.first || sort_hash[-1]&.last
     end
   end
