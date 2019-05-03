@@ -6,6 +6,10 @@
       (ly:context-pushpop-property context grob-name 'color color)
       (loop (cdr x)))))))
 
+\paper {
+  #(set-paper-size "tabloid")
+}
+
 \score {
   <<
     % This section adds an \applyContext to set the grob color to white, and
