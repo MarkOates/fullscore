@@ -1,3 +1,15 @@
 #!/bin/bash
 
-rerun "ruby app/lily_builder.rb && bin/scripts/lilypond -dbackend=svg output-lily.ly && cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg" -p "{app/lily_builder.rb,templates/lilypond-template.ly}" -c
+yellow='\033[1;33m'
+reset_text='\033[0m'
+
+declare -a commands=(
+  "ruby app/lily_builder.rb"
+)
+
+rerun_command="${commands[0]} && ${commands[1]} && ${commands[2]} && ${commands[3]}"
+
+rerun "${commands[0]} && bin/scripts/lilypond -dbackend=svg output-lily.ly && cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg" -p "{app/lily_builder.rb,templates/lilypond-template.ly,app/**/*.rb}" -c
+
+
+
