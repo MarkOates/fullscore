@@ -29,7 +29,7 @@ class Texturer < ComposerBase
     notes.each do |note|
       result_notes << Note.new(pitches: note, duration: 8)
       result_notes << Note.new(pitches: 'r', duration: 8)
-      result_notes << Note.new(pitches: 'r', duration: 4)
+      #result_notes << Note.new(pitches: 'r', duration: 4)
     end
     result_notes
   end
@@ -56,7 +56,8 @@ class Texturer < ComposerBase
   def join_with_pickups(notes:)
     result_notes = []
     notes.each do |note|
-      result_notes << Note.new(pitches: note, duration: 4, duration_dots: 1)
+      result_notes << Note.new(pitches: note, duration: 8)
+      #result_notes << Note.new(pitches: note, duration: 4, duration_dots: 1)
     end
     result_notes = interject(notes: result_notes, interjection: Note.new(pitches: 'r', duration: 8))
     result_notes.last.duration = 2
@@ -67,12 +68,12 @@ class Texturer < ComposerBase
   def texturize(notes:)
     return join_with_pickups(notes: notes)
 
-    result_notes = []
-    notes.each do |note|
-      result_notes << Note.new(pitches: note, duration: 4, duration_dots: 1)
-      result_notes << Note.new(pitches: note-1, duration: 8)
-    end
-    result_notes
+    #result_notes = []
+    #notes.each do |note|
+      #result_notes << Note.new(pitches: note, duration: 4, duration_dots: 1)
+      #result_notes << Note.new(pitches: note-1, duration: 8)
+    #end
+    #result_notes
   end
 
   def normalize_chord_within_octave(notes:, uniq: true)
