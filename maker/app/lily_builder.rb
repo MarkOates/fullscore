@@ -43,6 +43,6 @@ class LilyBuilder
   end
 end
 
-require_relative 'composers/path_follower'
+require_relative 'composers/texturer'
 
-LilyBuilder.new(composer: PathFollower.new).build
+LilyBuilder.new(composer: Texturer.new).build
