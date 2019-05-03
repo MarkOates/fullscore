@@ -1,12 +1,16 @@
 #!/bin/bash
 
 yellow='\033[1;33m'
+magenta='\033[1;95m'
+
+# see the section "88/256 Colors" at https://misc.flogisoft.com/bash/tip_colors_and_formatting
+orange='\033[38;5;208m'
 reset_text='\033[0m'
 
 declare -a commands=(
-  "echo \"\n$yellow===== STAGE 0: Building Composition =====$reset_text\n\"; ruby app/lily_builder.rb"
-  "echo \"\n$yellow===== STAGE 1: Converting Lilypond output to SVG  =====$reset_text\n\"; bin/scripts/lilypond -dbackend=svg output-lily.ly"
-  "echo \"\n$yellow===== STAGE 2: Copying the output to HomeServer =====$reset_text\n\"; cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg"
+  "echo \"\n$orange===== STAGE 0: Building Composition =====$reset_text\n\"; ruby app/lily_builder.rb"
+  "echo \"\n$orange===== STAGE 1: Converting Lilypond output to SVG  =====$reset_text\n\"; bin/scripts/lilypond -dbackend=svg output-lily.ly"
+  "echo \"\n$orange===== STAGE 2: Copying the output to HomeServer =====$reset_text\n\"; cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg"
 )
 
 rerun "(${commands[0]}) && (${commands[1]}) && (${commands[2]})" -p "{app/lily_builder.rb,templates/lilypond-template.ly,app/**/*.rb}" -c
