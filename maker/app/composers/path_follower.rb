@@ -118,6 +118,10 @@ class PathFollower < ComposerBase
         notes: transpose_up_octave(notes: reverse_resolve),
       },
       {
+        instrument: { name: { full: 'Progression'}, },
+        notes: progression,
+      },
+      {
         instrument: { name: { full: 'Floodfill'}, },
         notes: fill,
       },
