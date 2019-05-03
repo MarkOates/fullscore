@@ -34,9 +34,6 @@ class Texturer < ComposerBase
     result_notes
   end
 
-  #def interjection(first_note:, second_note:)
-  #end
-
   def interject(notes:, interjection:)
     return notes if notes.empty?
     return notes if notes.size == 1
@@ -48,7 +45,8 @@ class Texturer < ComposerBase
       left_note = notes[i-1]
       right_note = notes[i]
 
-      result << Note.eighth_rest
+      result << Note.new(duration: 16, pitches: left_note.pitches + 1)
+      result << Note.new(duration: 16, pitches: right_note.pitches - 1)
       result << notes[i]
     end
 
