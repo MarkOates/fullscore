@@ -4,29 +4,20 @@ The Lily Builder can be used to automatically assemble musical notation output f
 
 ## Setup
 
-### Step 1) Generate new notes with your composer
+In a separate terminal session, do the following steps:
 
-Have another rerun running in a separate terminal instance with the following command:
-
-```
-rerun "ruby app/lily_builder.rb" -p "{app/lily_builder.rb,templates/lilypond-template.ly}" -c
-```
-
-This will cause `ruby lily_builder.rb` to be rerun anytime it's modified, which should be generating the `output-lily.ly` file, that gets picked up by the next command.
-
-
-### Step 2) Have Rerun running to compile lilypoind output to PDF
-
-Have rerun running in a separate terminal instance with the following command:
+### Step 1) Navigate to the maker Directory
 
 ```
-rerun "bin/scripts/lilypond -dbackend=svg output-lily.ly" -p "output-lily.ly" -c
+cd ~/Repos/fullscore/maker
 ```
 
-This will cause `rerun` to watch in the background for any changes to the `output-lily.ly` file, that will cause the `lilypond` script to convert the `output-lily.ly` file to a PDF.  This PDF can be viewed in MacOS preview (through Finder), and will automaticaly refresh on the changes.
-
-### Step 3) Copy the newly output file to HomeServer
+### Step 2) Run the Compile and Output Script
 
 ```
-rerun "cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg" -p "output-lily.svg" -c
+./bin/scripts/compile_and_output
 ```
+
+This script will initialize a `rerun` that will assemble and build your
+composition, then copy the output to the `HomeServer`.  If the HomeServer is
+running, your composition should be visible at `https://stradivarious.ngrok.io`.
