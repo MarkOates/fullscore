@@ -9,4 +9,4 @@ declare -a commands=(
   "echo \"\n$yellow===== STAGE 2: Copying the output to HomeServer =====$reset_text\n\"; cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg"
 )
 
-rerun "${commands[0]} && ${commands[1]} && ${commands[2]}" -p "{app/lily_builder.rb,templates/lilypond-template.ly,app/**/*.rb}" -c
+rerun "(${commands[0]}) && (${commands[1]}) && (${commands[2]})" -p "{app/lily_builder.rb,templates/lilypond-template.ly,app/**/*.rb}" -c
