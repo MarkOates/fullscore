@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rerun "ruby app/lily_builder.rb && bin/scripts/lilypond -dbackend=svg output-lily.ly && cp output-lily.svg ~/Repos/HomeServer/db/files/output-lily.svg" -p "{app/lily_builder.rb,templates/lilypond-template.ly}" -c
