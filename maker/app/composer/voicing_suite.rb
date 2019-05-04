@@ -1,4 +1,4 @@
-require_relative '../composers/base'
+require_relative '../composer/base'
 
 class VoicingSuite < Composer::Base
   DIATONIC = [0, 2, 4, 5, 7, 9, 11]

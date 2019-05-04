@@ -1,4 +1,4 @@
-require_relative '../composers/base'
+require_relative '../composer/base'
 require_relative 'path_follower'
 
 class Note

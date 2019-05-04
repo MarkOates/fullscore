@@ -1,6 +1,6 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
-require_relative '../../app/composers/melody_shaper'
+require_relative '../../app/composer/melody_shaper'
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 

@@ -1,4 +1,4 @@
-require_relative '../composers/base'
+require_relative '../composer/base'
 require 'ostruct'
 
 class Flute

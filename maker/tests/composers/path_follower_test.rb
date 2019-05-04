@@ -1,6 +1,6 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
-require_relative '../../app/composers/path_follower'
+require_relative '../../app/composer/path_follower'
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 

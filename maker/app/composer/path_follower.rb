@@ -1,4 +1,4 @@
-require_relative '../composers/base'
+require_relative '../composer/base'
 require_relative '../../lib/chromatic/chord_notes'
 require_relative '../../lib/chromatic/lily_converter'
 
