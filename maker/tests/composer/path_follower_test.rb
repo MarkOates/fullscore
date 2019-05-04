@@ -15,14 +15,6 @@ class PathFollowerTest < Minitest::Test
     initial_notes = [0, 2, 4, 7, 12, 14]
     expected = [12, 14, 16, 19, 24, 26]
 
-    result = PathFollower.new.transpose_up_octave(notes: initial_notes)
-    assert_equal result, expected
-  end
-
-  def test_transpose_up_ocate_works
-    initial_notes = [0, 2, 4, 7, 12, 14]
-    expected = [12, 14, 16, 19, 24, 26]
-
     actual = PathFollower.new.transpose_up_octave(notes: initial_notes)
     assert_equal expected, actual
   end
