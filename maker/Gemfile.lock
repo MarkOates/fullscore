@@ -3,6 +3,7 @@ GEM
   specs:
     ansi (1.5.0)
     builder (3.2.3)
+    differ (0.1.2)
     ffi (1.10.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -28,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  differ
   minitest (~> 5.4)
   minitest-reporters
   minitest-reporters-json_reporter
