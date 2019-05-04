@@ -1,8 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../lib/template_stuffer'
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+require_relative 'test_helper'
 
 class TemplateStufferTest < Minitest::Test
   def staves_content_temp_default_arg

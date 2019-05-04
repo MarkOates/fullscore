@@ -1,6 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../lib/chromatic/voicer'
+require_relative '../test_helper'
 
 module Chromatic
   class VoicerTest < Minitest::Test

@@ -1,6 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../lib/diatonic/lily_diatonic_converter'
+require_relative '../test_helper'
 
 module Diatonic
   class LilyDiatonicConverterTest < Minitest::Test

@@ -1,6 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../lib/staffer'
+require_relative 'test_helper'
 
 class StafferTest < Minitest::Test
   def test_staffer_places_the_notes_into_staves

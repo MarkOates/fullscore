@@ -1,8 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../app/composer/path_follower'
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+require_relative '../test_helper'
 
 class PathFollowerTest < Minitest::Test
   def test_returns_staves

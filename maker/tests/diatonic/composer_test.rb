@@ -1,6 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../lib/diatonic/composer'
+require_relative '../test_helper'
 
 module Diatonic
   class ComposerTest < Minitest::Test

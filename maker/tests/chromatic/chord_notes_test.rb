@@ -1,8 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../lib/chromatic/chord_notes'
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+require_relative '../test_helper'
 
 module Chromatic
   class ChordNotesTest < Minitest::Test

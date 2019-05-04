@@ -1,8 +1,5 @@
-gem 'minitest', '~> 5.4'
-require 'minitest/autorun'
 require_relative '../../app/composer/melody_shaper'
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+require_relative '../test_helper'
 
 class MelodyShaperTest < Minitest::Test
   def test_staves_returns_the_expected_hash
