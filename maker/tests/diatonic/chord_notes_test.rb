@@ -66,7 +66,7 @@ module Diatonic
     end
 
     def test_circle_of_5ths
-      expected = [[1, 3, 5], [4, 6, 8], [7, 9, 11], [3, 5, 7], [6, 8, 10], [2, 4, 6], [5, 7, 9]]
+      expected = [[1, 3, 5], [4, 6, 8], [7, 9, 11], [3, 5, 7], [6, 8, 10], [2, 4, 6], [5, 7, 9], [1, 3, 5]]
       assert_equal expected, ChordNotes.notes_for('circle_of_5ths')
     end
 
