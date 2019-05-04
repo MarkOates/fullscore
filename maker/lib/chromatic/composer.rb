@@ -13,7 +13,7 @@ module Chromatic
       #melody.pop
       #melody << 12  # make sure it ends on tonic
 
-      result = {
+      {
         staves: [
           {
             notes: projections,

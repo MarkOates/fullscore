@@ -1,4 +1,4 @@
-class Diatonic
+module Diatonic
   class LilyDiatonicConverter
     class UnknownNote < StandardError; end
     class UnknownFramentType < StandardError; end

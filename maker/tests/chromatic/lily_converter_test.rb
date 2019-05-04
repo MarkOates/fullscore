@@ -29,7 +29,7 @@ module Chromatic
       assert_equal expected_output, converter.convert
     end
 
-    def test_with_an_unknown_note_number_raises_an_exception
+    def test_with_an_unexpected_note_class_raises_an_exception
       notes = [ TrueClass ]
       assert_raises LilyConverter::UnknownFramentType do
         LilyConverter.new(notes: notes).convert

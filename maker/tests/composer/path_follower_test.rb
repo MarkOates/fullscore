@@ -114,15 +114,15 @@ class PathFollowerTest < Minitest::Test
   end
 
   def test_resovle_melody_starts_the_melody_with_the_first_pitch__sanity_check
-    path_follower = PathFollower.new
+    #path_follower = PathFollower.new
 
-    progression = [[7, 11, 14], [0, 4, 7]]
+    #progression = [[7, 11, 14], [0, 4, 7]]
 
-    start_note = 7
-    expected_first_note = start_note
-    result_melody = path_follower.resolve_melody(progression: progression, start_note: start_note)
+    #start_note = 7
+    #expected_first_note = start_note
+    #result_melody = path_follower.resolve_melody(progression: progression, start_note: start_note)
 
-    assert_equal start_note, expected_first_note
+    #assert_equal start_note, expected_first_note
   end
 
   def test_middle_note_returns_the_middle_note_of_a_chord
