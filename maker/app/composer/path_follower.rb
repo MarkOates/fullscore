@@ -88,8 +88,8 @@ class PathFollower < Composer::Base
   def staves
     progression = Chromatic::ChordNotes.progression(['I', 'vi', 'ii', 'V', 'I', 'vi', 'ii', 'V', 'I'])
     root_notes = progression.map { |note| note.first }
-    top_notes = normalize_within_octave(notes: progression.map { |note| note.last }, uniq: false)
-    sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
+    #top_notes = normalize_within_octave(notes: progression.map { |note| note.last }, uniq: false)
+    #sampled_notes = normalize_within_octave(notes: progression.map { |note| note.sample }, uniq: false)
     fill = floodfill(noteses: progression)
 
     resolve_forward_1 = resolve_melody(progression: fill, start_note: middle_note(notes: fill.first))
