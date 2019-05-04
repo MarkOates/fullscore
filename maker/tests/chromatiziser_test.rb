@@ -1,6 +1,6 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
-require_relative '../lib/chromatic/chord_notes'
+require_relative '../lib/chromatisizer'
 
 class ChromatisizerTest < Minitest::Test
   def test_converts_diatonic_note_to_chromatic
