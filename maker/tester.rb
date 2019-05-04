@@ -10,11 +10,25 @@ puts "status: #{status}"
 
 fails = json['fails']
 
+
+yellow="\033[1;33m"
+magenta="\033[1;95m"
+
+# see the section "88/256 Colors" at https://misc.flogisoft.com/bash/tip_colors_and_formatting
+orange="\033[38;5;208m"
+good_red="\033[38;5;196m"
+red="\033[1;31m"
+reset_text="\033[0m"
+style_underlined="\e[4m"
+style_normal="\e[24m"
+
+
 fails.each do |f|
-  puts "==== Failure ===="
-  puts "Class: #{f['class']}"
-  puts "Test: #{f['name']}"
-  puts "Message: "
+  puts
+  puts
+  puts "#{good_red}==== Failure ====#{reset_text}"
+  puts "#{yellow}#{f['class']} ##{f['name']}#{reset_text}"
+
   lines = f['message'].split("\n")
   expected_line = "[unextracted]"
   actual_line = "[unextracted]"
@@ -28,13 +42,11 @@ fails.each do |f|
       actual_line[0] = ''
     end
   end
-  puts "== Expected:"
-  puts "#{expected_line}"
-  puts "== Actual:"
-  puts "#{actual_line}"
+  puts "#{orange}#{style_underlined}Expected#{style_normal}\n#{expected_line}#{reset_text}"
+  puts "#{good_red}#{style_underlined}Actual#{style_normal}\n#{actual_line}#{reset_text}"
+  #puts "== Actual:"
+  #puts "#{good_red}#{actual_line}#{reset_text}"
   puts "== Diff:"
   diff = Differ.diff_by_char expected_line, actual_line
   puts diff.format_as :color
-  puts
-  puts
 end
