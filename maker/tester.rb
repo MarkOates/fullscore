@@ -5,6 +5,7 @@ require 'differ'
 output = `rake test REPORTER=JsonReporter`
 
 json = JSON.parse(output)
+
 status = json['status']
 puts "status: #{status}"
 
@@ -27,7 +28,8 @@ fails.each do |f|
   puts
   puts
   puts "#{good_red}==== Failure ====#{reset_text}"
-  puts "#{yellow}#{f['class']} ##{f['name']}#{reset_text}"
+  puts "#{yellow}#{f['location']}#{reset_text}"
+  puts "#{yellow}#{f['name']}#{reset_text}"
 
   lines = f['message'].split("\n")
   expected_line = "[unextracted]"
