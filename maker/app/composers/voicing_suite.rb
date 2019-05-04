@@ -1,6 +1,6 @@
-require_relative '../composer_base'
+require_relative '../composers/base'
 
-class VoicingSuite < ComposerBase
+class VoicingSuite < Composer::Base
   DIATONIC = [0, 2, 4, 5, 7, 9, 11]
 
   def next_diatonic(chromatic:, interval: 1)

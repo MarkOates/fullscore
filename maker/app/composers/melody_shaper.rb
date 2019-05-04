@@ -1,4 +1,4 @@
-require_relative '../composer_base'
+require_relative '../composers/base'
 require 'ostruct'
 
 class Flute
@@ -74,7 +74,7 @@ class Note
   end
 end
 
-class MelodyShaper < ComposerBase
+class MelodyShaper < Composer::Base
   def n(pitches, duration, dots = 0)
     Note.new(duration: duration, duration_dots: 0, pitches: pitches)
   end

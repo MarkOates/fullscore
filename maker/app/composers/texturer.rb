@@ -1,4 +1,4 @@
-require_relative '../composer_base'
+require_relative '../composers/base'
 require_relative 'path_follower'
 
 class Note
@@ -23,7 +23,7 @@ class Note
   end
 end
 
-class Texturer < ComposerBase
+class Texturer < Composer::Base
   def eighth_every_strong_beat(notes:)
     result_notes = []
     notes.each do |note|
