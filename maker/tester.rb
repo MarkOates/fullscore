@@ -47,6 +47,6 @@ fails.each do |f|
   puts "#{orange}#{style_underlined}Expected#{style_normal}\n#{expected_line}#{reset_text}"
   puts "#{good_red}#{style_underlined}Actual#{style_normal}\n#{actual_line}#{reset_text}"
   puts "#{style_underlined}Diff#{style_normal}\n"#{actual_line}#{reset_text}"
-  diff = Differ.diff_by_char expected_line, actual_line
+  diff = Differ.diff_by_char actual_line, expected_line
   puts diff.format_as :color
 end
