@@ -3,6 +3,14 @@ require_relative '../test_helper'
 
 require 'ostruct'
 
+class Note
+  attr_reader :pitches
+
+  def initialize(pitches: 3)
+    @pitches = pitches
+  end
+end
+
 module Chromatic
   class LilyConverterTest < Minitest::Test
     def test_parses_middle_c
@@ -14,6 +22,13 @@ module Chromatic
 
     def test_parses_simple_example
       notes = [0, 2]
+      converter = LilyConverter.new(notes: notes)
+      expected_output = "c'4 d'4"
+      assert_equal expected_output, converter.convert
+    end
+
+    def test_parses_example_with_pitch_message_sender
+      notes = [0, Note.new(pitches: 2)]
       converter = LilyConverter.new(notes: notes)
       expected_output = "c'4 d'4"
       assert_equal expected_output, converter.convert
