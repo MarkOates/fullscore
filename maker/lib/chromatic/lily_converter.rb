@@ -67,7 +67,7 @@ module Chromatic
     end
 
     def filter_individual_articulation(articulation:)
-      raise UnrecognizedArticulation unless ALLOWED_ARTICULATIONS.include?(articulation)
+      raise UnrecognizedArticulation.new("Unknown articulation called \"#{articulation}\"") unless ALLOWED_ARTICULATIONS.include?(articulation)
       articulation
     end
 

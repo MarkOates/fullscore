@@ -64,18 +64,24 @@ module Chromatic
       notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: ['not-a-real-name-for-an-articulation'])]
       converter = LilyConverter.new(notes: notes)
 
-      assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
+      exception = assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
         converter.convert
       end
+
+      expected_error_message = 'Unknown articulation called "not-a-real-name-for-an-articulation"'
+      assert_equal expected_error_message, exception.message
     end
 
     def test_with_a_articulation_that_is_a_symbol_name_of_a_real_articulation_raises_an_exception
       notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: :accent)]
       converter = LilyConverter.new(notes: notes)
 
-      assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
+      exception = assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
         converter.convert
       end
+
+      expected_error_message = 'Unknown articulation called "accent"'
+      assert_equal expected_error_message, exception.message
     end
 
     def test_parses_longer_example
