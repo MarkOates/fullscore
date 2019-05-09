@@ -28,8 +28,8 @@ fails.each do |f|
   puts
   puts
   puts "#{good_red}==== Failure ====#{reset_text}"
-  puts "#{yellow}#{f['location']}#{reset_text}"
   puts "#{yellow}#{f['name']}#{reset_text}"
+  puts "#{yellow}#{f['location']}#{reset_text}"
 
   lines = f['message'].split("\n")
   expected_line = "[unextracted]"
