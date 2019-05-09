@@ -67,9 +67,8 @@ module Chromatic
     end
 
     def filter_individual_articulation(articulation:)
-      stringified = articulation.to_s
-      raise UnrecognizedArticulation unless ALLOWED_ARTICULATIONS.include?(stringified)
-      stringified
+      raise UnrecognizedArticulation unless ALLOWED_ARTICULATIONS.include?(articulation)
+      articulation
     end
 
     def get_fragment_duration(fragment:)

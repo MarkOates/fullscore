@@ -69,6 +69,15 @@ module Chromatic
       end
     end
 
+    def test_with_a_articulation_that_is_a_symbol_name_of_a_real_articulation_raises_an_exception
+      notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: :accent)]
+      converter = LilyConverter.new(notes: notes)
+
+      assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
+        converter.convert
+      end
+    end
+
     def test_parses_longer_example
       notes = [0, 2, 4, 5, 7, 9]
       converter = LilyConverter.new(notes: notes)
