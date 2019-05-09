@@ -5,7 +5,7 @@ require 'ostruct'
 
 module Chromatic
   class LilyConverterTest < Minitest::Test
-    class Note
+    class NoteWithPitches
       attr_reader :pitches
 
       def initialize(pitches: 3)
@@ -28,7 +28,7 @@ module Chromatic
     end
 
     def test_parses_example_with_pitch_message_sender
-      notes = [0, Chromatic::LilyConverterTest::Note.new(pitches: 2)]
+      notes = [0, Chromatic::LilyConverterTest::NoteWithPitches.new(pitches: 2)]
       converter = LilyConverter.new(notes: notes)
       expected_output = "c'4 d'4"
       assert_equal expected_output, converter.convert
