@@ -13,6 +13,18 @@ module Chromatic
       end
     end
 
+    class NoteWithArticulations
+      attr_reader :articulations
+
+      def initialize(articulations:)
+        @articulations = articulations
+      end
+
+      def pitches
+        [2, 4]
+      end
+    end
+
     def test_parses_middle_c
       notes = [0]
       converter = LilyConverter.new(notes: notes)
@@ -35,9 +47,9 @@ module Chromatic
     end
 
     def test_with_an_articulation_will_convert
-      notes = [0, 2]
+      notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: 'marcato')]
       converter = LilyConverter.new(notes: notes)
-      expected_output = "c'4 d'4"
+      expected_output = "c'4 <d' e'>4\\marcato"
       assert_equal expected_output, converter.convert
     end
 

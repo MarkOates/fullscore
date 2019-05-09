@@ -17,6 +17,7 @@ module Chromatic
       notes.map do |fragment|
         fragment_component = fragment.respond_to?(:pitches) ? fragment.pitches : fragment
         fragment_duration = get_fragment_duration(fragment: fragment)
+        fragment_articulations = get_fragment_articulation(fragment: fragment)
 
         if fragment_component.is_a?(Integer)
           convert_note(note: fragment_component)
@@ -30,11 +31,19 @@ module Chromatic
           end
         else
           raise UnknownFramentType.new("Fragment type #{fragment.class}")
-        end + fragment_duration.to_s
+        end + fragment_duration.to_s + fragment_articulations
       end.join(' ')
     end
 
     private
+
+    def get_fragment_articulation(fragment:)
+      fragment_articulation = fragment.respond_to?(:articulations) ? fragment.articulations : nil
+
+      return '' if fragment_articulation == nil
+
+      '\\' + fragment_articulation.to_s
+    end
 
     def get_fragment_duration(fragment:)
       duration = fragment.respond_to?(:duration) ? convert_duration(duration: fragment.duration) : 4
