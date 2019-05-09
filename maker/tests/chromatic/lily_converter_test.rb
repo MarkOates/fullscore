@@ -53,6 +53,22 @@ module Chromatic
       assert_equal expected_output, converter.convert
     end
 
+    def test_with_an_array_of_articulations_will_convert
+      notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: ['staccato', 'accent'])]
+      converter = LilyConverter.new(notes: notes)
+      expected_output = "c'4 <d' e'>4\\staccato\\accent"
+      assert_equal expected_output, converter.convert
+    end
+
+    def test_with_a_articulation_that_is_not_allowed_raises_an_exception
+      notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: ['not-a-real-name-for-an-articulation'])]
+      converter = LilyConverter.new(notes: notes)
+
+      assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
+        converter.convert
+      end
+    end
+
     def test_parses_longer_example
       notes = [0, 2, 4, 5, 7, 9]
       converter = LilyConverter.new(notes: notes)

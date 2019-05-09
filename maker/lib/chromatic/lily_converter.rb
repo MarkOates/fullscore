@@ -1,11 +1,30 @@
+class Array
+  def self.wrap(object)
+    if object.nil?
+      []
+    elsif object.respond_to?(:to_ary)
+      object.to_ary || [object]
+    else
+      [object]
+    end
+  end
+end
+
 module Chromatic
   class LilyConverter
     class UnknownNote < StandardError; end
     class UnknownFramentType < StandardError; end
     class UnknownStringFragmentType < StandardError; end
+    class UnrecognizedArticulation < StandardError; end
 
     SHARP = 'is'
     FLAT = 'es'
+
+    ALLOWED_ARTICULATIONS = [
+      'staccato',
+      'accent',
+      'marcato',
+    ]
 
     attr_reader :notes
 
@@ -40,9 +59,17 @@ module Chromatic
     def get_fragment_articulation(fragment:)
       fragment_articulation = fragment.respond_to?(:articulations) ? fragment.articulations : nil
 
-      return '' if fragment_articulation == nil
+      return '' if fragment_articulation == nil || fragment_articulation.empty?
 
-      '\\' + fragment_articulation.to_s
+      fragment_articulations = Array.wrap(fragment_articulation)
+
+      '\\' + fragment_articulations.map { |articulation| filter_individual_articulation(articulation: articulation) }.join('\\')
+    end
+
+    def filter_individual_articulation(articulation:)
+      stringified = articulation.to_s
+      raise UnrecognizedArticulation unless ALLOWED_ARTICULATIONS.include?(stringified)
+      stringified
     end
 
     def get_fragment_duration(fragment:)
