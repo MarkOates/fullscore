@@ -2,16 +2,17 @@ require_relative '../composer/base'
 require_relative 'path_follower'
 
 class Note
-  attr_accessor :duration, :duration_dots, :pitches
+  attr_accessor :duration, :duration_dots, :pitches, :articulations
 
   def self.eighth_rest
     Note.new(duration: 8, pitches: 'r')
   end
 
-  def initialize(duration: 4, duration_dots: 0, pitches:)
+  def initialize(duration: 4, duration_dots: 0, pitches:, articulations: nil)
     @duration = duration
     @duration_dots = duration_dots
     @pitches = pitches
+    @articulations = articulations
   end
 
   def /(divisor)
@@ -65,6 +66,10 @@ class Texturer < Composer::Base
     result_notes
   end
 
+  def articulate(notes:)
+    notes.each { |n| n.articulations = 'staccato' unless n.pitches == 'r' }
+  end
+
   def texturize(notes:)
     return join_with_pickups(notes: notes)
 
@@ -94,7 +99,6 @@ class Texturer < Composer::Base
     end
 
     melody = texturize(notes: path_follower_composition[:staves].first[:notes])
-
     result = {
       staves: [
         {
@@ -103,7 +107,7 @@ class Texturer < Composer::Base
         },
         {
           instrument: { name: { full: 'Piano RH', abbreviated: 'Pf.', } },
-          notes: eighth_every_strong_beat(notes: normalize_chord_within_octave(notes: progression[:notes])),
+          notes: articulate(notes: eighth_every_strong_beat(notes: normalize_chord_within_octave(notes: progression[:notes]))),
         },
         {
           instrument: { name: { full: 'Piano LH', abbreviated: 'Pf.', }, clef: 'bass' },
