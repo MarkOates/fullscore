@@ -76,11 +76,11 @@ module Chromatic
       notes = [0, Chromatic::LilyConverterTest::NoteWithArticulations.new(articulations: :accent)]
       converter = LilyConverter.new(notes: notes)
 
-      exception = assert_raises Chromatic::LilyConverter::UnrecognizedArticulation do
+      exception = assert_raises Chromatic::LilyConverter::UnallowedArticulationType do
         converter.convert
       end
 
-      expected_error_message = 'Unknown articulation called "accent"'
+      expected_error_message = 'Articulation type not allowed: type: "Symbol", to_s: "accent"'
       assert_equal expected_error_message, exception.message
     end
 

@@ -16,6 +16,7 @@ module Chromatic
     class UnknownFramentType < StandardError; end
     class UnknownStringFragmentType < StandardError; end
     class UnrecognizedArticulation < StandardError; end
+    class UnallowedArticulationType < StandardError; end
 
     SHARP = 'is'
     FLAT = 'es'
@@ -67,6 +68,7 @@ module Chromatic
     end
 
     def filter_individual_articulation(articulation:)
+      raise UnallowedArticulationType.new("Articulation type not allowed: type: \"#{articulation.class}\", to_s: \"#{articulation}\"") unless articulation.is_a?(String)
       raise UnrecognizedArticulation.new("Unknown articulation called \"#{articulation}\"") unless ALLOWED_ARTICULATIONS.include?(articulation)
       articulation
     end
