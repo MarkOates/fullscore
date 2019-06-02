@@ -11,6 +11,15 @@ class VectorWriter
     ChromaticVector.new(direction: direction)
   end
 
+  def progression_2
+    [
+      v('I'),
+      v('bV'),
+      v('I'),
+      v('bV'),
+    ].map(&:render)
+  end
+
   def progression
     [
       v('V') + v('iii') + v('bV'),
