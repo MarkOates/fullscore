@@ -1,3 +1,5 @@
+require_relative '../chromatic/chord_builder'
+
 class ChromaticVector
   class UnrecognizedTriadQuality < StandardError; end
 
@@ -31,6 +33,17 @@ class ChromaticVector
     @direction = direction
   end
 
+  def +(other)
+    this_vector_render = render
+    other_render = other.render
+    root = other_render[:root] + this_vector_render[:root]
+
+    other_quality = other_render[:quality]
+    output_chord = ChordBuilder.new(root: root, quality: other_quality).build
+
+    ChromaticVector.new(direction: output_chord)
+  end
+
   def render
     root = extract_root(string: direction)
     quality = extract_quality(string: direction)
@@ -38,6 +51,7 @@ class ChromaticVector
     {
       normalized: render_triad(root: root, quality: quality),
       root: root,
+      quality: quality.to_s,
       name: [ direction ],
     }
   end
