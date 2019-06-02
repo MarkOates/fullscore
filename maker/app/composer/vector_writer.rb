@@ -8,15 +8,21 @@ class VectorWriter
   end
 
   def v(direction, root: root)
-    ChromaticVector.new(direction: direction).render
+    ChromaticVector.new(direction: direction)
   end
 
   def progression
     [
+      v('V') + v('iii') + v('bV'),
+      v('V') + v('iii'),
+      v('V') + v('iii') + v('bV'),
+      v('V') + v('iii'),
+      v('V') + v('vi'),
+      v('V') + v('ii'),
       v('V') + v('V'),
       v('V'),
       v('I'),
-    ]
+    ].map(&:render)
   end
 
   def composition

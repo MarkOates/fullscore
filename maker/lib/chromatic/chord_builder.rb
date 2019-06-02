@@ -37,7 +37,9 @@ class ChordBuilder
   end
 
   def base_string
-    case root
+    modded_root = root % 12
+
+    case modded_root
     when 0
       'i'
     when 1, 2
@@ -50,7 +52,7 @@ class ChordBuilder
       'v'
     when 8, 9
       'vi'
-    when 11
+    when 10, 11
       'vii'
     else
       raise StandardError
