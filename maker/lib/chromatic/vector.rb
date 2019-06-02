@@ -38,6 +38,7 @@ class ChromaticVector
     {
       normalized: render_triad(root: root, quality: quality),
       root: root,
+      name: [ direction ],
     }
   end
 
