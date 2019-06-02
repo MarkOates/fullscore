@@ -7,20 +7,20 @@ class ChromaticVectorTest < Minitest::Test
   end
 
   def test_chromatic_vector_doenst_blow_up
-    chromatic_vector(direction: 'i').render
+    assert chromatic_vector(direction: 'i').render
   end
 
   def test_chromatic_vector_renders_the_expected_vector
-    expected = {
-      result: [ 9, 0+12, 4+12 ],
-    }
-    chromatic_vector(direction: 'vi').render
+    expected = { normalized: [ 9, 12, 16 ], root: 9 }
+    actual = chromatic_vector(direction: 'vi').render
+
+    assert_equal expected, actual
   end
 
-  def test_chromatic_vector_renders_the_expected_vector
-    expected = {
-      result: [ 9, 0+12, 4+12 ],
-    }
-    chromatic_vector(direction: 'vi').render
+  def test_chromatic_vector_renders_the_expected_vector_2
+    expected = { normalized: [ 2, 6, 9 ], root: 2 }
+    actual = chromatic_vector(direction: 'II').render
+
+    assert_equal expected, actual
   end
 end
