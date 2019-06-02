@@ -2,13 +2,27 @@ class ChromaticVector
   class UnrecognizedTriadQuality < StandardError; end
 
   ROOTS = {
-      'i'   => 0,
-      'ii'  => 2,
-      'iii' => 4,
-      'iv'  => 5,
-      'v'   => 7,
-      'vi'  => 9,
-      'vii' => 11,
+        'bi'   => 11,
+      'i'      => 0,
+        '#i'   => 1,
+        'bii'  => 1,
+      'ii'     => 2,
+        '#ii'  => 3,
+        'biii' => 3,
+      'iii'    => 4,
+        '#iii' => 5,
+        'biv'  => 3,
+      'iv'     => 5,
+        '#iv'  => 6,
+        'bv'   => 6,
+      'v'      => 7,
+        '#v'   => 8,
+        'bvi'  => 8,
+      'vi'     => 9,
+        '#vi'  => 9,
+        'bvi'  => 10,
+      'vii'    => 11,
+        '#vii' => 0,
     }
 
   attr_reader :direction
@@ -30,11 +44,21 @@ class ChromaticVector
   private
 
   def extract_quality(string:)
-    string.downcase == string ? :minor : :major
+    case string.downcase == string
+    when true # minor-like
+      string[-1] == 'o' ? :diminished : :minor
+    when false # major-like
+      string[-1] == '+' ? :augmented : :major
+    end
   end
 
   def extract_root(string:)
-    ROOTS[string.downcase]
+    key = keyafy(key: string)
+    ROOTS[key]
+  end
+
+  def keyafy(key:)
+    key.downcase.gsub(/[\+o]/, '')
   end
 
   def render_triad(root:, quality:)

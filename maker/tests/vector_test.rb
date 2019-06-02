@@ -23,4 +23,11 @@ class ChromaticVectorTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_chromatic_vector_renders_the_expected_vector_3
+    expected = { normalized: [ 3, 7, 11 ], root: 2 }
+    actual = chromatic_vector(direction: 'bIII+').render
+
+    #assert_equal expected, actual
+  end
 end
