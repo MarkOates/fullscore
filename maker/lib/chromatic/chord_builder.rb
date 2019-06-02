@@ -7,13 +7,15 @@ class ChordBuilder
   end
 
   def build
-    base_string = get_base_string
-
     case quality
     when 'minor'
-      base_string
+      accidental + base_string
     when 'major'
-      base_string.upcase
+      accidental + base_string.upcase
+    when 'augmented'
+      accidental + base_string.upcase + '+'
+    when 'diminished'
+      accidental + base_string + 'o'
     else
       raise UnknownChordQuality, "chord quality not recognized: \"#{qualith}\""
     end
@@ -21,19 +23,32 @@ class ChordBuilder
 
   private
 
-  def get_base_string
+  def accidental
+    modded_root = root % 12
+
+    case modded_root
+    when 0, 2, 4, 5, 7, 9, 11
+      ''
+    when 1, 3, 6, 8, 10
+      'b'
+    else
+      raise StandardError, "unknown modded root #{modded_root} for root #{root}"
+    end
+  end
+
+  def base_string
     case root
     when 0
       'i'
-    when 2
+    when 1, 2
       'ii'
-    when 4
+    when 3, 4
       'iii'
     when 5
       'iv'
-    when 7
+    when 6, 7
       'v'
-    when 9
+    when 8, 9
       'vi'
     when 11
       'vii'

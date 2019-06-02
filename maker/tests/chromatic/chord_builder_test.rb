@@ -20,6 +20,24 @@ module Chromatic
 
       assert_equal expcected, actual
     end
+
+    def test_plots_notes_in_a_major_chord
+      builder = ChordBuilder.new(root: 3, quality: 'diminished')
+
+      expcected = 'biiio'
+      actual = builder.build
+
+      assert_equal expcected, actual
+    end
+
+    def test_plots_notes_in_a_major_chord
+      builder = ChordBuilder.new(root: 6, quality: 'augmented')
+
+      expcected = 'bV+'
+      actual = builder.build
+
+      assert_equal expcected, actual
+    end
   end
 end
 
