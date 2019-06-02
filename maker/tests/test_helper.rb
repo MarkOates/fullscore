@@ -1,6 +1,8 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
 
+require 'pry'
+
 
 case ENV['REPORTER']
 when 'JsonReporter'
