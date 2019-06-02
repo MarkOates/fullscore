@@ -2,8 +2,14 @@ require_relative '../../lib/chromatic/chord_builder'
 require_relative '../test_helper'
 
 module Chromatic
-  class ChordNotesTest < Minitest::Test
+  class ChordBuilderTest < Minitest::Test
     def test_plots_notes_in_a_chord
+      builder = ChordBuilder.new(root: 0)
+
+      expcected = 'i'
+      actual = builder.build
+
+      assert_equal expcected, actual
     end
   end
 end
