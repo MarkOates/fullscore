@@ -43,6 +43,6 @@ class LilyBuilder
   end
 end
 
-require_relative 'composer/texturer'
+require_relative 'composer/vector_writer'
 
-LilyBuilder.new(composer: Texturer.new).build
+LilyBuilder.new(composer: VectorWriter.new).build
