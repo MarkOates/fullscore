@@ -7,7 +7,7 @@ class VectorWriter
     root = 0
   end
 
-  def v(direction, root: root)
+  def v(direction)
     ChromaticVector.new(direction: direction)
   end
 
