@@ -1,3 +1,11 @@
+# Setting up with Beebot
+
+```
+bb setup_compose
+```
+
+If you don't have Beebot, you can follow the manual steps below:
+
 ## Lily Builder
 
 The Lily Builder can be used to automatically assemble musical notation output for content generated through the maker.  Two steps are required to have a complete comprehensive setup.  All the commands should be run from `fullscore/maker/`.
