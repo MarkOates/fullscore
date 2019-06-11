@@ -22,7 +22,7 @@ class ChromaticVector
         'bvi'  => 8,
       'vi'     => 9,
         '#vi'  => 9,
-        'bvi'  => 10,
+        'bvii' => 10,
       'vii'    => 11,
         '#vii' => 0,
     }
