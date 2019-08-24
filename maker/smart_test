@@ -1,0 +1,3 @@
+chruby 2.4.0
+bundle install
+rerun "ruby tester.rb" -c -q
