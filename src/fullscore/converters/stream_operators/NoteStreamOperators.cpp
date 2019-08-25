@@ -12,7 +12,7 @@
 
 std::ostream & operator<< (std::ostream &out, Note const &t)
 {
-   out << "{ pitch: " << t.get_pitch() << ", duration: " << t.get_duration() << ", rest: " << t.get_rest() << "}";
+   out << t.get_pitch() << " " << t.get_duration() << " " << t.get_rest();
    return out;
 }
 
