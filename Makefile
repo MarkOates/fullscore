@@ -11,11 +11,6 @@ GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
 
 
-# this is the directory of the project (it's auto_generated)
-PROJECT_BINARY_NAME=TestProject
-
-
-
 GOOGLE_TEST_LIBS=gtest
 ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
 ALLEGRO_LIBS=allegro_color allegro_font allegro_ttf allegro_dialog allegro_audio allegro_acodec allegro_primitives allegro_image allegro
@@ -62,14 +57,6 @@ bin/examples/%: examples/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
 	g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS)
-	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
-
-
-
-bin/$(PROJECT_BINARY_NAME): programs/$(PROJECT_BINARY_NAME).cpp $(OBJECTS)
-	@mkdir -p $(@D)
-	@printf "compiling program \e[1m\e[36m$<\033[0m..."
-	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
 
