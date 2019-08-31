@@ -97,7 +97,7 @@ bin/programs/%: programs/%.cpp $(OBJECTS)
 bin/examples/%: examples/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
-	g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
+	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
 
