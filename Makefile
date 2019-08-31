@@ -57,8 +57,8 @@ main:
 	@make quintessences
 	$(call output_terminal_message,"Make all the object files")
 	@make objects
-	#$(call output_terminal_message,"Make all the test files")
-	#@make tests
+	$(call output_terminal_message,"Make all the test files")
+	@make tests
 	#$(call output_terminal_message,"Run the tests for all the components")
 	#@make run_tests
 	$(call output_terminal_message,"Make all the programs")
@@ -127,19 +127,11 @@ obj/tests/%.o: tests/%.cpp $(OBJECTS)
 
 
 
-#bin/tests/%: obj/tests/%.o obj/tests/test_runner.o
-	#@mkdir -p $(@D)
-	#@printf "compiling standalone test \e[1m\e[36m$<\033[0m...\n"
-	#@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< obj/tests/test_runner.o -o $@ -l$(GOOGLE_TEST_LIBS) -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
-	#@echo "done. Executable at \033[1m\033[32m$@\033[0m"
-
-
-
-#bin/tests/test_runner: $(TEST_OBJECTS) obj/tests/test_runner.o
-	#@mkdir -p $(@D)
-	#@printf "compiling test_runer \e[1m\e[36m$<\033[0m...\n"
-	#@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) obj/tests/test_runner.o $< -o $@ -l$(GOOGLE_TEST_LIBS) -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
-	#@echo "done. Executable at \033[1m\033[32m$@\033[0m"
+bin/tests/%: obj/tests/%.o obj/tests/test_runner.o
+	@mkdir -p $(@D)
+	@printf "compiling standalone test \e[1m\e[36m$<\033[0m...\n"
+	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< obj/tests/test_runner.o -o $@ -l$(GOOGLE_TEST_LIBS) -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
+	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
 
 
