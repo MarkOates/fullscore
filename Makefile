@@ -14,6 +14,7 @@ GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
 
 GOOGLE_TEST_LIBS=gtest
+NCURSES_LIB=ncurses
 ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
 ALLEGRO_LIBS=allegro_color allegro_font allegro_ttf allegro_dialog allegro_audio allegro_acodec allegro_primitives allegro_image allegro
 ALLEGRO_LIBS_MAIN=$(ALLEGRO_LIBS) allegro_main
