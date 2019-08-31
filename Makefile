@@ -62,8 +62,8 @@ main:
 	#@make run_tests
 	$(call output_terminal_message,"Make all the programs")
 	@make programs
-	#$(call output_terminal_message,"Make all the example programs")
-	#@make examples
+	$(call output_terminal_message,"Make all the example programs")
+	@make examples
 	$(call output_terminal_message,"================= FINISHED! ===================")
 
 
