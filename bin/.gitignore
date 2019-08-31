@@ -2,11 +2,11 @@
 *
 # Except this file and everything in the bin directory
 !.gitignore
-!data/
-!data/*
-!data/*/*
-!data/*/*/*
-!data/*/*/*/*     # (4 levels should be enough)
+!programs/data/
+!programs/data/*
+!programs/data/*/*
+!programs/data/*/*/*
+!programs/data/*/*/*/*     # (4 levels should be enough)
 !tools/
 !tools/*
 !tools/*/*

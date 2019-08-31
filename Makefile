@@ -29,7 +29,7 @@ PROGRAM_SOURCES := $(shell find programs -name '*.cpp')
 EXAMPLE_SOURCES := $(shell find examples -name '*.cpp')
 TEST_SOURCES := $(shell find tests -name '*Test.cpp')
 OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
-PROGRAMS := $(PROGRAM_SOURCES:programs/%.cpp=bin/%)
+PROGRAMS := $(PROGRAM_SOURCES:programs/%.cpp=bin/programs/%)
 EXAMPLES := $(EXAMPLE_SOURCES:examples/%.cpp=bin/examples/%)
 TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
@@ -62,8 +62,8 @@ main:
 	#@make run_tests
 	$(call output_terminal_message,"Make all the programs")
 	@make programs
-	$(call output_terminal_message,"Make all the example programs")
-	@make examples
+	#$(call output_terminal_message,"Make all the example programs")
+	#@make examples
 	$(call output_terminal_message,"================= FINISHED! ===================")
 
 
@@ -85,12 +85,13 @@ examples: $(EXAMPLES)
 
 
 
-bin/%: programs/%.cpp $(OBJECTS)
+bin/programs/%: programs/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
-	@g++ -std=gnu++11 -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_MAIN_ARGS) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
+	@g++ -std=gnu++11 -Wall $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_FLARE_INCLUDE_DIR) $(ALLEGRO_LIBS_LINK_MAIN_ARGS) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
+ #-L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_MAIN_ARGS) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 
 
 bin/examples/%: examples/%.cpp $(OBJECTS)
