@@ -109,6 +109,7 @@ run_tests: tests
 
 
 $(LIBRARY_NAME): $(OBJECTS)
+	@mkdir -p $(@D)
 	@printf "compiling library \e[1m\e[36m$@\033[0m..."
 	@ar rs $(LIBRARY_NAME) $^
 	@echo "done. Library file at \033[1m\033[32m$@\033[0m"
