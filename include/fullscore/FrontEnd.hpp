@@ -17,7 +17,7 @@ namespace fullscore
       ~FrontEnd();
 
 
-   void on_timer_func();
+   void on_draw() override;
    };
 }
 

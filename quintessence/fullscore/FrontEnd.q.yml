@@ -4,9 +4,11 @@ properties:
     init_with: nullptr
     constructor_arg: true
 functions:
-  - name: on_timer_func
+  - name: on_draw
     type: void
+    override: true
     body: |
+      al_draw_filled_rectangle(300, 400, 900, 1200, al_color_name("green"));
       return;
 parent_classes:
   - class: UIScreen

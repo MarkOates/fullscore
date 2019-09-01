@@ -20,8 +20,9 @@ FrontEnd::~FrontEnd()
 }
 
 
-void FrontEnd::on_timer_func()
+void FrontEnd::on_draw()
 {
+al_draw_filled_rectangle(300, 400, 900, 1200, al_color_name("green"));
 return;
 
 }
