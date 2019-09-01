@@ -8,8 +8,9 @@ namespace fullscore
 {
 
 
-FrontEnd::FrontEnd()
+FrontEnd::FrontEnd(Display* display)
    : UIScreen(display)
+   , display(display)
 {
 }
 
