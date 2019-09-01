@@ -1,3 +1,5 @@
+PROJECT_NAME=fullscore
+VERSION_NUMBER=0.0.1
 LIBS_ROOT=/Users/markoates/Repos
 ALLEGRO_INCLUDE_DIR=$(LIBS_ROOT)/allegro5/build/include
 ALLEGRO_LIB_DIR=$(LIBS_ROOT)/allegro5/build/lib
@@ -21,6 +23,7 @@ ALLEGRO_LIBS_MAIN=$(ALLEGRO_LIBS) allegro_main
 
 
 SOURCES := $(shell find src -name '*.cpp')
+QUINTESSENCE_SOURCES := $(shell find quintessence -name '*.q.yml')
 PROGRAM_SOURCES := $(shell find programs -name '*.cpp')
 EXAMPLE_SOURCES := $(shell find examples -name '*.cpp')
 TEST_SOURCES := $(shell find tests -name '*Test.cpp')
@@ -28,7 +31,12 @@ OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
 PROGRAMS := $(PROGRAM_SOURCES:programs/%.cpp=bin/programs/%)
 EXAMPLES := $(EXAMPLE_SOURCES:examples/%.cpp=bin/examples/%)
 TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
+LIBRARY_NAME := lib/lib$(PROJECT_NAME)-$(VERSION_NUMBER).a
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
+ALL_COMPILED_EXECUTABLES_IN_BIN := $(shell find bin/**/* -perm +111 -type f)
+
+
+
 ALLEGRO_LIBS_LINK_ARGS := $(ALLEGRO_LIBS:%=-l%)
 ALLEGRO_LIBS_LINK_MAIN_ARGS := $(ALLEGRO_LIBS_MAIN:%=-l%)
 ALLEGRO_FLARE_LINK_ARGS := $(ALLEGRO_FLARE_LIB:%=-l%)
@@ -47,6 +55,10 @@ endef
 
 
 
+.PHONY: main quintessence programs objects examples library tests run_tests
+
+
+
 main:
 	$(call output_terminal_message,"Compose componets from all quintessence files")
 	@make quintessences
@@ -56,6 +68,8 @@ main:
 	@make tests
 	$(call output_terminal_message,"Run the tests for all the components")
 	@make run_tests
+	$(call output_terminal_message,"Make the library")
+	@make library
 	$(call output_terminal_message,"Make all the programs")
 	@make programs
 	$(call output_terminal_message,"Make all the example programs")
@@ -81,6 +95,26 @@ examples: $(EXAMPLES)
 
 
 
+library: $(LIBRARY_NAME)
+
+
+
+tests: $(INDIVIDUAL_TEST_EXECUTABLES) #bin/tests/test_runner
+
+
+
+run_tests: tests
+	find bin/tests -type f -exec {} \;
+
+
+
+$(LIBRARY_NAME): $(OBJECTS)
+	@printf "compiling library \e[1m\e[36m$@\033[0m..."
+	@ar rs $(LIBRARY_NAME) $^
+	@echo "done. Library file at \033[1m\033[32m$@\033[0m"
+
+
+
 bin/programs/%: programs/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
@@ -94,15 +128,6 @@ bin/examples/%: examples/%.cpp $(OBJECTS)
 	@printf "compiling program \e[1m\e[36m$<\033[0m..."
 	@g++ -std=gnu++11 -Qunused-arguments -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
-
-
-
-tests: $(INDIVIDUAL_TEST_EXECUTABLES) #bin/tests/test_runner
-
-
-
-run_tests: tests
-	find bin/tests -type f -exec {} \;
 
 
 
