@@ -6,9 +6,9 @@
 //#include <fullscore/AppController.hpp>
 
 
-#include <fullscore/UI/MeasureEditor/Widget.hpp>
+#include <fullscore/ui/MeasureEditor/Widget.hpp>
 #include <fullscore/actions/Base.h>
-#include <fullscore/UI/MeasureEditor/ActionFactory.hpp>
+#include <fullscore/ui/MeasureEditor/ActionFactory.hpp>
 
 
 class Project : public UIScreen

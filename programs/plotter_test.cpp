@@ -7,9 +7,9 @@
 
 
 #include <fullscore/models/lists/PlotterList.hpp>
-#include <fullscore/UI/PlotterList/Widget.hpp>
+#include <fullscore/ui/PlotterList/Widget.hpp>
 #include <fullscore/actions/Base.h>
-#include <fullscore/UI/PlotterList/ActionFactory.hpp>
+#include <fullscore/ui/PlotterList/ActionFactory.hpp>
 #include <fullscore/models/plotters/Destination.h>
 
 

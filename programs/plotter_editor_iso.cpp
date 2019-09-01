@@ -5,9 +5,9 @@
 
 
 #include <fullscore/models/plotters/destination.h>
-#include <fullscore/UI/PlotterEditor/Widget.hpp>
+#include <fullscore/ui/PlotterEditor/Widget.hpp>
 #include <fullscore/actions/Base.h>
-#include <fullscore/UI/PlotterEditor/ActionFactory.hpp>
+#include <fullscore/ui/PlotterEditor/ActionFactory.hpp>
 
 
 class Project : public UIScreen
