@@ -6,7 +6,6 @@ properties:
 functions:
   - name: on_timer_func
     type: void
-    override: true
     body: |
       return;
 parent_classes:
