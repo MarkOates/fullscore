@@ -1,0 +1,12 @@
+properties:
+  - name: message
+    constructor_arg: true
+    getter: true
+functions:
+  - name: output_message
+    type: void
+    body: |
+      std::cout << "Helloooo" << std::endl;
+function_body_symbol_dependencies:
+  - std::cout
+  - std::endl
