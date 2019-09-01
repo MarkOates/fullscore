@@ -3,6 +3,12 @@ properties:
     type: Display*
     init_with: nullptr
     constructor_arg: true
+functions:
+  - name: on_timer_func
+    type: void
+    override: true
+    body: |
+      return;
 parent_classes:
   - class: UIScreen
     scope: private

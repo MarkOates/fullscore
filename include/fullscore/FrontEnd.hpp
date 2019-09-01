@@ -17,6 +17,7 @@ namespace fullscore
       ~FrontEnd();
 
 
+   void on_timer_func() override;
    };
 }
 

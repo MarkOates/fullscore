@@ -20,6 +20,11 @@ FrontEnd::~FrontEnd()
 }
 
 
+void FrontEnd::on_timer_func()
+{
+return;
+
+}
 } // namespace fullscore
 
 
