@@ -1,12 +1,24 @@
-properties:
-  - name: message
-    constructor_arg: true
-    getter: true
 functions:
   - name: output_message
     type: void
     body: |
-      std::cout << "Helloooo" << std::endl;
+      Note note;
+      note.set_duration(Duration(Duration::QUARTER, 2));
+      note.set_pitch(Pitch(2, 0));
+      std::cout << note << std::endl;
 function_body_symbol_dependencies:
   - std::cout
   - std::endl
+  - fullscore::Note
+  - fullscore::Pitch
+  - fullscore::Duration
+  - fullscore::Staff
+dependencies:
+  - symbol: fullscore::Note
+    headers: [ 'fullscore/models/Note.h', 'fullscore/converters/stream_operators/NoteStreamOperators.h' ]
+  - symbol: fullscore::Duration
+    headers: [ 'fullscore/converters/stream_operators/DurationStreamOperators.h' ]
+  - symbol: fullscore::Pitch
+    headers: [ 'fullscore/converters/stream_operators/PitchStreamOperators.h' ]
+  - symbol: fullscore::Staff
+    headers: [ 'fullscore/converters/stream_operators/StaffStreamOperators.h' ]

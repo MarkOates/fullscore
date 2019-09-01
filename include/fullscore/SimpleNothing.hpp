@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include <string>
 
 
 namespace fullscore
@@ -9,14 +8,12 @@ namespace fullscore
    class SimpleNothing
    {
    private:
-      std::string message;
 
    public:
-      SimpleNothing(std::string message="");
+      SimpleNothing();
       ~SimpleNothing();
 
 
-      std::string get_message();
    void output_message();
    };
 }
