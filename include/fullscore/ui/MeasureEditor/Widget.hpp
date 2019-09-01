@@ -2,7 +2,7 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <fullscore/UI/MeasureEditor/KeyboardCommands.hpp>
+#include <fullscore/ui/MeasureEditor/KeyboardCommands.hpp>
 #include <fullscore/services/MusicEngraver.h>
 #include <fullscore/models/Note.h>
 #include <fullscore/models/measures/Base.h>

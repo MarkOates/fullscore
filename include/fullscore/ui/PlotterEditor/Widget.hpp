@@ -2,7 +2,7 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <fullscore/UI/PlotterEditor/KeyboardCommands.hpp>
+#include <fullscore/ui/PlotterEditor/KeyboardCommands.hpp>
 
 
 namespace Plotter { class Base; }

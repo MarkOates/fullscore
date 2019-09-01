@@ -7,7 +7,7 @@
 #include <fullscore/models/Grid.h>
 #include <fullscore/models/PlaybackControl.h>
 #include <fullscore/services/MusicEngraver.h>
-#include <fullscore/UI/GridEditor/KeyboardCommands.hpp>
+#include <fullscore/ui/GridEditor/KeyboardCommands.hpp>
 
 
 namespace UI::GridEditor::RenderComponents { class UIGridEditorRenderComponent; }

@@ -10,8 +10,8 @@
 #include <fullscore/actions/QueueAction.h>
 #include <fullscore/widgets/CommandBar.h>
 #include <fullscore/widgets/FollowCamera.h>
-#include <fullscore/UI/GridEditor/Widget.hpp>
-#include <fullscore/UI/PlotterList/Widget.hpp>
+#include <fullscore/ui/GridEditor/Widget.hpp>
+#include <fullscore/ui/PlotterList/Widget.hpp>
 
 
 class AppController : public UIScreen

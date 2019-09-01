@@ -2,7 +2,7 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <fullscore/UI/AppNavigator/KeyboardCommands.hpp>
+#include <fullscore/ui/AppNavigator/KeyboardCommands.hpp>
 
 
 namespace UI::AppNavigator::RenderComponents { class Widget; }

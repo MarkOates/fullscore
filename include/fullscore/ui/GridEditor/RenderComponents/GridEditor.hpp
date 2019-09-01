@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <fullscore/UI/GridEditor/Widget.hpp>
+#include <fullscore/ui/GridEditor/Widget.hpp>
 
 
 namespace UI::GridEditor::RenderComponents

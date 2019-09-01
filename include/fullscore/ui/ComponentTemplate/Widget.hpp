@@ -2,7 +2,7 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <fullscore/UI/ComponentTemplate/KeyboardCommands.hpp>
+#include <fullscore/ui/ComponentTemplate/KeyboardCommands.hpp>
 
 
 namespace UI::ComponentTemplate::RenderComponents { class Widget; }
