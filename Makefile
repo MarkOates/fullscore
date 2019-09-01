@@ -64,7 +64,7 @@ main:
 
 
 
-quintessences: $(QINTESSENCE_SOURCES)
+quintessences: $(QUINTESSENCE_SOURCES)
 	@./build
 
 
