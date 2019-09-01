@@ -8,7 +8,11 @@ functions:
     type: void
     override: true
     body: |
+      static placement2d place;
+      place.rotation = place.rotation += 0.01;
+      place.start_transform();
       al_draw_filled_rectangle(300, 400, 900, 1200, al_color_name("green"));
+      place.restore_transform();
       return;
 parent_classes:
   - class: UIScreen
@@ -19,3 +23,5 @@ dependencies:
     headers: [ 'allegro_flare/display.h' ]
   - symbol: UIScreen
     headers: [ 'allegro_flare/gui/gui_screen.h' ]
+  - symbol: placement2d
+    headers: [ 'allegro_flare/placement2d.h' ]
