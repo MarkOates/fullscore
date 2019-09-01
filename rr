@@ -11,10 +11,10 @@ then
 else
   chruby 2.5.1
   declare -a commands=(
-    "echo \"\n$yellow===== STAGE 0: Compose componets from all yamls =====$reset_text\n\"; ./build"
-    "echo \"\n$yellow===== STAGE 1: Make all the components =====$reset_text\n\"; make"
-    "echo \"\n$yellow===== STAGE 2: Make the test for this component =====$reset_text\n\"; make ./bin/tests/$@Test"
-    "echo \"\n$yellow===== STAGE 3: Run the test for this component =====$reset_text\n\"; ./bin/tests/$@Test"
+    "make quintessences"
+    "make objects"
+    "make tests"
+    "tests/$1Test"
   )
 
   rerun_command="${commands[0]} && ${commands[1]} && ${commands[2]} && ${commands[3]}"
