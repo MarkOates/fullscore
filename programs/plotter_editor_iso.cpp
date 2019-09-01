@@ -4,7 +4,7 @@
 #include <allegro_flare/allegro_flare.h>
 
 
-#include <fullscore/models/plotters/destination.h>
+#include <fullscore/models/plotters/Destination.h>
 #include <fullscore/ui/PlotterEditor/Widget.hpp>
 #include <fullscore/actions/Base.h>
 #include <fullscore/ui/PlotterEditor/ActionFactory.hpp>
