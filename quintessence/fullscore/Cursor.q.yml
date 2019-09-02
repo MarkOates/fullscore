@@ -1,0 +1,11 @@
+properties:
+  - name: x
+    type: int
+    init_with: 0
+    getter: true
+    setter: true
+  - name: y
+    type: int
+    init_with: 0
+    getter: true
+    setter: true

@@ -1,3 +1,9 @@
+properties:
+  - name: cursor
+    type: fullscore::Cursor
+    init_with: ""
+    getter: true
+    setter: true
 functions:
   - name: output_message
     type: void
@@ -13,6 +19,7 @@ function_body_symbol_dependencies:
   - fullscore::Pitch
   - fullscore::Duration
   - fullscore::Staff
+  - fullscore::Cursor
 dependencies:
   - symbol: fullscore::Note
     headers: [ 'fullscore/models/Note.h', 'fullscore/converters/stream_operators/NoteStreamOperators.h' ]
@@ -22,3 +29,5 @@ dependencies:
     headers: [ 'fullscore/converters/stream_operators/PitchStreamOperators.h' ]
   - symbol: fullscore::Staff
     headers: [ 'fullscore/converters/stream_operators/StaffStreamOperators.h' ]
+  - symbol: fullscore::Cursor
+    headers: [ 'fullscore/Cursor.hpp' ]

@@ -8,6 +8,7 @@
 #include <fullscore/converters/stream_operators/PitchStreamOperators.h>
 #include <fullscore/converters/stream_operators/DurationStreamOperators.h>
 #include <fullscore/converters/stream_operators/StaffStreamOperators.h>
+#include <fullscore/Cursor.hpp>
 
 
 namespace fullscore
@@ -15,12 +16,25 @@ namespace fullscore
 
 
 SimpleNothing::SimpleNothing()
+   : cursor()
 {
 }
 
 
 SimpleNothing::~SimpleNothing()
 {
+}
+
+
+void SimpleNothing::set_cursor(fullscore::Cursor cursor)
+{
+   this->cursor = cursor;
+}
+
+
+fullscore::Cursor SimpleNothing::get_cursor()
+{
+   return cursor;
 }
 
 
