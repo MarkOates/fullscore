@@ -16,7 +16,7 @@ GOOGLE_TEST_INCLUDE_DIR=$(GOOGLE_TEST_DIR)/googletest/include
 
 GOOGLE_TEST_LIBS=gtest
 NCURSES_LIB=ncurses
-ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
+ALLEGRO_FLARE_LIB=allegro_flare-0.8.11wip
 ALLEGRO_LIBS=allegro_color allegro_font allegro_ttf allegro_dialog allegro_audio allegro_acodec allegro_primitives allegro_image allegro
 ALLEGRO_LIBS_MAIN=$(ALLEGRO_LIBS) allegro_main
 
@@ -65,7 +65,9 @@ main:
 	@make quintessences
 	$(call output_terminal_message,"Make all the object files")
 	@make objects
-	$(call output_terminal_message,"Make all the test files")
+	$(call output_terminal_message,"Make all the test object files")
+	@make test_objects
+	$(call output_terminal_message,"Make all the test executables")
 	@make tests
 	$(call output_terminal_message,"Run the tests for all the components")
 	@make run_tests
@@ -100,7 +102,11 @@ library: $(LIBRARY_NAME)
 
 
 
-tests: $(INDIVIDUAL_TEST_EXECUTABLES) #bin/tests/test_runner
+test_objects: $(TEST_OBJECTS)
+
+
+
+tests: $(INDIVIDUAL_TEST_EXECUTABLES)
 
 
 
@@ -111,7 +117,7 @@ run_tests: tests
 
 $(LIBRARY_NAME): $(OBJECTS)
 	@mkdir -p $(@D)
-	@printf "compiling library \e[1m\e[36m$@\033[0m..."
+	@printf "Compiling library \e[1m\e[36m$@\033[0m\n"
 	@ar rs $(LIBRARY_NAME) $^
 	@echo "done. Library file at \033[1m\033[32m$@\033[0m"
 
@@ -119,7 +125,7 @@ $(LIBRARY_NAME): $(OBJECTS)
 
 bin/programs/%: programs/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
-	@printf "compiling program \e[1m\e[36m$<\033[0m..."
+	@printf "Compiling program \e[1m\e[36m$<\033[0m\n"
 	@g++ -std=c++1z -Qunused-arguments -Wall $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_FLARE_INCLUDE_DIR) $(ALLEGRO_LIBS_LINK_MAIN_ARGS) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
@@ -127,7 +133,7 @@ bin/programs/%: programs/%.cpp $(OBJECTS)
 
 bin/examples/%: examples/%.cpp $(OBJECTS)
 	@mkdir -p $(@D)
-	@printf "compiling program \e[1m\e[36m$<\033[0m..."
+	@printf "Compiling program \e[1m\e[36m$<\033[0m\n"
 	@g++ -std=c++1z -Qunused-arguments -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -L$(ALLEGRO_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
 
@@ -135,7 +141,7 @@ bin/examples/%: examples/%.cpp $(OBJECTS)
 
 obj/%.o: src/%.cpp
 	@mkdir -p $(@D)
-	@printf "compiling object file \e[1m\e[34m$<\033[0m..."
+	@printf "Compiling object file \e[1m\e[34m$<\033[0m\n"
 	@g++ -c -std=c++1z -Qunused-arguments -Wall -Wuninitialized -Weffc++ $< -o $@ -I./include -I$(ALLEGRO_INCLUDE_DIR) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
 	@echo "done. object at \033[1m\033[32m$@\033[0m"
 
@@ -144,17 +150,17 @@ obj/%.o: src/%.cpp
 obj/tests/%.o: tests/%.cpp $(OBJECTS)
 	@echo "=== Total num test source files: $(NUM_OF_TEST_SOURCE_FILES)"
 	@mkdir -p $(@D)
-	@printf "compiling test object file \e[1m\e[36m$<\033[0m..."
+	@printf "Compiling test object file \e[1m\e[36m$<\033[0m\n"
 	@g++ -c -std=c++1z -Qunused-arguments -Wall -Wuninitialized -Weffc++ $< -o $@ -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_FLARE_INCLUDE_DIR)
-	@echo "done. Object at \033[1m\033[32m$@\033[0m"
+	@echo "Test object at \033[1m\033[32m$@\033[0m compiled successfully."
 
 
 
 bin/tests/%: obj/tests/%.o obj/tests/test_runner.o
 	@mkdir -p $(@D)
-	@printf "compiling standalone test \e[1m\e[36m$<\033[0m..."
+	@printf "Compiling standalone test \e[1m\e[36m$<\033[0m\n."
 	@g++ -std=c++1z -Qunused-arguments -Wall -Wuninitialized -Weffc++ $(OBJECTS) $< obj/tests/test_runner.o -o $@ -l$(GOOGLE_TEST_LIBS) -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -L$(GOOGLE_TEST_LIB_DIR) $(ALLEGRO_LIBS_LINK_ARGS) -I$(ALLEGRO_FLARE_INCLUDE_DIR) -L$(ALLEGRO_FLARE_LIB_DIR) $(ALLEGRO_FLARE_LINK_ARGS) -I$(NCURSES_INCLUDE_DIR) -L$(NCURSES_LIB_DIR) -l$(NCURSES_LIB)
-	@echo "done. Executable at \033[1m\033[32m$@\033[0m"
+	@echo "Standalone test executable at \033[1m\033[32m$@\033[0m compiled successfully."
 
 
 
