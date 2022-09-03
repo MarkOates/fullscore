@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <fullscore/transforms/StackTransform.hpp>
+#include <fullscore/transforms/StackTransform.h>
 #include <fullscore/models/measures/Base.hpp>
 
 
