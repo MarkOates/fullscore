@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/Octatonic1.h>
 
 #include <fullscore/transforms/Octatonic1Transform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

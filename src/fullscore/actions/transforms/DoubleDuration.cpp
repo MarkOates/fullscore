@@ -5,7 +5,7 @@
 #include <fullscore/actions/transforms/DoubleDuration.h>
 
 #include <fullscore/transforms/DoubleDurationTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

@@ -1,16 +1,16 @@
 #pragma once
 
 
-class PlotterList;
+class PlotterListRepository;
 
 
 class PlotterListPlotter
 {
 private:
-   PlotterList *plotter_list;
+   PlotterListRepository *plotter_list;
 
 public:
-   PlotterListPlotter(PlotterList *plotter_list);
+   PlotterListPlotter(PlotterListRepository *plotter_list);
    ~PlotterListPlotter();
 
    void plot();

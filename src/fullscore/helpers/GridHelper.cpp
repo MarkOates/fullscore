@@ -2,11 +2,11 @@
 
 
 
-#include <fullscore/helpers/GridDimensionsHelper.h>
+#include <fullscore/helpers/GridDimensionsHelper.hpp>
 
-#include <fullscore/models/staves/Base.h>
-#include <fullscore/helpers/DurationHelper.h>
-#include <fullscore/models/Grid.h>
+#include <fullscore/models/staves/Base.hpp>
+#include <fullscore/helpers/DurationHelper.hpp>
+#include <fullscore/models/Grid.hpp>
 
 
 

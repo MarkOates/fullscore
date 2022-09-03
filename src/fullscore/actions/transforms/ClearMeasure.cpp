@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/ClearMeasure.h>
 
 #include <fullscore/transforms/ClearMeasureTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

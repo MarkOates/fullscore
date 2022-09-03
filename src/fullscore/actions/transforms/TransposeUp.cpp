@@ -4,7 +4,7 @@
 
 #include <fullscore/actions/transforms/TransposeUp.h>
 
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 #include <fullscore/transforms/TransposeTransform.h>
 
 

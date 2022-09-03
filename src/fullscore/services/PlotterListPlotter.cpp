@@ -2,11 +2,11 @@
 
 #include <fullscore/services/PlotterListPlotter.hpp>
 
-#include <fullscore/models/lists/PlotterList.hpp>
-#include <fullscore/models/plotters/Base.h>
+#include <fullscore/models/Repositories/PlotterRepository.hpp>
+#include <fullscore/models/plotters/Base.hpp>
 
 
-PlotterListPlotter::PlotterListPlotter(PlotterList *plotter_list)
+PlotterListPlotter::PlotterListPlotter(PlotterListRepository *plotter_list)
    : plotter_list(plotter_list)
 {
 }

@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/SplitNote.h>
 
 #include <fullscore/transforms/SplitNoteTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

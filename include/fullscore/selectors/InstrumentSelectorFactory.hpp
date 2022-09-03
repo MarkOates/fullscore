@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <fullscore/models/Staff.h>
-#include <fullscore/models/staves/Instrument.h>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
+#include <fullscore/models/staves/Instrument.hpp>
 
 
 class InstrumentSelectorFactory
@@ -11,7 +11,7 @@ private:
    std::vector<Staff::Base *> &pool;
 
 public:
-   InstrumentSelectorFactory(std::vector<Staff::Base *> &pool=Staff::pool);
+   InstrumentSelectorFactory(std::vector<Staff::Base *> &pool=StaffRepository::pool);
    ~InstrumentSelectorFactory();
 
    std::vector<Staff::Instrument *> instruments();

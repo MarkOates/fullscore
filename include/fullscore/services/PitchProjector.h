@@ -4,8 +4,8 @@
 
 #include <vector>
 
-#include <fullscore/models/ProjectionSet.h>
-#include <fullscore/models/IndexSet.h>
+#include <fullscore/models/ProjectionSet.hpp>
+#include <fullscore/models/IndexSet.hpp>
 
 
 

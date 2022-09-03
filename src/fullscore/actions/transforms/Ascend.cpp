@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/Ascend.h>
 
 #include <fullscore/transforms/AscendTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

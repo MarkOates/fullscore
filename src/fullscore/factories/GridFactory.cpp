@@ -3,15 +3,15 @@
 
 #include <fullscore/factories/GridFactory.h>
 #include <fullscore/factories/InstrumentFactory.h>
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/plotters/Basic.h>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/plotters/Basic.hpp>
 #include <fullscore/models/plotters/Staff.hpp>
-#include <fullscore/models/staves/HarmonicAnalysis.h>
-#include <fullscore/models/staves/MeasureNumbers.h>
-#include <fullscore/models/staves/Instrument.h>
-#include <fullscore/models/staves/Spacer.h>
-#include <fullscore/models/staves/Tempo.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/staves/HarmonicAnalysis.hpp>
+#include <fullscore/models/staves/MeasureNumbers.hpp>
+#include <fullscore/models/staves/Instrument.hpp>
+#include <fullscore/models/staves/Spacer.hpp>
+#include <fullscore/models/staves/Tempo.hpp>
+#include <fullscore/models/Note.hpp>
 #include <fullscore/selectors/InstrumentSelectorFactory.hpp>
 #include <fullscore/transforms/HalfDurationTransform.h>
 #include <fullscore/transforms/Octatonic1Transform.h>

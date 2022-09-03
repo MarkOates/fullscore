@@ -4,7 +4,7 @@
 #include <fullscore/actions/transforms/Descend.h>
 
 #include <fullscore/transforms/DescendTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 

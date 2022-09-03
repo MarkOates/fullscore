@@ -5,7 +5,7 @@
 #include <fullscore/actions/transforms/ToggleRest.h>
 
 #include <fullscore/transforms/ToggleRestTransform.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 
 
 
