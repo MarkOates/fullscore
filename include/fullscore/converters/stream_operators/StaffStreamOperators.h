@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/staves/Base.h>
+#include <fullscore/models/staves/Base.hpp>
 #include <iostream>
 
 

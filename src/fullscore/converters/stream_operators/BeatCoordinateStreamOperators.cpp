@@ -5,7 +5,6 @@
 
 
 
-
 std::ostream & operator<< (std::ostream &out, BeatCoordinate const &t)
 {
    out << t.beat << " " << t.sub_beat_numerator << " " << t.sub_beat_denominator;

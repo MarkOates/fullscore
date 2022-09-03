@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/TimeSignature.h>
+#include <fullscore/models/TimeSignature.hpp>
 #include <iostream>
 
 

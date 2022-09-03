@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Note.hpp>
 #include <iostream>
 
 

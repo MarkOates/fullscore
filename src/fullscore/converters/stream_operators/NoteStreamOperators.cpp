@@ -5,8 +5,8 @@
 
 #include <fullscore/converters/stream_operators/DurationStreamOperators.h>
 #include <fullscore/converters/stream_operators/PitchStreamOperators.h>
-#include <fullscore/models/Duration.h>
-#include <fullscore/models/Pitch.h>
+#include <fullscore/models/Duration.hpp>
+#include <fullscore/models/Pitch.hpp>
 
 
 

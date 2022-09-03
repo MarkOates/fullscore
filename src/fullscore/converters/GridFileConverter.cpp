@@ -4,9 +4,9 @@
 
 #include <fullscore/converters/GridFileConverter.h>
 
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/staves/Instrument.h>
-#include <fullscore/models/Grid.h>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/staves/Instrument.hpp>
+#include <fullscore/models/Grid.hpp>
 
 
 
