@@ -2,15 +2,16 @@
 
 
 #include <vector>
-#include <fullscore/models/measures/Base.hpp>
 #include <fullscore/models/Repositories/MeasureRepository.hpp>
 
 
+using namespace Measure;
 
 namespace Fullscore::Repositories
 {
 class MeasureRepository
 {
+
 
 
 std::vector<Base *> measure_pool = {};
@@ -121,7 +122,7 @@ bool destroy_all()
 
 
 
-} // class
+}; // class
 } // namespace
 
 

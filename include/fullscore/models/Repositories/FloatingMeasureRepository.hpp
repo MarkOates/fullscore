@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
 #include <fullscore/models/GridCoordinate.hpp>
 
 
@@ -47,6 +47,7 @@ namespace Fullscore::Repositories
       static bool destroy(int floating_measure_id);
       static bool destroy_all();
    };
+}
 
 
 

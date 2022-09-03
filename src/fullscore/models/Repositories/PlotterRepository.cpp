@@ -1,18 +1,18 @@
 
 
 
-#include <fullscore/models/lists/PlotterList.hpp>
+#include <fullscore/models/Repositories/PlotterRepository.hpp>
 
 
 
-int PlotterList::count() const
+int PlotterRepository::count() const
 {
    return plotters.size();
 }
 
 
 
-Plotter::Base *PlotterList::get(int index)
+Plotter::Base *PlotterRepository::get(int index)
 {
    if (index < 0 || index >= plotters.size()) return nullptr;
 
@@ -23,21 +23,21 @@ Plotter::Base *PlotterList::get(int index)
 
 
 
-std::vector<Plotter::Base *> PlotterList::get_list()
+std::vector<Plotter::Base *> PlotterRepository::get_list()
 {
    return plotters;
 }
 
 
 
-std::vector<Plotter::Base *> &PlotterList::get_list_ref()
+std::vector<Plotter::Base *> &PlotterRepository::get_list_ref()
 {
    return plotters;
 }
 
 
 
-bool PlotterList::insert(Plotter::Base *plotter, int index)
+bool PlotterRepository::insert(Plotter::Base *plotter, int index)
 {
    if (!plotter) return false;
 
@@ -51,7 +51,7 @@ bool PlotterList::insert(Plotter::Base *plotter, int index)
 
 
 
-bool PlotterList::erase(int index)
+bool PlotterRepository::erase(int index)
 {
    if (index < 0 || index >= (int)plotters.size()) return false;
    // TODO: Thinking a delete voice[index] should happen here
@@ -61,7 +61,7 @@ bool PlotterList::erase(int index)
 
 
 
-bool PlotterList::append(Plotter::Base *plotter)
+bool PlotterRepository::append(Plotter::Base *plotter)
 {
    if (!plotter) return false;
    plotters.push_back(plotter);

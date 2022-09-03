@@ -2,9 +2,10 @@
 
 
 
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/Note.hpp>
 #include <string>
 #include <vector>
-#include <fullscore/models/Note.hpp>
 
 
 
@@ -27,7 +28,7 @@ namespace Measure
    int const NO_RECORD = -1;
    typedef int measure_id_t;
 
-   class Base;
+   //class Base;
 
    extern std::vector<Base *> pool;
    extern int next_id;
