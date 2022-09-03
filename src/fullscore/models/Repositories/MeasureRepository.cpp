@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <fullscore/models/measures/Base.hpp>
-#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
 
 
 

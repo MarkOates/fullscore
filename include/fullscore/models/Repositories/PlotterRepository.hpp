@@ -7,7 +7,7 @@
 namespace Plotter { class Base; }
 
 
-class PlotterList
+class PlotterRepository
 {
 private:
    std::vector<Plotter::Base *> plotters;
