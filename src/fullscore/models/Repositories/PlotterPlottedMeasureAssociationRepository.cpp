@@ -1,6 +1,6 @@
 
 
-#include <fullscore/models/PlotterPlottedMeasureAssociation.hpp>
+#include <fullscore/models/Repositories/PlotterPlottedMeasureAssociationRepository.hpp>
 
 
 
@@ -11,25 +11,25 @@ namespace models
 {
 
 
-PlotterPlottedMeasureAssociation::PlotterPlottedMeasureAssociation(Plotter::Base* plotter, std::vector<Measure::Plotted*> measures)
+PlotterPlottedMeasureAssociationRepository::PlotterPlottedMeasureAssociationRepository(Plotter::Base* plotter, std::vector<Measure::Plotted*> measures)
    : plotter(plotter)
    , measures(measures)
 {
 }
 
 
-PlotterPlottedMeasureAssociation::~PlotterPlottedMeasureAssociation()
+PlotterPlottedMeasureAssociationRepository::~PlotterPlottedMeasureAssociationRepository()
 {
 }
 
 
-Plotter::Base* PlotterPlottedMeasureAssociation::get_plotter()
+Plotter::Base* PlotterPlottedMeasureAssociationRepository::get_plotter()
 {
    return plotter;
 }
 
 
-std::vector<Measure::Plotted*> PlotterPlottedMeasureAssociation::get_measures()
+std::vector<Measure::Plotted*> PlotterPlottedMeasureAssociationRepository::get_measures()
 {
    return measures;
 }
