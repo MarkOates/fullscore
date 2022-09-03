@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <fullscore/models/Staff.h>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 #include <fullscore/selectors/instrument_selector/Interface.hpp>
 
 

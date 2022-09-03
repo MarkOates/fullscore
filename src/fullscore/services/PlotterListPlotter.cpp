@@ -6,7 +6,7 @@
 #include <fullscore/models/plotters/Base.hpp>
 
 
-PlotterListPlotter::PlotterListPlotter(PlotterListRepository *plotter_list)
+PlotterListPlotter::PlotterListPlotter(PlotterRepository *plotter_list)
    : plotter_list(plotter_list)
 {
 }

@@ -22,7 +22,7 @@ std::vector<Staff::Instrument *> InstrumentSelectorFactory::instruments()
    std::vector<Staff::Instrument *> results;
 
    for (auto &element : pool)
-      if (element->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
+      if (element->is_type(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT))
          results.push_back(static_cast<Staff::Instrument *>(element));
 
    return results;
@@ -35,7 +35,7 @@ std::vector<Staff::Instrument *> InstrumentSelectorFactory::matches(std::string 
 
    for (auto &element : pool)
    {
-      if (element->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT) && static_cast<Staff::Instrument *>(element)->attributes.exists(attribute, property))
+      if (element->is_type(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT) && static_cast<Staff::Instrument *>(element)->attributes.exists(attribute, property))
          results.push_back(static_cast<Staff::Instrument *>(element));
    }
 
@@ -97,7 +97,7 @@ std::vector<Staff::Instrument *> InstrumentSelectorFactory::within_basic_range(i
    std::vector<std::string> warnings;
 
    for (auto &element : pool)
-      if (element->is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT))
+      if (element->is_type(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT))
       {
          Staff::Instrument *instrument = static_cast<Staff::Instrument *>(element);
          if (instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN) && instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN))
