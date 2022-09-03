@@ -34,6 +34,7 @@ TEST_OBJECTS := $(TEST_SOURCES:tests/%.cpp=obj/tests/%.o)
 LIBRARY_NAME := lib/lib$(PROJECT_NAME)-$(VERSION_NUMBER).a
 INDIVIDUAL_TEST_EXECUTABLES := $(TEST_SOURCES:tests/%.cpp=bin/tests/%)
 ALL_COMPILED_EXECUTABLES_IN_BIN := $(shell find bin/**/* -perm +111 -type f)
+NUM_OF_TEST_SOURCE_FILES := $(words $(TEST_SOURCES))
 
 
 
@@ -141,6 +142,7 @@ obj/%.o: src/%.cpp
 
 
 obj/tests/%.o: tests/%.cpp $(OBJECTS)
+	@echo "=== Total num test source files: $(NUM_OF_TEST_SOURCE_FILES)"
 	@mkdir -p $(@D)
 	@printf "compiling test object file \e[1m\e[36m$<\033[0m..."
 	@g++ -c -std=c++1z -Qunused-arguments -Wall -Wuninitialized -Weffc++ $< -o $@ -I./include -I$(GOOGLE_TEST_INCLUDE_DIR) -I$(ALLEGRO_FLARE_INCLUDE_DIR)
