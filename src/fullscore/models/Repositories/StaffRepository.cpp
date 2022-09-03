@@ -1,16 +1,15 @@
 
 
 
-#include <fullscore/models/Staff.hpp>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 
-#include <fullscore/models/staves/Base.hpp>
 #include <sstream>
 
 
 
-namespace Staff
+namespace StaffRepository
 {
-   std::vector<Base *> pool = {};
+   std::vector<Staff::Base *> pool = {};
 
 
 
@@ -33,9 +32,9 @@ namespace Staff
 
 
 
-   Base *find(int id, find_option_t find_option)
+   Staff::Base *find(int id, find_option_t find_option)
    {
-      Base *found_element = nullptr;
+      Staff::Base *found_element = nullptr;
 
       for (auto &element : pool)
          if (element->get_id() == id) { found_element = element; break; }
@@ -52,9 +51,9 @@ namespace Staff
 
 
 
-   std::vector<Base *> find(std::vector<int> ids, find_option_t find_option)
+   std::vector<Staff::Base *> find(std::vector<int> ids, find_option_t find_option)
    {
-      std::vector<Base *> results = {};
+      std::vector<Staff::Base *> results = {};
       std::vector<int> not_found_ids = {};
       find_option_t element_find_option = (find_option == FIND_OPTION_RAISE_NOT_FOUND) ? FIND_OPTION_RAISE_NOT_FOUND : FIND_OPTION_NONE;
 
@@ -62,7 +61,7 @@ namespace Staff
       {
          try
          {
-            Base *found_element = find(ids[i], element_find_option);
+            Staff::Base *found_element = find(ids[i], element_find_option);
             if (found_element || (find_option == FIND_OPTION_INCLUDE_NOT_FOUND)) results.push_back(found_element);
          }
          catch (std::runtime_error const &e)
@@ -118,7 +117,7 @@ namespace Staff
 
 
 
-   Base *find_first_of_type(std::string type)
+   Staff::Base *find_first_of_type(std::string type)
    {
       for (auto &element : pool)
          if (element->get_type() == type) return element;

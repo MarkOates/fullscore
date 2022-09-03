@@ -13,7 +13,7 @@ bool ___basically_equal(float f1, float f2, float threshold=0.00001f)
 
 
 
-static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingMeasure *m2)
+static bool __compare_floating_measure_x_location(FloatingMeasureRepository *m1, FloatingMeasureRepository *m2)
 {
    if (m1->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num() == m2->get_grid_coordinate().get_grid_horizontal_coordinate().get_barline_num())
    {
@@ -28,8 +28,8 @@ static bool __compare_floating_measure_x_location(FloatingMeasure *m1, FloatingM
 
 
 
-FloatingMeasure::FloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
-   : id(FloatingMeasure::next_id++)
+FloatingMeasureRepository::FloatingMeasureRepository(GridCoordinate grid_coordinate, int measure_id)
+   : id(FloatingMeasureRepository::next_id++)
    , grid_coordinate(grid_coordinate)
    , measure_id(measure_id)
 {
@@ -38,13 +38,13 @@ FloatingMeasure::FloatingMeasure(GridCoordinate grid_coordinate, int measure_id)
 
 
 
-FloatingMeasure::~FloatingMeasure()
+FloatingMeasureRepository::~FloatingMeasureRepository()
 {
-   std::vector<FloatingMeasure *>::iterator it = std::find(pool_elements.begin(), pool_elements.end(), this);
+   std::vector<FloatingMeasureRepository *>::iterator it = std::find(pool_elements.begin(), pool_elements.end(), this);
    if (it == pool_elements.end())
    {
       std::stringstream error_message;
-      error_message << "Could not find floating measure (where id = " << id << ") to remove from FloatingMeasure pool_elements";
+      error_message << "Could not find floating measure (where id = " << id << ") to remove from FloatingMeasureRepository pool_elements";
       throw std::runtime_error(error_message.str());
    }
    pool_elements.erase(it);
@@ -52,45 +52,45 @@ FloatingMeasure::~FloatingMeasure()
 
 
 
-GridCoordinate FloatingMeasure::get_grid_coordinate()
+GridCoordinate FloatingMeasureRepository::get_grid_coordinate()
 {
    return grid_coordinate;
 }
 
 
 
-int FloatingMeasure::get_measure_id()
+int FloatingMeasureRepository::get_measure_id()
 {
    return measure_id;
 }
 
 
 
-int FloatingMeasure::get_id()
+int FloatingMeasureRepository::get_id()
 {
    return id;
 }
 
 
 
-int FloatingMeasure::next_id = 0;
+int FloatingMeasureRepository::next_id = 0;
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::pool_elements;
+std::vector<FloatingMeasureRepository *> FloatingMeasureRepository::pool_elements;
 
 
 
-int FloatingMeasure::get_next_id()
+int FloatingMeasureRepository::get_next_id()
 {
    return next_id;
 }
 
 
 
-FloatingMeasure *FloatingMeasure::find(int id, find_option_t find_option)
+FloatingMeasureRepository *FloatingMeasureRepository::find(int id, find_option_t find_option)
 {
-   FloatingMeasure *found_element = nullptr;
+   FloatingMeasureRepository *found_element = nullptr;
 
    for (auto &element : pool_elements)
       if (element->get_id() == id) { found_element = element; break; }
@@ -98,7 +98,7 @@ FloatingMeasure *FloatingMeasure::find(int id, find_option_t find_option)
    if (find_option == FIND_OPTION_RAISE_NOT_FOUND && found_element == nullptr)
    {
       std::stringstream error_message;
-      error_message << "Looking for FloatingMeasure with id = " << id << " but does not exist";
+      error_message << "Looking for FloatingMeasureRepository with id = " << id << " but does not exist";
       throw std::runtime_error(error_message.str());
    }
 
@@ -107,9 +107,9 @@ FloatingMeasure *FloatingMeasure::find(int id, find_option_t find_option)
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int staff_id, int barline_num)
+std::vector<FloatingMeasureRepository *> FloatingMeasureRepository::find_at_staff_and_barline(int staff_id, int barline_num)
 {
-   std::vector<FloatingMeasure *> results;
+   std::vector<FloatingMeasureRepository *> results;
 
    for (auto &element : pool_elements)
    {
@@ -122,9 +122,9 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_at_staff_and_barline(int st
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff_after_barline(int staff_id, int barline_num, bool sort)
+std::vector<FloatingMeasureRepository *> FloatingMeasureRepository::find_in_staff_after_barline(int staff_id, int barline_num, bool sort)
 {
-   std::vector<FloatingMeasure *> results;
+   std::vector<FloatingMeasureRepository *> results;
 
    for (auto &element : pool_elements)
    {
@@ -139,9 +139,9 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff_after_barline(int 
 
 
 
-FloatingMeasure *FloatingMeasure::find_first_in_staff_after_barline(int staff_id, int barline_num)
+FloatingMeasureRepository *FloatingMeasureRepository::find_first_in_staff_after_barline(int staff_id, int barline_num)
 {
-   std::vector<FloatingMeasure *> potential_results;
+   std::vector<FloatingMeasureRepository *> potential_results;
 
    for (auto &element : pool_elements)
    {
@@ -158,9 +158,9 @@ FloatingMeasure *FloatingMeasure::find_first_in_staff_after_barline(int staff_id
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff(int staff_id, bool sort)
+std::vector<FloatingMeasureRepository *> FloatingMeasureRepository::find_in_staff(int staff_id, bool sort)
 {
-   std::vector<FloatingMeasure *> results;
+   std::vector<FloatingMeasureRepository *> results;
 
    for (auto &element : pool_elements)
       if (element->grid_coordinate.get_staff_id() == staff_id) results.push_back(element);
@@ -172,14 +172,14 @@ std::vector<FloatingMeasure *> FloatingMeasure::find_in_staff(int staff_id, bool
 
 
 
-std::vector<FloatingMeasure *> FloatingMeasure::get_pool_elements()
+std::vector<FloatingMeasureRepository *> FloatingMeasureRepository::get_pool_elements()
 {
    return pool_elements;
 }
 
 
 
-bool FloatingMeasure::destroy(int id)
+bool FloatingMeasureRepository::destroy(int id)
 {
    for (unsigned i=0; i<pool_elements.size(); i++)
       if (pool_elements[i]->get_id() == id)
@@ -192,7 +192,7 @@ bool FloatingMeasure::destroy(int id)
 
 
 
-bool FloatingMeasure::destroy_all()
+bool FloatingMeasureRepository::destroy_all()
 {
    for (auto &element : pool_elements) delete element;
    pool_elements.clear();
@@ -201,7 +201,7 @@ bool FloatingMeasure::destroy_all()
 
 
 
-int FloatingMeasure::get_num_pool_elements()
+int FloatingMeasureRepository::get_num_pool_elements()
 {
    return pool_elements.size();
 }
