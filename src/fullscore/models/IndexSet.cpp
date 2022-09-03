@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/IndexSet.h>
+#include <fullscore/models/IndexSet.hpp>
 
 
 

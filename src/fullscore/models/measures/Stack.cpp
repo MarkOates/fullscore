@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/models/measures/Stack.h>
+#include <fullscore/models/measures/Stack.hpp>
 
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Note.hpp>
 #include <iostream>
 
 

@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/Duration.h>
+#include <fullscore/models/Duration.hpp>
 
 //#include <AllegroFlare/Useful.hpp>
 #include <vector>

@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/FloatingMeasure.h>
+#include <fullscore/models/FloatingMeasure.hpp>
 #include <cmath>
 
 

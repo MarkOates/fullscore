@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/staves/MeasureNumbers.h>
+#include <fullscore/models/staves/MeasureNumbers.hpp>
 
-#include <fullscore/models/measures/Base.h>
+#include <fullscore/models/measures/Base.hpp>
 
 
 

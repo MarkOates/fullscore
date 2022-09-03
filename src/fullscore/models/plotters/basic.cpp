@@ -1,13 +1,13 @@
 
 
 
-#include <fullscore/models/plotters/Basic.h>
+#include <fullscore/models/plotters/Basic.hpp>
 
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/staves/Base.h>
-#include <fullscore/models/Plotter.h>
-#include <fullscore/models/Grid.h>
-#include <fullscore/models/FloatingMeasure.h>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/staves/Base.hpp>
+#include <fullscore/models/Plotter.hpp>
+#include <fullscore/models/Grid.hpp>
+#include <fullscore/models/FloatingMeasure.hpp>
 
 
 

@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/models/measures/Basic.h>
+#include <fullscore/models/measures/Basic.hpp>
 
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Note.hpp>
 
 
 

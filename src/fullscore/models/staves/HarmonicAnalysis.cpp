@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/staves/HarmonicAnalysis.h>
+#include <fullscore/models/staves/HarmonicAnalysis.hpp>
 
-#include <fullscore/models/measures/Base.h>
+#include <fullscore/models/measures/Base.hpp>
 
 
 

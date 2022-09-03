@@ -2,8 +2,8 @@
 
 #include <fullscore/models/plotters/Selector.hpp>
 
-#include <fullscore/models/Note.h>
-#include <fullscore/models/Plotter.h>
+#include <fullscore/models/Note.hpp>
+#include <fullscore/models/Plotter.hpp>
 #include <fullscore/selectors/instrument_selector/Interface.hpp>
 
 

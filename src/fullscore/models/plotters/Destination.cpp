@@ -1,12 +1,12 @@
 
 
 
-#include <fullscore/models/plotters/Destination.h>
+#include <fullscore/models/plotters/Destination.hpp>
 
-#include <fullscore/models/FloatingMeasure.h>
-#include <fullscore/models/measures/Plotted.h>
-#include <fullscore/models/Grid.h>
-#include <fullscore/models/Plotter.h>
+#include <fullscore/models/FloatingMeasure.hpp>
+#include <fullscore/models/measures/Plotted.hpp>
+#include <fullscore/models/Grid.hpp>
+#include <fullscore/models/Plotter.hpp>
 #include <algorithm>
 
 

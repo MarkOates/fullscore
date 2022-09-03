@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/measures/ReferenceById.h>
+#include <fullscore/models/measures/ReferenceById.hpp>
 
-#include <fullscore/models/Measure.h>
+#include <fullscore/models/Measure.hpp>
 
 
 

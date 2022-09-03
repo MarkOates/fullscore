@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/models/TimeSignature.h>
+#include <fullscore/models/TimeSignature.hpp>
 
-#include <fullscore/models/Duration.h>
-#include <fullscore/helpers/DurationHelper.h>
+#include <fullscore/models/Duration.hpp>
+#include <fullscore/helpers/DurationHelper.hpp>
 
 
 

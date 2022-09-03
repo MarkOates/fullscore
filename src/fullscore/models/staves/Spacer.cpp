@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/staves/Spacer.h>
+#include <fullscore/models/staves/Spacer.hpp>
 
-#include <fullscore/models/measures/Base.h>
+#include <fullscore/models/measures/Base.hpp>
 
 
 

@@ -2,8 +2,8 @@
 
 
 #include <vector>
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/Measure.h>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/Measure.hpp>
 
 
 

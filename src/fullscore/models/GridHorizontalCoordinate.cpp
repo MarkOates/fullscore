@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/GridHorizontalCoordinate.h>
+#include <fullscore/models/GridHorizontalCoordinate.hpp>
 
 
 

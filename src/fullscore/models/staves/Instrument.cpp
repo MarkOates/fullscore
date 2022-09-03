@@ -1,11 +1,11 @@
 
 
 
-#include <fullscore/models/staves/Instrument.h>
+#include <fullscore/models/staves/Instrument.hpp>
 
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Staff.h>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Staff.hpp>
 #include <algorithm>
 
 
