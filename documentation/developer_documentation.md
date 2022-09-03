@@ -37,7 +37,7 @@ folder, and consist of transforms like:
 - AppendNote - appends a not after a note (or set of notes)
 - Ascend - on a set of notes, ascends each subsequent note by a scale step from
   the previous
-- ClearMeasure - literally just removes all the notes
+- ClearMeasure - removes all the notes
 - Descend - on a set of notes, descends each subsequent note by a scale step from the previous
 - DoubleDuration - doubles the duration of a note (or set of notes)
 - EraseNote - removes a note from a set of notes (by its index position)

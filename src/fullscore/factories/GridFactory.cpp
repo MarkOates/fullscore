@@ -18,7 +18,7 @@
 #include <fullscore/transforms/RetrogradeTransform.h>
 #include <fullscore/transforms/TransposeTransform.h>
 #include <fullscore/InstrumentAttributes.h>
-#include <allegro_flare/useful.h>
+//#include <allegro_flare/useful.h>
 #include <iostream>
 
 

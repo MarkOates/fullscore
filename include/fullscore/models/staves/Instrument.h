@@ -3,7 +3,7 @@
 
 
 #include <fullscore/models/staves/Base.h>
-#include <allegro_flare/attributes.h>
+#include <AllegroFlare/Attributes.hpp>
 
 
 
@@ -12,7 +12,7 @@ namespace Staff
    class Instrument : public Base
    {
    public:
-      Attributes attributes;
+      AllegroFlare::Attributes attributes;
 
       Instrument(std::string name = std::string());
       ~Instrument();

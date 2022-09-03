@@ -5,16 +5,16 @@
 
 #include <fullscore/models/Measure.h>
 #include <fullscore/models/Note.h>
-#include <allegro_flare/useful.h>
 
 
 
 Measure::Basic::Basic(std::vector<Note> notes)
    : Base(Measure::TYPE_IDENTIFIER_BASIC)
-   , notes()
+   , notes(notes)
    , extension(12)
 {
-   set_notes(notes);
+   // TODO remove this on initialization, move to constructor
+   //set_notes(notes);
 }
 
 

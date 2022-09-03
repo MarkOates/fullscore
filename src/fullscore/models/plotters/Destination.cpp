@@ -7,7 +7,6 @@
 #include <fullscore/models/measures/Plotted.h>
 #include <fullscore/models/Grid.h>
 #include <fullscore/models/Plotter.h>
-#include <allegro_flare/useful.h>
 #include <algorithm>
 
 

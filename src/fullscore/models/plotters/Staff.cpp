@@ -3,7 +3,6 @@
 
 #include <fullscore/models/plotters/Staff.hpp>
 
-#include <allegro_flare/useful.h>
 #include <fullscore/models/measures/Basic.h>
 #include <fullscore/models/staves/Base.h>
 #include <fullscore/models/Plotter.h>

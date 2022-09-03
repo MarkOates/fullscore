@@ -13,8 +13,8 @@ namespace UI::MeasureEditor
 
 
 Widget::Widget(UIWidget *parent, Measure::Basic *measure)
-   : UIWidget(parent, "MeasureEditor", new UISurfaceAreaBox(0, 0, 300, 200))
-   , measure(measure)
+   //: UIWidget(parent, "MeasureEditor", new UISurfaceAreaBox(0, 0, 300, 200))
+   : measure(measure)
    , note_mode_keyboard_commands()
    , measure_mode_keyboard_commands()
    , note_cursor_x(0)

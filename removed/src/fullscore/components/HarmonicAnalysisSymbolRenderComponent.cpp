@@ -4,7 +4,7 @@
 #include <fullscore/components/HarmonicAnalysisSymbolRenderComponent.h>
 
 #include <allegro5/allegro_font.h>
-#include <allegro_flare/useful.h>
+//#include <allegro_flare/useful.h>
 #include <allegro_flare/color.h>
 
 

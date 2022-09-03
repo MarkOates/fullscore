@@ -7,8 +7,6 @@
 #include <fullscore/models/measures/Base.h>
 #include <fullscore/models/staves/Instrument.h>
 #include <fullscore/models/Grid.h>
-#include <allegro_flare/attributes.h>
-#include <allegro_flare/useful_php.h>
 
 
 

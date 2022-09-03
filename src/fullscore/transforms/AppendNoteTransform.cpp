@@ -3,7 +3,6 @@
 
 #include <fullscore/transforms/AppendNoteTransform.h>
 
-#include <allegro_flare/useful.h>
 #include <fullscore/Transform.h>
 
 

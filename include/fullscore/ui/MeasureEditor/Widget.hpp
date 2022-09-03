@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <allegro_flare/gui/widget.h>
+//#include <allegro_flare/gui/widget.h>
 #include <fullscore/ui/MeasureEditor/KeyboardCommands.hpp>
 #include <fullscore/services/MusicEngraver.h>
 #include <fullscore/models/Note.h>
@@ -13,7 +13,7 @@ namespace Measures { class Base; }
 
 namespace UI::MeasureEditor
 {
-   class Widget : public UIWidget
+   class Widget// : public UIWidget
    {
    private:
       Measure::Base *measure;
