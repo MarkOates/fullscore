@@ -3,7 +3,7 @@
 
 #include <fullscore/models/plotters/Destination.hpp>
 
-#include <fullscore/models/FloatingMeasure.hpp>
+#include <fullscore/models/Repositories/FloatingMeasureRepository.hpp>
 #include <fullscore/models/measures/Plotted.hpp>
 #include <fullscore/models/Grid.hpp>
 #include <fullscore/models/Plotter.hpp>
@@ -104,7 +104,7 @@ bool Plotter::Destination::plot()
 
    for (auto &destination : destinations)
    {
-      new FloatingMeasure(destination, m->get_id());
+      new FloatingMeasureRepository(destination, m->get_id());
    }
 
    return true;

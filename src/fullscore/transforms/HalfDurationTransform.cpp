@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/HalfDurationTransform.h>
 
-#include <fullscore/helpers/DurationHelper.h>
+#include <fullscore/helpers/DurationHelper.hpp>
 #include <fullscore/Transform.h>
 #include <algorithm>
 

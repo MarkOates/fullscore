@@ -7,7 +7,7 @@
 #include <fullscore/models/staves/Base.hpp>
 #include <fullscore/models/Plotter.hpp>
 #include <fullscore/models/Grid.hpp>
-#include <fullscore/models/FloatingMeasure.hpp>
+#include <fullscore/models/Repositories/FloatingMeasureRepository.hpp>
 
 
 
@@ -39,7 +39,7 @@ bool Plotter::Basic::plot()
       {
          int staff_id = staff->get_id();
          Measure::Base* plotted_measure = new Measure::Basic(notes); // < this automatically adds the measure to the base
-         new FloatingMeasure(GridCoordinate(staff_id, {barline_num, { 0 }}), plotted_measure->get_id());
+         new FloatingMeasureRepository(GridCoordinate(staff_id, {barline_num, { 0 }}), plotted_measure->get_id());
       }
    }
 

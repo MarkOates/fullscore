@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/Grid.h>
+#include <fullscore/models/Grid.hpp>
 
 
 

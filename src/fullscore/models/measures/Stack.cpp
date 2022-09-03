@@ -3,7 +3,7 @@
 
 #include <fullscore/models/measures/Stack.hpp>
 
-#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
 #include <fullscore/models/Note.hpp>
 #include <iostream>
 

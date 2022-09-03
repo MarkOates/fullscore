@@ -2,8 +2,7 @@
 
 
 
-#include <fullscore/models/staves/Instrument.h>
-
+#include <fullscore/models/staves/Instrument.hpp>
 
 
 class InstrumentFactory

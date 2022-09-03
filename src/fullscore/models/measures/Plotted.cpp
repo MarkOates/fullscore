@@ -3,7 +3,7 @@
 
 #include <fullscore/models/measures/Plotted.hpp>
 
-#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
 #include <fullscore/models/Note.hpp>
 
 

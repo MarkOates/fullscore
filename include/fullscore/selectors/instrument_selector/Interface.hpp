@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <fullscore/models/Staff.hpp>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 #include <fullscore/models/staves/Instrument.hpp>
 
 
