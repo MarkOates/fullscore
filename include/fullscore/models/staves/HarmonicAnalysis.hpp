@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/models/staves/Base.h>
-#include <fullscore/models/GridHorizontalCoordinate.h>
-#include <fullscore/models/HarmonicAnalysisSymbol.h>
+#include <fullscore/models/staves/Base.hpp>
+#include <fullscore/models/GridHorizontalCoordinate.hpp>
+#include <fullscore/models/HarmonicAnalysisSymbol.hpp>
 
 
 

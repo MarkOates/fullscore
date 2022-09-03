@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <fullscore/models/measures/Plotted.h>
-#include <fullscore/models/plotters/Base.h>
+#include <fullscore/models/measures/Plotted.hpp>
+#include <fullscore/models/plotters/Base.hpp>
 #include <vector>
 
 

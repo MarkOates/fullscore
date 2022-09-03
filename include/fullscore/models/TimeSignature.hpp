@@ -3,7 +3,7 @@
 
 
 
-#include <fullscore/models/Duration.h>
+#include <fullscore/models/Duration.hpp>
 
 
 

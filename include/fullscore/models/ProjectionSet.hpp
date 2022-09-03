@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <fullscore/models/Pitch.h>
+#include <fullscore/models/Pitch.hpp>
 
 
 

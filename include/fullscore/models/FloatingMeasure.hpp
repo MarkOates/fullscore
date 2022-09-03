@@ -2,8 +2,8 @@
 
 
 
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/GridCoordinate.h>
+#include <fullscore/models/Measure.hpp>
+#include <fullscore/models/GridCoordinate.hpp>
 
 
 

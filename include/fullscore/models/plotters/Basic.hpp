@@ -2,8 +2,8 @@
 
 
 
-#include <fullscore/models/plotters/Base.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/plotters/Base.hpp>
+#include <fullscore/models/Note.hpp>
 #include <vector>
 
 
