@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+<style>
+*
+{
+  font-family: 'Arial';
+  padding: 3px 20px;
+}
+table td
+{
+  padding: 3px 20px;
+}
+.property
+{
+  color: blue;
+}
+.private_property
+{
+  color: lightblue;
+}
+
+.method
+{
+  color: red;
+}
+
+.private_method
+{
+  color: pink;
+}
+
+.dependency
+{
+  color: green;
+}
+
+.component
+{
+  padding: 20 10 20 10;
+  margin: 20 10 20 10;
+  background-color: #dfdfdf;
+}
+
+.component h3
+{
+}
+</style>
+</head>
+<body>
+<h1>TOC</h1>
+<ul>
+  <li><a href="#removed/quintessence/fullscore/Cursor.q.yml">removed/quintessence/fullscore/Cursor.q.yml</a></li>
+  <li><a href="#removed/quintessence/fullscore/FrontEnd.q.yml">removed/quintessence/fullscore/FrontEnd.q.yml</a></li>
+  <li><a href="#removed/quintessence/fullscore/SimpleNothing.q.yml">removed/quintessence/fullscore/SimpleNothing.q.yml</a></li>
+</ul>
+<h1>Components</h1>
+<ul>
+  <div class="component">
+    <h3 id="removed/quintessence/fullscore/Cursor.q.yml">removed/quintessence/fullscore/Cursor.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">x</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">y</td>
+  <td class="property">int</td>
+</tr>
+    </table>
+     <table>
+    </table>
+     <table>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="removed/quintessence/fullscore/FrontEnd.q.yml">removed/quintessence/fullscore/FrontEnd.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">display</td>
+  <td class="property">Display*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">on_draw()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;Display*&quot;, &quot;headers&quot;=&gt;[&quot;allegro_flare/display.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;UIScreen&quot;, &quot;headers&quot;=&gt;[&quot;allegro_flare/gui/gui_screen.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;placement2d&quot;, &quot;headers&quot;=&gt;[&quot;allegro_flare/placement2d.h&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="removed/quintessence/fullscore/SimpleNothing.q.yml">removed/quintessence/fullscore/SimpleNothing.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">cursor</td>
+  <td class="property">fullscore::Cursor</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">output_message()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fullscore::Note&quot;, &quot;headers&quot;=&gt;[&quot;fullscore/models/Note.h&quot;, &quot;fullscore/converters/stream_operators/NoteStreamOperators.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fullscore::Duration&quot;, &quot;headers&quot;=&gt;[&quot;fullscore/converters/stream_operators/DurationStreamOperators.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fullscore::Pitch&quot;, &quot;headers&quot;=&gt;[&quot;fullscore/converters/stream_operators/PitchStreamOperators.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fullscore::Staff&quot;, &quot;headers&quot;=&gt;[&quot;fullscore/converters/stream_operators/StaffStreamOperators.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fullscore::Cursor&quot;, &quot;headers&quot;=&gt;[&quot;fullscore/Cursor.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<h1>Dependents</h1>
+<pre>
+{
+  "Display": [
+    "removed/fullscore/FrontEnd"
+  ],
+  "UIScreen": [
+    "removed/fullscore/FrontEnd"
+  ],
+  "placement2d": [
+    "removed/fullscore/FrontEnd"
+  ],
+  "fullscore/Note": [
+    "removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Duration": [
+    "removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Pitch": [
+    "removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Staff": [
+    "removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Cursor": [
+    "removed/fullscore/SimpleNothing"
+  ]
+}
+</pre>
+</body>
