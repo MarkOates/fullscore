@@ -8,6 +8,7 @@ allegro.log
 
 *.a
 *.o
+.deps/**
 *.o-*
 *.obj
 *.exe

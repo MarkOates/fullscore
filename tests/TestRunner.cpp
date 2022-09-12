@@ -1,6 +1,7 @@
 
 
 
+#include <allegro5/allegro.h>
 #include <gtest/gtest.h>
 
 
