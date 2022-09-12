@@ -8,7 +8,7 @@
 
 
 Measure::Static::Static()
-   : Base(Measure::TYPE_IDENTIFIER_STATIC)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_STATIC)
 {}
 
 

@@ -8,7 +8,7 @@
 
 
 Measure::ReferenceByID::ReferenceByID(int measure_id)
-   : Base(Measure::TYPE_IDENTIFIER_REFERENCE_BY_ID)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_REFERENCE_BY_ID)
    , measure_id(measure_id)
 {}
 
@@ -25,7 +25,7 @@ std::vector<Note> Measure::ReferenceByID::get_notes_copy()
 
 Measure::Base *Measure::ReferenceByID::get_referenced_measure()
 {
-   return Measure::find(measure_id);
+   return MeasureRepository::find(measure_id);
 }
 
 

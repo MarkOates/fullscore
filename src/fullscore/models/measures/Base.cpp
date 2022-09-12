@@ -9,16 +9,16 @@
 
 Measure::Base::Base(std::string type)
    : type(type)
-   , id(Measure::next_id++)
+   , id(MeasureRepository::next_id++)
 {
-   Measure::push_back(this);
+   MeasureRepository::push_back(this);
 }
 
 
 
 Measure::Base::~Base()
 {
-   Measure::remove(id);
+   MeasureRepository::remove(id);
 }
 
 

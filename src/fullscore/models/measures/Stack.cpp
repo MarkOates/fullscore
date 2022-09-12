@@ -10,7 +10,7 @@
 
 
 Measure::Stack::Stack()
-   : Base(Measure::TYPE_IDENTIFIER_STACK)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_STACK)
    , transformations()
 {}
 

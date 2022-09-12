@@ -9,7 +9,7 @@
 
 
 Measure::Plotted::Plotted(std::vector<Note> notes)
-   : Base(Measure::TYPE_IDENTIFIER_PLOTTED)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_PLOTTED)
    , notes(notes)
 {
 }
