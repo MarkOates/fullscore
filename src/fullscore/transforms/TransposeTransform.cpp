@@ -4,12 +4,12 @@
 
 #include <fullscore/transforms/TransposeTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::Transpose::Transpose(int transposition)
-   : Base(Transform::TRANSPOSE_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::TRANSPOSE_TRANSFORM_IDENTIFIER)
    , transposition(transposition)
 {
 }

@@ -3,12 +3,12 @@
 
 #include <fullscore/transforms/AppendNoteTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::AppendNote::AppendNote(Note note)
-   : Base(Transform::APPEND_NOTE_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::APPEND_NOTE_TRANSFORM_IDENTIFIER)
    , note(note)
 {
 }

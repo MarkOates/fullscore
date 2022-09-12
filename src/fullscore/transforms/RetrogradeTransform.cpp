@@ -4,13 +4,13 @@
 
 #include <fullscore/transforms/RetrogradeTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 
 Transform::Retrograde::Retrograde()
-   : Base(Transform::RETROGRADE_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::RETROGRADE_TRANSFORM_IDENTIFIER)
 {
 }
 

@@ -4,12 +4,12 @@
 
 #include <fullscore/transforms/ToggleRestTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::ToggleRest::ToggleRest()
-   : Base(Transform::TOGGLE_REST_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::TOGGLE_REST_TRANSFORM_IDENTIFIER)
 {
 }
 

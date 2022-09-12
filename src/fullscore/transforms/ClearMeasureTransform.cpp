@@ -3,12 +3,12 @@
 
 #include <fullscore/transforms/ClearMeasureTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::ClearMeasure::ClearMeasure()
-   : Base(Transform::CLEAR_MEASURE_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::CLEAR_MEASURE_TRANSFORM_IDENTIFIER)
 {}
 
 

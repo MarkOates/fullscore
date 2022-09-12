@@ -2,7 +2,7 @@
 
 
 
-namespace InstrumentAttribute
+namespace InstrumentAttributeNames
 {
    // Families
 

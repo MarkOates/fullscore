@@ -2,7 +2,7 @@
 
 
 
-namespace Transform
+namespace TransformNames
 {
    std::string const ADD_DOT_TRANSFORM_IDENTIFIER = "ADD_DOT";
    std::string const APPEND_NOTE_TRANSFORM_IDENTIFIER = "APPEND_NOTE";

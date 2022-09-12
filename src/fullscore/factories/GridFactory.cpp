@@ -17,7 +17,7 @@
 #include <fullscore/transforms/Octatonic1Transform.hpp>
 #include <fullscore/transforms/RetrogradeTransform.hpp>
 #include <fullscore/transforms/TransposeTransform.hpp>
-#include <fullscore/InstrumentAttributes.hpp>
+#include <fullscore/InstrumentAttributeNames.hpp>
 //#include <allegro_flare/useful.h>
 #include <iostream>
 

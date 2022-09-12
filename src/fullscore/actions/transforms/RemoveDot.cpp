@@ -6,13 +6,13 @@
 
 #include <fullscore/transforms/RemoveDotTransform.hpp>
 #include <fullscore/models/Note.hpp>
-#include <fullscore/Action.hpp>
+#include <fullscore/ActionNames.hpp>
 
 
 
 
 Action::Transform::RemoveDot::RemoveDot(Note *note)
-   : Base(Action::REMOVE_DOT_ACTION_IDENTIFIER)
+   : Base(ActionNames::REMOVE_DOT_ACTION_IDENTIFIER)
    , note(note)
 {}
 

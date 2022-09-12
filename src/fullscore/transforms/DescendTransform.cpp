@@ -4,12 +4,12 @@
 
 #include <fullscore/transforms/DescendTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::Descend::Descend()
-   : Base(Transform::DESCEND_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::DESCEND_TRANSFORM_IDENTIFIER)
 {
 }
 

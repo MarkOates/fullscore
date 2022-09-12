@@ -3,12 +3,12 @@
 
 #include <fullscore/transforms/Octatonic1Transform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::Octatonic1::Octatonic1()
-   : Base(Transform::OCTATONIC_1_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::OCTATONIC_1_TRANSFORM_IDENTIFIER)
 {}
 
 

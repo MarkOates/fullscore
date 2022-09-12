@@ -2,7 +2,7 @@
 
 #include <fullscore/selectors/InstrumentSelectorFactory.hpp>
 
-#include <fullscore/InstrumentAttributes.hpp>
+#include <fullscore/InstrumentAttributeNames.hpp>
 #include <sstream>
 
 
@@ -45,49 +45,49 @@ std::vector<Staff::Instrument *> InstrumentSelectorFactory::matches(std::string 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::soprano_voices()
 {
-   return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::SOPRANO);
+   return matches(InstrumentAttributeNames::VOICE_ROLE, InstrumentAttributeNames::VoiceRole::SOPRANO);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::alto_voices()
 {
-   return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::ALTO);
+   return matches(InstrumentAttributeNames::VOICE_ROLE, InstrumentAttributeNames::VoiceRole::ALTO);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::tenor_voices()
 {
-   return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::TENOR);
+   return matches(InstrumentAttributeNames::VOICE_ROLE, InstrumentAttributeNames::VoiceRole::TENOR);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::baritone_voices()
 {
-   return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BARITONE);
+   return matches(InstrumentAttributeNames::VOICE_ROLE, InstrumentAttributeNames::VoiceRole::BARITONE);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::bass_voices()
 {
-   return matches(InstrumentAttribute::VOICE_ROLE, InstrumentAttribute::VoiceRole::BASS);
+   return matches(InstrumentAttributeNames::VOICE_ROLE, InstrumentAttributeNames::VoiceRole::BASS);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::woodwinds()
 {
-   return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::WOODWIND);
+   return matches(InstrumentAttributeNames::FAMILY, InstrumentAttributeNames::Family::WOODWIND);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::brass()
 {
-   return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::BRASS);
+   return matches(InstrumentAttributeNames::FAMILY, InstrumentAttributeNames::Family::BRASS);
 }
 
 
 std::vector<Staff::Instrument *> InstrumentSelectorFactory::strings()
 {
-   return matches(InstrumentAttribute::FAMILY, InstrumentAttribute::Family::STRING);
+   return matches(InstrumentAttributeNames::FAMILY, InstrumentAttributeNames::Family::STRING);
 }
 
 
@@ -100,10 +100,10 @@ std::vector<Staff::Instrument *> InstrumentSelectorFactory::within_basic_range(i
       if (element->is_type(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT))
       {
          Staff::Instrument *instrument = static_cast<Staff::Instrument *>(element);
-         if (instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN) && instrument->attributes.exists(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN))
+         if (instrument->attributes.exists(InstrumentAttributeNames::SMARTMUSIC_BASIC_RANGE_MIN) && instrument->attributes.exists(InstrumentAttributeNames::SMARTMUSIC_BASIC_RANGE_MIN))
          {
-            int range_min = instrument->attributes.get_as_int(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MIN);
-            int range_max = instrument->attributes.get_as_int(InstrumentAttribute::SMARTMUSIC_BASIC_RANGE_MAX);
+            int range_min = instrument->attributes.get_as_int(InstrumentAttributeNames::SMARTMUSIC_BASIC_RANGE_MIN);
+            int range_max = instrument->attributes.get_as_int(InstrumentAttributeNames::SMARTMUSIC_BASIC_RANGE_MAX);
 
             if (pitch >= range_min && pitch <= range_max) results.push_back(instrument);
          }

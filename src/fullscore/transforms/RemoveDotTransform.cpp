@@ -4,13 +4,13 @@
 
 #include <fullscore/transforms/RemoveDotTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 
 Transform::RemoveDot::RemoveDot()
-   : Base(Transform::REMOVE_DOT_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::REMOVE_DOT_TRANSFORM_IDENTIFIER)
 {
 }
 

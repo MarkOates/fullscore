@@ -4,12 +4,12 @@
 #include <fullscore/actions/transforms/InsertNoteAfter.hpp>
 
 #include <fullscore/actions/transforms/InsertNote.hpp>
-#include <fullscore/Action.hpp>
+#include <fullscore/ActionNames.hpp>
 
 
 
 Action::Transform::InsertNoteAfter::InsertNoteAfter(std::vector<Note> *notes, int at_index, Note note)
-   : Base(INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER)
+   : Base(ActionNames::INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER)
    , notes(notes)
    , at_index(at_index)
    , note(note)

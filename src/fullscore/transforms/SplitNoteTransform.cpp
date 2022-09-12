@@ -4,12 +4,12 @@
 #include <fullscore/transforms/SplitNoteTransform.hpp>
 
 #include <fullscore/transforms/HalfDurationTransform.hpp>
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::SplitNote::SplitNote()
-   : Base(Transform::SPLIT_NOTE_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::SPLIT_NOTE_TRANSFORM_IDENTIFIER)
 {
 }
 

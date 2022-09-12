@@ -3,12 +3,12 @@
 
 #include <fullscore/transforms/NotesAtTransform.hpp>
 
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
 Transform::NotesAt::NotesAt(std::vector<int> indexes)
-   : Base(Transform::NOTES_AT_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::NOTES_AT_TRANSFORM_IDENTIFIER)
    , indexes(indexes)
 {
 }

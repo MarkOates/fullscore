@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/Playback/PlaybackNote.hpp>
+#include <fullscore/Playback/PlaybackNote.hpp>
 
 
 

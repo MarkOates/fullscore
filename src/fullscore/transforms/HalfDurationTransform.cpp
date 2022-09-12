@@ -5,14 +5,14 @@
 #include <fullscore/transforms/HalfDurationTransform.hpp>
 
 #include <fullscore/helpers/DurationHelper.hpp>
-#include <fullscore/Transform.hpp>
+#include <fullscore/TransformNames.hpp>
 #include <algorithm>
 
 
 
 
 Transform::HalfDuration::HalfDuration()
-   : Base(Transform::HALF_DURATION_TRANSFORM_IDENTIFIER)
+   : Base(TransformNames::HALF_DURATION_TRANSFORM_IDENTIFIER)
    , minimum_duration(Duration::THIRTYSECOND)
 {
 }
