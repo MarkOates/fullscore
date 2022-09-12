@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/helpers/GridHelper.hpp>
+#include <fullscore/services/GridHelper.hpp>
 
 #include <fullscore/models/staves/Base.hpp>
-#include <fullscore/helpers/DurationHelper.hpp>
+#include <fullscore/services/DurationHelper.hpp>
 #include <fullscore/models/Grid.hpp>
 
 

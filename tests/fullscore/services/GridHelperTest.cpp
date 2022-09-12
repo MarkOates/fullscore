@@ -6,7 +6,7 @@
 
 #include <fullscore/models/staves/Instrument.hpp>
 #include <fullscore/models/staves/Spacer.hpp>
-#include <fullscore/helpers/GridHelper.hpp>
+#include <fullscore/services/GridHelper.hpp>
 #include <fullscore/models/Grid.hpp>
 #include <fullscore/models/Note.hpp>
 
