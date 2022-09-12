@@ -5,8 +5,8 @@
 
 #include <fullscore/actions/transforms/SplitNote.h>
 
-#include <fullscore/models/Duration.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/Duration.hpp>
+#include <fullscore/models/Note.hpp>
 
 
 

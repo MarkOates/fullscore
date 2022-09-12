@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/models/HarmonicAnalysisSymbol.h>
+#include <fullscore/models/HarmonicAnalysisSymbol.hpp>
 
 
 

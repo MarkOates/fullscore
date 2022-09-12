@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/widgets/GridEditor.h>
+#include <fullscore/widgets/GridEditor.hpp>
 
 
 

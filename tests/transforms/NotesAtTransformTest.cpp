@@ -5,7 +5,7 @@
 
 #include "../TestHelper.hpp"
 
-#include <fullscore/models/NoteSet.h>
+#include <fullscore/models/NoteSet.hpp>
 #include <fullscore/transforms/NotesAtTransform.h>
 
 

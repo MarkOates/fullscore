@@ -4,11 +4,11 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/staves/Instrument.h>
-#include <fullscore/models/staves/Spacer.h>
-#include <fullscore/helpers/GridDimensionsHelper.h>
-#include <fullscore/models/Grid.h>
-#include <fullscore/models/Note.h>
+#include <fullscore/models/staves/Instrument.hpp>
+#include <fullscore/models/staves/Spacer.hpp>
+#include <fullscore/helpers/GridDimensionsHelper.hpp>
+#include <fullscore/models/Grid.hpp>
+#include <fullscore/models/Note.hpp>
 
 
 
