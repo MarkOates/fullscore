@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/AppendNoteTransform.h>
+#include <fullscore/transforms/AppendNoteTransform.hpp>
 
 #include <fullscore/Transform.h>
 

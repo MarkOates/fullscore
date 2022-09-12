@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/DoubleDurationTransform.h>
+#include <fullscore/transforms/DoubleDurationTransform.hpp>
 
 #include <fullscore/helpers/DurationHelper.hpp>
 #include <fullscore/Transform.h>

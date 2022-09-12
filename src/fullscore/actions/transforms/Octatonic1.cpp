@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/Octatonic1.h>
+#include <fullscore/actions/transforms/Octatonic1.hpp>
 
-#include <fullscore/transforms/Octatonic1Transform.h>
+#include <fullscore/transforms/Octatonic1Transform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

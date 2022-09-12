@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/TransposeTransform.h>
+#include <fullscore/transforms/TransposeTransform.hpp>
 
 #include <fullscore/Transform.h>
 

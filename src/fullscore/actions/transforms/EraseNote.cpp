@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/actions/transforms/EraseNote.h>
+#include <fullscore/actions/transforms/EraseNote.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/EraseNoteTransform.h>
+#include <fullscore/transforms/EraseNoteTransform.hpp>
 
 
 

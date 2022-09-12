@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/ClearMeasure.h>
+#include <fullscore/actions/transforms/ClearMeasure.hpp>
 
-#include <fullscore/transforms/ClearMeasureTransform.h>
+#include <fullscore/transforms/ClearMeasureTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

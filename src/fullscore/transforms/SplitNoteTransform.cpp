@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/transforms/SplitNoteTransform.h>
+#include <fullscore/transforms/SplitNoteTransform.hpp>
 
-#include <fullscore/transforms/HalfDurationTransform.h>
+#include <fullscore/transforms/HalfDurationTransform.hpp>
 #include <fullscore/Transform.h>
 
 

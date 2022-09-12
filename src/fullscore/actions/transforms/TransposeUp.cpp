@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/actions/transforms/TransposeUp.h>
+#include <fullscore/actions/transforms/TransposeUp.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/TransposeTransform.h>
+#include <fullscore/transforms/TransposeTransform.hpp>
 
 
 

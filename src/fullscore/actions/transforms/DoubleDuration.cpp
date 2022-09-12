@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/actions/transforms/DoubleDuration.h>
+#include <fullscore/actions/transforms/DoubleDuration.hpp>
 
-#include <fullscore/transforms/DoubleDurationTransform.h>
+#include <fullscore/transforms/DoubleDurationTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/actions/transforms/SplitNote.h>
+#include <fullscore/actions/transforms/SplitNote.hpp>
 
 #include <fullscore/models/Duration.hpp>
 #include <fullscore/models/Note.hpp>

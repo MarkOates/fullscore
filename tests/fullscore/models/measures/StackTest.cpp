@@ -5,10 +5,10 @@
 
 #include <fullscore/models/measures/Stack.hpp>
 
-#include <fullscore/transforms/DoubleDurationTransform.h>
-#include <fullscore/transforms/EraseNoteTransform.h>
-#include <fullscore/transforms/RetrogradeTransform.h>
-#include <fullscore/transforms/Octatonic1Transform.h>
+#include <fullscore/transforms/DoubleDurationTransform.hpp>
+#include <fullscore/transforms/EraseNoteTransform.hpp>
+#include <fullscore/transforms/RetrogradeTransform.hpp>
+#include <fullscore/transforms/Octatonic1Transform.hpp>
 
 
 

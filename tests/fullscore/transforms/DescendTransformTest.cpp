@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/DescendTransform.h>
+#include <fullscore/transforms/DescendTransform.hpp>
 
 
 

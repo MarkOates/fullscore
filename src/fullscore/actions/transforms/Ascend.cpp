@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/Ascend.h>
+#include <fullscore/actions/transforms/Ascend.hpp>
 
-#include <fullscore/transforms/AscendTransform.h>
+#include <fullscore/transforms/AscendTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

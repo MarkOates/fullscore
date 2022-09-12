@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/ClearMeasureTransform.h>
+#include <fullscore/transforms/ClearMeasureTransform.hpp>
 
 #include <fullscore/Transform.h>
 

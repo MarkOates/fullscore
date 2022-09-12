@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/actions/transforms/RemoveDot.h>
+#include <fullscore/actions/transforms/RemoveDot.hpp>
 
-#include <fullscore/transforms/RemoveDotTransform.h>
+#include <fullscore/transforms/RemoveDotTransform.hpp>
 #include <fullscore/models/Note.hpp>
 #include <fullscore/Action.h>
 

@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/InsertNoteAfter.h>
+#include <fullscore/actions/transforms/InsertNoteAfter.hpp>
 
-#include <fullscore/actions/transforms/InsertNote.h>
+#include <fullscore/actions/transforms/InsertNote.hpp>
 #include <fullscore/Action.h>
 
 

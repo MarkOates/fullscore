@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/AppendNote.h>
+#include <fullscore/actions/transforms/AppendNote.hpp>
 
-#include <fullscore/transforms/AppendNoteTransform.h>
+#include <fullscore/transforms/AppendNoteTransform.hpp>
 
 
 

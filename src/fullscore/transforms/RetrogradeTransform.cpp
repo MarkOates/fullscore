@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/RetrogradeTransform.h>
+#include <fullscore/transforms/RetrogradeTransform.hpp>
 
 #include <fullscore/Transform.h>
 

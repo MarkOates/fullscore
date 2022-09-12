@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/SplitNoteTransform.h>
+#include <fullscore/transforms/SplitNoteTransform.hpp>
 
 
 

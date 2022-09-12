@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/actions/transforms/HalfDuration.h>
+#include <fullscore/actions/transforms/HalfDuration.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/HalfDurationTransform.h>
+#include <fullscore/transforms/HalfDurationTransform.hpp>
 
 
 

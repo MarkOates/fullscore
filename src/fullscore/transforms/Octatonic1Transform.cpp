@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/Octatonic1Transform.h>
+#include <fullscore/transforms/Octatonic1Transform.hpp>
 
 #include <fullscore/Transform.h>
 

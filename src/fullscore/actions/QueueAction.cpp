@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/actions/QueueAction.h>
+#include <fullscore/actions/QueueAction.hpp>
 
 
 

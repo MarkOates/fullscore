@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/transforms/StackTransform.h>
+#include <fullscore/transforms/StackTransform.hpp>
 
 #include <fullscore/Transform.h>
 

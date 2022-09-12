@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/DescendTransform.h>
+#include <fullscore/transforms/DescendTransform.hpp>
 
 #include <fullscore/Transform.h>
 

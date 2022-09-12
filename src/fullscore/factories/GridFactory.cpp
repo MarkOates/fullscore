@@ -13,10 +13,10 @@
 #include <fullscore/models/staves/Tempo.hpp>
 #include <fullscore/models/Note.hpp>
 #include <fullscore/selectors/InstrumentSelectorFactory.hpp>
-#include <fullscore/transforms/HalfDurationTransform.h>
-#include <fullscore/transforms/Octatonic1Transform.h>
-#include <fullscore/transforms/RetrogradeTransform.h>
-#include <fullscore/transforms/TransposeTransform.h>
+#include <fullscore/transforms/HalfDurationTransform.hpp>
+#include <fullscore/transforms/Octatonic1Transform.hpp>
+#include <fullscore/transforms/RetrogradeTransform.hpp>
+#include <fullscore/transforms/TransposeTransform.hpp>
 #include <fullscore/InstrumentAttributes.h>
 //#include <allegro_flare/useful.h>
 #include <iostream>

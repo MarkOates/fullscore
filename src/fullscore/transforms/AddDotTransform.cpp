@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/AddDotTransform.h>
+#include <fullscore/transforms/AddDotTransform.hpp>
 
 #include <fullscore/Transform.h>
 

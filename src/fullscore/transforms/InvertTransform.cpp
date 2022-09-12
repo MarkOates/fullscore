@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/transforms/InvertTransform.h>
+#include <fullscore/transforms/InvertTransform.hpp>
 
 #include <fullscore/Transform.h>
 

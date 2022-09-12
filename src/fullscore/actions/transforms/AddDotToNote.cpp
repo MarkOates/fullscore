@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/AddDotToNote.h>
+#include <fullscore/actions/transforms/AddDotToNote.hpp>
 
-#include <fullscore/transforms/AddDotTransform.h>
+#include <fullscore/transforms/AddDotTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

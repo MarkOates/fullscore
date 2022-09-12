@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/actions/transforms/SplitNote.h>
+#include <fullscore/actions/transforms/SplitNote.hpp>
 
-#include <fullscore/transforms/SplitNoteTransform.h>
+#include <fullscore/transforms/SplitNoteTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

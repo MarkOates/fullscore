@@ -2,10 +2,10 @@
 
 
 
-#include <fullscore/actions/transforms/Invert.h>
+#include <fullscore/actions/transforms/Invert.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/InvertTransform.h>
+#include <fullscore/transforms/InvertTransform.hpp>
 
 
 

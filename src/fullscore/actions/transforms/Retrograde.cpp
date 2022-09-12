@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/actions/transforms/Retrograde.h>
+#include <fullscore/actions/transforms/Retrograde.hpp>
 
-#include <fullscore/transforms/RetrogradeTransform.h>
+#include <fullscore/transforms/RetrogradeTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 

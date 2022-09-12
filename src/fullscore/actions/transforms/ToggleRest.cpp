@@ -2,9 +2,9 @@
 
 
 
-#include <fullscore/actions/transforms/ToggleRest.h>
+#include <fullscore/actions/transforms/ToggleRest.hpp>
 
-#include <fullscore/transforms/ToggleRestTransform.h>
+#include <fullscore/transforms/ToggleRestTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 
