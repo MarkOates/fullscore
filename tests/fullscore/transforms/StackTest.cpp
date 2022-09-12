@@ -5,7 +5,7 @@
 
 #include <fullscore/transforms/StackTransform.h>
 
-#include <fullscore/transforms/InsertNoteTransform.h>
+#include <fullscore/transforms/InsertNoteTransform.hpp>
 #include <fullscore/transforms/RetrogradeTransform.h>
 #include <fullscore/transforms/ToggleRestTransform.h>
 #include <fullscore/Transform.h>
