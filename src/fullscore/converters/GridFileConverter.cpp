@@ -2,7 +2,7 @@
 
 
 
-#include <fullscore/converters/GridFileConverter.h>
+#include <fullscore/converters/GridFileConverter.hpp>
 
 #include <fullscore/models/measures/Base.hpp>
 #include <fullscore/models/staves/Instrument.hpp>

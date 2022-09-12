@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/converters/ScientificPitchNotationToPitchConverter.h>
+#include <fullscore/converters/ScientificPitchNotationToPitchConverter.hpp>
 
 
 

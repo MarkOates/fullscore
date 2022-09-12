@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 #include <fullscore/models/BeatCoordinate.hpp>
-#include <fullscore/converters/stream_operators/BeatCoordinateStreamOperators.h>
+#include <fullscore/converters/stream_operators/BeatCoordinateStreamOperators.hpp>
 
 
 

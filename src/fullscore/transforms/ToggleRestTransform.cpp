@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/ToggleRestTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 
 
 

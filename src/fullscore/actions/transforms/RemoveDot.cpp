@@ -6,7 +6,7 @@
 
 #include <fullscore/transforms/RemoveDotTransform.hpp>
 #include <fullscore/models/Note.hpp>
-#include <fullscore/Action.h>
+#include <fullscore/Action.hpp>
 
 
 

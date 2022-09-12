@@ -8,7 +8,7 @@
 #include <fullscore/transforms/InsertNoteTransform.hpp>
 #include <fullscore/transforms/RetrogradeTransform.hpp>
 #include <fullscore/transforms/ToggleRestTransform.hpp>
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 
 
 

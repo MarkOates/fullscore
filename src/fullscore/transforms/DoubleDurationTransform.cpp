@@ -5,7 +5,7 @@
 #include <fullscore/transforms/DoubleDurationTransform.hpp>
 
 #include <fullscore/helpers/DurationHelper.hpp>
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 #include <algorithm>
 
 

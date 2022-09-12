@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/RemoveDotTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 
 
 

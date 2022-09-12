@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/InsertNoteTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 #include <AllegroFlare/Useful.hpp>
 
 

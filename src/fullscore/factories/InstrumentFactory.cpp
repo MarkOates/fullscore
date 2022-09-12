@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/factories/InstrumentFactory.h>
+#include <fullscore/factories/InstrumentFactory.hpp>
 
-#include <fullscore/converters/ScientificPitchNotationToPitchConverter.h>
-#include <fullscore/InstrumentAttributes.h>
+#include <fullscore/converters/ScientificPitchNotationToPitchConverter.hpp>
+#include <fullscore/InstrumentAttributes.hpp>
 
 
 

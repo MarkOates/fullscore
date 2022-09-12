@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/converters/stream_operators/BeatCoordinateStreamOperators.h>
+#include <fullscore/converters/stream_operators/BeatCoordinateStreamOperators.hpp>
 
 
 

@@ -4,7 +4,7 @@
 #include <fullscore/transforms/SplitNoteTransform.hpp>
 
 #include <fullscore/transforms/HalfDurationTransform.hpp>
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 
 
 

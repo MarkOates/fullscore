@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 #include <fullscore/models/TimeSignature.hpp>
-#include <fullscore/converters/stream_operators/TimeSignatureStreamOperators.h>
+#include <fullscore/converters/stream_operators/TimeSignatureStreamOperators.hpp>
 
 
 

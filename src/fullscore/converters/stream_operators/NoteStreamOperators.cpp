@@ -1,10 +1,10 @@
 
 
 
-#include <fullscore/converters/stream_operators/NoteStreamOperators.h>
+#include <fullscore/converters/stream_operators/NoteStreamOperators.hpp>
 
-#include <fullscore/converters/stream_operators/DurationStreamOperators.h>
-#include <fullscore/converters/stream_operators/PitchStreamOperators.h>
+#include <fullscore/converters/stream_operators/DurationStreamOperators.hpp>
+#include <fullscore/converters/stream_operators/PitchStreamOperators.hpp>
 #include <fullscore/models/Duration.hpp>
 #include <fullscore/models/Pitch.hpp>
 

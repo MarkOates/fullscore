@@ -2,7 +2,7 @@
 
 #include <fullscore/selectors/InstrumentSelectorFactory.hpp>
 
-#include <fullscore/InstrumentAttributes.h>
+#include <fullscore/InstrumentAttributes.hpp>
 #include <sstream>
 
 

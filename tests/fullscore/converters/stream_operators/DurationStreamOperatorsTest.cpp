@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 #include <fullscore/models/Duration.hpp>
-#include <fullscore/converters/stream_operators/DurationStreamOperators.h>
+#include <fullscore/converters/stream_operators/DurationStreamOperators.hpp>
 
 
 

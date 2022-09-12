@@ -4,7 +4,7 @@
 
 #include <fullscore/transforms/EraseNoteTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/Transform.hpp>
 #include <algorithm>
 
 

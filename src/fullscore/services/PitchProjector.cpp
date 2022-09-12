@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/services/PitchProjector.h>
+#include <fullscore/services/PitchProjector.hpp>
 
 
 

@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/converters/stream_operators/StaffStreamOperators.h>
+#include <fullscore/converters/stream_operators/StaffStreamOperators.hpp>
 #include <fullscore/models/staves/Base.hpp>
 
 

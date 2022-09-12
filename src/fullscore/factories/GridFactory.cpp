@@ -1,8 +1,8 @@
 
 
 
-#include <fullscore/factories/GridFactory.h>
-#include <fullscore/factories/InstrumentFactory.h>
+#include <fullscore/factories/GridFactory.hpp>
+#include <fullscore/factories/InstrumentFactory.hpp>
 #include <fullscore/models/measures/Basic.hpp>
 #include <fullscore/models/plotters/Basic.hpp>
 #include <fullscore/models/plotters/Staff.hpp>
@@ -17,7 +17,7 @@
 #include <fullscore/transforms/Octatonic1Transform.hpp>
 #include <fullscore/transforms/RetrogradeTransform.hpp>
 #include <fullscore/transforms/TransposeTransform.hpp>
-#include <fullscore/InstrumentAttributes.h>
+#include <fullscore/InstrumentAttributes.hpp>
 //#include <allegro_flare/useful.h>
 #include <iostream>
 

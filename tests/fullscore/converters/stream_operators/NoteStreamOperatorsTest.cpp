@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/converters/stream_operators/NoteStreamOperators.h>
+#include <fullscore/converters/stream_operators/NoteStreamOperators.hpp>
 #include <fullscore/models/Note.hpp>
 
 
