@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/actions/transforms/SplitNote.hpp>
+#include <fullscore/actions/Transforms/SplitNote.hpp>
 
 #include <fullscore/models/Duration.hpp>
 #include <fullscore/models/Note.hpp>
@@ -18,7 +18,7 @@ TEST(SplitNoteActionTest, splits_the_source_notes_into_half)
          Note(7, Duration::QUARTER),
       };
 
-   ::Action::Transform::SplitNote split_note_action(&source_notes);
+   ::Action::Transforms::SplitNote split_note_action(&source_notes);
 
    std::vector<Note> expected_notes = {
       Note(3, Duration::QUARTER),

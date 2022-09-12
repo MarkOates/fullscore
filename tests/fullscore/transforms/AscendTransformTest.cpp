@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/AscendTransform.hpp>
+#include <fullscore/Transforms/AscendTransform.hpp>
 
 
 
@@ -25,7 +25,7 @@ TEST(AscendTransformTest, causes_subsequent_pitches_to_ascend_from_the_initial_s
       Note(6, Duration::SIXTEENTH),
    };
 
-   std::vector<Note> returned_notes = Transform::Ascend().transform(notes);
+   std::vector<Note> returned_notes = Transforms::Ascend().transform(notes);
 
    ASSERT_EQ(expected_notes, returned_notes);
 }

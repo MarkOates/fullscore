@@ -2,14 +2,14 @@
 
 
 
-#include <fullscore/transforms/AscendTransform.hpp>
+#include <fullscore/Transforms/AscendTransform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
 
-Transform::Ascend::Ascend()
+Transforms::Ascend::Ascend()
    : Base(TransformNames::ASCEND_TRANSFORM_IDENTIFIER)
 {
 }
@@ -17,14 +17,14 @@ Transform::Ascend::Ascend()
 
 
 
-Transform::Ascend::~Ascend()
+Transforms::Ascend::~Ascend()
 {
 }
 
 
 
 
-std::vector<Note> Transform::Ascend::transform(std::vector<Note> n)
+std::vector<Note> Transforms::Ascend::transform(std::vector<Note> n)
 {
    if (n.empty()) return {};
 

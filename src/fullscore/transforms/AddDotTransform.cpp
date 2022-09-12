@@ -2,14 +2,14 @@
 
 
 
-#include <fullscore/transforms/AddDotTransform.hpp>
+#include <fullscore/Transforms/AddDotTransform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
 
-Transform::AddDot::AddDot()
+Transforms::AddDot::AddDot()
    : Base(TransformNames::ADD_DOT_TRANSFORM_IDENTIFIER)
 {
 }
@@ -17,14 +17,14 @@ Transform::AddDot::AddDot()
 
 
 
-Transform::AddDot::~AddDot()
+Transforms::AddDot::~AddDot()
 {
 }
 
 
 
 
-std::vector<Note> Transform::AddDot::transform(std::vector<Note> n)
+std::vector<Note> Transforms::AddDot::transform(std::vector<Note> n)
 {
    for (auto &note : n)
    {

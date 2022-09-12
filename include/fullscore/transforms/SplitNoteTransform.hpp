@@ -2,11 +2,11 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
    class SplitNote : public Base
    {

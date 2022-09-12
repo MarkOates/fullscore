@@ -2,15 +2,15 @@
 
 
 
-#include <fullscore/actions/transforms/TransposeUp.hpp>
+#include <fullscore/actions/Transforms/TransposeUp.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/TransposeTransform.hpp>
+#include <fullscore/Transforms/TransposeTransform.hpp>
 
 
 
 
-Action::Transform::TransposeUp::TransposeUp(Note *note)
+Action::Transforms::TransposeUp::TransposeUp(Note *note)
    : Base("transpose_up")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::Transform::TransposeUp::TransposeUp(Note *note)
 
 
 
-Action::Transform::TransposeUp::~TransposeUp()
+Action::Transforms::TransposeUp::~TransposeUp()
 {}
 
 
 
 
-bool Action::Transform::TransposeUp::execute()
+bool Action::Transforms::TransposeUp::execute()
 {
    if (!note) throw std::runtime_error("Cannot TransposeUp on a nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   ::Transform::Transpose transpose_transform(1);
+   ::Transforms::Transpose transpose_transform(1);
    single_note_as_array = transpose_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

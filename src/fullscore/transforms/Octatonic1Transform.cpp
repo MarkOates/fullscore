@@ -1,24 +1,24 @@
 
 
 
-#include <fullscore/transforms/Octatonic1Transform.hpp>
+#include <fullscore/Transforms/Octatonic1Transform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
-Transform::Octatonic1::Octatonic1()
+Transforms::Octatonic1::Octatonic1()
    : Base(TransformNames::OCTATONIC_1_TRANSFORM_IDENTIFIER)
 {}
 
 
 
-Transform::Octatonic1::~Octatonic1()
+Transforms::Octatonic1::~Octatonic1()
 {}
 
 
 
-std::vector<Note> Transform::Octatonic1::transform(std::vector<Note> source)
+std::vector<Note> Transforms::Octatonic1::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = {0, 2, 3, 5, 6, 8, 9, 11};
    return notes;

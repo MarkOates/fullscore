@@ -2,14 +2,14 @@
 
 
 
-#include <fullscore/transforms/RemoveDotTransform.hpp>
+#include <fullscore/Transforms/RemoveDotTransform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
 
-Transform::RemoveDot::RemoveDot()
+Transforms::RemoveDot::RemoveDot()
    : Base(TransformNames::REMOVE_DOT_TRANSFORM_IDENTIFIER)
 {
 }
@@ -17,14 +17,14 @@ Transform::RemoveDot::RemoveDot()
 
 
 
-Transform::RemoveDot::~RemoveDot()
+Transforms::RemoveDot::~RemoveDot()
 {
 }
 
 
 
 
-std::vector<Note> Transform::RemoveDot::transform(std::vector<Note> n)
+std::vector<Note> Transforms::RemoveDot::transform(std::vector<Note> n)
 {
    for (auto &note : n)
    {

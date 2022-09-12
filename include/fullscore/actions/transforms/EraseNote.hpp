@@ -11,7 +11,7 @@ class Note;
 
 namespace Action
 {
-   namespace Transform
+   namespace Transforms
    {
       class EraseNote : public Base
       {

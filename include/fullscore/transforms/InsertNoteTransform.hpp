@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 #include <fullscore/models/Note.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
    class InsertNote : public Base
    {

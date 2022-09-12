@@ -2,15 +2,15 @@
 
 
 
-#include <fullscore/actions/transforms/EraseNote.hpp>
+#include <fullscore/actions/Transforms/EraseNote.hpp>
 
 #include <fullscore/models/Note.hpp>
-#include <fullscore/transforms/EraseNoteTransform.hpp>
+#include <fullscore/Transforms/EraseNoteTransform.hpp>
 
 
 
 
-Action::Transform::EraseNote::EraseNote(std::vector<Note> *notes, int index)
+Action::Transforms::EraseNote::EraseNote(std::vector<Note> *notes, int index)
    : Base("erase_note")
    , notes(notes)
    , index(index)
@@ -19,18 +19,18 @@ Action::Transform::EraseNote::EraseNote(std::vector<Note> *notes, int index)
 
 
 
-Action::Transform::EraseNote::~EraseNote()
+Action::Transforms::EraseNote::~EraseNote()
 {}
 
 
 
 
-bool Action::Transform::EraseNote::execute()
+bool Action::Transforms::EraseNote::execute()
 {
    if (!notes) throw std::runtime_error("Cannot EraseNote on a nullptr note");
    if (notes->empty() || index < 0 || index >= notes->size()) throw std::runtime_error("Cannot EraseNote at out of bounds index");
 
-   ::Transform::EraseNote erase_note_transform(index);
+   ::Transforms::EraseNote erase_note_transform(index);
    *notes = erase_note_transform.transform(*notes);
 
    return true;

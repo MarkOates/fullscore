@@ -1,30 +1,30 @@
 
 
 
-#include <fullscore/actions/transforms/Descend.hpp>
+#include <fullscore/actions/Transforms/Descend.hpp>
 
-#include <fullscore/transforms/DescendTransform.hpp>
+#include <fullscore/Transforms/DescendTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 
 
-Action::Transform::Descend::Descend(std::vector<Note> *notes)
+Action::Transforms::Descend::Descend(std::vector<Note> *notes)
    : Base("descend")
    , notes(notes)
 {}
 
 
 
-Action::Transform::Descend::~Descend()
+Action::Transforms::Descend::~Descend()
 {}
 
 
 
-bool Action::Transform::Descend::execute()
+bool Action::Transforms::Descend::execute()
 {
    if (!notes) throw std::runtime_error("Cannot perform Descend action on nullptr notes");
 
-   *notes = ::Transform::Descend().transform(*notes);
+   *notes = ::Transforms::Descend().transform(*notes);
 
    return true;
 }

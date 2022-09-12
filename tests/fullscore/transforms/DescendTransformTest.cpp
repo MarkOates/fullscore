@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/DescendTransform.hpp>
+#include <fullscore/Transforms/DescendTransform.hpp>
 
 
 
@@ -25,7 +25,7 @@ TEST(DescendTransformTest, causes_subsequent_pitches_to_descend_from_the_initial
       Note(-2, Duration::SIXTEENTH),
    };
 
-   std::vector<Note> returned_notes = Transform::Descend().transform(notes);
+   std::vector<Note> returned_notes = Transforms::Descend().transform(notes);
 
    ASSERT_EQ(expected_notes, returned_notes);
 }

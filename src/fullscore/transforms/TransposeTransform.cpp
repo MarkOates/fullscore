@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/TransposeTransform.hpp>
+#include <fullscore/Transforms/TransposeTransform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
-Transform::Transpose::Transpose(int transposition)
+Transforms::Transpose::Transpose(int transposition)
    : Base(TransformNames::TRANSPOSE_TRANSFORM_IDENTIFIER)
    , transposition(transposition)
 {
@@ -17,14 +17,14 @@ Transform::Transpose::Transpose(int transposition)
 
 
 
-Transform::Transpose::~Transpose()
+Transforms::Transpose::~Transpose()
 {
 }
 
 
 
 
-std::vector<Note> Transform::Transpose::transform(std::vector<Note> source)
+std::vector<Note> Transforms::Transpose::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = source;
    for (auto &note : notes)

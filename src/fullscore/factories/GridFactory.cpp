@@ -13,10 +13,10 @@
 #include <fullscore/models/staves/Tempo.hpp>
 #include <fullscore/models/Note.hpp>
 #include <fullscore/selectors/InstrumentSelectorFactory.hpp>
-#include <fullscore/transforms/HalfDurationTransform.hpp>
-#include <fullscore/transforms/Octatonic1Transform.hpp>
-#include <fullscore/transforms/RetrogradeTransform.hpp>
-#include <fullscore/transforms/TransposeTransform.hpp>
+#include <fullscore/Transforms/HalfDurationTransform.hpp>
+#include <fullscore/Transforms/Octatonic1Transform.hpp>
+#include <fullscore/Transforms/RetrogradeTransform.hpp>
+#include <fullscore/Transforms/TransposeTransform.hpp>
 #include <fullscore/InstrumentAttributeNames.hpp>
 //#include <allegro_flare/useful.h>
 #include <iostream>
@@ -131,13 +131,13 @@ Grid GridFactory::development()
       rest_note,
    };
 
-   std::vector<Note> octanotes = Transform::Retrograde().transform(Transform::HalfDuration().transform(Transform::Octatonic1().transform({})));
-   std::vector<Note> octanotes_1 = Transform::Transpose(12).transform(octanotes);
-   std::vector<Note> octanotes_2 = Transform::Transpose(24).transform(octanotes);
-   std::vector<Note> octanotes_n1 = Transform::Transpose(-12).transform(octanotes);
-   std::vector<Note> octanotes_n2 = Transform::Transpose(-24).transform(octanotes);
+   std::vector<Note> octanotes = Transforms::Retrograde().transform(Transforms::HalfDuration().transform(Transforms::Octatonic1().transform({})));
+   std::vector<Note> octanotes_1 = Transforms::Transpose(12).transform(octanotes);
+   std::vector<Note> octanotes_2 = Transforms::Transpose(24).transform(octanotes);
+   std::vector<Note> octanotes_n1 = Transforms::Transpose(-12).transform(octanotes);
+   std::vector<Note> octanotes_n2 = Transforms::Transpose(-24).transform(octanotes);
 
-   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+   auto notes_retrograde = Transforms::Retrograde().transform(notes_to_plot);
 
 
    InstrumentSelectorFactory instrument_selector;

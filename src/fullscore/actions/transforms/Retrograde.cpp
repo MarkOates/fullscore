@@ -2,15 +2,15 @@
 
 
 
-#include <fullscore/actions/transforms/Retrograde.hpp>
+#include <fullscore/actions/Transforms/Retrograde.hpp>
 
-#include <fullscore/transforms/RetrogradeTransform.hpp>
+#include <fullscore/Transforms/RetrogradeTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 
 
 
-Action::Transform::Retrograde::Retrograde(std::vector<Note> *notes)
+Action::Transforms::Retrograde::Retrograde(std::vector<Note> *notes)
    : Base("retrograde")
    , notes(notes)
 {}
@@ -18,17 +18,17 @@ Action::Transform::Retrograde::Retrograde(std::vector<Note> *notes)
 
 
 
-Action::Transform::Retrograde::~Retrograde()
+Action::Transforms::Retrograde::~Retrograde()
 {}
 
 
 
 
-bool Action::Transform::Retrograde::execute()
+bool Action::Transforms::Retrograde::execute()
 {
    if (!notes) throw std::runtime_error("Cannot Retrograde on nullptr notes");
 
-   ::Transform::Retrograde retrograde_transform;
+   ::Transforms::Retrograde retrograde_transform;
    *notes = retrograde_transform.transform(*notes);
 
    return true;

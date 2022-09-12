@@ -3,13 +3,13 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/transforms/SplitNoteTransform.hpp>
+#include <fullscore/Transforms/SplitNoteTransform.hpp>
 
 
 
 TEST(SplitNoteTest, splits_notes_into_half)
 {
-   std::vector<Note> returned_notes = ::Transform::SplitNote().transform({
+   std::vector<Note> returned_notes = ::Transforms::SplitNote().transform({
          Note(3, Duration::HALF),
          Note(5, Duration::WHOLE),
          Note(7, Duration::QUARTER),

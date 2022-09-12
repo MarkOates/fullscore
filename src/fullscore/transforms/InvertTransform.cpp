@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/InvertTransform.hpp>
+#include <fullscore/Transforms/InvertTransform.hpp>
 
 #include <fullscore/TransformNames.hpp>
 
 
 
-Transform::Invert::Invert(int axis)
+Transforms::Invert::Invert(int axis)
    : Base(TransformNames::INVERT_TRANSFORM_IDENTIFIER)
    , axis(axis)
 {
@@ -17,14 +17,14 @@ Transform::Invert::Invert(int axis)
 
 
 
-Transform::Invert::~Invert()
+Transforms::Invert::~Invert()
 {
 }
 
 
 
 
-std::vector<Note> Transform::Invert::transform(std::vector<Note> source)
+std::vector<Note> Transforms::Invert::transform(std::vector<Note> source)
 {
    std::vector<Note> notes = source;
    for (auto &note : notes)

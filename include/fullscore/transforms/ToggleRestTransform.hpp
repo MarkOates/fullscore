@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
-   class ToggleRest : public Transform::Base
+   class ToggleRest : public Transforms::Base
    {
    public:
       ToggleRest();

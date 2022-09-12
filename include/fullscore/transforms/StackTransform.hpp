@@ -2,25 +2,25 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
-   class Stack : public Transform::Base
+   class Stack : public Transforms::Base
    {
    private:
-      std::vector<Transform::Base *> transformations;
+      std::vector<Transforms::Base *> transformations;
 
    public:
-      Stack(std::vector<Transform::Base *> transformations = {});
+      Stack(std::vector<Transforms::Base *> transformations = {});
 
-      bool add_transform(Transform::Base *transform);
+      bool add_transform(Transforms::Base *transform);
       bool clear();
 
       virtual std::vector<Note> transform(std::vector<Note> notes) override;
-      std::vector<Transform::Base *> get_transformations();
+      std::vector<Transforms::Base *> get_transformations();
    };
 };
 

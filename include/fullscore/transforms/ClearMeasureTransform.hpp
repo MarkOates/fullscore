@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
-   class ClearMeasure : public Transform::Base
+   class ClearMeasure : public Transforms::Base
    {
    public:
       ClearMeasure();

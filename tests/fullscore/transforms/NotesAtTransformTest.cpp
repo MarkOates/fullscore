@@ -12,7 +12,7 @@
 
 
 #include <fullscore/models/NoteSet.hpp>
-#include <fullscore/transforms/NotesAtTransform.hpp>
+#include <fullscore/Transforms/NotesAtTransform.hpp>
 
 
 
@@ -23,9 +23,9 @@ TEST(NotesAtTransformTest, with_negative_values_for_indexes_raises_an_error)
       { 1, Duration::QUARTER }
    });
 
-   std::string expected_error_message = "Transform::NotesAt::transform() error: cannot have index greater than the number of elements in the set (index: -1, set_size: 2).";
+   std::string expected_error_message = "Transforms::NotesAt::transform() error: cannot have index greater than the number of elements in the set (index: -1, set_size: 2).";
 
-   Transform::NotesAt transform({ -1 });
+   Transforms::NotesAt transform({ -1 });
 
    ASSERT_THROW_WITH_MESSAGE(
       transform.transform(note_set.get_notes()),
@@ -42,9 +42,9 @@ TEST(NotesAtTransformTest, with_index_values_that_are_beyond_the_range_of_the_no
       { 1, Duration::QUARTER }
    });
 
-   //std::string expected_error_message = "Transform::NotesAt::transform() error: cannot have index greater than the number of elements in the set (index: -1, set_size: 2).";
+   //std::string expected_error_message = "Transforms::NotesAt::transform() error: cannot have index greater than the number of elements in the set (index: -1, set_size: 2).";
 
-   //std::vector<Note> returned_notes = Transform::NotesAt({ 1, 2 }).transform(note_set.get_notes());
+   //std::vector<Note> returned_notes = Transforms::NotesAt({ 1, 2 }).transform(note_set.get_notes());
 
    //ASSERT_EQ(1, returned_notes.size());
 }

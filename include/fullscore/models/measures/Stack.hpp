@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <fullscore/transforms/StackTransform.hpp>
+#include <fullscore/Transforms/StackTransform.hpp>
 #include <fullscore/models/measures/Base.hpp>
 
 
@@ -18,7 +18,7 @@ namespace Measure
    class Stack : public Measure::Base
    {
    public:
-      Transform::Stack transformations;
+      Transforms::Stack transformations;
       bool refresh();
 
       Stack();

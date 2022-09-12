@@ -2,15 +2,15 @@
 
 
 
-#include <fullscore/actions/transforms/ToggleRest.hpp>
+#include <fullscore/actions/Transforms/ToggleRest.hpp>
 
-#include <fullscore/transforms/ToggleRestTransform.hpp>
+#include <fullscore/Transforms/ToggleRestTransform.hpp>
 #include <fullscore/models/Note.hpp>
 
 
 
 
-Action::Transform::ToggleRest::ToggleRest(Note *note)
+Action::Transforms::ToggleRest::ToggleRest(Note *note)
    : Base("toggle_rest")
    , note(note)
 {}
@@ -18,20 +18,20 @@ Action::Transform::ToggleRest::ToggleRest(Note *note)
 
 
 
-Action::Transform::ToggleRest::~ToggleRest()
+Action::Transforms::ToggleRest::~ToggleRest()
 {}
 
 
 
 
-bool Action::Transform::ToggleRest::execute()
+bool Action::Transforms::ToggleRest::execute()
 {
    if (!note) throw std::runtime_error("Cannot ToggleRest on a nullptr note");
 
    std::vector<Note> single_note_as_array;
    single_note_as_array.push_back(*note);
 
-   ::Transform::ToggleRest toggle_rest_transform;
+   ::Transforms::ToggleRest toggle_rest_transform;
    single_note_as_array = toggle_rest_transform.transform(single_note_as_array);
 
    *note = single_note_as_array.at(0);

@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/transforms/Base.hpp>
+#include <fullscore/Transforms/Base.hpp>
 
 
 
-namespace Transform
+namespace Transforms
 {
-   class Retrograde : public Transform::Base
+   class Retrograde : public Transforms::Base
    {
    public:
       Retrograde();

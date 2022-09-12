@@ -1,14 +1,14 @@
 
 
 
-#include <fullscore/actions/transforms/InsertNoteAfter.hpp>
+#include <fullscore/actions/Transforms/InsertNoteAfter.hpp>
 
-#include <fullscore/actions/transforms/InsertNote.hpp>
+#include <fullscore/actions/Transforms/InsertNote.hpp>
 #include <fullscore/ActionNames.hpp>
 
 
 
-Action::Transform::InsertNoteAfter::InsertNoteAfter(std::vector<Note> *notes, int at_index, Note note)
+Action::Transforms::InsertNoteAfter::InsertNoteAfter(std::vector<Note> *notes, int at_index, Note note)
    : Base(ActionNames::INSERT_NOTE_AFTER_TRANSFORM_IDENTIFIER)
    , notes(notes)
    , at_index(at_index)
@@ -18,18 +18,18 @@ Action::Transform::InsertNoteAfter::InsertNoteAfter(std::vector<Note> *notes, in
 
 
 
-Action::Transform::InsertNoteAfter::~InsertNoteAfter()
+Action::Transforms::InsertNoteAfter::~InsertNoteAfter()
 {}
 
 
 
-bool Action::Transform::InsertNoteAfter::execute()
+bool Action::Transforms::InsertNoteAfter::execute()
 {
    if (!notes) throw std::runtime_error("Cannot InsertNoteAfter nullptr notes");
 
    try
    {
-      Action::Transform::InsertNote(notes, at_index+1, note).execute();
+      Action::Transforms::InsertNote(notes, at_index+1, note).execute();
    }
    catch (std::runtime_error const &e)
    {

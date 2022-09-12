@@ -2,13 +2,13 @@
 
 
 
-#include <fullscore/actions/transforms/InsertNote.hpp>
+#include <fullscore/actions/Transforms/InsertNote.hpp>
 
-#include <fullscore/transforms/InsertNoteTransform.hpp>
+#include <fullscore/Transforms/InsertNoteTransform.hpp>
 
 
 
-Action::Transform::InsertNote::InsertNote(std::vector<Note> *notes, int at_index, Note note)
+Action::Transforms::InsertNote::InsertNote(std::vector<Note> *notes, int at_index, Note note)
    : Base("insert_note")
    , notes(notes)
    , at_index(at_index)
@@ -18,17 +18,17 @@ Action::Transform::InsertNote::InsertNote(std::vector<Note> *notes, int at_index
 
 
 
-Action::Transform::InsertNote::~InsertNote()
+Action::Transforms::InsertNote::~InsertNote()
 {}
 
 
 
 
-bool Action::Transform::InsertNote::execute()
+bool Action::Transforms::InsertNote::execute()
 {
    if (!notes) throw std::runtime_error("Cannot InsertNote NULL notes");
 
-   ::Transform::InsertNote insert_note_transform(at_index, note);
+   ::Transforms::InsertNote insert_note_transform(at_index, note);
    *notes = insert_note_transform.transform(*notes);
 
    return true;
