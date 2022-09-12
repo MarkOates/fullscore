@@ -4,7 +4,7 @@
 
 class Grid;
 
-class GridDimensionsHelper
+class GridHelper
 {
 public:
    static float get_length_to_measure(const Grid &grid, int measure_index);

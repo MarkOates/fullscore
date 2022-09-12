@@ -16,8 +16,7 @@ namespace Staff { class Base; }
 class Grid
 {
 private:
-   friend class GridFileConverter;
-   friend class GridDimensionsHelper;
+   friend class GridHelper;
 
    std::vector<Staff::Base *> voices;
    std::vector<TimeSignature> time_signatures;
