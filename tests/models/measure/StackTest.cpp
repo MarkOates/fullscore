@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measures/Stack.h>
+#include <fullscore/models/measures/Stack.hpp>
 
 #include <fullscore/transforms/DoubleDurationTransform.h>
 #include <fullscore/transforms/EraseNoteTransform.h>

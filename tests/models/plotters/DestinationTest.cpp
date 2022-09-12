@@ -5,11 +5,11 @@
 
 
 
-#include <fullscore/models/plotters/Destination.h>
+#include <fullscore/models/plotters/Destination.hpp>
 
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/staves/MeasureNumbers.h>
-#include <fullscore/models/Grid.h>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/staves/MeasureNumbers.hpp>
+#include <fullscore/models/Grid.hpp>
 
 
 

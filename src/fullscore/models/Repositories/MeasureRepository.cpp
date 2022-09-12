@@ -5,16 +5,16 @@
 #include <fullscore/models/Repositories/MeasureRepository.hpp>
 
 
-using namespace Measure;
+//using namespace Measure;
 
-namespace Fullscore::Repositories
+//namespace Fullscore::Repositories
+//{
+namespace MeasureRepository
 {
-class MeasureRepository
-{
 
 
 
-std::vector<Base *> measure_pool = {};
+std::vector<Measure::Base *> measure_pool = {};
 
 
 
@@ -37,9 +37,9 @@ int count()
 
 
 
-Base *find(int id, find_option_t find_option)
+Measure::Base *find(int id, find_option_t find_option)
 {
-   Base *found_measure = nullptr;
+   Measure::Base *found_measure = nullptr;
 
    for (auto &measure : measure_pool)
       if (measure->get_id() == id) { found_measure = measure; break; }
@@ -56,9 +56,9 @@ Base *find(int id, find_option_t find_option)
 
 
 
-std::vector<Base *> find(std::vector<int> ids, find_option_t find_option)
+std::vector<Measure::Base *> find(std::vector<int> ids, find_option_t find_option)
 {
-   std::vector<Base *> results = {};
+   std::vector<Measure::Base *> results = {};
    std::vector<int> not_found_ids = {};
    find_option_t measure_find_option = (find_option == FIND_OPTION_RAISE_NOT_FOUND) ? FIND_OPTION_RAISE_NOT_FOUND : FIND_OPTION_NONE;
 
@@ -66,7 +66,7 @@ std::vector<Base *> find(std::vector<int> ids, find_option_t find_option)
    {
       try
       {
-         Base *found_measure = find(ids[i], measure_find_option);
+         Measure::Base *found_measure = find(ids[i], measure_find_option);
          if (found_measure || (find_option == FIND_OPTION_INCLUDE_NOT_FOUND)) results.push_back(found_measure);
       }
       catch (std::runtime_error const &e)
@@ -123,7 +123,7 @@ bool destroy_all()
 
 
 }; // class
-} // namespace
+//} // namespace
 
 
 

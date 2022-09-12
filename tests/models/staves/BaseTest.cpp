@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/staves/Base.h>
+#include <fullscore/models/staves/Base.hpp>
 
 
 

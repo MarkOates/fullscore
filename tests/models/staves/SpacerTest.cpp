@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/staves/Spacer.h>
+#include <fullscore/models/staves/Spacer.hpp>
 
 
 

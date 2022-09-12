@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/staves/Tempo.h>
+#include <fullscore/models/staves/Tempo.hpp>
 
 
 

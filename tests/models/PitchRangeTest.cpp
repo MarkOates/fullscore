@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/PitchRange.h>
+#include <fullscore/models/PitchRange.hpp>
 
 
 

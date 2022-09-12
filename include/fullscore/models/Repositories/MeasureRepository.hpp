@@ -9,7 +9,7 @@
 
 
 
-namespace Measure
+namespace MeasureRepository
 {
    std::string const TYPE_IDENTIFIER_BASE            = "base";
    std::string const TYPE_IDENTIFIER_BASIC           = "basic";
@@ -30,14 +30,14 @@ namespace Measure
 
    //class Base;
 
-   extern std::vector<Base *> pool;
+   extern std::vector<Measure::Base *> pool;
    extern int next_id;
 
-   extern bool push_back(Base *measure);
+   extern bool push_back(Measure::Base *measure);
    extern bool remove(int id);
    extern int count();
-   extern Base *find(int id, find_option_t find_option=FIND_OPTION_NONE);
-   extern std::vector<Base *> find(std::vector<int> ids, find_option_t find_option=FIND_OPTION_NONE);
+   extern Measure::Base *find(int id, find_option_t find_option=FIND_OPTION_NONE);
+   extern std::vector<Measure::Base *> find(std::vector<int> ids, find_option_t find_option=FIND_OPTION_NONE);
    extern bool destroy(int id);
    extern bool destroy_all();
 };

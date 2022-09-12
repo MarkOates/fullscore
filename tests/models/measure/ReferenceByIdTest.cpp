@@ -3,8 +3,8 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/measures/ReferenceById.h>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/measures/ReferenceById.hpp>
 
 
 

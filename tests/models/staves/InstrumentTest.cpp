@@ -3,11 +3,11 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/models/staves/Instrument.h>
+#include <fullscore/models/staves/Instrument.hpp>
 
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Staff.h>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 
 
 
@@ -31,7 +31,7 @@ TEST(Staff_InstrumentTest, has_the_expected_type)
 {
    Staff::Instrument instrument;
 
-   ASSERT_TRUE(instrument.is_type(Staff::TYPE_IDENTIFIER_INSTRUMENT));
+   ASSERT_TRUE(instrument.is_type(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT));
 }
 
 
