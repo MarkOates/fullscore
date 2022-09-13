@@ -5,12 +5,13 @@
 #include <fullscore/Transforms/Base.hpp>
 
 
-
 namespace Transforms
 {
-   class Ascend : public Base
+   class Ascend : public Transforms::Base
    {
    public:
+      constexpr static const char TYPE[] = "Ascend";
+
       Ascend();
       ~Ascend();
 

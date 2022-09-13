@@ -10,7 +10,7 @@
 
 
 Transforms::Ascend::Ascend()
-   : Base(TransformNames::ASCEND_TRANSFORM_IDENTIFIER)
+   : Base(TYPE)
 {
 }
 
