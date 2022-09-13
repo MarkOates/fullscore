@@ -4,7 +4,7 @@
 #include <fullscore/models/TimeSignature.hpp>
 
 #include <fullscore/models/Duration.hpp>
-#include <fullscore/helpers/DurationHelper.hpp>
+#include <fullscore/services/DurationHelper.hpp>
 
 
 

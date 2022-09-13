@@ -4,7 +4,7 @@
 
 #include <fullscore/Transforms/DoubleDurationTransform.hpp>
 
-#include <fullscore/helpers/DurationHelper.hpp>
+#include <fullscore/services/DurationHelper.hpp>
 #include <fullscore/TransformNames.hpp>
 #include <algorithm>
 

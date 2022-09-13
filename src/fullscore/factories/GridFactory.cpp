@@ -12,7 +12,7 @@
 #include <fullscore/models/staves/Spacer.hpp>
 #include <fullscore/models/staves/Tempo.hpp>
 #include <fullscore/models/Note.hpp>
-#include <fullscore/selectors/InstrumentSelectorFactory.hpp>
+#include <fullscore/services/InstrumentSelectorFactory.hpp>
 #include <fullscore/Transforms/HalfDurationTransform.hpp>
 #include <fullscore/Transforms/Octatonic1Transform.hpp>
 #include <fullscore/Transforms/RetrogradeTransform.hpp>
