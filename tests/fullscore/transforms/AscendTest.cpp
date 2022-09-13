@@ -3,11 +3,11 @@
 
 #include <gtest/gtest.h>
 
-#include <fullscore/Transforms/AscendTransform.hpp>
+#include <fullscore/Transforms/Ascend.hpp>
 
 
 
-TEST(AscendTransformTest, causes_subsequent_pitches_to_ascend_from_the_initial_scale_degree)
+TEST(AscendTest, causes_subsequent_pitches_to_ascend_from_the_initial_scale_degree)
 {
    std::vector<Note> notes = {
       Note(2, Duration::HALF),
