@@ -25,7 +25,17 @@ of notes, these
 
 ## Plotters
 
-[to write]
+Plotters are powerful tools that can place one or multiple measures into the
+grid.  Their functionality is very generic and depends on the implementation and
+the needs of the plotting.  Plotters must override a plot() method, but otherwise do not have any more
+ellaborate usages, unless the drived adds more complex behavior and/or requirements.
+
+Plotters might be used to distribute the voicing of a chord across several instruments, they could be used to fill chords into a staff given
+a HarmonicAnalysisSymbol, and in really ellaborate cases, they could even be be responsible for writing an entire piece into the score. Some plotters
+might be ephemerial (used once and disposed of), while others might maintain a list of its plotted measures so it can destroy and replot them.
+Plotting in situations like this can get complicated, when other measures (ReferenceById, Stack) can potentially be referencing plotted measures and
+need to be re-linked. It's up to you to figure this out depending on your needs in the score.
+
 
 ## Transforms
 
@@ -58,11 +68,6 @@ folder, and consist of transforms like:
   not.
 - Transpose - will transpose a note by an integer value.  Note that
   transpositions are whole numbers only.
-
-Note that at the time of this writing, the filenames are post-fixed with
-`*Transform.h`.  Those postfixes are redundant and should eventually be removed.
-The classnames themselves are correct (e.g. `Transform::AddDot`), though the
-namespace should probably be plural (`Transforms::`).
 
 ## Actions
 
