@@ -1,6 +1,6 @@
 
 
-#include <fullscore/selectors/FloatingMeasureSelector.hpp>
+#include <fullscore/services/FloatingMeasureSelector.hpp>
 
 
 FloatingMeasureSelector::FloatingMeasureSelector(std::vector<FloatingMeasure *> *pool)

@@ -1,6 +1,6 @@
 
 
-#include <fullscore/selectors/InstrumentSelectorFactory.hpp>
+#include <fullscore/services/InstrumentSelectorFactory.hpp>
 
 #include <fullscore/InstrumentAttributeNames.hpp>
 #include <sstream>
