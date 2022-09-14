@@ -5,17 +5,17 @@
 #include <fullscore/models/staves/Instrument.hpp>
 
 
-namespace InstrumentSelector
+namespace InstrumentSelectors
 {
-   class Interface
+   class Base
    {
    protected:
       std::string name;
       std::vector<Staff::Base *> &pool;
 
    public:
-      Interface(std::string name, std::vector<Staff::Base *> &pool);
-      virtual ~Interface();
+      Base(std::string name, std::vector<Staff::Base *> &pool);
+      virtual ~Base();
 
       virtual std::vector<Staff::Base *> select() = 0;
    };

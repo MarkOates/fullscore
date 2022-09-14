@@ -2,12 +2,12 @@
 
 
 #include <fullscore/models/Repositories/StaffRepository.hpp>
-#include <fullscore/selectors/instrument_selector/Interface.hpp>
+#include <fullscore/selectors/InstrumentSelectors/Base.hpp>
 
 
-namespace InstrumentSelector
+namespace InstrumentSelectors
 {
-   class All : public Interface
+   class All : public Base
    {
    public:
       All(std::vector<Staff::Base *> &pool);

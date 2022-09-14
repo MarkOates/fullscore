@@ -1,14 +1,14 @@
 
 
-#include <fullscore/selectors/instrument_selector/All.hpp>
+#include <fullscore/selectors/InstrumentSelectors/All.hpp>
 
 
-namespace InstrumentSelector
+namespace InstrumentSelectors
 {
 
 
 All::All(std::vector<Staff::Base *> &pool)
-   : Interface("all", pool)
+   : Base("all", pool)
 {
 }
 

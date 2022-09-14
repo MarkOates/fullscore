@@ -5,7 +5,7 @@
 #include <vector>
 
 
-namespace InstrumentSelector { class Interface; }
+namespace InstrumentSelectors { class Base; }
 class Note;
 
 
@@ -14,18 +14,18 @@ namespace Plotter
    class Selector : public Base
    {
    private:
-      InstrumentSelector::Interface *instrument_selector;
+      InstrumentSelectors::Base *instrument_selector;
       std::vector<Note> notes;
 
    public:
-      Selector(InstrumentSelector::Interface *instrument_selector=nullptr, std::vector<Note> notes={});
+      Selector(InstrumentSelectors::Base *instrument_selector=nullptr, std::vector<Note> notes={});
       virtual ~Selector();
 
       void set_notes(std::vector<Note> notes={});
-      void set_instrument_selector(InstrumentSelector::Interface *instrument_selector);
+      void set_instrument_selector(InstrumentSelectors::Base *instrument_selector);
 
       std::vector<Note> get_notes();
-      InstrumentSelector::Interface *get_instrument_selector();
+      InstrumentSelectors::Base *get_instrument_selector();
 
       bool plot() override;
    };
