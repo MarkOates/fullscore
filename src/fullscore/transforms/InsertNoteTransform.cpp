@@ -2,16 +2,16 @@
 
 
 
-#include <fullscore/transforms/InsertNoteTransform.h>
+#include <fullscore/Transforms/InsertNoteTransform.hpp>
 
-#include <fullscore/Transform.h>
-#include <allegro_flare/useful.h>
-
-
+#include <fullscore/TransformNames.hpp>
+#include <AllegroFlare/Useful.hpp>
 
 
-Transform::InsertNote::InsertNote(int position, Note note)
-   : Base(Transform::INSERT_NOTE_TRANSFORM_IDENTIFIER)
+
+
+Transforms::InsertNote::InsertNote(int position, Note note)
+   : Base(TransformNames::INSERT_NOTE_TRANSFORM_IDENTIFIER)
    , position(position)
    , note(note)
 {
@@ -20,17 +20,19 @@ Transform::InsertNote::InsertNote(int position, Note note)
 
 
 
-Transform::InsertNote::~InsertNote()
+Transforms::InsertNote::~InsertNote()
 {
 }
 
 
 
 
-std::vector<Note> Transform::InsertNote::transform(std::vector<Note> notes)
+std::vector<Note> Transforms::InsertNote::transform(std::vector<Note> notes)
 {
-   position = limit<int>(0, notes.size(), position);
-	notes.insert(notes.begin() + position, note);
+   if (position < 0) position = 0;
+   if (position > notes.size()) position = notes.size();
+
+   notes.insert(notes.begin() + position, note);
    return notes;
 }
 

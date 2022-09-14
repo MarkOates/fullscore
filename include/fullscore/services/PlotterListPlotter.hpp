@@ -1,16 +1,17 @@
 #pragma once
 
 
-class PlotterList;
+#include <fullscore/models/Repositories/PlotterRepository.hpp>
+//class PlotterListRepository;
 
 
 class PlotterListPlotter
 {
 private:
-   PlotterList *plotter_list;
+   PlotterRepository *plotter_list;
 
 public:
-   PlotterListPlotter(PlotterList *plotter_list);
+   PlotterListPlotter(PlotterRepository *plotter_list);
    ~PlotterListPlotter();
 
    void plot();

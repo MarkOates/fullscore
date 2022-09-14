@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/converters/ScientificPitchNotationToPitchConverter.h>
+#include <fullscore/converters/ScientificPitchNotationToPitchConverter.hpp>
 
 #include <sstream>
 

@@ -1,24 +1,24 @@
 
 
 
-#include <fullscore/factories/GridFactory.h>
-#include <fullscore/factories/InstrumentFactory.h>
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/plotters/Basic.h>
+#include <fullscore/factories/GridFactory.hpp>
+#include <fullscore/factories/InstrumentFactory.hpp>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/plotters/Basic.hpp>
 #include <fullscore/models/plotters/Staff.hpp>
-#include <fullscore/models/staves/HarmonicAnalysis.h>
-#include <fullscore/models/staves/MeasureNumbers.h>
-#include <fullscore/models/staves/Instrument.h>
-#include <fullscore/models/staves/Spacer.h>
-#include <fullscore/models/staves/Tempo.h>
-#include <fullscore/models/Note.h>
-#include <fullscore/selectors/InstrumentSelectorFactory.hpp>
-#include <fullscore/transforms/HalfDurationTransform.h>
-#include <fullscore/transforms/Octatonic1Transform.h>
-#include <fullscore/transforms/RetrogradeTransform.h>
-#include <fullscore/transforms/TransposeTransform.h>
-#include <fullscore/InstrumentAttributes.h>
-#include <allegro_flare/useful.h>
+#include <fullscore/models/staves/HarmonicAnalysis.hpp>
+#include <fullscore/models/staves/MeasureNumbers.hpp>
+#include <fullscore/models/staves/Instrument.hpp>
+#include <fullscore/models/staves/Spacer.hpp>
+#include <fullscore/models/staves/Tempo.hpp>
+#include <fullscore/models/Note.hpp>
+#include <fullscore/services/InstrumentSelectorFactory.hpp>
+#include <fullscore/Transforms/HalfDurationTransform.hpp>
+#include <fullscore/Transforms/Octatonic1Transform.hpp>
+#include <fullscore/Transforms/RetrogradeTransform.hpp>
+#include <fullscore/Transforms/TransposeTransform.hpp>
+#include <fullscore/InstrumentAttributeNames.hpp>
+//#include <allegro_flare/useful.h>
 #include <iostream>
 
 
@@ -131,13 +131,13 @@ Grid GridFactory::development()
       rest_note,
    };
 
-   std::vector<Note> octanotes = Transform::Retrograde().transform(Transform::HalfDuration().transform(Transform::Octatonic1().transform({})));
-   std::vector<Note> octanotes_1 = Transform::Transpose(12).transform(octanotes);
-   std::vector<Note> octanotes_2 = Transform::Transpose(24).transform(octanotes);
-   std::vector<Note> octanotes_n1 = Transform::Transpose(-12).transform(octanotes);
-   std::vector<Note> octanotes_n2 = Transform::Transpose(-24).transform(octanotes);
+   std::vector<Note> octanotes = Transforms::Retrograde().transform(Transforms::HalfDuration().transform(Transforms::Octatonic1().transform({})));
+   std::vector<Note> octanotes_1 = Transforms::Transpose(12).transform(octanotes);
+   std::vector<Note> octanotes_2 = Transforms::Transpose(24).transform(octanotes);
+   std::vector<Note> octanotes_n1 = Transforms::Transpose(-12).transform(octanotes);
+   std::vector<Note> octanotes_n2 = Transforms::Transpose(-24).transform(octanotes);
 
-   auto notes_retrograde = Transform::Retrograde().transform(notes_to_plot);
+   auto notes_retrograde = Transforms::Retrograde().transform(notes_to_plot);
 
 
    InstrumentSelectorFactory instrument_selector;

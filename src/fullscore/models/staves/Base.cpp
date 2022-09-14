@@ -1,25 +1,25 @@
 
 
 
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/staves/Base.h>
-#include <fullscore/models/Staff.h>
+#include <fullscore/models/measures/Base.hpp>
+#include <fullscore/models/staves/Base.hpp>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 
 
 
 Staff::Base::Base(std::string type, std::string name)
    : type(type)
-   , id(Staff::next_id++)
+   , id(StaffRepository::next_id++)
    , name(name)
 {
-   Staff::push_back(this);
+   StaffRepository::push_back(this);
 }
 
 
 
 Staff::Base::~Base()
 {
-   Staff::remove(id);
+   StaffRepository::remove(id);
 }
 
 

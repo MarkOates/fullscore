@@ -1,10 +1,9 @@
 
 
 
-#include <fullscore/models/Duration.h>
+#include <fullscore/models/Duration.hpp>
 
-#include <allegro_flare/enum_iterator.h>
-#include <allegro_flare/useful.h>
+//#include <AllegroFlare/Useful.hpp>
 #include <vector>
 
 

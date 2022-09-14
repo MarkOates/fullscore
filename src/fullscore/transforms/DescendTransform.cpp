@@ -2,28 +2,28 @@
 
 
 
-#include <fullscore/transforms/DescendTransform.h>
+#include <fullscore/Transforms/DescendTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/TransformNames.hpp>
 
 
 
-Transform::Descend::Descend()
-   : Base(Transform::DESCEND_TRANSFORM_IDENTIFIER)
+Transforms::Descend::Descend()
+   : Base(TransformNames::DESCEND_TRANSFORM_IDENTIFIER)
 {
 }
 
 
 
 
-Transform::Descend::~Descend()
+Transforms::Descend::~Descend()
 {
 }
 
 
 
 
-std::vector<Note> Transform::Descend::transform(std::vector<Note> n)
+std::vector<Note> Transforms::Descend::transform(std::vector<Note> n)
 {
    if (n.empty()) return {};
 

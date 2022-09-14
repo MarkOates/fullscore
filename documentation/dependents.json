@@ -1,0 +1,26 @@
+{
+  "Display": [
+    ".removed/fullscore/FrontEnd"
+  ],
+  "UIScreen": [
+    ".removed/fullscore/FrontEnd"
+  ],
+  "placement2d": [
+    ".removed/fullscore/FrontEnd"
+  ],
+  "fullscore/Note": [
+    ".removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Duration": [
+    ".removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Pitch": [
+    ".removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Staff": [
+    ".removed/fullscore/SimpleNothing"
+  ],
+  "fullscore/Cursor": [
+    ".removed/fullscore/SimpleNothing"
+  ]
+}

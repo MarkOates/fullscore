@@ -1,20 +1,20 @@
 
 
 
-#include <fullscore/transforms/StackTransform.h>
+#include <fullscore/Transforms/StackTransform.hpp>
 
-#include <fullscore/Transform.h>
+#include <fullscore/TransformNames.hpp>
 
 
 
-Transform::Stack::Stack(std::vector<Transform::Base *> transformations)
-   : Base(Transform::STACK_TRANSFORM_IDENTIFIER)
+Transforms::Stack::Stack(std::vector<Transforms::Base *> transformations)
+   : Base(TransformNames::STACK_TRANSFORM_IDENTIFIER)
    , transformations(transformations)
 {}
 
 
 
-bool Transform::Stack::add_transform(Transform::Base *transform)
+bool Transforms::Stack::add_transform(Transforms::Base *transform)
 {
    transformations.push_back(transform);
    return true;
@@ -22,7 +22,7 @@ bool Transform::Stack::add_transform(Transform::Base *transform)
 
 
 
-bool Transform::Stack::clear()
+bool Transforms::Stack::clear()
 {
    transformations.clear();
    return true;
@@ -30,7 +30,7 @@ bool Transform::Stack::clear()
 
 
 
-std::vector<Note> Transform::Stack::transform(std::vector<Note> notes)
+std::vector<Note> Transforms::Stack::transform(std::vector<Note> notes)
 {
    for(auto &transform : transformations)
       notes = transform->transform(notes);
@@ -40,7 +40,7 @@ std::vector<Note> Transform::Stack::transform(std::vector<Note> notes)
 
 
 
-std::vector<Transform::Base *> Transform::Stack::get_transformations()
+std::vector<Transforms::Base *> Transforms::Stack::get_transformations()
 {
    return transformations;
 }

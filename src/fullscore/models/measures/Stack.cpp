@@ -1,16 +1,16 @@
 
 
 
-#include <fullscore/models/measures/Stack.h>
+#include <fullscore/models/measures/Stack.hpp>
 
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Note.h>
-#include <allegro_flare/useful.h>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
+#include <fullscore/models/Note.hpp>
+#include <iostream>
 
 
 
 Measure::Stack::Stack()
-   : Base(Measure::TYPE_IDENTIFIER_STACK)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_STACK)
    , transformations()
 {}
 

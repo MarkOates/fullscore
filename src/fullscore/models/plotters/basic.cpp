@@ -1,14 +1,13 @@
 
 
 
-#include <fullscore/models/plotters/Basic.h>
+#include <fullscore/models/plotters/Basic.hpp>
 
-#include <allegro_flare/useful.h>
-#include <fullscore/models/measures/Basic.h>
-#include <fullscore/models/staves/Base.h>
-#include <fullscore/models/Plotter.h>
-#include <fullscore/models/Grid.h>
-#include <fullscore/models/FloatingMeasure.h>
+#include <fullscore/models/measures/Basic.hpp>
+#include <fullscore/models/staves/Base.hpp>
+#include <fullscore/models/Plotter.hpp>
+#include <fullscore/models/Grid.hpp>
+#include <fullscore/models/Repositories/FloatingMeasureRepository.hpp>
 
 
 
@@ -40,7 +39,7 @@ bool Plotter::Basic::plot()
       {
          int staff_id = staff->get_id();
          Measure::Base* plotted_measure = new Measure::Basic(notes); // < this automatically adds the measure to the base
-         new FloatingMeasure(GridCoordinate(staff_id, {barline_num, { 0 }}), plotted_measure->get_id());
+         new FloatingMeasureRepository(GridCoordinate(staff_id, {barline_num, { 0 }}), plotted_measure->get_id());
       }
    }
 

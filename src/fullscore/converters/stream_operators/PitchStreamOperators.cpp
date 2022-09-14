@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/converters/stream_operators/PitchStreamOperators.h>
+#include <fullscore/converters/stream_operators/PitchStreamOperators.hpp>
 
 
 

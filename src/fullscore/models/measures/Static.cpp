@@ -1,14 +1,14 @@
 
 
 
-#include <fullscore/models/measures/Static.h>
+#include <fullscore/models/measures/Static.hpp>
 
-#include <fullscore/models/Measure.h>
+#include <fullscore/models/Repositories/MeasureRepository.hpp>
 
 
 
 Measure::Static::Static()
-   : Base(Measure::TYPE_IDENTIFIER_STATIC)
+   : Base(MeasureRepository::TYPE_IDENTIFIER_STATIC)
 {}
 
 

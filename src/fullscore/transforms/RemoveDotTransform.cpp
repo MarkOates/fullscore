@@ -2,29 +2,29 @@
 
 
 
-#include <fullscore/transforms/RemoveDotTransform.h>
+#include <fullscore/Transforms/RemoveDotTransform.hpp>
 
-#include <fullscore/Transform.h>
-
-
+#include <fullscore/TransformNames.hpp>
 
 
-Transform::RemoveDot::RemoveDot()
-   : Base(Transform::REMOVE_DOT_TRANSFORM_IDENTIFIER)
+
+
+Transforms::RemoveDot::RemoveDot()
+   : Base(TransformNames::REMOVE_DOT_TRANSFORM_IDENTIFIER)
 {
 }
 
 
 
 
-Transform::RemoveDot::~RemoveDot()
+Transforms::RemoveDot::~RemoveDot()
 {
 }
 
 
 
 
-std::vector<Note> Transform::RemoveDot::transform(std::vector<Note> n)
+std::vector<Note> Transforms::RemoveDot::transform(std::vector<Note> n)
 {
    for (auto &note : n)
    {

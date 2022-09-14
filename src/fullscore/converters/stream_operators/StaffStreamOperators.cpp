@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/converters/stream_operators/StaffStreamOperators.h>
+#include <fullscore/converters/stream_operators/StaffStreamOperators.hpp>
 
 
 

@@ -1,27 +1,27 @@
 
 
 
-#include <fullscore/transforms/SplitNoteTransform.h>
+#include <fullscore/Transforms/SplitNoteTransform.hpp>
 
-#include <fullscore/transforms/HalfDurationTransform.h>
-#include <fullscore/Transform.h>
+#include <fullscore/Transforms/HalfDurationTransform.hpp>
+#include <fullscore/TransformNames.hpp>
 
 
 
-Transform::SplitNote::SplitNote()
-   : Base(Transform::SPLIT_NOTE_TRANSFORM_IDENTIFIER)
+Transforms::SplitNote::SplitNote()
+   : Base(TransformNames::SPLIT_NOTE_TRANSFORM_IDENTIFIER)
 {
 }
 
 
 
-Transform::SplitNote::~SplitNote()
+Transforms::SplitNote::~SplitNote()
 {
 }
 
 
 
-std::vector<Note> Transform::SplitNote::transform(std::vector<Note> n)
+std::vector<Note> Transforms::SplitNote::transform(std::vector<Note> n)
 {
    std::vector<Note> results = {};
 
@@ -31,7 +31,7 @@ std::vector<Note> Transform::SplitNote::transform(std::vector<Note> n)
       results.push_back(note);
    }
 
-   results = ::Transform::HalfDuration().transform(results);
+   results = ::Transforms::HalfDuration().transform(results);
 
    return  results;
 }

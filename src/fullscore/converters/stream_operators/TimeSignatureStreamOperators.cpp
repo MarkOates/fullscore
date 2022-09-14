@@ -1,8 +1,8 @@
 
 
 
-#include <fullscore/converters/stream_operators/DurationStreamOperators.h>
-#include <fullscore/converters/stream_operators/TimeSignatureStreamOperators.h>
+#include <fullscore/converters/stream_operators/DurationStreamOperators.hpp>
+#include <fullscore/converters/stream_operators/TimeSignatureStreamOperators.hpp>
 
 
 

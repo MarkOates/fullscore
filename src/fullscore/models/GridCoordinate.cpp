@@ -1,9 +1,9 @@
 
 
 
-#include <fullscore/models/GridCoordinate.h>
+#include <fullscore/models/GridCoordinate.hpp>
 
-#include <fullscore/models/Grid.h>
+#include <fullscore/models/Grid.hpp>
 
 
 

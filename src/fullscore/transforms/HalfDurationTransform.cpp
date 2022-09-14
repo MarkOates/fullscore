@@ -2,17 +2,17 @@
 
 
 
-#include <fullscore/transforms/HalfDurationTransform.h>
+#include <fullscore/Transforms/HalfDurationTransform.hpp>
 
-#include <fullscore/helpers/DurationHelper.h>
-#include <fullscore/Transform.h>
+#include <fullscore/services/DurationHelper.hpp>
+#include <fullscore/TransformNames.hpp>
 #include <algorithm>
 
 
 
 
-Transform::HalfDuration::HalfDuration()
-   : Base(Transform::HALF_DURATION_TRANSFORM_IDENTIFIER)
+Transforms::HalfDuration::HalfDuration()
+   : Base(TransformNames::HALF_DURATION_TRANSFORM_IDENTIFIER)
    , minimum_duration(Duration::THIRTYSECOND)
 {
 }
@@ -20,14 +20,14 @@ Transform::HalfDuration::HalfDuration()
 
 
 
-Transform::HalfDuration::~HalfDuration()
+Transforms::HalfDuration::~HalfDuration()
 {
 }
 
 
 
 
-std::vector<Note> Transform::HalfDuration::transform(std::vector<Note> n)
+std::vector<Note> Transforms::HalfDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)

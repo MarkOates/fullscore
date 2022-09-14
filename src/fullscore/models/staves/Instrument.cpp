@@ -1,17 +1,17 @@
 
 
 
-#include <fullscore/models/staves/Instrument.h>
+#include <fullscore/models/staves/Instrument.hpp>
 
-#include <fullscore/models/measures/Base.h>
-#include <fullscore/models/Measure.h>
-#include <fullscore/models/Staff.h>
+#include <fullscore/models/measures/Base.hpp>
+//#include <fullscore/models/Repositories/MeasureRepository.hpp>
+#include <fullscore/models/Repositories/StaffRepository.hpp>
 #include <algorithm>
 
 
 
 Staff::Instrument::Instrument(std::string name)
-   : Base(Staff::TYPE_IDENTIFIER_INSTRUMENT, name)
+   : Base(StaffRepository::TYPE_IDENTIFIER_INSTRUMENT, name)
    , attributes()
 {
 }

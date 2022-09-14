@@ -25,7 +25,17 @@ of notes, these
 
 ## Plotters
 
-[to write]
+Plotters are powerful tools that can place one or multiple measures into the
+grid.  Their functionality is very generic and depends on the implementation and
+the needs of the plotting.  Plotters must override a plot() method, but otherwise do not have any more
+ellaborate usages, unless the drived adds more complex behavior and/or requirements.
+
+Plotters might be used to distribute the voicing of a chord across several instruments, they could be used to fill chords into a staff given
+a HarmonicAnalysisSymbol, and in really ellaborate cases, they could even be be responsible for writing an entire piece into the score. Some plotters
+might be ephemerial (used once and disposed of), while others might maintain a list of its plotted measures so it can destroy and replot them.
+Plotting in situations like this can get complicated, when other measures (ReferenceById, Stack) can potentially be referencing plotted measures and
+need to be re-linked. It's up to you to figure this out depending on your needs in the score.
+
 
 ## Transforms
 
@@ -37,7 +47,7 @@ folder, and consist of transforms like:
 - AppendNote - appends a not after a note (or set of notes)
 - Ascend - on a set of notes, ascends each subsequent note by a scale step from
   the previous
-- ClearMeasure - literally just removes all the notes
+- ClearMeasure - removes all the notes
 - Descend - on a set of notes, descends each subsequent note by a scale step from the previous
 - DoubleDuration - doubles the duration of a note (or set of notes)
 - EraseNote - removes a note from a set of notes (by its index position)
@@ -58,11 +68,6 @@ folder, and consist of transforms like:
   not.
 - Transpose - will transpose a note by an integer value.  Note that
   transpositions are whole numbers only.
-
-Note that at the time of this writing, the filenames are post-fixed with
-`*Transform.h`.  Those postfixes are redundant and should eventually be removed.
-The classnames themselves are correct (e.g. `Transform::AddDot`), though the
-namespace should probably be plural (`Transforms::`).
 
 ## Actions
 

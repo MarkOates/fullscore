@@ -1,13 +1,12 @@
 
 
 
-#include <fullscore/models/plotters/Destination.h>
+#include <fullscore/models/plotters/Destination.hpp>
 
-#include <fullscore/models/FloatingMeasure.h>
-#include <fullscore/models/measures/Plotted.h>
-#include <fullscore/models/Grid.h>
-#include <fullscore/models/Plotter.h>
-#include <allegro_flare/useful.h>
+#include <fullscore/models/Repositories/FloatingMeasureRepository.hpp>
+#include <fullscore/models/measures/Plotted.hpp>
+#include <fullscore/models/Grid.hpp>
+#include <fullscore/models/Plotter.hpp>
 #include <algorithm>
 
 
@@ -105,7 +104,7 @@ bool Plotter::Destination::plot()
 
    for (auto &destination : destinations)
    {
-      new FloatingMeasure(destination, m->get_id());
+      new FloatingMeasureRepository(destination, m->get_id());
    }
 
    return true;

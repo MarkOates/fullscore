@@ -2,12 +2,12 @@
 
 #include <fullscore/models/plotters/Selector.hpp>
 
-#include <fullscore/models/Note.h>
-#include <fullscore/models/Plotter.h>
-#include <fullscore/selectors/instrument_selector/Interface.hpp>
+#include <fullscore/models/Note.hpp>
+#include <fullscore/models/Plotter.hpp>
+#include <fullscore/selectors/InstrumentSelectors/Base.hpp>
 
 
-Plotter::Selector::Selector(InstrumentSelector::Interface *instrument_selector, std::vector<Note> notes)
+Plotter::Selector::Selector(InstrumentSelectors::Base *instrument_selector, std::vector<Note> notes)
    : Base(Plotter::TYPE_IDENTIFIER_SELECTOR)
    , instrument_selector(instrument_selector)
    , notes(notes)
@@ -24,7 +24,7 @@ void Plotter::Selector::set_notes(std::vector<Note> notes)
 }
 
 
-void Plotter::Selector::set_instrument_selector(InstrumentSelector::Interface *instrument_selector)
+void Plotter::Selector::set_instrument_selector(InstrumentSelectors::Base *instrument_selector)
 {
    this->instrument_selector = instrument_selector;
 }
@@ -36,7 +36,7 @@ std::vector<Note> Plotter::Selector::get_notes()
 }
 
 
-InstrumentSelector::Interface *Plotter::Selector::get_instrument_selector()
+InstrumentSelectors::Base *Plotter::Selector::get_instrument_selector()
 {
    return instrument_selector;
 }

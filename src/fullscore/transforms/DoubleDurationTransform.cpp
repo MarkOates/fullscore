@@ -2,17 +2,17 @@
 
 
 
-#include <fullscore/transforms/DoubleDurationTransform.h>
+#include <fullscore/Transforms/DoubleDurationTransform.hpp>
 
-#include <fullscore/helpers/DurationHelper.h>
-#include <fullscore/Transform.h>
+#include <fullscore/services/DurationHelper.hpp>
+#include <fullscore/TransformNames.hpp>
 #include <algorithm>
 
 
 
 
-Transform::DoubleDuration::DoubleDuration()
-   : Base(Transform::DOUBLE_DURATION_TRANSFORM_IDENTIFIER)
+Transforms::DoubleDuration::DoubleDuration()
+   : Base(TransformNames::DOUBLE_DURATION_TRANSFORM_IDENTIFIER)
    , maximum_duration(Duration::WHOLE)
 {
 }
@@ -20,14 +20,14 @@ Transform::DoubleDuration::DoubleDuration()
 
 
 
-Transform::DoubleDuration::~DoubleDuration()
+Transforms::DoubleDuration::~DoubleDuration()
 {
 }
 
 
 
 
-std::vector<Note> Transform::DoubleDuration::transform(std::vector<Note> n)
+std::vector<Note> Transforms::DoubleDuration::transform(std::vector<Note> n)
 {
    std::vector<Note> result = n;
    for (auto &note : result)

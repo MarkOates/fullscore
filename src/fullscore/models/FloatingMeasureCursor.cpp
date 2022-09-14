@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/FloatingMeasureCursor.h>
+#include <fullscore/models/FloatingMeasureCursor.hpp>
 
 
 

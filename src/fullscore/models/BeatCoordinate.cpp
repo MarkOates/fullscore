@@ -1,7 +1,7 @@
 
 
 
-#include <fullscore/models/BeatCoordinate.h>
+#include <fullscore/models/BeatCoordinate.hpp>
 
 
 
