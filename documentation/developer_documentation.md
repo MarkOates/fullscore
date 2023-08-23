@@ -45,4 +45,4 @@ Transforms are the transformations that can be applied to a note, measure, or se
 
 ## Actions
 
-Actions are the individual explicit instructions that can be executed on the system.  Some are really simple, like "move cursor down", but it should be worth noting that most Transforms have corellated actions as well.
+Actions are the individual explicit instructions that can be executed on the system.  Some simple examples of actions include "move cursor down", etc. It's worth noting that a lot of Transforms have corellated actions as well.
