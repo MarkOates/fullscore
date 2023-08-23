@@ -27,8 +27,8 @@ private:
 public:
    Duration(denominator_t denominator=QUARTER, int dots=0);
 
-   bool set_denominator(denominator_t denominator);
-   bool set_dots(int dots);
+   void set_denominator(denominator_t denominator);
+   void set_dots(int dots);
 
    denominator_t get_denominator() const;
    int get_dots() const;

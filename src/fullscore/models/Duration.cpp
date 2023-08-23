@@ -15,7 +15,7 @@ Duration::Duration(denominator_t denominator, int dots)
 
 
 
-bool Duration::set_denominator(denominator_t denominator)
+void Duration::set_denominator(denominator_t denominator)
 {
    if (!Duration::is_valid_denominator(denominator))
    {
@@ -25,13 +25,12 @@ bool Duration::set_denominator(denominator_t denominator)
    }
 
    this->denominator = denominator;
-   return true;
 }
 
 
 
 
-bool Duration::set_dots(int dots)
+void Duration::set_dots(int dots)
 {
    this->dots = dots;
 }

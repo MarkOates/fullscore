@@ -13,7 +13,7 @@ class Note
 private:
    Pitch pitch;
    Duration duration;
-   int rest;
+   bool rest;
 
 public:
    Note(int _scale_degree=0, Duration duration=Duration(), bool rest=false);
