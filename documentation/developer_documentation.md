@@ -11,7 +11,7 @@
 - Plotted - Result of a calculations done by a plotter.  The content of a plotted measure is fixed and cannot be edited on its own, unless it is modified by the plotter.  If you modify the plotter, then the measure should be updated dynamically.
 - ReferenceById - ReferenceById measures are direct mirror copies of other measures.  There are no transforms applied to these measures and any changes to the original source will be reflected in the ReferenceById measure.  In this case, the ID of the measure is what is used to identify the measure to copy.  In some past cases, a measure may have been referenced by its coordinates, but these types of references are more fragile and so referencing by ID was added.
 - Stack - This is a measure composed of multiple transformations.  Rather than a set list of notes, these
-- Static - A static measure is a type of "constant" measure.  There are a few preset static measures, like certain types of scales, for example.  They're usually used as source material for building and crafting other material.  The defining characteristic of a Static measure is that it can't be modified.
+- Static - A static measure analagous to a "constant" in programming.  There are a few preset static measures (certain types of scales, for example). They're usually used as source material for building and crafting other material.  The defining characteristic of a Static measure is that it can't be modified and can be relied on to not change.
 
 ## Plotters
 
